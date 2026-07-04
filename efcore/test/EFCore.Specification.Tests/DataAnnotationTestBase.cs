@@ -797,9 +797,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
         modelBuilder.Entity<Child>();
         var toy = modelBuilder.Entity<Toy>();
 
-        Assert.DoesNotContain(
-            toy.Metadata.GetForeignKeys(),
-            fk => fk.IsUnique == false && fk.Properties.Any(p => p.Name == nameof(Toy.IdRow))
+        Assert.DoesNotContain(toy.Metadata.GetForeignKeys(), fk =>
+            fk.IsUnique == false && fk.Properties.Any(p => p.Name == nameof(Toy.IdRow))
         );
 
         Validate(modelBuilder);

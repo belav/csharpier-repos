@@ -47,25 +47,22 @@ namespace DebuggerTests
         public async Task RaiseDebugEventTraceTest(bool? trace)
         {
             var tcs = new TaskCompletionSource<bool>();
-            insp.On(
-                "Runtime.consoleAPICalled",
-                async (args, token) =>
+            insp.On("Runtime.consoleAPICalled", async (args, token) =>
+            {
+                if (
+                    args?["type"]?.Value<string>() == "debug"
+                    && args?["args"]?.Type == JTokenType.Array
+                    && args?["args"]?[0]?["value"]?.Value<string>()
+                        ?.StartsWith("mono_wasm_debug_event_raised:") == true
+                )
                 {
-                    if (
-                        args?["type"]?.Value<string>() == "debug"
-                        && args?["args"]?.Type == JTokenType.Array
-                        && args?["args"]?[0]?["value"]?.Value<string>()
-                            ?.StartsWith("mono_wasm_debug_event_raised:") == true
-                    )
-                    {
-                        tcs.SetResult(true);
-                    }
-
-                    return tcs.Task.IsCompleted
-                        ? await Task.FromResult(ProtocolEventHandlerReturn.RemoveHandler)
-                        : await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+                    tcs.SetResult(true);
                 }
-            );
+
+                return tcs.Task.IsCompleted
+                    ? await Task.FromResult(ProtocolEventHandlerReturn.RemoveHandler)
+                    : await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+            });
 
             var trace_str = trace.HasValue ? $"trace: {trace.ToString().ToLower()}" : String.Empty;
             var expression =
@@ -135,30 +132,27 @@ namespace DebuggerTests
         {
             int event_count = 0;
             var tcs = new TaskCompletionSource<bool>();
-            insp.On(
-                "Debugger.scriptParsed",
-                async (args, c) =>
+            insp.On("Debugger.scriptParsed", async (args, c) =>
+            {
+                try
                 {
-                    try
+                    var url = args["url"]?.Value<string>();
+                    if (url?.EndsWith(source_file) == true)
                     {
-                        var url = args["url"]?.Value<string>();
-                        if (url?.EndsWith(source_file) == true)
-                        {
-                            event_count++;
-                            if (event_count > expected_count)
-                                tcs.SetResult(false);
-                        }
+                        event_count++;
+                        if (event_count > expected_count)
+                            tcs.SetResult(false);
                     }
-                    catch (Exception ex)
-                    {
-                        tcs.SetException(ex);
-                    }
-
-                    return tcs.Task.IsCompleted
-                        ? await Task.FromResult(ProtocolEventHandlerReturn.RemoveHandler)
-                        : await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
                 }
-            );
+                catch (Exception ex)
+                {
+                    tcs.SetException(ex);
+                }
+
+                return tcs.Task.IsCompleted
+                    ? await Task.FromResult(ProtocolEventHandlerReturn.RemoveHandler)
+                    : await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+            });
 
             byte[] bytes = File.Exists(asm_path)
                 ? File.ReadAllBytes(asm_path)

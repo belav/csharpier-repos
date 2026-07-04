@@ -26,26 +26,23 @@ public class NavigationLockPrerenderingTest
         Navigate("/locked-navigation");
 
         // Assert that the component rendered successfully
-        Browser.Equal(
-            "Prevented navigations: 0",
-            () => Browser.FindElement(By.Id("num-prevented-navigations")).Text
+        Browser.Equal("Prevented navigations: 0", () =>
+            Browser.FindElement(By.Id("num-prevented-navigations")).Text
         );
 
         BeginInteractivity();
 
         // Assert that internal navigations are blocked
         Browser.Click(By.Id("internal-navigation-link"));
-        Browser.Equal(
-            "Prevented navigations: 1",
-            () => Browser.FindElement(By.Id("num-prevented-navigations")).Text
+        Browser.Equal("Prevented navigations: 1", () =>
+            Browser.FindElement(By.Id("num-prevented-navigations")).Text
         );
 
         // Assert that external navigations are blocked
         Browser.Navigate().GoToUrl("about:blank");
         Browser.SwitchTo().Alert().Dismiss();
-        Browser.Equal(
-            "Prevented navigations: 1",
-            () => Browser.FindElement(By.Id("num-prevented-navigations")).Text
+        Browser.Equal("Prevented navigations: 1", () =>
+            Browser.FindElement(By.Id("num-prevented-navigations")).Text
         );
     }
 

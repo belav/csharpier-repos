@@ -327,9 +327,8 @@ namespace System.Reflection.Tests
         {
             Assembly a = typeof(G<int>).Assembly;
             string s = typeof(G<int>).AssemblyQualifiedName;
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => a.GetType(s, throwOnError: true, ignoreCase: false)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                a.GetType(s, throwOnError: true, ignoreCase: false)
             );
         }
 
@@ -491,9 +490,8 @@ namespace System.Reflection.Tests
         public void LoadFile_PartiallyQualifiedPath_ThrowsArgumentException()
         {
             string path = "System.Runtime.Tests.dll";
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
-                "path",
-                () => Assembly.LoadFile(path)
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>("path", () =>
+                Assembly.LoadFile(path)
             );
             Assert.Contains(path, ex.Message);
         }
@@ -593,13 +591,11 @@ namespace System.Reflection.Tests
         )]
         public void LoadFrom_NullAssemblyFile_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "assemblyFile",
-                () => Assembly.LoadFrom(null)
+            AssertExtensions.Throws<ArgumentNullException>("assemblyFile", () =>
+                Assembly.LoadFrom(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "assemblyFile",
-                () => Assembly.UnsafeLoadFrom(null)
+            AssertExtensions.Throws<ArgumentNullException>("assemblyFile", () =>
+                Assembly.UnsafeLoadFrom(null)
             );
         }
 
@@ -676,13 +672,11 @@ namespace System.Reflection.Tests
         [Fact]
         public void LoadWithPartialName_Neg()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partialName",
-                () => Assembly.LoadWithPartialName(null)
+            AssertExtensions.Throws<ArgumentNullException>("partialName", () =>
+                Assembly.LoadWithPartialName(null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "partialName",
-                () => Assembly.LoadWithPartialName("")
+            AssertExtensions.Throws<ArgumentException>("partialName", () =>
+                Assembly.LoadWithPartialName("")
             );
             Assert.Null(Assembly.LoadWithPartialName("no such assembly"));
         }
@@ -817,41 +811,27 @@ namespace System.Reflection.Tests
         {
             Assembly assembly = Helpers.ExecutingAssembly;
             Assert.Throws(exceptionType, () => Helpers.ExecutingAssembly.CreateInstance(typeName));
-            Assert.Throws(
-                exceptionType,
-                () => Helpers.ExecutingAssembly.CreateInstance(typeName, true)
+            Assert.Throws(exceptionType, () =>
+                Helpers.ExecutingAssembly.CreateInstance(typeName, true)
             );
-            Assert.Throws(
-                exceptionType,
-                () => Helpers.ExecutingAssembly.CreateInstance(typeName, false)
+            Assert.Throws(exceptionType, () =>
+                Helpers.ExecutingAssembly.CreateInstance(typeName, false)
             );
 
             assembly = typeof(AssemblyTests).Assembly;
-            Assert.Throws(
-                exceptionType,
-                () =>
-                    assembly.CreateInstance(
-                        typeName,
-                        true,
-                        BindingFlags.Public,
-                        null,
-                        null,
-                        null,
-                        null
-                    )
+            Assert.Throws(exceptionType, () =>
+                assembly.CreateInstance(typeName, true, BindingFlags.Public, null, null, null, null)
             );
-            Assert.Throws(
-                exceptionType,
-                () =>
-                    assembly.CreateInstance(
-                        typeName,
-                        false,
-                        BindingFlags.Public,
-                        null,
-                        null,
-                        null,
-                        null
-                    )
+            Assert.Throws(exceptionType, () =>
+                assembly.CreateInstance(
+                    typeName,
+                    false,
+                    BindingFlags.Public,
+                    null,
+                    null,
+                    null,
+                    null
+                )
             );
         }
 
@@ -932,9 +912,8 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetAssembly_Nullery()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Assembly.GetAssembly(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Assembly.GetAssembly(null)
             );
         }
 
@@ -1067,9 +1046,8 @@ namespace System.Reflection.Tests
         public void AssemblyLoadFromStringNeg()
         {
             Assert.Throws<ArgumentNullException>(() => Assembly.Load((string)null));
-            AssertExtensions.Throws<ArgumentException>(
-                "assemblyName",
-                () => Assembly.Load(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("assemblyName", () =>
+                Assembly.Load(string.Empty)
             );
 
             string emptyCName = new string('\0', 1);

@@ -221,9 +221,8 @@ namespace System.Reflection.Tests
             EventInfo eventInfo = GetEventInfo(type, name);
             eventInfo.AddEventHandler(addTarget, addHandler);
 
-            Assert.Throws(
-                exceptionType,
-                () => eventInfo.RemoveEventHandler(removeTarget, removeHandler)
+            Assert.Throws(exceptionType, () =>
+                eventInfo.RemoveEventHandler(removeTarget, removeHandler)
             );
         }
 

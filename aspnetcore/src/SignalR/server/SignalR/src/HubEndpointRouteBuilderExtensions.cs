@@ -63,14 +63,10 @@ public static class HubEndpointRouteBuilderExtensions
         var options = new HttpConnectionDispatcherOptions();
         configureOptions?.Invoke(options);
 
-        var conventionBuilder = endpoints.MapConnections(
-            pattern,
-            options,
-            b =>
-            {
-                b.UseHub<THub>();
-            }
-        );
+        var conventionBuilder = endpoints.MapConnections(pattern, options, b =>
+        {
+            b.UseHub<THub>();
+        });
 
         var attributes = typeof(THub).GetCustomAttributes(inherit: true);
         conventionBuilder.Add(e =>

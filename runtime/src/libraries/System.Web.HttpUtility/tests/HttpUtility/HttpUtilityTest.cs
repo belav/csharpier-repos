@@ -838,9 +838,8 @@ namespace System.Web.Tests
             Assert.Null(HttpUtility.UrlDecode(default(byte[]), Encoding.UTF8));
             Assert.Null(HttpUtility.UrlDecode(null));
             Assert.Null(HttpUtility.UrlDecode(null, 2, 0, Encoding.UTF8));
-            Assert.Throws<ArgumentNullException>(
-                "bytes",
-                () => HttpUtility.UrlDecode(null, 2, 3, Encoding.UTF8)
+            Assert.Throws<ArgumentNullException>("bytes", () =>
+                HttpUtility.UrlDecode(null, 2, 3, Encoding.UTF8)
             );
         }
 
@@ -848,21 +847,17 @@ namespace System.Web.Tests
         public void UrlDecode_OutOfRange()
         {
             byte[] bytes = { 0, 1, 2 };
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => HttpUtility.UrlDecode(bytes, -1, 2, Encoding.UTF8)
+            Assert.Throws<ArgumentOutOfRangeException>("offset", () =>
+                HttpUtility.UrlDecode(bytes, -1, 2, Encoding.UTF8)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => HttpUtility.UrlDecode(bytes, 14, 2, Encoding.UTF8)
+            Assert.Throws<ArgumentOutOfRangeException>("offset", () =>
+                HttpUtility.UrlDecode(bytes, 14, 2, Encoding.UTF8)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => HttpUtility.UrlDecode(bytes, 1, 12, Encoding.UTF8)
+            Assert.Throws<ArgumentOutOfRangeException>("count", () =>
+                HttpUtility.UrlDecode(bytes, 1, 12, Encoding.UTF8)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => HttpUtility.UrlDecode(bytes, 1, -12, Encoding.UTF8)
+            Assert.Throws<ArgumentOutOfRangeException>("count", () =>
+                HttpUtility.UrlDecode(bytes, 1, -12, Encoding.UTF8)
             );
         }
 
@@ -890,9 +885,8 @@ namespace System.Web.Tests
             Assert.Null(HttpUtility.UrlDecodeToBytes(default(string)));
             Assert.Null(HttpUtility.UrlDecodeToBytes(default(string), Encoding.UTF8));
             Assert.Null(HttpUtility.UrlDecodeToBytes(default(byte[]), 2, 0));
-            Assert.Throws<ArgumentNullException>(
-                "bytes",
-                () => HttpUtility.UrlDecodeToBytes(default(byte[]), 2, 3)
+            Assert.Throws<ArgumentNullException>("bytes", () =>
+                HttpUtility.UrlDecodeToBytes(default(byte[]), 2, 3)
             );
         }
 
@@ -900,21 +894,17 @@ namespace System.Web.Tests
         public void UrlDecodeToBytes_OutOfRange()
         {
             byte[] bytes = { 0, 1, 2 };
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => HttpUtility.UrlDecodeToBytes(bytes, -1, 2)
+            Assert.Throws<ArgumentOutOfRangeException>("offset", () =>
+                HttpUtility.UrlDecodeToBytes(bytes, -1, 2)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => HttpUtility.UrlDecodeToBytes(bytes, 14, 2)
+            Assert.Throws<ArgumentOutOfRangeException>("offset", () =>
+                HttpUtility.UrlDecodeToBytes(bytes, 14, 2)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => HttpUtility.UrlDecodeToBytes(bytes, 1, 12)
+            Assert.Throws<ArgumentOutOfRangeException>("count", () =>
+                HttpUtility.UrlDecodeToBytes(bytes, 1, 12)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => HttpUtility.UrlDecodeToBytes(bytes, 1, -12)
+            Assert.Throws<ArgumentOutOfRangeException>("count", () =>
+                HttpUtility.UrlDecodeToBytes(bytes, 1, -12)
             );
         }
 
@@ -1054,9 +1044,8 @@ namespace System.Web.Tests
             Assert.Null(HttpUtility.UrlEncodeToBytes(default(byte[])));
             Assert.Null(HttpUtility.UrlEncodeToBytes(default(string)));
             Assert.Null(HttpUtility.UrlEncodeToBytes(null, 2, 0));
-            Assert.Throws<ArgumentNullException>(
-                "bytes",
-                () => HttpUtility.UrlEncodeToBytes(null, 2, 3)
+            Assert.Throws<ArgumentNullException>("bytes", () =>
+                HttpUtility.UrlEncodeToBytes(null, 2, 3)
             );
         }
 
@@ -1064,21 +1053,17 @@ namespace System.Web.Tests
         public void UrlEncodeToBytes_OutOfRange()
         {
             byte[] bytes = { 0, 1, 2 };
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => HttpUtility.UrlEncodeToBytes(bytes, -1, 2)
+            Assert.Throws<ArgumentOutOfRangeException>("offset", () =>
+                HttpUtility.UrlEncodeToBytes(bytes, -1, 2)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => HttpUtility.UrlEncodeToBytes(bytes, 14, 2)
+            Assert.Throws<ArgumentOutOfRangeException>("offset", () =>
+                HttpUtility.UrlEncodeToBytes(bytes, 14, 2)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => HttpUtility.UrlEncodeToBytes(bytes, 1, 12)
+            Assert.Throws<ArgumentOutOfRangeException>("count", () =>
+                HttpUtility.UrlEncodeToBytes(bytes, 1, 12)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => HttpUtility.UrlEncodeToBytes(bytes, 1, -12)
+            Assert.Throws<ArgumentOutOfRangeException>("count", () =>
+                HttpUtility.UrlEncodeToBytes(bytes, 1, -12)
             );
         }
 
@@ -1102,21 +1087,17 @@ namespace System.Web.Tests
         public void UrlEncode_OutOfRange()
         {
             byte[] bytes = { 0, 1, 2 };
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => HttpUtility.UrlEncode(bytes, -1, 2)
+            Assert.Throws<ArgumentOutOfRangeException>("offset", () =>
+                HttpUtility.UrlEncode(bytes, -1, 2)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => HttpUtility.UrlEncode(bytes, 14, 2)
+            Assert.Throws<ArgumentOutOfRangeException>("offset", () =>
+                HttpUtility.UrlEncode(bytes, 14, 2)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => HttpUtility.UrlEncode(bytes, 1, 12)
+            Assert.Throws<ArgumentOutOfRangeException>("count", () =>
+                HttpUtility.UrlEncode(bytes, 1, 12)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => HttpUtility.UrlEncode(bytes, 1, -12)
+            Assert.Throws<ArgumentOutOfRangeException>("count", () =>
+                HttpUtility.UrlEncode(bytes, 1, -12)
             );
         }
 

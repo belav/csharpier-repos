@@ -175,9 +175,8 @@ namespace System.Diagnostics.Metrics
             oldStateStored = false;
 
             if (
-                !_subscriptions.AddIfNotExist(
-                    subscription,
-                    (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)
+                !_subscriptions.AddIfNotExist(subscription, (s1, s2) =>
+                    object.ReferenceEquals(s1.Listener, s2.Listener)
                 )
             )
             {
@@ -185,9 +184,8 @@ namespace System.Diagnostics.Metrics
                     subscription,
                     (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)
                 );
-                _subscriptions.AddIfNotExist(
-                    subscription,
-                    (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)
+                _subscriptions.AddIfNotExist(subscription, (s1, s2) =>
+                    object.ReferenceEquals(s1.Listener, s2.Listener)
                 );
                 oldStateStored = object.ReferenceEquals(
                     oldSubscription.Listener,
@@ -202,9 +200,8 @@ namespace System.Diagnostics.Metrics
         // Called from MeterListener.DisableMeasurementEvents
         internal object? DisableMeasurements(MeterListener listener) =>
             _subscriptions
-                .Remove(
-                    new ListenerSubscription(listener),
-                    (s1, s2) => object.ReferenceEquals(s1.Listener, s2.Listener)
+                .Remove(new ListenerSubscription(listener), (s1, s2) =>
+                    object.ReferenceEquals(s1.Listener, s2.Listener)
                 )
                 .State;
 

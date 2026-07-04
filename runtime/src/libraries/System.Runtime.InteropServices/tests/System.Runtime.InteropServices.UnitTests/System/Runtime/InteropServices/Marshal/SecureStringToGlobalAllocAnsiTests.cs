@@ -64,9 +64,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SecureStringToGlobalAllocAnsi_NullString_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => Marshal.SecureStringToGlobalAllocAnsi(null)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                Marshal.SecureStringToGlobalAllocAnsi(null)
             );
         }
 

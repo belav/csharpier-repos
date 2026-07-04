@@ -54,9 +54,8 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             using (var connection = new LdapConnection("server"))
             {
-                AssertExtensions.Throws<InvalidEnumArgumentException>(
-                    "value",
-                    () => connection.SessionOptions.ReferralChasing = referralChasing
+                AssertExtensions.Throws<InvalidEnumArgumentException>("value", () =>
+                    connection.SessionOptions.ReferralChasing = referralChasing
                 );
             }
         }
@@ -122,9 +121,8 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             using (var connection = new LdapConnection("server"))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => connection.SessionOptions.ReferralHopLimit = -1
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    connection.SessionOptions.ReferralHopLimit = -1
                 );
             }
         }
@@ -308,12 +306,8 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             using (var connection = new LdapConnection("server"))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () =>
-                        connection.SessionOptions.PingKeepAliveTimeout = TimeSpan.FromSeconds(
-                            seconds
-                        )
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    connection.SessionOptions.PingKeepAliveTimeout = TimeSpan.FromSeconds(seconds)
                 );
             }
         }
@@ -351,9 +345,8 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             using (var connection = new LdapConnection("server"))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => connection.SessionOptions.PingLimit = -1
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    connection.SessionOptions.PingLimit = -1
                 );
             }
         }
@@ -389,9 +382,8 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             using (var connection = new LdapConnection("server"))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => connection.SessionOptions.PingWaitTimeout = TimeSpan.FromSeconds(seconds)
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    connection.SessionOptions.PingWaitTimeout = TimeSpan.FromSeconds(seconds)
                 );
             }
         }
@@ -656,9 +648,8 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             using (var connection = new LdapConnection("server"))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => connection.SessionOptions.SendTimeout = TimeSpan.FromSeconds(seconds)
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    connection.SessionOptions.SendTimeout = TimeSpan.FromSeconds(seconds)
                 );
             }
         }

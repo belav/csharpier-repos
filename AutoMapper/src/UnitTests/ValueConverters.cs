@@ -218,21 +218,17 @@ public class ValueConverters
             new(cfg =>
             {
                 cfg.CreateMap<Source, Dest>()
-                    .ForMember(
-                        "Value1",
-                        opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
+                    .ForMember("Value1", opt =>
+                        opt.ConvertUsing<EightDigitIntToStringConverter, int>()
                     )
-                    .ForMember(
-                        "Value2",
-                        opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
+                    .ForMember("Value2", opt =>
+                        opt.ConvertUsing<EightDigitIntToStringConverter, int>()
                     )
-                    .ForMember(
-                        "Value3",
-                        opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>()
+                    .ForMember("Value3", opt =>
+                        opt.ConvertUsing<FourDigitIntToStringConverter, int>()
                     )
-                    .ForMember(
-                        "Value4",
-                        opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>()
+                    .ForMember("Value4", opt =>
+                        opt.ConvertUsing<FourDigitIntToStringConverter, int>()
                     );
             });
 
@@ -291,21 +287,17 @@ public class ValueConverters
             new(cfg =>
             {
                 cfg.CreateMap<Source, Dest>()
-                    .ForMember(
-                        "ValueFoo1",
-                        opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>("Value1")
+                    .ForMember("ValueFoo1", opt =>
+                        opt.ConvertUsing<EightDigitIntToStringConverter, int>("Value1")
                     )
-                    .ForMember(
-                        "ValueFoo2",
-                        opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>("Value2")
+                    .ForMember("ValueFoo2", opt =>
+                        opt.ConvertUsing<EightDigitIntToStringConverter, int>("Value2")
                     )
-                    .ForMember(
-                        "ValueFoo3",
-                        opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>("Value3")
+                    .ForMember("ValueFoo3", opt =>
+                        opt.ConvertUsing<FourDigitIntToStringConverter, int>("Value3")
                     )
-                    .ForMember(
-                        "ValueFoo4",
-                        opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>("Value4")
+                    .ForMember("ValueFoo4", opt =>
+                        opt.ConvertUsing<FourDigitIntToStringConverter, int>("Value4")
                     );
             });
 
@@ -364,21 +356,17 @@ public class ValueConverters
             new(cfg =>
             {
                 cfg.CreateMap(typeof(Source), typeof(Dest))
-                    .ForMember(
-                        "Value1",
-                        opt => opt.ConvertUsing(typeof(EightDigitIntToStringConverter))
+                    .ForMember("Value1", opt =>
+                        opt.ConvertUsing(typeof(EightDigitIntToStringConverter))
                     )
-                    .ForMember(
-                        "Value2",
-                        opt => opt.ConvertUsing(typeof(EightDigitIntToStringConverter))
+                    .ForMember("Value2", opt =>
+                        opt.ConvertUsing(typeof(EightDigitIntToStringConverter))
                     )
-                    .ForMember(
-                        "Value3",
-                        opt => opt.ConvertUsing(typeof(FourDigitIntToStringConverter))
+                    .ForMember("Value3", opt =>
+                        opt.ConvertUsing(typeof(FourDigitIntToStringConverter))
                     )
-                    .ForMember(
-                        "Value4",
-                        opt => opt.ConvertUsing(typeof(FourDigitIntToStringConverter))
+                    .ForMember("Value4", opt =>
+                        opt.ConvertUsing(typeof(FourDigitIntToStringConverter))
                     );
             });
 
@@ -437,21 +425,17 @@ public class ValueConverters
             new(cfg =>
             {
                 cfg.CreateMap(typeof(Source), typeof(Dest))
-                    .ForMember(
-                        "ValueFoo1",
-                        opt => opt.ConvertUsing(typeof(EightDigitIntToStringConverter), "Value1")
+                    .ForMember("ValueFoo1", opt =>
+                        opt.ConvertUsing(typeof(EightDigitIntToStringConverter), "Value1")
                     )
-                    .ForMember(
-                        "ValueFoo2",
-                        opt => opt.ConvertUsing(typeof(EightDigitIntToStringConverter), "Value2")
+                    .ForMember("ValueFoo2", opt =>
+                        opt.ConvertUsing(typeof(EightDigitIntToStringConverter), "Value2")
                     )
-                    .ForMember(
-                        "ValueFoo3",
-                        opt => opt.ConvertUsing(typeof(FourDigitIntToStringConverter), "Value3")
+                    .ForMember("ValueFoo3", opt =>
+                        opt.ConvertUsing(typeof(FourDigitIntToStringConverter), "Value3")
                     )
-                    .ForMember(
-                        "ValueFoo4",
-                        opt => opt.ConvertUsing(typeof(FourDigitIntToStringConverter), "Value4")
+                    .ForMember("ValueFoo4", opt =>
+                        opt.ConvertUsing(typeof(FourDigitIntToStringConverter), "Value4")
                     );
             });
 
@@ -585,17 +569,15 @@ public class ValueConverters
                     .ForMember(
                         d => d.ValueFoo1,
                         opt =>
-                            opt.ConvertUsing(
-                                new EightDigitIntToStringConverter(),
-                                src => src.Value1
+                            opt.ConvertUsing(new EightDigitIntToStringConverter(), src =>
+                                src.Value1
                             )
                     )
                     .ForMember(
                         d => d.ValueFoo2,
                         opt =>
-                            opt.ConvertUsing(
-                                new EightDigitIntToStringConverter(),
-                                src => src.Value2
+                            opt.ConvertUsing(new EightDigitIntToStringConverter(), src =>
+                                src.Value2
                             )
                     )
                     .ForMember(
@@ -665,21 +647,17 @@ public class ValueConverters
             new(cfg =>
             {
                 cfg.CreateMap<Source, Dest>()
-                    .ForMember(
-                        "Value1",
-                        opt => opt.ConvertUsing(new EightDigitIntToStringConverter())
+                    .ForMember("Value1", opt =>
+                        opt.ConvertUsing(new EightDigitIntToStringConverter())
                     )
-                    .ForMember(
-                        "Value2",
-                        opt => opt.ConvertUsing(new EightDigitIntToStringConverter())
+                    .ForMember("Value2", opt =>
+                        opt.ConvertUsing(new EightDigitIntToStringConverter())
                     )
-                    .ForMember(
-                        "Value3",
-                        opt => opt.ConvertUsing(new FourDigitIntToStringConverter())
+                    .ForMember("Value3", opt =>
+                        opt.ConvertUsing(new FourDigitIntToStringConverter())
                     )
-                    .ForMember(
-                        "Value4",
-                        opt => opt.ConvertUsing(new FourDigitIntToStringConverter())
+                    .ForMember("Value4", opt =>
+                        opt.ConvertUsing(new FourDigitIntToStringConverter())
                     );
             });
 
@@ -738,21 +716,17 @@ public class ValueConverters
             new(cfg =>
             {
                 cfg.CreateMap<Source, Dest>()
-                    .ForMember(
-                        "ValueFoo1",
-                        opt => opt.ConvertUsing(new EightDigitIntToStringConverter(), "Value1")
+                    .ForMember("ValueFoo1", opt =>
+                        opt.ConvertUsing(new EightDigitIntToStringConverter(), "Value1")
                     )
-                    .ForMember(
-                        "ValueFoo2",
-                        opt => opt.ConvertUsing(new EightDigitIntToStringConverter(), "Value2")
+                    .ForMember("ValueFoo2", opt =>
+                        opt.ConvertUsing(new EightDigitIntToStringConverter(), "Value2")
                     )
-                    .ForMember(
-                        "ValueFoo3",
-                        opt => opt.ConvertUsing(new FourDigitIntToStringConverter(), "Value3")
+                    .ForMember("ValueFoo3", opt =>
+                        opt.ConvertUsing(new FourDigitIntToStringConverter(), "Value3")
                     )
-                    .ForMember(
-                        "ValueFoo4",
-                        opt => opt.ConvertUsing(new FourDigitIntToStringConverter(), "Value4")
+                    .ForMember("ValueFoo4", opt =>
+                        opt.ConvertUsing(new FourDigitIntToStringConverter(), "Value4")
                     );
             });
 

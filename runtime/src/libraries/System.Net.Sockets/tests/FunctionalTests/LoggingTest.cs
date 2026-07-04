@@ -55,52 +55,49 @@ namespace System.Net.Sockets.Tests
                     )
                     {
                         var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                        await listener.RunWithCallbackAsync(
-                            events.Enqueue,
-                            async () =>
-                            {
-                                // Invoke several tests to execute code paths while tracing is enabled
+                        await listener.RunWithCallbackAsync(events.Enqueue, async () =>
+                        {
+                            // Invoke several tests to execute code paths while tracing is enabled
 
-                                await new SendReceive_Sync(null).SendRecv_Stream_TCP(
-                                    IPAddress.Loopback,
-                                    false
-                                );
-                                await new SendReceive_Sync(null).SendRecv_Stream_TCP(
-                                    IPAddress.Loopback,
-                                    true
-                                );
+                            await new SendReceive_Sync(null).SendRecv_Stream_TCP(
+                                IPAddress.Loopback,
+                                false
+                            );
+                            await new SendReceive_Sync(null).SendRecv_Stream_TCP(
+                                IPAddress.Loopback,
+                                true
+                            );
 
-                                await new SendReceive_Task(null).SendRecv_Stream_TCP(
-                                    IPAddress.Loopback,
-                                    false
-                                );
-                                await new SendReceive_Task(null).SendRecv_Stream_TCP(
-                                    IPAddress.Loopback,
-                                    true
-                                );
+                            await new SendReceive_Task(null).SendRecv_Stream_TCP(
+                                IPAddress.Loopback,
+                                false
+                            );
+                            await new SendReceive_Task(null).SendRecv_Stream_TCP(
+                                IPAddress.Loopback,
+                                true
+                            );
 
-                                await new SendReceive_Eap(null).SendRecv_Stream_TCP(
-                                    IPAddress.Loopback,
-                                    false
-                                );
-                                await new SendReceive_Eap(null).SendRecv_Stream_TCP(
-                                    IPAddress.Loopback,
-                                    true
-                                );
+                            await new SendReceive_Eap(null).SendRecv_Stream_TCP(
+                                IPAddress.Loopback,
+                                false
+                            );
+                            await new SendReceive_Eap(null).SendRecv_Stream_TCP(
+                                IPAddress.Loopback,
+                                true
+                            );
 
-                                await new SendReceive_Apm(null).SendRecv_Stream_TCP(
-                                    IPAddress.Loopback,
-                                    false
-                                );
-                                await new SendReceive_Apm(null).SendRecv_Stream_TCP(
-                                    IPAddress.Loopback,
-                                    true
-                                );
+                            await new SendReceive_Apm(null).SendRecv_Stream_TCP(
+                                IPAddress.Loopback,
+                                false
+                            );
+                            await new SendReceive_Apm(null).SendRecv_Stream_TCP(
+                                IPAddress.Loopback,
+                                true
+                            );
 
-                                await new NetworkStreamTest().CopyToAsync_AllDataCopied(4096, true);
-                                await new NetworkStreamTest().Timeout_Roundtrips();
-                            }
-                        );
+                            await new NetworkStreamTest().CopyToAsync_AllDataCopied(4096, true);
+                            await new NetworkStreamTest().Timeout_Roundtrips();
+                        });
                         Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
                         Assert.InRange(events.Count, 1, int.MaxValue);
                     }

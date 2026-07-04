@@ -294,9 +294,8 @@ namespace System.Linq.Tests
         public void NullKeySelector()
         {
             Func<DateTime, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => Enumerable.Empty<DateTime>().OrderBy(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable.Empty<DateTime>().OrderBy(keySelector)
             );
         }
 

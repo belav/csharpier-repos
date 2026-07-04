@@ -126,14 +126,11 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_Add_D2()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
-                    dt.Rows.Add(dt.Rows[0]);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                dt.Rows.Add(dt.Rows[0]);
+            });
         }
 
         [Fact]
@@ -149,16 +146,13 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_Add_D4()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
-                    DataTable dt1 = DataProvider.CreateParentDataTable();
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                DataTable dt1 = DataProvider.CreateParentDataTable();
 
-                    dt.Rows.Add(dt1.Rows[0]);
-                }
-            );
+                dt.Rows.Add(dt1.Rows[0]);
+            });
         }
 
         [Fact]
@@ -336,20 +330,17 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_Contains_O4()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
-                    dt.PrimaryKey = new DataColumn[] { dt.Columns[0], dt.Columns[1] };
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                dt.PrimaryKey = new DataColumn[] { dt.Columns[0], dt.Columns[1] };
 
-                    //Prepare values array
-                    object[] arr = new object[1];
-                    arr[0] = 1;
+                //Prepare values array
+                object[] arr = new object[1];
+                arr[0] = 1;
 
-                    Assert.False(dt.Rows.Contains(arr));
-                }
-            );
+                Assert.False(dt.Rows.Contains(arr));
+            });
         }
 
         [Fact]
@@ -394,20 +385,17 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_Find_O4()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
-                    dt.PrimaryKey = new DataColumn[] { dt.Columns[0], dt.Columns[1] };
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                dt.PrimaryKey = new DataColumn[] { dt.Columns[0], dt.Columns[1] };
 
-                    //Prepare values array
-                    object[] arr = new object[1];
-                    arr[0] = 1;
+                //Prepare values array
+                object[] arr = new object[1];
+                arr[0] = 1;
 
-                    Assert.Null(dt.Rows.Find(arr));
-                }
-            );
+                Assert.Null(dt.Rows.Find(arr));
+            });
         }
 
         [Fact]

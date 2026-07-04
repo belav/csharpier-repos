@@ -874,9 +874,8 @@ namespace System.Runtime.Serialization.Schema.Tests
             }
             else
             {
-                var ex = Assert.Throws(
-                    expectedExceptionType,
-                    () => importer.GetCodeTypeReference(qname)
+                var ex = Assert.Throws(expectedExceptionType, () =>
+                    importer.GetCodeTypeReference(qname)
                 );
 
                 if (!string.IsNullOrEmpty(msg))
@@ -963,9 +962,8 @@ namespace System.Runtime.Serialization.Schema.Tests
             }
             else
             {
-                var ex = Assert.Throws(
-                    expectedExceptionType,
-                    () => importer.GetKnownTypeReferences(qname)
+                var ex = Assert.Throws(expectedExceptionType, () =>
+                    importer.GetKnownTypeReferences(qname)
                 );
 
                 if (!string.IsNullOrEmpty(msg))

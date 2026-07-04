@@ -844,12 +844,10 @@ public class Http3StreamTests : Http3TestBase
         var responseData = await requestStream.ExpectDataAsync();
         Assert.Equal("Hello world", Encoding.ASCII.GetString(responseData.ToArray()));
 
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Equals(
-                    "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Equals(
+                "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
+            )
         );
     }
 
@@ -3178,12 +3176,8 @@ public class Http3StreamTests : Http3TestBase
 
         await requestStream.OnStreamCompletedTask.DefaultTimeout();
 
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("the application completed without reading the entire request body.")
         );
         Assert.Equal(
             "The application completed without reading the entire request body.",
@@ -3268,12 +3262,8 @@ public class Http3StreamTests : Http3TestBase
         await requestStream.ExpectReceiveEndOfStream();
 
         await requestStream.OnStreamCompletedTask.DefaultTimeout();
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("the application completed without reading the entire request body.")
         );
 
         Assert.Equal(3, receivedHeaders.Count);
@@ -3332,12 +3322,8 @@ public class Http3StreamTests : Http3TestBase
         await requestStream.ExpectReceiveEndOfStream();
 
         await requestStream.OnStreamCompletedTask.DefaultTimeout();
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("the application completed without reading the entire request body.")
         );
 
         Assert.Equal(3, receivedHeaders.Count);
@@ -3564,12 +3550,8 @@ public class Http3StreamTests : Http3TestBase
 
         await requestStream.OnStreamCompletedTask.DefaultTimeout();
 
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("the application completed without reading the entire request body.")
         );
         Assert.Equal(
             "The application completed without reading the entire request body.",
@@ -3588,17 +3570,13 @@ public class Http3StreamTests : Http3TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
         };
 
-        var headerText = string.Create(
-            6 * 1024,
-            new object(),
-            (chars, state) =>
+        var headerText = string.Create(6 * 1024, new object(), (chars, state) =>
+        {
+            for (var i = 0; i < chars.Length; i++)
             {
-                for (var i = 0; i < chars.Length; i++)
-                {
-                    chars[i] = (char)('0' + i % 10);
-                }
+                chars[i] = (char)('0' + i % 10);
             }
-        );
+        });
 
         var requestStream = await Http3Api.InitializeConnectionAndStreamsAsync(
             c =>
@@ -3635,17 +3613,13 @@ public class Http3StreamTests : Http3TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
         };
 
-        var headerText = string.Create(
-            6 * 1024,
-            new object(),
-            (chars, state) =>
+        var headerText = string.Create(6 * 1024, new object(), (chars, state) =>
+        {
+            for (var i = 0; i < chars.Length; i++)
             {
-                for (var i = 0; i < chars.Length; i++)
-                {
-                    chars[i] = (char)('0' + i % 10);
-                }
+                chars[i] = (char)('0' + i % 10);
             }
-        );
+        });
 
         var requestStream = await Http3Api.InitializeConnectionAndStreamsAsync(
             c =>

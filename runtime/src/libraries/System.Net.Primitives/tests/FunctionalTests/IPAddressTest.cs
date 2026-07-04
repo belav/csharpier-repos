@@ -101,9 +101,8 @@ namespace System.Net.Primitives.Functional.Tests
         [InlineData(MaxAddress + 1)]
         public static void Ctor_Long_Invalid(long address)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "newAddress",
-                () => new IPAddress(address)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("newAddress", () =>
+                new IPAddress(address)
             );
         }
 
@@ -127,9 +126,8 @@ namespace System.Net.Primitives.Functional.Tests
         public static void Ctor_Bytes_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("address", () => new IPAddress(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "address",
-                () => new IPAddress(new byte[] { 0x01, 0x01, 0x02 })
+            AssertExtensions.Throws<ArgumentException>("address", () =>
+                new IPAddress(new byte[] { 0x01, 0x01, 0x02 })
             );
         }
 
@@ -158,23 +156,19 @@ namespace System.Net.Primitives.Functional.Tests
         [Fact]
         public static void Ctor_BytesScopeId_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "address",
-                () => new IPAddress(null, 500)
+            AssertExtensions.Throws<ArgumentNullException>("address", () =>
+                new IPAddress(null, 500)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "address",
-                () => new IPAddress(new byte[] { 0x01, 0x01, 0x02 }, 500)
+            AssertExtensions.Throws<ArgumentException>("address", () =>
+                new IPAddress(new byte[] { 0x01, 0x01, 0x02 }, 500)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "scopeid",
-                () => new IPAddress(IpV6AddressBytes1, MinScopeId - 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("scopeid", () =>
+                new IPAddress(IpV6AddressBytes1, MinScopeId - 1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "scopeid",
-                () => new IPAddress(IpV6AddressBytes1, MaxScopeId + 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("scopeid", () =>
+                new IPAddress(IpV6AddressBytes1, MaxScopeId + 1)
             );
         }
 
@@ -198,13 +192,11 @@ namespace System.Net.Primitives.Functional.Tests
             Assert.ThrowsAny<Exception>(() => ip.ScopeId);
 
             ip = IPV6Address1(); //IpV6
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => ip.ScopeId = MinScopeId - 1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                ip.ScopeId = MinScopeId - 1
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => ip.ScopeId = MaxScopeId + 1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                ip.ScopeId = MaxScopeId + 1
             );
         }
 
@@ -276,9 +268,8 @@ namespace System.Net.Primitives.Functional.Tests
         [Fact]
         public static void IsLooback_Get_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "address",
-                () => IPAddress.IsLoopback(null)
+            AssertExtensions.Throws<ArgumentNullException>("address", () =>
+                IPAddress.IsLoopback(null)
             );
         }
 

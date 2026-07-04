@@ -127,13 +127,11 @@ namespace System.CodeDom.Tests
         {
             using (var collection = new TempFileCollection())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "fileExtension",
-                    () => collection.AddExtension(fileExtension)
+                AssertExtensions.Throws<ArgumentException>("fileExtension", () =>
+                    collection.AddExtension(fileExtension)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "fileExtension",
-                    () => collection.AddExtension(fileExtension, keepFile: false)
+                AssertExtensions.Throws<ArgumentException>("fileExtension", () =>
+                    collection.AddExtension(fileExtension, keepFile: false)
                 );
             }
         }
@@ -216,9 +214,8 @@ namespace System.CodeDom.Tests
         {
             using (var collection = new TempFileCollection())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "fileName",
-                    () => collection.AddFile(fileName, keepFile: false)
+                AssertExtensions.Throws<ArgumentException>("fileName", () =>
+                    collection.AddFile(fileName, keepFile: false)
                 );
             }
         }
@@ -230,15 +227,13 @@ namespace System.CodeDom.Tests
             {
                 const string FileName = "FileName";
                 collection.AddFile(FileName, keepFile: false);
-                AssertExtensions.Throws<ArgumentException>(
-                    "fileName",
-                    () => collection.AddFile(FileName, keepFile: false)
+                AssertExtensions.Throws<ArgumentException>("fileName", () =>
+                    collection.AddFile(FileName, keepFile: false)
                 );
 
                 // Case insensitive
-                AssertExtensions.Throws<ArgumentException>(
-                    "fileName",
-                    () => collection.AddFile(FileName.ToLowerInvariant(), keepFile: false)
+                AssertExtensions.Throws<ArgumentException>("fileName", () =>
+                    collection.AddFile(FileName.ToLowerInvariant(), keepFile: false)
                 );
             }
         }

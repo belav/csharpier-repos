@@ -919,12 +919,10 @@ public class MessageBodyTests : LoggedTest
             await body.ConsumeAsync();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            Assert.Contains(
-                TestSink.Writes,
-                m =>
-                    m.EventId.Name == "ConnectionBadRequest"
-                    && m.Exception is BadHttpRequestException ex
-                    && ex.Reason == RequestRejectionReason.RequestBodyTimeout
+            Assert.Contains(TestSink.Writes, m =>
+                m.EventId.Name == "ConnectionBadRequest"
+                && m.Exception is BadHttpRequestException ex
+                && ex.Reason == RequestRejectionReason.RequestBodyTimeout
             );
 #pragma warning restore CS0618 // Type or member is obsolete
 
@@ -991,13 +989,11 @@ public class MessageBodyTests : LoggedTest
             input.Add("a");
             Assert.Equal(1, await stream.ReadAsync(new byte[1], 0, 1));
 
-            Assert.Contains(
-                TestSink.Writes,
-                m =>
-                    m.EventId.Name == "RequestBodyStart"
-                    && m.Message.Contains(
-                        @"Connection id ""ConnectionId"", Request id ""RequestId"": started reading request body."
-                    )
+            Assert.Contains(TestSink.Writes, m =>
+                m.EventId.Name == "RequestBodyStart"
+                && m.Message.Contains(
+                    @"Connection id ""ConnectionId"", Request id ""RequestId"": started reading request body."
+                )
             );
 
             input.Fin();

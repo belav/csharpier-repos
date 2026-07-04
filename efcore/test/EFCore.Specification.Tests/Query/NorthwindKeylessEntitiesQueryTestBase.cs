@@ -39,9 +39,8 @@ public abstract class NorthwindKeylessEntitiesQueryTestBase<TFixture> : QueryTes
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task KeylessEntity_with_nav_defining_query(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<CustomerQueryWithQueryFilter>().Where(cq => cq.OrderCount > 0)
+        AssertQuery(async, ss =>
+            ss.Set<CustomerQueryWithQueryFilter>().Where(cq => cq.OrderCount > 0)
         );
 
     [ConditionalTheory]
@@ -110,17 +109,19 @@ public abstract class NorthwindKeylessEntitiesQueryTestBase<TFixture> : QueryTes
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task KeylessEntity_select_where_navigation(bool async) =>
-        AssertQuery(
-            async,
-            ss => from ov in ss.Set<OrderQuery>() where ov.Customer.City == "Seattle" select ov
+        AssertQuery(async, ss =>
+            from ov in ss.Set<OrderQuery>()
+            where ov.Customer.City == "Seattle"
+            select ov
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task KeylessEntity_select_where_navigation_multi_level(bool async) =>
-        AssertQuery(
-            async,
-            ss => from ov in ss.Set<OrderQuery>() where ov.Customer.Orders.Any() select ov
+        AssertQuery(async, ss =>
+            from ov in ss.Set<OrderQuery>()
+            where ov.Customer.Orders.Any()
+            select ov
         );
 
     [ConditionalTheory]
@@ -158,14 +159,12 @@ public abstract class NorthwindKeylessEntitiesQueryTestBase<TFixture> : QueryTes
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Collection_correlated_with_keyless_entity_in_predicate_works(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<CustomerQuery>()
-                    .Where(cq => ss.Set<Customer>().Where(c => c.City == cq.City).Any())
-                    .Select(pv => new { pv.City, pv.ContactName })
-                    .OrderBy(x => x.ContactName)
-                    .Take(2)
+        AssertQuery(async, ss =>
+            ss.Set<CustomerQuery>()
+                .Where(cq => ss.Set<Customer>().Where(c => c.City == cq.City).Any())
+                .Select(pv => new { pv.City, pv.ContactName })
+                .OrderBy(x => x.ContactName)
+                .Take(2)
         );
 
     [ConditionalTheory]

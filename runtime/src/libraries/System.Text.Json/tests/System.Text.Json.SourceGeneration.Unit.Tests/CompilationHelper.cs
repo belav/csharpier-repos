@@ -27,9 +27,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             ContextGenerationSpecs.SelectMany(ctx => ctx.GeneratedTypes);
 
         public void AssertContainsType(string fullyQualifiedName) =>
-            Assert.Contains(
-                AllGeneratedTypes,
-                spec => spec.TypeRef.FullyQualifiedName == fullyQualifiedName
+            Assert.Contains(AllGeneratedTypes, spec =>
+                spec.TypeRef.FullyQualifiedName == fullyQualifiedName
             );
     }
 

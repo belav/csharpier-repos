@@ -507,16 +507,14 @@ public class DatabaseErrorPageMiddlewareTest
             );
         }
 
-        Assert.Contains(
-            logProvider.Logger.Messages.ToList(),
-            m =>
-                m.StartsWith(
-                    StringsHelpers.GetResourceString(
-                        "FormatDatabaseErrorPageMiddleware_ContextNotRegistered",
-                        typeof(BloggingContext)
-                    ),
-                    StringComparison.Ordinal
-                )
+        Assert.Contains(logProvider.Logger.Messages.ToList(), m =>
+            m.StartsWith(
+                StringsHelpers.GetResourceString(
+                    "FormatDatabaseErrorPageMiddleware_ContextNotRegistered",
+                    typeof(BloggingContext)
+                ),
+                StringComparison.Ordinal
+            )
         );
     }
 
@@ -567,13 +565,11 @@ public class DatabaseErrorPageMiddlewareTest
                 );
             }
 
-            Assert.Contains(
-                logProvider.Logger.Messages.ToList(),
-                m =>
-                    m.StartsWith(
-                        StringsHelpers.GetResourceString("DatabaseErrorPageMiddleware_Exception"),
-                        StringComparison.Ordinal
-                    )
+            Assert.Contains(logProvider.Logger.Messages.ToList(), m =>
+                m.StartsWith(
+                    StringsHelpers.GetResourceString("DatabaseErrorPageMiddleware_Exception"),
+                    StringComparison.Ordinal
+                )
             );
         }
     }

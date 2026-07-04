@@ -1291,15 +1291,11 @@ public class EndpointHtmlRendererTest
             builder.OpenElement(0, "form");
             builder.SetKey(firstRender);
 
-            builder.AddAttribute(
-                1,
-                "onsubmit",
-                () =>
-                {
-                    eventReceivedCount++;
-                    component.TriggerRender();
-                }
-            );
+            builder.AddAttribute(1, "onsubmit", () =>
+            {
+                eventReceivedCount++;
+                component.TriggerRender();
+            });
             builder.AddNamedEvent("onsubmit", "my-name");
             builder.CloseElement();
 
@@ -1337,14 +1333,10 @@ public class EndpointHtmlRendererTest
         component = new TestComponent(builder =>
         {
             builder.OpenElement(0, "form");
-            builder.AddAttribute(
-                1,
-                "onsubmit",
-                () =>
-                {
-                    eventReceivedCount++;
-                }
-            );
+            builder.AddAttribute(1, "onsubmit", () =>
+            {
+                eventReceivedCount++;
+            });
             builder.AddNamedEvent("onsubmit", firstRender ? "my-name-1" : "my-name-2");
             builder.CloseElement();
             firstRender = false;
@@ -1982,14 +1974,10 @@ public class EndpointHtmlRendererTest
             }
             else
             {
-                builder.AddAttribute(
-                    1,
-                    "onsubmit",
-                    () =>
-                    {
-                        GC.KeepAlive(new object());
-                    }
-                );
+                builder.AddAttribute(1, "onsubmit", () =>
+                {
+                    GC.KeepAlive(new object());
+                });
                 builder.AddNamedEvent("onsubmit", "default");
             }
             builder.CloseElement();

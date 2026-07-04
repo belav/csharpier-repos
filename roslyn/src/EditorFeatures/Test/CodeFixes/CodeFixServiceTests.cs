@@ -689,9 +689,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 if (_registerFixWithTitle != null)
                 {
                     context.RegisterCodeFix(
-                        CodeAction.Create(
-                            _registerFixWithTitle,
-                            createChangedDocument: _ => Task.FromResult(context.Document)
+                        CodeAction.Create(_registerFixWithTitle, createChangedDocument: _ =>
+                            Task.FromResult(context.Document)
                         ),
                         context.Diagnostics
                     );

@@ -933,15 +933,13 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
             .IsRequired();
         modelBuilder
             .Entity<A>()
-            .ToTable(
-                "Table",
-                tb => tb.HasCheckConstraint("SomeCK", "Id > 0").HasName("CK_Table_SomeCK")
+            .ToTable("Table", tb =>
+                tb.HasCheckConstraint("SomeCK", "Id > 0").HasName("CK_Table_SomeCK")
             );
         modelBuilder
             .Entity<B>()
-            .ToTable(
-                "Table",
-                tb => tb.HasCheckConstraint("SomeOtherCK", "Id > 10").HasName("CK_Table_SomeCK")
+            .ToTable("Table", tb =>
+                tb.HasCheckConstraint("SomeOtherCK", "Id > 10").HasName("CK_Table_SomeCK")
             );
 
         VerifyError(
@@ -1268,14 +1266,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Animal>()
-            .SplitToTable(
-                "AnimalDetails",
-                s =>
-                {
-                    s.Property(a => a.Name);
-                    s.Property("FavoritePersonId");
-                }
-            );
+            .SplitToTable("AnimalDetails", s =>
+            {
+                s.Property(a => a.Name);
+                s.Property("FavoritePersonId");
+            });
 
         VerifyError(
             RelationalStrings.EntitySplittingMissingPropertiesMainFragment(
@@ -1293,14 +1288,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder
             .Entity<Animal>()
             .ToView("Animal")
-            .SplitToView(
-                "AnimalDetails",
-                s =>
-                {
-                    s.Property(a => a.Name);
-                    s.Property("FavoritePersonId");
-                }
-            );
+            .SplitToView("AnimalDetails", s =>
+            {
+                s.Property(a => a.Name);
+                s.Property("FavoritePersonId");
+            });
 
         VerifyError(
             RelationalStrings.EntitySplittingMissingPropertiesMainFragment(
@@ -1322,13 +1314,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
             cb.ToTable("Order");
 
-            cb.SplitToTable(
-                "OrderDetails",
-                tb =>
-                {
-                    tb.Property(c => c.PartitionId);
-                }
-            );
+            cb.SplitToTable("OrderDetails", tb =>
+            {
+                tb.Property(c => c.PartitionId);
+            });
 
             cb.OwnsOne(
                 c => c.OrderDetails,
@@ -1337,13 +1326,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                     db.ToTable("Order");
 
                     db.Property<string>("OtherAddress");
-                    db.SplitToTable(
-                        "Details",
-                        tb =>
-                        {
-                            tb.Property("OtherAddress");
-                        }
-                    );
+                    db.SplitToTable("Details", tb =>
+                    {
+                        tb.Property("OtherAddress");
+                    });
                 }
             );
         });
@@ -1369,13 +1355,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
             cb.ToTable("Order");
 
-            cb.SplitToTable(
-                "OrderDetails",
-                tb =>
-                {
-                    tb.Property(c => c.PartitionId);
-                }
-            );
+            cb.SplitToTable("OrderDetails", tb =>
+            {
+                tb.Property(c => c.PartitionId);
+            });
 
             cb.OwnsOne(
                 c => c.OrderDetails,
@@ -1384,13 +1367,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                     db.ToTable("Details");
 
                     db.Property<string>("OtherAddress");
-                    db.SplitToTable(
-                        "Order",
-                        tb =>
-                        {
-                            tb.Property("OtherAddress");
-                        }
-                    );
+                    db.SplitToTable("Order", tb =>
+                    {
+                        tb.Property("OtherAddress");
+                    });
                 }
             );
             cb.Navigation(c => c.OrderDetails).IsRequired();
@@ -1418,13 +1398,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
 
             cb.ToTable("Order");
 
-            cb.SplitToTable(
-                "OrderDetails",
-                tb =>
-                {
-                    tb.Property(c => c.PartitionId);
-                }
-            );
+            cb.SplitToTable("OrderDetails", tb =>
+            {
+                tb.Property(c => c.PartitionId);
+            });
 
             cb.OwnsOne(
                 c => c.OrderDetails,
@@ -1433,13 +1410,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
                     db.ToTable("OrderDetails");
 
                     db.Property<string>("OtherAddress");
-                    db.SplitToTable(
-                        "Order",
-                        tb =>
-                        {
-                            tb.Property("OtherAddress");
-                        }
-                    );
+                    db.SplitToTable("Order", tb =>
+                    {
+                        tb.Property("OtherAddress");
+                    });
                 }
             );
             cb.Navigation(c => c.OrderDetails).IsRequired();
@@ -3809,14 +3783,12 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         {
             db.HasBaseType((string)null);
             db.OwnsOne(d => d.SomeTestMethods)
-                .DeleteUsingStoredProcedure(
-                    "Delete",
-                    s => s.HasOriginalValueParameter("DerivedTestMethodsId")
+                .DeleteUsingStoredProcedure("Delete", s =>
+                    s.HasOriginalValueParameter("DerivedTestMethodsId")
                 );
             db.OwnsOne(d => d.OtherTestMethods)
-                .DeleteUsingStoredProcedure(
-                    "Delete",
-                    s => s.HasOriginalValueParameter("DerivedTestMethodsId")
+                .DeleteUsingStoredProcedure("Delete", s =>
+                    s.HasOriginalValueParameter("DerivedTestMethodsId")
                 );
         });
 
@@ -3925,13 +3897,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Animal>()
-            .UpdateUsingStoredProcedure(
-                "Update",
-                s =>
-                    s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
-                        .HasParameter(a => a.Name)
-                        .HasParameter((Cat c) => c.Breed)
-                        .HasResultColumn(a => a.Name)
+            .UpdateUsingStoredProcedure("Update", s =>
+                s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
+                    .HasParameter(a => a.Name)
+                    .HasParameter((Cat c) => c.Breed)
+                    .HasResultColumn(a => a.Name)
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()
@@ -4307,12 +4277,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Animal>()
-            .InsertUsingStoredProcedure(
-                "Insert",
-                s =>
-                    s.HasParameter(a => a.Id, pb => pb.IsOutput())
-                        .HasParameter("FavoritePersonId")
-                        .HasParameter(a => a.Name)
+            .InsertUsingStoredProcedure("Insert", s =>
+                s.HasParameter(a => a.Id, pb => pb.IsOutput())
+                    .HasParameter("FavoritePersonId")
+                    .HasParameter(a => a.Name)
             )
             .Property(b => b.Name)
             .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
@@ -4335,12 +4303,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Animal>()
-            .UpdateUsingStoredProcedure(
-                "Update",
-                s =>
-                    s.HasOriginalValueParameter(a => a.Id)
-                        .HasParameter("FavoritePersonId")
-                        .HasParameter(a => a.Name)
+            .UpdateUsingStoredProcedure("Update", s =>
+                s.HasOriginalValueParameter(a => a.Id)
+                    .HasParameter("FavoritePersonId")
+                    .HasParameter(a => a.Name)
             )
             .Property(b => b.Name)
             .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
@@ -4363,9 +4329,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Animal>()
-            .InsertUsingStoredProcedure(
-                "Insert",
-                s => s.HasParameter(a => a.Id, pb => pb.IsOutput()).HasParameter("FavoritePersonId")
+            .InsertUsingStoredProcedure("Insert", s =>
+                s.HasParameter(a => a.Id, pb => pb.IsOutput()).HasParameter("FavoritePersonId")
             )
             .Property(b => b.Name)
             .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
@@ -4379,9 +4344,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Animal>()
-            .UpdateUsingStoredProcedure(
-                "Update",
-                s => s.HasOriginalValueParameter(a => a.Id).HasParameter("FavoritePersonId")
+            .UpdateUsingStoredProcedure("Update", s =>
+                s.HasOriginalValueParameter(a => a.Id).HasParameter("FavoritePersonId")
             )
             .Property(b => b.Name)
             .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
@@ -4413,12 +4377,10 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder.Entity<Animal>().UseTptMappingStrategy();
         modelBuilder
             .Entity<Cat>()
-            .UpdateUsingStoredProcedure(
-                "Update",
-                s =>
-                    s.HasOriginalValueParameter(c => c.Id)
-                        .HasParameter(c => c.Breed)
-                        .HasParameter(c => c.Identity)
+            .UpdateUsingStoredProcedure("Update", s =>
+                s.HasOriginalValueParameter(c => c.Id)
+                    .HasParameter(c => c.Breed)
+                    .HasParameter(c => c.Identity)
             );
 
         Validate(modelBuilder);
@@ -4431,13 +4393,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder
             .Entity<Animal>()
             .UseTptMappingStrategy()
-            .UpdateUsingStoredProcedure(
-                "Update",
-                s =>
-                    s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
-                        .HasParameter(a => a.Name)
-                        .HasParameter("FavoritePersonId")
-                        .HasResultColumn(a => a.Name)
+            .UpdateUsingStoredProcedure("Update", s =>
+                s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
+                    .HasParameter(a => a.Name)
+                    .HasParameter("FavoritePersonId")
+                    .HasResultColumn(a => a.Name)
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()
@@ -4455,13 +4415,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder
             .Entity<Animal>()
             .UseTptMappingStrategy()
-            .UpdateUsingStoredProcedure(
-                "Update",
-                s =>
-                    s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
-                        .HasParameter(a => a.Name)
-                        .HasParameter("FavoritePersonId")
-                        .HasResultColumn(a => a.Name)
+            .UpdateUsingStoredProcedure("Update", s =>
+                s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
+                    .HasParameter(a => a.Name)
+                    .HasParameter("FavoritePersonId")
+                    .HasResultColumn(a => a.Name)
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()
@@ -4506,9 +4464,8 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder
             .Entity<Animal>()
             .UseTptMappingStrategy()
-            .UpdateUsingStoredProcedure(
-                "Update",
-                s => s.HasOriginalValueParameter((Cat c) => c.Breed)
+            .UpdateUsingStoredProcedure("Update", s =>
+                s.HasOriginalValueParameter((Cat c) => c.Breed)
             );
         modelBuilder.Entity<Cat>();
 
@@ -4563,13 +4520,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Animal>()
-            .UpdateUsingStoredProcedure(
-                "Update",
-                s =>
-                    s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
-                        .HasParameter(a => a.Name)
-                        .HasParameter("FavoritePersonId")
-                        .HasParameter(a => a.Name)
+            .UpdateUsingStoredProcedure("Update", s =>
+                s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
+                    .HasParameter(a => a.Name)
+                    .HasParameter("FavoritePersonId")
+                    .HasParameter(a => a.Name)
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()
@@ -4592,13 +4547,11 @@ public partial class RelationalModelValidatorTest : ModelValidatorTest
         modelBuilder
             .Entity<Animal>()
             .UseTpcMappingStrategy()
-            .UpdateUsingStoredProcedure(
-                "Update",
-                s =>
-                    s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
-                        .HasParameter(a => a.Name)
-                        .HasParameter("FavoritePersonId")
-                        .HasResultColumn(a => a.Name)
+            .UpdateUsingStoredProcedure("Update", s =>
+                s.HasOriginalValueParameter(a => a.Id, p => p.HasName("MyId"))
+                    .HasParameter(a => a.Name)
+                    .HasParameter("FavoritePersonId")
+                    .HasResultColumn(a => a.Name)
             )
             .Property(a => a.Name)
             .ValueGeneratedOnUpdate()

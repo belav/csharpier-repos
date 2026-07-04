@@ -22,10 +22,8 @@ public class SqlServerValueGeneratorCacheTest
             .Instance.CreateContextServices(model)
             .GetRequiredService<ISqlServerValueGeneratorCache>();
 
-        var generator1 = cache.GetOrAdd(
-            property1,
-            entityType,
-            (p, et) => new TemporaryIntValueGenerator()
+        var generator1 = cache.GetOrAdd(property1, entityType, (p, et) =>
+            new TemporaryIntValueGenerator()
         );
         Assert.NotNull(generator1);
         Assert.Same(
@@ -33,10 +31,8 @@ public class SqlServerValueGeneratorCacheTest
             cache.GetOrAdd(property1, entityType, (p, et) => new TemporaryIntValueGenerator())
         );
 
-        var generator2 = cache.GetOrAdd(
-            property2,
-            entityType,
-            (p, et) => new TemporaryIntValueGenerator()
+        var generator2 = cache.GetOrAdd(property2, entityType, (p, et) =>
+            new TemporaryIntValueGenerator()
         );
         Assert.NotNull(generator2);
         Assert.Same(

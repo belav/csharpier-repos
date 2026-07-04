@@ -1093,9 +1093,8 @@ namespace System.Text.Json.Serialization.Tests
             >.GetEnumerator()
             {
                 RefCount++;
-                return new DisposableEnumerator<KeyValuePair<TKey, TValue>>(
-                    GetEnumerator(),
-                    () => RefCount--
+                return new DisposableEnumerator<KeyValuePair<TKey, TValue>>(GetEnumerator(), () =>
+                    RefCount--
                 );
             }
 

@@ -39,26 +39,20 @@ namespace System.ComponentModel.Composition
             Func<ReflectionContext, TypeCatalog> catalogCreator
         )
         {
-            Assert.Throws<ArgumentNullException>(
-                "reflectionContext",
-                () =>
-                {
-                    var catalog = catalogCreator(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("reflectionContext", () =>
+            {
+                var catalog = catalogCreator(null);
+            });
         }
 
         private static void Constructor_NullDefinitionOriginArgument_ShouldThrowArgumentNull(
             Func<ICompositionElement, TypeCatalog> catalogCreator
         )
         {
-            Assert.Throws<ArgumentNullException>(
-                "definitionOrigin",
-                () =>
-                {
-                    var catalog = catalogCreator(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definitionOrigin", () =>
+            {
+                var catalog = catalogCreator(null);
+            });
         }
 
         [Fact]
@@ -112,49 +106,37 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_NullAsTypesArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "types",
-                () =>
-                {
-                    new TypeCatalog((Type[])null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("types", () =>
+            {
+                new TypeCatalog((Type[])null);
+            });
         }
 
         [Fact]
         public void Constructor3_NullAsTypesArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "types",
-                () =>
-                {
-                    new TypeCatalog((IEnumerable<Type>)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("types", () =>
+            {
+                new TypeCatalog((IEnumerable<Type>)null);
+            });
         }
 
         [Fact]
         public void Constructor2_ArrayWithNullAsTypesArgument_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "types",
-                () =>
-                {
-                    new TypeCatalog(new Type[] { null });
-                }
-            );
+            Assert.Throws<ArgumentException>("types", () =>
+            {
+                new TypeCatalog(new Type[] { null });
+            });
         }
 
         [Fact]
         public void Constructor3_ArrayWithNullAsTypesArgument_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "types",
-                () =>
-                {
-                    new TypeCatalog((IEnumerable<Type>)new Type[] { null });
-                }
-            );
+            Assert.Throws<ArgumentException>("types", () =>
+            {
+                new TypeCatalog((IEnumerable<Type>)new Type[] { null });
+            });
         }
 
         [Fact]
@@ -239,13 +221,10 @@ namespace System.ComponentModel.Composition
             var catalog = CreateTypeCatalog();
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    var parts = catalog.Parts;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                var parts = catalog.Parts;
+            });
         }
 
         [Fact]
@@ -264,13 +243,10 @@ namespace System.ComponentModel.Composition
             catalog.Dispose();
             var definition = ImportDefinitionFactory.Create();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    catalog.GetExports(definition);
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                catalog.GetExports(definition);
+            });
         }
 
         [Fact]
@@ -278,13 +254,10 @@ namespace System.ComponentModel.Composition
         {
             var catalog = CreateTypeCatalog();
 
-            Assert.Throws<ArgumentNullException>(
-                "definition",
-                () =>
-                {
-                    catalog.GetExports((ImportDefinition)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definition", () =>
+            {
+                catalog.GetExports((ImportDefinition)null);
+            });
         }
 
         [Fact]
@@ -571,45 +544,30 @@ namespace System.ComponentModel.Composition
             var catalog = new TypeCatalog(Assembly.GetExecutingAssembly().GetTypes());
             var container = new CompositionContainer(catalog);
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<DirectCycleNonSharedPart>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<DirectCycleNonSharedPart>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleNonSharedPart>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleNonSharedPart>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleNonSharedPart1>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleNonSharedPart1>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleNonSharedPart2>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleNonSharedPart2>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleWithSharedPartAndNonSharedPart>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleWithSharedPartAndNonSharedPart>();
+            });
 
             Assert.NotNull(container.GetExportedValue<CycleSharedPart>());
             Assert.NotNull(container.GetExportedValue<CycleSharedPart1>());

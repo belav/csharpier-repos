@@ -327,11 +327,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
             convention
                 .ForType<TPart>()
-                .ExportProperty(
-                    property,
-                    eb =>
-                        eb.AsContractType<IContractA>()
-                            .AddMetadata(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
+                .ExportProperty(property, eb =>
+                    eb.AsContractType<IContractA>()
+                        .AddMetadata(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
                 );
 
             return convention;
@@ -477,12 +475,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
             convention
                 .ForType<TPart>()
-                .ImportProperty(
-                    property,
-                    ib =>
-                        ib.AsMany(false)
-                            .AsContractName(ContractNames.ContractX)
-                            .AsContractType<AB>()
+                .ImportProperty(property, ib =>
+                    ib.AsMany(false).AsContractName(ContractNames.ContractX).AsContractType<AB>()
                 );
 
             return convention;

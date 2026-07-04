@@ -14,9 +14,8 @@ namespace System.Linq.Tests
             string[] first = null;
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => first.CountBy(x => x));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => first.CountBy(x => x, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                first.CountBy(x => x, new AnagramEqualityComparer())
             );
         }
 
@@ -26,13 +25,11 @@ namespace System.Linq.Tests
             string[] source = { "Bob", "Tim", "Robert", "Chris" };
             Func<string, string> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.CountBy(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.CountBy(keySelector)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.CountBy(keySelector, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.CountBy(keySelector, new AnagramEqualityComparer())
             );
         }
 

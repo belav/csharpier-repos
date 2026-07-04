@@ -1420,9 +1420,8 @@ enum E
 
 ";
 
-            CompileAndVerifyFieldMarshal(
-                source,
-                (name, _omitted1) => (name == "e" || name == "X") ? new byte[] { 0x02 } : null
+            CompileAndVerifyFieldMarshal(source, (name, _omitted1) =>
+                (name == "e" || name == "X") ? new byte[] { 0x02 } : null
             );
         }
 

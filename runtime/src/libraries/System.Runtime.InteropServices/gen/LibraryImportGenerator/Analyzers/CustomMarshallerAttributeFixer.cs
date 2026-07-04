@@ -138,9 +138,8 @@ namespace Microsoft.Interop.Analyzers
                     partiallyUpdatedSymbols[marshallerType] = newMarshallerType;
                 }
 
-                return CodeAction.Create(
-                    SR.AddMissingCustomTypeMarshallerMembers,
-                    ct => Task.FromResult(symbolEditor.ChangedSolution)
+                return CodeAction.Create(SR.AddMissingCustomTypeMarshallerMembers, ct =>
+                    Task.FromResult(symbolEditor.ChangedSolution)
                 );
             }
 
@@ -637,9 +636,8 @@ namespace Microsoft.Interop.Analyzers
                 );
             }
 
-            editor.ReplaceNode(
-                declaringSyntax,
-                (declaringSyntax, gen) => gen.AddMembers(declaringSyntax, newMembers)
+            editor.ReplaceNode(declaringSyntax, (declaringSyntax, gen) =>
+                gen.AddMembers(declaringSyntax, newMembers)
             );
 
             SyntaxNode CreateUnmanagedTypeSyntax()
@@ -939,9 +937,8 @@ namespace Microsoft.Interop.Analyzers
                 );
             }
 
-            editor.ReplaceNode(
-                declaringSyntax,
-                (declaringSyntax, gen) => gen.AddMembers(declaringSyntax, newMembers)
+            editor.ReplaceNode(declaringSyntax, (declaringSyntax, gen) =>
+                gen.AddMembers(declaringSyntax, newMembers)
             );
 
             SyntaxNode CreateUnmanagedTypeSyntax()

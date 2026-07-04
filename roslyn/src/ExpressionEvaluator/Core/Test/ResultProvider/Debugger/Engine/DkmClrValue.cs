@@ -212,25 +212,21 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             DkmCompletionRoutine<DkmEvaluationAsyncResult> CompletionRoutine
         )
         {
-            InspectionContext.InspectionSession.InvokeResultProvider(
-                this,
-                MethodId.GetResult,
-                r =>
-                {
-                    r.GetResult(
-                        this,
-                        WorkList,
-                        DeclaredType,
-                        CustomTypeInfo,
-                        InspectionContext,
-                        FormatSpecifiers,
-                        ResultName,
-                        ResultFullName,
-                        CompletionRoutine
-                    );
-                    return (object)null;
-                }
-            );
+            InspectionContext.InspectionSession.InvokeResultProvider(this, MethodId.GetResult, r =>
+            {
+                r.GetResult(
+                    this,
+                    WorkList,
+                    DeclaredType,
+                    CustomTypeInfo,
+                    InspectionContext,
+                    FormatSpecifiers,
+                    ResultName,
+                    ResultFullName,
+                    CompletionRoutine
+                );
+                return (object)null;
+            });
         }
 
         public string EvaluateToString(DkmInspectionContext inspectionContext)

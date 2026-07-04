@@ -29,27 +29,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new[] { source, RefSafetyRulesAttributeDefinition },
                 parseOptions: TestOptions.Regular10
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: false,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: false,
+                    publicDefinition: true
+                )
             );
 
             comp = CreateCompilation(new[] { source, RefSafetyRulesAttributeDefinition });
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: true,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: true,
+                    publicDefinition: true
+                )
             );
         }
 
@@ -61,15 +57,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 RefSafetyRulesAttributeDefinition,
                 parseOptions: TestOptions.Regular10
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: false,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: false,
+                    publicDefinition: true
+                )
             );
             var ref1 = AsReference(comp, useCompilationReference);
 
@@ -84,27 +78,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 references: new[] { ref1 },
                 parseOptions: TestOptions.Regular10
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: false,
-                        includesAttributeUse: false,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: false,
+                    includesAttributeUse: false,
+                    publicDefinition: true
+                )
             );
 
             comp = CreateCompilation(source, references: new[] { ref1 });
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: false,
-                        includesAttributeUse: true,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: false,
+                    includesAttributeUse: true,
+                    publicDefinition: true
+                )
             );
         }
 
@@ -199,27 +189,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void EmitAttribute_01(string source, bool expectedIncludesAttributeUse)
         {
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: false,
-                        includesAttributeUse: false,
-                        publicDefinition: false
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: false,
+                    includesAttributeUse: false,
+                    publicDefinition: false
+                )
             );
 
             comp = CreateCompilation(source);
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: expectedIncludesAttributeUse,
-                        includesAttributeUse: expectedIncludesAttributeUse,
-                        publicDefinition: false
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: expectedIncludesAttributeUse,
+                    includesAttributeUse: expectedIncludesAttributeUse,
+                    publicDefinition: false
+                )
             );
         }
 
@@ -251,29 +237,23 @@ public ref struct R { }
                 references: new[] { refA },
                 parseOptions: TestOptions.Regular10
             );
-            CompileAndVerify(
-                comp,
-                verify: Verification.Skipped,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: false,
-                        includesAttributeUse: false,
-                        publicDefinition: false
-                    )
+            CompileAndVerify(comp, verify: Verification.Skipped, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: false,
+                    includesAttributeUse: false,
+                    publicDefinition: false
+                )
             );
 
             comp = CreateCompilation(source, references: new[] { refA });
-            CompileAndVerify(
-                comp,
-                verify: Verification.Skipped,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: true,
-                        publicDefinition: false
-                    )
+            CompileAndVerify(comp, verify: Verification.Skipped, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: true,
+                    publicDefinition: false
+                )
             );
         }
 
@@ -297,15 +277,13 @@ public ref struct R { }
             var refA = AsReference(comp, useCompilationReference);
             bool useUpdatedEscapeRulesA = languageVersionA == LanguageVersion.CSharp11;
             Assert.Equal(useUpdatedEscapeRulesA, comp.SourceModule.UseUpdatedEscapeRules);
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: useUpdatedEscapeRulesA,
-                        includesAttributeUse: useUpdatedEscapeRulesA,
-                        publicDefinition: false
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: useUpdatedEscapeRulesA,
+                    includesAttributeUse: useUpdatedEscapeRulesA,
+                    publicDefinition: false
+                )
             );
 
             var sourceB =
@@ -321,15 +299,13 @@ public ref struct R { }
                 languageVersionB == LanguageVersion.CSharp11,
                 comp.SourceModule.UseUpdatedEscapeRules
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertRefSafetyRulesAttribute(
-                        m,
-                        includesAttributeDefinition: false,
-                        includesAttributeUse: false,
-                        publicDefinition: false
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertRefSafetyRulesAttribute(
+                    m,
+                    includesAttributeDefinition: false,
+                    includesAttributeUse: false,
+                    publicDefinition: false
+                )
             );
         }
 

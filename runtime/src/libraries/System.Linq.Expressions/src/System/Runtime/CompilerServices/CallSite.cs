@@ -415,9 +415,8 @@ namespace System.Runtime.CompilerServices
             var body = new ArrayBuilder<Expression>(13);
             var vars = new ArrayBuilder<ParameterExpression>(8 + (isVoid ? 0 : 1));
 
-            ParameterExpression[] @params = Array.ConvertAll(
-                invoke.GetParametersCached(),
-                p => Expression.Parameter(p.ParameterType, p.Name)
+            ParameterExpression[] @params = Array.ConvertAll(invoke.GetParametersCached(), p =>
+                Expression.Parameter(p.ParameterType, p.Name)
             );
             LabelTarget @return = Expression.Label(returnType);
             Type[] typeArgs = new[] { typeof(T) };
@@ -636,9 +635,8 @@ namespace System.Runtime.CompilerServices
             body.UncheckedAdd(Expression.Assign(rule, Expression.Constant(null, rule.Type)));
 
             ParameterExpression args = Expression.Variable(typeof(object[]), "args");
-            Expression[] argsElements = Array.ConvertAll(
-                arguments,
-                p => Convert(p, typeof(object))
+            Expression[] argsElements = Array.ConvertAll(arguments, p =>
+                Convert(p, typeof(object))
             );
             vars.UncheckedAdd(args);
             body.UncheckedAdd(
@@ -704,9 +702,8 @@ namespace System.Runtime.CompilerServices
         [RequiresDynamicCode(Expression.NewArrayRequiresDynamicCode)]
         private T CreateCustomNoMatchDelegate(MethodInfo invoke)
         {
-            ParameterExpression[] @params = Array.ConvertAll(
-                invoke.GetParametersCached(),
-                p => Expression.Parameter(p.ParameterType, p.Name)
+            ParameterExpression[] @params = Array.ConvertAll(invoke.GetParametersCached(), p =>
+                Expression.Parameter(p.ParameterType, p.Name)
             );
             return Expression
                 .Lambda<T>(

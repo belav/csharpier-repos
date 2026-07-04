@@ -364,14 +364,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             var i = 0;
 
             return parameterList != null
-                ? parameterList.ReplaceNodes(
-                    parameterList.Parameters,
-                    (parameterNode, _) =>
-                        PromoteParameter(
-                            generator,
-                            parameterNode,
-                            delegateMethod.Parameters.ElementAtOrDefault(i++)
-                        )
+                ? parameterList.ReplaceNodes(parameterList.Parameters, (parameterNode, _) =>
+                    PromoteParameter(
+                        generator,
+                        parameterNode,
+                        delegateMethod.Parameters.ElementAtOrDefault(i++)
+                    )
                 )
                 : SyntaxFactory.ParameterList(
                     SyntaxFactory.SeparatedList(
@@ -437,36 +435,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             ParameterListSyntax newParameterList
         )
         {
-            return invocation.ReplaceNodes(
-                invocation.ArgumentList.Arguments,
-                (argumentNode, _) =>
+            return invocation.ReplaceNodes(invocation.ArgumentList.Arguments, (argumentNode, _) =>
+            {
+                if (argumentNode.NameColon == null)
                 {
-                    if (argumentNode.NameColon == null)
-                    {
-                        return argumentNode;
-                    }
-
-                    var parameterIndex = TryDetermineParameterIndex(argumentNode.NameColon, method);
-                    if (parameterIndex == -1)
-                    {
-                        return argumentNode;
-                    }
-
-                    var newParameter = newParameterList.Parameters.ElementAtOrDefault(
-                        parameterIndex
-                    );
-                    if (newParameter == null || newParameter.Identifier.IsMissing)
-                    {
-                        return argumentNode;
-                    }
-
-                    return argumentNode.WithNameColon(
-                        argumentNode.NameColon.WithName(
-                            SyntaxFactory.IdentifierName(newParameter.Identifier)
-                        )
-                    );
+                    return argumentNode;
                 }
-            );
+
+                var parameterIndex = TryDetermineParameterIndex(argumentNode.NameColon, method);
+                if (parameterIndex == -1)
+                {
+                    return argumentNode;
+                }
+
+                var newParameter = newParameterList.Parameters.ElementAtOrDefault(parameterIndex);
+                if (newParameter == null || newParameter.Identifier.IsMissing)
+                {
+                    return argumentNode;
+                }
+
+                return argumentNode.WithNameColon(
+                    argumentNode.NameColon.WithName(
+                        SyntaxFactory.IdentifierName(newParameter.Identifier)
+                    )
+                );
+            });
         }
 
         private static int TryDetermineParameterIndex(

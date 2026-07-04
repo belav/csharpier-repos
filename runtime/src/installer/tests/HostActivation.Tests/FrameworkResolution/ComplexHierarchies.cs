@@ -29,26 +29,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             {
                 DotNetWithMultipleFrameworks = DotNet("DotNetWithMultipleFrameworks")
                     .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("5.1.1")
-                    .AddFramework(
-                        "MiddleWare",
-                        "2.1.2",
-                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.1")
+                    .AddFramework("MiddleWare", "2.1.2", runtimeConfig =>
+                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.1")
                     )
-                    .AddFramework(
-                        "SerializerWare",
-                        "3.0.1",
-                        runtimeConfig =>
-                            runtimeConfig
-                                .WithFramework(MicrosoftNETCoreApp, "5.1.0")
-                                .WithFramework("MiddleWare", "2.1.0")
+                    .AddFramework("SerializerWare", "3.0.1", runtimeConfig =>
+                        runtimeConfig
+                            .WithFramework(MicrosoftNETCoreApp, "5.1.0")
+                            .WithFramework("MiddleWare", "2.1.0")
                     )
-                    .AddFramework(
-                        "OMWare",
-                        "7.3.1",
-                        runtimeConfig =>
-                            runtimeConfig
-                                .WithFramework(MicrosoftNETCoreApp, "5.1.0")
-                                .WithFramework("MiddleWare", "2.1.0")
+                    .AddFramework("OMWare", "7.3.1", runtimeConfig =>
+                        runtimeConfig
+                            .WithFramework(MicrosoftNETCoreApp, "5.1.0")
+                            .WithFramework("MiddleWare", "2.1.0")
                     )
                     .Build();
 

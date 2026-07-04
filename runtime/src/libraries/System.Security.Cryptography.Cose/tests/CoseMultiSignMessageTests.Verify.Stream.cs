@@ -68,9 +68,8 @@ namespace System.Security.Cryptography.Cose.Tests
 
             CoseMultiSignMessage msg = CoseMessage.DecodeMultiSign(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unseekable);
-            await Assert.ThrowsAsync<ArgumentException>(
-                "detachedContent",
-                () => msg.Signatures[0].VerifyDetachedAsync(DefaultKey, unseekableStream)
+            await Assert.ThrowsAsync<ArgumentException>("detachedContent", () =>
+                msg.Signatures[0].VerifyDetachedAsync(DefaultKey, unseekableStream)
             );
         }
 
@@ -85,9 +84,8 @@ namespace System.Security.Cryptography.Cose.Tests
 
             CoseMultiSignMessage msg = CoseMessage.DecodeMultiSign(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unreadable);
-            await Assert.ThrowsAsync<ArgumentException>(
-                "detachedContent",
-                () => msg.Signatures[0].VerifyDetachedAsync(DefaultKey, unseekableStream)
+            await Assert.ThrowsAsync<ArgumentException>("detachedContent", () =>
+                msg.Signatures[0].VerifyDetachedAsync(DefaultKey, unseekableStream)
             );
         }
     }
@@ -137,9 +135,8 @@ namespace System.Security.Cryptography.Cose.Tests
 
             CoseMultiSignMessage msg = CoseMessage.DecodeMultiSign(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unseekable);
-            Assert.Throws<ArgumentException>(
-                "detachedContent",
-                () => msg.Signatures[0].VerifyDetached(DefaultKey, unseekableStream)
+            Assert.Throws<ArgumentException>("detachedContent", () =>
+                msg.Signatures[0].VerifyDetached(DefaultKey, unseekableStream)
             );
         }
 
@@ -154,9 +151,8 @@ namespace System.Security.Cryptography.Cose.Tests
 
             CoseMultiSignMessage msg = CoseMessage.DecodeMultiSign(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unreadable);
-            Assert.Throws<ArgumentException>(
-                "detachedContent",
-                () => msg.Signatures[0].VerifyDetached(DefaultKey, unseekableStream)
+            Assert.Throws<ArgumentException>("detachedContent", () =>
+                msg.Signatures[0].VerifyDetached(DefaultKey, unseekableStream)
             );
         }
     }

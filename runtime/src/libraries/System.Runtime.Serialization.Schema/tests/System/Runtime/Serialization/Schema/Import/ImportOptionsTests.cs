@@ -146,9 +146,8 @@ namespace System.Runtime.Serialization.Schema.Tests
             }
             else
             {
-                var ex = Assert.Throws(
-                    expectedExceptionType,
-                    () => importer.Import(schemas, qname)
+                var ex = Assert.Throws(expectedExceptionType, () =>
+                    importer.Import(schemas, qname)
                 );
 
                 if (!string.IsNullOrEmpty(msg))

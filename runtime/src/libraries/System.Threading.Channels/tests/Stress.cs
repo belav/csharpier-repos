@@ -315,9 +315,8 @@ namespace System.Threading.Channels.Tests
                 }
                 catch (AggregateException ae)
                 {
-                    Assert.All(
-                        ae.InnerExceptions,
-                        e => Assert.IsAssignableFrom<OperationCanceledException>(e)
+                    Assert.All(ae.InnerExceptions, e =>
+                        Assert.IsAssignableFrom<OperationCanceledException>(e)
                     );
                 }
 

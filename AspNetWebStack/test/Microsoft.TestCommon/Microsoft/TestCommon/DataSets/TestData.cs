@@ -451,10 +451,8 @@ namespace Microsoft.TestCommon
             Type dictionaryType = OpenDictionaryType.MakeGenericType(dictionaryTypeParams);
             Type testDataHolderType = OpenTestDataHolderType.MakeGenericType(typeParams);
 
-            this.RegisterTestDataVariation(
-                TestDataVariations.AsInstance,
-                this.Type,
-                () => GetTypedTestData()
+            this.RegisterTestDataVariation(TestDataVariations.AsInstance, this.Type, () =>
+                GetTypedTestData()
             );
             this.RegisterTestDataVariation(
                 TestDataVariations.AsArray,

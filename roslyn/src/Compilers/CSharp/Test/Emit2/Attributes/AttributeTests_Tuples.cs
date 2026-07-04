@@ -125,14 +125,10 @@ public class Derived<T> : Outer<(int e1, (int e2, int e3) e4)>.Inner<
                 references: s_attributeRefs
             );
 
-            CompileAndVerify(
-                comp,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    TupleAttributeValidator.ValidateTupleAttributes(module);
-                }
-            );
+            CompileAndVerify(comp, verify: Verification.Passes, symbolValidator: module =>
+            {
+                TupleAttributeValidator.ValidateTupleAttributes(module);
+            });
         }
 
         [Fact]
@@ -158,13 +154,10 @@ namespace System.Runtime.CompilerServices
             );
             comp.VerifyDiagnostics();
 
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    TupleAttributeValidator.ValidateTupleAttributes(module);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                TupleAttributeValidator.ValidateTupleAttributes(module);
+            });
         }
 
         [Fact]

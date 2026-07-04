@@ -39,48 +39,30 @@ namespace System.Net.Security.Tests
             SslApplicationProtocol defaultProtocol = default;
             Assert.True(defaultProtocol.Protocol.IsEmpty);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "protocol",
-                () =>
-                {
-                    new SslApplicationProtocol((byte[])null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "protocol",
-                () =>
-                {
-                    new SslApplicationProtocol((string)null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "protocol",
-                () =>
-                {
-                    new SslApplicationProtocol(new byte[] { });
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "protocol",
-                () =>
-                {
-                    new SslApplicationProtocol(string.Empty);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "protocol",
-                () =>
-                {
-                    new SslApplicationProtocol(Encoding.UTF8.GetBytes(new string('a', 256)));
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "protocol",
-                () =>
-                {
-                    new SslApplicationProtocol(new string('a', 256));
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("protocol", () =>
+            {
+                new SslApplicationProtocol((byte[])null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("protocol", () =>
+            {
+                new SslApplicationProtocol((string)null);
+            });
+            AssertExtensions.Throws<ArgumentException>("protocol", () =>
+            {
+                new SslApplicationProtocol(new byte[] { });
+            });
+            AssertExtensions.Throws<ArgumentException>("protocol", () =>
+            {
+                new SslApplicationProtocol(string.Empty);
+            });
+            AssertExtensions.Throws<ArgumentException>("protocol", () =>
+            {
+                new SslApplicationProtocol(Encoding.UTF8.GetBytes(new string('a', 256)));
+            });
+            AssertExtensions.Throws<ArgumentException>("protocol", () =>
+            {
+                new SslApplicationProtocol(new string('a', 256));
+            });
             Assert.Throws<EncoderFallbackException>(() =>
             {
                 new SslApplicationProtocol("\uDC00");

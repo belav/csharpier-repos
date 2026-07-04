@@ -189,9 +189,8 @@ public partial class TestServer : IDisposable
                     )
                     .Configure(app =>
                     {
-                        app.Map(
-                            "/start",
-                            builder => builder.Run(context => context.Response.WriteAsync("Done"))
+                        app.Map("/start", builder =>
+                            builder.Run(context => context.Response.WriteAsync("Done"))
                         );
                         _appBuilder(app);
                     })

@@ -329,9 +329,8 @@ namespace System.Tests
             internal void CompareToThrows()
             {
                 Tuple<int> tupleB = new Tuple<int>((int)10000);
-                AssertExtensions.Throws<ArgumentException>(
-                    "other",
-                    () => ((IComparable)Tuple).CompareTo(tupleB)
+                AssertExtensions.Throws<ArgumentException>("other", () =>
+                    ((IComparable)Tuple).CompareTo(tupleB)
                 );
             }
         }

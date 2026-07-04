@@ -592,9 +592,8 @@ namespace System.Reflection.Emit.Tests
             );
             FieldBuilder field = type.DefineField("Field", typeof(int), FieldAttributes.Public);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "field",
-                () => TypeBuilder.GetField(type, field)
+            AssertExtensions.Throws<ArgumentException>("field", () =>
+                TypeBuilder.GetField(type, field)
             );
         }
 

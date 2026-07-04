@@ -15,26 +15,22 @@ namespace System.IO.Pipes.Tests
         [Fact]
         public static void NullPipeName_Throws_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pipeName",
-                () => new NamedPipeClientStream(null)
+            AssertExtensions.Throws<ArgumentNullException>("pipeName", () =>
+                new NamedPipeClientStream(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pipeName",
-                () => new NamedPipeClientStream(".", null)
+            AssertExtensions.Throws<ArgumentNullException>("pipeName", () =>
+                new NamedPipeClientStream(".", null)
             );
         }
 
         [Fact]
         public static void EmptyStringPipeName_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "pipeName",
-                () => new NamedPipeClientStream("")
+            AssertExtensions.Throws<ArgumentException>("pipeName", () =>
+                new NamedPipeClientStream("")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "pipeName",
-                () => new NamedPipeClientStream(".", "")
+            AssertExtensions.Throws<ArgumentException>("pipeName", () =>
+                new NamedPipeClientStream(".", "")
             );
         }
 
@@ -44,28 +40,23 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeDirection.Out)]
         public static void NullServerName_Throws_ArgumentNullException(PipeDirection direction)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serverName",
-                () => new NamedPipeClientStream(null, "client1")
+            AssertExtensions.Throws<ArgumentNullException>("serverName", () =>
+                new NamedPipeClientStream(null, "client1")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serverName",
-                () => new NamedPipeClientStream(null, "client1", direction)
+            AssertExtensions.Throws<ArgumentNullException>("serverName", () =>
+                new NamedPipeClientStream(null, "client1", direction)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serverName",
-                () => new NamedPipeClientStream(null, "client1", direction, PipeOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("serverName", () =>
+                new NamedPipeClientStream(null, "client1", direction, PipeOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serverName",
-                () =>
-                    new NamedPipeClientStream(
-                        null,
-                        "client1",
-                        direction,
-                        PipeOptions.None,
-                        TokenImpersonationLevel.None
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("serverName", () =>
+                new NamedPipeClientStream(
+                    null,
+                    "client1",
+                    direction,
+                    PipeOptions.None,
+                    TokenImpersonationLevel.None
+                )
             );
         }
 
@@ -75,28 +66,23 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeDirection.Out)]
         public static void EmptyStringServerName_Throws_ArgumentException(PipeDirection direction)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new NamedPipeClientStream("", "client1")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new NamedPipeClientStream("", "client1")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new NamedPipeClientStream("", "client1", direction)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new NamedPipeClientStream("", "client1", direction)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new NamedPipeClientStream("", "client1", direction, PipeOptions.None)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new NamedPipeClientStream("", "client1", direction, PipeOptions.None)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new NamedPipeClientStream(
-                        "",
-                        "client1",
-                        direction,
-                        PipeOptions.None,
-                        TokenImpersonationLevel.None
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new NamedPipeClientStream(
+                    "",
+                    "client1",
+                    direction,
+                    PipeOptions.None,
+                    TokenImpersonationLevel.None
+                )
             );
         }
 
@@ -110,33 +96,26 @@ namespace System.IO.Pipes.Tests
         {
             const string serverName = ".";
             const string reservedName = "anonymous";
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "pipeName",
-                () => new NamedPipeClientStream(reservedName)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("pipeName", () =>
+                new NamedPipeClientStream(reservedName)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "pipeName",
-                () => new NamedPipeClientStream(serverName, reservedName)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("pipeName", () =>
+                new NamedPipeClientStream(serverName, reservedName)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "pipeName",
-                () => new NamedPipeClientStream(serverName, reservedName, direction)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("pipeName", () =>
+                new NamedPipeClientStream(serverName, reservedName, direction)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "pipeName",
-                () =>
-                    new NamedPipeClientStream(serverName, reservedName, direction, PipeOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("pipeName", () =>
+                new NamedPipeClientStream(serverName, reservedName, direction, PipeOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "pipeName",
-                () =>
-                    new NamedPipeClientStream(
-                        serverName,
-                        reservedName,
-                        direction,
-                        PipeOptions.None,
-                        TokenImpersonationLevel.Impersonation
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("pipeName", () =>
+                new NamedPipeClientStream(
+                    serverName,
+                    reservedName,
+                    direction,
+                    PipeOptions.None,
+                    TokenImpersonationLevel.Impersonation
+                )
             );
         }
 
@@ -173,24 +152,20 @@ namespace System.IO.Pipes.Tests
             PipeDirection direction
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "direction",
-                () => new NamedPipeClientStream(".", "client1", direction)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("direction", () =>
+                new NamedPipeClientStream(".", "client1", direction)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "direction",
-                () => new NamedPipeClientStream(".", "client1", direction, PipeOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("direction", () =>
+                new NamedPipeClientStream(".", "client1", direction, PipeOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "direction",
-                () =>
-                    new NamedPipeClientStream(
-                        ".",
-                        "client1",
-                        direction,
-                        PipeOptions.None,
-                        TokenImpersonationLevel.None
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("direction", () =>
+                new NamedPipeClientStream(
+                    ".",
+                    "client1",
+                    direction,
+                    PipeOptions.None,
+                    TokenImpersonationLevel.None
+                )
             );
         }
 
@@ -202,20 +177,17 @@ namespace System.IO.Pipes.Tests
             PipeDirection direction
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => new NamedPipeClientStream(".", "client1", direction, (PipeOptions)255)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new NamedPipeClientStream(".", "client1", direction, (PipeOptions)255)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    new NamedPipeClientStream(
-                        ".",
-                        "client1",
-                        direction,
-                        (PipeOptions)255,
-                        TokenImpersonationLevel.None
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new NamedPipeClientStream(
+                    ".",
+                    "client1",
+                    direction,
+                    (PipeOptions)255,
+                    TokenImpersonationLevel.None
+                )
             );
         }
 
@@ -227,16 +199,14 @@ namespace System.IO.Pipes.Tests
             PipeDirection direction
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "impersonationLevel",
-                () =>
-                    new NamedPipeClientStream(
-                        ".",
-                        "client1",
-                        direction,
-                        PipeOptions.None,
-                        (TokenImpersonationLevel)999
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("impersonationLevel", () =>
+                new NamedPipeClientStream(
+                    ".",
+                    "client1",
+                    direction,
+                    PipeOptions.None,
+                    (TokenImpersonationLevel)999
+                )
             );
         }
 
@@ -246,9 +216,8 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeDirection.Out)]
         public static void NullHandle_Throws_ArgumentNullException(PipeDirection direction)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "safePipeHandle",
-                () => new NamedPipeClientStream(direction, false, true, null)
+            AssertExtensions.Throws<ArgumentNullException>("safePipeHandle", () =>
+                new NamedPipeClientStream(direction, false, true, null)
             );
         }
 
@@ -259,9 +228,8 @@ namespace System.IO.Pipes.Tests
         public static void InvalidHandle_Throws_ArgumentException(PipeDirection direction)
         {
             using SafePipeHandle pipeHandle = new SafePipeHandle(new IntPtr(-1), true);
-            AssertExtensions.Throws<ArgumentException>(
-                "safePipeHandle",
-                () => new NamedPipeClientStream(direction, false, true, pipeHandle)
+            AssertExtensions.Throws<ArgumentException>("safePipeHandle", () =>
+                new NamedPipeClientStream(direction, false, true, pipeHandle)
             );
         }
 
@@ -309,29 +277,25 @@ namespace System.IO.Pipes.Tests
         [Fact]
         public void NamedPipeClientStream_InvalidHandleInerhitability()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inheritability",
-                () =>
-                    new NamedPipeClientStream(
-                        "a",
-                        "b",
-                        PipeDirection.Out,
-                        0,
-                        TokenImpersonationLevel.Delegation,
-                        HandleInheritability.None - 1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inheritability", () =>
+                new NamedPipeClientStream(
+                    "a",
+                    "b",
+                    PipeDirection.Out,
+                    0,
+                    TokenImpersonationLevel.Delegation,
+                    HandleInheritability.None - 1
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inheritability",
-                () =>
-                    new NamedPipeClientStream(
-                        "a",
-                        "b",
-                        PipeDirection.Out,
-                        0,
-                        TokenImpersonationLevel.Delegation,
-                        HandleInheritability.Inheritable + 1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inheritability", () =>
+                new NamedPipeClientStream(
+                    "a",
+                    "b",
+                    PipeDirection.Out,
+                    0,
+                    TokenImpersonationLevel.Delegation,
+                    HandleInheritability.Inheritable + 1
+                )
             );
         }
     }

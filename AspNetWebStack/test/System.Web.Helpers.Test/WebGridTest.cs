@@ -2536,33 +2536,19 @@ namespace System.Web.Helpers.Test
             );
             var html = grid.Table(
                 displayHeader: false,
-                columns: new[]
-                {
-                    grid.Column(
-                        "P1",
-                        format: item =>
+                columns: new[] { grid.Column("P1", format: item =>
+                    {
+                        return "<span>P1: " + item.P1 + "</span>";
+                    }), grid.Column("P2", format: item =>
+                    {
+                        return new HtmlString("<span>P2: " + item.P2 + "</span>");
+                    }), grid.Column("P3", format: item =>
+                    {
+                        return new HelperResult(tw =>
                         {
-                            return "<span>P1: " + item.P1 + "</span>";
-                        }
-                    ),
-                    grid.Column(
-                        "P2",
-                        format: item =>
-                        {
-                            return new HtmlString("<span>P2: " + item.P2 + "</span>");
-                        }
-                    ),
-                    grid.Column(
-                        "P3",
-                        format: item =>
-                        {
-                            return new HelperResult(tw =>
-                            {
-                                tw.Write("<span>P3: " + item.P3 + "</span>");
-                            });
-                        }
-                    ),
-                }
+                            tw.Write("<span>P3: " + item.P3 + "</span>");
+                        });
+                    }) }
             );
             UnitTestHelper.AssertEqualsIgnoreWhitespace(
                 "<table><tbody><tr>"
@@ -3328,10 +3314,8 @@ namespace System.Web.Helpers.Test
             var html = grid.Table(
                 columns: grid.Columns(
                     grid.Column("Name"),
-                    grid.Column(
-                        "Manager.Name",
-                        header: "Manager",
-                        format: item => item.Manager == null ? "" : item.Manager.Name
+                    grid.Column("Manager.Name", header: "Manager", format: item =>
+                        item.Manager == null ? "" : item.Manager.Name
                     )
                 )
             );

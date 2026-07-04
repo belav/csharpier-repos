@@ -53,19 +53,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 RegisterEditorFactory(editorFactory);
             }
 
-            RegisterLanguageService(
-                typeof(TLanguageService),
-                async ct =>
-                {
-                    await JoinableTaskFactory.SwitchToMainThreadAsync(ct);
+            RegisterLanguageService(typeof(TLanguageService), async ct =>
+            {
+                await JoinableTaskFactory.SwitchToMainThreadAsync(ct);
 
-                    // Create the language service, tell it to set itself up, then store it in a field
-                    // so we can notify it that it's time to clean up.
-                    _languageService = CreateLanguageService();
-                    _languageService.Setup();
-                    return _languageService.ComAggregate;
-                }
-            );
+                // Create the language service, tell it to set itself up, then store it in a field
+                // so we can notify it that it's time to clean up.
+                _languageService = CreateLanguageService();
+                _languageService.Setup();
+                return _languageService.ComAggregate;
+            });
 
             await shell.LoadPackageAsync(Guids.RoslynPackageId);
 

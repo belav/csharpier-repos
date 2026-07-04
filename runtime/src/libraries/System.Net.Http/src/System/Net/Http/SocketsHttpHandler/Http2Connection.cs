@@ -1475,25 +1475,21 @@ namespace System.Net.Http
         }
 
         private Task SendSettingsAckAsync() =>
-            PerformWriteAsync(
-                FrameHeader.Size,
-                this,
-                static (thisRef, writeBuffer) =>
-                {
-                    if (NetEventSource.Log.IsEnabled())
-                        thisRef.Trace("Started writing.");
+            PerformWriteAsync(FrameHeader.Size, this, static (thisRef, writeBuffer) =>
+            {
+                if (NetEventSource.Log.IsEnabled())
+                    thisRef.Trace("Started writing.");
 
-                    FrameHeader.WriteTo(
-                        writeBuffer.Span,
-                        0,
-                        FrameType.Settings,
-                        FrameFlags.Ack,
-                        streamId: 0
-                    );
+                FrameHeader.WriteTo(
+                    writeBuffer.Span,
+                    0,
+                    FrameType.Settings,
+                    FrameFlags.Ack,
+                    streamId: 0
+                );
 
-                    return true;
-                }
-            );
+                return true;
+            });
 
         /// <param name="pingContent">The 8-byte ping content to send, read as a big-endian integer.</param>
         /// <param name="isAck">Determine whether the frame is ping or ping ack.</param>

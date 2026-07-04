@@ -271,21 +271,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                     .Extensions.OfType<X509AuthorityInformationAccessExtension>()
                     .Single();
 
-                Assert.Throws<ArgumentNullException>(
-                    "accessMethodOid",
-                    () => aia.EnumerateUris((string)null)
+                Assert.Throws<ArgumentNullException>("accessMethodOid", () =>
+                    aia.EnumerateUris((string)null)
                 );
-                Assert.Throws<ArgumentNullException>(
-                    "accessMethodOid",
-                    () => aia.EnumerateUris((Oid)null)
+                Assert.Throws<ArgumentNullException>("accessMethodOid", () =>
+                    aia.EnumerateUris((Oid)null)
                 );
-                Assert.Throws<ArgumentNullException>(
-                    "accessMethodOid.Value",
-                    () => aia.EnumerateUris(new Oid(null, "potato"))
+                Assert.Throws<ArgumentNullException>("accessMethodOid.Value", () =>
+                    aia.EnumerateUris(new Oid(null, "potato"))
                 );
-                Assert.Throws<ArgumentException>(
-                    "accessMethodOid.Value",
-                    () => aia.EnumerateUris(new Oid("", "potato"))
+                Assert.Throws<ArgumentException>("accessMethodOid.Value", () =>
+                    aia.EnumerateUris(new Oid("", "potato"))
                 );
             }
         }

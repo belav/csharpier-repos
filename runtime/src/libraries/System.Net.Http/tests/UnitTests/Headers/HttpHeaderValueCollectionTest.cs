@@ -424,13 +424,10 @@ namespace System.Net.Http.Tests
 
             headers.Add(knownStringHeader, "special");
             array = new string[0];
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    collection.CopyTo(array, 0);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                collection.CopyTo(array, 0);
+            });
 
             headers.Add(knownStringHeader, "special");
             headers.Add(knownStringHeader, "special");

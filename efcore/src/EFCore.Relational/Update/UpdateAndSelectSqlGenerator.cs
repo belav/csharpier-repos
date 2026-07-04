@@ -270,10 +270,8 @@ public abstract class UpdateAndSelectSqlGenerator : UpdateSqlGenerator
     ) =>
         commandStringBuilder
             .Append("SELECT ")
-            .AppendJoin(
-                operations,
-                SqlGenerationHelper,
-                (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName)
+            .AppendJoin(operations, SqlGenerationHelper, (sb, o, helper) =>
+                helper.DelimitIdentifier(sb, o.ColumnName)
             );
 
     /// <summary>

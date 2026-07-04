@@ -291,18 +291,15 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void DefineDynamicAssembly_NullName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => AssemblyBuilder.DefineDynamicAssembly(null, AssemblyBuilderAccess.Run)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                AssemblyBuilder.DefineDynamicAssembly(null, AssemblyBuilderAccess.Run)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    AssemblyBuilder.DefineDynamicAssembly(
-                        null,
-                        AssemblyBuilderAccess.Run,
-                        new CustomAttributeBuilder[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                AssemblyBuilder.DefineDynamicAssembly(
+                    null,
+                    AssemblyBuilderAccess.Run,
+                    new CustomAttributeBuilder[0]
+                )
             );
         }
 
@@ -326,18 +323,15 @@ namespace System.Reflection.Emit.Tests
             AssemblyBuilderAccess access
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "access",
-                () => AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), access)
+            AssertExtensions.Throws<ArgumentException>("access", () =>
+                AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), access)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "access",
-                () =>
-                    AssemblyBuilder.DefineDynamicAssembly(
-                        new AssemblyName("Name"),
-                        access,
-                        new CustomAttributeBuilder[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>("access", () =>
+                AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("Name"),
+                    access,
+                    new CustomAttributeBuilder[0]
+                )
             );
         }
 
@@ -394,9 +388,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineDynamicModule_NullName_ThrowsArgumentNullException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => assembly.DefineDynamicModule(null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                assembly.DefineDynamicModule(null)
             );
         }
 
@@ -406,9 +399,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineDynamicModule_InvalidName_ThrowsArgumentException(string name)
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => assembly.DefineDynamicModule(name)
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                assembly.DefineDynamicModule(name)
             );
         }
 
@@ -465,9 +457,8 @@ namespace System.Reflection.Emit.Tests
         public void GetDynamicModule_InvalidName_ThrowsArgumentException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => assembly.GetDynamicModule(null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                assembly.GetDynamicModule(null)
             );
             AssertExtensions.Throws<ArgumentException>("name", () => assembly.GetDynamicModule(""));
         }
@@ -491,9 +482,8 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_ConstructorBuildler_ByteArray_NullConstructorBuilder_ThrowsArgumentNullException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () => assembly.SetCustomAttribute(null, new byte[0])
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                assembly.SetCustomAttribute(null, new byte[0])
             );
         }
 
@@ -504,9 +494,8 @@ namespace System.Reflection.Emit.Tests
             ConstructorInfo constructor = typeof(IntAllAttribute).GetConstructor(
                 new Type[] { typeof(int) }
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "binaryAttribute",
-                () => assembly.SetCustomAttribute(constructor, null)
+            AssertExtensions.Throws<ArgumentNullException>("binaryAttribute", () =>
+                assembly.SetCustomAttribute(constructor, null)
             );
         }
 
@@ -533,9 +522,8 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_CustomAttributeBuilder_NullAttributeBuilder_ThrowsArgumentNullException()
         {
             AssemblyBuilder assembly = Helpers.DynamicAssembly();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "customBuilder",
-                () => assembly.SetCustomAttribute(null)
+            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () =>
+                assembly.SetCustomAttribute(null)
             );
         }
 

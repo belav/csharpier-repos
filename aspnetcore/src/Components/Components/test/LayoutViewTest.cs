@@ -284,19 +284,16 @@ public class LayoutViewTest
             diff =>
             {
                 // NestedLayout rerendered, patching content in place
-                Assert.Collection(
-                    diff.Edits,
-                    edit =>
-                    {
-                        Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                        Assert.Equal(1, edit.SiblingIndex);
-                        AssertFrame.Text(
-                            batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                            "Changed content",
-                            sequence: 0
-                        );
-                    }
-                );
+                Assert.Collection(diff.Edits, edit =>
+                {
+                    Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+                    Assert.Equal(1, edit.SiblingIndex);
+                    AssertFrame.Text(
+                        batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                        "Changed content",
+                        sequence: 0
+                    );
+                });
             }
         );
     }

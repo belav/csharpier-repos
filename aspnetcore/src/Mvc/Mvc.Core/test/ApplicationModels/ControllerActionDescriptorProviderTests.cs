@@ -128,9 +128,8 @@ public class ControllerActionDescriptorProviderTests
         var descriptors = GetDescriptors(typeof(ActionParametersController).GetTypeInfo());
 
         // Assert
-        var main = Assert.Single(
-            descriptors.Cast<ControllerActionDescriptor>(),
-            d => d.ActionName.Equals(nameof(ActionParametersController.RequiredInt))
+        var main = Assert.Single(descriptors.Cast<ControllerActionDescriptor>(), d =>
+            d.ActionName.Equals(nameof(ActionParametersController.RequiredInt))
         );
 
         Assert.NotNull(main.Parameters);
@@ -148,9 +147,8 @@ public class ControllerActionDescriptorProviderTests
         var descriptors = GetDescriptors(typeof(ActionParametersController).GetTypeInfo());
 
         // Assert
-        var main = Assert.Single(
-            descriptors.Cast<ControllerActionDescriptor>(),
-            d => d.ActionName.Equals(nameof(ActionParametersController.MultipleParameters))
+        var main = Assert.Single(descriptors.Cast<ControllerActionDescriptor>(), d =>
+            d.ActionName.Equals(nameof(ActionParametersController.MultipleParameters))
         );
 
         Assert.NotNull(main.Parameters);
@@ -174,9 +172,8 @@ public class ControllerActionDescriptorProviderTests
         var descriptors = GetDescriptors(typeof(ActionParametersController).GetTypeInfo());
 
         // Assert
-        var main = Assert.Single(
-            descriptors.Cast<ControllerActionDescriptor>(),
-            d => d.ActionName.Equals(nameof(ActionParametersController.DifferentCasing))
+        var main = Assert.Single(descriptors.Cast<ControllerActionDescriptor>(), d =>
+            d.ActionName.Equals(nameof(ActionParametersController.DifferentCasing))
         );
 
         Assert.NotNull(main.Parameters);
@@ -208,9 +205,8 @@ public class ControllerActionDescriptorProviderTests
         var descriptors = GetDescriptors(typeof(ActionParametersController).GetTypeInfo());
 
         // Assert
-        var fromBody = Assert.Single(
-            descriptors.Cast<ControllerActionDescriptor>(),
-            d => d.ActionName.Equals(actionName)
+        var fromBody = Assert.Single(descriptors.Cast<ControllerActionDescriptor>(), d =>
+            d.ActionName.Equals(actionName)
         );
 
         Assert.NotNull(fromBody.Parameters);
@@ -230,9 +226,8 @@ public class ControllerActionDescriptorProviderTests
         var descriptors = GetDescriptors(typeof(ActionParametersController).GetTypeInfo());
 
         // Assert
-        var notFromBody = Assert.Single(
-            descriptors.Cast<ControllerActionDescriptor>(),
-            d => d.ActionName.Equals(actionName)
+        var notFromBody = Assert.Single(descriptors.Cast<ControllerActionDescriptor>(), d =>
+            d.ActionName.Equals(actionName)
         );
 
         Assert.NotNull(notFromBody.Parameters);
@@ -273,9 +268,8 @@ public class ControllerActionDescriptorProviderTests
         // Assert
         Assert.Equal(2, descriptors.Count());
 
-        var anonymousAction = Assert.Single(
-            descriptors,
-            a => a.RouteValues["action"] == "AllowAnonymousAction"
+        var anonymousAction = Assert.Single(descriptors, a =>
+            a.RouteValues["action"] == "AllowAnonymousAction"
         );
 
         Assert.NotNull(anonymousAction.EndpointMetadata);
@@ -286,9 +280,8 @@ public class ControllerActionDescriptorProviderTests
             metadata => Assert.IsType<AllowAnonymousAttribute>(metadata)
         );
 
-        var authorizeAction = Assert.Single(
-            descriptors,
-            a => a.RouteValues["action"] == "AuthorizeAction"
+        var authorizeAction = Assert.Single(descriptors, a =>
+            a.RouteValues["action"] == "AuthorizeAction"
         );
 
         Assert.NotNull(authorizeAction.EndpointMetadata);
@@ -409,35 +402,30 @@ public class ControllerActionDescriptorProviderTests
             )
             .ToArray();
 
-        var descriptorWithoutValue = Assert.Single(
-            descriptors,
-            ad => !ad.RouteValues.ContainsKey("key")
+        var descriptorWithoutValue = Assert.Single(descriptors, ad =>
+            !ad.RouteValues.ContainsKey("key")
         );
 
-        var descriptorWithValue = Assert.Single(
-            descriptors,
-            ad => ad.RouteValues.ContainsKey("key")
+        var descriptorWithValue = Assert.Single(descriptors, ad =>
+            ad.RouteValues.ContainsKey("key")
         );
 
         // Assert
         Assert.Equal(2, descriptors.Length);
 
         Assert.Equal(3, descriptorWithValue.RouteValues.Count);
-        Assert.Single(
-            descriptorWithValue.RouteValues,
-            c => c.Key == "controller" && c.Value == "RouteValue"
+        Assert.Single(descriptorWithValue.RouteValues, c =>
+            c.Key == "controller" && c.Value == "RouteValue"
         );
         Assert.Single(descriptorWithValue.RouteValues, c => c.Key == "action" && c.Value == "Edit");
         Assert.Single(descriptorWithValue.RouteValues, c => c.Key == "key" && c.Value == "value");
 
         Assert.Equal(2, descriptorWithoutValue.RouteValues.Count);
-        Assert.Single(
-            descriptorWithoutValue.RouteValues,
-            c => c.Key == "controller" && c.Value == "HttpMethod"
+        Assert.Single(descriptorWithoutValue.RouteValues, c =>
+            c.Key == "controller" && c.Value == "HttpMethod"
         );
-        Assert.Single(
-            descriptorWithoutValue.RouteValues,
-            c => c.Key == "action" && c.Value == "OnlyPost"
+        Assert.Single(descriptorWithoutValue.RouteValues, c =>
+            c.Key == "action" && c.Value == "OnlyPost"
         );
     }
 
@@ -687,9 +675,8 @@ public class ControllerActionDescriptorProviderTests
         var controllerAndAction = Assert.Single(actions, a => a.ActionName.Equals(firstActionName));
         Assert.NotNull(controllerAndAction.AttributeRouteInfo);
 
-        var controllerActionAndOverride = Assert.Single(
-            actions,
-            a => a.ActionName.Equals(secondActionName)
+        var controllerActionAndOverride = Assert.Single(actions, a =>
+            a.ActionName.Equals(secondActionName)
         );
         Assert.NotNull(controllerActionAndOverride.AttributeRouteInfo);
 
@@ -716,12 +703,10 @@ public class ControllerActionDescriptorProviderTests
 
         foreach (var method in new[] { "GET", "POST", "PUT", "PATCH", "DELETE" })
         {
-            var action = Assert.Single(
-                actions,
-                a =>
-                    a.ActionConstraints.OfType<HttpMethodActionConstraint>()
-                        .SelectMany(c => c.HttpMethods)
-                        .Contains(method)
+            var action = Assert.Single(actions, a =>
+                a.ActionConstraints.OfType<HttpMethodActionConstraint>()
+                    .SelectMany(c => c.HttpMethods)
+                    .Contains(method)
             );
 
             Assert.NotNull(action.AttributeRouteInfo);
@@ -1084,21 +1069,18 @@ public class ControllerActionDescriptorProviderTests
 
         Assert.Equal(3, indexAction.RouteValues.Count);
 
-        var controllerDefault = Assert.Single(
-            indexAction.RouteValues,
-            rd => rd.Key.Equals("controller", StringComparison.OrdinalIgnoreCase)
+        var controllerDefault = Assert.Single(indexAction.RouteValues, rd =>
+            rd.Key.Equals("controller", StringComparison.OrdinalIgnoreCase)
         );
         Assert.Equal("ConventionalAndAttributeRoutedActionsWithArea", controllerDefault.Value);
 
-        var actionDefault = Assert.Single(
-            indexAction.RouteValues,
-            rd => rd.Key.Equals("action", StringComparison.OrdinalIgnoreCase)
+        var actionDefault = Assert.Single(indexAction.RouteValues, rd =>
+            rd.Key.Equals("action", StringComparison.OrdinalIgnoreCase)
         );
         Assert.Equal("Index", actionDefault.Value);
 
-        var areaDefault = Assert.Single(
-            indexAction.RouteValues,
-            rd => rd.Key.Equals("area", StringComparison.OrdinalIgnoreCase)
+        var areaDefault = Assert.Single(indexAction.RouteValues, rd =>
+            rd.Key.Equals("area", StringComparison.OrdinalIgnoreCase)
         );
         Assert.Equal("Home", areaDefault.Value);
     }
@@ -1433,25 +1415,21 @@ public class ControllerActionDescriptorProviderTests
 
         var action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C1/A1");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "C1"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "C1"
         );
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "A1"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "A1"
         );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
 
         action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C2/A1");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "C2"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "C2"
         );
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "A1"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "A1"
         );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
     }
@@ -1474,49 +1452,41 @@ public class ControllerActionDescriptorProviderTests
 
         var action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C1/A3");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "C1"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "C1"
         );
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "A3"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "A3"
         );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
 
         action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C2/A3");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "C2"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "C2"
         );
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "A3"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "A3"
         );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
 
         action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C1/A4");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "C1"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "C1"
         );
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "A4"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "A4"
         );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
 
         action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "C2/A4");
         Assert.Equal(3, action.ActionConstraints.Count);
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "C2"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "C2"
         );
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "A4"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "A4"
         );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
     }
@@ -1539,9 +1509,8 @@ public class ControllerActionDescriptorProviderTests
 
         var action = Assert.Single(actions, a => a.AttributeRouteInfo.Template == "A2");
         Assert.Equal(2, action.ActionConstraints.Count);
-        Assert.Single(
-            action.ActionConstraints,
-            a => (a as RouteAndConstraintAttribute)?.Template == "~/A2"
+        Assert.Single(action.ActionConstraints, a =>
+            (a as RouteAndConstraintAttribute)?.Template == "~/A2"
         );
         Assert.Single(action.ActionConstraints, a => a is ConstraintAttribute);
     }

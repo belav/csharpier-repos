@@ -13159,13 +13159,10 @@ Copyright (C) Microsoft Corporation. All rights reserved.",
                 {
                     if (file == exePath)
                     {
-                        return new TestStream(
-                            backingStream: new MemoryStream(),
-                            dispose: () =>
-                            {
-                                throw new IOException("Fake IOException");
-                            }
-                        );
+                        return new TestStream(backingStream: new MemoryStream(), dispose: () =>
+                        {
+                            throw new IOException("Fake IOException");
+                        });
                     }
 
                     return File.Open(file, mode, access, share);
@@ -13196,13 +13193,10 @@ Copyright (C) Microsoft Corporation. All rights reserved.",
                 {
                     if (file == pdbPath)
                     {
-                        return new TestStream(
-                            backingStream: new MemoryStream(),
-                            dispose: () =>
-                            {
-                                throw new IOException("Fake IOException");
-                            }
-                        );
+                        return new TestStream(backingStream: new MemoryStream(), dispose: () =>
+                        {
+                            throw new IOException("Fake IOException");
+                        });
                     }
 
                     return File.Open(file, mode, access, share);
@@ -13232,13 +13226,10 @@ Copyright (C) Microsoft Corporation. All rights reserved.",
                 {
                     if (file == xmlPath)
                     {
-                        return new TestStream(
-                            backingStream: new MemoryStream(),
-                            dispose: () =>
-                            {
-                                throw new IOException("Fake IOException");
-                            }
-                        );
+                        return new TestStream(backingStream: new MemoryStream(), dispose: () =>
+                        {
+                            throw new IOException("Fake IOException");
+                        });
                     }
 
                     return File.Open(file, mode, access, share);
@@ -14825,13 +14816,10 @@ class C
             var generator = new PipelineCallbackGenerator(
                 (ctx) =>
                 {
-                    ctx.RegisterSourceOutput(
-                        ctx.ParseOptionsProvider,
-                        (spc, po) =>
-                        {
-                            sourceCallbackCount++;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.ParseOptionsProvider, (spc, po) =>
+                    {
+                        sourceCallbackCount++;
+                    });
                 }
             );
 
@@ -14903,13 +14891,10 @@ class C
             var generator = new PipelineCallbackGenerator(
                 (ctx) =>
                 {
-                    ctx.RegisterSourceOutput(
-                        ctx.ParseOptionsProvider,
-                        (spc, po) =>
-                        {
-                            sourceCallbackCount++;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.ParseOptionsProvider, (spc, po) =>
+                    {
+                        sourceCallbackCount++;
+                    });
                 }
             );
 
@@ -14981,13 +14966,10 @@ class C
             var generator = new PipelineCallbackGenerator(
                 (ctx) =>
                 {
-                    ctx.RegisterSourceOutput(
-                        ctx.ParseOptionsProvider,
-                        (spc, po) =>
-                        {
-                            sourceCallbackCount++;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.ParseOptionsProvider, (spc, po) =>
+                    {
+                        sourceCallbackCount++;
+                    });
                 }
             );
 
@@ -15079,26 +15061,20 @@ class C
             var generator = new PipelineCallbackGenerator(
                 (ctx) =>
                 {
-                    ctx.RegisterSourceOutput(
-                        ctx.ParseOptionsProvider,
-                        (spc, po) =>
-                        {
-                            sourceCallbackCount++;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.ParseOptionsProvider, (spc, po) =>
+                    {
+                        sourceCallbackCount++;
+                    });
                 }
             );
 
             var generator2 = new PipelineCallbackGenerator2(
                 (ctx) =>
                 {
-                    ctx.RegisterSourceOutput(
-                        ctx.ParseOptionsProvider,
-                        (spc, po) =>
-                        {
-                            sourceCallbackCount2++;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.ParseOptionsProvider, (spc, po) =>
+                    {
+                        sourceCallbackCount2++;
+                    });
                 }
             );
 
@@ -15177,21 +15153,15 @@ class C
             var generator = new PipelineCallbackGenerator(
                 (ctx) =>
                 {
-                    ctx.RegisterSourceOutput(
-                        ctx.ParseOptionsProvider,
-                        (spc, po) =>
-                        {
-                            sourceCallbackCount++;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.ParseOptionsProvider, (spc, po) =>
+                    {
+                        sourceCallbackCount++;
+                    });
 
-                    ctx.RegisterSourceOutput(
-                        ctx.AdditionalTextsProvider,
-                        (spc, po) =>
-                        {
-                            additionalFileCallbackCount++;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.AdditionalTextsProvider, (spc, po) =>
+                    {
+                        additionalFileCallbackCount++;
+                    });
                 }
             );
 
@@ -15261,22 +15231,16 @@ a = globalA"
             var generator = new PipelineCallbackGenerator(
                 (ctx) =>
                 {
-                    ctx.RegisterSourceOutput(
-                        ctx.ParseOptionsProvider,
-                        (spc, po) =>
-                        {
-                            sourceCallbackCount++;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.ParseOptionsProvider, (spc, po) =>
+                    {
+                        sourceCallbackCount++;
+                    });
 
-                    ctx.RegisterSourceOutput(
-                        ctx.AnalyzerConfigOptionsProvider,
-                        (spc, po) =>
-                        {
-                            configOptionsCallbackCount++;
-                            po.GlobalOptions.TryGetValue("a", out globalA);
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.AnalyzerConfigOptionsProvider, (spc, po) =>
+                    {
+                        configOptionsCallbackCount++;
+                        po.GlobalOptions.TryGetValue("a", out globalA);
+                    });
 
                     ctx.RegisterSourceOutput(
                         ctx.AnalyzerConfigOptionsProvider.Select(
@@ -15397,13 +15361,10 @@ class C
             var generator = new PipelineCallbackGenerator(
                 (ctx) =>
                 {
-                    ctx.RegisterSourceOutput(
-                        ctx.CompilationProvider,
-                        (spc, po) =>
-                        {
-                            sourceCallbackCount++;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.CompilationProvider, (spc, po) =>
+                    {
+                        sourceCallbackCount++;
+                    });
                 }
             );
 
@@ -18632,11 +18593,8 @@ public class TestAnalyzer : DiagnosticAnalyzer
 
                 foreach (var tuple in list)
                 {
-                    VerifyQuotedValid(
-                        "debug",
-                        tuple.Item1,
-                        tuple.Item2,
-                        x => x.EmitOptions.DebugInformationFormat
+                    VerifyQuotedValid("debug", tuple.Item1, tuple.Item2, x =>
+                        x.EmitOptions.DebugInformationFormat
                     );
                 }
             }
@@ -18667,11 +18625,8 @@ public class TestAnalyzer : DiagnosticAnalyzer
 
                 foreach (var tuple in list)
                 {
-                    VerifyQuotedInvalid(
-                        "target",
-                        tuple.Item1,
-                        tuple.Item2,
-                        x => x.CompilationOptions.OutputKind
+                    VerifyQuotedInvalid("target", tuple.Item1, tuple.Item2, x =>
+                        x.CompilationOptions.OutputKind
                     );
                 }
             }
@@ -18692,11 +18647,8 @@ public class TestAnalyzer : DiagnosticAnalyzer
 
                 foreach (var tuple in list)
                 {
-                    VerifyQuotedValid(
-                        "platform",
-                        tuple.Item1,
-                        tuple.Item2,
-                        x => x.CompilationOptions.Platform
+                    VerifyQuotedValid("platform", tuple.Item1, tuple.Item2, x =>
+                        x.CompilationOptions.Platform
                     );
                 }
             }
@@ -18712,11 +18664,8 @@ public class TestAnalyzer : DiagnosticAnalyzer
             [Fact]
             public void LangVersionFlag()
             {
-                VerifyQuotedValid(
-                    "langversion",
-                    "2",
-                    LanguageVersion.CSharp2,
-                    x => x.ParseOptions.LanguageVersion
+                VerifyQuotedValid("langversion", "2", LanguageVersion.CSharp2, x =>
+                    x.ParseOptions.LanguageVersion
                 );
             }
         }
@@ -23087,13 +23036,10 @@ public class Generator : ISourceGenerator
             int count = 0;
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.AdditionalTextsProvider,
-                    (spc, t) =>
-                    {
-                        count++;
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.AdditionalTextsProvider, (spc, t) =>
+                {
+                    count++;
+                });
             });
 
             var output = VerifyOutput(

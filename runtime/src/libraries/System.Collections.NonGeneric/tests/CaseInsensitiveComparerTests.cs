@@ -103,9 +103,8 @@ namespace System.Collections.Tests
         [Fact]
         public void Ctor_CultureInfo_NullCulture_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "culture",
-                () => new CaseInsensitiveComparer(null)
+            AssertExtensions.Throws<ArgumentNullException>("culture", () =>
+                new CaseInsensitiveComparer(null)
             ); // Culture is null
         }
 

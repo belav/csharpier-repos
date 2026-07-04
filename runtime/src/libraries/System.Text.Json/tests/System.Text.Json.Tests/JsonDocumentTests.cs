@@ -236,12 +236,8 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes => Task.FromResult(JsonDocument.Parse(bytes.AsMemory()))
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                Task.FromResult(JsonDocument.Parse(bytes.AsMemory()))
             );
         }
 
@@ -270,12 +266,8 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes => Task.FromResult(JsonDocument.Parse(new MemoryStream(bytes)))
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                Task.FromResult(JsonDocument.Parse(new MemoryStream(bytes)))
             );
         }
 
@@ -287,12 +279,8 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes => JsonDocument.ParseAsync(new MemoryStream(bytes))
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                JsonDocument.ParseAsync(new MemoryStream(bytes))
             );
         }
 
@@ -304,20 +292,10 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes =>
-                    JsonDocument.ParseAsync(
-                        new WrappedMemoryStream(
-                            canRead: true,
-                            canWrite: false,
-                            canSeek: false,
-                            bytes
-                        )
-                    )
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                JsonDocument.ParseAsync(
+                    new WrappedMemoryStream(canRead: true, canWrite: false, canSeek: false, bytes)
+                )
             );
         }
 
@@ -329,20 +307,10 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes =>
-                    JsonDocument.ParseAsync(
-                        new WrappedMemoryStream(
-                            canRead: true,
-                            canWrite: false,
-                            canSeek: false,
-                            bytes
-                        )
-                    )
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                JsonDocument.ParseAsync(
+                    new WrappedMemoryStream(canRead: true, canWrite: false, canSeek: false, bytes)
+                )
             );
         }
 
@@ -424,15 +392,10 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes =>
-                    Task.FromResult(
-                        JsonDocument.Parse(new MemoryStream(Utf8Bom.Concat(bytes).ToArray()))
-                    )
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                Task.FromResult(
+                    JsonDocument.Parse(new MemoryStream(Utf8Bom.Concat(bytes).ToArray()))
+                )
             );
         }
 
@@ -444,12 +407,8 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes => JsonDocument.ParseAsync(new MemoryStream(Utf8Bom.Concat(bytes).ToArray()))
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                JsonDocument.ParseAsync(new MemoryStream(Utf8Bom.Concat(bytes).ToArray()))
             );
         }
 
@@ -461,22 +420,17 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes =>
-                    Task.FromResult(
-                        JsonDocument.Parse(
-                            new WrappedMemoryStream(
-                                canRead: true,
-                                canWrite: false,
-                                canSeek: false,
-                                Utf8Bom.Concat(bytes).ToArray()
-                            )
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                Task.FromResult(
+                    JsonDocument.Parse(
+                        new WrappedMemoryStream(
+                            canRead: true,
+                            canWrite: false,
+                            canSeek: false,
+                            Utf8Bom.Concat(bytes).ToArray()
                         )
                     )
+                )
             );
         }
 
@@ -488,20 +442,15 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes =>
-                    JsonDocument.ParseAsync(
-                        new WrappedMemoryStream(
-                            canRead: true,
-                            canWrite: false,
-                            canSeek: false,
-                            Utf8Bom.Concat(bytes).ToArray()
-                        )
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                JsonDocument.ParseAsync(
+                    new WrappedMemoryStream(
+                        canRead: true,
+                        canWrite: false,
+                        canSeek: false,
+                        Utf8Bom.Concat(bytes).ToArray()
                     )
+                )
             );
         }
 
@@ -601,12 +550,8 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes => Task.FromResult(JsonDocument.Parse(new ReadOnlySequence<byte>(bytes)))
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                Task.FromResult(JsonDocument.Parse(new ReadOnlySequence<byte>(bytes)))
             );
         }
 
@@ -618,12 +563,8 @@ namespace System.Text.Json.Tests
             string jsonString
         )
         {
-            await ParseJsonAsync(
-                compactData,
-                type,
-                jsonString,
-                null,
-                bytes => Task.FromResult(JsonDocument.Parse(JsonTestHelper.SegmentInto(bytes, 31)))
+            await ParseJsonAsync(compactData, type, jsonString, null, bytes =>
+                Task.FromResult(JsonDocument.Parse(JsonTestHelper.SegmentInto(bytes, 31)))
             );
         }
 
@@ -2478,25 +2419,19 @@ namespace System.Text.Json.Tests
                 CommentHandling = JsonCommentHandling.Allow,
             };
 
-            AssertExtensions.Throws<ArgumentException>(
-                "reader",
-                () =>
-                {
-                    JsonReaderState state = new JsonReaderState(readerOptions);
-                    Utf8JsonReader reader = new Utf8JsonReader(utf8, isFinalBlock: false, state);
-                    JsonDocument.ParseValue(ref reader);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("reader", () =>
+            {
+                JsonReaderState state = new JsonReaderState(readerOptions);
+                Utf8JsonReader reader = new Utf8JsonReader(utf8, isFinalBlock: false, state);
+                JsonDocument.ParseValue(ref reader);
+            });
 
-            AssertExtensions.Throws<ArgumentException>(
-                "reader",
-                () =>
-                {
-                    JsonReaderState state = new JsonReaderState(readerOptions);
-                    Utf8JsonReader reader = new Utf8JsonReader(utf8, isFinalBlock: false, state);
-                    JsonDocument.TryParseValue(ref reader, out _);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("reader", () =>
+            {
+                JsonReaderState state = new JsonReaderState(readerOptions);
+                Utf8JsonReader reader = new Utf8JsonReader(utf8, isFinalBlock: false, state);
+                JsonDocument.TryParseValue(ref reader, out _);
+            });
         }
 
         [Theory]
@@ -2508,9 +2443,8 @@ namespace System.Text.Json.Tests
         [InlineData(byte.MaxValue + 4)]
         public static void ReadCommentHandlingDoesNotSupportAllow(int enumValue)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => new JsonDocumentOptions { CommentHandling = (JsonCommentHandling)enumValue }
+            Assert.Throws<ArgumentOutOfRangeException>("value", () =>
+                new JsonDocumentOptions { CommentHandling = (JsonCommentHandling)enumValue }
             );
         }
 
@@ -2533,9 +2467,8 @@ namespace System.Text.Json.Tests
         [InlineData(-1)]
         public static void TestDepthInvalid(int depth)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => new JsonDocumentOptions { MaxDepth = depth }
+            Assert.Throws<ArgumentOutOfRangeException>("value", () =>
+                new JsonDocumentOptions { MaxDepth = depth }
             );
         }
 
@@ -2561,14 +2494,12 @@ namespace System.Text.Json.Tests
         {
             using (JsonDocument doc = JsonDocument.Parse("{ }"))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "propertyName",
-                    () => doc.RootElement.GetProperty((string)null)
+                AssertExtensions.Throws<ArgumentNullException>("propertyName", () =>
+                    doc.RootElement.GetProperty((string)null)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "propertyName",
-                    () => doc.RootElement.TryGetProperty((string)null, out _)
+                AssertExtensions.Throws<ArgumentNullException>("propertyName", () =>
+                    doc.RootElement.TryGetProperty((string)null, out _)
                 );
             }
         }
@@ -3212,19 +3143,15 @@ namespace System.Text.Json.Tests
         {
             Assert.Throws<ArgumentNullException>("json", () => JsonDocument.Parse((string)null));
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "utf8Json",
-                () => JsonDocument.Parse((Stream)null)
+            AssertExtensions.Throws<ArgumentNullException>("utf8Json", () =>
+                JsonDocument.Parse((Stream)null)
             );
 
             // This synchronously throws the ArgumentNullException
-            AssertExtensions.Throws<ArgumentNullException>(
-                "utf8Json",
-                () =>
-                {
-                    JsonDocument.ParseAsync(null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("utf8Json", () =>
+            {
+                JsonDocument.ParseAsync(null);
+            });
         }
 
         [Fact]

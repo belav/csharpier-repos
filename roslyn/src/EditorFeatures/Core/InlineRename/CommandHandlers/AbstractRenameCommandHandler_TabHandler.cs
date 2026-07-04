@@ -32,30 +32,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 return;
             }
 
-            HandlePossibleTypingCommand(
-                args,
-                nextHandler,
-                (activeSession, span) =>
-                {
-                    var spans = new NormalizedSnapshotSpanCollection(
-                        activeSession
-                            .GetBufferManager(args.SubjectBuffer)
-                            .GetEditableSpansForSnapshot(args.SubjectBuffer.CurrentSnapshot)
-                    );
+            HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
+            {
+                var spans = new NormalizedSnapshotSpanCollection(
+                    activeSession
+                        .GetBufferManager(args.SubjectBuffer)
+                        .GetEditableSpansForSnapshot(args.SubjectBuffer.CurrentSnapshot)
+                );
 
-                    for (var i = 0; i < spans.Count; i++)
+                for (var i = 0; i < spans.Count; i++)
+                {
+                    if (span == spans[i])
                     {
-                        if (span == spans[i])
-                        {
-                            var selectNext = i < spans.Count - 1 ? i + 1 : 0;
-                            var newSelection = spans[selectNext];
-                            args.TextView.TryMoveCaretToAndEnsureVisible(newSelection.Start);
-                            args.TextView.SetSelection(newSelection);
-                            break;
-                        }
+                        var selectNext = i < spans.Count - 1 ? i + 1 : 0;
+                        var newSelection = spans[selectNext];
+                        args.TextView.TryMoveCaretToAndEnsureVisible(newSelection.Start);
+                        args.TextView.SetSelection(newSelection);
+                        break;
                     }
                 }
-            );
+            });
         }
 
         public CommandState GetCommandState(

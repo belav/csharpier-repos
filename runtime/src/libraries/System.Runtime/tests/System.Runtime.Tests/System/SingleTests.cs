@@ -703,9 +703,8 @@ namespace System.Tests
                 Assert.Equal(default(float), result);
 
                 Assert.Throws(exceptionType, () => float.Parse(value, style));
-                Assert.Throws(
-                    exceptionType,
-                    () => float.Parse(value, style, NumberFormatInfo.CurrentInfo)
+                Assert.Throws(exceptionType, () =>
+                    float.Parse(value, style, NumberFormatInfo.CurrentInfo)
                 );
             }
         }
@@ -876,9 +875,8 @@ namespace System.Tests
             if (value != null)
             {
                 ReadOnlySpan<byte> valueUtf8 = Encoding.UTF8.GetBytes(value);
-                Assert.Throws(
-                    exceptionType,
-                    () => float.Parse(Encoding.UTF8.GetBytes(value), style, provider)
+                Assert.Throws(exceptionType, () =>
+                    float.Parse(Encoding.UTF8.GetBytes(value), style, provider)
                 );
 
                 Assert.False(float.TryParse(valueUtf8, style, provider, out float result));

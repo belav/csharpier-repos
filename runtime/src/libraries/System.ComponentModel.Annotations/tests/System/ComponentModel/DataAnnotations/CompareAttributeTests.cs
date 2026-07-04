@@ -53,9 +53,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public static void Constructor_NullOtherProperty_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "otherProperty",
-                () => new CompareAttribute(null)
+            AssertExtensions.Throws<ArgumentNullException>("otherProperty", () =>
+                new CompareAttribute(null)
             );
         }
 
@@ -74,9 +73,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_Indexer_ThrowsArgumentException()
         {
             CompareAttribute attribute = new CompareAttribute("Item");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => attribute.Validate("b", s_context)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                attribute.Validate("b", s_context)
             );
         }
 
@@ -86,9 +84,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             CompareAttribute attribute = new CompareAttribute(
                 nameof(CompareObject.SetOnlyProperty)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => attribute.Validate("b", s_context)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                attribute.Validate("b", s_context)
             );
         }
 

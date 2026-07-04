@@ -104,13 +104,10 @@ namespace System.Numerics.Tests
 
             T[] values = GenerateRandomValuesForVector<T>();
             var vector = new Vector<T>(values);
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index], val);
+            });
         }
 
         [Fact]
@@ -183,13 +180,10 @@ namespace System.Numerics.Tests
                 .Concat(GenerateRandomValuesForVector<T>())
                 .ToArray();
             var vector = new Vector<T>(values, offsetAmount);
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index + offsetAmount], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index + offsetAmount], val);
+            });
         }
 
         [Fact]
@@ -257,13 +251,10 @@ namespace System.Numerics.Tests
         {
             T constantValue = Util.GenerateSingleValue<T>(GetMinValue<T>(), GetMaxValue<T>());
             var vector = new Vector<T>(constantValue);
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(val, constantValue);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(val, constantValue);
+            });
         }
 
         [Fact]
@@ -330,13 +321,10 @@ namespace System.Numerics.Tests
             where T : struct
         {
             var vector = new Vector<T>();
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(val, (T)(dynamic)0);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(val, (T)(dynamic)0);
+            });
         }
 
         [Fact]
@@ -448,33 +436,24 @@ namespace System.Numerics.Tests
 
             // Span<T> ctor
             vector = new Vector<T>(new Span<T>(values));
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index], val);
+            });
 
             // ReadOnlySpan<T> ctor
             vector = new Vector<T>(new ReadOnlySpan<T>(values));
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index], val);
+            });
 
             // ReadOnlySpan<byte> ctor
             vector = new Vector<T>(MemoryMarshal.AsBytes(new ReadOnlySpan<T>(values)));
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index], val);
+            });
         }
 
         [Fact]
@@ -717,13 +696,10 @@ namespace System.Numerics.Tests
         {
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count).ToArray();
             var vector = new Vector<T>(values);
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index], val);
+            });
         }
 
         [Fact]
@@ -762,13 +738,10 @@ namespace System.Numerics.Tests
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count * 2).ToArray();
             int offset = Vector<T>.Count - 1;
             var vector = new Vector<T>(values, offset);
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[offset + index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[offset + index], val);
+            });
         }
 
         [Fact]
@@ -1108,13 +1081,10 @@ namespace System.Numerics.Tests
         {
             Vector<T> vector = Vector<T>.One;
             T oneValue = Util.One<T>();
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(oneValue, val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(oneValue, val);
+            });
         }
 
         [Fact]
@@ -1182,13 +1152,10 @@ namespace System.Numerics.Tests
         {
             Vector<T> vector = Vector<T>.Zero;
             T zeroValue = Util.Zero<T>();
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(zeroValue, val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(zeroValue, val);
+            });
         }
         #endregion
 
@@ -2129,13 +2096,10 @@ namespace System.Numerics.Tests
             var v1 = new Vector<T>(values1);
             var v2 = new Vector<T>(values2);
             var sum = v1 + v2;
-            ValidateVector(
-                sum,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.Add(values1[index], values2[index]), val);
-                }
-            );
+            ValidateVector(sum, (index, val) =>
+            {
+                Assert.Equal(Util.Add(values1[index], values2[index]), val);
+            });
         }
 
         [Fact]
@@ -2195,16 +2159,13 @@ namespace System.Numerics.Tests
             Vector<T> sum = maxValueVector + secondVector;
 
             T minValue = GetMinValueExact<T>();
-            ValidateVector(
-                sum,
-                (index, val) =>
-                {
-                    Assert.Equal(
-                        Util.Subtract(Util.Add(secondVector[index], minValue), (T)(dynamic)1),
-                        sum[index]
-                    );
-                }
-            );
+            ValidateVector(sum, (index, val) =>
+            {
+                Assert.Equal(
+                    Util.Subtract(Util.Add(secondVector[index], minValue), (T)(dynamic)1),
+                    sum[index]
+                );
+            });
         }
 
         [Fact]
@@ -2287,13 +2248,10 @@ namespace System.Numerics.Tests
             var v1 = new Vector<T>(values1);
             var v2 = new Vector<T>(values2);
             var sum = v1 - v2;
-            ValidateVector(
-                sum,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.Subtract(values1[index], values2[index]), val);
-                }
-            );
+            ValidateVector(sum, (index, val) =>
+            {
+                Assert.Equal(Util.Subtract(values1[index], values2[index]), val);
+            });
         }
 
         [Fact]
@@ -2353,16 +2311,13 @@ namespace System.Numerics.Tests
             Vector<T> difference = minValueVector - secondVector;
 
             T maxValue = GetMaxValueExact<T>();
-            ValidateVector(
-                difference,
-                (index, val) =>
-                {
-                    Assert.Equal(
-                        Util.Add(Util.Subtract(maxValue, secondVector[index]), (T)(dynamic)1),
-                        val
-                    );
-                }
-            );
+            ValidateVector(difference, (index, val) =>
+            {
+                Assert.Equal(
+                    Util.Add(Util.Subtract(maxValue, secondVector[index]), (T)(dynamic)1),
+                    val
+                );
+            });
         }
 
         [Fact]
@@ -2445,13 +2400,10 @@ namespace System.Numerics.Tests
             var v1 = new Vector<T>(values1);
             var v2 = new Vector<T>(values2);
             var sum = v1 * v2;
-            ValidateVector(
-                sum,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.Multiply(values1[index], values2[index]), val);
-                }
-            );
+            ValidateVector(sum, (index, val) =>
+            {
+                Assert.Equal(Util.Multiply(values1[index], values2[index]), val);
+            });
         }
 
         [Fact]
@@ -2543,24 +2495,18 @@ namespace System.Numerics.Tests
             T factor = Util.GenerateSingleValue<T>(GetMinValue<T>(), GetMaxValue<T>());
             var vector = new Vector<T>(values);
             var product1 = vector * factor;
-            ValidateVector(
-                product1,
-                (index, val) =>
-                {
-                    T expected = Util.Multiply(values[index], factor);
-                    Assert.Equal(expected, val);
-                }
-            );
+            ValidateVector(product1, (index, val) =>
+            {
+                T expected = Util.Multiply(values[index], factor);
+                Assert.Equal(expected, val);
+            });
 
             var product2 = factor * vector;
-            ValidateVector(
-                product2,
-                (index, val) =>
-                {
-                    T expected = Util.Multiply(values[index], factor);
-                    Assert.Equal(expected, val);
-                }
-            );
+            ValidateVector(product2, (index, val) =>
+            {
+                T expected = Util.Multiply(values[index], factor);
+                Assert.Equal(expected, val);
+            });
         }
 
         [Fact]
@@ -2651,13 +2597,10 @@ namespace System.Numerics.Tests
             var v1 = new Vector<T>(values1);
             var v2 = new Vector<T>(values2);
             var sum = v1 / v2;
-            ValidateVector(
-                sum,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.Divide(values1[index], values2[index]), val);
-                }
-            );
+            ValidateVector(sum, (index, val) =>
+            {
+                Assert.Equal(Util.Divide(values1[index], values2[index]), val);
+            });
         }
 
         [Fact]
@@ -2797,13 +2740,10 @@ namespace System.Numerics.Tests
             var v1 = new Vector<T>(values);
             var sum = v1 / scalar;
 
-            ValidateVector(
-                sum,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.Divide(values[index], scalar), val);
-                }
-            );
+            ValidateVector(sum, (index, val) =>
+            {
+                Assert.Equal(Util.Divide(values[index], scalar), val);
+            });
         }
 
         [Fact]
@@ -2932,14 +2872,11 @@ namespace System.Numerics.Tests
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values);
             var negated = -vector;
-            ValidateVector(
-                negated,
-                (index, value) =>
-                {
-                    T expected = Util.Subtract(Util.Zero<T>(), values[index]);
-                    Assert.Equal(expected, value);
-                }
-            );
+            ValidateVector(negated, (index, value) =>
+            {
+                T expected = Util.Subtract(Util.Zero<T>(), values[index]);
+                Assert.Equal(expected, value);
+            });
         }
         #endregion
 
@@ -3141,14 +3078,11 @@ namespace System.Numerics.Tests
             Vector<T> randomVector2 = new Vector<T>(values2);
 
             Vector<T> result = randomVector1 ^ randomVector2;
-            ValidateVector(
-                result,
-                (index, val) =>
-                {
-                    T expected = Util.Xor(values1[index], values2[index]);
-                    Assert.Equal(expected, val);
-                }
-            );
+            ValidateVector(result, (index, val) =>
+            {
+                T expected = Util.Xor(values1[index], values2[index]);
+                Assert.Equal(expected, val);
+            });
         }
 
         [Fact]
@@ -3206,14 +3140,11 @@ namespace System.Numerics.Tests
             Vector<T> randomVector1 = new Vector<T>(values1);
 
             Vector<T> result = ~randomVector1;
-            ValidateVector(
-                result,
-                (index, val) =>
-                {
-                    T expected = Util.OnesComplement(values1[index]);
-                    Assert.Equal(expected, val);
-                }
-            );
+            ValidateVector(result, (index, val) =>
+            {
+                T expected = Util.OnesComplement(values1[index]);
+                Assert.Equal(expected, val);
+            });
         }
 
         [Fact]
@@ -3274,16 +3205,13 @@ namespace System.Numerics.Tests
 
             Vector<T> result = Vector.AndNot(randomVector1, randomVector2);
             Vector<T> result2 = randomVector1 & ~randomVector2;
-            ValidateVector(
-                result,
-                (index, val) =>
-                {
-                    T expected = Util.AndNot(values1[index], values2[index]);
-                    Assert.Equal(expected, val);
-                    Assert.Equal(expected, result2[index]);
-                    Assert.Equal(result2[index], val);
-                }
-            );
+            ValidateVector(result, (index, val) =>
+            {
+                T expected = Util.AndNot(values1[index], values2[index]);
+                Assert.Equal(expected, val);
+                Assert.Equal(expected, result2[index]);
+                Assert.Equal(result2[index], val);
+            });
         }
         #endregion
 
@@ -3344,13 +3272,10 @@ namespace System.Numerics.Tests
 
             vector <<= 1;
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.ShiftLeft(values[index], 1), val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(Util.ShiftLeft(values[index], 1), val);
+            });
         }
 
         [Fact]
@@ -3361,13 +3286,10 @@ namespace System.Numerics.Tests
 
             vector <<= 1;
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.ShiftLeft(values[index], 1), val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(Util.ShiftLeft(values[index], 1), val);
+            });
         }
 
         private void TestShiftLeft<T>()
@@ -3378,13 +3300,10 @@ namespace System.Numerics.Tests
 
             vector <<= 1;
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.ShiftLeft(values[index], 1), val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(Util.ShiftLeft(values[index], 1), val);
+            });
         }
 
         [Fact]
@@ -3443,13 +3362,10 @@ namespace System.Numerics.Tests
 
             vector >>= 1;
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.ShiftRightArithmetic(values[index], 1), val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(Util.ShiftRightArithmetic(values[index], 1), val);
+            });
         }
 
         [Fact]
@@ -3460,13 +3376,10 @@ namespace System.Numerics.Tests
 
             vector >>= 1;
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.ShiftRightArithmetic(values[index], 1), val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(Util.ShiftRightArithmetic(values[index], 1), val);
+            });
         }
 
         private void TestShiftRightArithmetic<T>()
@@ -3477,13 +3390,10 @@ namespace System.Numerics.Tests
 
             vector >>= 1;
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.ShiftRightArithmetic(values[index], 1), val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(Util.ShiftRightArithmetic(values[index], 1), val);
+            });
         }
 
         [Fact]
@@ -3542,13 +3452,10 @@ namespace System.Numerics.Tests
 
             vector >>>= 1;
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.ShiftRightLogical(values[index], 1), val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(Util.ShiftRightLogical(values[index], 1), val);
+            });
         }
 
         [Fact]
@@ -3559,13 +3466,10 @@ namespace System.Numerics.Tests
 
             vector >>>= 1;
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.ShiftRightLogical(values[index], 1), val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(Util.ShiftRightLogical(values[index], 1), val);
+            });
         }
 
         private void TestShiftRightLogical<T>()
@@ -3576,13 +3480,10 @@ namespace System.Numerics.Tests
 
             vector >>>= 1;
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.ShiftRightLogical(values[index], 1), val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(Util.ShiftRightLogical(values[index], 1), val);
+            });
         }
         #endregion
 
@@ -3668,15 +3569,12 @@ namespace System.Numerics.Tests
             var vec2 = new Vector<T>(values2);
 
             var result = Vector.GreaterThan<T>(vec1, vec2);
-            ValidateVector(
-                result,
-                (index, val) =>
-                {
-                    bool isGreater = Util.GreaterThan(values1[index], values2[index]);
-                    T expected = isGreater ? GetValueWithAllOnesSet<T>() : Util.Zero<T>();
-                    Assert.Equal(expected, result[index]);
-                }
-            );
+            ValidateVector(result, (index, val) =>
+            {
+                bool isGreater = Util.GreaterThan(values1[index], values2[index]);
+                T expected = isGreater ? GetValueWithAllOnesSet<T>() : Util.Zero<T>();
+                Assert.Equal(expected, result[index]);
+            });
         }
 
         [Fact]
@@ -3760,15 +3658,12 @@ namespace System.Numerics.Tests
             Vector<T> vec2 = new Vector<T>(values2);
 
             Vector<T> result = Vector.GreaterThanOrEqual<T>(vec1, vec2);
-            ValidateVector(
-                result,
-                (index, val) =>
-                {
-                    bool isGreaterOrEqual = Util.GreaterThanOrEqual(values1[index], values2[index]);
-                    T expected = isGreaterOrEqual ? GetValueWithAllOnesSet<T>() : Util.Zero<T>();
-                    Assert.Equal(expected, result[index]);
-                }
-            );
+            ValidateVector(result, (index, val) =>
+            {
+                bool isGreaterOrEqual = Util.GreaterThanOrEqual(values1[index], values2[index]);
+                T expected = isGreaterOrEqual ? GetValueWithAllOnesSet<T>() : Util.Zero<T>();
+                Assert.Equal(expected, result[index]);
+            });
         }
 
         [Fact]
@@ -4232,15 +4127,12 @@ namespace System.Numerics.Tests
             Vector<T> vec2 = new Vector<T>(values2);
 
             var result = Vector.LessThan<T>(vec1, vec2);
-            ValidateVector(
-                result,
-                (index, val) =>
-                {
-                    bool isLess = Util.LessThan(values1[index], values2[index]);
-                    T expected = isLess ? GetValueWithAllOnesSet<T>() : Util.Zero<T>();
-                    Assert.Equal(expected, result[index]);
-                }
-            );
+            ValidateVector(result, (index, val) =>
+            {
+                bool isLess = Util.LessThan(values1[index], values2[index]);
+                T expected = isLess ? GetValueWithAllOnesSet<T>() : Util.Zero<T>();
+                Assert.Equal(expected, result[index]);
+            });
         }
 
         [Fact]
@@ -4324,15 +4216,12 @@ namespace System.Numerics.Tests
             Vector<T> vec2 = new Vector<T>(values2);
 
             var result = Vector.LessThanOrEqual<T>(vec1, vec2);
-            ValidateVector(
-                result,
-                (index, val) =>
-                {
-                    bool isLessOrEqual = Util.LessThanOrEqual(values1[index], values2[index]);
-                    T expected = isLessOrEqual ? GetValueWithAllOnesSet<T>() : Util.Zero<T>();
-                    Assert.Equal(expected, result[index]);
-                }
-            );
+            ValidateVector(result, (index, val) =>
+            {
+                bool isLessOrEqual = Util.LessThanOrEqual(values1[index], values2[index]);
+                T expected = isLessOrEqual ? GetValueWithAllOnesSet<T>() : Util.Zero<T>();
+                Assert.Equal(expected, result[index]);
+            });
         }
 
         [Fact]
@@ -5039,28 +4928,22 @@ namespace System.Numerics.Tests
             // Using Greater Than mask
             Vector<T> mask = Vector.GreaterThan(vec1, vec2);
             Vector<T> result = Vector.ConditionalSelect(mask, vec1, vec2);
-            ValidateVector(
-                result,
-                (index, val) =>
-                {
-                    bool isGreater = Util.GreaterThan(values1[index], values2[index]);
-                    T expected = isGreater ? values1[index] : values2[index];
-                    Assert.Equal(expected, val);
-                }
-            );
+            ValidateVector(result, (index, val) =>
+            {
+                bool isGreater = Util.GreaterThan(values1[index], values2[index]);
+                T expected = isGreater ? values1[index] : values2[index];
+                Assert.Equal(expected, val);
+            });
 
             // Using Less Than Or Equal mask
             Vector<T> mask2 = Vector.LessThanOrEqual(vec1, vec2);
             Vector<T> result2 = Vector.ConditionalSelect(mask2, vec1, vec2);
-            ValidateVector(
-                result2,
-                (index, val) =>
-                {
-                    bool isLessOrEqual = Util.LessThanOrEqual(values1[index], values2[index]);
-                    T expected = isLessOrEqual ? values1[index] : values2[index];
-                    Assert.Equal(expected, val);
-                }
-            );
+            ValidateVector(result2, (index, val) =>
+            {
+                bool isLessOrEqual = Util.LessThanOrEqual(values1[index], values2[index]);
+                T expected = isLessOrEqual ? values1[index] : values2[index];
+                Assert.Equal(expected, val);
+            });
         }
         #endregion
 
@@ -5235,16 +5118,13 @@ namespace System.Numerics.Tests
             Vector<T> vector2 = new Vector<T>(values2);
 
             Vector<T> maxVector = Vector.Max(vector1, vector2);
-            ValidateVector(
-                maxVector,
-                (index, val) =>
-                {
-                    T expected = Util.GreaterThan(values1[index], values2[index])
-                        ? values1[index]
-                        : values2[index];
-                    Assert.Equal(expected, val);
-                }
-            );
+            ValidateVector(maxVector, (index, val) =>
+            {
+                T expected = Util.GreaterThan(values1[index], values2[index])
+                    ? values1[index]
+                    : values2[index];
+                Assert.Equal(expected, val);
+            });
         }
 
         [Fact]
@@ -5328,16 +5208,13 @@ namespace System.Numerics.Tests
             Vector<T> vector2 = new Vector<T>(values2);
 
             Vector<T> minVector = Vector.Min(vector1, vector2);
-            ValidateVector(
-                minVector,
-                (index, val) =>
-                {
-                    T expected = Util.LessThan(values1[index], values2[index])
-                        ? values1[index]
-                        : values2[index];
-                    Assert.Equal(expected, val);
-                }
-            );
+            ValidateVector(minVector, (index, val) =>
+            {
+                T expected = Util.LessThan(values1[index], values2[index])
+                    ? values1[index]
+                    : values2[index];
+                Assert.Equal(expected, val);
+            });
         }
 
         [Fact]
@@ -5419,19 +5296,11 @@ namespace System.Numerics.Tests
             Vector<T> vector = new Vector<T>(values);
 
             Vector<T> squareRootVector = Vector.SquareRoot(vector);
-            ValidateVector(
-                squareRootVector,
-                (index, val) =>
-                {
-                    T expected = Util.Sqrt(values[index]);
-                    AssertEqual(
-                        expected,
-                        val,
-                        $"SquareRoot( {FullString(values[index])} )",
-                        precision
-                    );
-                }
-            );
+            ValidateVector(squareRootVector, (index, val) =>
+            {
+                T expected = Util.Sqrt(values[index]);
+                AssertEqual(expected, val, $"SquareRoot( {FullString(values[index])} )", precision);
+            });
         }
 
         [Fact]
@@ -5441,14 +5310,11 @@ namespace System.Numerics.Tests
             Vector<float> vector = new Vector<float>(values);
 
             Vector<float> ceilVector = Vector.Ceiling(vector);
-            ValidateVector(
-                ceilVector,
-                (index, val) =>
-                {
-                    float expected = MathF.Ceiling(values[index]);
-                    AssertEqual(expected, val, $"Ceiling( {FullString(values[index])} )", -1);
-                }
-            );
+            ValidateVector(ceilVector, (index, val) =>
+            {
+                float expected = MathF.Ceiling(values[index]);
+                AssertEqual(expected, val, $"Ceiling( {FullString(values[index])} )", -1);
+            });
         }
 
         [Fact]
@@ -5458,14 +5324,11 @@ namespace System.Numerics.Tests
             Vector<double> vector = new Vector<double>(values);
 
             Vector<double> ceilVector = Vector.Ceiling(vector);
-            ValidateVector(
-                ceilVector,
-                (index, val) =>
-                {
-                    double expected = Math.Ceiling(values[index]);
-                    AssertEqual(expected, val, $"Ceiling( {FullString(values[index])} )", -1);
-                }
-            );
+            ValidateVector(ceilVector, (index, val) =>
+            {
+                double expected = Math.Ceiling(values[index]);
+                AssertEqual(expected, val, $"Ceiling( {FullString(values[index])} )", -1);
+            });
         }
 
         [Fact]
@@ -5475,14 +5338,11 @@ namespace System.Numerics.Tests
             Vector<float> vector = new Vector<float>(values);
 
             Vector<float> ceilVector = Vector.Floor(vector);
-            ValidateVector(
-                ceilVector,
-                (index, val) =>
-                {
-                    float expected = MathF.Floor(values[index]);
-                    AssertEqual(expected, val, $"Ceiling( {FullString(values[index])} )", -1);
-                }
-            );
+            ValidateVector(ceilVector, (index, val) =>
+            {
+                float expected = MathF.Floor(values[index]);
+                AssertEqual(expected, val, $"Ceiling( {FullString(values[index])} )", -1);
+            });
         }
 
         [Fact]
@@ -5492,14 +5352,11 @@ namespace System.Numerics.Tests
             Vector<double> vector = new Vector<double>(values);
 
             Vector<double> ceilVector = Vector.Floor(vector);
-            ValidateVector(
-                ceilVector,
-                (index, val) =>
-                {
-                    double expected = Math.Floor(values[index]);
-                    AssertEqual(expected, val, $"Ceiling( {FullString(values[index])} )", -1);
-                }
-            );
+            ValidateVector(ceilVector, (index, val) =>
+            {
+                double expected = Math.Floor(values[index]);
+                AssertEqual(expected, val, $"Ceiling( {FullString(values[index])} )", -1);
+            });
         }
 
         [Fact]
@@ -5584,14 +5441,11 @@ namespace System.Numerics.Tests
             );
             Vector<T> vector = new Vector<T>(values);
             Vector<T> AbsVector = Vector.Abs(vector);
-            ValidateVector(
-                AbsVector,
-                (index, val) =>
-                {
-                    T expected = Util.Abs(values[index]);
-                    Assert.Equal(expected, val);
-                }
-            );
+            ValidateVector(AbsVector, (index, val) =>
+            {
+                T expected = Util.Abs(values[index]);
+                Assert.Equal(expected, val);
+            });
         }
 
         #endregion
@@ -5688,13 +5542,10 @@ namespace System.Numerics.Tests
                 )
                 .Single();
             Vector<T> sum = (Vector<T>)multOperatorMethod.Invoke(null, new object[] { v1, v2 });
-            ValidateVector(
-                sum,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.Multiply(values1[index], values2[index]), val);
-                }
-            );
+            ValidateVector(sum, (index, val) =>
+            {
+                Assert.Equal(Util.Multiply(values1[index], values2[index]), val);
+            });
         }
 
         [Fact]
@@ -5786,13 +5637,10 @@ namespace System.Numerics.Tests
                 )
                 .Single();
             Vector<T> sum = (Vector<T>)addOperatorMethod.Invoke(null, new object[] { v1, v2 });
-            ValidateVector(
-                sum,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.Add(values1[index], values2[index]), val);
-                }
-            );
+            ValidateVector(sum, (index, val) =>
+            {
+                Assert.Equal(Util.Add(values1[index], values2[index]), val);
+            });
         }
 
         [Fact]
@@ -5892,13 +5740,10 @@ namespace System.Numerics.Tests
                 )
                 .Single();
             Vector<T> sum = (Vector<T>)divideOperatorMethod.Invoke(null, new object[] { v1, v2 });
-            ValidateVector(
-                sum,
-                (index, val) =>
-                {
-                    Assert.Equal(Util.Divide(values1[index], values2[index]), val);
-                }
-            );
+            ValidateVector(sum, (index, val) =>
+            {
+                Assert.Equal(Util.Divide(values1[index], values2[index]), val);
+            });
         }
 
         [Fact]
@@ -5974,16 +5819,13 @@ namespace System.Numerics.Tests
                 .Single();
             T constantValue = Util.GenerateSingleValue<T>();
             Vector<T> vec = (Vector<T>)constructor.Invoke(new object[] { constantValue });
-            ValidateVector(
-                vec,
-                (index, value) =>
+            ValidateVector(vec, (index, value) =>
+            {
+                for (int g = 0; g < Vector<T>.Count; g++)
                 {
-                    for (int g = 0; g < Vector<T>.Count; g++)
-                    {
-                        Assert.Equal(constantValue, vec[g]);
-                    }
+                    Assert.Equal(constantValue, vec[g]);
                 }
-            );
+            });
         }
 
         [Fact]
@@ -6059,16 +5901,13 @@ namespace System.Numerics.Tests
                 .Single();
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vec = (Vector<T>)constructor.Invoke(new object[] { values });
-            ValidateVector(
-                vec,
-                (index, value) =>
+            ValidateVector(vec, (index, value) =>
+            {
+                for (int g = 0; g < Vector<T>.Count; g++)
                 {
-                    for (int g = 0; g < Vector<T>.Count; g++)
-                    {
-                        Assert.Equal(values[g], vec[g]);
-                    }
+                    Assert.Equal(values[g], vec[g]);
                 }
-            );
+            });
         }
 
         [Fact]
@@ -6419,21 +6258,15 @@ namespace System.Numerics.Tests
             Vector<ushort> dest1;
             Vector<ushort> dest2;
             Vector.Widen(sourceVec, out dest1, out dest2);
-            ValidateVector(
-                dest1,
-                (index, val) =>
-                {
-                    Assert.Equal((ushort)source[index], val);
-                }
-            );
+            ValidateVector(dest1, (index, val) =>
+            {
+                Assert.Equal((ushort)source[index], val);
+            });
 
-            ValidateVector(
-                dest2,
-                (index, val) =>
-                {
-                    Assert.Equal((ushort)source[index + Vector<ushort>.Count], val);
-                }
-            );
+            ValidateVector(dest2, (index, val) =>
+            {
+                Assert.Equal((ushort)source[index + Vector<ushort>.Count], val);
+            });
         }
 
         [Fact]
@@ -6444,21 +6277,15 @@ namespace System.Numerics.Tests
             Vector<uint> dest1;
             Vector<uint> dest2;
             Vector.Widen(sourceVec, out dest1, out dest2);
-            ValidateVector(
-                dest1,
-                (index, val) =>
-                {
-                    Assert.Equal((uint)source[index], val);
-                }
-            );
+            ValidateVector(dest1, (index, val) =>
+            {
+                Assert.Equal((uint)source[index], val);
+            });
 
-            ValidateVector(
-                dest2,
-                (index, val) =>
-                {
-                    Assert.Equal((uint)source[index + Vector<uint>.Count], val);
-                }
-            );
+            ValidateVector(dest2, (index, val) =>
+            {
+                Assert.Equal((uint)source[index + Vector<uint>.Count], val);
+            });
         }
 
         [Fact]
@@ -6469,21 +6296,15 @@ namespace System.Numerics.Tests
             Vector<ulong> dest1;
             Vector<ulong> dest2;
             Vector.Widen(sourceVec, out dest1, out dest2);
-            ValidateVector(
-                dest1,
-                (index, val) =>
-                {
-                    Assert.Equal((ulong)source[index], val);
-                }
-            );
+            ValidateVector(dest1, (index, val) =>
+            {
+                Assert.Equal((ulong)source[index], val);
+            });
 
-            ValidateVector(
-                dest2,
-                (index, val) =>
-                {
-                    Assert.Equal((ulong)source[index + Vector<ulong>.Count], val);
-                }
-            );
+            ValidateVector(dest2, (index, val) =>
+            {
+                Assert.Equal((ulong)source[index + Vector<ulong>.Count], val);
+            });
         }
 
         [Fact]
@@ -6494,21 +6315,15 @@ namespace System.Numerics.Tests
             Vector<short> dest1;
             Vector<short> dest2;
             Vector.Widen(sourceVec, out dest1, out dest2);
-            ValidateVector(
-                dest1,
-                (index, val) =>
-                {
-                    Assert.Equal((short)source[index], val);
-                }
-            );
+            ValidateVector(dest1, (index, val) =>
+            {
+                Assert.Equal((short)source[index], val);
+            });
 
-            ValidateVector(
-                dest2,
-                (index, val) =>
-                {
-                    Assert.Equal((short)source[index + Vector<short>.Count], val);
-                }
-            );
+            ValidateVector(dest2, (index, val) =>
+            {
+                Assert.Equal((short)source[index + Vector<short>.Count], val);
+            });
         }
 
         [Fact]
@@ -6519,21 +6334,15 @@ namespace System.Numerics.Tests
             Vector<int> dest1;
             Vector<int> dest2;
             Vector.Widen(sourceVec, out dest1, out dest2);
-            ValidateVector(
-                dest1,
-                (index, val) =>
-                {
-                    Assert.Equal((int)source[index], val);
-                }
-            );
+            ValidateVector(dest1, (index, val) =>
+            {
+                Assert.Equal((int)source[index], val);
+            });
 
-            ValidateVector(
-                dest2,
-                (index, val) =>
-                {
-                    Assert.Equal((int)source[index + Vector<int>.Count], val);
-                }
-            );
+            ValidateVector(dest2, (index, val) =>
+            {
+                Assert.Equal((int)source[index + Vector<int>.Count], val);
+            });
         }
 
         [Fact]
@@ -6544,21 +6353,15 @@ namespace System.Numerics.Tests
             Vector<long> dest1;
             Vector<long> dest2;
             Vector.Widen(sourceVec, out dest1, out dest2);
-            ValidateVector(
-                dest1,
-                (index, val) =>
-                {
-                    Assert.Equal((long)source[index], val);
-                }
-            );
+            ValidateVector(dest1, (index, val) =>
+            {
+                Assert.Equal((long)source[index], val);
+            });
 
-            ValidateVector(
-                dest2,
-                (index, val) =>
-                {
-                    Assert.Equal((long)source[index + Vector<long>.Count], val);
-                }
-            );
+            ValidateVector(dest2, (index, val) =>
+            {
+                Assert.Equal((long)source[index + Vector<long>.Count], val);
+            });
         }
 
         [Fact]
@@ -6569,21 +6372,15 @@ namespace System.Numerics.Tests
             Vector<double> dest1;
             Vector<double> dest2;
             Vector.Widen(sourceVec, out dest1, out dest2);
-            ValidateVector(
-                dest1,
-                (index, val) =>
-                {
-                    Assert.Equal((double)source[index], val);
-                }
-            );
+            ValidateVector(dest1, (index, val) =>
+            {
+                Assert.Equal((double)source[index], val);
+            });
 
-            ValidateVector(
-                dest2,
-                (index, val) =>
-                {
-                    Assert.Equal((double)source[index + Vector<double>.Count], val);
-                }
-            );
+            ValidateVector(dest2, (index, val) =>
+            {
+                Assert.Equal((double)source[index + Vector<double>.Count], val);
+            });
         }
 
         [Fact]
@@ -6977,13 +6774,10 @@ namespace System.Numerics.Tests
                 vector = Vector.Load<T>(pValues);
             }
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index], val);
+            });
         }
 
         [Fact]
@@ -7059,13 +6853,10 @@ namespace System.Numerics.Tests
             vector = Vector.LoadAligned<T>(pValues);
             NativeMemory.AlignedFree(pValues);
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index], val);
+            });
         }
 
         [Fact]
@@ -7141,13 +6932,10 @@ namespace System.Numerics.Tests
             vector = Vector.LoadAlignedNonTemporal<T>(pValues);
             NativeMemory.AlignedFree(pValues);
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index], val);
+            });
         }
 
         [Fact]
@@ -7216,13 +7004,10 @@ namespace System.Numerics.Tests
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = Vector.LoadUnsafe<T>(ref values[0]);
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index], val);
+            });
         }
 
         [Fact]
@@ -7291,13 +7076,10 @@ namespace System.Numerics.Tests
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count + 1);
             Vector<T> vector = Vector.LoadUnsafe<T>(ref values[0], 1);
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(values[index + 1], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(values[index + 1], val);
+            });
         }
         #endregion
 
@@ -7375,13 +7157,10 @@ namespace System.Numerics.Tests
                 vector.Store<T>(pDestination);
             }
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(destination[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(destination[index], val);
+            });
         }
 
         [Fact]
@@ -7459,13 +7238,10 @@ namespace System.Numerics.Tests
 
             NativeMemory.AlignedFree(pDestination);
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(destination[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(destination[index], val);
+            });
         }
 
         [Fact]
@@ -7543,13 +7319,10 @@ namespace System.Numerics.Tests
 
             NativeMemory.AlignedFree(pDestination);
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(destination[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(destination[index], val);
+            });
         }
 
         [Fact]
@@ -7621,13 +7394,10 @@ namespace System.Numerics.Tests
             T[] destination = new T[Vector<T>.Count];
             vector.StoreUnsafe<T>(ref destination[0]);
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(destination[index], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(destination[index], val);
+            });
         }
 
         [Fact]
@@ -7699,13 +7469,10 @@ namespace System.Numerics.Tests
             T[] destination = new T[Vector<T>.Count + 1];
             vector.StoreUnsafe<T>(ref destination[0], 1);
 
-            ValidateVector(
-                vector,
-                (index, val) =>
-                {
-                    Assert.Equal(destination[index + 1], val);
-                }
-            );
+            ValidateVector(vector, (index, val) =>
+            {
+                Assert.Equal(destination[index + 1], val);
+            });
         }
         #endregion
 

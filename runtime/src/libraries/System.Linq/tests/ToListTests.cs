@@ -35,39 +35,30 @@ namespace System.Linq.Tests
         [Fact]
         public void ToList_WorkWithEmptyCollection()
         {
-            RunToListOnAllCollectionTypes(
-                new int[0],
-                resultList =>
-                {
-                    Assert.NotNull(resultList);
-                    Assert.Equal(0, resultList.Count);
-                }
-            );
+            RunToListOnAllCollectionTypes(new int[0], resultList =>
+            {
+                Assert.NotNull(resultList);
+                Assert.Equal(0, resultList.Count);
+            });
         }
 
         [Fact]
         public void ToList_ProduceCorrectList()
         {
             int[] sourceArray = new int[] { 1, 2, 3, 4, 5, 6, 7 };
-            RunToListOnAllCollectionTypes(
-                sourceArray,
-                resultList =>
-                {
-                    Assert.Equal(sourceArray.Length, resultList.Count);
-                    Assert.Equal(sourceArray, resultList);
-                }
-            );
+            RunToListOnAllCollectionTypes(sourceArray, resultList =>
+            {
+                Assert.Equal(sourceArray.Length, resultList.Count);
+                Assert.Equal(sourceArray, resultList);
+            });
 
             string[] sourceStringArray = new string[] { "1", "2", "3", "4", "5", "6", "7", "8" };
-            RunToListOnAllCollectionTypes(
-                sourceStringArray,
-                resultStringList =>
-                {
-                    Assert.Equal(sourceStringArray.Length, resultStringList.Count);
-                    for (int i = 0; i < sourceStringArray.Length; i++)
-                        Assert.Same(sourceStringArray[i], resultStringList[i]);
-                }
-            );
+            RunToListOnAllCollectionTypes(sourceStringArray, resultStringList =>
+            {
+                Assert.Equal(sourceStringArray.Length, resultStringList.Count);
+                for (int i = 0; i < sourceStringArray.Length; i++)
+                    Assert.Same(sourceStringArray[i], resultStringList[i]);
+            });
         }
 
         [Fact]

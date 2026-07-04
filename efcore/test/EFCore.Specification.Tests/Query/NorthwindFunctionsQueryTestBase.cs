@@ -38,34 +38,30 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     {
         var pattern = "M";
 
-        return AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.StartsWith(pattern))
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.StartsWith(pattern))
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_StartsWith_Identity(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.StartsWith(c.ContactName))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.StartsWith(c.ContactName))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_StartsWith_Column(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.StartsWith(c.ContactName))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.StartsWith(c.ContactName))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_StartsWith_MethodCall(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.StartsWith(LocalMethod1()))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.StartsWith(LocalMethod1()))
         );
 
     [ConditionalTheory]
@@ -79,34 +75,30 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     {
         var pattern = "b";
 
-        return AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.EndsWith(pattern))
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.EndsWith(pattern))
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_EndsWith_Identity(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.EndsWith(c.ContactName))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.EndsWith(c.ContactName))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_EndsWith_Column(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.EndsWith(c.ContactName))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.EndsWith(c.ContactName))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_EndsWith_MethodCall(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.EndsWith(LocalMethod2()))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.EndsWith(LocalMethod2()))
         );
 
     [ConditionalTheory]
@@ -117,25 +109,22 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_Contains_Identity(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.Contains(c.ContactName))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.Contains(c.ContactName))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_Contains_Column(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.Contains(c.ContactName))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.Contains(c.ContactName))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_FirstOrDefault_MethodCall(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.FirstOrDefault() == 'A')
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.FirstOrDefault() == 'A')
         );
 
     [ConditionalTheory]
@@ -162,17 +151,15 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_LastOrDefault_MethodCall(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.LastOrDefault() == 's')
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.LastOrDefault() == 's')
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_Contains_MethodCall(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.Contains(LocalMethod1()))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.Contains(LocalMethod1()))
         );
 
     [ConditionalTheory]
@@ -306,34 +293,28 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task String_Compare_simple_zero(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") == 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") == 0)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 0 != string.Compare(c.CustomerID, "AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 0 != string.Compare(c.CustomerID, "AROUT"))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") > 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") > 0)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 0 >= string.Compare(c.CustomerID, "AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 0 >= string.Compare(c.CustomerID, "AROUT"))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 0 < string.Compare(c.CustomerID, "AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 0 < string.Compare(c.CustomerID, "AROUT"))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") <= 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") <= 0)
         );
     }
 
@@ -341,34 +322,28 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task String_Compare_simple_one(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") == 1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") == 1)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => -1 == string.Compare(c.CustomerID, "AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => -1 == string.Compare(c.CustomerID, "AROUT"))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") < 1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") < 1)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 1 > string.Compare(c.CustomerID, "AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 1 > string.Compare(c.CustomerID, "AROUT"))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") > -1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, "AROUT") > -1)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => -1 < string.Compare(c.CustomerID, "AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => -1 < string.Compare(c.CustomerID, "AROUT"))
         );
     }
 
@@ -384,44 +359,28 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         ClearLog();
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => string.Compare(c.CustomerID, customer.CustomerID) == 1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, customer.CustomerID) == 1)
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => -1 == string.Compare(c.CustomerID, customer.CustomerID))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => -1 == string.Compare(c.CustomerID, customer.CustomerID))
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, customer.CustomerID) < 1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, customer.CustomerID) < 1)
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>().Where(c => 1 > string.Compare(c.CustomerID, customer.CustomerID))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 1 > string.Compare(c.CustomerID, customer.CustomerID))
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => string.Compare(c.CustomerID, customer.CustomerID) > -1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.Compare(c.CustomerID, customer.CustomerID) > -1)
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => -1 < string.Compare(c.CustomerID, customer.CustomerID))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => -1 < string.Compare(c.CustomerID, customer.CustomerID))
         );
     }
 
@@ -441,9 +400,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             assertEmpty: true
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 42 > string.Compare(c.CustomerID, "ALFKI"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 42 > string.Compare(c.CustomerID, "ALFKI"))
         );
     }
 
@@ -478,10 +436,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             assertEmpty: true
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>().Where(c => 0 >= string.Compare(c.CustomerID, "M" + c.CustomerID))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 0 >= string.Compare(c.CustomerID, "M" + c.CustomerID))
         );
 
         await AssertQuery(
@@ -492,14 +448,12 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             assertEmpty: true
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        string.Compare(c.CustomerID, "ALFKI".Replace("ALF".ToUpper(), c.CustomerID))
-                        == -1
-                    )
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    string.Compare(c.CustomerID, "ALFKI".Replace("ALF".ToUpper(), c.CustomerID))
+                    == -1
+                )
         );
     }
 
@@ -507,20 +461,16 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task String_Compare_multi_predicate(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => string.Compare(c.CustomerID, "ALFKI") > -1)
-                    .Where(c => string.Compare(c.CustomerID, "CACTU") == -1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => string.Compare(c.CustomerID, "ALFKI") > -1)
+                .Where(c => string.Compare(c.CustomerID, "CACTU") == -1)
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => string.Compare(c.ContactTitle, "Owner") == 0)
-                    .Where(c => string.Compare(c.Country, "USA") != 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => string.Compare(c.ContactTitle, "Owner") == 0)
+                .Where(c => string.Compare(c.Country, "USA") != 0)
         );
     }
 
@@ -528,34 +478,28 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task String_Compare_to_simple_zero(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") == 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") == 0)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 0 != c.CustomerID.CompareTo("AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 0 != c.CustomerID.CompareTo("AROUT"))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") > 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") > 0)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 0 >= c.CustomerID.CompareTo("AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 0 >= c.CustomerID.CompareTo("AROUT"))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 0 < c.CustomerID.CompareTo("AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 0 < c.CustomerID.CompareTo("AROUT"))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") <= 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") <= 0)
         );
     }
 
@@ -563,34 +507,28 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task String_Compare_to_simple_one(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") == 1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") == 1)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => -1 == c.CustomerID.CompareTo("AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => -1 == c.CustomerID.CompareTo("AROUT"))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") < 1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") < 1)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 1 > c.CustomerID.CompareTo("AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 1 > c.CustomerID.CompareTo("AROUT"))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") > -1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("AROUT") > -1)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => -1 < c.CustomerID.CompareTo("AROUT"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => -1 < c.CustomerID.CompareTo("AROUT"))
         );
     }
 
@@ -606,34 +544,28 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         ClearLog();
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID.CompareTo(customer.CustomerID) == 1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.CompareTo(customer.CustomerID) == 1)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => -1 == c.CustomerID.CompareTo(customer.CustomerID))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => -1 == c.CustomerID.CompareTo(customer.CustomerID))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID.CompareTo(customer.CustomerID) < 1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.CompareTo(customer.CustomerID) < 1)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 1 > c.CustomerID.CompareTo(customer.CustomerID))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 1 > c.CustomerID.CompareTo(customer.CustomerID))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID.CompareTo(customer.CustomerID) > -1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.CompareTo(customer.CustomerID) > -1)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => -1 < c.CustomerID.CompareTo(customer.CustomerID))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => -1 < c.CustomerID.CompareTo(customer.CustomerID))
         );
     }
 
@@ -653,9 +585,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             assertEmpty: true
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 42 > c.CustomerID.CompareTo("ALFKI"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 42 > c.CustomerID.CompareTo("ALFKI"))
         );
     }
 
@@ -663,28 +594,23 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task String_Compare_to_nested(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("M" + c.CustomerID) != 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.CompareTo("M" + c.CustomerID) != 0)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 0 == c.CustomerID.CompareTo(c.CustomerID.ToUpper()))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 0 == c.CustomerID.CompareTo(c.CustomerID.ToUpper()))
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        c.CustomerID.CompareTo("AROUT".Replace("OUT".ToUpper(), c.CustomerID)) > 0
-                    )
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    c.CustomerID.CompareTo("AROUT".Replace("OUT".ToUpper(), c.CustomerID)) > 0
+                )
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => 0 >= c.CustomerID.CompareTo("M" + c.CustomerID))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => 0 >= c.CustomerID.CompareTo("M" + c.CustomerID))
         );
 
         await AssertQuery(
@@ -694,13 +620,11 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             assertEmpty: true
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        c.CustomerID.CompareTo("AROUT".Replace("OUT".ToUpper(), c.CustomerID)) == -1
-                    )
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    c.CustomerID.CompareTo("AROUT".Replace("OUT".ToUpper(), c.CustomerID)) == -1
+                )
         );
     }
 
@@ -708,20 +632,16 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task String_Compare_to_multi_predicate(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID.CompareTo("ALFKI") > -1)
-                    .Where(c => c.CustomerID.CompareTo("CACTU") == -1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID.CompareTo("ALFKI") > -1)
+                .Where(c => c.CustomerID.CompareTo("CACTU") == -1)
         );
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.ContactTitle.CompareTo("Owner") == 0)
-                    .Where(c => c.Country.CompareTo("USA") != 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.ContactTitle.CompareTo("Owner") == 0)
+                .Where(c => c.Country.CompareTo("USA") != 0)
         );
     }
 
@@ -736,72 +656,54 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         if (compareTo)
         {
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) == 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) == 0)
             );
 
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => 0 != c.OrderDate.Value.CompareTo(myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 != c.OrderDate.Value.CompareTo(myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) > 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) > 0)
             );
 
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => 0 >= c.OrderDate.Value.CompareTo(myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 >= c.OrderDate.Value.CompareTo(myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => 0 < c.OrderDate.Value.CompareTo(myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 < c.OrderDate.Value.CompareTo(myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) <= 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) <= 0)
             );
         }
         else
         {
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) == 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) == 0)
             );
 
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => 0 != DateTime.Compare(c.OrderDate.Value, myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 != DateTime.Compare(c.OrderDate.Value, myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) > 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) > 0)
             );
 
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => 0 >= DateTime.Compare(c.OrderDate.Value, myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 >= DateTime.Compare(c.OrderDate.Value, myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => 0 < DateTime.Compare(c.OrderDate.Value, myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 < DateTime.Compare(c.OrderDate.Value, myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) <= 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) <= 0)
             );
         }
     }
@@ -817,72 +719,54 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         if (compareTo)
         {
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) == 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) == 0)
             );
 
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => 0 != c.OrderDate.Value.CompareTo(myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 != c.OrderDate.Value.CompareTo(myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) > 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) > 0)
             );
 
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => 0 >= c.OrderDate.Value.CompareTo(myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 >= c.OrderDate.Value.CompareTo(myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => 0 < c.OrderDate.Value.CompareTo(myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 < c.OrderDate.Value.CompareTo(myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) <= 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => c.OrderDate.Value.CompareTo(myDatetime) <= 0)
             );
         }
         else
         {
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) == 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) == 0)
             );
 
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => 0 != DateTime.Compare(c.OrderDate.Value, myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 != DateTime.Compare(c.OrderDate.Value, myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) > 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) > 0)
             );
 
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => 0 >= DateTime.Compare(c.OrderDate.Value, myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 >= DateTime.Compare(c.OrderDate.Value, myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => 0 < DateTime.Compare(c.OrderDate.Value, myDatetime))
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => 0 < DateTime.Compare(c.OrderDate.Value, myDatetime))
             );
 
-            await AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) <= 0)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(c => DateTime.Compare(c.OrderDate.Value, myDatetime) <= 0)
             );
         }
     }
@@ -893,34 +777,28 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     {
         var orderId = 10250;
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(c => c.OrderID.CompareTo(orderId) == 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Order>().Where(c => c.OrderID.CompareTo(orderId) == 0)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(c => 0 != c.OrderID.CompareTo(orderId))
+        await AssertQuery(async, ss =>
+            ss.Set<Order>().Where(c => 0 != c.OrderID.CompareTo(orderId))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(c => c.OrderID.CompareTo(orderId) > 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Order>().Where(c => c.OrderID.CompareTo(orderId) > 0)
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(c => 0 >= c.OrderID.CompareTo(orderId))
+        await AssertQuery(async, ss =>
+            ss.Set<Order>().Where(c => 0 >= c.OrderID.CompareTo(orderId))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(c => 0 < c.OrderID.CompareTo(orderId))
+        await AssertQuery(async, ss =>
+            ss.Set<Order>().Where(c => 0 < c.OrderID.CompareTo(orderId))
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(c => c.OrderID.CompareTo(orderId) <= 0)
+        await AssertQuery(async, ss =>
+            ss.Set<Order>().Where(c => c.OrderID.CompareTo(orderId) <= 0)
         );
     }
 
@@ -936,94 +814,78 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_abs2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.UnitPrice < 7)
-                    .Where(od => Math.Abs(od.Quantity) > 10)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.UnitPrice < 7)
+                .Where(od => Math.Abs(od.Quantity) > 10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_abs3(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.Quantity < 5)
-                    .Where(od => Math.Abs(od.UnitPrice) > 10)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.Quantity < 5)
+                .Where(od => Math.Abs(od.UnitPrice) > 10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_abs_uncorrelated(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.UnitPrice < 7)
-                    .Where(od => Math.Abs(-10) < od.ProductID)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.UnitPrice < 7)
+                .Where(od => Math.Abs(-10) < od.ProductID)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_ceiling1(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.UnitPrice < 7)
-                    .Where(od => Math.Ceiling(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.UnitPrice < 7)
+                .Where(od => Math.Ceiling(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_ceiling2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.Quantity < 5)
-                    .Where(od => Math.Ceiling(od.UnitPrice) > 10)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.Quantity < 5)
+                .Where(od => Math.Ceiling(od.UnitPrice) > 10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_floor(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.Quantity < 5)
-                    .Where(od => Math.Floor(od.UnitPrice) > 10)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.Quantity < 5)
+                .Where(od => Math.Floor(od.UnitPrice) > 10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_power(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OrderDetail>().Where(od => Math.Pow(od.Discount, 3) > 0.005f)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>().Where(od => Math.Pow(od.Discount, 3) > 0.005f)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_square(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OrderDetail>().Where(od => Math.Pow(od.Discount, 2) > 0.05f)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>().Where(od => Math.Pow(od.Discount, 2) > 0.05f)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_round(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.Quantity < 5)
-                    .Where(od => Math.Round(od.UnitPrice) > 10)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.Quantity < 5)
+                .Where(od => Math.Round(od.UnitPrice) > 10)
         );
 
     [ConditionalTheory]
@@ -1141,258 +1003,211 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_round2(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OrderDetail>().Where(od => Math.Round(od.UnitPrice, 2) > 100)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>().Where(od => Math.Round(od.UnitPrice, 2) > 100)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_truncate(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.Quantity < 5)
-                    .Where(od => Math.Truncate(od.UnitPrice) > 10)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.Quantity < 5)
+                .Where(od => Math.Truncate(od.UnitPrice) > 10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_exp(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Exp(od.Discount) > 1)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Exp(od.Discount) > 1)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_log10(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077 && od.Discount > 0)
-                    .Where(od => Math.Log10(od.Discount) < 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077 && od.Discount > 0)
+                .Where(od => Math.Log10(od.Discount) < 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_log(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077 && od.Discount > 0)
-                    .Where(od => Math.Log(od.Discount) < 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077 && od.Discount > 0)
+                .Where(od => Math.Log(od.Discount) < 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_log_new_base(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077 && od.Discount > 0)
-                    .Where(od => Math.Log(od.Discount, 7) < 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077 && od.Discount > 0)
+                .Where(od => Math.Log(od.Discount, 7) < 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_sqrt(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Sqrt(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Sqrt(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_acos(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Acos(od.Discount) > 1)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Acos(od.Discount) > 1)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_asin(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Asin(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Asin(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_atan(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Atan(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Atan(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_atan2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Atan2(od.Discount, 1) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Atan2(od.Discount, 1) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_cos(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Cos(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Cos(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_sin(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Sin(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Sin(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_tan(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Tan(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Tan(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_sign(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Sign(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Sign(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_max(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Max(od.OrderID, od.ProductID) == od.OrderID)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Max(od.OrderID, od.ProductID) == od.OrderID)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_max_nested(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Max(od.OrderID, Math.Max(od.ProductID, 1)) == od.OrderID)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Max(od.OrderID, Math.Max(od.ProductID, 1)) == od.OrderID)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_max_nested_twice(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od =>
-                        Math.Max(Math.Max(1, Math.Max(od.OrderID, 2)), od.ProductID) == od.OrderID
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od =>
+                    Math.Max(Math.Max(1, Math.Max(od.OrderID, 2)), od.ProductID) == od.OrderID
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_min(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Min(od.OrderID, od.ProductID) == od.ProductID)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Min(od.OrderID, od.ProductID) == od.ProductID)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_min_nested(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od =>
-                        Math.Min(od.OrderID, Math.Min(od.ProductID, 99999)) == od.ProductID
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Min(od.OrderID, Math.Min(od.ProductID, 99999)) == od.ProductID)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_min_nested_twice(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od =>
-                        Math.Min(Math.Min(99999, Math.Min(od.OrderID, 99998)), od.ProductID)
-                        == od.ProductID
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od =>
+                    Math.Min(Math.Min(99999, Math.Min(od.OrderID, 99998)), od.ProductID)
+                    == od.ProductID
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_degrees(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => double.RadiansToDegrees(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => double.RadiansToDegrees(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_math_radians(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => double.DegreesToRadians(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => double.DegreesToRadians(od.Discount) > 0)
         );
 
     [ConditionalTheory]
@@ -1403,253 +1218,209 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_ceiling1(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.UnitPrice < 7)
-                    .Where(od => MathF.Ceiling(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.UnitPrice < 7)
+                .Where(od => MathF.Ceiling(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_floor(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.Quantity < 5)
-                    .Where(od => MathF.Floor((float)od.UnitPrice) > 10)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.Quantity < 5)
+                .Where(od => MathF.Floor((float)od.UnitPrice) > 10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_power(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OrderDetail>().Where(od => MathF.Pow(od.Discount, 3) > 0.005f)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>().Where(od => MathF.Pow(od.Discount, 3) > 0.005f)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_square(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OrderDetail>().Where(od => MathF.Pow(od.Discount, 2) > 0.05f)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>().Where(od => MathF.Pow(od.Discount, 2) > 0.05f)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_round2(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OrderDetail>().Where(od => MathF.Round((float)od.UnitPrice, 2) > 100)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>().Where(od => MathF.Round((float)od.UnitPrice, 2) > 100)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_mathf_round(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss => ss.Set<Order>().Where(o => o.OrderID < 10250).Select(o => MathF.Round(o.OrderID))
+        AssertQueryScalar(async, ss =>
+            ss.Set<Order>().Where(o => o.OrderID < 10250).Select(o => MathF.Round(o.OrderID))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_mathf_round2(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.Quantity < 5)
-                    .Select(od => MathF.Round((float)od.UnitPrice, 2))
+        AssertQueryScalar(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.Quantity < 5)
+                .Select(od => MathF.Round((float)od.UnitPrice, 2))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_truncate(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.Quantity < 5)
-                    .Where(od => MathF.Truncate((float)od.UnitPrice) > 10)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.Quantity < 5)
+                .Where(od => MathF.Truncate((float)od.UnitPrice) > 10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_mathf_truncate(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.Quantity < 5)
-                    .Select(od => MathF.Truncate((float)od.UnitPrice))
+        AssertQueryScalar(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.Quantity < 5)
+                .Select(od => MathF.Truncate((float)od.UnitPrice))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_exp(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => MathF.Exp(od.Discount) > 1)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => MathF.Exp(od.Discount) > 1)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_log10(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077 && od.Discount > 0)
-                    .Where(od => MathF.Log10(od.Discount) < 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077 && od.Discount > 0)
+                .Where(od => MathF.Log10(od.Discount) < 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_log(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077 && od.Discount > 0)
-                    .Where(od => MathF.Log(od.Discount) < 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077 && od.Discount > 0)
+                .Where(od => MathF.Log(od.Discount) < 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_log_new_base(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077 && od.Discount > 0)
-                    .Where(od => MathF.Log(od.Discount, 7) < 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077 && od.Discount > 0)
+                .Where(od => MathF.Log(od.Discount, 7) < 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_sqrt(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => MathF.Sqrt(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => MathF.Sqrt(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_acos(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => MathF.Acos(od.Discount) > 1)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => MathF.Acos(od.Discount) > 1)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_asin(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => MathF.Asin(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => MathF.Asin(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_atan(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => MathF.Atan(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => MathF.Atan(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_atan2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => MathF.Atan2(od.Discount, 1) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => MathF.Atan2(od.Discount, 1) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_cos(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => MathF.Cos(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => MathF.Cos(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_sin(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => MathF.Sin(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => MathF.Sin(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_tan(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => MathF.Tan(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => MathF.Tan(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_sign(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => MathF.Sign(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => MathF.Sign(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_degrees(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => float.RadiansToDegrees(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => float.RadiansToDegrees(od.Discount) > 0)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_mathf_radians(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => float.DegreesToRadians(od.Discount) > 0)
+        AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => float.DegreesToRadians(od.Discount) > 0)
         );
 
     [ConditionalTheory]
@@ -1670,9 +1441,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_functions_nested(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => Math.Pow(c.CustomerID.Length, 2) == 25)
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => Math.Pow(c.CustomerID.Length, 2) == 25)
         );
 
     [ConditionalTheory]
@@ -1693,9 +1463,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         foreach (var convertMethod in convertMethods)
         {
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
             );
         }
     }
@@ -1719,9 +1488,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         foreach (var convertMethod in convertMethods)
         {
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
             );
         }
     }
@@ -1745,9 +1513,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         foreach (var convertMethod in convertMethods)
         {
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
             );
         }
     }
@@ -1771,9 +1538,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         foreach (var convertMethod in convertMethods)
         {
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
             );
         }
     }
@@ -1797,9 +1563,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         foreach (var convertMethod in convertMethods)
         {
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
             );
         }
     }
@@ -1823,9 +1588,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         foreach (var convertMethod in convertMethods)
         {
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
             );
         }
     }
@@ -1849,9 +1613,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         foreach (var convertMethod in convertMethods)
         {
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
             );
         }
     }
@@ -1878,9 +1641,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
 
         foreach (var convertMethod in convertMethods)
         {
-            await AssertQuery(
-                async,
-                ss => ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
+            await AssertQuery(async, ss =>
+                ss.Set<Order>().Where(o => o.CustomerID == "ALFKI").Where(convertMethod)
             );
         }
     }
@@ -1888,9 +1650,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Indexof_with_emptystring(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.IndexOf(string.Empty) == 0)
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.IndexOf(string.Empty) == 0)
         );
 
     [ConditionalTheory]
@@ -1904,9 +1665,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     {
         var pattern = "a";
 
-        return AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.IndexOf(pattern) == 1)
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.IndexOf(pattern) == 1)
         );
     }
 
@@ -1921,52 +1681,42 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     {
         var start = 2;
 
-        return AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactName.IndexOf("a", start) == 4)
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.IndexOf("a", start) == 4)
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Replace_with_emptystring(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.ContactName.Replace("ia", string.Empty) == "Mar Anders")
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactName.Replace("ia", string.Empty) == "Mar Anders")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Replace_using_property_arguments(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.ContactName.Replace(c.ContactName, c.CustomerID) == c.CustomerID)
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.ContactName.Replace(c.ContactName, c.CustomerID) == c.CustomerID)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Substring_with_one_arg_with_zero_startindex(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID.Substring(0) == "ALFKI")
-                    .Select(c => c.ContactName)
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID.Substring(0) == "ALFKI")
+                .Select(c => c.ContactName)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Substring_with_one_arg_with_constant(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID.Substring(1) == "LFKI")
-                    .Select(c => c.ContactName)
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID.Substring(1) == "LFKI")
+                .Select(c => c.ContactName)
         );
 
     [ConditionalTheory]
@@ -1975,46 +1725,38 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     {
         var start = 2;
 
-        return AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID.Substring(start) == "FKI")
-                    .Select(c => c.ContactName)
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID.Substring(start) == "FKI")
+                .Select(c => c.ContactName)
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Substring_with_two_args_with_zero_startindex(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID == "ALFKI")
-                    .Select(c => c.ContactName.Substring(0, 3))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID == "ALFKI")
+                .Select(c => c.ContactName.Substring(0, 3))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Substring_with_two_args_with_zero_length(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID == "ALFKI")
-                    .Select(c => c.ContactName.Substring(2, 0))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID == "ALFKI")
+                .Select(c => c.ContactName.Substring(2, 0))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Substring_with_two_args_with_constant(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID == "ALFKI")
-                    .Select(c => c.ContactName.Substring(1, 3))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID == "ALFKI")
+                .Select(c => c.ContactName.Substring(1, 3))
         );
 
     [ConditionalTheory]
@@ -2023,24 +1765,20 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     {
         var start = 2;
 
-        return AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID == "ALFKI")
-                    .Select(c => c.ContactName.Substring(start, 3))
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID == "ALFKI")
+                .Select(c => c.ContactName.Substring(start, 3))
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Substring_with_two_args_with_Index_of(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID == "ALFKI")
-                    .Select(c => c.ContactName.Substring(c.ContactName.IndexOf("a"), 3))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID == "ALFKI")
+                .Select(c => c.ContactName.Substring(c.ContactName.IndexOf("a"), 3))
         );
 
     [ConditionalTheory]
@@ -2082,9 +1820,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task IsNullOrWhiteSpace_in_predicate(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => string.IsNullOrWhiteSpace(c.Region))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.IsNullOrWhiteSpace(c.Region))
         );
 
     [ConditionalTheory]
@@ -2099,49 +1836,43 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task TrimStart_without_arguments_in_predicate(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactTitle.TrimStart() == "Owner")
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactTitle.TrimStart() == "Owner")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task TrimStart_with_char_argument_in_predicate(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactTitle.TrimStart('O') == "wner")
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactTitle.TrimStart('O') == "wner")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task TrimStart_with_char_array_argument_in_predicate(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactTitle.TrimStart('O', 'w') == "ner")
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactTitle.TrimStart('O', 'w') == "ner")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task TrimEnd_without_arguments_in_predicate(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactTitle.TrimEnd() == "Owner")
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactTitle.TrimEnd() == "Owner")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task TrimEnd_with_char_argument_in_predicate(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactTitle.TrimEnd('r') == "Owne")
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactTitle.TrimEnd('r') == "Owne")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task TrimEnd_with_char_array_argument_in_predicate(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactTitle.TrimEnd('e', 'r') == "Own")
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactTitle.TrimEnd('e', 'r') == "Own")
         );
 
     [ConditionalTheory]
@@ -2157,9 +1888,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Trim_with_char_array_argument_in_predicate(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.ContactTitle.Trim('O', 'r') == "wne")
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.ContactTitle.Trim('O', 'r') == "wne")
         );
 
     [ConditionalTheory]
@@ -2195,9 +1925,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Static_string_equals_in_predicate(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => string.Equals(c.CustomerID, "ANATR"))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => string.Equals(c.CustomerID, "ANATR"))
         );
 
     [ConditionalTheory]
@@ -2272,9 +2001,8 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Regex_IsMatch_MethodCall_constant_input(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(o => Regex.IsMatch("ALFKI", o.CustomerID))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(o => Regex.IsMatch("ALFKI", o.CustomerID))
         );
 
     [ConditionalTheory]
@@ -2282,25 +2010,21 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
     public virtual Task Datetime_subtraction_TotalDays(bool async)
     {
         var date = new DateTime(1997, 1, 1);
-        return AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o => o.OrderDate.HasValue && (o.OrderDate.Value - date).TotalDays > 365)
+        return AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o => o.OrderDate.HasValue && (o.OrderDate.Value - date).TotalDays > 365)
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_DateOnly_FromDateTime(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o =>
-                        o.OrderDate.HasValue
-                        && DateOnly.FromDateTime(o.OrderDate.Value) == new DateOnly(1996, 9, 16)
-                    )
-                    .AsTracking()
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o =>
+                    o.OrderDate.HasValue
+                    && DateOnly.FromDateTime(o.OrderDate.Value) == new DateOnly(1996, 9, 16)
+                )
+                .AsTracking()
         );
 }

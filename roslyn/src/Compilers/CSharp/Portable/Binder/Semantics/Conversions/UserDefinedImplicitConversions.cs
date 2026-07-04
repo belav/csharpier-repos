@@ -627,9 +627,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // best operator that converts from the source type to the target type with liftings
             // on neither side.
 
-            BestIndex bestUnlifted = UniqueIndex(
-                u,
-                conv => constraint(conv) && LiftingCount(conv) == 0
+            BestIndex bestUnlifted = UniqueIndex(u, conv =>
+                constraint(conv) && LiftingCount(conv) == 0
             );
 
             if (bestUnlifted.Kind == BestIndexKind.Best)
@@ -656,9 +655,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // (in the sense that we are not checking the source to see if it is null.)
             //
 
-            BestIndex bestHalfLifted = UniqueIndex(
-                u,
-                conv => constraint(conv) && LiftingCount(conv) == 1
+            BestIndex bestHalfLifted = UniqueIndex(u, conv =>
+                constraint(conv) && LiftingCount(conv) == 1
             );
 
             if (bestHalfLifted.Kind == BestIndexKind.Best)
@@ -674,9 +672,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // Finally, see if there is a unique best *fully lifted* operator.
 
-            BestIndex bestFullyLifted = UniqueIndex(
-                u,
-                conv => constraint(conv) && LiftingCount(conv) == 2
+            BestIndex bestFullyLifted = UniqueIndex(u, conv =>
+                constraint(conv) && LiftingCount(conv) == 2
             );
 
             if (bestFullyLifted.Kind == BestIndexKind.Best)
@@ -895,27 +892,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             // by Y but Y is not encompassed by X".
 
             CompoundUseSiteInfo<AssemblySymbol> inLambdaUseSiteInfo = useSiteInfo;
-            int? best = UniqueBestValidIndex(
-                items,
-                valid,
-                (left, right) =>
+            int? best = UniqueBestValidIndex(items, valid, (left, right) =>
+            {
+                TypeSymbol leftType = extract(left);
+                TypeSymbol rightType = extract(right);
+                if (TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2))
                 {
-                    TypeSymbol leftType = extract(left);
-                    TypeSymbol rightType = extract(right);
-                    if (TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2))
-                    {
-                        return BetterResult.Equal;
-                    }
-
-                    bool leftWins = IsEncompassedBy(leftType, rightType, ref inLambdaUseSiteInfo);
-                    bool rightWins = IsEncompassedBy(rightType, leftType, ref inLambdaUseSiteInfo);
-                    if (leftWins == rightWins)
-                    {
-                        return BetterResult.Neither;
-                    }
-                    return leftWins ? BetterResult.Left : BetterResult.Right;
+                    return BetterResult.Equal;
                 }
-            );
+
+                bool leftWins = IsEncompassedBy(leftType, rightType, ref inLambdaUseSiteInfo);
+                bool rightWins = IsEncompassedBy(rightType, leftType, ref inLambdaUseSiteInfo);
+                if (leftWins == rightWins)
+                {
+                    return BetterResult.Neither;
+                }
+                return leftWins ? BetterResult.Left : BetterResult.Right;
+            });
 
             useSiteInfo = inLambdaUseSiteInfo;
             return best == null ? null : extract(items[best.Value]);
@@ -939,27 +932,23 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // See comments above.
             CompoundUseSiteInfo<AssemblySymbol> inLambdaUseSiteInfo = useSiteInfo;
-            int? best = UniqueBestValidIndex(
-                items,
-                valid,
-                (left, right) =>
+            int? best = UniqueBestValidIndex(items, valid, (left, right) =>
+            {
+                TypeSymbol leftType = extract(left);
+                TypeSymbol rightType = extract(right);
+                if (TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2))
                 {
-                    TypeSymbol leftType = extract(left);
-                    TypeSymbol rightType = extract(right);
-                    if (TypeSymbol.Equals(leftType, rightType, TypeCompareKind.ConsiderEverything2))
-                    {
-                        return BetterResult.Equal;
-                    }
-
-                    bool leftWins = IsEncompassedBy(rightType, leftType, ref inLambdaUseSiteInfo);
-                    bool rightWins = IsEncompassedBy(leftType, rightType, ref inLambdaUseSiteInfo);
-                    if (leftWins == rightWins)
-                    {
-                        return BetterResult.Neither;
-                    }
-                    return leftWins ? BetterResult.Left : BetterResult.Right;
+                    return BetterResult.Equal;
                 }
-            );
+
+                bool leftWins = IsEncompassedBy(rightType, leftType, ref inLambdaUseSiteInfo);
+                bool rightWins = IsEncompassedBy(leftType, rightType, ref inLambdaUseSiteInfo);
+                if (leftWins == rightWins)
+                {
+                    return BetterResult.Neither;
+                }
+                return leftWins ? BetterResult.Left : BetterResult.Right;
+            });
 
             useSiteInfo = inLambdaUseSiteInfo;
             return best == null ? null : extract(items[best.Value]);

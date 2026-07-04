@@ -60,32 +60,26 @@ namespace System.Composition.Runtime.Tests
         [Fact]
         public void Ctor_NullContractType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "contractType",
-                () => new CompositionContract(null)
+            AssertExtensions.Throws<ArgumentNullException>("contractType", () =>
+                new CompositionContract(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "contractType",
-                () => new CompositionContract(null, "contractName")
+            AssertExtensions.Throws<ArgumentNullException>("contractType", () =>
+                new CompositionContract(null, "contractName")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "contractType",
-                () =>
-                    new CompositionContract(null, "contractName", new Dictionary<string, object>())
+            AssertExtensions.Throws<ArgumentNullException>("contractType", () =>
+                new CompositionContract(null, "contractName", new Dictionary<string, object>())
             );
         }
 
         [Fact]
         public void Ctor_EmptyMetadataConstraints_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "metadataConstraints",
-                () =>
-                    new CompositionContract(
-                        typeof(string),
-                        "contractName",
-                        new Dictionary<string, object>()
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("metadataConstraints", () =>
+                new CompositionContract(
+                    typeof(string),
+                    "contractName",
+                    new Dictionary<string, object>()
+                )
             );
         }
 
@@ -410,9 +404,8 @@ namespace System.Composition.Runtime.Tests
         public void ChangeType_NullNewContractType_ThrowsArgumentNullException()
         {
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "newContractType",
-                () => contract.ChangeType(null)
+            AssertExtensions.Throws<ArgumentNullException>("newContractType", () =>
+                contract.ChangeType(null)
             );
         }
 
@@ -523,14 +516,12 @@ namespace System.Composition.Runtime.Tests
         public void TryUnwrapMetadataConstraint_NullContractName_ThrowsArgumentNullException()
         {
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "constraintName",
-                () =>
-                    contract.TryUnwrapMetadataConstraint(
-                        null,
-                        out int unusedValue,
-                        out CompositionContract unusedContract
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("constraintName", () =>
+                contract.TryUnwrapMetadataConstraint(
+                    null,
+                    out int unusedValue,
+                    out CompositionContract unusedContract
+                )
             );
         }
 

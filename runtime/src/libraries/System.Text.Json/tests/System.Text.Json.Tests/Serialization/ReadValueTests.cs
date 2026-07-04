@@ -446,54 +446,39 @@ namespace System.Text.Json.Serialization.Tests
 
             byte[] utf8 = Encoding.UTF8.GetBytes(json);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "reader",
-                () =>
-                {
-                    var reader = new Utf8JsonReader(utf8, options);
-                    JsonSerializer.Deserialize(ref reader, typeof(int));
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("reader", () =>
+            {
+                var reader = new Utf8JsonReader(utf8, options);
+                JsonSerializer.Deserialize(ref reader, typeof(int));
+            });
 
-            AssertExtensions.Throws<ArgumentException>(
-                "reader",
-                () =>
-                {
-                    var state = new JsonReaderState(options);
-                    var reader = new Utf8JsonReader(utf8, isFinalBlock: false, state);
-                    JsonSerializer.Deserialize(ref reader, typeof(int));
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("reader", () =>
+            {
+                var state = new JsonReaderState(options);
+                var reader = new Utf8JsonReader(utf8, isFinalBlock: false, state);
+                JsonSerializer.Deserialize(ref reader, typeof(int));
+            });
 
-            AssertExtensions.Throws<ArgumentException>(
-                "reader",
-                () =>
-                {
-                    var state = new JsonReaderState(options);
-                    var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
-                    JsonSerializer.Deserialize(ref reader, typeof(int));
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("reader", () =>
+            {
+                var state = new JsonReaderState(options);
+                var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
+                JsonSerializer.Deserialize(ref reader, typeof(int));
+            });
 
-            AssertExtensions.Throws<ArgumentException>(
-                "reader",
-                () =>
-                {
-                    var state = new JsonReaderState(options);
-                    var reader = new Utf8JsonReader(utf8, isFinalBlock: false, state);
-                    JsonSerializer.Deserialize<int>(ref reader);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("reader", () =>
+            {
+                var state = new JsonReaderState(options);
+                var reader = new Utf8JsonReader(utf8, isFinalBlock: false, state);
+                JsonSerializer.Deserialize<int>(ref reader);
+            });
 
-            AssertExtensions.Throws<ArgumentException>(
-                "reader",
-                () =>
-                {
-                    var state = new JsonReaderState(options);
-                    var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
-                    JsonSerializer.Deserialize<int>(ref reader);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("reader", () =>
+            {
+                var state = new JsonReaderState(options);
+                var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
+                JsonSerializer.Deserialize<int>(ref reader);
+            });
         }
 
         [Fact]

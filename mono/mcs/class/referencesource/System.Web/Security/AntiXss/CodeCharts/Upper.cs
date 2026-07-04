@@ -67,10 +67,8 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable Javanese()
         {
-            return CodeChartHelper.GetRange(
-                0xA980,
-                0xA9DF,
-                i => (i == 0xA9CE || (i >= 0xA9DA && i <= 0xA9DD))
+            return CodeChartHelper.GetRange(0xA980, 0xA9DF, i =>
+                (i == 0xA9CE || (i >= 0xA9DA && i <= 0xA9DD))
             );
         }
 
@@ -80,17 +78,14 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable Cham()
         {
-            return CodeChartHelper.GetRange(
-                0xAA00,
-                0xAA5F,
-                i =>
-                    (
-                        (i >= 0xAA37 && i <= 0xAA3F)
-                        || i == 0xAA4E
-                        || i == 0xAA4F
-                        || i == 0xAA5A
-                        || i == 0xAA5B
-                    )
+            return CodeChartHelper.GetRange(0xAA00, 0xAA5F, i =>
+                (
+                    (i >= 0xAA37 && i <= 0xAA3F)
+                    || i == 0xAA4E
+                    || i == 0xAA4F
+                    || i == 0xAA5A
+                    || i == 0xAA5B
+                )
             );
         }
 
@@ -138,10 +133,8 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable HangulJamoExtendedB()
         {
-            return CodeChartHelper.GetRange(
-                0xD7B0,
-                0xD7FB,
-                i => (i == 0xD7C7 || i == 0xD7C8 || i == 0xD7C9 || i == 0xD7CA)
+            return CodeChartHelper.GetRange(0xD7B0, 0xD7FB, i =>
+                (i == 0xD7C7 || i == 0xD7C8 || i == 0xD7C9 || i == 0xD7CA)
             );
         }
 
@@ -151,10 +144,8 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable CjkCompatibilityIdeographs()
         {
-            return CodeChartHelper.GetRange(
-                0xF900,
-                0xFAD9,
-                i => (i == 0xFA2E || i == 0xFA2F || i == 0xFA6E || i == 0xFA6F)
+            return CodeChartHelper.GetRange(0xF900, 0xFAD9, i =>
+                (i == 0xFA2E || i == 0xFA2F || i == 0xFA6E || i == 0xFA6F)
             );
         }
 
@@ -164,19 +155,16 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable AlphabeticPresentationForms()
         {
-            return CodeChartHelper.GetRange(
-                0xFB00,
-                0xFB4F,
-                i =>
-                    (
-                        (i >= 0xFB07 && i <= 0xFB12)
-                        || (i >= 0xFB18 && i <= 0xFB1C)
-                        || i == 0xFB37
-                        || i == 0xFB3D
-                        || i == 0xFB3F
-                        || i == 0xFB42
-                        || i == 0xFB45
-                    )
+            return CodeChartHelper.GetRange(0xFB00, 0xFB4F, i =>
+                (
+                    (i >= 0xFB07 && i <= 0xFB12)
+                    || (i >= 0xFB18 && i <= 0xFB1C)
+                    || i == 0xFB37
+                    || i == 0xFB3D
+                    || i == 0xFB3F
+                    || i == 0xFB42
+                    || i == 0xFB45
+                )
             );
         }
 
@@ -186,17 +174,14 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable ArabicPresentationFormsA()
         {
-            return CodeChartHelper.GetRange(
-                0xFB50,
-                0xFDFD,
-                i =>
-                    (
-                        (i >= 0xFBB2 && i <= 0xFBD2)
-                        || (i >= 0xFD40 && i <= 0xFD4F)
-                        || i == 0xFD90
-                        || i == 0xFD91
-                        || (i >= 0xFDC8 && i <= 0xFDEF)
-                    )
+            return CodeChartHelper.GetRange(0xFB50, 0xFDFD, i =>
+                (
+                    (i >= 0xFBB2 && i <= 0xFBD2)
+                    || (i >= 0xFD40 && i <= 0xFD4F)
+                    || i == 0xFD90
+                    || i == 0xFD91
+                    || (i >= 0xFDC8 && i <= 0xFDEF)
+                )
             );
         }
 
@@ -260,25 +245,22 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable HalfWidthAndFullWidthForms()
         {
-            return CodeChartHelper.GetRange(
-                0xFF01,
-                0xFFEE,
-                i =>
-                    (
-                        i == 0xFFBF
-                        || i == 0xFFC0
-                        || i == 0xFFC1
-                        || i == 0xFFC8
-                        || i == 0xFFC9
-                        || i == 0xFFD0
-                        || i == 0xFFD1
-                        || i == 0xFFD8
-                        || i == 0xFFD9
-                        || i == 0xFFDD
-                        || i == 0xFFDE
-                        || i == 0xFFDF
-                        || i == 0xFFE7
-                    )
+            return CodeChartHelper.GetRange(0xFF01, 0xFFEE, i =>
+                (
+                    i == 0xFFBF
+                    || i == 0xFFC0
+                    || i == 0xFFC1
+                    || i == 0xFFC8
+                    || i == 0xFFC9
+                    || i == 0xFFD0
+                    || i == 0xFFD1
+                    || i == 0xFFD8
+                    || i == 0xFFD9
+                    || i == 0xFFDD
+                    || i == 0xFFDE
+                    || i == 0xFFDF
+                    || i == 0xFFE7
+                )
             );
         }
 

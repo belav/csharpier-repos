@@ -120,24 +120,18 @@ and lower(UCC.owner) = :owner";
 
             constraints.AddRange(
                 DataCommand
-                    .Find(
-                        conn,
-                        sql,
-                        ":owner",
-                        db.ToLower(),
-                        r => new
+                    .Find(conn, sql, ":owner", db.ToLower(), r => new
+                    {
+                        Key = new
                         {
-                            Key = new
-                            {
-                                Owner = r.GetString(0),
-                                ConName = r.GetString(1),
-                                TableName = r.GetString(2),
-                                ConType = r.GetString(3),
-                                RevCconName = r.GetAsString(4),
-                            },
-                            Value = new { ColName = r.GetString(5), ColPos = r.GetInt32(6) },
-                        }
-                    )
+                            Owner = r.GetString(0),
+                            ConName = r.GetString(1),
+                            TableName = r.GetString(2),
+                            ConType = r.GetString(3),
+                            RevCconName = r.GetAsString(4),
+                        },
+                        Value = new { ColName = r.GetString(5), ColPos = r.GetInt32(6) },
+                    })
                     .GroupBy(
                         r => r.Key,
                         r => r.Value,

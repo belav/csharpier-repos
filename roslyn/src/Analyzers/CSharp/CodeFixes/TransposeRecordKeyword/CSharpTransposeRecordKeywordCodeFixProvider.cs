@@ -149,25 +149,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.TransposeRecordKeyword
                     )
                 )
                 {
-                    editor.ReplaceNode(
-                        recordDeclaration,
-                        (current, _) =>
-                        {
-                            var currentRecordDeclaration = (RecordDeclarationSyntax)current;
-                            if (
-                                !TryGetTokens(
-                                    currentRecordDeclaration,
-                                    out var classOrStructKeyword,
-                                    out var recordKeyword
-                                )
+                    editor.ReplaceNode(recordDeclaration, (current, _) =>
+                    {
+                        var currentRecordDeclaration = (RecordDeclarationSyntax)current;
+                        if (
+                            !TryGetTokens(
+                                currentRecordDeclaration,
+                                out var classOrStructKeyword,
+                                out var recordKeyword
                             )
-                                return currentRecordDeclaration;
+                        )
+                            return currentRecordDeclaration;
 
-                            return currentRecordDeclaration
-                                .WithClassOrStructKeyword(classOrStructKeyword)
-                                .WithKeyword(recordKeyword);
-                        }
-                    );
+                        return currentRecordDeclaration
+                            .WithClassOrStructKeyword(classOrStructKeyword)
+                            .WithKeyword(recordKeyword);
+                    });
                 }
             }
 

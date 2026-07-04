@@ -64,9 +64,8 @@ namespace System.Security.Cryptography.RNG.Tests
         {
             using (var rng = new RNGCryptoServiceProvider())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => rng.GetNonZeroBytes(null)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    rng.GetNonZeroBytes(null)
                 );
 
                 // Array should not have any zeros
@@ -81,9 +80,8 @@ namespace System.Security.Cryptography.RNG.Tests
         {
             using (var rng = new RNGCryptoServiceProvider())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => rng.GetNonZeroBytes(null)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    rng.GetNonZeroBytes(null)
                 );
 
                 // Array should not have any zeros

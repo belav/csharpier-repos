@@ -38,15 +38,12 @@ public class KeyValueFactoryFactory
                 principalKeyValueFactory
             );
 
-            SetFactories(
-                foreignKey,
-                dependentKeyValueFactory,
-                () =>
-                    new DependentsMap<TKey>(
-                        foreignKey,
-                        principalKeyValueFactory,
-                        dependentKeyValueFactory
-                    )
+            SetFactories(foreignKey, dependentKeyValueFactory, () =>
+                new DependentsMap<TKey>(
+                    foreignKey,
+                    principalKeyValueFactory,
+                    dependentKeyValueFactory
+                )
             );
         }
 
@@ -65,15 +62,12 @@ public class KeyValueFactoryFactory
                 principalKeyValueFactory
             );
 
-            SetFactories(
-                foreignKey,
-                dependentKeyValueFactory,
-                () =>
-                    new DependentsMap<IReadOnlyList<object?>>(
-                        foreignKey,
-                        principalKeyValueFactory,
-                        dependentKeyValueFactory
-                    )
+            SetFactories(foreignKey, dependentKeyValueFactory, () =>
+                new DependentsMap<IReadOnlyList<object?>>(
+                    foreignKey,
+                    principalKeyValueFactory,
+                    dependentKeyValueFactory
+                )
             );
         }
 

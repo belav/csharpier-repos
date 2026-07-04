@@ -1992,9 +1992,8 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.P").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.P").GetMethod
                     ),
                 }
             );
@@ -2239,9 +2238,8 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.this[]").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.this[]").GetMethod
                     ),
                 }
             );
@@ -2463,9 +2461,8 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IEventSymbol>("C.E").RemoveMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IEventSymbol>("C.E").RemoveMethod
                     ),
                 }
             );
@@ -2494,9 +2491,8 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IEventSymbol>("C.E").RemoveMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IEventSymbol>("C.E").RemoveMethod
                     ),
                 }
             );
@@ -2525,9 +2521,8 @@ class C
                 new[] { new SourceLineUpdate(3, 4) },
                 semanticEdits: new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IEventSymbol>("C.E").RemoveMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IEventSymbol>("C.E").RemoveMethod
                     ),
                 }
             );

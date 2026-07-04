@@ -708,9 +708,8 @@ namespace System.IO.Tests
         [Fact]
         public void GetFullPath_ThrowsOnEmbeddedNulls()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Path.GetFullPath("/gi\0t", @"C:\foo\bar")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Path.GetFullPath("/gi\0t", @"C:\foo\bar")
             );
         }
 

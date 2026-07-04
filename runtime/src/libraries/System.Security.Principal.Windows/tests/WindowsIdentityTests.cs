@@ -196,26 +196,23 @@ public class WindowsIdentityTests
         using (WindowsIdentity currentIdentity = WindowsIdentity.GetCurrent())
         using (SafeAccessTokenHandle token = currentIdentity.AccessToken)
         {
-            WindowsIdentity.RunImpersonated(
-                token,
-                () =>
+            WindowsIdentity.RunImpersonated(token, () =>
+            {
+                testInfo.task = Task.Run(async () =>
                 {
-                    testInfo.task = Task.Run(async () =>
+                    try
                     {
-                        try
-                        {
-                            Task<bool> task = testInfo.continueTask.WaitAsync(
-                                ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                            );
-                            Assert.True(await task.ConfigureAwait(false));
-                        }
-                        catch (Exception ex)
-                        {
-                            testInfo.exception = ex;
-                        }
-                    });
-                }
-            );
+                        Task<bool> task = testInfo.continueTask.WaitAsync(
+                            ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                        );
+                        Assert.True(await task.ConfigureAwait(false));
+                    }
+                    catch (Exception ex)
+                    {
+                        testInfo.exception = ex;
+                    }
+                });
+            });
         }
     }
 

@@ -277,13 +277,10 @@ namespace System.IO.Tests
             {
                 writer.Write("012345789".ToCharArray());
 
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () =>
-                    {
-                        writer.Seek(3, ~SeekOrigin.Begin);
-                    }
-                );
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                {
+                    writer.Seek(3, ~SeekOrigin.Begin);
+                });
             }
         }
 

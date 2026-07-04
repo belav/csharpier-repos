@@ -244,9 +244,8 @@ namespace System.Memory.Tests
         {
             var positionObject = new T[50];
             var buffer = new ReadOnlySequence<T>(positionObject);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => buffer.GetOffset(new SequencePosition(positionObject, 75))
+            Assert.Throws<ArgumentOutOfRangeException>("position", () =>
+                buffer.GetOffset(new SequencePosition(positionObject, 75))
             );
         }
 
@@ -255,9 +254,8 @@ namespace System.Memory.Tests
         {
             (BufferSegment<T> bufferSegment1, BufferSegment<T> bufferSegment4) = GetBufferSegment();
             var buffer = new ReadOnlySequence<T>(bufferSegment1, 0, bufferSegment4, 50);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => buffer.GetOffset(new SequencePosition(bufferSegment4, 200))
+            Assert.Throws<ArgumentOutOfRangeException>("position", () =>
+                buffer.GetOffset(new SequencePosition(bufferSegment4, 200))
             );
         }
 
@@ -266,9 +264,8 @@ namespace System.Memory.Tests
         {
             ReadOnlySequence<T> buffer = GetFourSegmentsReadOnlySequence();
             ReadOnlySequence<T> buffer2 = GetFourSegmentsReadOnlySequence();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => buffer.GetOffset(buffer2.GetPosition(25))
+            Assert.Throws<ArgumentOutOfRangeException>("position", () =>
+                buffer.GetOffset(buffer2.GetPosition(25))
             );
         }
 

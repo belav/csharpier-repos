@@ -236,9 +236,8 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     List<string> headers = await server.AcceptConnectionSendResponseAndCloseAsync();
-                    Assert.Contains(
-                        headers,
-                        header => header.Contains("Accept-Language: en-US,en;q=0.5")
+                    Assert.Contains(headers, header =>
+                        header.Contains("Accept-Language: en-US,en;q=0.5")
                     );
                     Assert.Contains(headers, header => header.Contains("From: invalidemail"));
                 }
@@ -470,13 +469,11 @@ namespace System.Net.Http.Functional.Tests
             {
                 Assert.Equal(1024 * 1024, handler.MaxResponseDrainSize);
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.MaxResponseDrainSize = -1
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.MaxResponseDrainSize = -1
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.MaxResponseDrainSize = int.MinValue
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.MaxResponseDrainSize = int.MinValue
                 );
 
                 Assert.Equal(1024 * 1024, handler.MaxResponseDrainSize);
@@ -518,17 +515,14 @@ namespace System.Net.Http.Functional.Tests
             {
                 Assert.Equal(TimeSpan.FromSeconds(2), handler.ResponseDrainTimeout);
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.ResponseDrainTimeout = TimeSpan.FromSeconds(-1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.ResponseDrainTimeout = TimeSpan.FromSeconds(-1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.ResponseDrainTimeout = TimeSpan.MaxValue
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.ResponseDrainTimeout = TimeSpan.MaxValue
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.ResponseDrainTimeout = TimeSpan.FromSeconds(int.MaxValue)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.ResponseDrainTimeout = TimeSpan.FromSeconds(int.MaxValue)
                 );
 
                 Assert.Equal(TimeSpan.FromSeconds(2), handler.ResponseDrainTimeout);
@@ -2919,13 +2913,11 @@ namespace System.Net.Http.Functional.Tests
                 handler.MaxAutomaticRedirections = 1;
                 Assert.Equal(1, handler.MaxAutomaticRedirections);
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.MaxAutomaticRedirections = 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.MaxAutomaticRedirections = 0
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.MaxAutomaticRedirections = -1
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.MaxAutomaticRedirections = -1
                 );
             }
         }
@@ -2943,13 +2935,11 @@ namespace System.Net.Http.Functional.Tests
                 handler.MaxConnectionsPerServer = 1;
                 Assert.Equal(1, handler.MaxConnectionsPerServer);
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.MaxConnectionsPerServer = 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.MaxConnectionsPerServer = 0
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.MaxConnectionsPerServer = -1
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.MaxConnectionsPerServer = -1
                 );
             }
         }
@@ -2967,13 +2957,11 @@ namespace System.Net.Http.Functional.Tests
                 handler.MaxResponseHeadersLength = 1;
                 Assert.Equal(1, handler.MaxResponseHeadersLength);
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.MaxResponseHeadersLength = 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.MaxResponseHeadersLength = 0
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.MaxResponseHeadersLength = -1
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.MaxResponseHeadersLength = -1
                 );
             }
         }
@@ -3009,9 +2997,8 @@ namespace System.Net.Http.Functional.Tests
                 handler.PooledConnectionIdleTimeout = TimeSpan.FromSeconds(1);
                 Assert.Equal(TimeSpan.FromSeconds(1), handler.PooledConnectionIdleTimeout);
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.PooledConnectionIdleTimeout = TimeSpan.FromSeconds(-2)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.PooledConnectionIdleTimeout = TimeSpan.FromSeconds(-2)
                 );
             }
         }
@@ -3032,9 +3019,8 @@ namespace System.Net.Http.Functional.Tests
                 handler.PooledConnectionLifetime = TimeSpan.FromSeconds(1);
                 Assert.Equal(TimeSpan.FromSeconds(1), handler.PooledConnectionLifetime);
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.PooledConnectionLifetime = TimeSpan.FromSeconds(-2)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.PooledConnectionLifetime = TimeSpan.FromSeconds(-2)
                 );
             }
         }
@@ -3251,72 +3237,54 @@ namespace System.Net.Http.Functional.Tests
                 );
 
                 Assert.Throws(expectedExceptionType, () => handler.AllowAutoRedirect = false);
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.AutomaticDecompression = DecompressionMethods.GZip
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.AutomaticDecompression = DecompressionMethods.GZip
                 );
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.CookieContainer = new CookieContainer()
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.CookieContainer = new CookieContainer()
                 );
-                Assert.Throws(
-                    expectedExceptionType,
-                    () =>
-                        handler.Credentials = new NetworkCredential(
-                            "anotheruser",
-                            "anotherpassword"
-                        )
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.Credentials = new NetworkCredential("anotheruser", "anotherpassword")
                 );
-                Assert.Throws(
-                    expectedExceptionType,
-                    () =>
-                        handler.DefaultProxyCredentials = new NetworkCredential(
-                            "anotheruser",
-                            "anotherpassword"
-                        )
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.DefaultProxyCredentials = new NetworkCredential(
+                        "anotheruser",
+                        "anotherpassword"
+                    )
                 );
                 Assert.Throws(expectedExceptionType, () => handler.MaxAutomaticRedirections = 2);
                 Assert.Throws(expectedExceptionType, () => handler.MaxConnectionsPerServer = 2);
                 Assert.Throws(expectedExceptionType, () => handler.MaxResponseHeadersLength = 2);
                 Assert.Throws(expectedExceptionType, () => handler.PreAuthenticate = false);
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.PooledConnectionIdleTimeout = TimeSpan.FromSeconds(2)
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.PooledConnectionIdleTimeout = TimeSpan.FromSeconds(2)
                 );
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.PooledConnectionLifetime = TimeSpan.FromSeconds(2)
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.PooledConnectionLifetime = TimeSpan.FromSeconds(2)
                 );
                 Assert.Throws(expectedExceptionType, () => handler.Proxy = new WebProxy());
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.SslOptions = new SslClientAuthenticationOptions()
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.SslOptions = new SslClientAuthenticationOptions()
                 );
                 Assert.Throws(expectedExceptionType, () => handler.UseCookies = false);
                 Assert.Throws(expectedExceptionType, () => handler.UseProxy = false);
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.KeepAlivePingTimeout = TimeSpan.FromSeconds(5)
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.KeepAlivePingTimeout = TimeSpan.FromSeconds(5)
                 );
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.KeepAlivePingDelay = TimeSpan.FromSeconds(5)
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.KeepAlivePingDelay = TimeSpan.FromSeconds(5)
                 );
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.KeepAlivePingPolicy = HttpKeepAlivePingPolicy.WithActiveRequests
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.KeepAlivePingPolicy = HttpKeepAlivePingPolicy.WithActiveRequests
                 );
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.ConnectCallback = (context, token) => default
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.ConnectCallback = (context, token) => default
                 );
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.PlaintextStreamFilter = (context, token) => default
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.PlaintextStreamFilter = (context, token) => default
                 );
-                Assert.Throws(
-                    expectedExceptionType,
-                    () => handler.InitialHttp2StreamWindowSize = 128 * 1024
+                Assert.Throws(expectedExceptionType, () =>
+                    handler.InitialHttp2StreamWindowSize = 128 * 1024
                 );
             }
         }
@@ -4950,9 +4918,8 @@ namespace System.Net.Http.Functional.Tests
                         await server.AcceptConnectionSendResponseAndCloseAsync(content: "foo");
                     if (request.Version == HttpVersion20.Value)
                     {
-                        HttpHeaderData schemeHeader = Assert.Single(
-                            request.Headers,
-                            headerData => headerData.Name == ":scheme"
+                        HttpHeaderData schemeHeader = Assert.Single(request.Headers, headerData =>
+                            headerData.Name == ":scheme"
                         );
                         Assert.Equal(useSsl ? "https" : "http", schemeHeader.Value);
                     }
@@ -5467,21 +5434,18 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void Send_NullRequest_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "request",
-                () =>
+            Assert.Throws<ArgumentNullException>("request", () =>
+            {
+                var invoker = new HttpMessageInvoker(new SocketsHttpHandler());
+                if (TestAsync)
                 {
-                    var invoker = new HttpMessageInvoker(new SocketsHttpHandler());
-                    if (TestAsync)
-                    {
-                        invoker.SendAsync(null, CancellationToken.None);
-                    }
-                    else
-                    {
-                        invoker.Send(null, CancellationToken.None);
-                    }
+                    invoker.SendAsync(null, CancellationToken.None);
                 }
-            );
+                else
+                {
+                    invoker.Send(null, CancellationToken.None);
+                }
+            });
         }
 
         [Fact]

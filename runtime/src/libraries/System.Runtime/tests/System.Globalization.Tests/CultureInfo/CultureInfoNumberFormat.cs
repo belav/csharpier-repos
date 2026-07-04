@@ -31,9 +31,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void NumberFormat_Set_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CultureInfo("en-US").NumberFormat = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CultureInfo("en-US").NumberFormat = null
             );
             Assert.Throws<InvalidOperationException>(() =>
                 CultureInfo.InvariantCulture.NumberFormat = new NumberFormatInfo()

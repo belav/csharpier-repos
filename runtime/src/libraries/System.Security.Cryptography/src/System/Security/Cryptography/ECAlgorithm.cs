@@ -730,17 +730,13 @@ namespace System.Security.Cryptography
         /// </remarks>
         public override void ImportFromPem(ReadOnlySpan<char> input)
         {
-            PemKeyHelpers.ImportPem(
-                input,
-                label =>
-                    label switch
-                    {
-                        PemLabels.Pkcs8PrivateKey => ImportPkcs8PrivateKey,
-                        PemLabels.SpkiPublicKey => ImportSubjectPublicKeyInfo,
-                        PemLabels.EcPrivateKey => ImportECPrivateKey,
-                        _ => null,
-                    }
-            );
+            PemKeyHelpers.ImportPem(input, label => label switch
+                {
+                    PemLabels.Pkcs8PrivateKey => ImportPkcs8PrivateKey,
+                    PemLabels.SpkiPublicKey => ImportSubjectPublicKeyInfo,
+                    PemLabels.EcPrivateKey => ImportECPrivateKey,
+                    _ => null,
+                });
         }
 
         /// <summary>

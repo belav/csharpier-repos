@@ -1226,57 +1226,52 @@ public class C
         set {  }
 }
 }";
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
+
+                foreach (var paramDef in metadataReader.GetParameters())
                 {
-                    var metadataReader = assembly.GetMetadataReader();
-
-                    foreach (var paramDef in metadataReader.GetParameters())
-                    {
-                        var param = metadataReader.GetParameter(paramDef);
-                        Assert.Equal(
-                            ParameterAttributes.Optional | ParameterAttributes.HasDefault,
-                            param.Attributes
-                        );
-                    }
-
-                    foreach (var handle in metadataReader.GetConstants())
-                    {
-                        var constant = metadataReader.GetConstant(handle);
-                        var paramRow = metadataReader.GetParameter(
-                            (ParameterHandle)constant.Parent
-                        );
-                        string name = metadataReader.GetString(paramRow.Name);
-
-                        byte[] expectedConstant;
-                        switch (name)
-                        {
-                            case "args":
-                                expectedConstant = new byte[] { 0x00, 0x00, 0x00, 0x00 };
-                                break;
-
-                            case "a":
-                                expectedConstant = new byte[] { 0x01, 0x00, 0x00, 0x00 };
-                                break;
-
-                            case "b":
-                                expectedConstant = new byte[] { 0x02, 0x00, 0x00, 0x00 };
-                                break;
-
-                            case "value":
-                                expectedConstant = new byte[] { 0x03, 0x00, 0x00, 0x00 };
-                                break;
-
-                            default:
-                                throw TestExceptionUtilities.UnexpectedValue(name);
-                        }
-
-                        var actual = metadataReader.GetBlobBytes(constant.Value);
-                        AssertEx.Equal(expectedConstant, actual);
-                    }
+                    var param = metadataReader.GetParameter(paramDef);
+                    Assert.Equal(
+                        ParameterAttributes.Optional | ParameterAttributes.HasDefault,
+                        param.Attributes
+                    );
                 }
-            );
+
+                foreach (var handle in metadataReader.GetConstants())
+                {
+                    var constant = metadataReader.GetConstant(handle);
+                    var paramRow = metadataReader.GetParameter((ParameterHandle)constant.Parent);
+                    string name = metadataReader.GetString(paramRow.Name);
+
+                    byte[] expectedConstant;
+                    switch (name)
+                    {
+                        case "args":
+                            expectedConstant = new byte[] { 0x00, 0x00, 0x00, 0x00 };
+                            break;
+
+                        case "a":
+                            expectedConstant = new byte[] { 0x01, 0x00, 0x00, 0x00 };
+                            break;
+
+                        case "b":
+                            expectedConstant = new byte[] { 0x02, 0x00, 0x00, 0x00 };
+                            break;
+
+                        case "value":
+                            expectedConstant = new byte[] { 0x03, 0x00, 0x00, 0x00 };
+                            break;
+
+                        default:
+                            throw TestExceptionUtilities.UnexpectedValue(name);
+                    }
+
+                    var actual = metadataReader.GetBlobBytes(constant.Value);
+                    AssertEx.Equal(expectedConstant, actual);
+                }
+            });
         }
 
         [Fact]
@@ -1290,86 +1285,80 @@ public delegate void D([Optional, DefaultParameterValue(1)]ref int a, int b = 2,
 ";
             // Dev11: doesn't allow DPV(null) on int[], we do.
 
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
+
+                foreach (var methodHandle in metadataReader.MethodDefinitions)
                 {
-                    var metadataReader = assembly.GetMetadataReader();
+                    var methodDef = metadataReader.GetMethodDefinition(methodHandle);
+                    string methodName = metadataReader.GetString(methodDef.Name);
 
-                    foreach (var methodHandle in metadataReader.MethodDefinitions)
+                    foreach (var paramDef in methodDef.GetParameters())
                     {
-                        var methodDef = metadataReader.GetMethodDefinition(methodHandle);
-                        string methodName = metadataReader.GetString(methodDef.Name);
+                        var paramRow = metadataReader.GetParameter(paramDef);
+                        string paramName = metadataReader.GetString(paramRow.Name);
 
-                        foreach (var paramDef in methodDef.GetParameters())
+                        ParameterAttributes expectedFlags;
+                        string completeName = methodName + "." + paramName;
+                        switch (completeName)
                         {
-                            var paramRow = metadataReader.GetParameter(paramDef);
-                            string paramName = metadataReader.GetString(paramRow.Name);
-
-                            ParameterAttributes expectedFlags;
-                            string completeName = methodName + "." + paramName;
-                            switch (completeName)
-                            {
-                                case "BeginInvoke.a":
-                                case "BeginInvoke.args":
-                                case "EndInvoke.a":
-                                case "Invoke.a":
-                                case "Invoke.b":
-                                case "Invoke.args":
-                                    expectedFlags =
-                                        ParameterAttributes.Optional
-                                        | ParameterAttributes.HasDefault;
-                                    break;
-
-                                case ".ctor.object":
-                                case ".ctor.method":
-                                case "BeginInvoke.b":
-                                case "BeginInvoke.callback":
-                                case "BeginInvoke.object":
-                                case "EndInvoke.result":
-                                    expectedFlags = 0;
-                                    break;
-
-                                default:
-                                    throw TestExceptionUtilities.UnexpectedValue(completeName);
-                            }
-
-                            Assert.Equal(expectedFlags, paramRow.Attributes);
-                        }
-                    }
-
-                    foreach (var handle in metadataReader.GetConstants())
-                    {
-                        var constant = metadataReader.GetConstant(handle);
-                        var paramRow = metadataReader.GetParameter(
-                            (ParameterHandle)constant.Parent
-                        );
-                        string name = metadataReader.GetString(paramRow.Name);
-
-                        byte[] expectedConstant;
-                        switch (name)
-                        {
-                            case "a":
-                                expectedConstant = new byte[] { 0x01, 0x00, 0x00, 0x00 };
+                            case "BeginInvoke.a":
+                            case "BeginInvoke.args":
+                            case "EndInvoke.a":
+                            case "Invoke.a":
+                            case "Invoke.b":
+                            case "Invoke.args":
+                                expectedFlags =
+                                    ParameterAttributes.Optional | ParameterAttributes.HasDefault;
                                 break;
 
-                            case "args":
-                                expectedConstant = new byte[] { 0x00, 0x00, 0x00, 0x00 }; // null
-                                break;
-
-                            case "b":
-                                expectedConstant = new byte[] { 0x02, 0x00, 0x00, 0x00 };
+                            case ".ctor.object":
+                            case ".ctor.method":
+                            case "BeginInvoke.b":
+                            case "BeginInvoke.callback":
+                            case "BeginInvoke.object":
+                            case "EndInvoke.result":
+                                expectedFlags = 0;
                                 break;
 
                             default:
-                                throw TestExceptionUtilities.UnexpectedValue(name);
+                                throw TestExceptionUtilities.UnexpectedValue(completeName);
                         }
 
-                        var actual = metadataReader.GetBlobBytes(constant.Value);
-                        AssertEx.Equal(expectedConstant, actual);
+                        Assert.Equal(expectedFlags, paramRow.Attributes);
                     }
                 }
-            );
+
+                foreach (var handle in metadataReader.GetConstants())
+                {
+                    var constant = metadataReader.GetConstant(handle);
+                    var paramRow = metadataReader.GetParameter((ParameterHandle)constant.Parent);
+                    string name = metadataReader.GetString(paramRow.Name);
+
+                    byte[] expectedConstant;
+                    switch (name)
+                    {
+                        case "a":
+                            expectedConstant = new byte[] { 0x01, 0x00, 0x00, 0x00 };
+                            break;
+
+                        case "args":
+                            expectedConstant = new byte[] { 0x00, 0x00, 0x00, 0x00 }; // null
+                            break;
+
+                        case "b":
+                            expectedConstant = new byte[] { 0x02, 0x00, 0x00, 0x00 };
+                            break;
+
+                        default:
+                            throw TestExceptionUtilities.UnexpectedValue(name);
+                    }
+
+                    var actual = metadataReader.GetBlobBytes(constant.Value);
+                    AssertEx.Equal(expectedConstant, actual);
+                }
+            });
         }
 
         [Fact]
@@ -2430,76 +2419,73 @@ class C
     public static void M5(int m, out int n, ref int o) { throw null; }
 }
 ";
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
+
+                Assert.Equal(15, metadataReader.GetTableRowCount(TableIndex.Param));
+
+                foreach (var paramDef in metadataReader.GetParameters())
                 {
-                    var metadataReader = assembly.GetMetadataReader();
+                    var row = metadataReader.GetParameter(paramDef);
+                    string name = metadataReader.GetString(row.Name);
+                    ParameterAttributes expectedFlags;
 
-                    Assert.Equal(15, metadataReader.GetTableRowCount(TableIndex.Param));
-
-                    foreach (var paramDef in metadataReader.GetParameters())
+                    switch (name)
                     {
-                        var row = metadataReader.GetParameter(paramDef);
-                        string name = metadataReader.GetString(row.Name);
-                        ParameterAttributes expectedFlags;
+                        case "m":
+                        case "o":
+                            expectedFlags = 0;
+                            break;
 
-                        switch (name)
-                        {
-                            case "m":
-                            case "o":
-                                expectedFlags = 0;
-                                break;
+                        case "a":
+                        case "b":
+                        case "c":
+                            expectedFlags = ParameterAttributes.In;
+                            break;
 
-                            case "a":
-                            case "b":
-                            case "c":
-                                expectedFlags = ParameterAttributes.In;
-                                break;
+                        case "d":
+                        case "e":
+                        case "f":
+                        case "n":
+                            expectedFlags = ParameterAttributes.Out;
+                            break;
 
-                            case "d":
-                            case "e":
-                            case "f":
-                            case "n":
-                                expectedFlags = ParameterAttributes.Out;
-                                break;
+                        case "g":
+                        case "h":
+                        case "i":
+                            expectedFlags = ParameterAttributes.In | ParameterAttributes.Out;
+                            break;
 
-                            case "g":
-                            case "h":
-                            case "i":
-                                expectedFlags = ParameterAttributes.In | ParameterAttributes.Out;
-                                break;
+                        case "j":
+                            expectedFlags =
+                                ParameterAttributes.In
+                                | ParameterAttributes.HasDefault
+                                | ParameterAttributes.Optional;
+                            break;
 
-                            case "j":
-                                expectedFlags =
-                                    ParameterAttributes.In
-                                    | ParameterAttributes.HasDefault
-                                    | ParameterAttributes.Optional;
-                                break;
+                        case "k":
+                            expectedFlags =
+                                ParameterAttributes.Out
+                                | ParameterAttributes.HasDefault
+                                | ParameterAttributes.Optional;
+                            break;
 
-                            case "k":
-                                expectedFlags =
-                                    ParameterAttributes.Out
-                                    | ParameterAttributes.HasDefault
-                                    | ParameterAttributes.Optional;
-                                break;
+                        case "l":
+                            expectedFlags =
+                                ParameterAttributes.In
+                                | ParameterAttributes.Out
+                                | ParameterAttributes.HasDefault
+                                | ParameterAttributes.Optional;
+                            break;
 
-                            case "l":
-                                expectedFlags =
-                                    ParameterAttributes.In
-                                    | ParameterAttributes.Out
-                                    | ParameterAttributes.HasDefault
-                                    | ParameterAttributes.Optional;
-                                break;
-
-                            default:
-                                throw TestExceptionUtilities.UnexpectedValue(name);
-                        }
-
-                        Assert.Equal(expectedFlags, row.Attributes);
+                        default:
+                            throw TestExceptionUtilities.UnexpectedValue(name);
                     }
+
+                    Assert.Equal(expectedFlags, row.Attributes);
                 }
-            );
+            });
         }
 
         [Fact]
@@ -2657,51 +2643,48 @@ using System.Runtime.InteropServices;
 
 public delegate int F([Out]int a, [In]int b, [In, Out]ref int c, [In]ref int d, ref int e, [Out]out int f, out int g);
 ";
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
+
+                foreach (var paramDef in metadataReader.GetParameters())
                 {
-                    var metadataReader = assembly.GetMetadataReader();
+                    var row = metadataReader.GetParameter(paramDef);
+                    string name = metadataReader.GetString(row.Name);
+                    ParameterAttributes expectedFlags;
 
-                    foreach (var paramDef in metadataReader.GetParameters())
+                    switch (name)
                     {
-                        var row = metadataReader.GetParameter(paramDef);
-                        string name = metadataReader.GetString(row.Name);
-                        ParameterAttributes expectedFlags;
+                        case "e":
+                        case "callback":
+                        case "object":
+                        case "method":
+                        case "result":
+                            expectedFlags = 0;
+                            break;
 
-                        switch (name)
-                        {
-                            case "e":
-                            case "callback":
-                            case "object":
-                            case "method":
-                            case "result":
-                                expectedFlags = 0;
-                                break;
+                        case "b":
+                        case "d":
+                            expectedFlags = ParameterAttributes.In;
+                            break;
 
-                            case "b":
-                            case "d":
-                                expectedFlags = ParameterAttributes.In;
-                                break;
+                        case "a":
+                        case "g":
+                        case "f":
+                            expectedFlags = ParameterAttributes.Out;
+                            break;
 
-                            case "a":
-                            case "g":
-                            case "f":
-                                expectedFlags = ParameterAttributes.Out;
-                                break;
+                        case "c":
+                            expectedFlags = ParameterAttributes.In | ParameterAttributes.Out;
+                            break;
 
-                            case "c":
-                                expectedFlags = ParameterAttributes.In | ParameterAttributes.Out;
-                                break;
-
-                            default:
-                                throw TestExceptionUtilities.UnexpectedValue(name);
-                        }
-
-                        Assert.Equal(expectedFlags, row.Attributes);
+                        default:
+                            throw TestExceptionUtilities.UnexpectedValue(name);
                     }
+
+                    Assert.Equal(expectedFlags, row.Attributes);
                 }
-            );
+            });
         }
 
         [Fact]
@@ -2716,45 +2699,42 @@ public class C
     public int this[[Out]int a, [In]int b, [In, Out]int c, int d] {  get { return 0; }  set { } }
 }
 ";
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
+
+                foreach (var paramDef in metadataReader.GetParameters())
                 {
-                    var metadataReader = assembly.GetMetadataReader();
+                    var row = metadataReader.GetParameter(paramDef);
+                    string name = metadataReader.GetString(row.Name);
+                    ParameterAttributes expectedFlags;
 
-                    foreach (var paramDef in metadataReader.GetParameters())
+                    switch (name)
                     {
-                        var row = metadataReader.GetParameter(paramDef);
-                        string name = metadataReader.GetString(row.Name);
-                        ParameterAttributes expectedFlags;
+                        case "d":
+                        case "value":
+                            expectedFlags = 0;
+                            break;
 
-                        switch (name)
-                        {
-                            case "d":
-                            case "value":
-                                expectedFlags = 0;
-                                break;
+                        case "b":
+                            expectedFlags = ParameterAttributes.In;
+                            break;
 
-                            case "b":
-                                expectedFlags = ParameterAttributes.In;
-                                break;
+                        case "a":
+                            expectedFlags = ParameterAttributes.Out;
+                            break;
 
-                            case "a":
-                                expectedFlags = ParameterAttributes.Out;
-                                break;
+                        case "c":
+                            expectedFlags = ParameterAttributes.In | ParameterAttributes.Out;
+                            break;
 
-                            case "c":
-                                expectedFlags = ParameterAttributes.In | ParameterAttributes.Out;
-                                break;
-
-                            default:
-                                throw TestExceptionUtilities.UnexpectedValue(name);
-                        }
-
-                        Assert.Equal(expectedFlags, row.Attributes);
+                        default:
+                            throw TestExceptionUtilities.UnexpectedValue(name);
                     }
+
+                    Assert.Equal(expectedFlags, row.Attributes);
                 }
-            );
+            });
         }
 
         [Fact]
@@ -2777,24 +2757,21 @@ class C
     }
 }
 ";
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
-                {
-                    var metadataReader = assembly.GetMetadataReader();
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
 
-                    ParameterHandle[] ps = metadataReader.GetParameters().ToArray();
-                    Assert.Equal(2, ps.Length);
-                    Assert.Equal(
-                        ParameterAttributes.In | ParameterAttributes.Out,
-                        metadataReader.GetParameter(ps[0]).Attributes
-                    );
-                    Assert.Equal(
-                        ParameterAttributes.In | ParameterAttributes.Out,
-                        metadataReader.GetParameter(ps[1]).Attributes
-                    );
-                }
-            );
+                ParameterHandle[] ps = metadataReader.GetParameters().ToArray();
+                Assert.Equal(2, ps.Length);
+                Assert.Equal(
+                    ParameterAttributes.In | ParameterAttributes.Out,
+                    metadataReader.GetParameter(ps[0]).Attributes
+                );
+                Assert.Equal(
+                    ParameterAttributes.In | ParameterAttributes.Out,
+                    metadataReader.GetParameter(ps[1]).Attributes
+                );
+            });
         }
 
         #endregion
@@ -3048,42 +3025,39 @@ class Program
     static extern void SurrogatePairMax();
 }
 ";
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
+
+                Assert.Equal(3, metadataReader.GetTableRowCount(TableIndex.ModuleRef));
+                Assert.Equal(3, metadataReader.GetTableRowCount(TableIndex.ImplMap));
+
+                foreach (var method in metadataReader.GetImportedMethods())
                 {
-                    var metadataReader = assembly.GetMetadataReader();
-
-                    Assert.Equal(3, metadataReader.GetTableRowCount(TableIndex.ModuleRef));
-                    Assert.Equal(3, metadataReader.GetTableRowCount(TableIndex.ImplMap));
-
-                    foreach (var method in metadataReader.GetImportedMethods())
+                    var import = method.GetImport();
+                    string moduleName = metadataReader.GetString(
+                        metadataReader.GetModuleReference(import.Module).Name
+                    );
+                    string methodName = metadataReader.GetString(method.Name);
+                    switch (methodName)
                     {
-                        var import = method.GetImport();
-                        string moduleName = metadataReader.GetString(
-                            metadataReader.GetModuleReference(import.Module).Name
-                        );
-                        string methodName = metadataReader.GetString(method.Name);
-                        switch (methodName)
-                        {
-                            case "InvalidCharacter":
-                                Assert.Equal("\uFFFF", moduleName);
-                                break;
+                        case "InvalidCharacter":
+                            Assert.Equal("\uFFFF", moduleName);
+                            break;
 
-                            case "SurrogatePairMin":
-                                Assert.Equal("\uD800\uDC00", moduleName);
-                                break;
+                        case "SurrogatePairMin":
+                            Assert.Equal("\uD800\uDC00", moduleName);
+                            break;
 
-                            case "SurrogatePairMax":
-                                Assert.Equal("\uDBFF\uDFFF", moduleName);
-                                break;
+                        case "SurrogatePairMax":
+                            Assert.Equal("\uDBFF\uDFFF", moduleName);
+                            break;
 
-                            default:
-                                throw TestExceptionUtilities.UnexpectedValue(methodName);
-                        }
+                        default:
+                            throw TestExceptionUtilities.UnexpectedValue(methodName);
                     }
                 }
-            );
+            });
         }
 
         [Fact]
@@ -3501,21 +3475,18 @@ public class C
             sb.AppendLine("}");
             var code = sb.ToString();
 
-            CompileAndVerify(
-                code,
-                assemblyValidator: (assembly) =>
-                {
-                    var metadataReader = assembly.GetMetadataReader();
-                    Assert.Equal(cases.Length, metadataReader.GetTableRowCount(TableIndex.ImplMap));
+            CompileAndVerify(code, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
+                Assert.Equal(cases.Length, metadataReader.GetTableRowCount(TableIndex.ImplMap));
 
-                    int j = 0;
-                    foreach (var method in metadataReader.GetImportedMethods())
-                    {
-                        Assert.Equal(cases[j].expected, method.GetImport().Attributes);
-                        j++;
-                    }
+                int j = 0;
+                foreach (var method in metadataReader.GetImportedMethods())
+                {
+                    Assert.Equal(cases[j].expected, method.GetImport().Attributes);
+                    j++;
                 }
-            );
+            });
         }
 
         private string MakeDllImport(
@@ -4067,29 +4038,26 @@ abstract class C
 }
 ";
             // Ref.Emit doesn't implement custom attributes yet
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
-                {
-                    var metadataReader = assembly.GetMetadataReader();
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
 
-                    Assert.Equal(1, metadataReader.GetTableRowCount(TableIndex.ModuleRef));
-                    Assert.Equal(1, metadataReader.GetTableRowCount(TableIndex.ImplMap));
+                Assert.Equal(1, metadataReader.GetTableRowCount(TableIndex.ModuleRef));
+                Assert.Equal(1, metadataReader.GetTableRowCount(TableIndex.ImplMap));
 
-                    // the attribute is emitted:
-                    Assert.False(
-                        MetadataValidation
-                            .FindCustomAttribute(metadataReader, "DefaultCharSetAttribute")
-                            .IsNil
-                    );
+                // the attribute is emitted:
+                Assert.False(
+                    MetadataValidation
+                        .FindCustomAttribute(metadataReader, "DefaultCharSetAttribute")
+                        .IsNil
+                );
 
-                    var import = metadataReader.GetImportedMethods().Single().GetImport();
-                    Assert.Equal(
-                        MethodImportAttributes.CharSetAnsi,
-                        import.Attributes & MethodImportAttributes.CharSetMask
-                    );
-                }
-            );
+                var import = metadataReader.GetImportedMethods().Single().GetImport();
+                Assert.Equal(
+                    MethodImportAttributes.CharSetAnsi,
+                    import.Attributes & MethodImportAttributes.CharSetMask
+                );
+            });
         }
 
         [Fact]
@@ -4223,39 +4191,33 @@ interface I { }
 delegate void D();
 ";
             // Ref.Emit doesn't implement custom attributes yet
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
+
+                foreach (var typeHandle in metadataReader.TypeDefinitions)
                 {
-                    var metadataReader = assembly.GetMetadataReader();
+                    var row = metadataReader.GetTypeDefinition(typeHandle);
+                    var name = metadataReader.GetString(row.Name);
+                    var actual = row.Attributes & TypeAttributes.StringFormatMask;
 
-                    foreach (var typeHandle in metadataReader.TypeDefinitions)
-                    {
-                        var row = metadataReader.GetTypeDefinition(typeHandle);
-                        var name = metadataReader.GetString(row.Name);
-                        var actual = row.Attributes & TypeAttributes.StringFormatMask;
-
-                        if (
-                            name == "<Module>"
-                            || name.StartsWith(
-                                "__StaticArrayInitTypeSize=",
-                                StringComparison.Ordinal
-                            )
-                            || name.StartsWith(
-                                "<PrivateImplementationDetails>",
-                                StringComparison.Ordinal
-                            )
+                    if (
+                        name == "<Module>"
+                        || name.StartsWith("__StaticArrayInitTypeSize=", StringComparison.Ordinal)
+                        || name.StartsWith(
+                            "<PrivateImplementationDetails>",
+                            StringComparison.Ordinal
                         )
-                        {
-                            Assert.Equal(TypeAttributes.AnsiClass, actual);
-                        }
-                        else
-                        {
-                            Assert.Equal(TypeAttributes.UnicodeClass, actual);
-                        }
+                    )
+                    {
+                        Assert.Equal(TypeAttributes.AnsiClass, actual);
+                    }
+                    else
+                    {
+                        Assert.Equal(TypeAttributes.UnicodeClass, actual);
                     }
                 }
-            );
+            });
         }
 
         [Fact]

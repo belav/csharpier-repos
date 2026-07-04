@@ -57,34 +57,31 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable Ethiopic()
         {
-            return CodeChartHelper.GetRange(
-                0x1200,
-                0x137C,
-                i =>
-                    (
-                        i == 0x1249
-                        || i == 0x124E
-                        || i == 0x124F
-                        || i == 0x1257
-                        || i == 0x1259
-                        || i == 0x125E
-                        || i == 0x125F
-                        || i == 0x1289
-                        || i == 0x128E
-                        || i == 0x128F
-                        || i == 0x12B1
-                        || i == 0x12B6
-                        || i == 0x12B7
-                        || i == 0x12BF
-                        || i == 0x12C1
-                        || i == 0x12C6
-                        || i == 0x12C7
-                        || i == 0x12D7
-                        || i == 0x1311
-                        || i == 0x1316
-                        || i == 0x1317
-                        || (i >= 0x135B && i <= 0x135E)
-                    )
+            return CodeChartHelper.GetRange(0x1200, 0x137C, i =>
+                (
+                    i == 0x1249
+                    || i == 0x124E
+                    || i == 0x124F
+                    || i == 0x1257
+                    || i == 0x1259
+                    || i == 0x125E
+                    || i == 0x125F
+                    || i == 0x1289
+                    || i == 0x128E
+                    || i == 0x128F
+                    || i == 0x12B1
+                    || i == 0x12B6
+                    || i == 0x12B7
+                    || i == 0x12BF
+                    || i == 0x12C1
+                    || i == 0x12C6
+                    || i == 0x12C7
+                    || i == 0x12D7
+                    || i == 0x1311
+                    || i == 0x1316
+                    || i == 0x1317
+                    || (i >= 0x135B && i <= 0x135E)
+                )
             );
         }
 
@@ -175,10 +172,8 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable Khmer()
         {
-            return CodeChartHelper.GetRange(
-                0x1780,
-                0x17F9,
-                i => (i == 0x17DE || i == 0x17DF || (i >= 0x17EA && i <= 0x17EF))
+            return CodeChartHelper.GetRange(0x1780, 0x17F9, i =>
+                (i == 0x17DE || i == 0x17DF || (i >= 0x17EA && i <= 0x17EF))
             );
         }
 
@@ -188,10 +183,8 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable Mongolian()
         {
-            return CodeChartHelper.GetRange(
-                0x1800,
-                0x18AA,
-                i => (i == 0x180F || (i >= 0x181A && i <= 0x181F) || (i >= 0x1878 && i <= 0x187F))
+            return CodeChartHelper.GetRange(0x1800, 0x18AA, i =>
+                (i == 0x180F || (i >= 0x181A && i <= 0x181F) || (i >= 0x1878 && i <= 0x187F))
             );
         }
 
@@ -210,20 +203,17 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable Limbu()
         {
-            return CodeChartHelper.GetRange(
-                0x1900,
-                0x194F,
-                i =>
-                    (
-                        i == 0x191D
-                        || i == 0x191E
-                        || i == 0x191F
-                        || (i >= 0x192C && i <= 0x192F)
-                        || (i >= 0x193C && i <= 0x193F)
-                        || i == 0x1941
-                        || i == 0x1942
-                        || i == 0x1943
-                    )
+            return CodeChartHelper.GetRange(0x1900, 0x194F, i =>
+                (
+                    i == 0x191D
+                    || i == 0x191E
+                    || i == 0x191F
+                    || (i >= 0x192C && i <= 0x192F)
+                    || (i >= 0x193C && i <= 0x193F)
+                    || i == 0x1941
+                    || i == 0x1942
+                    || i == 0x1943
+                )
             );
         }
 
@@ -242,15 +232,12 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable NewTaiLue()
         {
-            return CodeChartHelper.GetRange(
-                0x1980,
-                0x19DF,
-                i =>
-                    (
-                        (i >= 0x19AC && i <= 0x19AF)
-                        || (i >= 0x19CA && i <= 0x19CF)
-                        || (i >= 0x19DB && i <= 0x19DD)
-                    )
+            return CodeChartHelper.GetRange(0x1980, 0x19DF, i =>
+                (
+                    (i >= 0x19AC && i <= 0x19AF)
+                    || (i >= 0x19CA && i <= 0x19CF)
+                    || (i >= 0x19DB && i <= 0x19DD)
+                )
             );
         }
 
@@ -278,17 +265,14 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable TaiTham()
         {
-            return CodeChartHelper.GetRange(
-                0x1A20,
-                0x1AAD,
-                i =>
-                    (
-                        i == 0x1A5F
-                        || i == 0x1A7D
-                        || i == 0x1A7E
-                        || (i >= 0x1A8A && i <= 0x1A8F)
-                        || (i >= 0x1A9A && i <= 0x1A9F)
-                    )
+            return CodeChartHelper.GetRange(0x1A20, 0x1AAD, i =>
+                (
+                    i == 0x1A5F
+                    || i == 0x1A7D
+                    || i == 0x1A7E
+                    || (i >= 0x1A8A && i <= 0x1A8F)
+                    || (i >= 0x1A9A && i <= 0x1A9F)
+                )
             );
         }
 
@@ -316,10 +300,8 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable Lepcha()
         {
-            return CodeChartHelper.GetRange(
-                0x1C00,
-                0x1C4F,
-                i => ((i >= 0x1C38 && i <= 0x1C3A) || (i >= 0x1C4A && i <= 0x1C4C))
+            return CodeChartHelper.GetRange(0x1C00, 0x1C4F, i =>
+                ((i >= 0x1C38 && i <= 0x1C3A) || (i >= 0x1C4A && i <= 0x1C4C))
             );
         }
 

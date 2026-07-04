@@ -112,13 +112,11 @@ public abstract class AbstractCodeLensTests : AbstractLanguageServerProtocolTest
         >(LSP.Methods.TextDocumentCodeLensName, codeLensParams, CancellationToken.None);
         AssertEx.NotNull(actualCodeLenses);
         Assert.NotEmpty(actualCodeLenses);
-        Assert.All(
-            actualCodeLenses,
-            actualCodeLens =>
-                Assert.NotEqual(
-                    CodeLensHandler.RunTestsCommandIdentifier,
-                    actualCodeLens.Command?.CommandIdentifier
-                )
+        Assert.All(actualCodeLenses, actualCodeLens =>
+            Assert.NotEqual(
+                CodeLensHandler.RunTestsCommandIdentifier,
+                actualCodeLens.Command?.CommandIdentifier
+            )
         );
     }
 }

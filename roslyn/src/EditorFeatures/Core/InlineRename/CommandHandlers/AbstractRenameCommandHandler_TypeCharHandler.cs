@@ -25,34 +25,30 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             CommandExecutionContext context
         )
         {
-            HandlePossibleTypingCommand(
-                args,
-                nextHandler,
-                (activeSession, span) =>
+            HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
+            {
+                var document =
+                    args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                if (document == null)
                 {
-                    var document =
-                        args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
-                    if (document == null)
-                    {
-                        nextHandler();
-                        return;
-                    }
-
-                    var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
-
-                    // We are inside the region we can edit, so let's forward only if it's a valid
-                    // character
-                    if (
-                        syntaxFactsService == null
-                        || syntaxFactsService.IsIdentifierStartCharacter(args.TypedChar)
-                        || syntaxFactsService.IsIdentifierPartCharacter(args.TypedChar)
-                        || syntaxFactsService.IsStartOfUnicodeEscapeSequence(args.TypedChar)
-                    )
-                    {
-                        nextHandler();
-                    }
+                    nextHandler();
+                    return;
                 }
-            );
+
+                var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
+
+                // We are inside the region we can edit, so let's forward only if it's a valid
+                // character
+                if (
+                    syntaxFactsService == null
+                    || syntaxFactsService.IsIdentifierStartCharacter(args.TypedChar)
+                    || syntaxFactsService.IsIdentifierPartCharacter(args.TypedChar)
+                    || syntaxFactsService.IsStartOfUnicodeEscapeSequence(args.TypedChar)
+                )
+                {
+                    nextHandler();
+                }
+            });
         }
     }
 }

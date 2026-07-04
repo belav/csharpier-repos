@@ -4030,14 +4030,12 @@ public abstract partial class ModelBuilderTest
                 .WithOne(e => e.Hob)
                 .IsRequired();
 
-            Assert.Contains(
-                modelBuilder.ModelLoggerFactory.Log,
-                l =>
-                    l.Level == LogLevel.Warning
-                    && l.Message
-                        == CoreResources
-                            .LogAmbiguousEndRequired(new TestLogger<TestLoggingDefinitions>())
-                            .GenerateMessage("{'NobId11', 'NobId21'}", typeof(Hob).Name)
+            Assert.Contains(modelBuilder.ModelLoggerFactory.Log, l =>
+                l.Level == LogLevel.Warning
+                && l.Message
+                    == CoreResources
+                        .LogAmbiguousEndRequired(new TestLogger<TestLoggingDefinitions>())
+                        .GenerateMessage("{'NobId11', 'NobId21'}", typeof(Hob).Name)
             );
 
             Assert.Equal(

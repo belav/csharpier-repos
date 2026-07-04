@@ -98,9 +98,8 @@ namespace Microsoft.Internal
         {
             if (
                 values != null
-                && !Contract.ForAll(
-                    values,
-                    (keyValue) => keyValue.Key != null && keyValue.Value != null
+                && !Contract.ForAll(values, (keyValue) =>
+                    keyValue.Key != null && keyValue.Value != null
                 )
             )
             {

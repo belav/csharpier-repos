@@ -122,13 +122,11 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void UnsafeAddrOfPinnedArrayElement_NullArray_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "arr",
-                () => Marshal.UnsafeAddrOfPinnedArrayElement(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("arr", () =>
+                Marshal.UnsafeAddrOfPinnedArrayElement(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "arr",
-                () => Marshal.UnsafeAddrOfPinnedArrayElement((int[])null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("arr", () =>
+                Marshal.UnsafeAddrOfPinnedArrayElement((int[])null, 0)
             );
         }
 

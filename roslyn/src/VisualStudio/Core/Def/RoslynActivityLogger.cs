@@ -52,9 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             {
                 // internally, it just uses our existing ILogger
                 Logger.SetLogger(
-                    AggregateLogger.Remove(
-                        Logger.GetLogger(),
-                        l => (l as TraceSourceLogger)?.TraceSource == traceSource
+                    AggregateLogger.Remove(Logger.GetLogger(), l =>
+                        (l as TraceSourceLogger)?.TraceSource == traceSource
                     )
                 );
             }

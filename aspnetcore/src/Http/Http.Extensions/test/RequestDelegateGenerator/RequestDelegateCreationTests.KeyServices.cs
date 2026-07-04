@@ -46,11 +46,9 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] [FromServi
         // runtime.
         if (IsGeneratorEnabled)
         {
-            Assert.Contains(
-                result.Value.Diagnostics,
-                diagnostic =>
-                    diagnostic.Id
-                    == DiagnosticDescriptors.KeyedAndNotKeyedServiceAttributesNotSupported.Id
+            Assert.Contains(result.Value.Diagnostics, diagnostic =>
+                diagnostic.Id
+                == DiagnosticDescriptors.KeyedAndNotKeyedServiceAttributesNotSupported.Id
             );
         }
 

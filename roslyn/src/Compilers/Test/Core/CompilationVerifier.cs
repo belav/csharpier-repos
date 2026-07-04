@@ -226,24 +226,21 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// <param name="expected">The expected IL</param>
         public void VerifyTypeIL(string typeName, string expected)
         {
-            VerifyTypeIL(
-                typeName,
-                output =>
-                {
-                    // All our tests predate ilspy adding `// Header size: ...` to the contents.  So trim that out since we
-                    // really don't need to validate superfluous IL comments
-                    expected = RemoveHeaderComments(expected);
-                    output = RemoveHeaderComments(output);
+            VerifyTypeIL(typeName, output =>
+            {
+                // All our tests predate ilspy adding `// Header size: ...` to the contents.  So trim that out since we
+                // really don't need to validate superfluous IL comments
+                expected = RemoveHeaderComments(expected);
+                output = RemoveHeaderComments(output);
 
-                    output = FixupCodeSizeComments(output);
+                output = FixupCodeSizeComments(output);
 
-                    AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                        expected,
-                        output,
-                        escapeQuotes: false
-                    );
-                }
-            );
+                AssertEx.AssertEqualToleratingWhitespaceDifferences(
+                    expected,
+                    output,
+                    escapeQuotes: false
+                );
+            });
         }
 
         private static readonly Regex s_headerCommentsRegex = new(
@@ -264,9 +261,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             // We use the form `// Code size 7 (0x7)` while ilspy moved to the form `// Code size: 7 (0x7)` (with an
             // extra colon).  Strip the colon to make these match.
-            return s_codeSizeCommentsRegex.Replace(
-                output,
-                match => match.Groups[0].Value.Replace(match.Groups[1].Value, "")
+            return s_codeSizeCommentsRegex.Replace(output, match =>
+                match.Groups[0].Value.Replace(match.Groups[1].Value, "")
             );
         }
 
@@ -838,12 +834,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     var documentMap = ILValidation.GetDocumentIdToPathMap(xmlDocument);
 
                     markers = sequencePointsSource
-                        ? ILValidation.GetSequencePointMarkers(
-                            xmlMethod,
-                            id =>
-                                _compilation
-                                    .SyntaxTrees.Single(tree => tree.FilePath == documentMap[id])
-                                    .GetText()
+                        ? ILValidation.GetSequencePointMarkers(xmlMethod, id =>
+                            _compilation
+                                .SyntaxTrees.Single(tree => tree.FilePath == documentMap[id])
+                                .GetText()
                         )
                         : ILValidation.GetSequencePointMarkers(xmlMethod);
                 }

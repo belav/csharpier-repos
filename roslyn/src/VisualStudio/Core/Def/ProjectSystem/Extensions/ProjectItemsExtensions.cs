@@ -35,10 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.E
             string itemName,
             string extension
         ) =>
-            NameGenerator.GenerateUniqueName(
-                itemName,
-                extension,
-                n => items.FindItem(n, StringComparer.OrdinalIgnoreCase) == null
+            NameGenerator.GenerateUniqueName(itemName, extension, n =>
+                items.FindItem(n, StringComparer.OrdinalIgnoreCase) == null
             );
 
         public static string GetUniqueNameIgnoringProjectItem(
@@ -48,15 +46,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.E
             string extension
         )
         {
-            return NameGenerator.GenerateUniqueName(
-                itemName,
-                extension,
-                n =>
-                {
-                    var foundItem = items.FindItem(n, StringComparer.OrdinalIgnoreCase);
-                    return foundItem == null || foundItem == itemToIgnore;
-                }
-            );
+            return NameGenerator.GenerateUniqueName(itemName, extension, n =>
+            {
+                var foundItem = items.FindItem(n, StringComparer.OrdinalIgnoreCase);
+                return foundItem == null || foundItem == itemToIgnore;
+            });
         }
     }
 }

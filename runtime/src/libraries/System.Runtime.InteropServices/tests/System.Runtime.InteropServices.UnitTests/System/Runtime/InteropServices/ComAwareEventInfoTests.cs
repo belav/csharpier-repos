@@ -47,9 +47,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_NullEventName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new ComAwareEventInfo(typeof(NonComObject), null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new ComAwareEventInfo(typeof(NonComObject), null)
             );
         }
 
@@ -105,9 +104,8 @@ namespace System.Runtime.InteropServices.Tests
         public void AddEventHandler_NullTarget_ThrowsArgumentNullException()
         {
             var attribute = new ComAwareEventInfo(typeof(NonComObject), nameof(NonComObject.Event));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "o",
-                () => attribute.AddEventHandler(null, new EventHandler(EventHandler))
+            AssertExtensions.Throws<ArgumentNullException>("o", () =>
+                attribute.AddEventHandler(null, new EventHandler(EventHandler))
             );
         }
 

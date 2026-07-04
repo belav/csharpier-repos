@@ -84,9 +84,8 @@ public abstract class DataAnnotationRelationalTestBase<TFixture> : DataAnnotatio
 
                 var tagIdProperty = petTagType.FindProperty(nameof(PetTag.TagId));
                 Assert.False(tagIdProperty.IsNullable);
-                Assert.All(
-                    tagIdProperty.GetTableColumnMappings(),
-                    m => Assert.False(m.Column.IsNullable)
+                Assert.All(tagIdProperty.GetTableColumnMappings(), m =>
+                    Assert.False(m.Column.IsNullable)
                 );
 
                 var catType = model.FindEntityType(typeof(Cat));

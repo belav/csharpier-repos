@@ -36,22 +36,16 @@ namespace System.Collections.Tests
             list.AddRange(enumerable);
 
             // Check that the first section of the List is unchanged
-            Assert.All(
-                Enumerable.Range(0, listLength),
-                index =>
-                {
-                    Assert.Equal(listBeforeAdd[index], list[index]);
-                }
-            );
+            Assert.All(Enumerable.Range(0, listLength), index =>
+            {
+                Assert.Equal(listBeforeAdd[index], list[index]);
+            });
 
             // Check that the added elements are correct
-            Assert.All(
-                Enumerable.Range(0, enumerableLength),
-                index =>
-                {
-                    Assert.Equal(enumerable.ElementAt(index), list[index + listLength]);
-                }
-            );
+            Assert.All(Enumerable.Range(0, enumerableLength), index =>
+            {
+                Assert.Equal(enumerable.ElementAt(index), list[index + listLength]);
+            });
         }
 
         [Theory]
@@ -77,13 +71,10 @@ namespace System.Collections.Tests
             list.AddRange(span);
 
             // Check that the first section of the List is unchanged
-            Assert.All(
-                Enumerable.Range(0, listLength),
-                index =>
-                {
-                    Assert.Equal(listBeforeAdd[index], list[index]);
-                }
-            );
+            Assert.All(Enumerable.Range(0, listLength), index =>
+            {
+                Assert.Equal(listBeforeAdd[index], list[index]);
+            });
 
             // Check that the added elements are correct
             for (int i = 0; i < enumerableLength; i++)
@@ -96,13 +87,11 @@ namespace System.Collections.Tests
         [Fact]
         public void AddRange_NullList_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "list",
-                () => CollectionExtensions.AddRange<int>(null, default)
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                CollectionExtensions.AddRange<int>(null, default)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "list",
-                () => CollectionExtensions.AddRange<int>(null, new int[1])
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                CollectionExtensions.AddRange<int>(null, new int[1])
             );
         }
 

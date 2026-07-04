@@ -178,10 +178,8 @@ namespace System.Net.Http
         public Task<string> ReadAsStringAsync(CancellationToken cancellationToken)
         {
             CheckDisposed();
-            return WaitAndReturnAsync(
-                LoadIntoBufferAsync(cancellationToken),
-                this,
-                static s => s.ReadBufferedContentAsString()
+            return WaitAndReturnAsync(LoadIntoBufferAsync(cancellationToken), this, static s =>
+                s.ReadBufferedContentAsString()
             );
         }
 
@@ -271,10 +269,8 @@ namespace System.Net.Http
         public Task<byte[]> ReadAsByteArrayAsync(CancellationToken cancellationToken)
         {
             CheckDisposed();
-            return WaitAndReturnAsync(
-                LoadIntoBufferAsync(cancellationToken),
-                this,
-                static s => s.ReadBufferedContentAsByteArray()
+            return WaitAndReturnAsync(LoadIntoBufferAsync(cancellationToken), this, static s =>
+                s.ReadBufferedContentAsByteArray()
             );
         }
 
@@ -660,10 +656,8 @@ namespace System.Net.Http
             // By default just buffer the content to a memory stream. Derived classes can override this behavior
             // if there is a better way to retrieve the content as stream (e.g. byte array/string use a more efficient
             // way, like wrapping a read-only MemoryStream around the bytes/string)
-            return WaitAndReturnAsync(
-                LoadIntoBufferAsync(),
-                this,
-                s => (Stream)s._bufferedContent!
+            return WaitAndReturnAsync(LoadIntoBufferAsync(), this, s =>
+                (Stream)s._bufferedContent!
             );
         }
 

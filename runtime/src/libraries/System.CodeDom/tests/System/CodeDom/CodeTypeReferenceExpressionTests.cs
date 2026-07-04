@@ -56,9 +56,8 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new CodeTypeReferenceExpression((Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new CodeTypeReferenceExpression((Type)null)
             );
         }
 

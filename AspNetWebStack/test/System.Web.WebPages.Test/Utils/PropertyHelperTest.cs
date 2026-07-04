@@ -152,13 +152,11 @@ namespace System.Web.WebPages.Test
             anonymous.StringProp = "Five";
 
             // Act + Assert
-            PropertyHelper helper1 = Assert.Single(
-                PropertyHelper.GetProperties(anonymous),
-                prop => prop.Name == "IntProp"
+            PropertyHelper helper1 = Assert.Single(PropertyHelper.GetProperties(anonymous), prop =>
+                prop.Name == "IntProp"
             );
-            PropertyHelper helper2 = Assert.Single(
-                PropertyHelper.GetProperties(anonymous),
-                prop => prop.Name == "StringProp"
+            PropertyHelper helper2 = Assert.Single(PropertyHelper.GetProperties(anonymous), prop =>
+                prop.Name == "StringProp"
             );
             Assert.Equal(3, helper1.GetValue(anonymous));
             Assert.Equal("Five", helper2.GetValue(anonymous));

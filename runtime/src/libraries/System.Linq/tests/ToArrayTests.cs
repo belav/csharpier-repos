@@ -76,39 +76,30 @@ namespace System.Linq.Tests
         [Fact]
         public void ToArray_WorkWithEmptyCollection()
         {
-            RunToArrayOnAllCollectionTypes(
-                new int[0],
-                resultArray =>
-                {
-                    Assert.NotNull(resultArray);
-                    Assert.Equal(0, resultArray.Length);
-                }
-            );
+            RunToArrayOnAllCollectionTypes(new int[0], resultArray =>
+            {
+                Assert.NotNull(resultArray);
+                Assert.Equal(0, resultArray.Length);
+            });
         }
 
         [Fact]
         public void ToArray_ProduceCorrectArray()
         {
             int[] sourceArray = new int[] { 1, 2, 3, 4, 5, 6, 7 };
-            RunToArrayOnAllCollectionTypes(
-                sourceArray,
-                resultArray =>
-                {
-                    Assert.Equal(sourceArray.Length, resultArray.Length);
-                    Assert.Equal(sourceArray, resultArray);
-                }
-            );
+            RunToArrayOnAllCollectionTypes(sourceArray, resultArray =>
+            {
+                Assert.Equal(sourceArray.Length, resultArray.Length);
+                Assert.Equal(sourceArray, resultArray);
+            });
 
             string[] sourceStringArray = new string[] { "1", "2", "3", "4", "5", "6", "7", "8" };
-            RunToArrayOnAllCollectionTypes(
-                sourceStringArray,
-                resultStringArray =>
-                {
-                    Assert.Equal(sourceStringArray.Length, resultStringArray.Length);
-                    for (int i = 0; i < sourceStringArray.Length; i++)
-                        Assert.Same(sourceStringArray[i], resultStringArray[i]);
-                }
-            );
+            RunToArrayOnAllCollectionTypes(sourceStringArray, resultStringArray =>
+            {
+                Assert.Equal(sourceStringArray.Length, resultStringArray.Length);
+                for (int i = 0; i < sourceStringArray.Length; i++)
+                    Assert.Same(sourceStringArray[i], resultStringArray[i]);
+            });
         }
 
         [Fact]

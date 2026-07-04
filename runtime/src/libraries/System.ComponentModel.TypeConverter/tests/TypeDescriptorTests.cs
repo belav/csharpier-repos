@@ -185,13 +185,11 @@ namespace System.ComponentModel.Tests
         )] // Mock will try to JIT
         public void AddProvider_NullProvider_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "provider",
-                () => TypeDescriptor.AddProvider(null, new object())
+            Assert.Throws<ArgumentNullException>("provider", () =>
+                TypeDescriptor.AddProvider(null, new object())
             );
-            Assert.Throws<ArgumentNullException>(
-                "provider",
-                () => TypeDescriptor.AddProvider(null, typeof(int))
+            Assert.Throws<ArgumentNullException>("provider", () =>
+                TypeDescriptor.AddProvider(null, typeof(int))
             );
         }
 
@@ -202,9 +200,8 @@ namespace System.ComponentModel.Tests
         public void AddProvider_NullInstance_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>(
-                "instance",
-                () => TypeDescriptor.AddProvider(mockProvider.Object, (object)null)
+            Assert.Throws<ArgumentNullException>("instance", () =>
+                TypeDescriptor.AddProvider(mockProvider.Object, (object)null)
             );
         }
 
@@ -215,9 +212,8 @@ namespace System.ComponentModel.Tests
         public void AddProvider_NullType_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>(
-                "type",
-                () => TypeDescriptor.AddProvider(mockProvider.Object, null)
+            Assert.Throws<ArgumentNullException>("type", () =>
+                TypeDescriptor.AddProvider(mockProvider.Object, null)
             );
         }
 
@@ -393,13 +389,11 @@ namespace System.ComponentModel.Tests
         )] // Mock will try to JIT
         public void AddProviderTransparent_NullProvider_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "provider",
-                () => TypeDescriptor.AddProviderTransparent(null, new object())
+            Assert.Throws<ArgumentNullException>("provider", () =>
+                TypeDescriptor.AddProviderTransparent(null, new object())
             );
-            Assert.Throws<ArgumentNullException>(
-                "provider",
-                () => TypeDescriptor.AddProviderTransparent(null, typeof(int))
+            Assert.Throws<ArgumentNullException>("provider", () =>
+                TypeDescriptor.AddProviderTransparent(null, typeof(int))
             );
         }
 
@@ -410,9 +404,8 @@ namespace System.ComponentModel.Tests
         public void AddProviderTransparent_NullInstance_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>(
-                "instance",
-                () => TypeDescriptor.AddProviderTransparent(mockProvider.Object, (object)null)
+            Assert.Throws<ArgumentNullException>("instance", () =>
+                TypeDescriptor.AddProviderTransparent(mockProvider.Object, (object)null)
             );
         }
 
@@ -423,9 +416,8 @@ namespace System.ComponentModel.Tests
         public void AddProviderTransparent_NullType_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>(
-                "type",
-                () => TypeDescriptor.AddProviderTransparent(mockProvider.Object, null)
+            Assert.Throws<ArgumentNullException>("type", () =>
+                TypeDescriptor.AddProviderTransparent(mockProvider.Object, null)
             );
         }
 
@@ -829,13 +821,11 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void RemoveProvider_NullProvider_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "provider",
-                () => TypeDescriptor.RemoveProvider(null, new object())
+            Assert.Throws<ArgumentNullException>("provider", () =>
+                TypeDescriptor.RemoveProvider(null, new object())
             );
-            Assert.Throws<ArgumentNullException>(
-                "provider",
-                () => TypeDescriptor.RemoveProvider(null, typeof(int))
+            Assert.Throws<ArgumentNullException>("provider", () =>
+                TypeDescriptor.RemoveProvider(null, typeof(int))
             );
         }
 
@@ -846,9 +836,8 @@ namespace System.ComponentModel.Tests
         public void RemoveProvider_NullInstance_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>(
-                "instance",
-                () => TypeDescriptor.RemoveProvider(mockProvider.Object, (object)null)
+            Assert.Throws<ArgumentNullException>("instance", () =>
+                TypeDescriptor.RemoveProvider(mockProvider.Object, (object)null)
             );
         }
 
@@ -859,9 +848,8 @@ namespace System.ComponentModel.Tests
         public void RemoveProvider_NullType_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>(
-                "type",
-                () => TypeDescriptor.RemoveProvider(mockProvider.Object, null)
+            Assert.Throws<ArgumentNullException>("type", () =>
+                TypeDescriptor.RemoveProvider(mockProvider.Object, null)
             );
         }
 
@@ -1096,13 +1084,11 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void RemoveProviderTransparent_NullProvider_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "provider",
-                () => TypeDescriptor.RemoveProviderTransparent(null, new object())
+            Assert.Throws<ArgumentNullException>("provider", () =>
+                TypeDescriptor.RemoveProviderTransparent(null, new object())
             );
-            Assert.Throws<ArgumentNullException>(
-                "provider",
-                () => TypeDescriptor.RemoveProviderTransparent(null, typeof(int))
+            Assert.Throws<ArgumentNullException>("provider", () =>
+                TypeDescriptor.RemoveProviderTransparent(null, typeof(int))
             );
         }
 
@@ -1113,9 +1099,8 @@ namespace System.ComponentModel.Tests
         public void RemoveProviderTransparent_NullInstance_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>(
-                "instance",
-                () => TypeDescriptor.RemoveProviderTransparent(mockProvider.Object, (object)null)
+            Assert.Throws<ArgumentNullException>("instance", () =>
+                TypeDescriptor.RemoveProviderTransparent(mockProvider.Object, (object)null)
             );
         }
 
@@ -1126,9 +1111,8 @@ namespace System.ComponentModel.Tests
         public void RemoveProviderTransparent_NullType_ThrowsArgumentNullException()
         {
             var mockProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
-            Assert.Throws<ArgumentNullException>(
-                "type",
-                () => TypeDescriptor.RemoveProviderTransparent(mockProvider.Object, null)
+            Assert.Throws<ArgumentNullException>("type", () =>
+                TypeDescriptor.RemoveProviderTransparent(mockProvider.Object, null)
             );
         }
 
@@ -1241,9 +1225,8 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void SortDescriptorArray_NullInfos_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "infos",
-                () => TypeDescriptor.SortDescriptorArray(null)
+            Assert.Throws<ArgumentNullException>("infos", () =>
+                TypeDescriptor.SortDescriptorArray(null)
             );
         }
 

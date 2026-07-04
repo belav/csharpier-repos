@@ -236,55 +236,51 @@ class Test
                 .CreateTestOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel)
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
-            CompileAndVerify(
-                source,
-                options: options,
-                symbolValidator: module =>
+            CompileAndVerify(source, options: options, symbolValidator: module =>
+            {
+                var peModule = (PEModuleSymbol)module;
+                var type = peModule.GlobalNamespace.GetMember<NamedTypeSymbol>("Test");
+
+                var property = type.GetMember<PEFieldSymbol>(
+                    GeneratedNames.MakeBackingFieldName("MyProp")
+                );
+                Verify(property.Handle);
+
+                var eventField = (PEFieldSymbol)
+                    type.GetMember<PEEventSymbol>("MyEvent").AssociatedField;
+                Verify(eventField.Handle);
+
+                void Verify(EntityHandle token)
                 {
-                    var peModule = (PEModuleSymbol)module;
-                    var type = peModule.GlobalNamespace.GetMember<NamedTypeSymbol>("Test");
+                    var attributes = peModule.GetCustomAttributesForToken(token);
 
-                    var property = type.GetMember<PEFieldSymbol>(
-                        GeneratedNames.MakeBackingFieldName("MyProp")
-                    );
-                    Verify(property.Handle);
-
-                    var eventField = (PEFieldSymbol)
-                        type.GetMember<PEEventSymbol>("MyEvent").AssociatedField;
-                    Verify(eventField.Handle);
-
-                    void Verify(EntityHandle token)
+                    if (optimizationLevel == OptimizationLevel.Debug)
                     {
-                        var attributes = peModule.GetCustomAttributesForToken(token);
+                        Assert.Equal(2, attributes.Length);
 
-                        if (optimizationLevel == OptimizationLevel.Debug)
-                        {
-                            Assert.Equal(2, attributes.Length);
-
-                            Assert.Equal(
-                                "CompilerGeneratedAttribute",
-                                attributes[0].AttributeClass.Name
-                            );
-                            Assert.Equal(
-                                "DebuggerBrowsableAttribute",
-                                attributes[1].AttributeClass.Name
-                            );
-                            Assert.Equal(
-                                DebuggerBrowsableState.Never,
-                                (DebuggerBrowsableState)
-                                    attributes[1].ConstructorArguments.Single().Value
-                            );
-                        }
-                        else
-                        {
-                            Assert.Equal(
-                                "CompilerGeneratedAttribute",
-                                attributes.Single().AttributeClass.Name
-                            );
-                        }
+                        Assert.Equal(
+                            "CompilerGeneratedAttribute",
+                            attributes[0].AttributeClass.Name
+                        );
+                        Assert.Equal(
+                            "DebuggerBrowsableAttribute",
+                            attributes[1].AttributeClass.Name
+                        );
+                        Assert.Equal(
+                            DebuggerBrowsableState.Never,
+                            (DebuggerBrowsableState)
+                                attributes[1].ConstructorArguments.Single().Value
+                        );
+                    }
+                    else
+                    {
+                        Assert.Equal(
+                            "CompilerGeneratedAttribute",
+                            attributes.Single().AttributeClass.Name
+                        );
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -307,56 +303,52 @@ abstract class C
                 .CreateTestOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel)
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
-            CompileAndVerify(
-                source,
-                options: options,
-                symbolValidator: module =>
-                {
-                    var peModule = (PEModuleSymbol)module;
-                    var c = peModule.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+            CompileAndVerify(source, options: options, symbolValidator: module =>
+            {
+                var peModule = (PEModuleSymbol)module;
+                var c = peModule.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
 
-                    var p = c.GetMember<PropertySymbol>("P");
-                    Assert.Equal(
-                        "CompilerGeneratedAttribute",
-                        peModule
-                            .GetCustomAttributesForToken(((PEMethodSymbol)p.GetMethod).Handle)
-                            .Single()
-                            .AttributeClass.Name
-                    );
-                    Assert.Equal(
-                        "CompilerGeneratedAttribute",
-                        peModule
-                            .GetCustomAttributesForToken(((PEMethodSymbol)p.SetMethod).Handle)
-                            .Single()
-                            .AttributeClass.Name
-                    );
+                var p = c.GetMember<PropertySymbol>("P");
+                Assert.Equal(
+                    "CompilerGeneratedAttribute",
+                    peModule
+                        .GetCustomAttributesForToken(((PEMethodSymbol)p.GetMethod).Handle)
+                        .Single()
+                        .AttributeClass.Name
+                );
+                Assert.Equal(
+                    "CompilerGeneratedAttribute",
+                    peModule
+                        .GetCustomAttributesForToken(((PEMethodSymbol)p.SetMethod).Handle)
+                        .Single()
+                        .AttributeClass.Name
+                );
 
-                    // no attributes on abstract property accessors
-                    var q = c.GetMember<PropertySymbol>("Q");
-                    Assert.Empty(
-                        peModule.GetCustomAttributesForToken(((PEMethodSymbol)q.GetMethod).Handle)
-                    );
-                    Assert.Empty(
-                        peModule.GetCustomAttributesForToken(((PEMethodSymbol)q.SetMethod).Handle)
-                    );
+                // no attributes on abstract property accessors
+                var q = c.GetMember<PropertySymbol>("Q");
+                Assert.Empty(
+                    peModule.GetCustomAttributesForToken(((PEMethodSymbol)q.GetMethod).Handle)
+                );
+                Assert.Empty(
+                    peModule.GetCustomAttributesForToken(((PEMethodSymbol)q.SetMethod).Handle)
+                );
 
-                    var e = c.GetMember<EventSymbol>("E");
-                    Assert.Equal(
-                        "CompilerGeneratedAttribute",
-                        peModule
-                            .GetCustomAttributesForToken(((PEMethodSymbol)e.AddMethod).Handle)
-                            .Single()
-                            .AttributeClass.Name
-                    );
-                    Assert.Equal(
-                        "CompilerGeneratedAttribute",
-                        peModule
-                            .GetCustomAttributesForToken(((PEMethodSymbol)e.RemoveMethod).Handle)
-                            .Single()
-                            .AttributeClass.Name
-                    );
-                }
-            );
+                var e = c.GetMember<EventSymbol>("E");
+                Assert.Equal(
+                    "CompilerGeneratedAttribute",
+                    peModule
+                        .GetCustomAttributesForToken(((PEMethodSymbol)e.AddMethod).Handle)
+                        .Single()
+                        .AttributeClass.Name
+                );
+                Assert.Equal(
+                    "CompilerGeneratedAttribute",
+                    peModule
+                        .GetCustomAttributesForToken(((PEMethodSymbol)e.RemoveMethod).Handle)
+                        .Single()
+                        .AttributeClass.Name
+                );
+            });
         }
 
         [Theory]
@@ -380,24 +372,21 @@ class C
                 .CreateTestOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel)
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
-            CompileAndVerify(
-                CreateCompilation(source, options: options),
-                symbolValidator: m =>
-                {
-                    var displayClass = m.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "C.<>c__DisplayClass0_0"
-                    );
-                    AssertEx.SetEqual(
-                        new[] { "CompilerGeneratedAttribute" },
-                        GetAttributeNames(displayClass.GetAttributes())
-                    );
+            CompileAndVerify(CreateCompilation(source, options: options), symbolValidator: m =>
+            {
+                var displayClass = m.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                    "C.<>c__DisplayClass0_0"
+                );
+                AssertEx.SetEqual(
+                    new[] { "CompilerGeneratedAttribute" },
+                    GetAttributeNames(displayClass.GetAttributes())
+                );
 
-                    foreach (var member in displayClass.GetMembers())
-                    {
-                        Assert.Equal(0, member.GetAttributes().Length);
-                    }
+                foreach (var member in displayClass.GetMembers())
+                {
+                    Assert.Equal(0, member.GetAttributes().Length);
                 }
-            );
+            });
         }
 
         [Theory]
@@ -418,61 +407,54 @@ class C
                 .CreateTestOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel)
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
-            CompileAndVerify(
-                CreateCompilation(source, options: options),
-                symbolValidator: m =>
+            CompileAndVerify(CreateCompilation(source, options: options), symbolValidator: m =>
+            {
+                var anon = m.ContainingAssembly.GetTypeByMetadataName("<>f__AnonymousType0`2");
+
+                string[] expected;
+                if (options.OptimizationLevel == OptimizationLevel.Debug)
                 {
-                    var anon = m.ContainingAssembly.GetTypeByMetadataName("<>f__AnonymousType0`2");
-
-                    string[] expected;
-                    if (options.OptimizationLevel == OptimizationLevel.Debug)
-                    {
-                        expected = new[]
-                        {
-                            "DebuggerDisplayAttribute",
-                            "CompilerGeneratedAttribute",
-                        };
-                    }
-                    else
-                    {
-                        expected = new[] { "CompilerGeneratedAttribute" };
-                    }
-
-                    AssertEx.SetEqual(expected, GetAttributeNames(anon.GetAttributes()));
-
-                    foreach (var member in anon.GetMembers())
-                    {
-                        var actual = GetAttributeNames(member.GetAttributes());
-
-                        switch (member.Name)
-                        {
-                            case "<X>i__Field":
-                            case "<Y>i__Field":
-                                expected = new[] { "DebuggerBrowsableAttribute" };
-                                break;
-
-                            case ".ctor":
-                            case "Equals":
-                            case "GetHashCode":
-                            case "ToString":
-                                expected = new[] { "DebuggerHiddenAttribute" };
-                                break;
-
-                            case "X":
-                            case "get_X":
-                            case "Y":
-                            case "get_Y":
-                                expected = new string[] { };
-                                break;
-
-                            default:
-                                throw TestExceptionUtilities.UnexpectedValue(member.Name);
-                        }
-
-                        AssertEx.SetEqual(expected, actual);
-                    }
+                    expected = new[] { "DebuggerDisplayAttribute", "CompilerGeneratedAttribute" };
                 }
-            );
+                else
+                {
+                    expected = new[] { "CompilerGeneratedAttribute" };
+                }
+
+                AssertEx.SetEqual(expected, GetAttributeNames(anon.GetAttributes()));
+
+                foreach (var member in anon.GetMembers())
+                {
+                    var actual = GetAttributeNames(member.GetAttributes());
+
+                    switch (member.Name)
+                    {
+                        case "<X>i__Field":
+                        case "<Y>i__Field":
+                            expected = new[] { "DebuggerBrowsableAttribute" };
+                            break;
+
+                        case ".ctor":
+                        case "Equals":
+                        case "GetHashCode":
+                        case "ToString":
+                            expected = new[] { "DebuggerHiddenAttribute" };
+                            break;
+
+                        case "X":
+                        case "get_X":
+                        case "Y":
+                        case "get_Y":
+                            expected = new string[] { };
+                            break;
+
+                        default:
+                            throw TestExceptionUtilities.UnexpectedValue(member.Name);
+                    }
+
+                    AssertEx.SetEqual(expected, actual);
+                }
+            });
         }
 
         [Fact]
@@ -509,60 +491,57 @@ public class C
 ";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
 
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                {
-                    var assembly = m.ContainingAssembly;
-                    Assert.Equal(@"\{ }", GetDebuggerDisplayString(assembly, 0, 0));
-                    Assert.Equal(@"\{ X0 = {X0} }", GetDebuggerDisplayString(assembly, 1, 1));
-                    Assert.Equal(
-                        @"\{ X0 = {X0}, X1 = {X1} }",
-                        GetDebuggerDisplayString(assembly, 2, 2)
-                    );
-                    Assert.Equal(
-                        @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2} }",
-                        GetDebuggerDisplayString(assembly, 3, 3)
-                    );
-                    Assert.Equal(
-                        @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3} }",
-                        GetDebuggerDisplayString(assembly, 4, 4)
-                    );
-                    Assert.Equal(
-                        @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4} }",
-                        GetDebuggerDisplayString(assembly, 5, 5)
-                    );
-                    Assert.Equal(
-                        @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5} }",
-                        GetDebuggerDisplayString(assembly, 6, 6)
-                    );
-                    Assert.Equal(
-                        @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5}, X6 = {X6} }",
-                        GetDebuggerDisplayString(assembly, 7, 7)
-                    );
-                    Assert.Equal(
-                        @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5}, X6 = {X6}, X7 = {X7} }",
-                        GetDebuggerDisplayString(assembly, 8, 8)
-                    );
-                    Assert.Equal(
-                        @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5}, X6 = {X6}, X7 = {X7}, X8 = {X8} }",
-                        GetDebuggerDisplayString(assembly, 9, 9)
-                    );
-                    Assert.Equal(
-                        @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5}, X6 = {X6}, X7 = {X7}, X8 = {X8}, X9 = {X9} }",
-                        GetDebuggerDisplayString(assembly, 10, 10)
-                    );
-                    Assert.Equal(
-                        @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5}, X6 = {X6}, X7 = {X7}, X8 = {X8}, X9 = {X9} ... }",
-                        GetDebuggerDisplayString(assembly, 11, 11)
-                    );
+            CompileAndVerify(comp, symbolValidator: m =>
+            {
+                var assembly = m.ContainingAssembly;
+                Assert.Equal(@"\{ }", GetDebuggerDisplayString(assembly, 0, 0));
+                Assert.Equal(@"\{ X0 = {X0} }", GetDebuggerDisplayString(assembly, 1, 1));
+                Assert.Equal(
+                    @"\{ X0 = {X0}, X1 = {X1} }",
+                    GetDebuggerDisplayString(assembly, 2, 2)
+                );
+                Assert.Equal(
+                    @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2} }",
+                    GetDebuggerDisplayString(assembly, 3, 3)
+                );
+                Assert.Equal(
+                    @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3} }",
+                    GetDebuggerDisplayString(assembly, 4, 4)
+                );
+                Assert.Equal(
+                    @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4} }",
+                    GetDebuggerDisplayString(assembly, 5, 5)
+                );
+                Assert.Equal(
+                    @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5} }",
+                    GetDebuggerDisplayString(assembly, 6, 6)
+                );
+                Assert.Equal(
+                    @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5}, X6 = {X6} }",
+                    GetDebuggerDisplayString(assembly, 7, 7)
+                );
+                Assert.Equal(
+                    @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5}, X6 = {X6}, X7 = {X7} }",
+                    GetDebuggerDisplayString(assembly, 8, 8)
+                );
+                Assert.Equal(
+                    @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5}, X6 = {X6}, X7 = {X7}, X8 = {X8} }",
+                    GetDebuggerDisplayString(assembly, 9, 9)
+                );
+                Assert.Equal(
+                    @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5}, X6 = {X6}, X7 = {X7}, X8 = {X8}, X9 = {X9} }",
+                    GetDebuggerDisplayString(assembly, 10, 10)
+                );
+                Assert.Equal(
+                    @"\{ X0 = {X0}, X1 = {X1}, X2 = {X2}, X3 = {X3}, X4 = {X4}, X5 = {X5}, X6 = {X6}, X7 = {X7}, X8 = {X8}, X9 = {X9} ... }",
+                    GetDebuggerDisplayString(assembly, 11, 11)
+                );
 
-                    Assert.Equal(
-                        @"\{ X10 = {X10}, X11 = {X11}, X12 = {X12}, X13 = {X13}, X14 = {X14}, X15 = {X15}, X16 = {X16}, X17 = {X17}, X20 = {X20}, X21 = {X21} ... }",
-                        GetDebuggerDisplayString(assembly, 12, 48)
-                    );
-                }
-            );
+                Assert.Equal(
+                    @"\{ X10 = {X10}, X11 = {X11}, X12 = {X12}, X13 = {X13}, X14 = {X14}, X15 = {X15}, X16 = {X16}, X17 = {X17}, X20 = {X20}, X21 = {X21} ... }",
+                    GetDebuggerDisplayString(assembly, 12, 48)
+                );
+            });
 
             string GetDebuggerDisplayString(AssemblySymbol assembly, int ordinal, int fieldCount)
             {
@@ -605,50 +584,45 @@ public class C
                 .CreateTestOptions(OutputKind.DynamicallyLinkedLibrary, optimizationLevel)
                 .WithMetadataImportOptions(MetadataImportOptions.All);
 
-            CompileAndVerify(
-                CreateCompilation(source, options: options),
-                symbolValidator: module =>
+            CompileAndVerify(CreateCompilation(source, options: options), symbolValidator: module =>
+            {
+                var iter = module.ContainingAssembly.GetTypeByMetadataName("C+<Iterator>d__0");
+                AssertEx.SetEqual(
+                    new[] { "CompilerGeneratedAttribute" },
+                    GetAttributeNames(iter.GetAttributes())
+                );
+
+                foreach (var member in iter.GetMembers().Where(member => member is MethodSymbol))
                 {
-                    var iter = module.ContainingAssembly.GetTypeByMetadataName("C+<Iterator>d__0");
-                    AssertEx.SetEqual(
-                        new[] { "CompilerGeneratedAttribute" },
-                        GetAttributeNames(iter.GetAttributes())
-                    );
-
-                    foreach (
-                        var member in iter.GetMembers().Where(member => member is MethodSymbol)
-                    )
+                    switch (member.Name)
                     {
-                        switch (member.Name)
-                        {
-                            case ".ctor":
-                            case "System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator":
-                            case "System.Collections.IEnumerable.GetEnumerator":
-                            case "System.Collections.IEnumerator.Reset":
-                            case "System.IDisposable.Dispose":
-                            case "System.Collections.Generic.IEnumerator<System.Int32>.get_Current":
-                            case "System.Collections.IEnumerator.get_Current":
-                                AssertEx.SetEqual(
-                                    new[] { "DebuggerHiddenAttribute" },
-                                    GetAttributeNames(member.GetAttributes())
-                                );
-                                break;
+                        case ".ctor":
+                        case "System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator":
+                        case "System.Collections.IEnumerable.GetEnumerator":
+                        case "System.Collections.IEnumerator.Reset":
+                        case "System.IDisposable.Dispose":
+                        case "System.Collections.Generic.IEnumerator<System.Int32>.get_Current":
+                        case "System.Collections.IEnumerator.get_Current":
+                            AssertEx.SetEqual(
+                                new[] { "DebuggerHiddenAttribute" },
+                                GetAttributeNames(member.GetAttributes())
+                            );
+                            break;
 
-                            case "System.Collections.IEnumerator.Current":
-                            case "System.Collections.Generic.IEnumerator<System.Int32>.Current":
-                            case "MoveNext":
-                                AssertEx.SetEqual(
-                                    new string[] { },
-                                    GetAttributeNames(member.GetAttributes())
-                                );
-                                break;
+                        case "System.Collections.IEnumerator.Current":
+                        case "System.Collections.Generic.IEnumerator<System.Int32>.Current":
+                        case "MoveNext":
+                            AssertEx.SetEqual(
+                                new string[] { },
+                                GetAttributeNames(member.GetAttributes())
+                            );
+                            break;
 
-                            default:
-                                throw TestExceptionUtilities.UnexpectedValue(member.Name);
-                        }
+                        default:
+                            throw TestExceptionUtilities.UnexpectedValue(member.Name);
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -1681,15 +1655,11 @@ public class Test
                     ? Verification.Fails
                     : Verification.FailsILVerify;
 
-                CompileAndVerify(
-                    compilation,
-                    verify: verify,
-                    symbolValidator: module =>
-                    {
-                        var assemblyAttributes = module.ContainingAssembly.GetAttributes();
-                        Assert.Equal(0, assemblyAttributes.Length);
-                    }
-                );
+                CompileAndVerify(compilation, verify: verify, symbolValidator: module =>
+                {
+                    var assemblyAttributes = module.ContainingAssembly.GetAttributes();
+                    Assert.Equal(0, assemblyAttributes.Length);
+                });
             }
         }
 
@@ -2118,40 +2088,36 @@ unsafe class C
             );
 
             //Skipped because PeVerify fails to run with "The module  was expected to contain an assembly manifest."
-            CompileAndVerify(
-                compilation,
-                verify: Verification.Skipped,
-                symbolValidator: module =>
+            CompileAndVerify(compilation, verify: Verification.Skipped, symbolValidator: module =>
+            {
+                var unverifiableCode = module.GetAttributes().Single();
+
+                Assert.Equal(
+                    "System.Security.UnverifiableCodeAttribute",
+                    unverifiableCode.AttributeClass.ToTestDisplayString()
+                );
+                Assert.Empty(unverifiableCode.AttributeConstructor.Parameters);
+                Assert.Empty(unverifiableCode.CommonConstructorArguments);
+                Assert.Empty(unverifiableCode.CommonNamedArguments);
+
+                if (outputKind.IsNetModule())
                 {
-                    var unverifiableCode = module.GetAttributes().Single();
-
-                    Assert.Equal(
-                        "System.Security.UnverifiableCodeAttribute",
-                        unverifiableCode.AttributeClass.ToTestDisplayString()
+                    // Modules security attributes are copied to assemblies they're included in
+                    var moduleReference = ModuleMetadata
+                        .CreateFromImage(compilation.EmitToArray())
+                        .GetReference();
+                    CompileAndVerifyWithMscorlib40(
+                        "",
+                        references: new[] { moduleReference },
+                        symbolValidator: validateSecurity,
+                        verify: Verification.Skipped
                     );
-                    Assert.Empty(unverifiableCode.AttributeConstructor.Parameters);
-                    Assert.Empty(unverifiableCode.CommonConstructorArguments);
-                    Assert.Empty(unverifiableCode.CommonNamedArguments);
-
-                    if (outputKind.IsNetModule())
-                    {
-                        // Modules security attributes are copied to assemblies they're included in
-                        var moduleReference = ModuleMetadata
-                            .CreateFromImage(compilation.EmitToArray())
-                            .GetReference();
-                        CompileAndVerifyWithMscorlib40(
-                            "",
-                            references: new[] { moduleReference },
-                            symbolValidator: validateSecurity,
-                            verify: Verification.Skipped
-                        );
-                    }
-                    else
-                    {
-                        validateSecurity(module);
-                    }
                 }
-            );
+                else
+                {
+                    validateSecurity(module);
+                }
+            });
 
             void validateSecurity(ModuleSymbol module)
             {

@@ -264,114 +264,109 @@ namespace System.IO.Compression.Tests
             using (ZipArchive archive = new ZipArchive(archiveFile, mode))
             {
                 List<FileData> files = FileData.InPath(directory);
-                Assert.All<FileData>(
-                    files,
-                    (file) =>
+                Assert.All<FileData>(files, (file) =>
+                {
+                    count++;
+                    string entryName = file.FullName;
+                    if (file.IsFolder)
+                        entryName += Path.DirectorySeparatorChar;
+                    ZipArchiveEntry entry = archive.GetEntry(entryName);
+                    if (entry == null)
                     {
-                        count++;
-                        string entryName = file.FullName;
-                        if (file.IsFolder)
-                            entryName += Path.DirectorySeparatorChar;
-                        ZipArchiveEntry entry = archive.GetEntry(entryName);
-                        if (entry == null)
-                        {
-                            entryName = FlipSlashes(entryName);
-                            entry = archive.GetEntry(entryName);
-                        }
-                        if (file.IsFile)
-                        {
-                            Assert.NotNull(entry);
-                            long givenLength = entry.Length;
+                        entryName = FlipSlashes(entryName);
+                        entry = archive.GetEntry(entryName);
+                    }
+                    if (file.IsFile)
+                    {
+                        Assert.NotNull(entry);
+                        long givenLength = entry.Length;
 
-                            var buffer = new byte[entry.Length];
-                            using (Stream entrystream = entry.Open())
-                            {
-                                ReadAllBytes(entrystream, buffer, 0, buffer.Length);
+                        var buffer = new byte[entry.Length];
+                        using (Stream entrystream = entry.Open())
+                        {
+                            ReadAllBytes(entrystream, buffer, 0, buffer.Length);
 #if NETCOREAPP
-                                uint zipcrc = entry.Crc32;
-                                Assert.Equal(CRC.CalculateCRC(buffer), zipcrc);
+                            uint zipcrc = entry.Crc32;
+                            Assert.Equal(CRC.CalculateCRC(buffer), zipcrc);
 #endif
 
-                                if (file.Length != givenLength)
-                                {
-                                    buffer = NormalizeLineEndings(buffer);
-                                }
-
-                                Assert.Equal(file.Length, buffer.Length);
-                                ulong crc = CRC.CalculateCRC(buffer);
-                                Assert.Equal(file.CRC, crc.ToString());
-                            }
-
-                            if (checkTimes)
+                            if (file.Length != givenLength)
                             {
-                                const int zipTimestampResolution = 2; // Zip follows the FAT timestamp resolution of two seconds for file records
-                                DateTime lower = file.LastModifiedDate.AddSeconds(
-                                    -zipTimestampResolution
-                                );
-                                DateTime upper = file.LastModifiedDate.AddSeconds(
-                                    zipTimestampResolution
-                                );
-                                Assert.InRange(entry.LastWriteTime.Ticks, lower.Ticks, upper.Ticks);
+                                buffer = NormalizeLineEndings(buffer);
                             }
 
-                            Assert.Equal(file.Name, entry.Name);
-                            Assert.Equal(entryName, entry.FullName);
-                            Assert.Equal(entryName, entry.ToString());
-                            Assert.Equal(archive, entry.Archive);
+                            Assert.Equal(file.Length, buffer.Length);
+                            ulong crc = CRC.CalculateCRC(buffer);
+                            Assert.Equal(file.CRC, crc.ToString());
                         }
-                        else if (file.IsFolder)
-                        {
-                            if (entry == null) //entry not found
-                            {
-                                string entryNameOtherSlash = FlipSlashes(entryName);
-                                bool isEmpty = !files.Any(f =>
-                                    f.IsFile
-                                    && (
-                                        f.FullName.StartsWith(
-                                            entryName,
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
-                                        || f.FullName.StartsWith(
-                                            entryNameOtherSlash,
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
-                                    )
-                                );
-                                if (requireExplicit || isEmpty)
-                                {
-                                    Assert.Contains("emptydir", entryName);
-                                }
 
-                                if (
-                                    (!requireExplicit && !isEmpty) || entryName.Contains("emptydir")
+                        if (checkTimes)
+                        {
+                            const int zipTimestampResolution = 2; // Zip follows the FAT timestamp resolution of two seconds for file records
+                            DateTime lower = file.LastModifiedDate.AddSeconds(
+                                -zipTimestampResolution
+                            );
+                            DateTime upper = file.LastModifiedDate.AddSeconds(
+                                zipTimestampResolution
+                            );
+                            Assert.InRange(entry.LastWriteTime.Ticks, lower.Ticks, upper.Ticks);
+                        }
+
+                        Assert.Equal(file.Name, entry.Name);
+                        Assert.Equal(entryName, entry.FullName);
+                        Assert.Equal(entryName, entry.ToString());
+                        Assert.Equal(archive, entry.Archive);
+                    }
+                    else if (file.IsFolder)
+                    {
+                        if (entry == null) //entry not found
+                        {
+                            string entryNameOtherSlash = FlipSlashes(entryName);
+                            bool isEmpty = !files.Any(f =>
+                                f.IsFile
+                                && (
+                                    f.FullName.StartsWith(
+                                        entryName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                    || f.FullName.StartsWith(
+                                        entryNameOtherSlash,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                                 )
-                                    count--; //discount this entry
-                            }
-                            else
+                            );
+                            if (requireExplicit || isEmpty)
                             {
-                                using (Stream es = entry.Open())
+                                Assert.Contains("emptydir", entryName);
+                            }
+
+                            if ((!requireExplicit && !isEmpty) || entryName.Contains("emptydir"))
+                                count--; //discount this entry
+                        }
+                        else
+                        {
+                            using (Stream es = entry.Open())
+                            {
+                                try
+                                {
+                                    Assert.Equal(0, es.Length);
+                                }
+                                catch (NotSupportedException)
                                 {
                                     try
                                     {
-                                        Assert.Equal(0, es.Length);
+                                        Assert.Equal(-1, es.ReadByte());
                                     }
-                                    catch (NotSupportedException)
+                                    catch (Exception)
                                     {
-                                        try
-                                        {
-                                            Assert.Equal(-1, es.ReadByte());
-                                        }
-                                        catch (Exception)
-                                        {
-                                            Console.WriteLine("Didn't return EOF");
-                                            throw;
-                                        }
+                                        Console.WriteLine("Didn't return EOF");
+                                        throw;
                                     }
                                 }
                             }
                         }
                     }
-                );
+                });
                 Assert.Equal(count, archive.Entries.Count);
             }
         }

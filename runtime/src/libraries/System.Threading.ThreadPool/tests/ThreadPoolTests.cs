@@ -344,12 +344,10 @@ namespace System.Threading.ThreadPools.Tests
             bool useUnsafe
         )
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "callBack",
-                () =>
-                    useUnsafe
-                        ? ThreadPool.UnsafeQueueUserWorkItem(null, new object(), preferLocal)
-                        : ThreadPool.QueueUserWorkItem(null, new object(), preferLocal)
+            AssertExtensions.Throws<ArgumentNullException>("callBack", () =>
+                useUnsafe
+                    ? ThreadPool.UnsafeQueueUserWorkItem(null, new object(), preferLocal)
+                    : ThreadPool.QueueUserWorkItem(null, new object(), preferLocal)
             );
         }
 
@@ -505,17 +503,14 @@ namespace System.Threading.ThreadPools.Tests
         [MemberData(nameof(OneBool))]
         public void UnsafeQueueUserWorkItem_IThreadPoolWorkItem_Invalid_Throws(bool preferLocal)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "callBack",
-                () => ThreadPool.UnsafeQueueUserWorkItem(null, preferLocal)
+            AssertExtensions.Throws<ArgumentNullException>("callBack", () =>
+                ThreadPool.UnsafeQueueUserWorkItem(null, preferLocal)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "callBack",
-                () =>
-                    ThreadPool.UnsafeQueueUserWorkItem(
-                        new InvalidWorkItemAndTask(() => { }),
-                        preferLocal
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("callBack", () =>
+                ThreadPool.UnsafeQueueUserWorkItem(
+                    new InvalidWorkItemAndTask(() => { }),
+                    preferLocal
+                )
             );
         }
 

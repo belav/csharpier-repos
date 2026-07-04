@@ -54,14 +54,11 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 
             Logger.Log(
                 FunctionId.VS_ErrorReportingService_ShowGlobalErrorInfo,
-                KeyValueLogMessage.Create(
-                    LogType.UserAction,
-                    m =>
-                    {
-                        m["Message"] = message;
-                        m["FeatureName"] = featureName.ToString();
-                    }
-                )
+                KeyValueLogMessage.Create(LogType.UserAction, m =>
+                {
+                    m["Message"] = message;
+                    m["FeatureName"] = featureName.ToString();
+                })
             );
         }
 

@@ -336,9 +336,8 @@ And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.Remov
         public void NullKeySelector()
         {
             Func<DateTime, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => Enumerable.Empty<DateTime>().OrderBy(e => e).ThenBy(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable.Empty<DateTime>().OrderBy(e => e).ThenBy(keySelector)
             );
         }
 
@@ -346,9 +345,8 @@ And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.Remov
         public void NullSourceComparer()
         {
             IOrderedEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.ThenBy(i => i, null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.ThenBy(i => i, null)
             );
         }
 
@@ -356,9 +354,8 @@ And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.Remov
         public void NullKeySelectorComparer()
         {
             Func<DateTime, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => Enumerable.Empty<DateTime>().OrderBy(e => e).ThenBy(keySelector, null)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable.Empty<DateTime>().OrderBy(e => e).ThenBy(keySelector, null)
             );
         }
 

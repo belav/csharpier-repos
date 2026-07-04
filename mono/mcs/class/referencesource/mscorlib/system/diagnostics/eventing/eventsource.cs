@@ -5350,9 +5350,8 @@ namespace System.Diagnostics.Tracing
         public EventListener()
         {
             // This will cause the OnEventSourceCreated callback to fire.
-            CallBackForExistingEventSources(
-                true,
-                (obj, args) => args.EventSource.AddListener(this)
+            CallBackForExistingEventSources(true, (obj, args) =>
+                args.EventSource.AddListener(this)
             );
         }
 
@@ -6982,10 +6981,8 @@ namespace System.Diagnostics.Tracing
                 // Sort by age, taking into account wrap-around.   As long as x and y are within
                 // 23 days of now then (0x7FFFFFFF & (tickNow - x.Value)) is the delta (even if
                 // TickCount wraps).  I then sort by DESCENDING age.  (that is oldest value first)
-                Array.Sort(
-                    keyValues,
-                    (x, y) =>
-                        (0x7FFFFFFF & (tickNow - y.Value)) - (0x7FFFFFFF & (tickNow - x.Value))
+                Array.Sort(keyValues, (x, y) =>
+                    (0x7FFFFFFF & (tickNow - y.Value)) - (0x7FFFFFFF & (tickNow - x.Value))
                 );
                 for (int i = 0; i < keyValues.Length / 2; i++)
                 {

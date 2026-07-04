@@ -23,10 +23,8 @@ namespace System.Threading.Tests
         [Fact]
         public void Ctor_InvalidMode()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "mode",
-                null,
-                () => new EventWaitHandle(true, (EventResetMode)12345)
+            AssertExtensions.Throws<ArgumentException>("mode", null, () =>
+                new EventWaitHandle(true, (EventResetMode)12345)
             );
         }
 
@@ -171,14 +169,11 @@ namespace System.Threading.Tests
         [Fact]
         public void OpenExisting_InvalidNames_Windows()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => EventWaitHandle.OpenExisting(null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                EventWaitHandle.OpenExisting(null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => EventWaitHandle.OpenExisting(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                EventWaitHandle.OpenExisting(string.Empty)
             );
         }
 

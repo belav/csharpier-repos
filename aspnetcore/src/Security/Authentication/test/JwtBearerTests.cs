@@ -597,15 +597,10 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             options.UseSecurityTokenValidators = true;
 #pragma warning disable CS0618 // Type or member is obsolete
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(
-                new BlobTokenValidator(
-                    "JWT",
-                    token =>
-                    {
-                        Assert.Equal("CustomToken", token);
-                    }
-                )
-            );
+            options.SecurityTokenValidators.Add(new BlobTokenValidator("JWT", token =>
+                {
+                    Assert.Equal("CustomToken", token);
+                }));
 #pragma warning restore CS0618 // Type or member is obsolete
         });
 
@@ -985,22 +980,16 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                     {
                         services
                             .AddAuthentication()
-                            .AddJwtBearer(
-                                "JwtAuthSchemaOne",
-                                o =>
-                                {
-                                    o.Events = jwtBearerEvents;
-                                    o.UseSecurityTokenValidators = true;
-                                }
-                            )
-                            .AddJwtBearer(
-                                "JwtAuthSchemaTwo",
-                                o =>
-                                {
-                                    o.Events = jwtBearerEvents;
-                                    o.UseSecurityTokenValidators = true;
-                                }
-                            );
+                            .AddJwtBearer("JwtAuthSchemaOne", o =>
+                            {
+                                o.Events = jwtBearerEvents;
+                                o.UseSecurityTokenValidators = true;
+                            })
+                            .AddJwtBearer("JwtAuthSchemaTwo", o =>
+                            {
+                                o.Events = jwtBearerEvents;
+                                o.UseSecurityTokenValidators = true;
+                            });
                     })
             )
             .Build();

@@ -1819,13 +1819,10 @@ namespace System.Data.Tests
         public void CreateDataReaderNoTable()
         {
             DataSet dsr = new DataSet();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTableReader dtr = dsr.CreateDataReader();
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTableReader dtr = dsr.CreateDataReader();
+            });
         }
 
         internal struct FillErrorStruct
@@ -1872,20 +1869,17 @@ namespace System.Data.Tests
         [Fact]
         public void Load_TableUnknown()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    localSetup();
-                    DataSet dsLoad = new DataSet("LoadTableUnknown");
-                    DataTable table1 = new DataTable();
-                    dsLoad.Tables.Add(table1);
-                    DataTable table2 = new DataTable();
-                    // table2 is not added to dsLoad [dsLoad.Tables.Add (table2);]
-                    DataTableReader dtr = _ds.CreateDataReader();
-                    dsLoad.Load(dtr, LoadOption.OverwriteChanges, table1, table2);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                localSetup();
+                DataSet dsLoad = new DataSet("LoadTableUnknown");
+                DataTable table1 = new DataTable();
+                dsLoad.Tables.Add(table1);
+                DataTable table2 = new DataTable();
+                // table2 is not added to dsLoad [dsLoad.Tables.Add (table2);]
+                DataTableReader dtr = _ds.CreateDataReader();
+                dsLoad.Load(dtr, LoadOption.OverwriteChanges, table1, table2);
+            });
         }
 
         [Fact]
@@ -1927,29 +1921,26 @@ namespace System.Data.Tests
         [Fact]
         public void Load_TableConflictF()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    _fillErrCounter = 0;
-                    _fillErr[0]
-                        .init(
-                            "Table1",
-                            1,
-                            false,
-                            "Input string was not in a correct format.Couldn't store <mono 1> in name1 Column.  Expected type is Double."
-                        );
-                    localSetup();
-                    DataSet dsLoad = new DataSet("LoadTableConflict");
-                    DataTable table1 = new DataTable();
-                    table1.Columns.Add("name1", typeof(double));
-                    dsLoad.Tables.Add(table1);
-                    DataTable table2 = new DataTable();
-                    dsLoad.Tables.Add(table2);
-                    DataTableReader dtr = _ds.CreateDataReader();
-                    dsLoad.Load(dtr, LoadOption.Upsert, FillErrorHandler, table1, table2);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                _fillErrCounter = 0;
+                _fillErr[0]
+                    .init(
+                        "Table1",
+                        1,
+                        false,
+                        "Input string was not in a correct format.Couldn't store <mono 1> in name1 Column.  Expected type is Double."
+                    );
+                localSetup();
+                DataSet dsLoad = new DataSet("LoadTableConflict");
+                DataTable table1 = new DataTable();
+                table1.Columns.Add("name1", typeof(double));
+                dsLoad.Tables.Add(table1);
+                DataTable table2 = new DataTable();
+                dsLoad.Tables.Add(table2);
+                DataTableReader dtr = _ds.CreateDataReader();
+                dsLoad.Load(dtr, LoadOption.Upsert, FillErrorHandler, table1, table2);
+            });
         }
 
         [Fact]

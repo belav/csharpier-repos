@@ -197,10 +197,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NegativeAttributeCount_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () =>
-                    new DirSyncRequestControl(new byte[0], DirectorySynchronizationOptions.None, -1)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                new DirSyncRequestControl(new byte[0], DirectorySynchronizationOptions.None, -1)
             );
         }
 

@@ -18,18 +18,15 @@ namespace System.Threading.Tasks.Tests
             CancellationToken token = default;
 
             AssertExtensions.Throws<ArgumentNullException>("callback", () => token.Register(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "callback",
-                () => token.Register(null, false)
+            AssertExtensions.Throws<ArgumentNullException>("callback", () =>
+                token.Register(null, false)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "callback",
-                () => token.Register((Action<object>)null, null)
+            AssertExtensions.Throws<ArgumentNullException>("callback", () =>
+                token.Register((Action<object>)null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "callback",
-                () => token.Register((Action<object>)null, null, false)
+            AssertExtensions.Throws<ArgumentNullException>("callback", () =>
+                token.Register((Action<object>)null, null, false)
             );
             AssertExtensions.Throws<ArgumentNullException>(() =>
                 token.Register((Action<object>)null, null, true)
@@ -38,13 +35,11 @@ namespace System.Threading.Tasks.Tests
                 token.Register((Action<object, CancellationToken>)null, null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "callback",
-                () => token.UnsafeRegister((Action<object>)null, null)
+            AssertExtensions.Throws<ArgumentNullException>("callback", () =>
+                token.UnsafeRegister((Action<object>)null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "callback",
-                () => token.UnsafeRegister((Action<object, CancellationToken>)null, null)
+            AssertExtensions.Throws<ArgumentNullException>("callback", () =>
+                token.UnsafeRegister((Action<object, CancellationToken>)null, null)
             );
         }
 

@@ -12,22 +12,19 @@ namespace System.Tests
         public static void Roundtrip1()
         {
             string input = "test";
-            Verify(
-                input,
-                result =>
-                {
-                    // See Freed, N. and N. Borenstein, RFC2045, Section 6.8 for a description of why this check is necessary.
-                    Assert.Equal(3, result.Length);
+            Verify(input, result =>
+            {
+                // See Freed, N. and N. Borenstein, RFC2045, Section 6.8 for a description of why this check is necessary.
+                Assert.Equal(3, result.Length);
 
-                    uint triplet = (uint)((result[0] << 16) | (result[1] << 8) | result[2]);
-                    Assert.Equal<uint>(45, triplet >> 18); // 't'
-                    Assert.Equal<uint>(30, (triplet << 14) >> 26); // 'e'
-                    Assert.Equal<uint>(44, (triplet << 20) >> 26); // 's'
-                    Assert.Equal<uint>(45, (triplet << 26) >> 26); // 't'
+                uint triplet = (uint)((result[0] << 16) | (result[1] << 8) | result[2]);
+                Assert.Equal<uint>(45, triplet >> 18); // 't'
+                Assert.Equal<uint>(30, (triplet << 14) >> 26); // 'e'
+                Assert.Equal<uint>(44, (triplet << 20) >> 26); // 's'
+                Assert.Equal<uint>(45, (triplet << 26) >> 26); // 't'
 
-                    Assert.Equal(input, Convert.ToBase64String(result));
-                }
-            );
+                Assert.Equal(input, Convert.ToBase64String(result));
+            });
         }
 
         [Fact]
@@ -46,14 +43,11 @@ namespace System.Tests
         public static void EmptyString()
         {
             string input = string.Empty;
-            Verify(
-                input,
-                result =>
-                {
-                    Assert.NotNull(result);
-                    Assert.Equal(0, result.Length);
-                }
-            );
+            Verify(input, result =>
+            {
+                Assert.NotNull(result);
+                Assert.Equal(0, result.Length);
+            });
         }
 
         [Fact]
@@ -83,35 +77,29 @@ namespace System.Tests
         public static void PartialRoundtripWithPadding1()
         {
             string input = "ab==";
-            Verify(
-                input,
-                result =>
-                {
-                    Assert.Equal(1, result.Length);
+            Verify(input, result =>
+            {
+                Assert.Equal(1, result.Length);
 
-                    string roundtrippedString = Convert.ToBase64String(result);
-                    Assert.NotEqual(input, roundtrippedString);
-                    Assert.Equal(input[0], roundtrippedString[0]);
-                }
-            );
+                string roundtrippedString = Convert.ToBase64String(result);
+                Assert.NotEqual(input, roundtrippedString);
+                Assert.Equal(input[0], roundtrippedString[0]);
+            });
         }
 
         [Fact]
         public static void PartialRoundtripWithPadding2()
         {
             string input = "789=";
-            Verify(
-                input,
-                result =>
-                {
-                    Assert.Equal(2, result.Length);
+            Verify(input, result =>
+            {
+                Assert.Equal(2, result.Length);
 
-                    string roundtrippedString = Convert.ToBase64String(result);
-                    Assert.NotEqual(input, roundtrippedString);
-                    Assert.Equal(input[0], roundtrippedString[0]);
-                    Assert.Equal(input[1], roundtrippedString[1]);
-                }
-            );
+                string roundtrippedString = Convert.ToBase64String(result);
+                Assert.NotEqual(input, roundtrippedString);
+                Assert.Equal(input[0], roundtrippedString[0]);
+                Assert.Equal(input[1], roundtrippedString[1]);
+            });
         }
 
         [Fact]
@@ -219,9 +207,8 @@ namespace System.Tests
         [Fact]
         public static void InvalidInput()
         {
-            Assert.Throws<ArgumentNullException>(
-                "inArray",
-                () => Convert.FromBase64CharArray(null, 0, 3)
+            Assert.Throws<ArgumentNullException>("inArray", () =>
+                Convert.FromBase64CharArray(null, 0, 3)
             );
             Assert.Throws<ArgumentNullException>("s", () => Convert.FromBase64String(null));
 
@@ -293,18 +280,15 @@ namespace System.Tests
                 expected = input;
             }
 
-            Verify(
-                input,
-                result =>
+            Verify(input, result =>
+            {
+                if (expectedLengthBytes.HasValue)
                 {
-                    if (expectedLengthBytes.HasValue)
-                    {
-                        Assert.Equal(expectedLengthBytes.Value, result.Length);
-                    }
-                    Assert.Equal(expected, Convert.ToBase64String(result));
-                    Assert.Equal(expected, Convert.ToBase64String(result, 0, result.Length));
+                    Assert.Equal(expectedLengthBytes.Value, result.Length);
                 }
-            );
+                Assert.Equal(expected, Convert.ToBase64String(result));
+                Assert.Equal(expected, Convert.ToBase64String(result, 0, result.Length));
+            });
         }
 
         private static void VerifyInvalidInput(string input)

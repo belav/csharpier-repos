@@ -83,10 +83,8 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
             var nextTokens = diagnostics.Select(d =>
                 d.AdditionalLocations[0].FindToken(cancellationToken)
             );
-            var newRoot = root.ReplaceTokens(
-                nextTokens,
-                (original, current) =>
-                    current.WithLeadingTrivia(current.LeadingTrivia.Insert(0, endOfLineTrivia))
+            var newRoot = root.ReplaceTokens(nextTokens, (original, current) =>
+                current.WithLeadingTrivia(current.LeadingTrivia.Insert(0, endOfLineTrivia))
             );
 
             return document.WithSyntaxRoot(newRoot);

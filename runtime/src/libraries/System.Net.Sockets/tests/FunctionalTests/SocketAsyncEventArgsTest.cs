@@ -261,43 +261,34 @@ namespace System.Net.Sockets.Tests
         {
             using (var saea = new SocketAsyncEventArgs())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => saea.SetBuffer(new byte[1], -1, 0)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    saea.SetBuffer(new byte[1], -1, 0)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => saea.SetBuffer(new byte[1], 2, 0)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    saea.SetBuffer(new byte[1], 2, 0)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => saea.SetBuffer(new byte[1], 0, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    saea.SetBuffer(new byte[1], 0, -1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => saea.SetBuffer(new byte[1], 0, 2)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    saea.SetBuffer(new byte[1], 0, 2)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => saea.SetBuffer(new byte[1], 1, 2)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    saea.SetBuffer(new byte[1], 1, 2)
                 );
 
                 saea.SetBuffer(new byte[2], 0, 2);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => saea.SetBuffer(-1, 2)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    saea.SetBuffer(-1, 2)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => saea.SetBuffer(3, 2)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    saea.SetBuffer(3, 2)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => saea.SetBuffer(0, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    saea.SetBuffer(0, -1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => saea.SetBuffer(0, 3)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    saea.SetBuffer(0, 3)
                 );
             }
         }
@@ -333,9 +324,8 @@ namespace System.Net.Sockets.Tests
 
                 byte[] buffer = new byte[1];
                 saea.SetBuffer(buffer, 0, 1);
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => saea.BufferList = bufferList
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    saea.BufferList = bufferList
                 );
                 Assert.Same(buffer, saea.Buffer);
                 Assert.Null(saea.BufferList);
@@ -355,9 +345,8 @@ namespace System.Net.Sockets.Tests
                     new ArraySegment<byte>(new byte[1]),
                 };
                 saea.BufferList = bufferList;
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => saea.SetBuffer(new byte[1], 0, 1)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    saea.SetBuffer(new byte[1], 0, 1)
                 );
                 Assert.Same(bufferList, saea.BufferList);
                 Assert.Null(saea.Buffer);
@@ -814,9 +803,8 @@ namespace System.Net.Sockets.Tests
                 byte[] buffer = new byte[1];
                 acceptArgs.SetBuffer(buffer, 0, buffer.Length);
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "Count",
-                    () => server.AcceptAsync(acceptArgs)
+                AssertExtensions.Throws<ArgumentException>("Count", () =>
+                    server.AcceptAsync(acceptArgs)
                 );
             }
         }
@@ -865,9 +853,8 @@ namespace System.Net.Sockets.Tests
             {
                 e.RemoteEndPoint = dns;
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "hostName",
-                    () => Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, e)
+                AssertExtensions.Throws<ArgumentException>("hostName", () =>
+                    Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, e)
                 );
                 using (
                     var client = new Socket(
@@ -877,9 +864,8 @@ namespace System.Net.Sockets.Tests
                     )
                 )
                 {
-                    AssertExtensions.Throws<ArgumentException>(
-                        "hostName",
-                        () => client.ConnectAsync(e)
+                    AssertExtensions.Throws<ArgumentException>("hostName", () =>
+                        client.ConnectAsync(e)
                     );
                 }
             }
@@ -1005,9 +991,8 @@ namespace System.Net.Sockets.Tests
                 Memory<byte> buffer = new byte[1];
 
                 saea.SetBuffer(buffer);
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => saea.BufferList = bufferList
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    saea.BufferList = bufferList
                 );
                 Assert.True(buffer.Equals(saea.MemoryBuffer));
                 Assert.Equal(0, saea.Offset);

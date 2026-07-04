@@ -115,13 +115,10 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
                         app.UseRouting();
                         app.UseEndpoints(endpoint =>
                         {
-                            endpoint.MapGet(
-                                "/test/{id}",
-                                (int id) =>
-                                {
-                                    throw new Exception("Test exception");
-                                }
-                            );
+                            endpoint.MapGet("/test/{id}", (int id) =>
+                            {
+                                throw new Exception("Test exception");
+                            });
                         });
                     });
             })
@@ -190,13 +187,10 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
                         app.UseRouting();
                         app.UseEndpoints(endpoint =>
                         {
-                            endpoint.MapGet(
-                                "/test/{id}",
-                                (int id) =>
-                                {
-                                    throw new Exception("Test exception");
-                                }
-                            );
+                            endpoint.MapGet("/test/{id}", (int id) =>
+                            {
+                                throw new Exception("Test exception");
+                            });
                         });
                     });
             })
@@ -711,18 +705,14 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
         await requestDurationCollector.WaitForMeasurementsAsync(minCount: 1).DefaultTimeout();
 
         // Assert
-        Assert.Collection(
-            requestDurationCollector.GetMeasurementSnapshot(),
-            m =>
-            {
-                Assert.True(m.Value > 0);
-                Assert.Equal(500, (int)m.Tags["http.response.status_code"]);
-                Assert.Equal("System.Exception", (string)m.Tags["error.type"]);
-            }
-        );
-        Assert.Collection(
-            requestExceptionCollector.GetMeasurementSnapshot(),
-            m => AssertRequestException(m, "System.Exception", "unhandled")
+        Assert.Collection(requestDurationCollector.GetMeasurementSnapshot(), m =>
+        {
+            Assert.True(m.Value > 0);
+            Assert.Equal(500, (int)m.Tags["http.response.status_code"]);
+            Assert.Equal("System.Exception", (string)m.Tags["error.type"]);
+        });
+        Assert.Collection(requestExceptionCollector.GetMeasurementSnapshot(), m =>
+            AssertRequestException(m, "System.Exception", "unhandled")
         );
     }
 

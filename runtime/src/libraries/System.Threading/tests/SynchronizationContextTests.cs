@@ -80,17 +80,14 @@ namespace System.Threading.Tests
                 var lockObj = new object();
                 var lockAcquiredFromBackground = new AutoResetEvent(false);
                 Action waitForThread;
-                Thread t = ThreadTestHelpers.CreateGuardedThread(
-                    out waitForThread,
-                    () =>
+                Thread t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+                {
+                    lock (lockObj)
                     {
-                        lock (lockObj)
-                        {
-                            lockAcquiredFromBackground.Set();
-                            e.CheckedWait();
-                        }
+                        lockAcquiredFromBackground.Set();
+                        e.CheckedWait();
                     }
-                );
+                });
                 t.IsBackground = true;
                 t.Start();
                 lockAcquiredFromBackground.CheckedWait();
@@ -102,22 +99,19 @@ namespace System.Threading.Tests
 
                 e.Reset();
                 var m = new Mutex();
-                t = ThreadTestHelpers.CreateGuardedThread(
-                    out waitForThread,
-                    () =>
+                t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+                {
+                    m.CheckedWait();
+                    try
                     {
-                        m.CheckedWait();
-                        try
-                        {
-                            lockAcquiredFromBackground.Set();
-                            e.CheckedWait();
-                        }
-                        finally
-                        {
-                            m.ReleaseMutex();
-                        }
+                        lockAcquiredFromBackground.Set();
+                        e.CheckedWait();
                     }
-                );
+                    finally
+                    {
+                        m.ReleaseMutex();
+                    }
+                });
                 t.IsBackground = true;
                 t.Start();
                 lockAcquiredFromBackground.CheckedWait();

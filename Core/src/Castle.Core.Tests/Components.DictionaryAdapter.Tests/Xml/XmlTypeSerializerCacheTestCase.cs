@@ -52,10 +52,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             var count = 16;
             var serializers = new XmlTypeSerializer[count];
 
-            Parallel.For(
-                0,
-                count,
-                i => serializers[i] = XmlTypeSerializerCache.Instance[typeof(A)]
+            Parallel.For(0, count, i =>
+                serializers[i] = XmlTypeSerializerCache.Instance[typeof(A)]
             );
 
             for (var i = 1; i < count; i++)

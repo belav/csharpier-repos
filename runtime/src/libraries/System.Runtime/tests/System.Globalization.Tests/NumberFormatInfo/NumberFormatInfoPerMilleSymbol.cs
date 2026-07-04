@@ -28,10 +28,8 @@ namespace System.Globalization.Tests
         public void PerMilleSymbol_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "PerMilleSymbol",
-                () => format.PerMilleSymbol = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "PerMilleSymbol", () =>
+                format.PerMilleSymbol = null
             );
         }
 

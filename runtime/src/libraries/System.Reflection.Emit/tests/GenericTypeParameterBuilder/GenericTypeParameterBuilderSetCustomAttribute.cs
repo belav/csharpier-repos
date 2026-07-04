@@ -26,9 +26,8 @@ namespace System.Reflection.Emit.Tests
             string[] typeParamNames = new string[] { "TFirst" };
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () => typeParams[0].SetCustomAttribute(null, new byte[128])
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                typeParams[0].SetCustomAttribute(null, new byte[128])
             );
         }
 
@@ -56,9 +55,8 @@ namespace System.Reflection.Emit.Tests
             string[] typeParamNames = new string[] { "TFirst" };
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "customBuilder",
-                () => typeParams[0].SetCustomAttribute(null)
+            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () =>
+                typeParams[0].SetCustomAttribute(null)
             );
         }
     }

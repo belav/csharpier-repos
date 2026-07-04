@@ -49,9 +49,8 @@ class CommonStringTests
         Assert.True(VerifyReversed(InitialString, (orig, rev) => rev == Helpers.Reverse(orig)));
 
         Assert.True(
-            ReverseInCallback(
-                InitialString,
-                (string str, out string rev) => rev = Helpers.Reverse(InitialString)
+            ReverseInCallback(InitialString, (string str, out string rev) =>
+                rev = Helpers.Reverse(InitialString)
             )
         );
 
@@ -69,17 +68,12 @@ class CommonStringTests
         Assert.Equal(Helpers.Reverse(InitialString), builder.ToString());
 
         builder = new StringBuilder(InitialString);
-        Assert.True(
-            ReverseInplaceInCallback(
-                builder,
-                b =>
-                {
-                    string reversed = Helpers.Reverse(b.ToString());
-                    b.Clear();
-                    b.Append(reversed);
-                }
-            )
-        );
+        Assert.True(ReverseInplaceInCallback(builder, b =>
+            {
+                string reversed = Helpers.Reverse(b.ToString());
+                b.Clear();
+                b.Append(reversed);
+            }));
     }
 
     private static void RunStructTests()

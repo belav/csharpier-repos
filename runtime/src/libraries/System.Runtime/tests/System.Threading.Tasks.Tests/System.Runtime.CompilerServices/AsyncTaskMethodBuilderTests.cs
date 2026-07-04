@@ -773,16 +773,13 @@ namespace System.Threading.Tasks.Tests
                     )
                     {
                         var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                        listener.RunWithCallback(
-                            events.Enqueue,
-                            () =>
-                            {
-                                NeverCompletes();
-                                GC.Collect();
-                                GC.WaitForPendingFinalizers();
-                                GC.WaitForPendingFinalizers();
-                            }
-                        );
+                        listener.RunWithCallback(events.Enqueue, () =>
+                        {
+                            NeverCompletes();
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                            GC.WaitForPendingFinalizers();
+                        });
 
                         // To help diagnose https://github.com/dotnet/runtime/issues/2198
                         // Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself

@@ -11,24 +11,16 @@ class Test
         Comparison<string> naturalSortComparer = (left, right) =>
         {
             return Regex
-                .Replace(
-                    left ?? "",
-                    @"([\d]+)|([^\d]+)",
-                    m =>
+                .Replace(left ?? "", @"([\d]+)|([^\d]+)", m =>
+                    (m.Value.Length > 0 && char.IsDigit(m.Value[0]))
+                        ? m.Value.PadLeft(Math.Max((left ?? "").Length, (right ?? "").Length))
+                        : m.Value
+                )
+                .CompareTo(
+                    Regex.Replace(right ?? "", @"([\d]+)|([^\d]+)", m =>
                         (m.Value.Length > 0 && char.IsDigit(m.Value[0]))
                             ? m.Value.PadLeft(Math.Max((left ?? "").Length, (right ?? "").Length))
                             : m.Value
-                )
-                .CompareTo(
-                    Regex.Replace(
-                        right ?? "",
-                        @"([\d]+)|([^\d]+)",
-                        m =>
-                            (m.Value.Length > 0 && char.IsDigit(m.Value[0]))
-                                ? m.Value.PadLeft(
-                                    Math.Max((left ?? "").Length, (right ?? "").Length)
-                                )
-                                : m.Value
                     )
                 );
         };

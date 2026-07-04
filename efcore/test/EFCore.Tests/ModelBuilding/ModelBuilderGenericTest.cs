@@ -203,10 +203,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
             Action<TestEntityTypeBuilder<TEntity>> buildAction
         )
         {
-            ModelBuilder.SharedTypeEntity<TEntity>(
-                name,
-                entityTypeBuilder =>
-                    buildAction(new GenericTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
+            ModelBuilder.SharedTypeEntity<TEntity>(name, entityTypeBuilder =>
+                buildAction(new GenericTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
             );
             return this;
         }
@@ -425,12 +423,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
         ) =>
             Wrap(
-                EntityTypeBuilder.OwnsOne<TRelatedEntity>(
-                    navigationName,
-                    r =>
-                        buildAction(
-                            new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsOne<TRelatedEntity>(navigationName, r =>
+                    buildAction(new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r))
                 )
             );
 
@@ -440,13 +434,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
         ) =>
             Wrap(
-                EntityTypeBuilder.OwnsOne<TRelatedEntity>(
-                    entityTypeName,
-                    navigationName,
-                    r =>
-                        buildAction(
-                            new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsOne<TRelatedEntity>(entityTypeName, navigationName, r =>
+                    buildAction(new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r))
                 )
             );
 
@@ -473,12 +462,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
         )
             where TRelatedEntity : class =>
             Wrap(
-                EntityTypeBuilder.OwnsOne(
-                    navigationExpression,
-                    r =>
-                        buildAction(
-                            new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsOne(navigationExpression, r =>
+                    buildAction(new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r))
                 )
             );
 
@@ -489,13 +474,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
         )
             where TRelatedEntity : class =>
             Wrap(
-                EntityTypeBuilder.OwnsOne(
-                    entityTypeName,
-                    navigationExpression,
-                    r =>
-                        buildAction(
-                            new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsOne(entityTypeName, navigationExpression, r =>
+                    buildAction(new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r))
                 )
             );
 
@@ -520,12 +500,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
         ) =>
             Wrap(
-                EntityTypeBuilder.OwnsMany<TRelatedEntity>(
-                    navigationName,
-                    r =>
-                        buildAction(
-                            new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsMany<TRelatedEntity>(navigationName, r =>
+                    buildAction(new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r))
                 )
             );
 
@@ -535,13 +511,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
         ) =>
             Wrap(
-                EntityTypeBuilder.OwnsMany<TRelatedEntity>(
-                    entityTypeName,
-                    navigationName,
-                    r =>
-                        buildAction(
-                            new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsMany<TRelatedEntity>(entityTypeName, navigationName, r =>
+                    buildAction(new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r))
                 )
             );
 
@@ -574,12 +545,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
         )
             where TRelatedEntity : class =>
             Wrap(
-                EntityTypeBuilder.OwnsMany(
-                    navigationExpression,
-                    r =>
-                        buildAction(
-                            new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsMany(navigationExpression, r =>
+                    buildAction(new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r))
                 )
             );
 
@@ -590,13 +557,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
         )
             where TRelatedEntity : class =>
             Wrap(
-                EntityTypeBuilder.OwnsMany(
-                    entityTypeName,
-                    navigationExpression,
-                    r =>
-                        buildAction(
-                            new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsMany(entityTypeName, navigationExpression, r =>
+                    buildAction(new GenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r))
                 )
             );
 
@@ -1762,14 +1724,12 @@ public class ModelBuilderGenericTest : ModelBuilderTest
             Action<TestEntityTypeBuilder<Dictionary<string, object>>> configureJoinEntityType
         ) =>
             new GenericTestEntityTypeBuilder<TRightEntity>(
-                CollectionCollectionBuilder.UsingEntity(
-                    joinEntityName,
-                    e =>
-                        configureJoinEntityType(
-                            new GenericTestEntityTypeBuilder<Dictionary<string, object>>(
-                                new EntityTypeBuilder<Dictionary<string, object>>(e.Metadata)
-                            )
+                CollectionCollectionBuilder.UsingEntity(joinEntityName, e =>
+                    configureJoinEntityType(
+                        new GenericTestEntityTypeBuilder<Dictionary<string, object>>(
+                            new EntityTypeBuilder<Dictionary<string, object>>(e.Metadata)
                         )
+                    )
                 )
             );
 
@@ -1787,9 +1747,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
         ) =>
             new GenericTestEntityTypeBuilder<TRightEntity>(
-                CollectionCollectionBuilder.UsingEntity<TJoinEntity>(
-                    joinEntityName,
-                    e => configureJoinEntityType(new GenericTestEntityTypeBuilder<TJoinEntity>(e))
+                CollectionCollectionBuilder.UsingEntity<TJoinEntity>(joinEntityName, e =>
+                    configureJoinEntityType(new GenericTestEntityTypeBuilder<TJoinEntity>(e))
                 )
             );
 
@@ -2310,10 +2269,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
         )
             where TNewDependentEntity : class =>
             Wrap(
-                OwnedNavigationBuilder.OwnsOne(
-                    entityTypeName,
-                    navigationExpression,
-                    r => buildAction(Wrap(r))
+                OwnedNavigationBuilder.OwnsOne(entityTypeName, navigationExpression, r =>
+                    buildAction(Wrap(r))
                 )
             );
 
@@ -2361,10 +2318,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewDependentEntity>> buildAction
         ) =>
             Wrap(
-                OwnedNavigationBuilder.OwnsMany(
-                    entityTypeName,
-                    navigationExpression,
-                    r => buildAction(Wrap(r))
+                OwnedNavigationBuilder.OwnsMany(entityTypeName, navigationExpression, r =>
+                    buildAction(Wrap(r))
                 )
             );
 

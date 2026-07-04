@@ -1525,15 +1525,11 @@ namespace System
         {
             ArgumentOutOfRangeException.ThrowIfGreaterThan(character, '\xff');
 
-            return string.Create(
-                3,
-                (byte)character,
-                (Span<char> chars, byte b) =>
-                {
-                    chars[0] = '%';
-                    HexConverter.ToCharsBuffer(b, chars, 1, HexConverter.Casing.Upper);
-                }
-            );
+            return string.Create(3, (byte)character, (Span<char> chars, byte b) =>
+            {
+                chars[0] = '%';
+                HexConverter.ToCharsBuffer(b, chars, 1, HexConverter.Casing.Upper);
+            });
         }
 
         //

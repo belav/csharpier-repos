@@ -207,23 +207,19 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outer",
-                () =>
-                    outer.GroupJoin(
-                        inner.AsQueryable(),
-                        e => e.name,
-                        e => e.name,
-                        (cr, arIE) =>
-                            new JoinRec
-                            {
-                                name = cr.name,
-                                orderID = arIE.Select(o => o.orderID).ToArray(),
-                                total = arIE.Select(o => o.total).ToArray(),
-                            },
-                        new AnagramEqualityComparer()
-                    )
-            );
+            AssertExtensions.Throws<ArgumentNullException>("outer", () => outer.GroupJoin(
+                    inner.AsQueryable(),
+                    e => e.name,
+                    e => e.name,
+                    (cr, arIE) =>
+                        new JoinRec
+                        {
+                            name = cr.name,
+                            orderID = arIE.Select(o => o.orderID).ToArray(),
+                            total = arIE.Select(o => o.total).ToArray(),
+                        },
+                    new AnagramEqualityComparer()
+                ));
         }
 
         [Fact]
@@ -237,25 +233,21 @@ namespace System.Linq.Tests
             };
             IQueryable<AnagramRec> inner = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inner",
-                () =>
-                    outer
-                        .AsQueryable()
-                        .GroupJoin(
-                            inner,
-                            e => e.name,
-                            e => e.name,
-                            (cr, arIE) =>
-                                new JoinRec
-                                {
-                                    name = cr.name,
-                                    orderID = arIE.Select(o => o.orderID).ToArray(),
-                                    total = arIE.Select(o => o.total).ToArray(),
-                                },
-                            new AnagramEqualityComparer()
-                        )
-            );
+            AssertExtensions.Throws<ArgumentNullException>("inner", () => outer
+                    .AsQueryable()
+                    .GroupJoin(
+                        inner,
+                        e => e.name,
+                        e => e.name,
+                        (cr, arIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = arIE.Select(o => o.orderID).ToArray(),
+                                total = arIE.Select(o => o.total).ToArray(),
+                            },
+                        new AnagramEqualityComparer()
+                    ));
         }
 
         [Fact]
@@ -283,25 +275,21 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outerKeySelector",
-                () =>
-                    outer
-                        .AsQueryable()
-                        .GroupJoin(
-                            inner.AsQueryable(),
-                            null,
-                            e => e.name,
-                            (cr, arIE) =>
-                                new JoinRec
-                                {
-                                    name = cr.name,
-                                    orderID = arIE.Select(o => o.orderID).ToArray(),
-                                    total = arIE.Select(o => o.total).ToArray(),
-                                },
-                            new AnagramEqualityComparer()
-                        )
-            );
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () => outer
+                    .AsQueryable()
+                    .GroupJoin(
+                        inner.AsQueryable(),
+                        null,
+                        e => e.name,
+                        (cr, arIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = arIE.Select(o => o.orderID).ToArray(),
+                                total = arIE.Select(o => o.total).ToArray(),
+                            },
+                        new AnagramEqualityComparer()
+                    ));
         }
 
         [Fact]
@@ -329,25 +317,21 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "innerKeySelector",
-                () =>
-                    outer
-                        .AsQueryable()
-                        .GroupJoin(
-                            inner.AsQueryable(),
-                            e => e.name,
-                            null,
-                            (cr, arIE) =>
-                                new JoinRec
-                                {
-                                    name = cr.name,
-                                    orderID = arIE.Select(o => o.orderID).ToArray(),
-                                    total = arIE.Select(o => o.total).ToArray(),
-                                },
-                            new AnagramEqualityComparer()
-                        )
-            );
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () => outer
+                    .AsQueryable()
+                    .GroupJoin(
+                        inner.AsQueryable(),
+                        e => e.name,
+                        null,
+                        (cr, arIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = arIE.Select(o => o.orderID).ToArray(),
+                                total = arIE.Select(o => o.total).ToArray(),
+                            },
+                        new AnagramEqualityComparer()
+                    ));
         }
 
         [Fact]
@@ -375,18 +359,16 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    outer
-                        .AsQueryable()
-                        .GroupJoin(
-                            inner.AsQueryable(),
-                            e => e.name,
-                            e => e.name,
-                            (Expression<Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>>)null,
-                            new AnagramEqualityComparer()
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                outer
+                    .AsQueryable()
+                    .GroupJoin(
+                        inner.AsQueryable(),
+                        e => e.name,
+                        e => e.name,
+                        (Expression<Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>>)null,
+                        new AnagramEqualityComparer()
+                    )
             );
         }
 
@@ -410,22 +392,18 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outer",
-                () =>
-                    outer.GroupJoin(
-                        inner.AsQueryable(),
-                        e => e.name,
-                        e => e.name,
-                        (cr, arIE) =>
-                            new JoinRec
-                            {
-                                name = cr.name,
-                                orderID = arIE.Select(o => o.orderID).ToArray(),
-                                total = arIE.Select(o => o.total).ToArray(),
-                            }
-                    )
-            );
+            AssertExtensions.Throws<ArgumentNullException>("outer", () => outer.GroupJoin(
+                    inner.AsQueryable(),
+                    e => e.name,
+                    e => e.name,
+                    (cr, arIE) =>
+                        new JoinRec
+                        {
+                            name = cr.name,
+                            orderID = arIE.Select(o => o.orderID).ToArray(),
+                            total = arIE.Select(o => o.total).ToArray(),
+                        }
+                ));
         }
 
         [Fact]
@@ -439,24 +417,20 @@ namespace System.Linq.Tests
             };
             IQueryable<AnagramRec> inner = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inner",
-                () =>
-                    outer
-                        .AsQueryable()
-                        .GroupJoin(
-                            inner,
-                            e => e.name,
-                            e => e.name,
-                            (cr, arIE) =>
-                                new JoinRec
-                                {
-                                    name = cr.name,
-                                    orderID = arIE.Select(o => o.orderID).ToArray(),
-                                    total = arIE.Select(o => o.total).ToArray(),
-                                }
-                        )
-            );
+            AssertExtensions.Throws<ArgumentNullException>("inner", () => outer
+                    .AsQueryable()
+                    .GroupJoin(
+                        inner,
+                        e => e.name,
+                        e => e.name,
+                        (cr, arIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = arIE.Select(o => o.orderID).ToArray(),
+                                total = arIE.Select(o => o.total).ToArray(),
+                            }
+                    ));
         }
 
         [Fact]
@@ -484,24 +458,20 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outerKeySelector",
-                () =>
-                    outer
-                        .AsQueryable()
-                        .GroupJoin(
-                            inner.AsQueryable(),
-                            null,
-                            e => e.name,
-                            (cr, arIE) =>
-                                new JoinRec
-                                {
-                                    name = cr.name,
-                                    orderID = arIE.Select(o => o.orderID).ToArray(),
-                                    total = arIE.Select(o => o.total).ToArray(),
-                                }
-                        )
-            );
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () => outer
+                    .AsQueryable()
+                    .GroupJoin(
+                        inner.AsQueryable(),
+                        null,
+                        e => e.name,
+                        (cr, arIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = arIE.Select(o => o.orderID).ToArray(),
+                                total = arIE.Select(o => o.total).ToArray(),
+                            }
+                    ));
         }
 
         [Fact]
@@ -529,24 +499,20 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "innerKeySelector",
-                () =>
-                    outer
-                        .AsQueryable()
-                        .GroupJoin(
-                            inner.AsQueryable(),
-                            e => e.name,
-                            null,
-                            (cr, arIE) =>
-                                new JoinRec
-                                {
-                                    name = cr.name,
-                                    orderID = arIE.Select(o => o.orderID).ToArray(),
-                                    total = arIE.Select(o => o.total).ToArray(),
-                                }
-                        )
-            );
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () => outer
+                    .AsQueryable()
+                    .GroupJoin(
+                        inner.AsQueryable(),
+                        e => e.name,
+                        null,
+                        (cr, arIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = arIE.Select(o => o.orderID).ToArray(),
+                                total = arIE.Select(o => o.total).ToArray(),
+                            }
+                    ));
         }
 
         [Fact]
@@ -574,17 +540,15 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    outer
-                        .AsQueryable()
-                        .GroupJoin(
-                            inner.AsQueryable(),
-                            e => e.name,
-                            e => e.name,
-                            (Expression<Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>>)null
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                outer
+                    .AsQueryable()
+                    .GroupJoin(
+                        inner.AsQueryable(),
+                        e => e.name,
+                        e => e.name,
+                        (Expression<Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>>)null
+                    )
             );
         }
 

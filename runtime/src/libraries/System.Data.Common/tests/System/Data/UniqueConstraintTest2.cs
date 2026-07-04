@@ -181,13 +181,10 @@ namespace System.Data.Tests
             );
 
             // add UniqueConstarint that don't belong to the table
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    dtParent.Constraints.Add(uc);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                dtParent.Constraints.Add(uc);
+            });
         }
 
         [Fact]

@@ -137,13 +137,11 @@ namespace System.Linq.Tests
         [Fact]
         public void SourceNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).Append(1)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).Append(1)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).Prepend(1)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).Prepend(1)
             );
         }
 

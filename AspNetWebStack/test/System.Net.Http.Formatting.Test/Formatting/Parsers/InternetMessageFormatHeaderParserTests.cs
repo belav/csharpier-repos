@@ -421,200 +421,167 @@ namespace System.Net.Http.Formatting.Parsers
         [Fact]
         public void Rfc5322Sample1Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample1,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("subject"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample1, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("subject"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+            });
         }
 
         [Fact]
         public void Rfc5322Sample2Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample2,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("sender"));
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("subject"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample2, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("sender"));
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("subject"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+            });
         }
 
         [Fact]
         public void Rfc5322Sample3Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample3,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("cc"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample3, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("cc"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+            });
         }
 
         [Fact]
         public void Rfc5322Sample4Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample4,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("cc"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample4, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("cc"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+            });
         }
 
         [Fact]
         public void Rfc5322Sample5Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample5,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("subject"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample5, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("subject"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+            });
         }
 
         [Fact]
         public void Rfc5322Sample6Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample6,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("reply-to"));
-                    Assert.True(headers.Contains("subject"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                    Assert.True(headers.Contains("in-reply-to"));
-                    Assert.True(headers.Contains("references"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample6, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("reply-to"));
+                Assert.True(headers.Contains("subject"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+                Assert.True(headers.Contains("in-reply-to"));
+                Assert.True(headers.Contains("references"));
+            });
         }
 
         [Fact]
         public void Rfc5322Sample7Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample7,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("subject"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                    Assert.True(headers.Contains("in-reply-to"));
-                    Assert.True(headers.Contains("references"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample7, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("subject"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+                Assert.True(headers.Contains("in-reply-to"));
+                Assert.True(headers.Contains("references"));
+            });
         }
 
         [Fact]
         public void Rfc5322Sample8Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample8,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("subject"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample8, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("subject"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+            });
         }
 
         [Fact]
         public void Rfc5322Sample9Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample9,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("resent-from"));
-                    Assert.True(headers.Contains("resent-to"));
-                    Assert.True(headers.Contains("resent-date"));
-                    Assert.True(headers.Contains("resent-message-id"));
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("subject"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample9, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("resent-from"));
+                Assert.True(headers.Contains("resent-to"));
+                Assert.True(headers.Contains("resent-date"));
+                Assert.True(headers.Contains("resent-message-id"));
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("subject"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+            });
         }
 
         [Fact]
         public void Rfc5322Sample10Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample10,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("received"));
-                    Assert.Equal(2, headers.GetValues("received").Count());
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("subject"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample10, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("received"));
+                Assert.Equal(2, headers.GetValues("received").Count());
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("subject"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+            });
         }
 
         [Fact]
         public void Rfc5322Sample11Test()
         {
-            RunRfc5322SampleTest(
-                Rfc5322Sample11,
-                (headers) =>
-                {
-                    Assert.NotNull(headers);
-                    Assert.True(headers.Contains("from"));
-                    Assert.True(headers.Contains("to"));
-                    Assert.True(headers.Contains("cc"));
-                    Assert.True(headers.Contains("date"));
-                    Assert.True(headers.Contains("message-id"));
-                }
-            );
+            RunRfc5322SampleTest(Rfc5322Sample11, (headers) =>
+            {
+                Assert.NotNull(headers);
+                Assert.True(headers.Contains("from"));
+                Assert.True(headers.Contains("to"));
+                Assert.True(headers.Contains("cc"));
+                Assert.True(headers.Contains("date"));
+                Assert.True(headers.Contains("message-id"));
+            });
         }
 
         // Set of samples from RFC 5322 with times adjusted to GMT following HTTP style for date time format.

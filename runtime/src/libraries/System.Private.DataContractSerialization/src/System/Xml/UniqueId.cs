@@ -601,10 +601,8 @@ namespace System.Xml
         }
 
         public override string ToString() =>
-            _s ??= string.Create(
-                CharArrayLength,
-                this,
-                (destination, thisRef) => thisRef.ToSpan(destination)
+            _s ??= string.Create(CharArrayLength, this, (destination, thisRef) =>
+                thisRef.ToSpan(destination)
             );
 
         public static bool operator ==(UniqueId? id1, UniqueId? id2)

@@ -131,17 +131,12 @@ public class MappingExpression<TSource, TDestination>
         params Expression<Func<TSource, object>>[] memberExpressions
     )
     {
-        var memberExpressionsWithoutCastToObject = Array.ConvertAll(
-            memberExpressions,
-            e =>
-            {
-                var bodyIsCastToObject =
-                    e.Body.NodeType == ExpressionType.Convert && e.Body.Type == typeof(object);
-                return bodyIsCastToObject
-                    ? Lambda(((UnaryExpression)e.Body).Operand, e.Parameters)
-                    : e;
-            }
-        );
+        var memberExpressionsWithoutCastToObject = Array.ConvertAll(memberExpressions, e =>
+        {
+            var bodyIsCastToObject =
+                e.Body.NodeType == ExpressionType.Convert && e.Body.Type == typeof(object);
+            return bodyIsCastToObject ? Lambda(((UnaryExpression)e.Body).Operand, e.Parameters) : e;
+        });
         IncludeMembersCore(memberExpressionsWithoutCastToObject);
         return this;
     }

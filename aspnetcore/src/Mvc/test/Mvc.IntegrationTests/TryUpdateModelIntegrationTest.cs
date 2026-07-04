@@ -538,14 +538,11 @@ public class TryUpdateModelIntegrationTest
 
         // Arrays should not be updated.
         Assert.Single(model.Address);
-        Assert.Collection(
-            model.Address,
-            (a) =>
-            {
-                Assert.Equal("Redmond", a.City);
-                Assert.Equal("One Microsoft Way", a.Street);
-            }
-        );
+        Assert.Collection(model.Address, (a) =>
+        {
+            Assert.Equal("Redmond", a.City);
+            Assert.Equal("One Microsoft Way", a.Street);
+        });
 
         // ModelState
         Assert.True(modelState.IsValid);
@@ -583,14 +580,11 @@ public class TryUpdateModelIntegrationTest
 
         // Arrays should not be updated.
         Assert.Single(model.Address);
-        Assert.Collection(
-            model.Address,
-            (a) =>
-            {
-                Assert.Equal("Redmond", a.City);
-                Assert.Equal("One Microsoft Way", a.Street);
-            }
-        );
+        Assert.Collection(model.Address, (a) =>
+        {
+            Assert.Equal("Redmond", a.City);
+            Assert.Equal("One Microsoft Way", a.Street);
+        });
 
         // ModelState
         Assert.True(modelState.IsValid);

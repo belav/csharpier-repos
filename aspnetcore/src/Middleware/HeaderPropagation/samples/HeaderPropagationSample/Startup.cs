@@ -32,13 +32,10 @@ public class Startup
             options.Headers.Add("X-BetaFeatures");
 
             // Generate a new X-BetaFeatures if not present.
-            options.Headers.Add(
-                "X-BetaFeatures",
-                context =>
-                {
-                    return GenerateBetaFeatureOptions();
-                }
-            );
+            options.Headers.Add("X-BetaFeatures", context =>
+            {
+                return GenerateBetaFeatureOptions();
+            });
         });
 
         services.AddHttpClient("test").AddHeaderPropagation();
@@ -67,58 +64,50 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapGet(
-                "/",
-                async context =>
+            endpoints.MapGet("/", async context =>
+            {
+                foreach (var header in context.Request.Headers)
                 {
-                    foreach (var header in context.Request.Headers)
-                    {
-                        await context.Response.WriteAsync(
-                            $"'/' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
-                        );
-                    }
-
-                    var clientNames = new[] { "test", "another" };
-                    foreach (var clientName in clientNames)
-                    {
-                        await context.Response.WriteAsync("Sending request to /forwarded\r\n");
-
-                        var uri = UriHelper.BuildAbsolute(
-                            context.Request.Scheme,
-                            context.Request.Host,
-                            context.Request.PathBase,
-                            "/forwarded"
-                        );
-                        var client = clientFactory.CreateClient(clientName);
-                        var response = await client.GetAsync(uri);
-
-                        foreach (var header in response.RequestMessage.Headers)
-                        {
-                            await context.Response.WriteAsync(
-                                $"Sent Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
-                            );
-                        }
-
-                        await context.Response.WriteAsync("Got response\r\n");
-                        await context.Response.WriteAsync(
-                            await response.Content.ReadAsStringAsync()
-                        );
-                    }
+                    await context.Response.WriteAsync(
+                        $"'/' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                    );
                 }
-            );
 
-            endpoints.MapGet(
-                "/forwarded",
-                async context =>
+                var clientNames = new[] { "test", "another" };
+                foreach (var clientName in clientNames)
                 {
-                    foreach (var header in context.Request.Headers)
+                    await context.Response.WriteAsync("Sending request to /forwarded\r\n");
+
+                    var uri = UriHelper.BuildAbsolute(
+                        context.Request.Scheme,
+                        context.Request.Host,
+                        context.Request.PathBase,
+                        "/forwarded"
+                    );
+                    var client = clientFactory.CreateClient(clientName);
+                    var response = await client.GetAsync(uri);
+
+                    foreach (var header in response.RequestMessage.Headers)
                     {
                         await context.Response.WriteAsync(
-                            $"'/forwarded' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                            $"Sent Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
                         );
                     }
+
+                    await context.Response.WriteAsync("Got response\r\n");
+                    await context.Response.WriteAsync(await response.Content.ReadAsStringAsync());
                 }
-            );
+            });
+
+            endpoints.MapGet("/forwarded", async context =>
+            {
+                foreach (var header in context.Request.Headers)
+                {
+                    await context.Response.WriteAsync(
+                        $"'/forwarded' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                    );
+                }
+            });
         });
     }
 

@@ -72,9 +72,8 @@ public class SqlServerConnection : RelationalConnection, ISqlServerConnection
         connectionStringBuilder.Remove("AttachDBFilename");
 
         var contextOptions = new DbContextOptionsBuilder()
-            .UseSqlServer(
-                connectionStringBuilder.ConnectionString,
-                b => b.CommandTimeout(CommandTimeout ?? DefaultMasterConnectionCommandTimeout)
+            .UseSqlServer(connectionStringBuilder.ConnectionString, b =>
+                b.CommandTimeout(CommandTimeout ?? DefaultMasterConnectionCommandTimeout)
             )
             .Options;
 
@@ -94,9 +93,8 @@ public class SqlServerConnection : RelationalConnection, ISqlServerConnection
             var connectionString = ConnectionString;
 
             return connectionString != null
-                && MultipleActiveResultSetsEnabledMap.GetOrAdd(
-                    connectionString,
-                    cs => new SqlConnectionStringBuilder(cs).MultipleActiveResultSets
+                && MultipleActiveResultSetsEnabledMap.GetOrAdd(connectionString, cs =>
+                    new SqlConnectionStringBuilder(cs).MultipleActiveResultSets
                 );
         }
     }

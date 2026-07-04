@@ -148,13 +148,11 @@ public class SqlServerGeometryTypeMapping<TGeometry>
     protected override void ConfigureParameter(DbParameter parameter)
     {
         var type = parameter.GetType();
-        LazyInitializer.EnsureInitialized(
-            ref _sqlDbTypeSetter,
-            () => CreateSqlDbTypeAccessor(type)
+        LazyInitializer.EnsureInitialized(ref _sqlDbTypeSetter, () =>
+            CreateSqlDbTypeAccessor(type)
         );
-        LazyInitializer.EnsureInitialized(
-            ref _udtTypeNameSetter,
-            () => CreateUdtTypeNameAccessor(type)
+        LazyInitializer.EnsureInitialized(ref _udtTypeNameSetter, () =>
+            CreateUdtTypeNameAccessor(type)
         );
 
         if (parameter.Value == DBNull.Value)

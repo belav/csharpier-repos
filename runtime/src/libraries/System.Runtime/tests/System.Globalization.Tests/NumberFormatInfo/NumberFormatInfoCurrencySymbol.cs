@@ -31,10 +31,8 @@ namespace System.Globalization.Tests
         public void CurrencySymbol_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "CurrencySymbol",
-                () => format.CurrencySymbol = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "CurrencySymbol", () =>
+                format.CurrencySymbol = null
             );
         }
 

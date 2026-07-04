@@ -8115,9 +8115,8 @@ namespace System.Text.Json.Tests
             {
                 writer.WriteStartArray();
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "value",
-                    () => writer.WriteCommentValue(nullString)
+                AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                    writer.WriteCommentValue(nullString)
                 );
 
                 ReadOnlySpan<char> nullStringSpan = nullString.AsSpan();
@@ -8224,9 +8223,8 @@ namespace System.Text.Json.Tests
             {
                 writer.WriteStartObject();
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "propertyName",
-                    () => stringAction(writer, nullString, value)
+                AssertExtensions.Throws<ArgumentNullException>("propertyName", () =>
+                    stringAction(writer, nullString, value)
                 );
 
                 writer.WriteEndObject();
@@ -8267,9 +8265,8 @@ namespace System.Text.Json.Tests
             {
                 writer.WriteStartObject();
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "propertyName",
-                    () => stringAction(writer, nullString)
+                AssertExtensions.Throws<ArgumentNullException>("propertyName", () =>
+                    stringAction(writer, nullString)
                 );
 
                 writer.WriteEndObject();

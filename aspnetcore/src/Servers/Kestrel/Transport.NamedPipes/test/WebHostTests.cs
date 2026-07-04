@@ -206,13 +206,10 @@ public class WebHostTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(o =>
                     {
-                        o.ListenNamedPipe(
-                            pipeName,
-                            listenOptions =>
-                            {
-                                listenOptions.Protocols = HttpProtocols.Http1;
-                            }
-                        );
+                        o.ListenNamedPipe(pipeName, listenOptions =>
+                        {
+                            listenOptions.Protocols = HttpProtocols.Http1;
+                        });
                     })
                     .UseNamedPipes(options =>
                     {
@@ -309,13 +306,10 @@ public class WebHostTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(o =>
                     {
-                        o.ListenNamedPipe(
-                            pipeName,
-                            options =>
-                            {
-                                options.Protocols = protocols;
-                            }
-                        );
+                        o.ListenNamedPipe(pipeName, options =>
+                        {
+                            options.Protocols = protocols;
+                        });
                     })
                     .Configure(app =>
                     {
@@ -379,14 +373,11 @@ public class WebHostTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(o =>
                     {
-                        o.ListenNamedPipe(
-                            pipeName,
-                            options =>
-                            {
-                                options.Protocols = protocols;
-                                options.UseHttps(TestResources.GetTestCertificate());
-                            }
-                        );
+                        o.ListenNamedPipe(pipeName, options =>
+                        {
+                            options.Protocols = protocols;
+                            options.UseHttps(TestResources.GetTestCertificate());
+                        });
                     })
                     .Configure(app =>
                     {

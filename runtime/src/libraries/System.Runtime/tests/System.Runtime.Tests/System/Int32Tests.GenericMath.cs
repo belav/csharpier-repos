@@ -6158,9 +6158,8 @@ namespace System.Tests
             // Default provider
             if (provider is null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () => NumberBaseHelper<int>.Parse(value, style, provider)
+                Assert.Throws(exceptionType, () =>
+                    NumberBaseHelper<int>.Parse(value, style, provider)
                 );
 
                 // Substitute default NumberFormatInfo
@@ -6168,9 +6167,8 @@ namespace System.Tests
                     NumberBaseHelper<int>.TryParse(value, style, new NumberFormatInfo(), out result)
                 );
                 Assert.Equal(default(int), result);
-                Assert.Throws(
-                    exceptionType,
-                    () => NumberBaseHelper<int>.Parse(value, style, new NumberFormatInfo())
+                Assert.Throws(exceptionType, () =>
+                    NumberBaseHelper<int>.Parse(value, style, new NumberFormatInfo())
                 );
             }
 
@@ -6256,9 +6254,8 @@ namespace System.Tests
                 Assert.Equal(default(int), result);
             }
 
-            Assert.Throws(
-                exceptionType,
-                () => NumberBaseHelper<int>.Parse(value.AsSpan(), style, provider)
+            Assert.Throws(exceptionType, () =>
+                NumberBaseHelper<int>.Parse(value.AsSpan(), style, provider)
             );
 
             Assert.False(

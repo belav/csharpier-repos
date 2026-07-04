@@ -100,19 +100,16 @@ namespace System.Data.Tests
     </xs:complexType>
 </xs:schema>";
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    var ds = new DataSet();
-                    ds.Tables.Add(new DataTable("Root"));
-                    ds.Tables.Add(new DataTable("unusedType"));
-                    ds.Tables[0].ReadXmlSchema(new StringReader(xs));
-                    DataSetAssertion.AssertDataTable("dt", ds.Tables[0], "Root", 1, 0, 0, 0, 0, 0);
-                    // Here "unusedType" table is never imported.
-                    ds.Tables[1].ReadXmlSchema(new StringReader(xs));
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                var ds = new DataSet();
+                ds.Tables.Add(new DataTable("Root"));
+                ds.Tables.Add(new DataTable("unusedType"));
+                ds.Tables[0].ReadXmlSchema(new StringReader(xs));
+                DataSetAssertion.AssertDataTable("dt", ds.Tables[0], "Root", 1, 0, 0, 0, 0, 0);
+                // Here "unusedType" table is never imported.
+                ds.Tables[1].ReadXmlSchema(new StringReader(xs));
+            });
         }
 
         [ConditionalFact(
@@ -132,26 +129,23 @@ namespace System.Data.Tests
     </xs:complexType>
 </xs:schema>";
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    // When explicit msdata:IsDataSet value is "false", then
-                    // treat as usual.
-                    string xs = string.Format(xsbase, "false");
-                    var ds = new DataSet();
-                    ds.Tables.Add(new DataTable("Root"));
-                    ds.Tables[0].ReadXmlSchema(new StringReader(xs));
-                    DataSetAssertion.AssertDataTable("dt", ds.Tables[0], "Root", 1, 0, 0, 0, 0, 0);
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                // When explicit msdata:IsDataSet value is "false", then
+                // treat as usual.
+                string xs = string.Format(xsbase, "false");
+                var ds = new DataSet();
+                ds.Tables.Add(new DataTable("Root"));
+                ds.Tables[0].ReadXmlSchema(new StringReader(xs));
+                DataSetAssertion.AssertDataTable("dt", ds.Tables[0], "Root", 1, 0, 0, 0, 0, 0);
 
-                    // Even if a global element uses a complexType, it will be
-                    // ignored if the element has msdata:IsDataSet='true'
-                    xs = string.Format(xsbase, "true");
-                    ds = new DataSet();
-                    ds.Tables.Add(new DataTable("Root"));
-                    ds.Tables[0].ReadXmlSchema(new StringReader(xs));
-                }
-            );
+                // Even if a global element uses a complexType, it will be
+                // ignored if the element has msdata:IsDataSet='true'
+                xs = string.Format(xsbase, "true");
+                ds = new DataSet();
+                ds.Tables.Add(new DataTable("Root"));
+                ds.Tables[0].ReadXmlSchema(new StringReader(xs));
+            });
         }
 
         [ConditionalFact(
@@ -178,17 +172,14 @@ namespace System.Data.Tests
     </xs:element>
 </xs:schema>";
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    // DataSet element cannot be converted into a DataTable.
-                    // (i.e. cannot be referenced in any other elements)
-                    var ds = new DataSet();
-                    ds.Tables.Add(new DataTable());
-                    ds.Tables[0].ReadXmlSchema(new StringReader(xs));
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                // DataSet element cannot be converted into a DataTable.
+                // (i.e. cannot be referenced in any other elements)
+                var ds = new DataSet();
+                ds.Tables.Add(new DataTable());
+                ds.Tables[0].ReadXmlSchema(new StringReader(xs));
+            });
         }
 
         [Fact]

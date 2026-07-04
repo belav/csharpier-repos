@@ -55,18 +55,12 @@ public class WeakReferenceHelpersTests
         MyDisposable instanceThatWillBeCreatedSecond = new MyDisposable();
 
         // Act
-        var retVal = WeakReferenceHelpers.GetSharedInstance(
-            ref wr,
-            () =>
-            {
-                // mimic another thread creating the instance while our factory is being invoked
-                WeakReferenceHelpers.GetSharedInstance(
-                    ref wr,
-                    () => instanceThatWillBeCreatedFirst
-                );
-                return instanceThatWillBeCreatedSecond;
-            }
-        );
+        var retVal = WeakReferenceHelpers.GetSharedInstance(ref wr, () =>
+        {
+            // mimic another thread creating the instance while our factory is being invoked
+            WeakReferenceHelpers.GetSharedInstance(ref wr, () => instanceThatWillBeCreatedFirst);
+            return instanceThatWillBeCreatedSecond;
+        });
 
         // Assert
         Assert.NotNull(wr);

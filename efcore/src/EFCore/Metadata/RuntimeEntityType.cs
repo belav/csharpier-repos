@@ -879,10 +879,8 @@ public class RuntimeEntityType : RuntimeTypeBase, IRuntimeEntityType
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual PropertyCounts Counts =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _counts,
-            this,
-            static entityType => entityType.CalculateCounts()
+        NonCapturingLazyInitializer.EnsureInitialized(ref _counts, this, static entityType =>
+            entityType.CalculateCounts()
         );
 
     /// <summary>

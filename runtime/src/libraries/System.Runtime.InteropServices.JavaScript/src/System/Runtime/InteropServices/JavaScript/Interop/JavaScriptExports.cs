@@ -90,13 +90,10 @@ namespace System.Runtime.InteropServices.JavaScript
                         SR.Format(SR.ReturnTypeNotSupportedForMain, method.ReturnType.FullName)
                     );
                 }
-                arg_result.ToJS(
-                    result,
-                    (ref JSMarshalerArgument arg, int value) =>
-                    {
-                        arg.ToJS(value);
-                    }
-                );
+                arg_result.ToJS(result, (ref JSMarshalerArgument arg, int value) =>
+                {
+                    arg.ToJS(value);
+                });
             }
             catch (Exception ex)
             {

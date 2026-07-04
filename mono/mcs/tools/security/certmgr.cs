@@ -552,26 +552,22 @@ namespace Mono.Tools
             NetworkStream ns = new NetworkStream(socket, false);
 
             var certs = new X509CertificateCollection();
-            var ssl = new SslStream(
-                ns,
-                false,
-                (s, cert, chain, p) =>
+            var ssl = new SslStream(ns, false, (s, cert, chain, p) =>
+            {
+                var elements = chain?.ChainPolicy?.ExtraStore;
+                if (elements != null && elements.Count > 0)
                 {
-                    var elements = chain?.ChainPolicy?.ExtraStore;
-                    if (elements != null && elements.Count > 0)
+                    foreach (var element in elements)
                     {
-                        foreach (var element in elements)
-                        {
-                            certs.Add(new X509Certificate(element.RawData));
-                        }
+                        certs.Add(new X509Certificate(element.RawData));
                     }
-                    else
-                    {
-                        certs.Add(new X509Certificate(cert.GetRawCertData()));
-                    }
-                    return true;
                 }
-            );
+                else
+                {
+                    certs.Add(new X509Certificate(cert.GetRawCertData()));
+                }
+                return true;
+            });
             ssl.AuthenticateAsClient(uri.Host);
 
             return certs;

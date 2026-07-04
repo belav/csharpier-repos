@@ -171,26 +171,21 @@ namespace System.Net.Tests
         [Fact]
         public void Ctor_InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "level",
-                () => new HttpRequestCachePolicy((HttpRequestCacheLevel)42)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("level", () =>
+                new HttpRequestCachePolicy((HttpRequestCacheLevel)42)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "cacheAgeControl",
-                () =>
-                    new HttpRequestCachePolicy(
-                        HttpCacheAgeControl.MaxAgeAndMinFresh,
-                        TimeSpan.FromSeconds(1)
-                    )
+            AssertExtensions.Throws<ArgumentException>("cacheAgeControl", () =>
+                new HttpRequestCachePolicy(
+                    HttpCacheAgeControl.MaxAgeAndMinFresh,
+                    TimeSpan.FromSeconds(1)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "cacheAgeControl",
-                () =>
-                    new HttpRequestCachePolicy(
-                        HttpCacheAgeControl.None,
-                        TimeSpan.FromSeconds(1),
-                        TimeSpan.FromSeconds(2)
-                    )
+            AssertExtensions.Throws<ArgumentException>("cacheAgeControl", () =>
+                new HttpRequestCachePolicy(
+                    HttpCacheAgeControl.None,
+                    TimeSpan.FromSeconds(1),
+                    TimeSpan.FromSeconds(2)
+                )
             );
         }
     }

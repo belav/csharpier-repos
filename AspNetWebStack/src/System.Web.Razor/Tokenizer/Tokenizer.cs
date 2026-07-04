@@ -256,22 +256,16 @@ namespace System.Web.Razor.Tokenizer
                     State next = () =>
                     {
                         Buffer.Append(star);
-                        return Transition(
-                            EndSymbol(start, RazorCommentStarType),
-                            () =>
+                        return Transition(EndSymbol(start, RazorCommentStarType), () =>
+                        {
+                            if (CurrentCharacter != '@')
                             {
-                                if (CurrentCharacter != '@')
-                                {
-                                    // We've been moved since last time we were asked for a symbol... reset the state
-                                    return Transition(StartState);
-                                }
-                                TakeCurrent();
-                                return Transition(
-                                    EndSymbol(RazorCommentTransitionType),
-                                    StartState
-                                );
+                                // We've been moved since last time we were asked for a symbol... reset the state
+                                return Transition(StartState);
                             }
-                        );
+                            TakeCurrent();
+                            return Transition(EndSymbol(RazorCommentTransitionType), StartState);
+                        });
                     };
 
                     if (HaveContent)

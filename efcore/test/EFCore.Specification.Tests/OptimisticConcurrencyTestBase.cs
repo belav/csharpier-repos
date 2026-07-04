@@ -43,103 +43,88 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         var newName = "New name";
         using var c = CreateF1Context();
         c.Database.CreateExecutionStrategy()
-            .Execute(
-                c,
-                context =>
-                {
-                    using var transaction = BeginTransaction(context.Database);
-                    var sponsor = context.Sponsors.Single(s => s.Id == 1);
-                    Assert.IsType<Sponsor.SponsorDoubleProxy>(sponsor);
-                    Assert.Null(
-                        context
-                            .Entry(sponsor)
-                            .Property<int?>(Sponsor.ClientTokenPropertyName)
-                            .CurrentValue
-                    );
-                    originalName = sponsor.Name;
-                    sponsor.Name = "New name";
+            .Execute(c, context =>
+            {
+                using var transaction = BeginTransaction(context.Database);
+                var sponsor = context.Sponsors.Single(s => s.Id == 1);
+                Assert.IsType<Sponsor.SponsorDoubleProxy>(sponsor);
+                Assert.Null(
                     context
                         .Entry(sponsor)
                         .Property<int?>(Sponsor.ClientTokenPropertyName)
-                        .CurrentValue = 1;
-                    context.SaveChanges();
+                        .CurrentValue
+                );
+                originalName = sponsor.Name;
+                sponsor.Name = "New name";
+                context
+                    .Entry(sponsor)
+                    .Property<int?>(Sponsor.ClientTokenPropertyName)
+                    .CurrentValue = 1;
+                context.SaveChanges();
 
-                    using var innerContext = CreateF1Context();
-                    UseTransaction(innerContext.Database, transaction);
-                    sponsor = innerContext.Sponsors.Single(s => s.Id == 1);
-                    Assert.IsType<Sponsor.SponsorDoubleProxy>(sponsor);
-                    Assert.Equal(
-                        1,
-                        innerContext
-                            .Entry(sponsor)
-                            .Property<int?>(Sponsor.ClientTokenPropertyName)
-                            .CurrentValue
-                    );
-                    Assert.Equal("Intercepted: " + newName, sponsor.Name);
-                    sponsor.Name = originalName;
+                using var innerContext = CreateF1Context();
+                UseTransaction(innerContext.Database, transaction);
+                sponsor = innerContext.Sponsors.Single(s => s.Id == 1);
+                Assert.IsType<Sponsor.SponsorDoubleProxy>(sponsor);
+                Assert.Equal(
+                    1,
                     innerContext
                         .Entry(sponsor)
                         .Property<int?>(Sponsor.ClientTokenPropertyName)
-                        .OriginalValue = null;
-                    Assert.Throws<DbUpdateConcurrencyException>(() => innerContext.SaveChanges());
-                }
-            );
+                        .CurrentValue
+                );
+                Assert.Equal("Intercepted: " + newName, sponsor.Name);
+                sponsor.Name = originalName;
+                innerContext
+                    .Entry(sponsor)
+                    .Property<int?>(Sponsor.ClientTokenPropertyName)
+                    .OriginalValue = null;
+                Assert.Throws<DbUpdateConcurrencyException>(() => innerContext.SaveChanges());
+            });
     }
 
     #region Concurrency resolution with FK associations
 
     [ConditionalFact]
     public virtual Task Simple_concurrency_exception_can_be_resolved_with_client_values() =>
-        ConcurrencyTestAsync(
-            ClientPodiums,
-            (c, ex) =>
-            {
-                var driverEntry = ex.Entries.Single();
-                driverEntry.OriginalValues.SetValues(driverEntry.GetDatabaseValues());
-                ResolveConcurrencyTokens(driverEntry);
-            }
-        );
+        ConcurrencyTestAsync(ClientPodiums, (c, ex) =>
+        {
+            var driverEntry = ex.Entries.Single();
+            driverEntry.OriginalValues.SetValues(driverEntry.GetDatabaseValues());
+            ResolveConcurrencyTokens(driverEntry);
+        });
 
     [ConditionalFact]
     public virtual Task Simple_concurrency_exception_can_be_resolved_with_store_values() =>
-        ConcurrencyTestAsync(
-            StorePodiums,
-            (c, ex) =>
-            {
-                var driverEntry = ex.Entries.Single();
-                var storeValues = driverEntry.GetDatabaseValues();
-                driverEntry.CurrentValues.SetValues(storeValues);
-                driverEntry.OriginalValues.SetValues(storeValues);
-                ResolveConcurrencyTokens(driverEntry);
-            }
-        );
+        ConcurrencyTestAsync(StorePodiums, (c, ex) =>
+        {
+            var driverEntry = ex.Entries.Single();
+            var storeValues = driverEntry.GetDatabaseValues();
+            driverEntry.CurrentValues.SetValues(storeValues);
+            driverEntry.OriginalValues.SetValues(storeValues);
+            ResolveConcurrencyTokens(driverEntry);
+        });
 
     [ConditionalFact]
     public virtual Task Simple_concurrency_exception_can_be_resolved_with_new_values() =>
-        ConcurrencyTestAsync(
-            10,
-            (c, ex) =>
-            {
-                var driverEntry = ex.Entries.Single();
-                driverEntry.OriginalValues.SetValues(driverEntry.GetDatabaseValues());
-                ResolveConcurrencyTokens(driverEntry);
-                ((Driver)driverEntry.Entity).Podiums = 10;
-            }
-        );
+        ConcurrencyTestAsync(10, (c, ex) =>
+        {
+            var driverEntry = ex.Entries.Single();
+            driverEntry.OriginalValues.SetValues(driverEntry.GetDatabaseValues());
+            ResolveConcurrencyTokens(driverEntry);
+            ((Driver)driverEntry.Entity).Podiums = 10;
+        });
 
     [ConditionalFact]
     public virtual Task Simple_concurrency_exception_can_be_resolved_with_store_values_using_equivalent_of_accept_changes() =>
-        ConcurrencyTestAsync(
-            StorePodiums,
-            (c, ex) =>
-            {
-                var driverEntry = ex.Entries.Single();
-                var storeValues = driverEntry.GetDatabaseValues();
-                driverEntry.CurrentValues.SetValues(storeValues);
-                driverEntry.OriginalValues.SetValues(storeValues);
-                driverEntry.State = EntityState.Unchanged;
-            }
-        );
+        ConcurrencyTestAsync(StorePodiums, (c, ex) =>
+        {
+            var driverEntry = ex.Entries.Single();
+            var storeValues = driverEntry.GetDatabaseValues();
+            driverEntry.CurrentValues.SetValues(storeValues);
+            driverEntry.OriginalValues.SetValues(storeValues);
+            driverEntry.State = EntityState.Unchanged;
+        });
 
     [ConditionalFact]
     public virtual Task Simple_concurrency_exception_can_be_resolved_with_store_values_using_Reload() =>
@@ -376,38 +361,33 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         using var c = CreateF1Context();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
-                {
-                    using var transaction = BeginTransaction(context.Database);
-                    context.Teams.Add(
-                        new Team
-                        {
-                            Id = -1,
-                            Name = "Wubbsy Racing",
-                            Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" },
-                        }
-                    );
+            .ExecuteAsync(c, async context =>
+            {
+                using var transaction = BeginTransaction(context.Database);
+                context.Teams.Add(
+                    new Team
+                    {
+                        Id = -1,
+                        Name = "Wubbsy Racing",
+                        Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" },
+                    }
+                );
 
-                    using var innerContext = CreateF1Context();
-                    UseTransaction(innerContext.Database, transaction);
-                    innerContext.Teams.Add(
-                        new Team
-                        {
-                            Id = -1,
-                            Name = "Wubbsy Racing",
-                            Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" },
-                        }
-                    );
+                using var innerContext = CreateF1Context();
+                UseTransaction(innerContext.Database, transaction);
+                innerContext.Teams.Add(
+                    new Team
+                    {
+                        Id = -1,
+                        Name = "Wubbsy Racing",
+                        Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" },
+                    }
+                );
 
-                    await innerContext.SaveChangesAsync();
+                await innerContext.SaveChangesAsync();
 
-                    await Assert.ThrowsAnyAsync<DbUpdateException>(() =>
-                        context.SaveChangesAsync()
-                    );
-                }
-            );
+                await Assert.ThrowsAnyAsync<DbUpdateException>(() => context.SaveChangesAsync());
+            });
     }
 
     [ConditionalFact]
@@ -500,29 +480,26 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         using var c = CreateF1Context();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
+            .ExecuteAsync(c, async context =>
+            {
+                using (BeginTransaction(context.Database))
                 {
-                    using (BeginTransaction(context.Database))
+                    var entry = context.Drivers.Add(
+                        new Driver { Name = "Larry David", TeamId = Team.Ferrari }
+                    );
+
+                    if (async)
                     {
-                        var entry = context.Drivers.Add(
-                            new Driver { Name = "Larry David", TeamId = Team.Ferrari }
-                        );
-
-                        if (async)
-                        {
-                            await entry.ReloadAsync();
-                        }
-                        else
-                        {
-                            entry.Reload();
-                        }
-
-                        Assert.Equal(EntityState.Added, entry.State);
+                        await entry.ReloadAsync();
                     }
+                    else
+                    {
+                        entry.Reload();
+                    }
+
+                    Assert.Equal(EntityState.Added, entry.State);
                 }
-            );
+            });
     }
 
     [ConditionalTheory]
@@ -558,36 +535,33 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         using var c = CreateF1Context();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
+            .ExecuteAsync(c, async context =>
+            {
+                using (BeginTransaction(context.Database))
                 {
-                    using (BeginTransaction(context.Database))
+                    var entry = context.Drivers.Add(
+                        new Driver
+                        {
+                            Id = 676,
+                            Name = "Larry David",
+                            TeamId = Team.Ferrari,
+                        }
+                    );
+
+                    entry.State = state;
+
+                    if (async)
                     {
-                        var entry = context.Drivers.Add(
-                            new Driver
-                            {
-                                Id = 676,
-                                Name = "Larry David",
-                                TeamId = Team.Ferrari,
-                            }
-                        );
-
-                        entry.State = state;
-
-                        if (async)
-                        {
-                            await entry.ReloadAsync();
-                        }
-                        else
-                        {
-                            entry.Reload();
-                        }
-
-                        Assert.Equal(EntityState.Detached, entry.State);
+                        await entry.ReloadAsync();
                     }
+                    else
+                    {
+                        entry.Reload();
+                    }
+
+                    Assert.Equal(EntityState.Detached, entry.State);
                 }
-            );
+            });
     }
 
     [ConditionalTheory]
@@ -630,33 +604,30 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         using var c = CreateF1Context();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
+            .ExecuteAsync(c, async context =>
+            {
+                using (BeginTransaction(context.Database))
                 {
-                    using (BeginTransaction(context.Database))
+                    var larry = context.Drivers.Single(d => d.Name == "Jenson Button");
+                    larry.Name = "Rory Gilmore";
+                    var entry = context.Entry(larry);
+                    entry.Property(e => e.Name).CurrentValue = "Emily Gilmore";
+                    entry.State = state;
+
+                    if (async)
                     {
-                        var larry = context.Drivers.Single(d => d.Name == "Jenson Button");
-                        larry.Name = "Rory Gilmore";
-                        var entry = context.Entry(larry);
-                        entry.Property(e => e.Name).CurrentValue = "Emily Gilmore";
-                        entry.State = state;
-
-                        if (async)
-                        {
-                            await entry.ReloadAsync();
-                        }
-                        else
-                        {
-                            entry.Reload();
-                        }
-
-                        Assert.Equal(EntityState.Unchanged, entry.State);
-                        Assert.Equal("Jenson Button", larry.Name);
-                        Assert.Equal("Jenson Button", entry.Property(e => e.Name).CurrentValue);
+                        await entry.ReloadAsync();
                     }
+                    else
+                    {
+                        entry.Reload();
+                    }
+
+                    Assert.Equal(EntityState.Unchanged, entry.State);
+                    Assert.Equal("Jenson Button", larry.Name);
+                    Assert.Equal("Jenson Button", entry.Property(e => e.Name).CurrentValue);
                 }
-            );
+            });
     }
 
     [ConditionalTheory]
@@ -667,34 +638,29 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         using var c = CreateF1Context();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
-                {
-                    using var transaction = BeginTransaction(context.Database);
-                    var titleSponsor = context
-                        .Set<TitleSponsor>()
-                        .Single(t => t.Name == "Vodafone");
+            .ExecuteAsync(c, async context =>
+            {
+                using var transaction = BeginTransaction(context.Database);
+                var titleSponsor = context.Set<TitleSponsor>().Single(t => t.Name == "Vodafone");
 
-                    var ownerEntry = context.Entry(titleSponsor);
-                    var ownedEntry = ownerEntry.Reference(e => e.Details).TargetEntry;
+                var ownerEntry = context.Entry(titleSponsor);
+                var ownedEntry = ownerEntry.Reference(e => e.Details).TargetEntry;
 
-                    using var innerContext = CreateF1Context();
-                    UseTransaction(innerContext.Database, transaction);
+                using var innerContext = CreateF1Context();
+                UseTransaction(innerContext.Database, transaction);
 
-                    var innerTitleSponsor = innerContext
-                        .Set<TitleSponsor>()
-                        .Single(t => t.Name == "Vodafone");
-                    innerTitleSponsor.Details.Days = 5;
+                var innerTitleSponsor = innerContext
+                    .Set<TitleSponsor>()
+                    .Single(t => t.Name == "Vodafone");
+                innerTitleSponsor.Details.Days = 5;
 
-                    await innerContext.SaveChangesAsync();
+                await innerContext.SaveChangesAsync();
 
-                    var databaseValues = async
-                        ? await ownedEntry.GetDatabaseValuesAsync()
-                        : ownedEntry.GetDatabaseValues();
-                    Assert.Equal(5, databaseValues.GetValue<int>("Days"));
-                }
-            );
+                var databaseValues = async
+                    ? await ownedEntry.GetDatabaseValuesAsync()
+                    : ownedEntry.GetDatabaseValues();
+                Assert.Equal(5, databaseValues.GetValue<int>("Days"));
+            });
     }
 
     [ConditionalTheory]
@@ -705,40 +671,35 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         using var c = CreateF1Context();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
+            .ExecuteAsync(c, async context =>
+            {
+                using var transaction = BeginTransaction(context.Database);
+                var titleSponsor = context.Set<TitleSponsor>().Single(t => t.Name == "Vodafone");
+
+                var ownerEntry = context.Entry(titleSponsor);
+                var ownedEntry = ownerEntry.Reference(e => e.Details).TargetEntry;
+
+                using var innerContext = CreateF1Context();
+                UseTransaction(innerContext.Database, transaction);
+
+                var innerTitleSponsor = innerContext
+                    .Set<TitleSponsor>()
+                    .Single(t => t.Name == "Vodafone");
+                innerTitleSponsor.Details.Days = 5;
+
+                await innerContext.SaveChangesAsync();
+
+                if (async)
                 {
-                    using var transaction = BeginTransaction(context.Database);
-                    var titleSponsor = context
-                        .Set<TitleSponsor>()
-                        .Single(t => t.Name == "Vodafone");
-
-                    var ownerEntry = context.Entry(titleSponsor);
-                    var ownedEntry = ownerEntry.Reference(e => e.Details).TargetEntry;
-
-                    using var innerContext = CreateF1Context();
-                    UseTransaction(innerContext.Database, transaction);
-
-                    var innerTitleSponsor = innerContext
-                        .Set<TitleSponsor>()
-                        .Single(t => t.Name == "Vodafone");
-                    innerTitleSponsor.Details.Days = 5;
-
-                    await innerContext.SaveChangesAsync();
-
-                    if (async)
-                    {
-                        await ownedEntry.ReloadAsync();
-                    }
-                    else
-                    {
-                        ownedEntry.Reload();
-                    }
-
-                    Assert.Equal(5, ownedEntry.Property(e => e.Days).CurrentValue);
+                    await ownedEntry.ReloadAsync();
                 }
-            );
+                else
+                {
+                    ownedEntry.Reload();
+                }
+
+                Assert.Equal(5, ownedEntry.Property(e => e.Days).CurrentValue);
+            });
     }
 
     #endregion
@@ -820,48 +781,45 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         using var c = CreateF1Context();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
+            .ExecuteAsync(c, async context =>
+            {
+                using var transaction = BeginTransaction(context.Database);
+                clientChange(context);
+
+                using var innerContext = CreateF1Context();
+                UseTransaction(innerContext.Database, transaction);
+                storeChange(innerContext);
+                await innerContext.SaveChangesAsync();
+
+                var updateException = await Assert.ThrowsAnyAsync<TException>(() =>
+                    context.SaveChangesAsync()
+                );
+
+                if (typeof(TException) == typeof(DbUpdateConcurrencyException))
                 {
-                    using var transaction = BeginTransaction(context.Database);
-                    clientChange(context);
-
-                    using var innerContext = CreateF1Context();
-                    UseTransaction(innerContext.Database, transaction);
-                    storeChange(innerContext);
-                    await innerContext.SaveChangesAsync();
-
-                    var updateException = await Assert.ThrowsAnyAsync<TException>(() =>
-                        context.SaveChangesAsync()
+                    Assert.Equal(
+                        LogLevel.Debug,
+                        Fixture
+                            .ListLoggerFactory.Log.Single(l =>
+                                l.Id == CoreEventId.OptimisticConcurrencyException
+                            )
+                            .Level
                     );
-
-                    if (typeof(TException) == typeof(DbUpdateConcurrencyException))
-                    {
-                        Assert.Equal(
-                            LogLevel.Debug,
-                            Fixture
-                                .ListLoggerFactory.Log.Single(l =>
-                                    l.Id == CoreEventId.OptimisticConcurrencyException
-                                )
-                                .Level
-                        );
-                    }
-
-                    Fixture.ListLoggerFactory.Clear();
-
-                    resolver(context, updateException);
-
-                    using var validationContext = CreateF1Context();
-                    UseTransaction(validationContext.Database, transaction);
-                    if (validator != null)
-                    {
-                        await context.SaveChangesAsync();
-
-                        validator(validationContext);
-                    }
                 }
-            );
+
+                Fixture.ListLoggerFactory.Clear();
+
+                resolver(context, updateException);
+
+                using var validationContext = CreateF1Context();
+                UseTransaction(validationContext.Database, transaction);
+                if (validator != null)
+                {
+                    await context.SaveChangesAsync();
+
+                    validator(validationContext);
+                }
+            });
     }
 
     protected virtual IDbContextTransaction BeginTransaction(DatabaseFacade facade) =>

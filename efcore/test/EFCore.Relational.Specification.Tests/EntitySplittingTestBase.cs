@@ -73,24 +73,21 @@ public abstract class EntitySplittingTestBase : NonSharedModelTestBase
         }
         else
         {
-            TestHelpers.ExecuteWithStrategyInTransaction(
-                CreateContext,
-                UseTransaction,
-                context =>
-                    Assert.Contains(
-                        RelationalStrings.NonQueryTranslationFailedWithDetails(
-                            "",
-                            RelationalStrings.ExecuteOperationOnEntitySplitting(
-                                "ExecuteDelete",
-                                "MeterReading"
-                            )
-                        )[21..],
-                        Assert
-                            .Throws<InvalidOperationException>(() =>
-                                context.MeterReadings.ExecuteDelete()
-                            )
-                            .Message
-                    )
+            TestHelpers.ExecuteWithStrategyInTransaction(CreateContext, UseTransaction, context =>
+                Assert.Contains(
+                    RelationalStrings.NonQueryTranslationFailedWithDetails(
+                        "",
+                        RelationalStrings.ExecuteOperationOnEntitySplitting(
+                            "ExecuteDelete",
+                            "MeterReading"
+                        )
+                    )[21..],
+                    Assert
+                        .Throws<InvalidOperationException>(() =>
+                            context.MeterReadings.ExecuteDelete()
+                        )
+                        .Message
+                )
             );
         }
     }
@@ -113,14 +110,11 @@ public abstract class EntitySplittingTestBase : NonSharedModelTestBase
         modelBuilder.Entity<MeterReading>(ob =>
         {
             ob.ToTable("MeterReadings");
-            ob.SplitToTable(
-                "MeterReadingDetails",
-                t =>
-                {
-                    t.Property(o => o.PreviousRead);
-                    t.Property(o => o.CurrentRead);
-                }
-            );
+            ob.SplitToTable("MeterReadingDetails", t =>
+            {
+                t.Property(o => o.PreviousRead);
+                t.Property(o => o.CurrentRead);
+            });
         });
 
     protected async Task InitializeAsync(

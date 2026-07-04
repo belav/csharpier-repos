@@ -238,21 +238,16 @@ namespace System.Linq.Expressions
 
         private void VisitDeclarations(IReadOnlyList<ParameterExpression> expressions)
         {
-            VisitExpressions(
-                '(',
-                ',',
-                expressions,
-                variable =>
+            VisitExpressions('(', ',', expressions, variable =>
+            {
+                Out(variable.Type.ToString());
+                if (variable.IsByRef)
                 {
-                    Out(variable.Type.ToString());
-                    if (variable.IsByRef)
-                    {
-                        Out("&");
-                    }
-                    Out(" ");
-                    VisitParameter(variable);
+                    Out("&");
                 }
-            );
+                Out(" ");
+                VisitParameter(variable);
+            });
         }
 
         private void VisitExpressions<T>(

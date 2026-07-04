@@ -276,9 +276,8 @@ namespace System.Runtime.Serialization
             MemberHolder mh = new MemberHolder(type, context);
 
             //If we've already gathered the members for this type, just return them.
-            MemberInfo[] members = m_MemberInfoTable.GetOrAdd(
-                mh,
-                _ => InternalGetSerializableMembers((RuntimeType)type)
+            MemberInfo[] members = m_MemberInfoTable.GetOrAdd(mh, _ =>
+                InternalGetSerializableMembers((RuntimeType)type)
             );
 
             return members;

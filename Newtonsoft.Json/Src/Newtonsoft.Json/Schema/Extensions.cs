@@ -64,13 +64,10 @@ namespace Newtonsoft.Json.Schema
         public static bool IsValid(this JToken source, JsonSchema schema)
         {
             bool valid = true;
-            source.Validate(
-                schema,
-                (sender, args) =>
-                {
-                    valid = false;
-                }
-            );
+            source.Validate(schema, (sender, args) =>
+            {
+                valid = false;
+            });
             return valid;
         }
 

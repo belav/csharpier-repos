@@ -87,14 +87,11 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new CodeTypeReference((Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new CodeTypeReference((Type)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () =>
-                    new CodeTypeReference((Type)null, CodeTypeReferenceOptions.GenericTypeParameter)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new CodeTypeReference((Type)null, CodeTypeReferenceOptions.GenericTypeParameter)
             );
         }
 
@@ -336,9 +333,8 @@ namespace System.CodeDom.Tests
         public void Ctor_NullObjectInTypeArguments_ThrowsArgumentNullException()
         {
             CodeTypeReference[] typeArguments = new CodeTypeReference[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeTypeReference("System.Int32", typeArguments)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTypeReference("System.Int32", typeArguments)
             );
         }
 

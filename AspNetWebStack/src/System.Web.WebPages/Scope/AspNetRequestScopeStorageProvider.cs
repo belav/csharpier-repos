@@ -16,9 +16,8 @@ namespace System.Web.WebPages.Scope
         private readonly Func<bool> _appStartExecuted;
 
         public AspNetRequestScopeStorageProvider()
-            : this(
-                httpContext: null,
-                appStartExecuted: () => WebPageHttpModule.AppStartExecuteCompleted
+            : this(httpContext: null, appStartExecuted: () =>
+                WebPageHttpModule.AppStartExecuteCompleted
             ) { }
 
         internal AspNetRequestScopeStorageProvider(

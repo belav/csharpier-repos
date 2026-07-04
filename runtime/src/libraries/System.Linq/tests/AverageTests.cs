@@ -75,13 +75,11 @@ namespace System.Linq.Tests
         [Fact]
         public void NullableFloat_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<float?>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<float?>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<float?>)null).Average(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<float?>)null).Average(i => i)
             );
         }
 
@@ -89,9 +87,8 @@ namespace System.Linq.Tests
         public void NullableFloat_NullSelector_ThrowsArgumentNullException()
         {
             Func<float?, float?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<float?>().Average(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<float?>().Average(selector)
             );
         }
 
@@ -130,13 +127,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Int_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).Average(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).Average(i => i)
             );
         }
 
@@ -144,9 +139,8 @@ namespace System.Linq.Tests
         public void Int_NullSelector_ThrowsArgumentNullException()
         {
             Func<int, int> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<int>().Average(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<int>().Average(selector)
             );
         }
 
@@ -226,13 +220,11 @@ namespace System.Linq.Tests
         [Fact]
         public void NullableInt_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int?>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int?>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int?>)null).Average(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int?>)null).Average(i => i)
             );
         }
 
@@ -240,9 +232,8 @@ namespace System.Linq.Tests
         public void NullableInt_NullSelector_ThrowsArgumentNullException()
         {
             Func<int?, int?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<int?>().Average(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<int?>().Average(selector)
             );
         }
 
@@ -281,13 +272,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Long_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<long>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<long>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<long>)null).Average(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<long>)null).Average(i => i)
             );
         }
 
@@ -295,9 +284,8 @@ namespace System.Linq.Tests
         public void Long_NullSelector_ThrowsArgumentNullException()
         {
             Func<long, long> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<long>().Average(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<long>().Average(selector)
             );
         }
 
@@ -382,13 +370,11 @@ namespace System.Linq.Tests
         [Fact]
         public void NullableLong_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<long?>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<long?>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<long?>)null).Average(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<long?>)null).Average(i => i)
             );
         }
 
@@ -396,9 +382,8 @@ namespace System.Linq.Tests
         public void NullableLong_NullSelector_ThrowsArgumentNullException()
         {
             Func<long?, long?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<long?>().Average(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<long?>().Average(selector)
             );
         }
 
@@ -437,13 +422,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Double_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<double>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<double>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<double>)null).Average(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<double>)null).Average(i => i)
             );
         }
 
@@ -451,9 +434,8 @@ namespace System.Linq.Tests
         public void Double_NullSelector_ThrowsArgumentNullException()
         {
             Func<double, double> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<double>().Average(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<double>().Average(selector)
             );
         }
 
@@ -540,13 +522,11 @@ namespace System.Linq.Tests
         [Fact]
         public void NullableDouble_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<double?>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<double?>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<double?>)null).Average(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<double?>)null).Average(i => i)
             );
         }
 
@@ -554,9 +534,8 @@ namespace System.Linq.Tests
         public void NullableDouble_NullSelector_ThrowsArgumentNullException()
         {
             Func<double?, double?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<double?>().Average(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<double?>().Average(selector)
             );
         }
 
@@ -595,13 +574,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Decimal_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<decimal>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<decimal>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<decimal>)null).Average(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<decimal>)null).Average(i => i)
             );
         }
 
@@ -609,9 +586,8 @@ namespace System.Linq.Tests
         public void Decimal_NullSelector_ThrowsArgumentNullException()
         {
             Func<decimal, decimal> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<decimal>().Average(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<decimal>().Average(selector)
             );
         }
 
@@ -688,13 +664,11 @@ namespace System.Linq.Tests
         [Fact]
         public void NullableDecimal_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<decimal?>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<decimal?>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<decimal?>)null).Average(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<decimal?>)null).Average(i => i)
             );
         }
 
@@ -702,9 +676,8 @@ namespace System.Linq.Tests
         public void NullableDecimal_NullSelector_ThrowsArgumentNullException()
         {
             Func<decimal?, decimal?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<decimal?>().Average(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<decimal?>().Average(selector)
             );
         }
 
@@ -751,13 +724,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Float_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<float>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<float>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<float>)null).Average(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<float>)null).Average(i => i)
             );
         }
 
@@ -765,9 +736,8 @@ namespace System.Linq.Tests
         public void Float_NullSelector_ThrowsArgumentNullException()
         {
             Func<float, float> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<float>().Average(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<float>().Average(selector)
             );
         }
 

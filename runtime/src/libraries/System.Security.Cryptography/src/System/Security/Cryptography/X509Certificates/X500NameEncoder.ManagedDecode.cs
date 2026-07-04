@@ -192,15 +192,11 @@ namespace System.Security.Cryptography.X509Certificates
 
             static string BinaryEncode(ReadOnlyMemory<byte> data)
             {
-                return string.Create(
-                    1 + data.Length * 2,
-                    data,
-                    static (buff, state) =>
-                    {
-                        buff[0] = '#';
-                        HexConverter.EncodeToUtf16(state.Span, buff.Slice(1));
-                    }
-                );
+                return string.Create(1 + data.Length * 2, data, static (buff, state) =>
+                {
+                    buff[0] = '#';
+                    HexConverter.EncodeToUtf16(state.Span, buff.Slice(1));
+                });
             }
         }
     }

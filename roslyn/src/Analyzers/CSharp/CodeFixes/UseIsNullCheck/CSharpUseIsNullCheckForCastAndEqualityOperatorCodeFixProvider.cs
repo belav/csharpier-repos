@@ -83,9 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                         cancellationToken: cancellationToken
                     );
 
-                editor.ReplaceNode(
-                    binary,
-                    (current, g) => Rewrite((BinaryExpressionSyntax)current)
+                editor.ReplaceNode(binary, (current, g) =>
+                    Rewrite((BinaryExpressionSyntax)current)
                 );
             }
 

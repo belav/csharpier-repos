@@ -1261,9 +1261,8 @@ public class When_mapping_to_an_object_using_contextual_service_location : AutoM
 
     protected override void Because_of()
     {
-        _dest = Mapper.Map<Source, Dest>(
-            new Source { Foo = 5 },
-            opt => opt.ConstructServicesUsing(t => new Dest(6))
+        _dest = Mapper.Map<Source, Dest>(new Source { Foo = 5 }, opt =>
+            opt.ConstructServicesUsing(t => new Dest(6))
         );
     }
 

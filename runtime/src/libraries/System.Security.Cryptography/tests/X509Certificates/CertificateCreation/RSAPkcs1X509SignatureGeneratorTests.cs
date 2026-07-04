@@ -13,9 +13,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         [Fact]
         public static void RsaPkcsSignatureGeneratorCtor_Exceptions()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => X509SignatureGenerator.CreateForRSA(null, RSASignaturePadding.Pkcs1)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                X509SignatureGenerator.CreateForRSA(null, RSASignaturePadding.Pkcs1)
             );
         }
 
@@ -105,9 +104,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                 HashAlgorithmName hashAlgorithm = new HashAlgorithmName(hashAlgorithmName);
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    "hashAlgorithm",
-                    () => signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm)
+                Assert.Throws<ArgumentOutOfRangeException>("hashAlgorithm", () =>
+                    signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm)
                 );
             }
         }

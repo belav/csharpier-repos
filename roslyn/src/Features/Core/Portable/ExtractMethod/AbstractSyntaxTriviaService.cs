@@ -82,33 +82,29 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var map = new Dictionary<SyntaxToken, SyntaxToken>();
             var emptyList = SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
 
-            token = map.GetOrAdd(
-                tokens[TriviaLocation.BeforeBeginningOfSpan],
-                _ => tokens[TriviaLocation.BeforeBeginningOfSpan]
+            token = map.GetOrAdd(tokens[TriviaLocation.BeforeBeginningOfSpan], _ =>
+                tokens[TriviaLocation.BeforeBeginningOfSpan]
             );
             map[tokens[TriviaLocation.BeforeBeginningOfSpan]] = token
                 .WithTrailingTrivia(emptyList)
                 .WithAdditionalAnnotations(annotations[TriviaLocation.BeforeBeginningOfSpan]);
 
-            token = map.GetOrAdd(
-                tokens[TriviaLocation.AfterBeginningOfSpan],
-                _ => tokens[TriviaLocation.AfterBeginningOfSpan]
+            token = map.GetOrAdd(tokens[TriviaLocation.AfterBeginningOfSpan], _ =>
+                tokens[TriviaLocation.AfterBeginningOfSpan]
             );
             map[tokens[TriviaLocation.AfterBeginningOfSpan]] = token
                 .WithLeadingTrivia(emptyList)
                 .WithAdditionalAnnotations(annotations[TriviaLocation.AfterBeginningOfSpan]);
 
-            token = map.GetOrAdd(
-                tokens[TriviaLocation.BeforeEndOfSpan],
-                _ => tokens[TriviaLocation.BeforeEndOfSpan]
+            token = map.GetOrAdd(tokens[TriviaLocation.BeforeEndOfSpan], _ =>
+                tokens[TriviaLocation.BeforeEndOfSpan]
             );
             map[tokens[TriviaLocation.BeforeEndOfSpan]] = token
                 .WithTrailingTrivia(emptyList)
                 .WithAdditionalAnnotations(annotations[TriviaLocation.BeforeEndOfSpan]);
 
-            token = map.GetOrAdd(
-                tokens[TriviaLocation.AfterEndOfSpan],
-                _ => tokens[TriviaLocation.AfterEndOfSpan]
+            token = map.GetOrAdd(tokens[TriviaLocation.AfterEndOfSpan], _ =>
+                tokens[TriviaLocation.AfterEndOfSpan]
             );
             map[tokens[TriviaLocation.AfterEndOfSpan]] = token
                 .WithLeadingTrivia(emptyList)

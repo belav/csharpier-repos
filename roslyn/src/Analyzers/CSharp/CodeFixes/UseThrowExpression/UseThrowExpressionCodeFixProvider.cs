@@ -103,22 +103,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UseThrowExpression
                     )
                     {
                         // Assignment already has trailing trivia.  Move the comments above it instead.
-                        editor.ReplaceNode(
-                            assignmentExpressionStatement,
-                            (current, _) =>
-                                current.WithLeadingTrivia(
-                                    current
-                                        .GetLeadingTrivia()
-                                        .Concat(throwStatement.GetTrailingTrivia())
-                                )
+                        editor.ReplaceNode(assignmentExpressionStatement, (current, _) =>
+                            current.WithLeadingTrivia(
+                                current
+                                    .GetLeadingTrivia()
+                                    .Concat(throwStatement.GetTrailingTrivia())
+                            )
                         );
                     }
                     else
                     {
-                        editor.ReplaceNode(
-                            assignmentExpressionStatement,
-                            (current, _) =>
-                                current.WithTrailingTrivia(throwStatement.GetTrailingTrivia())
+                        editor.ReplaceNode(assignmentExpressionStatement, (current, _) =>
+                            current.WithTrailingTrivia(throwStatement.GetTrailingTrivia())
                         );
                     }
                 }

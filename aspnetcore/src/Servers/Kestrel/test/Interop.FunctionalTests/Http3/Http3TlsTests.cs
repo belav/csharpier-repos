@@ -34,23 +34,20 @@ public class Http3TlsTests : LoggedTest
             },
             configureKestrel: kestrelOptions =>
             {
-                kestrelOptions.ListenAnyIP(
-                    0,
-                    listenOptions =>
+                kestrelOptions.ListenAnyIP(0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(httpsOptions =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(httpsOptions =>
+                        httpsOptions.ServerCertificateSelector = (context, host) =>
                         {
-                            httpsOptions.ServerCertificateSelector = (context, host) =>
-                            {
-                                serverCertificateSelectorActionCalled = true;
-                                Assert.Null(context); // The context isn't available durring the quic handshake.
-                                Assert.Equal("testhost", host);
-                                return TestResources.GetTestCertificate();
-                            };
-                        });
-                    }
-                );
+                            serverCertificateSelectorActionCalled = true;
+                            Assert.Null(context); // The context isn't available durring the quic handshake.
+                            Assert.Equal("testhost", host);
+                            return TestResources.GetTestCertificate();
+                        };
+                    });
+                });
             }
         );
 
@@ -99,19 +96,16 @@ public class Http3TlsTests : LoggedTest
             },
             configureKestrel: kestrelOptions =>
             {
-                kestrelOptions.ListenAnyIP(
-                    0,
-                    listenOptions =>
+                kestrelOptions.ListenAnyIP(0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(httpsOptions =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(httpsOptions =>
-                        {
-                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                            httpsOptions.ClientCertificateMode = mode;
-                            httpsOptions.AllowAnyClientCertificate();
-                        });
-                    }
-                );
+                        httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                        httpsOptions.ClientCertificateMode = mode;
+                        httpsOptions.AllowAnyClientCertificate();
+                    });
+                });
             }
         );
 
@@ -150,19 +144,16 @@ public class Http3TlsTests : LoggedTest
             },
             configureKestrel: kestrelOptions =>
             {
-                kestrelOptions.ListenAnyIP(
-                    0,
-                    listenOptions =>
+                kestrelOptions.ListenAnyIP(0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(httpsOptions =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(httpsOptions =>
-                        {
-                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                            httpsOptions.ClientCertificateMode = mode;
-                            httpsOptions.AllowAnyClientCertificate();
-                        });
-                    }
-                );
+                        httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                        httpsOptions.ClientCertificateMode = mode;
+                        httpsOptions.AllowAnyClientCertificate();
+                    });
+                });
             }
         );
 
@@ -207,23 +198,20 @@ public class Http3TlsTests : LoggedTest
             },
             configureKestrel: kestrelOptions =>
             {
-                kestrelOptions.ListenAnyIP(
-                    0,
-                    listenOptions =>
+                kestrelOptions.ListenAnyIP(0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(httpsOptions =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(httpsOptions =>
-                        {
-                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                            httpsOptions.ClientCertificateMode = mode;
+                        httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                        httpsOptions.ClientCertificateMode = mode;
 
-                            if (serverAllowInvalid)
-                            {
-                                httpsOptions.AllowAnyClientCertificate(); // The self-signed cert is invalid. Let it fail the default checks.
-                            }
-                        });
-                    }
-                );
+                        if (serverAllowInvalid)
+                        {
+                            httpsOptions.AllowAnyClientCertificate(); // The self-signed cert is invalid. Let it fail the default checks.
+                        }
+                    });
+                });
             }
         );
 
@@ -272,20 +260,16 @@ public class Http3TlsTests : LoggedTest
             },
             configureKestrel: kestrelOptions =>
             {
-                kestrelOptions.ListenAnyIP(
-                    0,
-                    listenOptions =>
+                kestrelOptions.ListenAnyIP(0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(httpsOptions =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(httpsOptions =>
-                        {
-                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                            httpsOptions.ClientCertificateMode =
-                                ClientCertificateMode.AllowCertificate;
-                            httpsOptions.AllowAnyClientCertificate();
-                        });
-                    }
-                );
+                        httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                        httpsOptions.ClientCertificateMode = ClientCertificateMode.AllowCertificate;
+                        httpsOptions.AllowAnyClientCertificate();
+                    });
+                });
             }
         );
 
@@ -324,19 +308,15 @@ public class Http3TlsTests : LoggedTest
                     },
                     configureKestrel: kestrelOptions =>
                     {
-                        kestrelOptions.ListenAnyIP(
-                            port,
-                            listenOptions =>
+                        kestrelOptions.ListenAnyIP(port, listenOptions =>
+                        {
+                            listenOptions.Protocols = protocols;
+                            listenOptions.UseHttps(httpsOptions =>
                             {
-                                listenOptions.Protocols = protocols;
-                                listenOptions.UseHttps(httpsOptions =>
-                                {
-                                    httpsOptions.ServerCertificate =
-                                        TestResources.GetTestCertificate();
-                                    httpsOptions.OnAuthenticate = (_, _) => { };
-                                });
-                            }
-                        );
+                                httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                                httpsOptions.OnAuthenticate = (_, _) => { };
+                            });
+                        });
                     }
                 );
 
@@ -367,33 +347,30 @@ public class Http3TlsTests : LoggedTest
             },
             configureKestrel: kestrelOptions =>
             {
-                kestrelOptions.ListenAnyIP(
-                    0,
-                    listenOptions =>
-                    {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(
-                            new TlsHandshakeCallbackOptions
+                kestrelOptions.ListenAnyIP(0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(
+                        new TlsHandshakeCallbackOptions
+                        {
+                            OnConnection = (context) =>
                             {
-                                OnConnection = (context) =>
-                                {
-                                    callbackState = context.State;
-                                    return ValueTask.FromResult(
-                                        new SslServerAuthenticationOptions
+                                callbackState = context.State;
+                                return ValueTask.FromResult(
+                                    new SslServerAuthenticationOptions
+                                    {
+                                        ServerCertificate = TestResources.GetTestCertificate(),
+                                        ApplicationProtocols = new List<SslApplicationProtocol>
                                         {
-                                            ServerCertificate = TestResources.GetTestCertificate(),
-                                            ApplicationProtocols = new List<SslApplicationProtocol>
-                                            {
-                                                SslApplicationProtocol.Http3,
-                                            },
-                                        }
-                                    );
-                                },
-                                OnConnectionState = configuredState,
-                            }
-                        );
-                    }
-                );
+                                            SslApplicationProtocol.Http3,
+                                        },
+                                    }
+                                );
+                            },
+                            OnConnectionState = configuredState,
+                        }
+                    );
+                });
             }
         );
 
@@ -439,34 +416,30 @@ public class Http3TlsTests : LoggedTest
             .UseKestrelCore()
             .ConfigureKestrel(serverOptions =>
             {
-                serverOptions.ListenAnyIP(
-                    0,
-                    listenOptions =>
+                serverOptions.ListenAnyIP(0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    if (useHttps)
                     {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        if (useHttps)
+                        if (useHttpsEnablesHttpsConfiguration)
                         {
-                            if (useHttpsEnablesHttpsConfiguration)
+                            listenOptions.UseHttps(httpsOptions =>
                             {
-                                listenOptions.UseHttps(httpsOptions =>
+                                httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                            });
+                        }
+                        else
+                        {
+                            // Specifically choose an overload that doesn't enable https configuration
+                            listenOptions.UseHttps(
+                                new HttpsConnectionAdapterOptions
                                 {
-                                    httpsOptions.ServerCertificate =
-                                        TestResources.GetTestCertificate();
-                                });
-                            }
-                            else
-                            {
-                                // Specifically choose an overload that doesn't enable https configuration
-                                listenOptions.UseHttps(
-                                    new HttpsConnectionAdapterOptions
-                                    {
-                                        ServerCertificate = TestResources.GetTestCertificate(),
-                                    }
-                                );
-                            }
+                                    ServerCertificate = TestResources.GetTestCertificate(),
+                                }
+                            );
                         }
                     }
-                );
+                });
             })
             .Configure(app => { });
 
@@ -570,17 +543,14 @@ public class Http3TlsTests : LoggedTest
                 ranConfigureKestrelAction = true;
                 kestrelOptions.Configure(config);
 
-                kestrelOptions.ListenAnyIP(
-                    0,
-                    listenOptions =>
+                kestrelOptions.ListenAnyIP(0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(_ =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(_ =>
-                        {
-                            ranUseHttpsAction = true;
-                        });
-                    }
-                );
+                        ranUseHttpsAction = true;
+                    });
+                });
             }
         );
 

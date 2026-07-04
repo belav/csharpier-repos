@@ -122,13 +122,11 @@ namespace System.Runtime.InteropServices.Tests
             var target = new ComImportObject();
             Delegate handler = new EventHandler(EventHandler);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "element",
-                () => attribute.AddEventHandler(target, handler)
+            AssertExtensions.Throws<ArgumentNullException>("element", () =>
+                attribute.AddEventHandler(target, handler)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "element",
-                () => attribute.RemoveEventHandler(target, handler)
+            AssertExtensions.Throws<ArgumentNullException>("element", () =>
+                attribute.RemoveEventHandler(target, handler)
             );
         }
 

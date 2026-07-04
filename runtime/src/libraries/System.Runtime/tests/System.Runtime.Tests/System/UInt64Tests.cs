@@ -497,9 +497,8 @@ namespace System.Tests
                 // Substitute default NumberFormatInfo
                 Assert.False(ulong.TryParse(value, style, new NumberFormatInfo(), out result));
                 Assert.Equal(default, result);
-                Assert.Throws(
-                    exceptionType,
-                    () => ulong.Parse(value, style, new NumberFormatInfo())
+                Assert.Throws(exceptionType, () =>
+                    ulong.Parse(value, style, new NumberFormatInfo())
                 );
             }
 
@@ -523,16 +522,14 @@ namespace System.Tests
         public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(NumberStyles style)
         {
             ulong result = 0;
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () => ulong.TryParse("1", style, null, out result)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                ulong.TryParse("1", style, null, out result)
             );
             Assert.Equal(default(ulong), result);
 
             AssertExtensions.Throws<ArgumentException>("style", () => ulong.Parse("1", style));
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () => ulong.Parse("1", style, null)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                ulong.Parse("1", style, null)
             );
         }
 
@@ -670,9 +667,8 @@ namespace System.Tests
                     Assert.Equal(0u, result);
                 }
 
-                Assert.Throws(
-                    exceptionType,
-                    () => ulong.Parse(Encoding.UTF8.GetBytes(value), style, provider)
+                Assert.Throws(exceptionType, () =>
+                    ulong.Parse(Encoding.UTF8.GetBytes(value), style, provider)
                 );
 
                 Assert.False(ulong.TryParse(valueUtf8, style, provider, out result));

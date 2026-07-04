@@ -20,10 +20,8 @@ public class ExplicitlyExpandCollectionsAndChildReferences
     {
         using (var context = new ClientContext())
         {
-            _course = ProjectTo<TrainingCourseDto>(
-                    context.TrainingCourses,
-                    null,
-                    c => c.Content.Select(co => co.Category)
+            _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses, null, c =>
+                    c.Content.Select(co => co.Category)
                 )
                 .FirstOrDefault(n => n.CourseName == "Course 1");
         }

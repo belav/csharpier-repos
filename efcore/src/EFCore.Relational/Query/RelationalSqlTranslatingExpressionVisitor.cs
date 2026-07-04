@@ -2144,9 +2144,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
         var rightExpressions = ((NewArrayExpression)right).Expressions;
 
         return leftExpressions
-            .Zip(
-                rightExpressions,
-                (l, r) => Infrastructure.ExpressionExtensions.CreateEqualsExpression(l, r)
+            .Zip(rightExpressions, (l, r) =>
+                Infrastructure.ExpressionExtensions.CreateEqualsExpression(l, r)
             )
             .Aggregate(Expression.AndAlso);
     }

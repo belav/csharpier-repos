@@ -63,17 +63,13 @@ namespace System.Net.Http.Functional.Tests
             (List<HttpHeaderData> headers, string content) = CreateResponse(
                 "abcdefghijklmnopqrstuvwxyz"
             );
-            await ForCountAsync(
-                numRequests,
-                dop,
-                async i =>
+            await ForCountAsync(numRequests, dop, async i =>
+            {
+                using (HttpClient client = CreateHttpClient())
                 {
-                    using (HttpClient client = CreateHttpClient())
-                    {
-                        await CreateServerAndPostAsync(client, numBytes, headers, content);
-                    }
+                    await CreateServerAndPostAsync(client, numBytes, headers, content);
                 }
-            );
+            });
         }
 
         private async Task CreateServerAndPostAsync(
@@ -171,10 +167,8 @@ namespace System.Net.Http.Functional.Tests
             );
             using (HttpClient client = CreateHttpClient())
             {
-                await ForCountAsync(
-                    numRequests,
-                    dop,
-                    i => CreateServerAndGetAsync(client, completionOption, headers, content)
+                await ForCountAsync(numRequests, dop, i =>
+                    CreateServerAndGetAsync(client, completionOption, headers, content)
                 );
             }
         }
@@ -226,13 +220,11 @@ namespace System.Net.Http.Functional.Tests
                             select client.GetStringAsync(url)
                         ).ToArray();
 
-                        Assert.All(
-                            tasks,
-                            t =>
-                                Assert.True(
-                                    t.IsFaulted || t.Status == TaskStatus.WaitingForActivation,
-                                    $"Unexpected status {t.Status}"
-                                )
+                        Assert.All(tasks, t =>
+                            Assert.True(
+                                t.IsFaulted || t.Status == TaskStatus.WaitingForActivation,
+                                $"Unexpected status {t.Status}"
+                            )
                         );
 
                         server.Dispose();

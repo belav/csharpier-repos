@@ -107,9 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
                     : SyntaxFactory.IdentifierName(enumerationSymbol.Name);
             }
 
-            var itemString = NameGenerator.GenerateUniqueName(
-                "item",
-                name => semanticModel.LookupSymbols(position, name: name).IsEmpty
+            var itemString = NameGenerator.GenerateUniqueName("item", name =>
+                semanticModel.LookupSymbols(position, name: name).IsEmpty
             );
 
             ForEachStatementSyntax forEachStatement;

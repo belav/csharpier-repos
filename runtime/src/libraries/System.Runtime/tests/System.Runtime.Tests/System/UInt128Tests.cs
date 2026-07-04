@@ -567,9 +567,8 @@ namespace System.Tests
                 // Substitute default NumberFormatInfo
                 Assert.False(UInt128.TryParse(value, style, new NumberFormatInfo(), out result));
                 Assert.Equal(default, result);
-                Assert.Throws(
-                    exceptionType,
-                    () => UInt128.Parse(value, style, new NumberFormatInfo())
+                Assert.Throws(exceptionType, () =>
+                    UInt128.Parse(value, style, new NumberFormatInfo())
                 );
             }
 
@@ -593,16 +592,14 @@ namespace System.Tests
         public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(NumberStyles style)
         {
             UInt128 result = 0U;
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () => UInt128.TryParse("1", style, null, out result)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                UInt128.TryParse("1", style, null, out result)
             );
             Assert.Equal(default(UInt128), result);
 
             AssertExtensions.Throws<ArgumentException>("style", () => UInt128.Parse("1", style));
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () => UInt128.Parse("1", style, null)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                UInt128.Parse("1", style, null)
             );
         }
 
@@ -748,9 +745,8 @@ namespace System.Tests
                     Assert.Equal(0u, result);
                 }
 
-                Assert.Throws(
-                    exceptionType,
-                    () => UInt128.Parse(Encoding.UTF8.GetBytes(value), style, provider)
+                Assert.Throws(exceptionType, () =>
+                    UInt128.Parse(Encoding.UTF8.GetBytes(value), style, provider)
                 );
 
                 Assert.False(UInt128.TryParse(valueUtf8, style, provider, out result));

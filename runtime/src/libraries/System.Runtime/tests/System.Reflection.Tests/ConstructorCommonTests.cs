@@ -133,9 +133,8 @@ namespace System.Reflection.Tests
         public void Invoke_ParameterWrongType_ThrowsArgumentException()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => (ClassWith3Constructors)Invoke(constructors[1], new object[] { "hello" })
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                (ClassWith3Constructors)Invoke(constructors[1], new object[] { "hello" })
             );
         }
 

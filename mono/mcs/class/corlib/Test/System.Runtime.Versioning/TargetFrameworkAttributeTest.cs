@@ -78,13 +78,10 @@ namespace MonoTests.System.Runtime.Versioning
         {
             TargetFrameworkAttribute tfa;
 
-            Throws<ArgumentNullException>(
-                "#A1-1",
-                () =>
-                {
-                    tfa = new TargetFrameworkAttribute(null);
-                }
-            );
+            Throws<ArgumentNullException>("#A1-1", () =>
+            {
+                tfa = new TargetFrameworkAttribute(null);
+            });
 
             tfa = new TargetFrameworkAttribute(String.Empty);
             Assert.AreEqual(String.Empty, tfa.FrameworkName, "#A2-1");

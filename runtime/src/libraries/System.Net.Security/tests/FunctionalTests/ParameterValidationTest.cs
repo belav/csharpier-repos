@@ -18,19 +18,16 @@ namespace System.Net.Security.Tests
             using (clientStream)
             using (serverStream)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "encryptionPolicy",
-                    () =>
-                    {
-                        SslStream sslStream = new SslStream(
-                            clientStream,
-                            false,
-                            TestHelper.AllowAnyServerCertificate,
-                            null,
-                            (EncryptionPolicy)100
-                        );
-                    }
-                );
+                AssertExtensions.Throws<ArgumentException>("encryptionPolicy", () =>
+                {
+                    SslStream sslStream = new SslStream(
+                        clientStream,
+                        false,
+                        TestHelper.AllowAnyServerCertificate,
+                        null,
+                        (EncryptionPolicy)100
+                    );
+                });
             }
         }
     }

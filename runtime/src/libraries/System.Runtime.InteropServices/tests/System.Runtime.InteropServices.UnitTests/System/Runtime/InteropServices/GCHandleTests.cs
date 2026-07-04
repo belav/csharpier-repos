@@ -88,9 +88,8 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(GCHandleType.Pinned + 1)]
         public void Alloc_InvalidGCHandleType_ThrowsArgumentOutOfRangeException(GCHandleType type)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "type",
-                () => GCHandle.Alloc(new object(), type)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("type", () =>
+                GCHandle.Alloc(new object(), type)
             );
         }
 

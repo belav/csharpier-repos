@@ -173,10 +173,8 @@ namespace System.Data.Objects.ELinq
         {
             if (null != _rootContextExpression)
             {
-                return EntityExpressionVisitor.Visit(
-                    expression,
-                    (exp, baseVisit) =>
-                        exp == _rootContextParameter ? _rootContextExpression : baseVisit(exp)
+                return EntityExpressionVisitor.Visit(expression, (exp, baseVisit) =>
+                    exp == _rootContextParameter ? _rootContextExpression : baseVisit(exp)
                 );
             }
             else
@@ -468,17 +466,14 @@ namespace System.Data.Objects.ELinq
                     // If this is a simple query parameter (involving a single delegate parameter) report the
                     // type of that parameter. Otherwise, report the type of the part of the parameter.
                     HashSet<ParameterExpression> parameters = new HashSet<ParameterExpression>();
-                    EntityExpressionVisitor.Visit(
-                        expression,
-                        (exp, baseVisit) =>
+                    EntityExpressionVisitor.Visit(expression, (exp, baseVisit) =>
+                    {
+                        if (null != exp && exp.NodeType == ExpressionType.Parameter)
                         {
-                            if (null != exp && exp.NodeType == ExpressionType.Parameter)
-                            {
-                                parameters.Add((ParameterExpression)exp);
-                            }
-                            return baseVisit(exp);
+                            parameters.Add((ParameterExpression)exp);
                         }
-                    );
+                        return baseVisit(exp);
+                    });
 
                     if (parameters.Count != 1)
                     {

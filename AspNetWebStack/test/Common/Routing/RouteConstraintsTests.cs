@@ -270,14 +270,10 @@ namespace System.Web.Mvc.Routing
 #else
             var optionalParameter = UrlParameter.Optional;
 #endif
-            var actual = TestValue(
-                constraint,
-                parameterValue ?? optionalParameter,
-                route =>
-                {
-                    route.Defaults.Add("fake", optionalParameter);
-                }
-            );
+            var actual = TestValue(constraint, parameterValue ?? optionalParameter, route =>
+            {
+                route.Defaults.Add("fake", optionalParameter);
+            });
 
             // Assert
             Assert.Equal(expected, actual);

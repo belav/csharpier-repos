@@ -180,14 +180,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitStringLiteral
         private static void TestNotHandled(string inputMarkup)
         {
             var notHandled = false;
-            TestWorker(
-                inputMarkup,
-                null,
-                callback: () =>
-                {
-                    notHandled = true;
-                }
-            );
+            TestWorker(inputMarkup, null, callback: () =>
+            {
+                notHandled = true;
+            });
 
             Assert.True(notHandled);
         }

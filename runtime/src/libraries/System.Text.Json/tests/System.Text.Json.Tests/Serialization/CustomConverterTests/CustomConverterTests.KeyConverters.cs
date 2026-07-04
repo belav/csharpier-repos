@@ -136,9 +136,8 @@ namespace System.Text.Json.Serialization.Tests
             };
             string json = @"{""key1"" : 1, ""key2"" : 2 }";
 
-            Assert.Throws(
-                exceptionType,
-                () => JsonSerializer.Deserialize<Dictionary<string, int>>(json, options)
+            Assert.Throws(exceptionType, () =>
+                JsonSerializer.Deserialize<Dictionary<string, int>>(json, options)
             );
         }
 

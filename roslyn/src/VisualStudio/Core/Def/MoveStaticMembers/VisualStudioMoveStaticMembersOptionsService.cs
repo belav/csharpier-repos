@@ -157,9 +157,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                 .ToImmutableArray();
             var existingTypeNames = existingTypes.SelectAsArray(t => t.ToDisplayString());
             var candidateName = selectedType.Name + "Helpers";
-            var defaultTypeName = NameGenerator.GenerateUniqueName(
-                candidateName,
-                name => !existingTypeNames.Contains(name)
+            var defaultTypeName = NameGenerator.GenerateUniqueName(candidateName, name =>
+                !existingTypeNames.Contains(name)
             );
 
             var containingNamespaceDisplay = selectedType.ContainingNamespace.IsGlobalNamespace

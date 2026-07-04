@@ -21,14 +21,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             CommandExecutionContext context
         )
         {
-            HandlePossibleTypingCommand(
-                args,
-                nextHandler,
-                (activeSession, span) =>
-                {
-                    nextHandler();
-                }
-            );
+            HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
+            {
+                nextHandler();
+            });
         }
 
         public CommandState GetCommandState(
@@ -42,14 +38,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             CommandExecutionContext context
         )
         {
-            HandlePossibleTypingCommand(
-                args,
-                nextHandler,
-                (activeSession, span) =>
-                {
-                    nextHandler();
-                }
-            );
+            HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
+            {
+                nextHandler();
+            });
         }
     }
 }

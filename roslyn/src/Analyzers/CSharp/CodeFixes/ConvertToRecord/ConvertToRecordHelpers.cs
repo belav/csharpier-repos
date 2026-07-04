@@ -226,9 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 return false;
             }
 
-            var assignmentValues = GetAssignmentValuesForConstructor(
-                operation,
-                assignment => (assignment as IParameterReferenceOperation)?.Parameter
+            var assignmentValues = GetAssignmentValuesForConstructor(operation, assignment =>
+                (assignment as IParameterReferenceOperation)?.Parameter
             );
 
             // we must assign to all the properties (keys) and use all the parameters (values)
@@ -275,31 +274,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 return false;
             }
 
-            var assignmentValues = GetAssignmentValuesForConstructor(
-                operation,
-                assignment =>
-                    assignment switch
+            var assignmentValues = GetAssignmentValuesForConstructor(operation, assignment =>
+                assignment switch
+                {
+                    IPropertyReferenceOperation
                     {
-                        IPropertyReferenceOperation
+                        Instance: IParameterReferenceOperation
                         {
-                            Instance: IParameterReferenceOperation
-                            {
-                                Parameter: IParameterSymbol referencedParameter
-                            },
-                            Property: IPropertySymbol referencedProperty
-                        } => referencedParameter.Equals(parameter)
-                            ? referencedProperty.GetBackingFieldIfAny()
-                            : null,
-                        IFieldReferenceOperation
+                            Parameter: IParameterSymbol referencedParameter
+                        },
+                        Property: IPropertySymbol referencedProperty
+                    } => referencedParameter.Equals(parameter)
+                        ? referencedProperty.GetBackingFieldIfAny()
+                        : null,
+                    IFieldReferenceOperation
+                    {
+                        Instance: IParameterReferenceOperation
                         {
-                            Instance: IParameterReferenceOperation
-                            {
-                                Parameter: IParameterSymbol referencedParameter
-                            },
-                            Field: IFieldSymbol referencedField
-                        } => referencedParameter.Equals(parameter) ? referencedField : null,
-                        _ => null,
-                    }
+                            Parameter: IParameterSymbol referencedParameter
+                        },
+                        Field: IFieldSymbol referencedField
+                    } => referencedParameter.Equals(parameter) ? referencedField : null,
+                    _ => null,
+                }
             );
 
             // left hand side of each assignment
@@ -343,10 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
         )
         {
             // make sure the assignment wouldn't reference local variables we may have declared
-            var assignmentValues = GetAssignmentValuesForConstructor(
-                operation,
-                assignment =>
-                    IsSafeAssignment(assignment) ? assignment.Syntax as ExpressionSyntax : null
+            var assignmentValues = GetAssignmentValuesForConstructor(operation, assignment =>
+                IsSafeAssignment(assignment) ? assignment.Syntax as ExpressionSyntax : null
             );
 
             if (

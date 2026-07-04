@@ -20,10 +20,8 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         [InlineData(null)]
         public static void Ctor_String_NullName_ThrowsArgumentException(string name)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                null,
-                () => new TableAttribute(name)
+            AssertExtensions.Throws<ArgumentNullException>("name", null, () =>
+                new TableAttribute(name)
             );
         }
 
@@ -32,10 +30,8 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         [InlineData(" \t\r\n")]
         public static void Ctor_String_WhitespaceName_ThrowsArgumentException(string name)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => new TableAttribute(name)
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                new TableAttribute(name)
             );
         }
 
@@ -52,10 +48,8 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         public static void Schema_Set_NullValue_ThrowsArgumentException(string value)
         {
             TableAttribute attribute = new TableAttribute("Perspicacia Tick");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                null,
-                () => attribute.Schema = value
+            AssertExtensions.Throws<ArgumentNullException>("value", null, () =>
+                attribute.Schema = value
             );
         }
 
@@ -65,10 +59,8 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         public static void Schema_Set_WhitespaceValue_ThrowsArgumentException(string value)
         {
             TableAttribute attribute = new TableAttribute("Perspicacia Tick");
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => attribute.Schema = value
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                attribute.Schema = value
             );
         }
     }

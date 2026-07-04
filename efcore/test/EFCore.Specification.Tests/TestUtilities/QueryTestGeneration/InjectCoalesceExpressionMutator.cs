@@ -21,13 +21,11 @@ public class InjectCoalesceExpressionMutator : ExpressionMutator
     {
         var i = random.Next(_expressionFinder.FoundExpressions.Count);
 
-        var injector = new ExpressionInjector(
-            _expressionFinder.FoundExpressions[i],
-            e =>
-                Expression.Convert(
-                    Expression.Coalesce(e, Expression.Default(e.Type.GetGenericArguments()[0])),
-                    e.Type
-                )
+        var injector = new ExpressionInjector(_expressionFinder.FoundExpressions[i], e =>
+            Expression.Convert(
+                Expression.Coalesce(e, Expression.Default(e.Type.GetGenericArguments()[0])),
+                e.Type
+            )
         );
 
         return injector.Visit(expression);

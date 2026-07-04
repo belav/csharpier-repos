@@ -29,10 +29,8 @@ namespace System.Globalization.Tests
         public void PercentDecimalSeparator_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "PercentDecimalSeparator",
-                () => format.PercentDecimalSeparator = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "PercentDecimalSeparator", () =>
+                format.PercentDecimalSeparator = null
             );
         }
 
@@ -40,10 +38,8 @@ namespace System.Globalization.Tests
         public void PercentDecimalSeparator_SetEmpty_ThrowsArgumentException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => format.PercentDecimalSeparator = ""
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                format.PercentDecimalSeparator = ""
             );
         }
 

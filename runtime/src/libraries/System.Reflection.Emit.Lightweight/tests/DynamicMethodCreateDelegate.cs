@@ -159,9 +159,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => method.CreateDelegate(typeof(IntDelegate), "foo")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                method.CreateDelegate(typeof(IntDelegate), "foo")
             );
         }
 
@@ -185,13 +184,11 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = method.GetILGenerator();
             Helpers.EmitMethodBody(ilGenerator, field);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => method.CreateDelegate(delegateType)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                method.CreateDelegate(delegateType)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => method.CreateDelegate(delegateType, new IDClass())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                method.CreateDelegate(delegateType, new IDClass())
             );
         }
 

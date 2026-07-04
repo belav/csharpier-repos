@@ -522,17 +522,14 @@ public partial class ParameterViewTest
         // Act
         parameters.SetParameterProperties(target);
 
-        Assert.Collection(
-            target.CaptureUnmatchedValues,
-            kvp =>
-            {
-                Assert.Equal(
-                    nameof(HasCaptureUnmatchedValuesPropertyAndCascadingParameter.Cascading),
-                    kvp.Key
-                );
-                Assert.Equal("hi", kvp.Value);
-            }
-        );
+        Assert.Collection(target.CaptureUnmatchedValues, kvp =>
+        {
+            Assert.Equal(
+                nameof(HasCaptureUnmatchedValuesPropertyAndCascadingParameter.Cascading),
+                kvp.Key
+            );
+            Assert.Equal("hi", kvp.Value);
+        });
         Assert.Equal("bye", target.Cascading);
     }
 

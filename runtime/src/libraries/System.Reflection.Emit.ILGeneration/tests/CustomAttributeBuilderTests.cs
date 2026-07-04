@@ -801,36 +801,24 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public static void NullConstructor_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () => new CustomAttributeBuilder(null, new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                new CustomAttributeBuilder(null, new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () =>
-                    new CustomAttributeBuilder(null, new object[0], new FieldInfo[0], new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                new CustomAttributeBuilder(null, new object[0], new FieldInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () =>
-                    new CustomAttributeBuilder(
-                        null,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                new CustomAttributeBuilder(null, new object[0], new PropertyInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () =>
-                    new CustomAttributeBuilder(
-                        null,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                new CustomAttributeBuilder(
+                    null,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -841,36 +829,24 @@ namespace System.Reflection.Emit.Tests
                 .GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
                 .First();
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CustomAttributeBuilder(con, new object[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], new FieldInfo[0], new object[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], new FieldInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], new PropertyInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -881,36 +857,24 @@ namespace System.Reflection.Emit.Tests
                 .GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
                 .First();
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CustomAttributeBuilder(con, new object[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], new FieldInfo[0], new object[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], new FieldInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], new PropertyInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -932,36 +896,24 @@ namespace System.Reflection.Emit.Tests
 
             ConstructorInfo con = typeBuilder.CreateType().GetConstructor(new Type[0]);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CustomAttributeBuilder(con, new object[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], new FieldInfo[0], new object[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], new FieldInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], new PropertyInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -970,29 +922,24 @@ namespace System.Reflection.Emit.Tests
         {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[] { typeof(int) });
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "constructorArgs",
-                () => new CustomAttributeBuilder(con, null)
+            AssertExtensions.Throws<ArgumentNullException>("constructorArgs", () =>
+                new CustomAttributeBuilder(con, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "constructorArgs",
-                () => new CustomAttributeBuilder(con, null, new FieldInfo[0], new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("constructorArgs", () =>
+                new CustomAttributeBuilder(con, null, new FieldInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "constructorArgs",
-                () => new CustomAttributeBuilder(con, null, new PropertyInfo[0], new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("constructorArgs", () =>
+                new CustomAttributeBuilder(con, null, new PropertyInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "constructorArgs",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        null,
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("constructorArgs", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    null,
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1048,36 +995,24 @@ namespace System.Reflection.Emit.Tests
             );
             object[] constructorArgs = new object[] { value };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CustomAttributeBuilder(con, new object[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], new PropertyInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], new FieldInfo[0], new object[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], new FieldInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1095,41 +1030,24 @@ namespace System.Reflection.Emit.Tests
         {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(constructorTypes);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CustomAttributeBuilder(con, constructorArgs)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, constructorArgs)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, constructorArgs, new FieldInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new PropertyInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, constructorArgs, new PropertyInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    constructorArgs,
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1181,41 +1099,24 @@ namespace System.Reflection.Emit.Tests
             );
             object[] constructorArgs = new object[] { value };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CustomAttributeBuilder(con, constructorArgs)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, constructorArgs)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, constructorArgs, new FieldInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new PropertyInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, constructorArgs, new PropertyInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    constructorArgs,
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1226,41 +1127,24 @@ namespace System.Reflection.Emit.Tests
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[] { typeof(int) });
             object[] constructorArgs = new object[] { null };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "constructorArgs[0]",
-                () => new CustomAttributeBuilder(con, constructorArgs)
+            AssertExtensions.Throws<ArgumentNullException>("constructorArgs[0]", () =>
+                new CustomAttributeBuilder(con, constructorArgs)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "constructorArgs[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("constructorArgs[0]", () =>
+                new CustomAttributeBuilder(con, constructorArgs, new FieldInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "constructorArgs[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new PropertyInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("constructorArgs[0]", () =>
+                new CustomAttributeBuilder(con, constructorArgs, new PropertyInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "constructorArgs[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("constructorArgs[0]", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    constructorArgs,
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1282,41 +1166,24 @@ namespace System.Reflection.Emit.Tests
             );
             object[] constructorArgs = new object[] { value };
 
-            AssertExtensions.Throws<ArgumentException>(
-                "constructorArgs[0]",
-                () => new CustomAttributeBuilder(con, constructorArgs)
+            AssertExtensions.Throws<ArgumentException>("constructorArgs[0]", () =>
+                new CustomAttributeBuilder(con, constructorArgs)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "constructorArgs[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>("constructorArgs[0]", () =>
+                new CustomAttributeBuilder(con, constructorArgs, new FieldInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "constructorArgs[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new PropertyInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>("constructorArgs[0]", () =>
+                new CustomAttributeBuilder(con, constructorArgs, new PropertyInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "constructorArgs[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        constructorArgs,
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>("constructorArgs[0]", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    constructorArgs,
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1344,22 +1211,18 @@ namespace System.Reflection.Emit.Tests
         {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "namedFields",
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], (FieldInfo[])null, new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("namedFields", () =>
+                new CustomAttributeBuilder(con, new object[0], (FieldInfo[])null, new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "namedFields",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        null,
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("namedFields", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    null,
+                    new object[0]
+                )
             );
         }
 
@@ -1376,21 +1239,18 @@ namespace System.Reflection.Emit.Tests
             FieldInfo[] namedFields = new FieldInfo[] { field };
             object[] fieldValues = new object[] { value };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CustomAttributeBuilder(con, new object[0], namedFields, fieldValues)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], namedFields, fieldValues)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        namedFields,
-                        fieldValues
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    namedFields,
+                    fieldValues
+                )
             );
         }
 
@@ -1421,22 +1281,18 @@ namespace System.Reflection.Emit.Tests
         {
             FieldInfo[] namedFields = new FieldInfo[] { field };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], namedFields, new object[] { 5 })
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], namedFields, new object[] { 5 })
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        namedFields,
-                        new object[] { 5 }
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    namedFields,
+                    new object[] { 5 }
+                )
             );
         }
 
@@ -1473,21 +1329,18 @@ namespace System.Reflection.Emit.Tests
         {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fieldValues",
-                () => new CustomAttributeBuilder(con, new object[0], new FieldInfo[0], null)
+            AssertExtensions.Throws<ArgumentNullException>("fieldValues", () =>
+                new CustomAttributeBuilder(con, new object[0], new FieldInfo[0], null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fieldValues",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        new FieldInfo[0],
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("fieldValues", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    new FieldInfo[0],
+                    null
+                )
             );
         }
 
@@ -1498,21 +1351,18 @@ namespace System.Reflection.Emit.Tests
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
             FieldInfo[] namedFields = new FieldInfo[] { null };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "namedFields[0]",
-                () => new CustomAttributeBuilder(con, new object[0], namedFields, new object[1])
+            AssertExtensions.Throws<ArgumentNullException>("namedFields[0]", () =>
+                new CustomAttributeBuilder(con, new object[0], namedFields, new object[1])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "namedFields[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        namedFields,
-                        new object[1]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("namedFields[0]", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    namedFields,
+                    new object[1]
+                )
             );
         }
 
@@ -1527,21 +1377,18 @@ namespace System.Reflection.Emit.Tests
             );
             object[] fieldValues = new object[] { null };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fieldValues[0]",
-                () => new CustomAttributeBuilder(con, new object[0], namedFields, fieldValues)
+            AssertExtensions.Throws<ArgumentNullException>("fieldValues[0]", () =>
+                new CustomAttributeBuilder(con, new object[0], namedFields, fieldValues)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fieldValues[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        namedFields,
-                        fieldValues
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("fieldValues[0]", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    namedFields,
+                    fieldValues
+                )
             );
         }
 
@@ -1557,21 +1404,18 @@ namespace System.Reflection.Emit.Tests
             );
             object[] fieldValues = new object[] { value };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CustomAttributeBuilder(con, new object[0], namedFields, fieldValues)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], namedFields, fieldValues)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        namedFields,
-                        fieldValues
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    namedFields,
+                    fieldValues
+                )
             );
         }
 
@@ -1616,21 +1460,18 @@ namespace System.Reflection.Emit.Tests
             );
             object[] fieldValues = new object[] { value };
 
-            AssertExtensions.Throws<ArgumentException>(
-                "fieldValues[0]",
-                () => new CustomAttributeBuilder(con, new object[0], namedFields, fieldValues)
+            AssertExtensions.Throws<ArgumentException>("fieldValues[0]", () =>
+                new CustomAttributeBuilder(con, new object[0], namedFields, fieldValues)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "fieldValues[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new FieldInfo[0],
-                        namedFields,
-                        fieldValues
-                    )
+            AssertExtensions.Throws<ArgumentException>("fieldValues[0]", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new FieldInfo[0],
+                    namedFields,
+                    fieldValues
+                )
             );
         }
 
@@ -1690,21 +1531,18 @@ namespace System.Reflection.Emit.Tests
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
             FieldInfo[] namedFields = Helpers.GetFields(typeof(TestAttribute), fieldNames);
 
-            AssertExtensions.Throws<ArgumentException>(
-                paramName,
-                () => new CustomAttributeBuilder(con, new object[0], namedFields, fieldValues)
+            AssertExtensions.Throws<ArgumentException>(paramName, () =>
+                new CustomAttributeBuilder(con, new object[0], namedFields, fieldValues)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                paramName,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        new object[0],
-                        namedFields,
-                        fieldValues
-                    )
+            AssertExtensions.Throws<ArgumentException>(paramName, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    new object[0],
+                    namedFields,
+                    fieldValues
+                )
             );
         }
 
@@ -1713,27 +1551,18 @@ namespace System.Reflection.Emit.Tests
         {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "namedProperties",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        (PropertyInfo[])null,
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("namedProperties", () =>
+                new CustomAttributeBuilder(con, new object[0], (PropertyInfo[])null, new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "namedProperties",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        null,
-                        new object[0],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("namedProperties", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    null,
+                    new object[0],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1742,21 +1571,18 @@ namespace System.Reflection.Emit.Tests
         {
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyValues",
-                () => new CustomAttributeBuilder(con, new object[0], new PropertyInfo[0], null)
+            AssertExtensions.Throws<ArgumentNullException>("propertyValues", () =>
+                new CustomAttributeBuilder(con, new object[0], new PropertyInfo[0], null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyValues",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        new PropertyInfo[0],
-                        null,
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("propertyValues", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    new PropertyInfo[0],
+                    null,
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1767,21 +1593,18 @@ namespace System.Reflection.Emit.Tests
             ConstructorInfo con = typeof(TestAttribute).GetConstructor(new Type[0]);
             PropertyInfo[] namedProperties = new PropertyInfo[] { null };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "namedProperties[0]",
-                () => new CustomAttributeBuilder(con, new object[0], namedProperties, new object[1])
+            AssertExtensions.Throws<ArgumentNullException>("namedProperties[0]", () =>
+                new CustomAttributeBuilder(con, new object[0], namedProperties, new object[1])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "namedProperties[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        namedProperties,
-                        new object[1],
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("namedProperties[0]", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    namedProperties,
+                    new object[1],
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1831,22 +1654,18 @@ namespace System.Reflection.Emit.Tests
             PropertyInfo[] namedProperties = new PropertyInfo[] { property };
             object[] propertyValues = new object[] { value };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], namedProperties, propertyValues)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], namedProperties, propertyValues)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        namedProperties,
-                        propertyValues,
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    namedProperties,
+                    propertyValues,
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1877,27 +1696,18 @@ namespace System.Reflection.Emit.Tests
         {
             PropertyInfo[] namedProperties = new PropertyInfo[] { property };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        namedProperties,
-                        new object[] { 5 }
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], namedProperties, new object[] { 5 })
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        namedProperties,
-                        new object[] { 5 },
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    namedProperties,
+                    new object[] { 5 },
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1912,22 +1722,18 @@ namespace System.Reflection.Emit.Tests
             );
             object[] propertyValues = new object[] { null };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyValues[0]",
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], namedProperties, propertyValues)
+            AssertExtensions.Throws<ArgumentNullException>("propertyValues[0]", () =>
+                new CustomAttributeBuilder(con, new object[0], namedProperties, propertyValues)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyValues[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        namedProperties,
-                        propertyValues,
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("propertyValues[0]", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    namedProperties,
+                    propertyValues,
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -1943,22 +1749,18 @@ namespace System.Reflection.Emit.Tests
             );
             object[] propertyValues = new object[] { value };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], namedProperties, propertyValues)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(con, new object[0], namedProperties, propertyValues)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        namedProperties,
-                        propertyValues,
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    namedProperties,
+                    propertyValues,
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -2002,22 +1804,18 @@ namespace System.Reflection.Emit.Tests
             );
             object[] propertyValues = new object[] { value };
 
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyValues[0]",
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], namedProperties, propertyValues)
+            AssertExtensions.Throws<ArgumentException>("propertyValues[0]", () =>
+                new CustomAttributeBuilder(con, new object[0], namedProperties, propertyValues)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyValues[0]",
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        namedProperties,
-                        propertyValues,
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>("propertyValues[0]", () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    namedProperties,
+                    propertyValues,
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 
@@ -2086,22 +1884,18 @@ namespace System.Reflection.Emit.Tests
                 propertyNames
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                paramName,
-                () =>
-                    new CustomAttributeBuilder(con, new object[0], namedProperties, propertyValues)
+            AssertExtensions.Throws<ArgumentException>(paramName, () =>
+                new CustomAttributeBuilder(con, new object[0], namedProperties, propertyValues)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                paramName,
-                () =>
-                    new CustomAttributeBuilder(
-                        con,
-                        new object[0],
-                        namedProperties,
-                        propertyValues,
-                        new FieldInfo[0],
-                        new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(paramName, () =>
+                new CustomAttributeBuilder(
+                    con,
+                    new object[0],
+                    namedProperties,
+                    propertyValues,
+                    new FieldInfo[0],
+                    new object[0]
+                )
             );
         }
 

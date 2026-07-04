@@ -182,13 +182,11 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "asyncResult",
-                    () => s.EndDisconnect(null)
+                AssertExtensions.Throws<ArgumentNullException>("asyncResult", () =>
+                    s.EndDisconnect(null)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "asyncResult",
-                    () => s.EndDisconnect(Task.CompletedTask)
+                AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                    s.EndDisconnect(Task.CompletedTask)
                 );
             }
         }

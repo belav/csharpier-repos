@@ -288,9 +288,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             : base(name, containingNamespace, containingModule, baseType)
         {
             _constructors = ImmutableArray.Create<MethodSymbol>(
-                new SynthesizedEmbeddedAttributeConstructorSymbol(
-                    this,
-                    m => ImmutableArray<ParameterSymbol>.Empty
+                new SynthesizedEmbeddedAttributeConstructorSymbol(this, m =>
+                    ImmutableArray<ParameterSymbol>.Empty
                 )
             );
         }

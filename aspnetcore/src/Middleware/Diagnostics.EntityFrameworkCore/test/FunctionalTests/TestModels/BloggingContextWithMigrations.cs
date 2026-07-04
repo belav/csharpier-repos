@@ -22,15 +22,12 @@ public class BloggingContextWithMigrations : BloggingContext
 
     private static void BuildSnapshotModel(ModelBuilder builder)
     {
-        builder.Entity(
-            "Blogging.Models.Blog",
-            b =>
-            {
-                b.Property<int>("BlogId").ValueGeneratedOnAdd();
-                b.Property<string>("Name");
-                b.HasKey("BlogId");
-            }
-        );
+        builder.Entity("Blogging.Models.Blog", b =>
+        {
+            b.Property<int>("BlogId").ValueGeneratedOnAdd();
+            b.Property<string>("Name");
+            b.HasKey("BlogId");
+        });
     }
 
     [DbContext(typeof(BloggingContextWithMigrations))]
@@ -50,14 +47,11 @@ public class BloggingContextWithMigrations : BloggingContext
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder
-                .CreateTable(
-                    "Blogs",
-                    c => new
-                    {
-                        BlogId = c.Column<int>().Annotation("Sqlite:Autoincrement", true),
-                        Name = c.Column<string>(nullable: true),
-                    }
-                )
+                .CreateTable("Blogs", c => new
+                {
+                    BlogId = c.Column<int>().Annotation("Sqlite:Autoincrement", true),
+                    Name = c.Column<string>(nullable: true),
+                })
                 .PrimaryKey("PK_Blog", t => t.BlogId);
         }
 

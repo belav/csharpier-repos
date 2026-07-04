@@ -227,10 +227,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Action<TestEntityTypeBuilder<TEntity>> buildAction
         )
         {
-            ModelBuilder.Entity(
-                typeof(TEntity),
-                entityTypeBuilder =>
-                    buildAction(new NonGenericTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
+            ModelBuilder.Entity(typeof(TEntity), entityTypeBuilder =>
+                buildAction(new NonGenericTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
             );
             return this;
         }
@@ -240,11 +238,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Action<TestEntityTypeBuilder<TEntity>> buildAction
         )
         {
-            ModelBuilder.SharedTypeEntity(
-                name,
-                typeof(TEntity),
-                entityTypeBuilder =>
-                    buildAction(new NonGenericTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
+            ModelBuilder.SharedTypeEntity(name, typeof(TEntity), entityTypeBuilder =>
+                buildAction(new NonGenericTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
             );
             return this;
         }
@@ -536,13 +531,10 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
         ) =>
             Wrap(
-                EntityTypeBuilder.OwnsOne(
-                    typeof(TRelatedEntity),
-                    navigationName,
-                    r =>
-                        buildAction(
-                            new NonGenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsOne(typeof(TRelatedEntity), navigationName, r =>
+                    buildAction(
+                        new NonGenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
+                    )
                 )
             );
 
@@ -634,13 +626,10 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
         ) =>
             Wrap(
-                EntityTypeBuilder.OwnsMany(
-                    typeof(TRelatedEntity),
-                    navigationName,
-                    r =>
-                        buildAction(
-                            new NonGenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsMany(typeof(TRelatedEntity), navigationName, r =>
+                    buildAction(
+                        new NonGenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
+                    )
                 )
             );
 
@@ -2011,12 +2000,10 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Action<TestEntityTypeBuilder<Dictionary<string, object>>> configureJoinEntityType
         ) =>
             new NonGenericTestEntityTypeBuilder<TRightEntity>(
-                CollectionCollectionBuilder.UsingEntity(
-                    joinEntityName,
-                    e =>
-                        configureJoinEntityType(
-                            new NonGenericTestEntityTypeBuilder<Dictionary<string, object>>(e)
-                        )
+                CollectionCollectionBuilder.UsingEntity(joinEntityName, e =>
+                    configureJoinEntityType(
+                        new NonGenericTestEntityTypeBuilder<Dictionary<string, object>>(e)
+                    )
                 )
             );
 
@@ -2024,10 +2011,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
         ) =>
             new NonGenericTestEntityTypeBuilder<TRightEntity>(
-                CollectionCollectionBuilder.UsingEntity(
-                    typeof(TJoinEntity),
-                    e =>
-                        configureJoinEntityType(new NonGenericTestEntityTypeBuilder<TJoinEntity>(e))
+                CollectionCollectionBuilder.UsingEntity(typeof(TJoinEntity), e =>
+                    configureJoinEntityType(new NonGenericTestEntityTypeBuilder<TJoinEntity>(e))
                 )
             );
 
@@ -2036,11 +2021,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
         ) =>
             new NonGenericTestEntityTypeBuilder<TRightEntity>(
-                CollectionCollectionBuilder.UsingEntity(
-                    joinEntityName,
-                    typeof(TJoinEntity),
-                    e =>
-                        configureJoinEntityType(new NonGenericTestEntityTypeBuilder<TJoinEntity>(e))
+                CollectionCollectionBuilder.UsingEntity(joinEntityName, typeof(TJoinEntity), e =>
+                    configureJoinEntityType(new NonGenericTestEntityTypeBuilder<TJoinEntity>(e))
                 )
             );
 

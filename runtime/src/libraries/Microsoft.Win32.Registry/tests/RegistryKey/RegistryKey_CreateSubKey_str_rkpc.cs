@@ -96,69 +96,51 @@ namespace Microsoft.Win32.RegistryTests
             );
 
             // Should throw if passed option is invalid
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        TestRegistryKeyName,
-                        true,
-                        options: (RegistryOptions)(-1)
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                TestRegistryKey.CreateSubKey(
+                    TestRegistryKeyName,
+                    true,
+                    options: (RegistryOptions)(-1)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        TestRegistryKeyName,
-                        true,
-                        options: (RegistryOptions)3
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                TestRegistryKey.CreateSubKey(TestRegistryKeyName, true, options: (RegistryOptions)3)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        TestRegistryKeyName,
-                        RegistryKeyPermissionCheck.ReadWriteSubTree,
-                        (RegistryOptions)(-1)
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                TestRegistryKey.CreateSubKey(
+                    TestRegistryKeyName,
+                    RegistryKeyPermissionCheck.ReadWriteSubTree,
+                    (RegistryOptions)(-1)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        TestRegistryKeyName,
-                        RegistryKeyPermissionCheck.ReadWriteSubTree,
-                        (RegistryOptions)3
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                TestRegistryKey.CreateSubKey(
+                    TestRegistryKeyName,
+                    RegistryKeyPermissionCheck.ReadWriteSubTree,
+                    (RegistryOptions)3
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        TestRegistryKeyName,
-                        RegistryKeyPermissionCheck.ReadWriteSubTree,
-                        (RegistryOptions)(-1),
-                        new RegistrySecurity()
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                TestRegistryKey.CreateSubKey(
+                    TestRegistryKeyName,
+                    RegistryKeyPermissionCheck.ReadWriteSubTree,
+                    (RegistryOptions)(-1),
+                    new RegistrySecurity()
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        TestRegistryKeyName,
-                        RegistryKeyPermissionCheck.ReadWriteSubTree,
-                        (RegistryOptions)3,
-                        new RegistrySecurity()
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                TestRegistryKey.CreateSubKey(
+                    TestRegistryKeyName,
+                    RegistryKeyPermissionCheck.ReadWriteSubTree,
+                    (RegistryOptions)3,
+                    new RegistrySecurity()
+                )
             );
 
             // Should throw if key length above 255 characters
             const int maxValueNameLength = 255;
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => TestRegistryKey.CreateSubKey(new string('a', maxValueNameLength + 1))
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                TestRegistryKey.CreateSubKey(new string('a', maxValueNameLength + 1))
             );
 
             // Should throw if RegistryKey is readonly
@@ -282,9 +264,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(
-                expected,
-                () => TestRegistryKey.CreateSubKey(subKeyName, writable: true)
+            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(subKeyName, writable: true)
             );
 
         [Theory]
@@ -293,13 +274,11 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(
-                expected,
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        subKeyName,
-                        RegistryKeyPermissionCheck.ReadWriteSubTree
-                    )
+            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(
+                    subKeyName,
+                    RegistryKeyPermissionCheck.ReadWriteSubTree
+                )
             );
 
         [Theory]
@@ -308,9 +287,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(
-                expected,
-                () => TestRegistryKey.CreateSubKey(subKeyName, writable: false)
+            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(subKeyName, writable: false)
             );
 
         [Theory]
@@ -319,9 +297,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(
-                expected,
-                () => TestRegistryKey.CreateSubKey(subKeyName, RegistryKeyPermissionCheck.Default)
+            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(subKeyName, RegistryKeyPermissionCheck.Default)
             );
 
         [Theory]
@@ -330,10 +307,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(
-                expected,
-                () =>
-                    TestRegistryKey.CreateSubKey(subKeyName, RegistryKeyPermissionCheck.ReadSubTree)
+            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(subKeyName, RegistryKeyPermissionCheck.ReadSubTree)
             );
 
         [Theory]
@@ -342,9 +317,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(
-                expected,
-                () => TestRegistryKey.CreateSubKey(subKeyName, writable: true)
+            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(subKeyName, writable: true)
             );
 
         [Theory]
@@ -353,13 +327,11 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(
-                expected,
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        subKeyName,
-                        RegistryKeyPermissionCheck.ReadWriteSubTree
-                    )
+            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(
+                    subKeyName,
+                    RegistryKeyPermissionCheck.ReadWriteSubTree
+                )
             );
 
         [Theory]
@@ -368,9 +340,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(
-                expected,
-                () => TestRegistryKey.CreateSubKey(subKeyName, writable: false)
+            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(subKeyName, writable: false)
             );
 
         [Theory]
@@ -379,9 +350,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(
-                expected,
-                () => TestRegistryKey.CreateSubKey(subKeyName, RegistryKeyPermissionCheck.Default)
+            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(subKeyName, RegistryKeyPermissionCheck.Default)
             );
 
         [Theory]
@@ -390,10 +360,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(
-                expected,
-                () =>
-                    TestRegistryKey.CreateSubKey(subKeyName, RegistryKeyPermissionCheck.ReadSubTree)
+            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(subKeyName, RegistryKeyPermissionCheck.ReadSubTree)
             );
     }
 }

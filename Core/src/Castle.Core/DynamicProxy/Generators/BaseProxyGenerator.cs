@@ -78,24 +78,21 @@ namespace Castle.DynamicProxy.Generators
         {
             bool notFoundInTypeCache = false;
 
-            var proxyType = Scope.TypeCache.GetOrAdd(
-                GetCacheKey(),
-                cacheKey =>
-                {
-                    notFoundInTypeCache = true;
-                    Logger.DebugFormat(
-                        "No cached proxy type was found for target type {0}.",
-                        targetType.FullName
-                    );
+            var proxyType = Scope.TypeCache.GetOrAdd(GetCacheKey(), cacheKey =>
+            {
+                notFoundInTypeCache = true;
+                Logger.DebugFormat(
+                    "No cached proxy type was found for target type {0}.",
+                    targetType.FullName
+                );
 
-                    EnsureOptionsOverrideEqualsAndGetHashCode();
+                EnsureOptionsOverrideEqualsAndGetHashCode();
 
-                    var name = Scope.NamingScope.GetUniqueName(
-                        "Castle.Proxies." + targetType.Name + "Proxy"
-                    );
-                    return GenerateType(name, Scope.NamingScope.SafeSubScope());
-                }
-            );
+                var name = Scope.NamingScope.GetUniqueName(
+                    "Castle.Proxies." + targetType.Name + "Proxy"
+                );
+                return GenerateType(name, Scope.NamingScope.SafeSubScope());
+            });
 
             if (!notFoundInTypeCache)
             {

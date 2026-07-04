@@ -458,9 +458,8 @@ public class RouteTest
 
         // Assert
         Assert.Single(route.DataTokens);
-        Assert.Single(
-            route.DataTokens,
-            kvp => kvp.Key == "culture" && ((string)kvp.Value) == "en-CA"
+        Assert.Single(route.DataTokens, kvp =>
+            kvp.Key == "culture" && ((string)kvp.Value) == "en-CA"
         );
     }
 

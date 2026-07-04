@@ -112,15 +112,12 @@ public class SymbolApiResponseMetadataProviderTest
         );
 
         // Assert
-        Assert.Collection(
-            result,
-            metadata =>
-            {
-                Assert.Equal(201, metadata.StatusCode);
-                Assert.NotNull(metadata.Attribute);
-                Assert.Equal(method, metadata.AttributeSource);
-            }
-        );
+        Assert.Collection(result, metadata =>
+        {
+            Assert.Equal(201, metadata.StatusCode);
+            Assert.NotNull(metadata.Attribute);
+            Assert.Equal(method, metadata.AttributeSource);
+        });
     }
 
     [Fact]
@@ -148,15 +145,12 @@ public class SymbolApiResponseMetadataProviderTest
         );
 
         // Assert
-        Assert.Collection(
-            result,
-            metadata =>
-            {
-                Assert.Equal(202, metadata.StatusCode);
-                Assert.NotNull(metadata.Attribute);
-                Assert.Equal(method, metadata.AttributeSource);
-            }
-        );
+        Assert.Collection(result, metadata =>
+        {
+            Assert.Equal(202, metadata.StatusCode);
+            Assert.NotNull(metadata.Attribute);
+            Assert.Equal(method, metadata.AttributeSource);
+        });
     }
 
     [Fact]
@@ -184,15 +178,12 @@ public class SymbolApiResponseMetadataProviderTest
         );
 
         // Assert
-        Assert.Collection(
-            result,
-            metadata =>
-            {
-                Assert.Equal(203, metadata.StatusCode);
-                Assert.NotNull(metadata.Attribute);
-                Assert.Equal(method, metadata.AttributeSource);
-            }
-        );
+        Assert.Collection(result, metadata =>
+        {
+            Assert.Equal(203, metadata.StatusCode);
+            Assert.NotNull(metadata.Attribute);
+            Assert.Equal(method, metadata.AttributeSource);
+        });
     }
 
     [Fact]
@@ -220,15 +211,12 @@ public class SymbolApiResponseMetadataProviderTest
         );
 
         // Assert
-        Assert.Collection(
-            result,
-            metadata =>
-            {
-                Assert.Equal(201, metadata.StatusCode);
-                Assert.NotNull(metadata.Attribute);
-                Assert.Equal(method, metadata.AttributeSource);
-            }
-        );
+        Assert.Collection(result, metadata =>
+        {
+            Assert.Equal(201, metadata.StatusCode);
+            Assert.NotNull(metadata.Attribute);
+            Assert.Equal(method, metadata.AttributeSource);
+        });
     }
 
     [Fact]
@@ -256,14 +244,11 @@ public class SymbolApiResponseMetadataProviderTest
         );
 
         // Assert
-        Assert.Collection(
-            result,
-            metadata =>
-            {
-                Assert.Equal(201, metadata.StatusCode);
-                Assert.NotNull(metadata.Attribute);
-            }
-        );
+        Assert.Collection(result, metadata =>
+        {
+            Assert.Equal(201, metadata.StatusCode);
+            Assert.NotNull(metadata.Attribute);
+        });
     }
 
     [Fact]
@@ -335,14 +320,11 @@ public class SymbolApiResponseMetadataProviderTest
         );
 
         // Assert
-        Assert.Collection(
-            result,
-            metadata =>
-            {
-                Assert.Equal(204, metadata.StatusCode);
-                Assert.NotNull(metadata.Attribute);
-            }
-        );
+        Assert.Collection(result, metadata =>
+        {
+            Assert.Equal(204, metadata.StatusCode);
+            Assert.NotNull(metadata.Attribute);
+        });
     }
 
     [Fact]
@@ -413,14 +395,11 @@ public class SymbolApiResponseMetadataProviderTest
         );
 
         // Assert
-        Assert.Collection(
-            result,
-            metadata =>
-            {
-                Assert.Equal(200, metadata.StatusCode);
-                Assert.Same(method, metadata.AttributeSource);
-            }
-        );
+        Assert.Collection(result, metadata =>
+        {
+            Assert.Equal(200, metadata.StatusCode);
+            Assert.Same(method, metadata.AttributeSource);
+        });
     }
 
     [Fact]

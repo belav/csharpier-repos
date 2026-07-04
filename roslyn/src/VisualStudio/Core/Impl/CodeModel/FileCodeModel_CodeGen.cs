@@ -348,11 +348,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 allowMultipleElements: true
             );
 
-            var implementedInterfaceSymbols = Array.ConvertAll(
-                implementedInterfaceArray,
-                i =>
-                    (INamedTypeSymbol)
-                        CodeModelService.GetTypeSymbol(i, semanticModel, containerNodePosition)
+            var implementedInterfaceSymbols = Array.ConvertAll(implementedInterfaceArray, i =>
+                (INamedTypeSymbol)
+                    CodeModelService.GetTypeSymbol(i, semanticModel, containerNodePosition)
             );
 
             var newType = CreateTypeDeclaration(
@@ -651,11 +649,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             var implementedInterfaceArray = GetValidArray(bases, allowMultipleElements: true);
 
-            var implementedInterfaceSymbols = Array.ConvertAll(
-                implementedInterfaceArray,
-                i =>
-                    (INamedTypeSymbol)
-                        CodeModelService.GetTypeSymbol(i, semanticModel, containerNodePosition)
+            var implementedInterfaceSymbols = Array.ConvertAll(implementedInterfaceArray, i =>
+                (INamedTypeSymbol)
+                    CodeModelService.GetTypeSymbol(i, semanticModel, containerNodePosition)
             );
 
             var newType = CreateTypeDeclaration(
@@ -775,11 +771,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
             var implementedInterfaceArray = GetValidArray(bases, allowMultipleElements: true);
 
-            var implementedInterfaceSymbols = Array.ConvertAll(
-                implementedInterfaceArray,
-                i =>
-                    (INamedTypeSymbol)
-                        CodeModelService.GetTypeSymbol(i, semanticModel, containerNodePosition)
+            var implementedInterfaceSymbols = Array.ConvertAll(implementedInterfaceArray, i =>
+                (INamedTypeSymbol)
+                    CodeModelService.GetTypeSymbol(i, semanticModel, containerNodePosition)
             );
 
             var newType = CreateTypeDeclaration(

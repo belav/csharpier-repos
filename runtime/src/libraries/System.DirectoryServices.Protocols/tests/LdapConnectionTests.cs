@@ -141,28 +141,24 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(AuthType.Kerberos + 1)]
         public void Ctor_InvalidAuthType_ThrowsInvalidEnumArgumentException(AuthType authType)
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "authType",
-                () =>
-                    new LdapConnection(
-                        new LdapDirectoryIdentifier("server"),
-                        new NetworkCredential(),
-                        authType
-                    )
+            AssertExtensions.Throws<InvalidEnumArgumentException>("authType", () =>
+                new LdapConnection(
+                    new LdapDirectoryIdentifier("server"),
+                    new NetworkCredential(),
+                    authType
+                )
             );
         }
 
         [Fact]
         public void Ctor_InvalidAuthTypeWithCredentials_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new LdapConnection(
-                        new LdapDirectoryIdentifier("server"),
-                        new NetworkCredential("username", "password"),
-                        AuthType.Anonymous
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new LdapConnection(
+                    new LdapDirectoryIdentifier("server"),
+                    new NetworkCredential("username", "password"),
+                    AuthType.Anonymous
+                )
             );
         }
 
@@ -202,9 +198,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void AuthType_SetInvalid_ThrowsInvalidEnumArgumentException(AuthType authType)
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "value",
-                () => connection.AuthType = authType
+            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () =>
+                connection.AuthType = authType
             );
         }
 
@@ -228,9 +223,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Timeout_SetInvalid_ThrowsArgumentException(long totalSeconds)
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => connection.Timeout = TimeSpan.FromSeconds(totalSeconds)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                connection.Timeout = TimeSpan.FromSeconds(totalSeconds)
             );
         }
 
@@ -277,19 +271,16 @@ namespace System.DirectoryServices.Protocols.Tests
         public void SendRequest_NullRequest_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "request",
-                () => connection.SendRequest(null)
+            AssertExtensions.Throws<ArgumentNullException>("request", () =>
+                connection.SendRequest(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "request",
-                () =>
-                    connection.BeginSendRequest(
-                        null,
-                        PartialResultProcessing.NoPartialResultSupport,
-                        null,
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("request", () =>
+                connection.BeginSendRequest(
+                    null,
+                    PartialResultProcessing.NoPartialResultSupport,
+                    null,
+                    null
+                )
             );
         }
 
@@ -310,9 +301,8 @@ namespace System.DirectoryServices.Protocols.Tests
         )
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "partialMode",
-                () => connection.BeginSendRequest(new AddRequest(), partialMode, null, null)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("partialMode", () =>
+                connection.BeginSendRequest(new AddRequest(), partialMode, null, null)
             );
         }
 
@@ -333,15 +323,13 @@ namespace System.DirectoryServices.Protocols.Tests
         public void BeginSendRequest_NotifyCallbackAndNullCallback_ThrowsArgumentException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentException>(
-                "callback",
-                () =>
-                    connection.BeginSendRequest(
-                        new SearchRequest(),
-                        PartialResultProcessing.ReturnPartialResultsAndNotifyCallback,
-                        null,
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentException>("callback", () =>
+                connection.BeginSendRequest(
+                    new SearchRequest(),
+                    PartialResultProcessing.ReturnPartialResultsAndNotifyCallback,
+                    null,
+                    null
+                )
             );
         }
 
@@ -358,9 +346,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void EndSendRequest_NullAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "asyncResult",
-                () => connection.EndSendRequest(null)
+            AssertExtensions.Throws<ArgumentNullException>("asyncResult", () =>
+                connection.EndSendRequest(null)
             );
         }
 
@@ -368,9 +355,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void EndSendRequest_InvalidAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => connection.EndSendRequest(new CustomAsyncResult())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                connection.EndSendRequest(new CustomAsyncResult())
             );
         }
 
@@ -387,9 +373,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void GetPartialResults_NullAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "asyncResult",
-                () => connection.GetPartialResults(null)
+            AssertExtensions.Throws<ArgumentNullException>("asyncResult", () =>
+                connection.GetPartialResults(null)
             );
         }
 
@@ -397,9 +382,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void GetPartialResults_InvalidAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => connection.GetPartialResults(new CustomAsyncResult())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                connection.GetPartialResults(new CustomAsyncResult())
             );
         }
 
@@ -416,9 +400,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Abort_NullAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "asyncResult",
-                () => connection.Abort(null)
+            AssertExtensions.Throws<ArgumentNullException>("asyncResult", () =>
+                connection.Abort(null)
             );
         }
 
@@ -426,9 +409,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Abort_InvalidAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => connection.Abort(new CustomAsyncResult())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                connection.Abort(new CustomAsyncResult())
             );
         }
 

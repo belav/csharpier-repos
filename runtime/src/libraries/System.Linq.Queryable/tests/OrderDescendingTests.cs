@@ -33,9 +33,8 @@ namespace System.Linq.Tests
         public void NullSource()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.OrderDescending()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.OrderDescending()
             );
         }
 
@@ -43,9 +42,8 @@ namespace System.Linq.Tests
         public void NullSourceComparer()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.OrderDescending(Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.OrderDescending(Comparer<int>.Default)
             );
         }
 

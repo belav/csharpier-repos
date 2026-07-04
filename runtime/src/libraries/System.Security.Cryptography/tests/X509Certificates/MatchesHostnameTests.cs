@@ -1059,17 +1059,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 // But argument validation comes first.
                 Assert.Throws<ArgumentNullException>("hostname", () => cert.MatchesHostname(null));
-                Assert.Throws<ArgumentNullException>(
-                    "hostname",
-                    () => cert.MatchesHostname(null, false, true)
+                Assert.Throws<ArgumentNullException>("hostname", () =>
+                    cert.MatchesHostname(null, false, true)
                 );
-                Assert.Throws<ArgumentNullException>(
-                    "hostname",
-                    () => cert.MatchesHostname(null, true, false)
+                Assert.Throws<ArgumentNullException>("hostname", () =>
+                    cert.MatchesHostname(null, true, false)
                 );
-                Assert.Throws<ArgumentNullException>(
-                    "hostname",
-                    () => cert.MatchesHostname(null, false, false)
+                Assert.Throws<ArgumentNullException>("hostname", () =>
+                    cert.MatchesHostname(null, false, false)
                 );
             }
         }
@@ -1106,29 +1103,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 using (X509Certificate2 cert = req.CreateSelfSigned(notBefore, notAfter))
                 {
-                    Assert.Throws<ArgumentException>(
-                        "hostname",
-                        () => cert.MatchesHostname("John Smith")
+                    Assert.Throws<ArgumentException>("hostname", () =>
+                        cert.MatchesHostname("John Smith")
                     );
-                    Assert.Throws<ArgumentException>(
-                        "hostname",
-                        () => cert.MatchesHostname("*.pomme.fruit.example")
+                    Assert.Throws<ArgumentException>("hostname", () =>
+                        cert.MatchesHostname("*.pomme.fruit.example")
                     );
-                    Assert.Throws<ArgumentException>(
-                        "hostname",
-                        () => cert.MatchesHostname(".pomme.fruit.example")
+                    Assert.Throws<ArgumentException>("hostname", () =>
+                        cert.MatchesHostname(".pomme.fruit.example")
                     );
-                    Assert.Throws<ArgumentException>(
-                        "hostname",
-                        () => cert.MatchesHostname("*berry.fruit.example")
+                    Assert.Throws<ArgumentException>("hostname", () =>
+                        cert.MatchesHostname("*berry.fruit.example")
                     );
-                    Assert.Throws<ArgumentException>(
-                        "hostname",
-                        () => cert.MatchesHostname("cran*.fruit.example")
+                    Assert.Throws<ArgumentException>("hostname", () =>
+                        cert.MatchesHostname("cran*.fruit.example")
                     );
-                    Assert.Throws<ArgumentException>(
-                        "hostname",
-                        () => cert.MatchesHostname("cran*.fruit.example")
+                    Assert.Throws<ArgumentException>("hostname", () =>
+                        cert.MatchesHostname("cran*.fruit.example")
                     );
                     Assert.Throws<ArgumentException>("hostname", () => cert.MatchesHostname(""));
                     Assert.Throws<ArgumentException>("hostname", () => cert.MatchesHostname("."));

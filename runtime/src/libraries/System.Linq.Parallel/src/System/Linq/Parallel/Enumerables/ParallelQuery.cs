@@ -99,9 +99,8 @@ namespace System.Linq
 
         internal sealed override ParallelQuery<TCastTo> Cast<TCastTo>()
         {
-            return ParallelEnumerable.Select<TSource, TCastTo>(
-                this,
-                elem => (TCastTo)(object)elem!
+            return ParallelEnumerable.Select<TSource, TCastTo>(this, elem =>
+                (TCastTo)(object)elem!
             );
         }
 

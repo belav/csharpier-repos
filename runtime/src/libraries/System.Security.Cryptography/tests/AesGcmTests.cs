@@ -86,9 +86,8 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesGcm = new AesGcm(key, AesGcm.TagByteSizes.MinSize))
             {
-                Assert.Throws<ArgumentException>(
-                    "nonce",
-                    () => aesGcm.Encrypt(nonce, plaintext, ciphertext, tag)
+                Assert.Throws<ArgumentException>("nonce", () =>
+                    aesGcm.Encrypt(nonce, plaintext, ciphertext, tag)
                 );
             }
         }
@@ -141,13 +140,11 @@ namespace System.Security.Cryptography.Tests
             using (var aesGcm = new AesGcm(key))
 #pragma warning restore SYSLIB0053
             {
-                Assert.Throws<ArgumentException>(
-                    "tag",
-                    () => aesGcm.Encrypt(nonce, plaintext, ciphertext, tag)
+                Assert.Throws<ArgumentException>("tag", () =>
+                    aesGcm.Encrypt(nonce, plaintext, ciphertext, tag)
                 );
-                Assert.Throws<ArgumentException>(
-                    "tag",
-                    () => aesGcm.Decrypt(nonce, ciphertext, tag, plaintext)
+                Assert.Throws<ArgumentException>("tag", () =>
+                    aesGcm.Decrypt(nonce, ciphertext, tag, plaintext)
                 );
             }
         }
@@ -162,9 +159,8 @@ namespace System.Security.Cryptography.Tests
         {
             byte[] key = new byte[32];
             Assert.Throws<ArgumentException>("tagSizeInBytes", () => new AesGcm(key, tagSize));
-            Assert.Throws<ArgumentException>(
-                "tagSizeInBytes",
-                () => new AesGcm(key.AsSpan(), tagSize)
+            Assert.Throws<ArgumentException>("tagSizeInBytes", () =>
+                new AesGcm(key.AsSpan(), tagSize)
             );
         }
 
@@ -212,27 +208,23 @@ namespace System.Security.Cryptography.Tests
             using (var aesGcm = new AesGcm(key, tagSize))
             {
                 ArgumentException ex;
-                ex = Assert.Throws<ArgumentException>(
-                    "tag",
-                    () => aesGcm.Encrypt(nonce, plaintext, ciphertext, tag)
+                ex = Assert.Throws<ArgumentException>("tag", () =>
+                    aesGcm.Encrypt(nonce, plaintext, ciphertext, tag)
                 );
                 Assert.Contains(tagSize.ToString(), ex.Message);
 
-                ex = Assert.Throws<ArgumentException>(
-                    "tag",
-                    () => aesGcm.Encrypt(nonce.AsSpan(), plaintext, ciphertext, tag)
+                ex = Assert.Throws<ArgumentException>("tag", () =>
+                    aesGcm.Encrypt(nonce.AsSpan(), plaintext, ciphertext, tag)
                 );
                 Assert.Contains(tagSize.ToString(), ex.Message);
 
-                ex = Assert.Throws<ArgumentException>(
-                    "tag",
-                    () => aesGcm.Decrypt(nonce, ciphertext, tag, plaintext)
+                ex = Assert.Throws<ArgumentException>("tag", () =>
+                    aesGcm.Decrypt(nonce, ciphertext, tag, plaintext)
                 );
                 Assert.Contains(tagSize.ToString(), ex.Message);
 
-                ex = Assert.Throws<ArgumentException>(
-                    "tag",
-                    () => aesGcm.Decrypt(nonce.AsSpan(), ciphertext, tag, plaintext)
+                ex = Assert.Throws<ArgumentException>("tag", () =>
+                    aesGcm.Decrypt(nonce.AsSpan(), ciphertext, tag, plaintext)
                 );
                 Assert.Contains(tagSize.ToString(), ex.Message);
             }
@@ -492,33 +484,27 @@ namespace System.Security.Cryptography.Tests
                     && testCase.Tag.Length != CryptoKitSupportedTagSizeInBytes
                 )
                 {
-                    Assert.Throws<ArgumentException>(
-                        "tag",
-                        () =>
-                        {
-                            aesGcm.Encrypt(
-                                testCase.Nonce,
-                                testCase.Plaintext,
-                                ciphertext,
-                                tag,
-                                testCase.AssociatedData
-                            );
-                        }
-                    );
-                    Assert.Throws<ArgumentException>(
-                        "tag",
-                        () =>
-                        {
-                            byte[] plaintext = new byte[testCase.Plaintext.Length];
-                            aesGcm.Decrypt(
-                                testCase.Nonce,
-                                ciphertext,
-                                tag,
-                                testCase.Ciphertext,
-                                testCase.AssociatedData
-                            );
-                        }
-                    );
+                    Assert.Throws<ArgumentException>("tag", () =>
+                    {
+                        aesGcm.Encrypt(
+                            testCase.Nonce,
+                            testCase.Plaintext,
+                            ciphertext,
+                            tag,
+                            testCase.AssociatedData
+                        );
+                    });
+                    Assert.Throws<ArgumentException>("tag", () =>
+                    {
+                        byte[] plaintext = new byte[testCase.Plaintext.Length];
+                        aesGcm.Decrypt(
+                            testCase.Nonce,
+                            ciphertext,
+                            tag,
+                            testCase.Ciphertext,
+                            testCase.AssociatedData
+                        );
+                    });
                 }
                 else
                 {
@@ -555,9 +541,8 @@ namespace System.Security.Cryptography.Tests
         {
             if (PlatformDetection.IsOSX && testCase.Tag.Length != CryptoKitSupportedTagSizeInBytes)
             {
-                Assert.Throws<ArgumentException>(
-                    "tagSizeInBytes",
-                    () => new AesGcm(testCase.Key, testCase.Tag.Length)
+                Assert.Throws<ArgumentException>("tagSizeInBytes", () =>
+                    new AesGcm(testCase.Key, testCase.Tag.Length)
                 );
             }
             else

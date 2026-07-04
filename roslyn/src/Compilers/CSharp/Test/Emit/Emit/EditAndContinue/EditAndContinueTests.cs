@@ -3393,9 +3393,8 @@ partial class C
                     edits: new[]
                     {
                         // note: lambda is not syntax-mapped to the previous generation
-                        Edit(
-                            SemanticEditKind.Update,
-                            c => c.GetMember<IMethodSymbol>("C.M").PartialImplementationPart
+                        Edit(SemanticEditKind.Update, c =>
+                            c.GetMember<IMethodSymbol>("C.M").PartialImplementationPart
                         ),
                     },
                     validator: g =>
@@ -6286,18 +6285,14 @@ class C
                     """,
                     edits: new[]
                     {
-                        Edit(
-                            SemanticEditKind.Insert,
-                            c =>
-                                c.GetMembers<IPropertySymbol>("C.this[]")
-                                    .Single(p => p.Parameters is [{ Name: "y" }])
+                        Edit(SemanticEditKind.Insert, c =>
+                            c.GetMembers<IPropertySymbol>("C.this[]")
+                                .Single(p => p.Parameters is [{ Name: "y" }])
                         ),
-                        Edit(
-                            SemanticEditKind.Insert,
-                            c =>
-                                c.GetMembers<IPropertySymbol>("C.this[]")
-                                    .Single(p => p.Parameters is [{ Name: "y" }])
-                                    .GetMethod
+                        Edit(SemanticEditKind.Insert, c =>
+                            c.GetMembers<IPropertySymbol>("C.this[]")
+                                .Single(p => p.Parameters is [{ Name: "y" }])
+                                .GetMethod
                         ), // the compiler does not need this edit, but the IDE adds it for simplicity
                     },
                     validator: g =>
@@ -12304,18 +12299,13 @@ class B
             var bytes0 = compilation0.EmitToArray(testData: testData0);
             using var md0 = ModuleMetadata.CreateFromImage(bytes0);
 
-            var generation0 = CreateInitialBaseline(
-                compilation0,
-                md0,
-                m =>
-                    md0.MetadataReader.GetString(
-                        md0.MetadataReader.GetMethodDefinition(m).Name
-                    ) switch
-                    {
-                        "F" => testData0.GetMethodData("C.F").GetEncDebugInfo(),
-                        "G" => testData0.GetMethodData("C.G").GetEncDebugInfo(),
-                        _ => default,
-                    }
+            var generation0 = CreateInitialBaseline(compilation0, md0, m =>
+                md0.MetadataReader.GetString(md0.MetadataReader.GetMethodDefinition(m).Name) switch
+                {
+                    "F" => testData0.GetMethodData("C.F").GetEncDebugInfo(),
+                    "G" => testData0.GetMethodData("C.G").GetEncDebugInfo(),
+                    _ => default,
+                }
             );
 
             var reader0 = md0.MetadataReader;
@@ -14954,11 +14944,8 @@ class C
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(
-                        SemanticEditKind.Update,
-                        method0F,
-                        method1F,
-                        syntaxMap: s => null
+                    SemanticEdit.Create(SemanticEditKind.Update, method0F, method1F, syntaxMap: s =>
+                        null
                     )
                 )
             );
@@ -14987,11 +14974,8 @@ class C
             var diff2F = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(
-                        SemanticEditKind.Update,
-                        method1F,
-                        method2F,
-                        syntaxMap: s => null
+                    SemanticEdit.Create(SemanticEditKind.Update, method1F, method2F, syntaxMap: s =>
+                        null
                     )
                 )
             );
@@ -15007,11 +14991,8 @@ class C
             var diff2G = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(
-                        SemanticEditKind.Update,
-                        method1G,
-                        method2G,
-                        syntaxMap: s => null
+                    SemanticEdit.Create(SemanticEditKind.Update, method1G, method2G, syntaxMap: s =>
+                        null
                     )
                 )
             );
@@ -15364,11 +15345,8 @@ class C
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(
-                        SemanticEditKind.Update,
-                        method0F,
-                        method1F,
-                        syntaxMap: s => null
+                    SemanticEdit.Create(SemanticEditKind.Update, method0F, method1F, syntaxMap: s =>
+                        null
                     )
                 )
             );
@@ -15383,11 +15361,8 @@ class C
             var diff2F = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(
-                        SemanticEditKind.Update,
-                        method1F,
-                        method2F,
-                        syntaxMap: s => null
+                    SemanticEdit.Create(SemanticEditKind.Update, method1F, method2F, syntaxMap: s =>
+                        null
                     )
                 )
             );
@@ -15775,14 +15750,10 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(
-                compilation0,
-                md0,
-                methodHandle =>
-                {
-                    throw new InvalidDataException("Bad PDB!");
-                }
-            );
+            var generation0 = CreateInitialBaseline(compilation0, md0, methodHandle =>
+            {
+                throw new InvalidDataException("Bad PDB!");
+            });
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
@@ -15849,14 +15820,10 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(
-                compilation0,
-                md0,
-                methodHandle =>
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
-            );
+            var generation0 = CreateInitialBaseline(compilation0, md0, methodHandle =>
+            {
+                throw new ArgumentOutOfRangeException();
+            });
 
             // the compiler should't swallow any exceptions but InvalidDataException
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -19421,29 +19388,26 @@ namespace N
                 options: TestOptions.DebugDll,
                 targetFramework: TargetFramework.NetStandard20
             )
-                .AddBaseline(
-                    source: IsExternalInitTypeDefinition + "record R {}",
-                    validator: g =>
-                    {
-                        g.VerifyMethodDefNames(
-                            ".ctor",
-                            ".ctor",
-                            ".ctor",
-                            ".ctor",
-                            "get_EqualityContract",
-                            "ToString",
-                            "PrintMembers",
-                            "op_Inequality",
-                            "op_Equality",
-                            "GetHashCode",
-                            "Equals",
-                            "Equals",
-                            "<Clone>$",
-                            ".ctor",
-                            ".ctor"
-                        );
-                    }
-                )
+                .AddBaseline(source: IsExternalInitTypeDefinition + "record R {}", validator: g =>
+                {
+                    g.VerifyMethodDefNames(
+                        ".ctor",
+                        ".ctor",
+                        ".ctor",
+                        ".ctor",
+                        "get_EqualityContract",
+                        "ToString",
+                        "PrintMembers",
+                        "op_Inequality",
+                        "op_Equality",
+                        "GetHashCode",
+                        "Equals",
+                        "Equals",
+                        "<Clone>$",
+                        ".ctor",
+                        ".ctor"
+                    );
+                })
                 .AddGeneration(
                     source: IsExternalInitTypeDefinition + "record R(int P) {}",
                     edits: new[]
@@ -21692,15 +21656,13 @@ class C
                                     ?.ISymbol,
                             newSymbolProvider: c => c.GetMember("C")
                         ),
-                        Edit(
-                            SemanticEditKind.Insert,
-                            symbolProvider: c =>
-                                c.GetMembers("C.M")
-                                    .FirstOrDefault(m =>
-                                        m.GetParameterTypes()[0].SpecialType
-                                        == SpecialType.System_Boolean
-                                    )
-                                    ?.ISymbol
+                        Edit(SemanticEditKind.Insert, symbolProvider: c =>
+                            c.GetMembers("C.M")
+                                .FirstOrDefault(m =>
+                                    m.GetParameterTypes()[0].SpecialType
+                                    == SpecialType.System_Boolean
+                                )
+                                ?.ISymbol
                         ),
                     },
                     validator: g =>
@@ -21770,15 +21732,12 @@ class C
                                     ?.ISymbol,
                             newSymbolProvider: c => c.GetMember("C")
                         ),
-                        Edit(
-                            SemanticEditKind.Insert,
-                            symbolProvider: c =>
-                                c.GetMembers("C.M")
-                                    .FirstOrDefault(m =>
-                                        m.GetParameterTypes()[0].SpecialType
-                                        == SpecialType.System_Int32
-                                    )
-                                    ?.ISymbol
+                        Edit(SemanticEditKind.Insert, symbolProvider: c =>
+                            c.GetMembers("C.M")
+                                .FirstOrDefault(m =>
+                                    m.GetParameterTypes()[0].SpecialType == SpecialType.System_Int32
+                                )
+                                ?.ISymbol
                         ),
                     },
                     validator: g =>
@@ -21866,15 +21825,12 @@ class C
                                     ?.ISymbol,
                             newSymbolProvider: c => c.GetMember("C")
                         ),
-                        Edit(
-                            SemanticEditKind.Insert,
-                            symbolProvider: c =>
-                                c.GetMembers("C.M")
-                                    .FirstOrDefault(m =>
-                                        m.GetTypeOrReturnType().SpecialType
-                                        == SpecialType.System_Int32
-                                    )
-                                    ?.ISymbol
+                        Edit(SemanticEditKind.Insert, symbolProvider: c =>
+                            c.GetMembers("C.M")
+                                .FirstOrDefault(m =>
+                                    m.GetTypeOrReturnType().SpecialType == SpecialType.System_Int32
+                                )
+                                ?.ISymbol
                         ),
                     },
                     validator: g =>
@@ -21947,15 +21903,12 @@ class C
                                     ?.ISymbol,
                             newSymbolProvider: c => c.GetMember("C")
                         ),
-                        Edit(
-                            SemanticEditKind.Insert,
-                            symbolProvider: c =>
-                                c.GetMembers("C.M")
-                                    .FirstOrDefault(m =>
-                                        m.GetTypeOrReturnType().SpecialType
-                                        == SpecialType.System_String
-                                    )
-                                    ?.ISymbol
+                        Edit(SemanticEditKind.Insert, symbolProvider: c =>
+                            c.GetMembers("C.M")
+                                .FirstOrDefault(m =>
+                                    m.GetTypeOrReturnType().SpecialType == SpecialType.System_String
+                                )
+                                ?.ISymbol
                         ),
                     },
                     validator: g =>
@@ -22044,12 +21997,10 @@ class C
                                     ?.ISymbol,
                             newSymbolProvider: c => c.GetMember("C")
                         ),
-                        Edit(
-                            SemanticEditKind.Insert,
-                            symbolProvider: c =>
-                                c.GetMembers("C.M")
-                                    .FirstOrDefault(m => m.GetParameterCount() == 2)
-                                    ?.ISymbol
+                        Edit(SemanticEditKind.Insert, symbolProvider: c =>
+                            c.GetMembers("C.M")
+                                .FirstOrDefault(m => m.GetParameterCount() == 2)
+                                ?.ISymbol
                         ),
                     },
                     validator: g =>
@@ -22119,12 +22070,10 @@ class C
                                     ?.ISymbol,
                             newSymbolProvider: c => c.GetMember("C")
                         ),
-                        Edit(
-                            SemanticEditKind.Insert,
-                            symbolProvider: c =>
-                                c.GetMembers("C.M")
-                                    .FirstOrDefault(m => m.GetParameterCount() == 1)
-                                    ?.ISymbol
+                        Edit(SemanticEditKind.Insert, symbolProvider: c =>
+                            c.GetMembers("C.M")
+                                .FirstOrDefault(m => m.GetParameterCount() == 1)
+                                ?.ISymbol
                         ),
                     },
                     validator: g =>
@@ -22732,9 +22681,8 @@ file class C
                     """,
                     edits: new[]
                     {
-                        Edit(
-                            SemanticEditKind.Update,
-                            symbolProvider: c => c.GetParameterlessConstructor("C")
+                        Edit(SemanticEditKind.Update, symbolProvider: c =>
+                            c.GetParameterlessConstructor("C")
                         ),
                     },
                     validator: g =>

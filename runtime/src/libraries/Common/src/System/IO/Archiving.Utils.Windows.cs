@@ -41,26 +41,22 @@ namespace System.IO
             i += offset;
 
             // We found at least one character that needs to be replaced.
-            return string.Create(
-                entryPath.Length,
-                (i, entryPath),
-                static (dest, state) =>
+            return string.Create(entryPath.Length, (i, entryPath), static (dest, state) =>
+            {
+                string entryPath = state.entryPath;
+
+                // Copy over to the new string everything until the character, then
+                // substitute for the found character.
+                entryPath.AsSpan(0, state.i).CopyTo(dest);
+                dest[state.i] = '_';
+
+                // Continue looking for and replacing any more illegal characters.
+                for (int i = state.i + 1; i < entryPath.Length; i++)
                 {
-                    string entryPath = state.entryPath;
-
-                    // Copy over to the new string everything until the character, then
-                    // substitute for the found character.
-                    entryPath.AsSpan(0, state.i).CopyTo(dest);
-                    dest[state.i] = '_';
-
-                    // Continue looking for and replacing any more illegal characters.
-                    for (int i = state.i + 1; i < entryPath.Length; i++)
-                    {
-                        char c = entryPath[i];
-                        dest[i] = s_illegalChars.Contains(c) ? '_' : c;
-                    }
+                    char c = entryPath[i];
+                    dest[i] = s_illegalChars.Contains(c) ? '_' : c;
                 }
-            );
+            });
         }
 
         public static unsafe string EntryFromPath(

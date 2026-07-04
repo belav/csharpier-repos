@@ -31,18 +31,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             CommandExecutionContext context
         )
         {
-            HandlePossibleTypingCommand(
-                args,
-                nextHandler,
-                (activeSession, span) =>
+            HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
+            {
+                var caretPoint = args.TextView.GetCaretPoint(args.SubjectBuffer);
+                if (!args.TextView.Selection.IsEmpty || caretPoint.Value != span.Start)
                 {
-                    var caretPoint = args.TextView.GetCaretPoint(args.SubjectBuffer);
-                    if (!args.TextView.Selection.IsEmpty || caretPoint.Value != span.Start)
-                    {
-                        nextHandler();
-                    }
+                    nextHandler();
                 }
-            );
+            });
         }
 
         public void ExecuteCommand(
@@ -51,18 +47,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             CommandExecutionContext context
         )
         {
-            HandlePossibleTypingCommand(
-                args,
-                nextHandler,
-                (activeSession, span) =>
+            HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
+            {
+                var caretPoint = args.TextView.GetCaretPoint(args.SubjectBuffer);
+                if (!args.TextView.Selection.IsEmpty || caretPoint.Value != span.End)
                 {
-                    var caretPoint = args.TextView.GetCaretPoint(args.SubjectBuffer);
-                    if (!args.TextView.Selection.IsEmpty || caretPoint.Value != span.End)
-                    {
-                        nextHandler();
-                    }
+                    nextHandler();
                 }
-            );
+            });
         }
     }
 }

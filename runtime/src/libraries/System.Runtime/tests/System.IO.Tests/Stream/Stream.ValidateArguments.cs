@@ -11,46 +11,37 @@ namespace System.IO.Tests
         [Fact]
         public void ValidateBufferArguments()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "buffer",
-                () => ExposeProtectedStream.ValidateBufferArguments(null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+                ExposeProtectedStream.ValidateBufferArguments(null, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => ExposeProtectedStream.ValidateBufferArguments(new byte[3], -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                ExposeProtectedStream.ValidateBufferArguments(new byte[3], -1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => ExposeProtectedStream.ValidateBufferArguments(new byte[3], 4, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                ExposeProtectedStream.ValidateBufferArguments(new byte[3], 4, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => ExposeProtectedStream.ValidateBufferArguments(new byte[3], 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                ExposeProtectedStream.ValidateBufferArguments(new byte[3], 0, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => ExposeProtectedStream.ValidateBufferArguments(new byte[3], 0, 4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                ExposeProtectedStream.ValidateBufferArguments(new byte[3], 0, 4)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => ExposeProtectedStream.ValidateBufferArguments(new byte[3], 3, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                ExposeProtectedStream.ValidateBufferArguments(new byte[3], 3, 1)
             );
         }
 
         [Fact]
         public void ValidateCopyToArguments()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destination",
-                () => ExposeProtectedStream.ValidateCopyToArguments(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("destination", () =>
+                ExposeProtectedStream.ValidateCopyToArguments(null, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bufferSize",
-                () => ExposeProtectedStream.ValidateCopyToArguments(new MemoryStream(), 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () =>
+                ExposeProtectedStream.ValidateCopyToArguments(new MemoryStream(), 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bufferSize",
-                () => ExposeProtectedStream.ValidateCopyToArguments(new MemoryStream(), -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () =>
+                ExposeProtectedStream.ValidateCopyToArguments(new MemoryStream(), -1)
             );
 
             var srcDisposed = new MemoryStream();

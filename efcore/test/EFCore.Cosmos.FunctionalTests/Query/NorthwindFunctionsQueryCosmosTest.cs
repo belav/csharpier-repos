@@ -1558,10 +1558,8 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch("ALFKI", c["CustomerID"]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Regex_IsMatch_MethodCall_With_Option_None(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>().Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.None))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.None))
         );
 
         AssertSql(
@@ -1577,11 +1575,9 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T"))
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Regex_IsMatch_MethodCall_With_Option_IgnoreCase(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.IgnoreCase))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.IgnoreCase))
         );
 
         AssertSql(
@@ -1597,11 +1593,8 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Regex_IsMatch_MethodCall_With_Option_Multiline(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.Multiline))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.Multiline))
         );
 
         AssertSql(
@@ -1617,11 +1610,9 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Regex_IsMatch_MethodCall_With_Option_Singleline(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.Singleline))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.Singleline))
         );
 
         AssertSql(
@@ -1639,13 +1630,9 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
         bool async
     )
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(o =>
-                        Regex.IsMatch(o.CustomerID, "^T", RegexOptions.IgnorePatternWhitespace)
-                    )
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.IgnorePatternWhitespace))
         );
 
         AssertSql(
@@ -1663,17 +1650,15 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
         bool async
     )
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(o =>
-                        Regex.IsMatch(
-                            o.CustomerID,
-                            "^T",
-                            RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
-                        )
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(o =>
+                    Regex.IsMatch(
+                        o.CustomerID,
+                        "^T",
+                        RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
                     )
+                )
         );
 
         AssertSql(
@@ -1689,11 +1674,9 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Regex_IsMatch_MethodCall_With_Unsupported_Option(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.RightToLeft))
+            AssertQuery(async, ss =>
+                ss.Set<Customer>()
+                    .Where(o => Regex.IsMatch(o.CustomerID, "^T", RegexOptions.RightToLeft))
             )
         );
 
@@ -1701,17 +1684,15 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Regex_IsMatch_MethodCall_With_Any_Unsupported_Option(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .Where(o =>
-                            Regex.IsMatch(
-                                o.CustomerID,
-                                "^T",
-                                RegexOptions.IgnoreCase | RegexOptions.RightToLeft
-                            )
+            AssertQuery(async, ss =>
+                ss.Set<Customer>()
+                    .Where(o =>
+                        Regex.IsMatch(
+                            o.CustomerID,
+                            "^T",
+                            RegexOptions.IgnoreCase | RegexOptions.RightToLeft
                         )
+                    )
             )
         );
 
@@ -1719,11 +1700,9 @@ WHERE ((c["Discriminator"] = "Customer") AND RegexMatch(c["CustomerID"], "^T", "
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Case_insensitive_string_comparison_instance(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID.Equals("alFkI", StringComparison.OrdinalIgnoreCase))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID.Equals("alFkI", StringComparison.OrdinalIgnoreCase))
         );
 
         AssertSql(
@@ -1739,13 +1718,11 @@ WHERE ((c["Discriminator"] = "Customer") AND STRINGEQUALS(c["CustomerID"], "alFk
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Case_insensitive_string_comparison_static(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        string.Equals(c.CustomerID, "alFkI", StringComparison.OrdinalIgnoreCase)
-                    )
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    string.Equals(c.CustomerID, "alFkI", StringComparison.OrdinalIgnoreCase)
+                )
         );
 
         AssertSql(
@@ -1761,11 +1738,8 @@ WHERE ((c["Discriminator"] = "Customer") AND STRINGEQUALS(c["CustomerID"], "alFk
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Case_sensitive_string_comparison_instance(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID.Equals("ALFKI", StringComparison.Ordinal))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID.Equals("ALFKI", StringComparison.Ordinal))
         );
 
         AssertSql(
@@ -1781,11 +1755,9 @@ WHERE ((c["Discriminator"] = "Customer") AND STRINGEQUALS(c["CustomerID"], "ALFK
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Case_sensitive_string_comparison_static(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => string.Equals(c.CustomerID, "ALFKI", StringComparison.Ordinal))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => string.Equals(c.CustomerID, "ALFKI", StringComparison.Ordinal))
         );
 
         AssertSql(

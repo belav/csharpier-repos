@@ -37,9 +37,8 @@ namespace System.Runtime.InteropServices.Tests
             );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
-            AssertExtensions.Throws<ArgumentException>(
-                "t",
-                () => Marshal.GetEndComSlot(typeBuilder)
+            AssertExtensions.Throws<ArgumentException>("t", () =>
+                Marshal.GetEndComSlot(typeBuilder)
             );
         }
 

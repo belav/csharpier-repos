@@ -1330,9 +1330,8 @@ class C
             var m = Assert.IsType<MethodDeclarationSyntax>(
                 file.DescendantNodes().Where(n => n.Kind() == SyntaxKind.MethodDeclaration).Single()
             );
-            Assert.All(
-                m.Body.Statements,
-                s => Assert.Equal(SyntaxKind.LocalFunctionStatement, s.Kind())
+            Assert.All(m.Body.Statements, s =>
+                Assert.Equal(SyntaxKind.LocalFunctionStatement, s.Kind())
             );
         }
 

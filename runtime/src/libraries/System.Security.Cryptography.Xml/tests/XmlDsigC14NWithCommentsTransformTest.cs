@@ -63,9 +63,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             XmlDsigC14NWithCommentsTransform xmlDsigC14NWithCommentsTransform =
                 new XmlDsigC14NWithCommentsTransform();
-            AssertExtensions.Throws<ArgumentException>(
-                "obj",
-                () => xmlDsigC14NWithCommentsTransform.LoadInput(input)
+            AssertExtensions.Throws<ArgumentException>("obj", () =>
+                xmlDsigC14NWithCommentsTransform.LoadInput(input)
             );
         }
 
@@ -76,9 +75,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             XmlDsigC14NWithCommentsTransform xmlDsigC14NWithCommentsTransform =
                 new XmlDsigC14NWithCommentsTransform();
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => xmlDsigC14NWithCommentsTransform.GetOutput(type)
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                xmlDsigC14NWithCommentsTransform.GetOutput(type)
             );
         }
 

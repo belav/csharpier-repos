@@ -16898,64 +16898,60 @@ class Program
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
 
-            var verifier = CompileAndVerify(
-                    comp,
-                    verify: Verification.Fails,
-                    symbolValidator: m =>
-                    {
-                        var t = m.GlobalNamespace.GetTypeMember("<PrivateImplementationDetails>");
-                        AssertEx.Equal(
-                            "System.Span<TElement> <PrivateImplementationDetails>.InlineArrayAsSpan<TBuffer, TElement>(ref TBuffer buffer, System.Int32 length)",
-                            t.GetMember(
-                                    CodeAnalysis
-                                        .CodeGen
-                                        .PrivateImplementationDetails
-                                        .SynthesizedInlineArrayAsSpanName
-                                )
-                                .ToTestDisplayString()
-                        );
-                        Assert.Empty(
-                            t.GetMembers(
+            var verifier = CompileAndVerify(comp, verify: Verification.Fails, symbolValidator: m =>
+                {
+                    var t = m.GlobalNamespace.GetTypeMember("<PrivateImplementationDetails>");
+                    AssertEx.Equal(
+                        "System.Span<TElement> <PrivateImplementationDetails>.InlineArrayAsSpan<TBuffer, TElement>(ref TBuffer buffer, System.Int32 length)",
+                        t.GetMember(
                                 CodeAnalysis
                                     .CodeGen
                                     .PrivateImplementationDetails
-                                    .SynthesizedInlineArrayAsReadOnlySpanName
+                                    .SynthesizedInlineArrayAsSpanName
                             )
-                        );
-                        Assert.Empty(
-                            t.GetMembers(
-                                CodeAnalysis
-                                    .CodeGen
-                                    .PrivateImplementationDetails
-                                    .SynthesizedInlineArrayElementRefName
-                            )
-                        );
-                        Assert.Empty(
-                            t.GetMembers(
-                                CodeAnalysis
-                                    .CodeGen
-                                    .PrivateImplementationDetails
-                                    .SynthesizedInlineArrayElementRefReadOnlyName
-                            )
-                        );
-                        Assert.Empty(
-                            t.GetMembers(
-                                CodeAnalysis
-                                    .CodeGen
-                                    .PrivateImplementationDetails
-                                    .SynthesizedInlineArrayFirstElementRefName
-                            )
-                        );
-                        Assert.Empty(
-                            t.GetMembers(
-                                CodeAnalysis
-                                    .CodeGen
-                                    .PrivateImplementationDetails
-                                    .SynthesizedInlineArrayFirstElementRefReadOnlyName
-                            )
-                        );
-                    }
-                )
+                            .ToTestDisplayString()
+                    );
+                    Assert.Empty(
+                        t.GetMembers(
+                            CodeAnalysis
+                                .CodeGen
+                                .PrivateImplementationDetails
+                                .SynthesizedInlineArrayAsReadOnlySpanName
+                        )
+                    );
+                    Assert.Empty(
+                        t.GetMembers(
+                            CodeAnalysis
+                                .CodeGen
+                                .PrivateImplementationDetails
+                                .SynthesizedInlineArrayElementRefName
+                        )
+                    );
+                    Assert.Empty(
+                        t.GetMembers(
+                            CodeAnalysis
+                                .CodeGen
+                                .PrivateImplementationDetails
+                                .SynthesizedInlineArrayElementRefReadOnlyName
+                        )
+                    );
+                    Assert.Empty(
+                        t.GetMembers(
+                            CodeAnalysis
+                                .CodeGen
+                                .PrivateImplementationDetails
+                                .SynthesizedInlineArrayFirstElementRefName
+                        )
+                    );
+                    Assert.Empty(
+                        t.GetMembers(
+                            CodeAnalysis
+                                .CodeGen
+                                .PrivateImplementationDetails
+                                .SynthesizedInlineArrayFirstElementRefReadOnlyName
+                        )
+                    );
+                })
                 .VerifyDiagnostics();
 
             verifier.VerifyIL(
@@ -17005,64 +17001,60 @@ class Program
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
 
-            var verifier = CompileAndVerify(
-                    comp,
-                    verify: Verification.Fails,
-                    symbolValidator: m =>
-                    {
-                        var t = m.GlobalNamespace.GetTypeMember("<PrivateImplementationDetails>");
-                        Assert.Empty(
-                            t.GetMembers(
+            var verifier = CompileAndVerify(comp, verify: Verification.Fails, symbolValidator: m =>
+                {
+                    var t = m.GlobalNamespace.GetTypeMember("<PrivateImplementationDetails>");
+                    Assert.Empty(
+                        t.GetMembers(
+                            CodeAnalysis
+                                .CodeGen
+                                .PrivateImplementationDetails
+                                .SynthesizedInlineArrayAsSpanName
+                        )
+                    );
+                    AssertEx.Equal(
+                        "System.ReadOnlySpan<TElement> <PrivateImplementationDetails>.InlineArrayAsReadOnlySpan<TBuffer, TElement>(in TBuffer buffer, System.Int32 length)",
+                        t.GetMember(
                                 CodeAnalysis
                                     .CodeGen
                                     .PrivateImplementationDetails
-                                    .SynthesizedInlineArrayAsSpanName
+                                    .SynthesizedInlineArrayAsReadOnlySpanName
                             )
-                        );
-                        AssertEx.Equal(
-                            "System.ReadOnlySpan<TElement> <PrivateImplementationDetails>.InlineArrayAsReadOnlySpan<TBuffer, TElement>(in TBuffer buffer, System.Int32 length)",
-                            t.GetMember(
-                                    CodeAnalysis
-                                        .CodeGen
-                                        .PrivateImplementationDetails
-                                        .SynthesizedInlineArrayAsReadOnlySpanName
-                                )
-                                .ToTestDisplayString()
-                        );
-                        Assert.Empty(
-                            t.GetMembers(
-                                CodeAnalysis
-                                    .CodeGen
-                                    .PrivateImplementationDetails
-                                    .SynthesizedInlineArrayElementRefName
-                            )
-                        );
-                        Assert.Empty(
-                            t.GetMembers(
-                                CodeAnalysis
-                                    .CodeGen
-                                    .PrivateImplementationDetails
-                                    .SynthesizedInlineArrayElementRefReadOnlyName
-                            )
-                        );
-                        Assert.Empty(
-                            t.GetMembers(
-                                CodeAnalysis
-                                    .CodeGen
-                                    .PrivateImplementationDetails
-                                    .SynthesizedInlineArrayFirstElementRefName
-                            )
-                        );
-                        Assert.Empty(
-                            t.GetMembers(
-                                CodeAnalysis
-                                    .CodeGen
-                                    .PrivateImplementationDetails
-                                    .SynthesizedInlineArrayFirstElementRefReadOnlyName
-                            )
-                        );
-                    }
-                )
+                            .ToTestDisplayString()
+                    );
+                    Assert.Empty(
+                        t.GetMembers(
+                            CodeAnalysis
+                                .CodeGen
+                                .PrivateImplementationDetails
+                                .SynthesizedInlineArrayElementRefName
+                        )
+                    );
+                    Assert.Empty(
+                        t.GetMembers(
+                            CodeAnalysis
+                                .CodeGen
+                                .PrivateImplementationDetails
+                                .SynthesizedInlineArrayElementRefReadOnlyName
+                        )
+                    );
+                    Assert.Empty(
+                        t.GetMembers(
+                            CodeAnalysis
+                                .CodeGen
+                                .PrivateImplementationDetails
+                                .SynthesizedInlineArrayFirstElementRefName
+                        )
+                    );
+                    Assert.Empty(
+                        t.GetMembers(
+                            CodeAnalysis
+                                .CodeGen
+                                .PrivateImplementationDetails
+                                .SynthesizedInlineArrayFirstElementRefReadOnlyName
+                        )
+                    );
+                })
                 .VerifyDiagnostics();
 
             verifier.VerifyIL(

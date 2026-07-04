@@ -417,9 +417,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             foreach (bool post in DataflowTestHelpers.BooleanValues)
             {
                 const int Iters = 10;
-                var network = DataflowTestHelpers.Chain<BufferBlock<int>, int>(
-                    4,
-                    () => new BufferBlock<int>()
+                var network = DataflowTestHelpers.Chain<BufferBlock<int>, int>(4, () =>
+                    new BufferBlock<int>()
                 );
                 for (int i = 0; i < Iters; i++)
                 {
@@ -442,9 +441,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             foreach (bool post in DataflowTestHelpers.BooleanValues)
             {
                 const int Iters = 10;
-                var network = DataflowTestHelpers.Chain<BufferBlock<int>, int>(
-                    4,
-                    () => new BufferBlock<int>()
+                var network = DataflowTestHelpers.Chain<BufferBlock<int>, int>(4, () =>
+                    new BufferBlock<int>()
                 );
 
                 if (post)

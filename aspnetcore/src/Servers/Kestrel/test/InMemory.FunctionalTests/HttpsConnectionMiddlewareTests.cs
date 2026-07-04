@@ -294,20 +294,16 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     public async Task RequireCertificateFailsWhenNoCertificate()
     {
         await using (
-            var server = new TestServer(
-                App,
-                new TestServiceContext(LoggerFactory),
-                listenOptions =>
-                {
-                    listenOptions.UseHttps(
-                        new HttpsConnectionAdapterOptions
-                        {
-                            ServerCertificate = _x509Certificate2,
-                            ClientCertificateMode = ClientCertificateMode.RequireCertificate,
-                        }
-                    );
-                }
-            )
+            var server = new TestServer(App, new TestServiceContext(LoggerFactory), listenOptions =>
+            {
+                listenOptions.UseHttps(
+                    new HttpsConnectionAdapterOptions
+                    {
+                        ServerCertificate = _x509Certificate2,
+                        ClientCertificateMode = ClientCertificateMode.RequireCertificate,
+                    }
+                );
+            })
         )
         {
             await Assert.ThrowsAnyAsync<Exception>(() =>

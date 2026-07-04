@@ -45,9 +45,8 @@ public class WebViewManagerTests
         webViewManager.ReceiveAttachPageMessage();
 
         // Act
-        Assert.Collection(
-            webViewManager.SentIpcMessages,
-            m => AssertHelpers.IsAttachWebRendererInteropMessage(m)
+        Assert.Collection(webViewManager.SentIpcMessages, m =>
+            AssertHelpers.IsAttachWebRendererInteropMessage(m)
         );
         await webViewManager.AddRootComponentAsync(
             typeof(MyComponent),

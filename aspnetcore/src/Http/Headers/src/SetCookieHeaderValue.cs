@@ -263,73 +263,69 @@ public class SetCookieHeaderValue
             }
         }
 
-        return string.Create(
-            length,
-            (this, maxAge, sameSite),
-            (span, tuple) =>
+        return string.Create(length, (this, maxAge, sameSite), (span, tuple) =>
+        {
+            var (headerValue, maxAgeValue, sameSite) = tuple;
+
+            Append(ref span, headerValue._name);
+            Append(ref span, EqualsToken);
+            Append(ref span, headerValue._value);
+
+            if (headerValue.Expires is DateTimeOffset expiresValue)
             {
-                var (headerValue, maxAgeValue, sameSite) = tuple;
-
-                Append(ref span, headerValue._name);
+                Append(ref span, SeparatorToken);
+                Append(ref span, ExpiresToken);
                 Append(ref span, EqualsToken);
-                Append(ref span, headerValue._value);
 
-                if (headerValue.Expires is DateTimeOffset expiresValue)
+                var formatted = expiresValue.TryFormat(
+                    span,
+                    out var charsWritten,
+                    ExpiresDateFormat,
+                    CultureInfo.InvariantCulture
+                );
+                span = span.Slice(charsWritten);
+
+                Debug.Assert(formatted);
+            }
+
+            if (maxAgeValue != null)
+            {
+                AppendSegment(ref span, MaxAgeToken, maxAgeValue);
+            }
+
+            if (headerValue.Domain != null)
+            {
+                AppendSegment(ref span, DomainToken, headerValue.Domain);
+            }
+
+            if (headerValue.Path != null)
+            {
+                AppendSegment(ref span, PathToken, headerValue.Path);
+            }
+
+            if (headerValue.Secure)
+            {
+                AppendSegment(ref span, SecureToken, null);
+            }
+
+            if (sameSite != null)
+            {
+                AppendSegment(ref span, SameSiteToken, sameSite);
+            }
+
+            if (headerValue.HttpOnly)
+            {
+                AppendSegment(ref span, HttpOnlyToken, null);
+            }
+
+            if (_extensions?.Count > 0)
+            {
+                foreach (var extension in _extensions)
                 {
-                    Append(ref span, SeparatorToken);
-                    Append(ref span, ExpiresToken);
-                    Append(ref span, EqualsToken);
-
-                    var formatted = expiresValue.TryFormat(
-                        span,
-                        out var charsWritten,
-                        ExpiresDateFormat,
-                        CultureInfo.InvariantCulture
-                    );
-                    span = span.Slice(charsWritten);
-
-                    Debug.Assert(formatted);
-                }
-
-                if (maxAgeValue != null)
-                {
-                    AppendSegment(ref span, MaxAgeToken, maxAgeValue);
-                }
-
-                if (headerValue.Domain != null)
-                {
-                    AppendSegment(ref span, DomainToken, headerValue.Domain);
-                }
-
-                if (headerValue.Path != null)
-                {
-                    AppendSegment(ref span, PathToken, headerValue.Path);
-                }
-
-                if (headerValue.Secure)
-                {
-                    AppendSegment(ref span, SecureToken, null);
-                }
-
-                if (sameSite != null)
-                {
-                    AppendSegment(ref span, SameSiteToken, sameSite);
-                }
-
-                if (headerValue.HttpOnly)
-                {
-                    AppendSegment(ref span, HttpOnlyToken, null);
-                }
-
-                if (_extensions?.Count > 0)
-                {
-                    foreach (var extension in _extensions)
-                    {
-                        AppendSegment(ref span, extension, null);
-                    }
+                    AppendSegment(ref span, extension, null);
                 }
             }
-        );
+        });
     }
 
     private static void AppendSegment(ref Span<char> span, StringSegment name, StringSegment value)

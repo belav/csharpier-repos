@@ -228,13 +228,10 @@ namespace System.Web.WebPages.Administration.Test
         public void SaveAdminPasswordReturnsFalseIfGettingStreamThrowsUnauthorizedAccessException()
         {
             // Act
-            bool passwordSaved = AdminSecurity.SaveTemporaryPassword(
-                "password",
-                () =>
-                {
-                    throw new UnauthorizedAccessException();
-                }
-            );
+            bool passwordSaved = AdminSecurity.SaveTemporaryPassword("password", () =>
+            {
+                throw new UnauthorizedAccessException();
+            });
 
             // Assert
             Assert.False(passwordSaved);

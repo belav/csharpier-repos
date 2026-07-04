@@ -20,9 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         {
             Schema = RoslynGraphProperties.Schema;
 
-            Overrides = Schema.Categories.AddNewCategory(
-                "Overrides",
-                () => new GraphMetadata(GraphMetadataOptions.Sharable)
+            Overrides = Schema.Categories.AddNewCategory("Overrides", () =>
+                new GraphMetadata(GraphMetadataOptions.Sharable)
             );
         }
     }

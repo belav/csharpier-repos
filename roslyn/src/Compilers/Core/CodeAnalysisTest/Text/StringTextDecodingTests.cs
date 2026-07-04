@@ -341,26 +341,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
             {
                 MaxDegreeOfParallelism = Environment.ProcessorCount * 2,
             };
-            Parallel.For(
-                0,
-                500,
-                parallelOptions,
-                i =>
-                {
-                    using (
-                        var stream = new FileStream(
-                            path,
-                            FileMode.Open,
-                            FileAccess.Read,
-                            FileShare.Read
-                        )
+            Parallel.For(0, 500, parallelOptions, i =>
+            {
+                using (
+                    var stream = new FileStream(
+                        path,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read
                     )
-                    {
-                        var sourceText = EncodedStringText.Create(stream);
-                        Assert.Equal(expectedText, sourceText.ToString());
-                    }
+                )
+                {
+                    var sourceText = EncodedStringText.Create(stream);
+                    Assert.Equal(expectedText, sourceText.ToString());
                 }
-            );
+            });
         }
 
         [Fact]

@@ -974,9 +974,8 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("F")
                             ),
                         }
                     ),
@@ -2662,9 +2661,8 @@ interface I
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("I").GetMember("M")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("I").GetMember("M")
                             ),
                         }
                     ),
@@ -3125,9 +3123,8 @@ interface I { void F() {} }
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("M")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("M")
                             ),
                         }
                     ),
@@ -3234,17 +3231,14 @@ interface I { void F() {} }
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("F")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("S").GetMember("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("S").GetMember("F")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("I").GetMember("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("I").GetMember("F")
                             ),
                         }
                     ),
@@ -3309,29 +3303,23 @@ interface I
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("AbstractMethod")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("AbstractMethod")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("VirtualMethod")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("VirtualMethod")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("ToString")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("ToString")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("I.G")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("I.G")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("I").GetMember("G")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("I").GetMember("G")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("I").GetMember("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("I").GetMember("F")
                             ),
                         }
                     ),
@@ -3384,29 +3372,23 @@ interface I
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("AbstractMethod")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("AbstractMethod")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("VirtualMethod")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("VirtualMethod")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("ToString")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("ToString")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("I.G")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("I.G")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("I").GetMember("G")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("I").GetMember("G")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("I").GetMember("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("I").GetMember("F")
                             ),
                         }
                     ),
@@ -3448,13 +3430,11 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.P").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.P").GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.P").SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.P").SetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
@@ -3503,13 +3483,11 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.P").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.P").GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.P").SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.P").SetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
@@ -3561,13 +3539,11 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.P").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.P").GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.P").SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.P").SetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
@@ -3985,19 +3961,12 @@ public abstract record C<T>
             );
 
             edits.VerifySemantics(
-                new[]
-                {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            methodName switch
-                            {
-                                ".ctor" => c.GetCopyConstructor("C"),
-                                "Equals" => c.GetSpecializedEqualsOverload("C"),
-                                _ => c.GetMember("C." + methodName),
-                            }
-                    ),
-                },
+                new[] { SemanticEdit(SemanticEditKind.Update, c => methodName switch
+                        {
+                            ".ctor" => c.GetCopyConstructor("C"),
+                            "Equals" => c.GetSpecializedEqualsOverload("C"),
+                            _ => c.GetMember("C." + methodName),
+                        }) },
                 capabilities: EditAndContinueCapabilities.UpdateParameters
             );
         }
@@ -4034,9 +4003,8 @@ public abstract record C<T>
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMembers("C.PrintMembers").First().ISymbol
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMembers("C.PrintMembers").First().ISymbol
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.UpdateParameters
@@ -4064,18 +4032,12 @@ public abstract record C<T>
 
             var edits = GetTopEdits(src1, src2);
 
-            edits.VerifySemantics(
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        methodName switch
-                        {
-                            ".ctor" => c.GetCopyConstructor("C"),
-                            "Equals" => c.GetSpecializedEqualsOverload("C"),
-                            _ => c.GetMember("C." + methodName),
-                        }
-                )
-            );
+            edits.VerifySemantics(SemanticEdit(SemanticEditKind.Update, c => methodName switch
+                    {
+                        ".ctor" => c.GetCopyConstructor("C"),
+                        "Equals" => c.GetSpecializedEqualsOverload("C"),
+                        _ => c.GetMember("C." + methodName),
+                    }));
         }
 
         [Theory]
@@ -4098,18 +4060,12 @@ public abstract record C<T>
 
             var edits = GetTopEdits(src1, src2);
 
-            edits.VerifySemantics(
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        methodName switch
-                        {
-                            ".ctor" => c.GetCopyConstructor("C"),
-                            "Equals" => c.GetSpecializedEqualsOverload("C"),
-                            _ => c.GetMember("C." + methodName),
-                        }
-                )
-            );
+            edits.VerifySemantics(SemanticEdit(SemanticEditKind.Update, c => methodName switch
+                    {
+                        ".ctor" => c.GetCopyConstructor("C"),
+                        "Equals" => c.GetSpecializedEqualsOverload("C"),
+                        _ => c.GetMember("C." + methodName),
+                    }));
 
             edits.VerifySemanticDiagnostics();
         }
@@ -4162,19 +4118,12 @@ public abstract record C<T>
             );
 
             edits.VerifySemantics(
-                new[]
-                {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            methodName switch
-                            {
-                                ".ctor" => c.GetCopyConstructor("C"),
-                                "Equals" => c.GetSpecializedEqualsOverload("C"),
-                                _ => c.GetMember("C." + methodName),
-                            }
-                    ),
-                },
+                new[] { SemanticEdit(SemanticEditKind.Update, c => methodName switch
+                        {
+                            ".ctor" => c.GetCopyConstructor("C"),
+                            "Equals" => c.GetSpecializedEqualsOverload("C"),
+                            _ => c.GetMember("C." + methodName),
+                        }) },
                 capabilities: EditAndContinueCapabilities.UpdateParameters
             );
         }
@@ -4750,17 +4699,14 @@ record C(int X)
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.get_X")),
@@ -4797,13 +4743,11 @@ record C(int X)
                     SemanticEdit(SemanticEditKind.Update, c => c.GetSpecializedEqualsOverload("C")),
                     SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.GetHashCode")),
                     SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.X").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.X").GetMethod
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.X").SetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.X").SetMethod
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
@@ -4866,15 +4810,13 @@ record C(int X)
             }
 
             expectedEdits.Add(
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c => c.GetMember<IPropertySymbol>("C.X").GetMethod
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMember<IPropertySymbol>("C.X").GetMethod
                 )
             );
             expectedEdits.Add(
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c => c.GetMember<IPropertySymbol>("C.X").SetMethod
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMember<IPropertySymbol>("C.X").SetMethod
                 )
             );
             expectedEdits.Add(
@@ -4914,26 +4856,21 @@ record C(int X)
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.X").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.X").GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.X").SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.X").SetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
@@ -5351,17 +5288,14 @@ record C(int X)
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.get_X")),
@@ -5425,17 +5359,14 @@ record C(int X)
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.get_X")),
@@ -5548,13 +5479,11 @@ record C(int X)
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.Y").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.Y").GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.Y").SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.Y").SetMethod
                             ),
                         }
                     ),
@@ -7603,15 +7532,13 @@ class D<T>
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Insert,
-                                c =>
-                                    c.GetMembers("S.C.F2")
-                                        .FirstOrDefault(m =>
-                                            m.GetParameterTypes()
-                                                .Any(t => t.SpecialType == SpecialType.System_Int32)
-                                        )
-                                        ?.ISymbol
+                            SemanticEdit(SemanticEditKind.Insert, c =>
+                                c.GetMembers("S.C.F2")
+                                    .FirstOrDefault(m =>
+                                        m.GetParameterTypes()
+                                            .Any(t => t.SpecialType == SpecialType.System_Int32)
+                                    )
+                                    ?.ISymbol
                             ),
                         }
                     ),
@@ -7838,18 +7765,16 @@ class D<T>
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("F")
                             ),
                         }
                     ),
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("G")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("G")
                             ),
                         }
                     ),
@@ -8021,12 +7946,10 @@ class B : System.Attribute {}
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("I")
-                                        .GetMember<INamedTypeSymbol>("C")
-                                        .GetMember("F1")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("I")
+                                    .GetMember<INamedTypeSymbol>("C")
+                                    .GetMember("F1")
                             ),
                         }
                     ),
@@ -8045,12 +7968,10 @@ class B : System.Attribute {}
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("I")
-                                        .GetMember<INamedTypeSymbol>("C")
-                                        .GetMember("F2")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("I")
+                                    .GetMember<INamedTypeSymbol>("C")
+                                    .GetMember("F2")
                             ),
                         }
                     ),
@@ -9005,73 +8926,54 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IMethodSymbol>("C.M")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IMethodSymbol>("C.M")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.P1").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.P1").GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.P1").SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.P1").SetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.P2").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.P2").GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.P2").SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.P2").SetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m => m.Parameters[0].Type.Name == "Int32")
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m => m.Parameters[0].Type.Name == "Int32")
+                                    .GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m => m.Parameters[0].Type.Name == "Int32")
-                                        .SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m => m.Parameters[0].Type.Name == "Int32")
+                                    .SetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m => m.Parameters[0].Type.Name == "Int32")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m => m.Parameters[0].Type.Name == "Int32")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m => m.Parameters[0].Type.Name == "Byte")
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m => m.Parameters[0].Type.Name == "Byte")
+                                    .GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m => m.Parameters[0].Type.Name == "Byte")
-                                        .SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m => m.Parameters[0].Type.Name == "Byte")
+                                    .SetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m => m.Parameters[0].Type.Name == "Byte")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m => m.Parameters[0].Type.Name == "Byte")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IEventSymbol>("C.E").AddMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IEventSymbol>("C.E").AddMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IEventSymbol>("C.E").RemoveMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IEventSymbol>("C.E").RemoveMethod
                             ),
                         }
                     ),
@@ -9338,28 +9240,24 @@ partial class C
                     DocumentResults(
                         semanticEdits:
                         [
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IMethodSymbol>("C.F")
-                                        .Single(m =>
-                                            m.Parameters
-                                                is [{ Type.SpecialType: SpecialType.System_Char }]
-                                        )
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IMethodSymbol>("C.F")
+                                    .Single(m =>
+                                        m.Parameters
+                                            is [{ Type.SpecialType: SpecialType.System_Char }]
+                                    )
                             ),
                         ]
                     ),
                     DocumentResults(
                         semanticEdits:
                         [
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IMethodSymbol>("C.F")
-                                        .Single(m =>
-                                            m.Parameters
-                                                is [{ Type.SpecialType: SpecialType.System_Byte }]
-                                        )
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IMethodSymbol>("C.F")
+                                    .Single(m =>
+                                        m.Parameters
+                                            is [{ Type.SpecialType: SpecialType.System_Byte }]
+                                    )
                             ),
                         ]
                     ),
@@ -9381,68 +9279,56 @@ partial class C
                     DocumentResults(
                         semanticEdits:
                         [
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m =>
-                                            m.Parameters
-                                                is [{ Type.SpecialType: SpecialType.System_Char }]
-                                        )
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m =>
+                                        m.Parameters
+                                            is [{ Type.SpecialType: SpecialType.System_Char }]
+                                    )
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m =>
-                                            m.Parameters
-                                                is [{ Type.SpecialType: SpecialType.System_Char }]
-                                        )
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m =>
+                                        m.Parameters
+                                            is [{ Type.SpecialType: SpecialType.System_Char }]
+                                    )
+                                    .GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m =>
-                                            m.Parameters
-                                                is [{ Type.SpecialType: SpecialType.System_Char }]
-                                        )
-                                        .SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m =>
+                                        m.Parameters
+                                            is [{ Type.SpecialType: SpecialType.System_Char }]
+                                    )
+                                    .SetMethod
                             ),
                         ]
                     ),
                     DocumentResults(
                         semanticEdits:
                         [
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m =>
-                                            m.Parameters
-                                                is [{ Type.SpecialType: SpecialType.System_Byte }]
-                                        )
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m =>
+                                        m.Parameters
+                                            is [{ Type.SpecialType: SpecialType.System_Byte }]
+                                    )
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m =>
-                                            m.Parameters
-                                                is [{ Type.SpecialType: SpecialType.System_Byte }]
-                                        )
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m =>
+                                        m.Parameters
+                                            is [{ Type.SpecialType: SpecialType.System_Byte }]
+                                    )
+                                    .GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMembers<IPropertySymbol>("C.this[]")
-                                        .Single(m =>
-                                            m.Parameters
-                                                is [{ Type.SpecialType: SpecialType.System_Byte }]
-                                        )
-                                        .SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMembers<IPropertySymbol>("C.this[]")
+                                    .Single(m =>
+                                        m.Parameters
+                                            is [{ Type.SpecialType: SpecialType.System_Byte }]
+                                    )
+                                    .SetMethod
                             ),
                         ]
                     ),
@@ -9524,19 +9410,15 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P")
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("P")
+                                    .GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P")
-                                        .SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("P")
+                                    .SetMethod
                             ),
                         }
                     ),
@@ -9560,12 +9442,10 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P")
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("P")
+                                    .GetMethod
                             ),
                         }
                     ),
@@ -9673,12 +9553,10 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Insert,
-                                c =>
-                                    c.GetMembers("S.F")
-                                        .FirstOrDefault(m => m.GetParameterCount() == 1)
-                                        ?.ISymbol
+                            SemanticEdit(SemanticEditKind.Insert, c =>
+                                c.GetMembers("S.F")
+                                    .FirstOrDefault(m => m.GetParameterCount() == 1)
+                                    ?.ISymbol
                             ),
                         }
                     ),
@@ -9714,15 +9592,13 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Insert,
-                                c =>
-                                    c.GetMembers("S.F")
-                                        .FirstOrDefault(m =>
-                                            m.GetParameterTypes()
-                                                .Any(t => t.SpecialType == SpecialType.System_Byte)
-                                        )
-                                        ?.ISymbol
+                            SemanticEdit(SemanticEditKind.Insert, c =>
+                                c.GetMembers("S.F")
+                                    .FirstOrDefault(m =>
+                                        m.GetParameterTypes()
+                                            .Any(t => t.SpecialType == SpecialType.System_Byte)
+                                    )
+                                    ?.ISymbol
                             ),
                         }
                     ),
@@ -9761,12 +9637,8 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Insert,
-                                c =>
-                                    c.GetMembers("S.F")
-                                        .FirstOrDefault(m => m.GetArity() == 1)
-                                        ?.ISymbol
+                            SemanticEdit(SemanticEditKind.Insert, c =>
+                                c.GetMembers("S.F").FirstOrDefault(m => m.GetArity() == 1)?.ISymbol
                             ),
                         }
                     ),
@@ -9845,9 +9717,8 @@ partial class C
 
             // Currently, an edit is produced eventhough there is no metadata/IL change. Consider improving.
             edits.VerifySemantics(
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c => c.GetMember<INamedTypeSymbol>("C").GetMember<IMethodSymbol>("F")
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMember<INamedTypeSymbol>("C").GetMember<IMethodSymbol>("F")
                 )
             );
         }
@@ -9864,9 +9735,8 @@ partial class C
 
             // Currently, an edit is produced eventhough there is no metadata/IL change. Consider improving.
             edits.VerifySemantics(
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c => c.GetMember<INamedTypeSymbol>("C").GetMember<IMethodSymbol>("F")
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMember<INamedTypeSymbol>("C").GetMember<IMethodSymbol>("F")
                 )
             );
         }
@@ -9912,9 +9782,8 @@ readonly struct S
 
             // Currently, an edit is produced eventhough the body nor IsReadOnly attribute have changed. Consider improving.
             edits.VerifySemantics(
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c => c.GetMember<INamedTypeSymbol>("S").GetMember<IMethodSymbol>("M")
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMember<INamedTypeSymbol>("S").GetMember<IMethodSymbol>("M")
                 )
             );
         }
@@ -11233,15 +11102,13 @@ class C
                                 ?.ISymbol,
                         deletedSymbolContainerProvider: c => c.GetMember("C")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c =>
-                            c.GetMembers("C.Main")
-                                .FirstOrDefault(m =>
-                                    m.GetParameterTypes()
-                                        .Any(t => t.SpecialType == SpecialType.System_Int32)
-                                )
-                                ?.ISymbol
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMembers("C.Main")
+                            .FirstOrDefault(m =>
+                                m.GetParameterTypes()
+                                    .Any(t => t.SpecialType == SpecialType.System_Int32)
+                            )
+                            ?.ISymbol
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -11298,15 +11165,13 @@ class C
                                 ?.ISymbol,
                         deletedSymbolContainerProvider: c => c.GetMember("C")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c =>
-                            c.GetMembers("C.Main")
-                                .FirstOrDefault(m =>
-                                    m.GetParameterTypes()
-                                        .Any(t => t.SpecialType == SpecialType.System_Int32)
-                                )
-                                ?.ISymbol
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMembers("C.Main")
+                            .FirstOrDefault(m =>
+                                m.GetParameterTypes()
+                                    .Any(t => t.SpecialType == SpecialType.System_Int32)
+                            )
+                            ?.ISymbol
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -13281,9 +13146,8 @@ public class SubClass : BaseClass, IConflict
                     DocumentResults(
                         semanticEdits:
                         [
-                            SemanticEdit(
-                                SemanticEditKind.Insert,
-                                c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart
+                            SemanticEdit(SemanticEditKind.Insert, c =>
+                                c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart
                             ),
                         ]
                     ),
@@ -13736,18 +13600,16 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("op_Addition")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("op_Addition")
                             ),
                         }
                     ),
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("op_Implicit")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("op_Implicit")
                             ),
                         }
                     ),
@@ -14211,9 +14073,8 @@ class C
                         c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single(),
                         deletedSymbolContainerProvider: c => c.GetMember("C")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single()
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single()
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -14417,9 +14278,8 @@ class C
                         c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single(),
                         deletedSymbolContainerProvider: c => c.GetMember("C")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single()
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single()
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -14851,11 +14711,9 @@ record C(int X);
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            c.GetMembers<IMethodSymbol>("C.Deconstruct")
-                                .Single(m => m.Parameters is [_])
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMembers<IMethodSymbol>("C.Deconstruct")
+                            .Single(m => m.Parameters is [_])
                     ),
                     SemanticEdit(
                         SemanticEditKind.Delete,
@@ -15076,9 +14934,8 @@ class C(int x)
                         c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single(),
                         deletedSymbolContainerProvider: c => c.GetMember("C")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single()
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single()
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -15300,9 +15157,8 @@ record struct C(int x, int y)
                         c => c.GetParameterlessConstructor("C"),
                         deletedSymbolContainerProvider: c => c.GetMember("C")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single()
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single()
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -15397,11 +15253,9 @@ record struct C(int x, int y)
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            c.GetMembers<IMethodSymbol>("C.Deconstruct")
-                                .Single(m => m.Parameters is [_, _])
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMembers<IMethodSymbol>("C.Deconstruct")
+                            .Single(m => m.Parameters is [_, _])
                     ),
                     SemanticEdit(SemanticEditKind.Insert, c => c.GetMember("C.Y")),
                     SemanticEdit(
@@ -15512,21 +15366,17 @@ record struct C(int x, int y)
                         semanticEdits:
                         [
                             SemanticEdit(SemanticEditKind.Insert, c => c.GetMember("C.Y")),
-                            SemanticEdit(
-                                SemanticEditKind.Insert,
-                                c => c.GetPrimaryDeconstructor("C")
+                            SemanticEdit(SemanticEditKind.Insert, c =>
+                                c.GetPrimaryDeconstructor("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
                             SemanticEdit(
@@ -15540,9 +15390,8 @@ record struct C(int x, int y)
                                 c => c.GetPrimaryConstructor("C"),
                                 deletedSymbolContainerProvider: c => c.GetMember("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Insert,
-                                c => c.GetPrimaryConstructor("C")
+                            SemanticEdit(SemanticEditKind.Insert, c =>
+                                c.GetPrimaryConstructor("C")
                             ),
                         ]
                     ),
@@ -16097,22 +15946,18 @@ class C(int x, int y)
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.Deconstruct")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.Deconstruct")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.get_P")),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.set_P")),
@@ -16161,21 +16006,17 @@ class C(int x, int y)
                                 partialType: "C",
                                 preserveLocalVariables: true
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.Deconstruct")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.Deconstruct")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
                         ]
@@ -16213,21 +16054,17 @@ class C(int x, int y)
                                 partialType: "C",
                                 preserveLocalVariables: true
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.Deconstruct")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.Deconstruct")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
                         }
@@ -16272,17 +16109,14 @@ class C(int x, int y)
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
                             SemanticEdit(SemanticEditKind.Insert, c => c.GetMember("C.P")),
@@ -16296,9 +16130,8 @@ class C(int x, int y)
                                 partialType: "C",
                                 preserveLocalVariables: true
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.Deconstruct")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.Deconstruct")
                             ),
                         }
                     ),
@@ -16343,13 +16176,11 @@ class C(int x, int y)
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .InstanceConstructors.Single(m =>
-                                            m.Parameters is [{ Name: "P" }]
-                                        )
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .InstanceConstructors.Single(m =>
+                                        m.Parameters is [{ Name: "P" }]
+                                    )
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
@@ -16359,17 +16190,14 @@ class C(int x, int y)
                                 partialType: "C",
                                 preserveLocalVariables: true
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
                         }
@@ -16413,17 +16241,14 @@ class C(int x, int y)
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.PrintMembers")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.PrintMembers")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetSpecializedEqualsOverload("C")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetSpecializedEqualsOverload("C")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("C.GetHashCode")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("C.GetHashCode")
                             ),
                             SemanticEdit(SemanticEditKind.Update, c => c.GetCopyConstructor("C")),
                             SemanticEdit(SemanticEditKind.Insert, c => c.GetMember("C.P")),
@@ -17014,11 +16839,9 @@ partial class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c =>
-                            c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(c => c.Parameters is [{ Name: "X" }])
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C")
+                            .InstanceConstructors.Single(c => c.Parameters is [{ Name: "X" }])
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -17036,11 +16859,9 @@ partial class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c =>
-                            c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(c => c.Parameters is [{ Name: "X" }])
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C")
+                            .InstanceConstructors.Single(c => c.Parameters is [{ Name: "X" }])
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -17082,11 +16903,9 @@ partial class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c =>
-                            c.GetMember<INamedTypeSymbol>("C")
-                                .InstanceConstructors.Single(c => c.Parameters is [{ Name: "X" }])
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C")
+                            .InstanceConstructors.Single(c => c.Parameters is [{ Name: "X" }])
                     ),
                     SemanticEdit(
                         SemanticEditKind.Delete,
@@ -17573,9 +17392,8 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Insert,
-                                c => c.GetParameterlessConstructor("C")
+                            SemanticEdit(SemanticEditKind.Insert, c =>
+                                c.GetParameterlessConstructor("C")
                             ),
                         }
                     ),
@@ -19217,10 +19035,8 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C").GetMember<IMethodSymbol>("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember<IMethodSymbol>("F")
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
@@ -19249,10 +19065,8 @@ partial class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C").GetMember<IMethodSymbol>("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember<IMethodSymbol>("F")
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
@@ -19380,9 +19194,8 @@ partial class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single()
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single()
                     ),
                 },
                 EditAndContinueCapabilities.AddMethodToExistingType
@@ -19782,9 +19595,8 @@ public class C
             );
 
             edits.VerifySemantics(
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c => c.GetMember<IPropertySymbol>("C.a").GetMethod
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMember<IPropertySymbol>("C.a").GetMethod
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
@@ -19809,9 +19621,8 @@ public class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.a").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.a").GetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
@@ -19866,9 +19677,8 @@ public class C
                 ActiveStatementsDescription.Empty,
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.a").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.a").GetMethod
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
@@ -20419,9 +20229,8 @@ public class C
                 ActiveStatementsDescription.Empty,
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single()
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single()
                     ),
                 }
             );
@@ -20444,9 +20253,8 @@ public class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single()
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single()
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -21716,13 +21524,11 @@ class C
                 ActiveStatementsDescription.Empty,
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(ctor =>
-                                    ctor.ToTestDisplayString() == "C..ctor(System.Boolean b)"
-                                )
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<INamedTypeSymbol>("C")
+                            .Constructors.Single(ctor =>
+                                ctor.ToTestDisplayString() == "C..ctor(System.Boolean b)"
+                            )
                     ),
                 }
             );
@@ -21820,13 +21626,11 @@ class C
                 ActiveStatementsDescription.Empty,
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            c.GetMember<INamedTypeSymbol>("C")
-                                .Constructors.Single(ctor =>
-                                    ctor.ToTestDisplayString() == "C..ctor(System.Boolean b)"
-                                )
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<INamedTypeSymbol>("C")
+                            .Constructors.Single(ctor =>
+                                ctor.ToTestDisplayString() == "C..ctor(System.Boolean b)"
+                            )
                     ),
                 }
             );
@@ -22042,9 +21846,8 @@ partial class C
                 ActiveStatementsDescription.Empty,
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<INamedTypeSymbol>("C").GetMember("F")
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<INamedTypeSymbol>("C").GetMember("F")
                     ),
                     SemanticEdit(
                         SemanticEditKind.Update,
@@ -22154,13 +21957,10 @@ partial class C
             var edits = GetTopEdits(src1, src2);
 
             edits.VerifySemantics(
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        (
-                            (IPropertySymbol)
-                                c.GetMember<INamedTypeSymbol>("C").GetMembers("P").First()
-                        ).GetMethod
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    (
+                        (IPropertySymbol)c.GetMember<INamedTypeSymbol>("C").GetMembers("P").First()
+                    ).GetMethod
                 ),
                 SemanticEdit(
                     SemanticEditKind.Update,
@@ -22920,9 +22720,8 @@ class C
                 new[]
                 {
                     SemanticEdit(SemanticEditKind.Insert, c => c.GetMember("C.B")),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").Constructors.Single()
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").Constructors.Single()
                     ),
                     SemanticEdit(
                         SemanticEditKind.Delete,
@@ -23549,12 +23348,8 @@ class C
                 ActiveStatementsDescription.Empty,
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            c.GetMember<INamedTypeSymbol>("C")
-                                .GetMember<IPropertySymbol>("P")
-                                .SetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<INamedTypeSymbol>("C").GetMember<IPropertySymbol>("P").SetMethod
                     ),
                 }
             );
@@ -24347,12 +24142,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            c.GetMember<INamedTypeSymbol>("C")
-                                .GetMember<IPropertySymbol>("P")
-                                .SetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<INamedTypeSymbol>("C").GetMember<IPropertySymbol>("P").SetMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.ChangeCustomAttributes
@@ -24381,9 +24172,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").GetMember("P")
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").GetMember("P")
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -24401,9 +24191,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").GetMember("P")
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").GetMember("P")
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -24633,9 +24422,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").GetMember("P")
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").GetMember("P")
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -24654,9 +24442,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").GetMember("P")
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").GetMember("P")
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -24675,9 +24462,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").GetMember("P")
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").GetMember("P")
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -24710,9 +24496,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").GetMember("P")
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").GetMember("P")
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -24996,9 +24781,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.P").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.P").GetMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddInstanceFieldToExistingType
@@ -25027,9 +24811,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.P").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.P").GetMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddInstanceFieldToExistingType
@@ -25060,9 +24843,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.P").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.P").GetMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.Baseline
@@ -25080,9 +24862,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.P").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.P").GetMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
@@ -25111,9 +24892,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.P").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.P").GetMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.Baseline
@@ -25131,9 +24911,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("C.P").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("C.P").GetMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
@@ -25233,19 +25012,15 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P")
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("P")
+                                    .GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P")
-                                        .SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("P")
+                                    .SetMethod
                             ),
                         }
                     ),
@@ -25269,19 +25044,15 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("Q")
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("Q")
+                                    .GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("Q")
-                                        .SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("Q")
+                                    .SetMethod
                             ),
                         }
                     ),
@@ -25307,33 +25078,25 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P")
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("P")
+                                    .GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P")
-                                        .SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("P")
+                                    .SetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("Q")
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("Q")
+                                    .GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("Q")
-                                        .SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("Q")
+                                    .SetMethod
                             ),
                         }
                     ),
@@ -25359,19 +25122,15 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P")
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("P")
+                                    .GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P")
-                                        .SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("P")
+                                    .SetMethod
                             ),
                             SemanticEdit(
                                 SemanticEditKind.Update,
@@ -25401,12 +25160,10 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IPropertySymbol>("P")
-                                        .GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IPropertySymbol>("P")
+                                    .GetMethod
                             ),
                         }
                     ),
@@ -26679,12 +26436,10 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c =>
-                            c.GetMember<INamedTypeSymbol>("C")
-                                .GetMember<IPropertySymbol>("this[]")
-                                .SetMethod
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C")
+                            .GetMember<IPropertySymbol>("this[]")
+                            .SetMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -26941,17 +26696,14 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.this[]")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.this[]")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.this[]").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.this[]").GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.this[]").SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.this[]").SetMethod
                             ),
                         }
                     ),
@@ -26975,17 +26727,14 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.this[]")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.this[]")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.this[]").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.this[]").GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.this[]").SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.this[]").SetMethod
                             ),
                         }
                     ),
@@ -27011,17 +26760,14 @@ class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.this[]")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.this[]")
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.this[]").GetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.this[]").GetMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<IPropertySymbol>("C.this[]").SetMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<IPropertySymbol>("C.this[]").SetMethod
                             ),
                         }
                     ),
@@ -27050,13 +26796,11 @@ struct S
             // Compiler generated attribute changed, we do not require runtime capability for custom attribute changes.
             edits.VerifySemantics(
                 [
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("S.this[]")
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("S.this[]")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IPropertySymbol>("S.this[]").GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IPropertySymbol>("S.this[]").GetMethod
                     ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
@@ -27086,75 +26830,59 @@ struct S
 }";
             var edits = GetTopEdits(src1, src2);
             edits.VerifySemantics(
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        c.GetMembers<IPropertySymbol>("S.this[]")
-                            .Single(m =>
-                                m.Parameters is [{ Type.SpecialType: SpecialType.System_Int32 }]
-                            )
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMembers<IPropertySymbol>("S.this[]")
+                        .Single(m =>
+                            m.Parameters is [{ Type.SpecialType: SpecialType.System_Int32 }]
+                        )
                 ),
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        c.GetMembers<IPropertySymbol>("S.this[]")
-                            .Single(m =>
-                                m.Parameters is [{ Type.SpecialType: SpecialType.System_SByte }]
-                            )
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMembers<IPropertySymbol>("S.this[]")
+                        .Single(m =>
+                            m.Parameters is [{ Type.SpecialType: SpecialType.System_SByte }]
+                        )
                 ),
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        c.GetMembers<IPropertySymbol>("S.this[]")
-                            .Single(m =>
-                                m.Parameters is [{ Type.SpecialType: SpecialType.System_Int32 }]
-                            )
-                            .GetMethod
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMembers<IPropertySymbol>("S.this[]")
+                        .Single(m =>
+                            m.Parameters is [{ Type.SpecialType: SpecialType.System_Int32 }]
+                        )
+                        .GetMethod
                 ),
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        c.GetMembers<IPropertySymbol>("S.this[]")
-                            .Single(m =>
-                                m.Parameters is [{ Type.SpecialType: SpecialType.System_SByte }]
-                            )
-                            .GetMethod
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMembers<IPropertySymbol>("S.this[]")
+                        .Single(m =>
+                            m.Parameters is [{ Type.SpecialType: SpecialType.System_SByte }]
+                        )
+                        .GetMethod
                 ),
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        c.GetMembers<IPropertySymbol>("S.this[]")
-                            .Single(m =>
-                                m.Parameters is [{ Type.SpecialType: SpecialType.System_SByte }]
-                            )
-                            .SetMethod
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMembers<IPropertySymbol>("S.this[]")
+                        .Single(m =>
+                            m.Parameters is [{ Type.SpecialType: SpecialType.System_SByte }]
+                        )
+                        .SetMethod
                 ),
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        c.GetMembers<IPropertySymbol>("S.this[]")
-                            .Single(m =>
-                                m.Parameters is [{ Type.SpecialType: SpecialType.System_UInt32 }]
-                            )
-                            .GetMethod
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMembers<IPropertySymbol>("S.this[]")
+                        .Single(m =>
+                            m.Parameters is [{ Type.SpecialType: SpecialType.System_UInt32 }]
+                        )
+                        .GetMethod
                 ),
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        c.GetMembers<IPropertySymbol>("S.this[]")
-                            .Single(m =>
-                                m.Parameters is [{ Type.SpecialType: SpecialType.System_Byte }]
-                            )
-                            .SetMethod
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMembers<IPropertySymbol>("S.this[]")
+                        .Single(m =>
+                            m.Parameters is [{ Type.SpecialType: SpecialType.System_Byte }]
+                        )
+                        .SetMethod
                 ),
-                SemanticEdit(
-                    SemanticEditKind.Update,
-                    c =>
-                        c.GetMembers<IPropertySymbol>("S.this[]")
-                            .Single(m =>
-                                m.Parameters is [{ Type.SpecialType: SpecialType.System_UInt32 }]
-                            )
-                            .SetMethod
+                SemanticEdit(SemanticEditKind.Update, c =>
+                    c.GetMembers<IPropertySymbol>("S.this[]")
+                        .Single(m =>
+                            m.Parameters is [{ Type.SpecialType: SpecialType.System_UInt32 }]
+                        )
+                        .SetMethod
                 )
             );
         }
@@ -27187,40 +26915,31 @@ readonly struct S
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            c.GetMembers<IPropertySymbol>("S.this[]")
-                                .Single(m =>
-                                    m.Parameters
-                                        is [{ Type.SpecialType: SpecialType.System_UInt32 }]
-                                )
-                                .GetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMembers<IPropertySymbol>("S.this[]")
+                            .Single(m =>
+                                m.Parameters is [{ Type.SpecialType: SpecialType.System_UInt32 }]
+                            )
+                            .GetMethod
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            c.GetMembers<IPropertySymbol>("S.this[]")
-                                .Single(m =>
-                                    m.Parameters is [{ Type.SpecialType: SpecialType.System_Byte }]
-                                )
-                                .SetMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMembers<IPropertySymbol>("S.this[]")
+                            .Single(m =>
+                                m.Parameters is [{ Type.SpecialType: SpecialType.System_Byte }]
+                            )
+                            .SetMethod
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            c.GetMembers<IPropertySymbol>("S.this[]")
-                                .Single(m =>
-                                    m.Parameters is [{ Type.SpecialType: SpecialType.System_Int32 }]
-                                )
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMembers<IPropertySymbol>("S.this[]")
+                            .Single(m =>
+                                m.Parameters is [{ Type.SpecialType: SpecialType.System_Int32 }]
+                            )
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c =>
-                            c.GetMembers<IPropertySymbol>("S.this[]")
-                                .Single(m =>
-                                    m.Parameters is [{ Type.SpecialType: SpecialType.System_SByte }]
-                                )
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMembers<IPropertySymbol>("S.this[]")
+                            .Single(m =>
+                                m.Parameters is [{ Type.SpecialType: SpecialType.System_SByte }]
+                            )
                     ),
                 }
             );
@@ -27329,9 +27048,8 @@ readonly struct S
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c => c.GetMember<INamedTypeSymbol>("C").GetMember("E")
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMember<INamedTypeSymbol>("C").GetMember("E")
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -27529,19 +27247,15 @@ public class C
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IEventSymbol>("E")
-                                        .AddMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IEventSymbol>("E")
+                                    .AddMethod
                             ),
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c =>
-                                    c.GetMember<INamedTypeSymbol>("C")
-                                        .GetMember<IEventSymbol>("E")
-                                        .RemoveMethod
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C")
+                                    .GetMember<IEventSymbol>("E")
+                                    .RemoveMethod
                             ),
                         }
                     ),
@@ -27684,13 +27398,11 @@ class C
                 new[]
                 {
                     SemanticEdit(SemanticEditKind.Update, c => c.GetMember<IEventSymbol>("C.F")),
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IEventSymbol>("C.F").AddMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IEventSymbol>("C.F").AddMethod
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IEventSymbol>("C.F").RemoveMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IEventSymbol>("C.F").RemoveMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.ChangeCustomAttributes
@@ -27731,9 +27443,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IEventSymbol>("C.F").RemoveMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IEventSymbol>("C.F").RemoveMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.ChangeCustomAttributes
@@ -27819,13 +27530,11 @@ class C
                 new[]
                 {
                     SemanticEdit(SemanticEditKind.Update, c => c.GetMember<IEventSymbol>("C.F")),
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IEventSymbol>("C.F").AddMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IEventSymbol>("C.F").AddMethod
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IEventSymbol>("C.F").RemoveMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IEventSymbol>("C.F").RemoveMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.ChangeCustomAttributes
@@ -27866,9 +27575,8 @@ class C
             edits.VerifySemantics(
                 new[]
                 {
-                    SemanticEdit(
-                        SemanticEditKind.Update,
-                        c => c.GetMember<IEventSymbol>("C.F").RemoveMethod
+                    SemanticEdit(SemanticEditKind.Update, c =>
+                        c.GetMember<IEventSymbol>("C.F").RemoveMethod
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.ChangeCustomAttributes
@@ -28225,12 +27933,8 @@ class C
                                 ?.ISymbol,
                         deletedSymbolContainerProvider: c => c.GetMember("C")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c =>
-                            c.GetMembers("C.M")
-                                .FirstOrDefault(m => m.GetParameterCount() == 1)
-                                ?.ISymbol
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMembers("C.M").FirstOrDefault(m => m.GetParameterCount() == 1)?.ISymbol
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -28260,12 +27964,8 @@ class C
                                 ?.ISymbol,
                         deletedSymbolContainerProvider: c => c.GetMember("C")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c =>
-                            c.GetMembers("C.M")
-                                .FirstOrDefault(m => m.GetParameterCount() == 2)
-                                ?.ISymbol
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMembers("C.M").FirstOrDefault(m => m.GetParameterCount() == 2)?.ISymbol
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -28318,12 +28018,8 @@ class C
                                 ?.ISymbol,
                         deletedSymbolContainerProvider: c => c.GetMember("C")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c =>
-                            c.GetMembers("C.M")
-                                .FirstOrDefault(m => m.GetParameterCount() == 0)
-                                ?.ISymbol
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMembers("C.M").FirstOrDefault(m => m.GetParameterCount() == 0)?.ISymbol
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -28350,12 +28046,8 @@ class C
                                 ?.ISymbol,
                         deletedSymbolContainerProvider: c => c.GetMember("C")
                     ),
-                    SemanticEdit(
-                        SemanticEditKind.Insert,
-                        c =>
-                            c.GetMembers("C.M")
-                                .FirstOrDefault(m => m.GetParameterCount() == 1)
-                                ?.ISymbol
+                    SemanticEdit(SemanticEditKind.Insert, c =>
+                        c.GetMembers("C.M").FirstOrDefault(m => m.GetParameterCount() == 1)?.ISymbol
                     ),
                 },
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
@@ -30668,9 +30360,8 @@ public class B
                     DocumentResults(
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember("Program.<Main>$")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember("Program.<Main>$")
                             ),
                         }
                     ),

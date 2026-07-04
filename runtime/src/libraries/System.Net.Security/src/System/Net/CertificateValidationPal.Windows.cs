@@ -231,13 +231,10 @@ namespace System.Net
             try
             {
                 using SafeAccessTokenHandle invalidHandle = SafeAccessTokenHandle.InvalidHandle;
-                WindowsIdentity.RunImpersonated(
-                    invalidHandle,
-                    () =>
-                    {
-                        store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
-                    }
-                );
+                WindowsIdentity.RunImpersonated(invalidHandle, () =>
+                {
+                    store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+                });
             }
             catch
             {

@@ -317,36 +317,32 @@ namespace System.Formats.Asn1.Tests.Writer
         protected void VerifyWrite_String_Null_Helper(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => WriteString(writer, null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                WriteString(writer, null)
             );
         }
 
         protected void VerifyWrite_String_Null_CustomTag_Helper(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => WriteString(writer, new Asn1Tag(TagClass.ContextSpecific, 3), null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                WriteString(writer, new Asn1Tag(TagClass.ContextSpecific, 3), null)
             );
         }
 
         protected void VerifyWrite_Null_String_Helper(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => WriteString(writer, Asn1Tag.Null, "hi")
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                WriteString(writer, Asn1Tag.Null, "hi")
             );
         }
 
         protected void VerifyWrite_Null_Span_Helper(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => WriteSpan(writer, Asn1Tag.Null, "hi".AsSpan())
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                WriteSpan(writer, Asn1Tag.Null, "hi".AsSpan())
             );
         }
 

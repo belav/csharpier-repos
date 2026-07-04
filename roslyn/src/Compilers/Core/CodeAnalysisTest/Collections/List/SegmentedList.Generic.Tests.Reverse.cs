@@ -133,17 +133,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Tuple.Create(3, listLength - 2),
             };
 
-            Assert.All(
-                InvalidParameters,
-                invalidSet =>
-                {
-                    if (invalidSet.Item1 >= 0 && invalidSet.Item2 >= 0)
-                        Assert.Throws<ArgumentException>(
-                            null,
-                            () => list.Reverse(invalidSet.Item1, invalidSet.Item2)
-                        );
-                }
-            );
+            Assert.All(InvalidParameters, invalidSet =>
+            {
+                if (invalidSet.Item1 >= 0 && invalidSet.Item2 >= 0)
+                    Assert.Throws<ArgumentException>(null, () =>
+                        list.Reverse(invalidSet.Item1, invalidSet.Item2)
+                    );
+            });
         }
 
         [Theory]
@@ -164,15 +160,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Tuple.Create(2, -1),
             };
 
-            Assert.All(
-                InvalidParameters,
-                invalidSet =>
-                {
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        list.Reverse(invalidSet.Item1, invalidSet.Item2)
-                    );
-                }
-            );
+            Assert.All(InvalidParameters, invalidSet =>
+            {
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.Reverse(invalidSet.Item1, invalidSet.Item2)
+                );
+            });
         }
     }
 }

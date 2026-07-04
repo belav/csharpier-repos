@@ -48,24 +48,16 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Alter_table_MemoryOptimized() =>
         Execute(
-            common =>
-                common.Entity(
-                    "Person",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.HasKey("Id").IsClustered(false);
-                    }
-                ),
+            common => common.Entity("Person", x =>
+                {
+                    x.Property<int>("Id");
+                    x.HasKey("Id").IsClustered(false);
+                }),
             _ => { },
-            target =>
-                target.Entity(
-                    "Person",
-                    x =>
-                    {
-                        x.ToTable(tb => tb.IsMemoryOptimized());
-                    }
-                ),
+            target => target.Entity("Person", x =>
+                {
+                    x.ToTable(tb => tb.IsMemoryOptimized());
+                }),
             upOps =>
             {
                 Assert.Equal(2, upOps.Count);
@@ -111,14 +103,10 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
         Execute(
             _ => { },
             _ => { },
-            target =>
-                target.Entity(
-                    "Person",
-                    x =>
-                    {
-                        x.ToTable(tb => tb.IsMemoryOptimized());
-                    }
-                ),
+            target => target.Entity("Person", x =>
+                {
+                    x.ToTable(tb => tb.IsMemoryOptimized());
+                }),
             upOps =>
             {
                 Assert.Equal(2, upOps.Count);
@@ -158,30 +146,21 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Add_column_with_dependencies() =>
         Execute(
-            source =>
-                source.Entity(
-                    "Person",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.HasKey("Id").HasName("PK_People");
-                        x.ToTable("People", "dbo");
-                    }
-                ),
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Person",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.HasKey("Id").HasName("PK_People");
-                        x.ToTable("People", "dbo");
-                        x.Property<string>("FirstName");
-                        x.Property<string>("FullName")
-                            .HasComputedColumnSql("[FirstName] + [LastName]");
-                        x.Property<string>("LastName");
-                    }
-                ),
+            source => source.Entity("Person", x =>
+                {
+                    x.Property<int>("Id");
+                    x.HasKey("Id").HasName("PK_People");
+                    x.ToTable("People", "dbo");
+                }),
+            modelBuilder => modelBuilder.Entity("Person", x =>
+                {
+                    x.Property<int>("Id");
+                    x.HasKey("Id").HasName("PK_People");
+                    x.ToTable("People", "dbo");
+                    x.Property<string>("FirstName");
+                    x.Property<string>("FullName").HasComputedColumnSql("[FirstName] + [LastName]");
+                    x.Property<string>("LastName");
+                }),
             operations =>
             {
                 Assert.Equal(3, operations.Count);
@@ -221,26 +200,18 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Alter_column_non_key_identity() =>
         Execute(
-            source =>
-                source.Entity(
-                    "Lamb",
-                    x =>
-                    {
-                        x.ToTable("Lamb", "bah");
-                        x.Property<int>("Num").ValueGeneratedNever();
-                        x.Property<int>("Id");
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Lamb",
-                    x =>
-                    {
-                        x.ToTable("Lamb", "bah");
-                        x.Property<int>("Num").ValueGeneratedOnAdd();
-                        x.Property<int>("Id");
-                    }
-                ),
+            source => source.Entity("Lamb", x =>
+                {
+                    x.ToTable("Lamb", "bah");
+                    x.Property<int>("Num").ValueGeneratedNever();
+                    x.Property<int>("Id");
+                }),
+            target => target.Entity("Lamb", x =>
+                {
+                    x.ToTable("Lamb", "bah");
+                    x.Property<int>("Num").ValueGeneratedOnAdd();
+                    x.Property<int>("Id");
+                }),
             operations =>
             {
                 Assert.Equal(1, operations.Count);
@@ -256,27 +227,18 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Alter_column_computation() =>
         Execute(
-            source =>
-                source.Entity(
-                    "Sheep",
-                    x =>
-                    {
-                        x.ToTable("Sheep", "bah");
-                        x.Property<int>("Id");
-                        x.Property<int>("Now");
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Sheep",
-                    x =>
-                    {
-                        x.ToTable("Sheep", "bah");
-                        x.Property<int>("Id");
-                        x.Property<int>("Now")
-                            .HasComputedColumnSql("CAST(CURRENT_TIMESTAMP AS int)");
-                    }
-                ),
+            source => source.Entity("Sheep", x =>
+                {
+                    x.ToTable("Sheep", "bah");
+                    x.Property<int>("Id");
+                    x.Property<int>("Now");
+                }),
+            target => target.Entity("Sheep", x =>
+                {
+                    x.ToTable("Sheep", "bah");
+                    x.Property<int>("Id");
+                    x.Property<int>("Now").HasComputedColumnSql("CAST(CURRENT_TIMESTAMP AS int)");
+                }),
             operations =>
             {
                 Assert.Equal(1, operations.Count);
@@ -294,35 +256,26 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
         Execute(
             source =>
             {
-                source.Entity(
-                    "Campaign",
-                    x =>
-                    {
-                        x.ToTable((string)null);
-                        x.UseTpcMappingStrategy();
-                        x.Property<int>("Id");
-                        x.Property<int>("Status");
-                    }
-                );
+                source.Entity("Campaign", x =>
+                {
+                    x.ToTable((string)null);
+                    x.UseTpcMappingStrategy();
+                    x.Property<int>("Id");
+                    x.Property<int>("Status");
+                });
 
-                source.Entity(
-                    "SearchCampaign",
-                    x =>
-                    {
-                        x.HasBaseType("Campaign");
-                    }
-                );
+                source.Entity("SearchCampaign", x =>
+                {
+                    x.HasBaseType("Campaign");
+                });
             },
             source => { },
             target =>
             {
-                target.Entity(
-                    "Campaign",
-                    x =>
-                    {
-                        x.Property<int>("Status").HasColumnName("status_new");
-                    }
-                );
+                target.Entity("Campaign", x =>
+                {
+                    x.Property<int>("Status").HasColumnName("status_new");
+                });
             },
             operations =>
             {
@@ -341,34 +294,25 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
         Execute(
             source =>
             {
-                source.Entity(
-                    "Campaign",
-                    x =>
-                    {
-                        x.UseTptMappingStrategy();
-                        x.Property<int>("Id");
-                        x.Property<int>("Status");
-                    }
-                );
+                source.Entity("Campaign", x =>
+                {
+                    x.UseTptMappingStrategy();
+                    x.Property<int>("Id");
+                    x.Property<int>("Status");
+                });
 
-                source.Entity(
-                    "SearchCampaign",
-                    x =>
-                    {
-                        x.HasBaseType("Campaign");
-                    }
-                );
+                source.Entity("SearchCampaign", x =>
+                {
+                    x.HasBaseType("Campaign");
+                });
             },
             source => { },
             target =>
             {
-                target.Entity(
-                    "Campaign",
-                    x =>
-                    {
-                        x.Property<int>("Status").HasColumnName("status_new");
-                    }
-                );
+                target.Entity("Campaign", x =>
+                {
+                    x.Property<int>("Status").HasColumnName("status_new");
+                });
             },
             operations =>
             {
@@ -387,34 +331,25 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
         Execute(
             source =>
             {
-                source.Entity(
-                    "Campaign",
-                    x =>
-                    {
-                        x.UseTpcMappingStrategy();
-                        x.Property<int>("Id");
-                        x.Property<int>("Status");
-                    }
-                );
+                source.Entity("Campaign", x =>
+                {
+                    x.UseTpcMappingStrategy();
+                    x.Property<int>("Id");
+                    x.Property<int>("Status");
+                });
 
-                source.Entity(
-                    "SearchCampaign",
-                    x =>
-                    {
-                        x.HasBaseType("Campaign");
-                    }
-                );
+                source.Entity("SearchCampaign", x =>
+                {
+                    x.HasBaseType("Campaign");
+                });
             },
             source => { },
             target =>
             {
-                target.Entity(
-                    "Campaign",
-                    x =>
-                    {
-                        x.Property<int>("Status").HasColumnName("status_new");
-                    }
-                );
+                target.Entity("Campaign", x =>
+                {
+                    x.Property<int>("Status").HasColumnName("status_new");
+                });
             },
             operations =>
             {
@@ -437,26 +372,18 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Alter_primary_key_clustering() =>
         Execute(
-            source =>
-                source.Entity(
-                    "Ram",
-                    x =>
-                    {
-                        x.ToTable("Ram", "bah");
-                        x.Property<int>("Id");
-                        x.HasKey("Id").IsClustered(false);
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Ram",
-                    x =>
-                    {
-                        x.ToTable("Ram", "bah");
-                        x.Property<int>("Id");
-                        x.HasKey("Id").IsClustered();
-                    }
-                ),
+            source => source.Entity("Ram", x =>
+                {
+                    x.ToTable("Ram", "bah");
+                    x.Property<int>("Id");
+                    x.HasKey("Id").IsClustered(false);
+                }),
+            target => target.Entity("Ram", x =>
+                {
+                    x.ToTable("Ram", "bah");
+                    x.Property<int>("Id");
+                    x.HasKey("Id").IsClustered();
+                }),
             operations =>
             {
                 Assert.Equal(2, operations.Count);
@@ -478,16 +405,12 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     public void Add_non_clustered_primary_key_with_owned() =>
         Execute(
             _ => { },
-            target =>
-                target.Entity(
-                    "Ram",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.HasKey("Id").IsClustered(false);
-                        x.OwnsOne("Address", "Address");
-                    }
-                ),
+            target => target.Entity("Ram", x =>
+                {
+                    x.Property<int>("Id");
+                    x.HasKey("Id").IsClustered(false);
+                    x.OwnsOne("Address", "Address");
+                }),
             operations =>
             {
                 Assert.Equal(1, operations.Count);
@@ -502,28 +425,20 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Alter_unique_constraint_clustering() =>
         Execute(
-            source =>
-                source.Entity(
-                    "Ewe",
-                    x =>
-                    {
-                        x.ToTable("Ewe", "bah");
-                        x.Property<int>("Id");
-                        x.Property<int>("AlternateId");
-                        x.HasAlternateKey("AlternateId").IsClustered(false);
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Ewe",
-                    x =>
-                    {
-                        x.ToTable("Ewe", "bah");
-                        x.Property<int>("Id");
-                        x.Property<int>("AlternateId");
-                        x.HasAlternateKey("AlternateId").IsClustered();
-                    }
-                ),
+            source => source.Entity("Ewe", x =>
+                {
+                    x.ToTable("Ewe", "bah");
+                    x.Property<int>("Id");
+                    x.Property<int>("AlternateId");
+                    x.HasAlternateKey("AlternateId").IsClustered(false);
+                }),
+            target => target.Entity("Ewe", x =>
+                {
+                    x.ToTable("Ewe", "bah");
+                    x.Property<int>("Id");
+                    x.Property<int>("AlternateId");
+                    x.HasAlternateKey("AlternateId").IsClustered();
+                }),
             operations =>
             {
                 Assert.Equal(2, operations.Count);
@@ -547,24 +462,18 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
             _ => { },
             modelBuilder =>
             {
-                modelBuilder.Entity(
-                    "Order",
-                    eb =>
-                    {
-                        eb.Property<int>("Id");
-                        eb.ToTable("Orders");
-                    }
-                );
-                modelBuilder.Entity(
-                    "Details",
-                    eb =>
-                    {
-                        eb.Property<int>("Id");
-                        eb.Property<DateTime>("Time");
-                        eb.HasOne("Order").WithOne().HasForeignKey("Details", "Id");
-                        eb.ToTable("Orders");
-                    }
-                );
+                modelBuilder.Entity("Order", eb =>
+                {
+                    eb.Property<int>("Id");
+                    eb.ToTable("Orders");
+                });
+                modelBuilder.Entity("Details", eb =>
+                {
+                    eb.Property<int>("Id");
+                    eb.Property<DateTime>("Time");
+                    eb.HasOne("Order").WithOne().HasForeignKey("Details", "Id");
+                    eb.ToTable("Orders");
+                });
             },
             operations =>
             {
@@ -584,28 +493,20 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Add_SequenceHiLo_with_seed_data() =>
         Execute(
-            common =>
-                common.Entity(
-                    "Firefly",
-                    x =>
-                    {
-                        x.ToTable("Firefly", "dbo");
-                        x.Property<int>("Id");
-                        x.Property<int>("SequenceId");
-                        x.HasData(new { Id = 42 });
-                    }
-                ),
+            common => common.Entity("Firefly", x =>
+                {
+                    x.ToTable("Firefly", "dbo");
+                    x.Property<int>("Id");
+                    x.Property<int>("SequenceId");
+                    x.HasData(new { Id = 42 });
+                }),
             _ => { },
-            target =>
-                target.Entity(
-                    "Firefly",
-                    x =>
-                    {
-                        x.ToTable("Firefly", "dbo");
-                        x.Property<int>("SequenceId").UseHiLo(schema: "dbo");
-                        x.HasData(new { Id = 43 });
-                    }
-                ),
+            target => target.Entity("Firefly", x =>
+                {
+                    x.ToTable("Firefly", "dbo");
+                    x.Property<int>("SequenceId").UseHiLo(schema: "dbo");
+                    x.HasData(new { Id = 43 });
+                }),
             upOps =>
                 Assert.Collection(
                     upOps,
@@ -641,28 +542,20 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Add_KeySequence_with_seed_data() =>
         Execute(
-            common =>
-                common.Entity(
-                    "Firefly",
-                    x =>
-                    {
-                        x.ToTable("Firefly", "dbo");
-                        x.Property<int>("Id");
-                        x.Property<int>("SequenceId");
-                        x.HasData(new { Id = 42 });
-                    }
-                ),
+            common => common.Entity("Firefly", x =>
+                {
+                    x.ToTable("Firefly", "dbo");
+                    x.Property<int>("Id");
+                    x.Property<int>("SequenceId");
+                    x.HasData(new { Id = 42 });
+                }),
             _ => { },
-            target =>
-                target.Entity(
-                    "Firefly",
-                    x =>
-                    {
-                        x.ToTable("Firefly", "dbo");
-                        x.Property<int>("SequenceId").UseSequence(schema: "dbo");
-                        x.HasData(new { Id = 43 });
-                    }
-                ),
+            target => target.Entity("Firefly", x =>
+                {
+                    x.ToTable("Firefly", "dbo");
+                    x.Property<int>("SequenceId").UseSequence(schema: "dbo");
+                    x.HasData(new { Id = 43 });
+                }),
             upOps =>
                 Assert.Collection(
                     upOps,
@@ -711,28 +604,20 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Alter_index_clustering() =>
         Execute(
-            source =>
-                source.Entity(
-                    "Mutton",
-                    x =>
-                    {
-                        x.ToTable("Mutton", "bah");
-                        x.Property<int>("Id");
-                        x.Property<int>("Value");
-                        x.HasIndex("Value").IsClustered(false);
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Mutton",
-                    x =>
-                    {
-                        x.ToTable("Mutton", "bah");
-                        x.Property<int>("Id");
-                        x.Property<int>("Value");
-                        x.HasIndex("Value").IsClustered();
-                    }
-                ),
+            source => source.Entity("Mutton", x =>
+                {
+                    x.ToTable("Mutton", "bah");
+                    x.Property<int>("Id");
+                    x.Property<int>("Value");
+                    x.HasIndex("Value").IsClustered(false);
+                }),
+            target => target.Entity("Mutton", x =>
+                {
+                    x.ToTable("Mutton", "bah");
+                    x.Property<int>("Id");
+                    x.Property<int>("Value");
+                    x.HasIndex("Value").IsClustered();
+                }),
             operations =>
             {
                 Assert.Equal(2, operations.Count);
@@ -772,26 +657,18 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Alter_column_rowversion() =>
         Execute(
-            source =>
-                source.Entity(
-                    "Toad",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<byte[]>("Version");
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Toad",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<byte[]>("Version")
-                            .ValueGeneratedOnAddOrUpdate()
-                            .IsConcurrencyToken();
-                    }
-                ),
+            source => source.Entity("Toad", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<byte[]>("Version");
+                }),
+            target => target.Entity("Toad", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<byte[]>("Version")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .IsConcurrencyToken();
+                }),
             operations =>
             {
                 Assert.Equal(1, operations.Count);
@@ -808,86 +685,78 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     public void SeedData_all_operations() =>
         Execute(
             _ => { },
-            source =>
-                source.Entity(
-                    "EntityWithTwoProperties",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<int>("Value1");
-                        x.Property<string>("Value2");
-                        x.HasData(
-                            new
-                            {
-                                Id = 99999,
-                                Value1 = 0,
-                                Value2 = "",
-                            }, // deleted
-                            new
-                            {
-                                Id = 42,
-                                Value1 = 32,
-                                Value2 = "equal",
-                                InvalidProperty = "is ignored",
-                            }, // modified
-                            new
-                            {
-                                Id = 8,
-                                Value1 = 100,
-                                Value2 = "equal",
-                            }, // unchanged
-                            new
-                            {
-                                Id = 24,
-                                Value1 = 72,
-                                Value2 = "not equal1",
-                            }
-                        ); // modified
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "EntityWithTwoProperties",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<int>("Value1");
-                        x.Property<string>("Value2");
-                        x.HasData(
-                            new
-                            {
-                                Id = 11111,
-                                Value1 = 0,
-                                Value2 = "",
-                            }, // added
-                            new
-                            {
-                                Id = 11112,
-                                Value1 = 1,
-                                Value2 = "new",
-                            }, // added
-                            new
-                            {
-                                Id = 42,
-                                Value1 = 27,
-                                Value2 = "equal",
-                                InvalidProperty = "is ignored here too",
-                            }, // modified
-                            new
-                            {
-                                Id = 8,
-                                Value1 = 100,
-                                Value2 = "equal",
-                            }, // unchanged
-                            new
-                            {
-                                Id = 24,
-                                Value1 = 99,
-                                Value2 = "not equal2",
-                            }
-                        ); // modified
-                    }
-                ),
+            source => source.Entity("EntityWithTwoProperties", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<int>("Value1");
+                    x.Property<string>("Value2");
+                    x.HasData(
+                        new
+                        {
+                            Id = 99999,
+                            Value1 = 0,
+                            Value2 = "",
+                        }, // deleted
+                        new
+                        {
+                            Id = 42,
+                            Value1 = 32,
+                            Value2 = "equal",
+                            InvalidProperty = "is ignored",
+                        }, // modified
+                        new
+                        {
+                            Id = 8,
+                            Value1 = 100,
+                            Value2 = "equal",
+                        }, // unchanged
+                        new
+                        {
+                            Id = 24,
+                            Value1 = 72,
+                            Value2 = "not equal1",
+                        }
+                    ); // modified
+                }),
+            target => target.Entity("EntityWithTwoProperties", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<int>("Value1");
+                    x.Property<string>("Value2");
+                    x.HasData(
+                        new
+                        {
+                            Id = 11111,
+                            Value1 = 0,
+                            Value2 = "",
+                        }, // added
+                        new
+                        {
+                            Id = 11112,
+                            Value1 = 1,
+                            Value2 = "new",
+                        }, // added
+                        new
+                        {
+                            Id = 42,
+                            Value1 = 27,
+                            Value2 = "equal",
+                            InvalidProperty = "is ignored here too",
+                        }, // modified
+                        new
+                        {
+                            Id = 8,
+                            Value1 = 100,
+                            Value2 = "equal",
+                        }, // unchanged
+                        new
+                        {
+                            Id = 24,
+                            Value1 = 99,
+                            Value2 = "not equal2",
+                        }
+                    ); // modified
+                }),
             upOps =>
                 Assert.Collection(
                     upOps,
@@ -981,15 +850,12 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
         Execute(
             common =>
             {
-                common.Entity(
-                    "EntityWithValueGeneratedOnAddProperty",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("ValueGeneratedOnAddProperty").ValueGeneratedOnAdd();
-                        x.HasData(new { Id = 1, ValueGeneratedOnAddProperty = "Value" });
-                    }
-                );
+                common.Entity("EntityWithValueGeneratedOnAddProperty", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("ValueGeneratedOnAddProperty").ValueGeneratedOnAdd();
+                    x.HasData(new { Id = 1, ValueGeneratedOnAddProperty = "Value" });
+                });
             },
             source => { },
             target => { },
@@ -998,59 +864,39 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
 
     [ConditionalFact]
     public void Dont_rebuild_index_with_equal_include() =>
-        Execute(
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.HasIndex("Zip").IncludeProperties("City");
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.HasIndex("Zip").IncludeProperties("City");
-                    }
-                ),
-            operations => Assert.Equal(0, operations.Count)
-        );
+        Execute(source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.HasIndex("Zip").IncludeProperties("City");
+                }), target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.HasIndex("Zip").IncludeProperties("City");
+                }), operations => Assert.Equal(0, operations.Count));
 
     [ConditionalFact]
     public void Rebuild_index_with_different_include() =>
         Execute(
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip").IncludeProperties("City");
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip").IncludeProperties("Street");
-                    }
-                ),
+            source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip").IncludeProperties("City");
+                }),
+            target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip").IncludeProperties("Street");
+                }),
             operations =>
             {
                 Assert.Equal(2, operations.Count);
@@ -1076,60 +922,40 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
 
     [ConditionalFact]
     public void Dont_rebuild_index_with_unchanged_online_option() =>
-        Execute(
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.HasIndex("Zip").IsCreatedOnline();
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.HasIndex("Zip").IsCreatedOnline();
-                    }
-                ),
-            operations => Assert.Equal(0, operations.Count)
-        );
+        Execute(source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.HasIndex("Zip").IsCreatedOnline();
+                }), target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.HasIndex("Zip").IsCreatedOnline();
+                }), operations => Assert.Equal(0, operations.Count));
 
     [ConditionalFact]
     public void Rebuild_index_when_changing_online_option() =>
         Execute(
             _ => { },
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip");
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip").IsCreatedOnline();
-                    }
-                ),
+            source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip");
+                }),
+            target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip").IsCreatedOnline();
+                }),
             upOps =>
             {
                 Assert.Equal(2, upOps.Count);
@@ -1174,163 +1000,127 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
             modelBuilder => { },
             source =>
             {
-                source.Entity(
-                    "Animal",
-                    b =>
-                    {
-                        b.Property<int>("Id")
-                            .ValueGeneratedOnAdd()
-                            .HasColumnType("int")
-                            .UseIdentityColumn();
+                source.Entity("Animal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                        b.Property<int?>("MouseId").HasColumnType("int");
+                    b.Property<int?>("MouseId").HasColumnType("int");
 
-                        b.HasKey("Id");
+                    b.HasKey("Id");
 
-                        b.HasIndex("MouseId");
+                    b.HasIndex("MouseId");
 
-                        b.ToTable("Animal");
-                    }
-                );
+                    b.ToTable("Animal");
+                });
 
-                source.Entity(
-                    "Cat",
-                    b =>
-                    {
-                        b.HasBaseType("Animal");
+                source.Entity("Cat", b =>
+                {
+                    b.HasBaseType("Animal");
 
-                        b.Property<int?>("PreyId").HasColumnType("int").HasColumnName("PreyId");
+                    b.Property<int?>("PreyId").HasColumnType("int").HasColumnName("PreyId");
 
-                        b.HasIndex("PreyId");
+                    b.HasIndex("PreyId");
 
-                        b.ToTable("Cats");
+                    b.ToTable("Cats");
 
-                        b.HasData(new { Id = 11, MouseId = 31 });
-                    }
-                );
+                    b.HasData(new { Id = 11, MouseId = 31 });
+                });
 
-                source.Entity(
-                    "Dog",
-                    b =>
-                    {
-                        b.HasBaseType("Animal");
+                source.Entity("Dog", b =>
+                {
+                    b.HasBaseType("Animal");
 
-                        b.Property<int?>("PreyId").HasColumnType("int").HasColumnName("PreyId");
+                    b.Property<int?>("PreyId").HasColumnType("int").HasColumnName("PreyId");
 
-                        b.HasIndex("PreyId");
+                    b.HasIndex("PreyId");
 
-                        b.ToTable("Dogs");
+                    b.ToTable("Dogs");
 
-                        b.HasData(new { Id = 21, PreyId = 31 });
-                    }
-                );
+                    b.HasData(new { Id = 21, PreyId = 31 });
+                });
 
-                source.Entity(
-                    "Mouse",
-                    b =>
-                    {
-                        b.HasBaseType("Animal");
+                source.Entity("Mouse", b =>
+                {
+                    b.HasBaseType("Animal");
 
-                        b.ToTable("Mice");
+                    b.ToTable("Mice");
 
-                        b.HasData(new { Id = 31 });
-                    }
-                );
+                    b.HasData(new { Id = 31 });
+                });
 
-                source.Entity(
-                    "Animal",
-                    b =>
-                    {
-                        b.HasOne("Mouse", null).WithMany().HasForeignKey("MouseId");
-                    }
-                );
+                source.Entity("Animal", b =>
+                {
+                    b.HasOne("Mouse", null).WithMany().HasForeignKey("MouseId");
+                });
 
-                source.Entity(
-                    "Cat",
-                    b =>
-                    {
-                        b.HasOne("Animal", null)
-                            .WithOne()
-                            .HasForeignKey("Cat", "Id")
-                            .OnDelete(DeleteBehavior.Cascade)
-                            .IsRequired();
+                source.Entity("Cat", b =>
+                {
+                    b.HasOne("Animal", null)
+                        .WithOne()
+                        .HasForeignKey("Cat", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                        b.HasOne("Animal", null).WithMany().HasForeignKey("PreyId");
-                    }
-                );
+                    b.HasOne("Animal", null).WithMany().HasForeignKey("PreyId");
+                });
 
-                source.Entity(
-                    "Dog",
-                    b =>
-                    {
-                        b.HasOne("Animal", null)
-                            .WithOne()
-                            .HasForeignKey("Dog", "Id")
-                            .OnDelete(DeleteBehavior.Cascade)
-                            .IsRequired();
+                source.Entity("Dog", b =>
+                {
+                    b.HasOne("Animal", null)
+                        .WithOne()
+                        .HasForeignKey("Dog", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                        b.HasOne("Animal", null).WithMany().HasForeignKey("PreyId");
-                    }
-                );
+                    b.HasOne("Animal", null).WithMany().HasForeignKey("PreyId");
+                });
 
-                source.Entity(
-                    "Mouse",
-                    b =>
-                    {
-                        b.HasOne("Animal", null)
-                            .WithOne()
-                            .HasForeignKey("Mouse", "Id")
-                            .OnDelete(DeleteBehavior.Cascade)
-                            .IsRequired();
-                    }
-                );
+                source.Entity("Mouse", b =>
+                {
+                    b.HasOne("Animal", null)
+                        .WithOne()
+                        .HasForeignKey("Mouse", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
             },
             modelBuilder =>
             {
-                modelBuilder.Entity(
-                    "Animal",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<int?>("MouseId");
+                modelBuilder.Entity("Animal", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<int?>("MouseId");
 
-                        x.HasOne("Mouse").WithMany().HasForeignKey("MouseId");
-                    }
-                );
-                modelBuilder.Entity(
-                    "Cat",
-                    x =>
-                    {
-                        x.HasBaseType("Animal");
-                        x.ToTable("Cats");
-                        x.Property<int?>("PreyId").HasColumnName("PreyId");
+                    x.HasOne("Mouse").WithMany().HasForeignKey("MouseId");
+                });
+                modelBuilder.Entity("Cat", x =>
+                {
+                    x.HasBaseType("Animal");
+                    x.ToTable("Cats");
+                    x.Property<int?>("PreyId").HasColumnName("PreyId");
 
-                        x.HasOne("Animal").WithMany().HasForeignKey("PreyId");
-                        x.HasData(new { Id = 11, MouseId = 31 });
-                    }
-                );
-                modelBuilder.Entity(
-                    "Dog",
-                    x =>
-                    {
-                        x.HasBaseType("Animal");
-                        x.ToTable("Dogs");
-                        x.Property<int?>("PreyId").HasColumnName("PreyId");
+                    x.HasOne("Animal").WithMany().HasForeignKey("PreyId");
+                    x.HasData(new { Id = 11, MouseId = 31 });
+                });
+                modelBuilder.Entity("Dog", x =>
+                {
+                    x.HasBaseType("Animal");
+                    x.ToTable("Dogs");
+                    x.Property<int?>("PreyId").HasColumnName("PreyId");
 
-                        x.HasOne("Animal").WithMany().HasForeignKey("PreyId");
-                        x.HasData(new { Id = 21, PreyId = 31 });
-                    }
-                );
-                modelBuilder.Entity(
-                    "Mouse",
-                    x =>
-                    {
-                        x.HasBaseType("Animal");
-                        x.ToTable("Mice");
+                    x.HasOne("Animal").WithMany().HasForeignKey("PreyId");
+                    x.HasData(new { Id = 21, PreyId = 31 });
+                });
+                modelBuilder.Entity("Mouse", x =>
+                {
+                    x.HasBaseType("Animal");
+                    x.ToTable("Mice");
 
-                        x.HasData(new { Id = 31 });
-                    }
-                );
+                    x.HasData(new { Id = 31 });
+                });
             },
             upOps => Assert.Empty(upOps),
             downOps => Assert.Empty(downOps),
@@ -1348,60 +1138,40 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
 
     [ConditionalFact]
     public void Dont_rebuild_index_with_unchanged_fillfactor_option() =>
-        Execute(
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.HasIndex("Zip").HasFillFactor(90);
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.HasIndex("Zip").HasFillFactor(90);
-                    }
-                ),
-            operations => Assert.Equal(0, operations.Count)
-        );
+        Execute(source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.HasIndex("Zip").HasFillFactor(90);
+                }), target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.HasIndex("Zip").HasFillFactor(90);
+                }), operations => Assert.Equal(0, operations.Count));
 
     [ConditionalFact]
     public void Rebuild_index_when_adding_fillfactor_option() =>
         Execute(
             _ => { },
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip");
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip").HasFillFactor(90);
-                    }
-                ),
+            source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip");
+                }),
+            target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip").HasFillFactor(90);
+                }),
             upOps =>
             {
                 Assert.Equal(2, upOps.Count);
@@ -1443,30 +1213,22 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Rebuild_index_with_different_fillfactor_value() =>
         Execute(
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip").HasFillFactor(50);
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip").HasFillFactor(90);
-                    }
-                ),
+            source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip").HasFillFactor(50);
+                }),
+            target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip").HasFillFactor(90);
+                }),
             operations =>
             {
                 Assert.Equal(2, operations.Count);
@@ -1492,60 +1254,40 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
 
     [ConditionalFact]
     public void Dont_rebuild_index_with_unchanged_sortintempdb_option() =>
-        Execute(
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.HasIndex("Zip").SortInTempDb();
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.HasIndex("Zip").SortInTempDb();
-                    }
-                ),
-            operations => Assert.Equal(0, operations.Count)
-        );
+        Execute(source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.HasIndex("Zip").SortInTempDb();
+                }), target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.HasIndex("Zip").SortInTempDb();
+                }), operations => Assert.Equal(0, operations.Count));
 
     [ConditionalFact]
     public void Rebuild_index_when_changing_sortintempdb_option() =>
         Execute(
             _ => { },
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip");
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip").SortInTempDb();
-                    }
-                ),
+            source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip");
+                }),
+            target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip").SortInTempDb();
+                }),
             upOps =>
             {
                 Assert.Equal(2, upOps.Count);
@@ -1590,32 +1332,19 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [InlineData(DataCompressionType.Page)]
     public void Dont_rebuild_index_with_unchanged_datacompression_option(
         DataCompressionType dataCompression
-    ) =>
-        Execute(
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.HasIndex("Zip").UseDataCompression(dataCompression);
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.HasIndex("Zip").UseDataCompression(dataCompression);
-                    }
-                ),
-            operations => Assert.Equal(0, operations.Count)
-        );
+    ) => Execute(source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.HasIndex("Zip").UseDataCompression(dataCompression);
+                }), target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.HasIndex("Zip").UseDataCompression(dataCompression);
+                }), operations => Assert.Equal(0, operations.Count));
 
     [ConditionalTheory]
     [InlineData(DataCompressionType.None)]
@@ -1626,30 +1355,22 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     ) =>
         Execute(
             _ => { },
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip");
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip").UseDataCompression(dataCompression);
-                    }
-                ),
+            source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip");
+                }),
+            target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip").UseDataCompression(dataCompression);
+                }),
             upOps =>
             {
                 Assert.Equal(2, upOps.Count);
@@ -1691,30 +1412,22 @@ public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
     [ConditionalFact]
     public void Rebuild_index_with_different_datacompression_value() =>
         Execute(
-            source =>
-                source.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip").UseDataCompression(DataCompressionType.Row);
-                    }
-                ),
-            target =>
-                target.Entity(
-                    "Address",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Zip");
-                        x.Property<string>("City");
-                        x.Property<string>("Street");
-                        x.HasIndex("Zip").UseDataCompression(DataCompressionType.Page);
-                    }
-                ),
+            source => source.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip").UseDataCompression(DataCompressionType.Row);
+                }),
+            target => target.Entity("Address", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Zip");
+                    x.Property<string>("City");
+                    x.Property<string>("Street");
+                    x.HasIndex("Zip").UseDataCompression(DataCompressionType.Page);
+                }),
             operations =>
             {
                 Assert.Equal(2, operations.Count);

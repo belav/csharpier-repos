@@ -129,30 +129,27 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             bool usingCrl =
                 pkiOptions.HasFlag(PkiOptions.IssuerRevocationViaCrl)
                 || pkiOptions.HasFlag(PkiOptions.EndEntityRevocationViaCrl);
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                if (PlatformDetection.IsAndroid && usingCrl)
                 {
-                    if (PlatformDetection.IsAndroid && usingCrl)
-                    {
-                        // Android uses the verification time when determining if a CRL is relevant. If there
-                        // are no relevant CRLs based on that time, the revocation status will be unknown.
-                        // SimpleTest sets the verification time to the end entity's NotBefore + 1 minute,
-                        // while the revocation responder uses the current time to set thisUpdate/nextUpdate.
-                        // If using CRLs, set the verification time to the current time so that fetched CRLs
-                        //  will be considered relevant.
-                        holder.Chain.ChainPolicy.VerificationTime = DateTime.UtcNow;
-                    }
-
-                    SimpleRevocationBody(
-                        holder,
-                        endEntity,
-                        rootRevoked: false,
-                        issrRevoked: false,
-                        leafRevoked: false
-                    );
+                    // Android uses the verification time when determining if a CRL is relevant. If there
+                    // are no relevant CRLs based on that time, the revocation status will be unknown.
+                    // SimpleTest sets the verification time to the end entity's NotBefore + 1 minute,
+                    // while the revocation responder uses the current time to set thisUpdate/nextUpdate.
+                    // If using CRLs, set the verification time to the current time so that fetched CRLs
+                    //  will be considered relevant.
+                    holder.Chain.ChainPolicy.VerificationTime = DateTime.UtcNow;
                 }
-            );
+
+                SimpleRevocationBody(
+                    holder,
+                    endEntity,
+                    rootRevoked: false,
+                    issrRevoked: false,
+                    leafRevoked: false
+                );
+            });
         }
 
         [Theory]
@@ -160,74 +157,65 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]
         public static void RevokeIntermediate(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                using (X509Certificate2 intermediateCert = intermediate.CloneIssuerCert())
                 {
-                    using (X509Certificate2 intermediateCert = intermediate.CloneIssuerCert())
-                    {
-                        X509Chain chain = holder.Chain;
-                        DateTimeOffset now = DateTimeOffset.UtcNow;
-                        root.Revoke(intermediateCert, now);
-                        chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
-                    }
-
-                    SimpleRevocationBody(
-                        holder,
-                        endEntity,
-                        rootRevoked: false,
-                        issrRevoked: true,
-                        leafRevoked: false
-                    );
+                    X509Chain chain = holder.Chain;
+                    DateTimeOffset now = DateTimeOffset.UtcNow;
+                    root.Revoke(intermediateCert, now);
+                    chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
                 }
-            );
+
+                SimpleRevocationBody(
+                    holder,
+                    endEntity,
+                    rootRevoked: false,
+                    issrRevoked: true,
+                    leafRevoked: false
+                );
+            });
         }
 
         [Theory]
         [MemberData(nameof(AllViableRevocation))]
         public static void RevokeEndEntity(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
-                {
-                    DateTimeOffset now = DateTimeOffset.UtcNow;
-                    intermediate.Revoke(endEntity, now);
-                    holder.Chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                DateTimeOffset now = DateTimeOffset.UtcNow;
+                intermediate.Revoke(endEntity, now);
+                holder.Chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
 
-                    SimpleRevocationBody(
-                        holder,
-                        endEntity,
-                        rootRevoked: false,
-                        issrRevoked: false,
-                        leafRevoked: true
-                    );
-                }
-            );
+                SimpleRevocationBody(
+                    holder,
+                    endEntity,
+                    rootRevoked: false,
+                    issrRevoked: false,
+                    leafRevoked: true
+                );
+            });
         }
 
         [Theory]
         [MemberData(nameof(AllViableRevocation))]
         public static void RevokeLeafWithAiaFetchingDisabled(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
-                {
-                    DateTimeOffset now = DateTimeOffset.UtcNow;
-                    intermediate.Revoke(endEntity, now);
-                    holder.Chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
-                    holder.Chain.ChainPolicy.DisableCertificateDownloads = true;
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                DateTimeOffset now = DateTimeOffset.UtcNow;
+                intermediate.Revoke(endEntity, now);
+                holder.Chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
+                holder.Chain.ChainPolicy.DisableCertificateDownloads = true;
 
-                    SimpleRevocationBody(
-                        holder,
-                        endEntity,
-                        rootRevoked: false,
-                        issrRevoked: false,
-                        leafRevoked: true
-                    );
-                }
-            );
+                SimpleRevocationBody(
+                    holder,
+                    endEntity,
+                    rootRevoked: false,
+                    issrRevoked: false,
+                    leafRevoked: true
+                );
+            });
         }
 
         [Theory]
@@ -235,30 +223,27 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]
         public static void RevokeIntermediateAndEndEntity(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                using (X509Certificate2 intermediateCert = intermediate.CloneIssuerCert())
                 {
-                    using (X509Certificate2 intermediateCert = intermediate.CloneIssuerCert())
-                    {
-                        X509Chain chain = holder.Chain;
-                        DateTimeOffset now = DateTimeOffset.UtcNow;
+                    X509Chain chain = holder.Chain;
+                    DateTimeOffset now = DateTimeOffset.UtcNow;
 
-                        root.Revoke(intermediateCert, now);
-                        intermediate.Revoke(endEntity, now);
+                    root.Revoke(intermediateCert, now);
+                    intermediate.Revoke(endEntity, now);
 
-                        chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
+                    chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
 
-                        SimpleRevocationBody(
-                            holder,
-                            endEntity,
-                            rootRevoked: false,
-                            issrRevoked: true,
-                            leafRevoked: true
-                        );
-                    }
+                    SimpleRevocationBody(
+                        holder,
+                        endEntity,
+                        rootRevoked: false,
+                        issrRevoked: true,
+                        leafRevoked: true
+                    );
                 }
-            );
+            });
         }
 
         [Theory]
@@ -266,38 +251,35 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]
         public static void RevokeRoot(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                DateTimeOffset now = DateTimeOffset.UtcNow;
+                X509Chain chain = holder.Chain;
+
+                root.RebuildRootWithRevocation();
+
+                using (X509Certificate2 revocableRoot = root.CloneIssuerCert())
                 {
-                    DateTimeOffset now = DateTimeOffset.UtcNow;
-                    X509Chain chain = holder.Chain;
+                    chain.ChainPolicy.CustomTrustStore.Clear();
+                    chain.ChainPolicy.CustomTrustStore.Add(revocableRoot);
 
-                    root.RebuildRootWithRevocation();
+                    root.Revoke(revocableRoot, now);
 
-                    using (X509Certificate2 revocableRoot = root.CloneIssuerCert())
-                    {
-                        chain.ChainPolicy.CustomTrustStore.Clear();
-                        chain.ChainPolicy.CustomTrustStore.Add(revocableRoot);
+                    chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
 
-                        root.Revoke(revocableRoot, now);
+                    SimpleRevocationBody(
+                        holder,
+                        endEntity,
+                        rootRevoked: true,
+                        issrRevoked: false,
+                        leafRevoked: false,
+                        testWithRootRevocation: true
+                    );
 
-                        chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
-
-                        SimpleRevocationBody(
-                            holder,
-                            endEntity,
-                            rootRevoked: true,
-                            issrRevoked: false,
-                            leafRevoked: false,
-                            testWithRootRevocation: true
-                        );
-
-                        // Make sure nothing weird happens during the root-only test.
-                        CheckRevokedRootDirectly(holder, revocableRoot);
-                    }
+                    // Make sure nothing weird happens during the root-only test.
+                    CheckRevokedRootDirectly(holder, revocableRoot);
                 }
-            );
+            });
         }
 
         [Theory]
@@ -305,36 +287,33 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]
         public static void RevokeRootAndEndEntity(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                DateTimeOffset now = DateTimeOffset.UtcNow;
+                X509Chain chain = holder.Chain;
+
+                root.RebuildRootWithRevocation();
+
+                using (X509Certificate2 revocableRoot = root.CloneIssuerCert())
                 {
-                    DateTimeOffset now = DateTimeOffset.UtcNow;
-                    X509Chain chain = holder.Chain;
+                    chain.ChainPolicy.CustomTrustStore.Clear();
+                    chain.ChainPolicy.CustomTrustStore.Add(revocableRoot);
 
-                    root.RebuildRootWithRevocation();
+                    root.Revoke(revocableRoot, now);
+                    intermediate.Revoke(endEntity, now);
 
-                    using (X509Certificate2 revocableRoot = root.CloneIssuerCert())
-                    {
-                        chain.ChainPolicy.CustomTrustStore.Clear();
-                        chain.ChainPolicy.CustomTrustStore.Add(revocableRoot);
+                    chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
 
-                        root.Revoke(revocableRoot, now);
-                        intermediate.Revoke(endEntity, now);
-
-                        chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
-
-                        SimpleRevocationBody(
-                            holder,
-                            endEntity,
-                            rootRevoked: true,
-                            issrRevoked: false,
-                            leafRevoked: true,
-                            testWithRootRevocation: true
-                        );
-                    }
+                    SimpleRevocationBody(
+                        holder,
+                        endEntity,
+                        rootRevoked: true,
+                        issrRevoked: false,
+                        leafRevoked: true,
+                        testWithRootRevocation: true
+                    );
                 }
-            );
+            });
         }
 
         [Theory]
@@ -342,37 +321,34 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]
         public static void RevokeRootAndIntermediate(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                DateTimeOffset now = DateTimeOffset.UtcNow;
+                X509Chain chain = holder.Chain;
+
+                root.RebuildRootWithRevocation();
+
+                using (X509Certificate2 revocableRoot = root.CloneIssuerCert())
+                using (X509Certificate2 intermediatePub = intermediate.CloneIssuerCert())
                 {
-                    DateTimeOffset now = DateTimeOffset.UtcNow;
-                    X509Chain chain = holder.Chain;
+                    chain.ChainPolicy.CustomTrustStore.Clear();
+                    chain.ChainPolicy.CustomTrustStore.Add(revocableRoot);
 
-                    root.RebuildRootWithRevocation();
+                    root.Revoke(revocableRoot, now);
+                    root.Revoke(intermediatePub, now);
 
-                    using (X509Certificate2 revocableRoot = root.CloneIssuerCert())
-                    using (X509Certificate2 intermediatePub = intermediate.CloneIssuerCert())
-                    {
-                        chain.ChainPolicy.CustomTrustStore.Clear();
-                        chain.ChainPolicy.CustomTrustStore.Add(revocableRoot);
+                    chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
 
-                        root.Revoke(revocableRoot, now);
-                        root.Revoke(intermediatePub, now);
-
-                        chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
-
-                        SimpleRevocationBody(
-                            holder,
-                            endEntity,
-                            rootRevoked: true,
-                            issrRevoked: true,
-                            leafRevoked: false,
-                            testWithRootRevocation: true
-                        );
-                    }
+                    SimpleRevocationBody(
+                        holder,
+                        endEntity,
+                        rootRevoked: true,
+                        issrRevoked: true,
+                        leafRevoked: false,
+                        testWithRootRevocation: true
+                    );
                 }
-            );
+            });
         }
 
         [Theory]
@@ -380,38 +356,35 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]
         public static void RevokeEverything(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                DateTimeOffset now = DateTimeOffset.UtcNow;
+                X509Chain chain = holder.Chain;
+
+                root.RebuildRootWithRevocation();
+
+                using (X509Certificate2 revocableRoot = root.CloneIssuerCert())
+                using (X509Certificate2 intermediatePub = intermediate.CloneIssuerCert())
                 {
-                    DateTimeOffset now = DateTimeOffset.UtcNow;
-                    X509Chain chain = holder.Chain;
+                    chain.ChainPolicy.CustomTrustStore.Clear();
+                    chain.ChainPolicy.CustomTrustStore.Add(revocableRoot);
 
-                    root.RebuildRootWithRevocation();
+                    root.Revoke(revocableRoot, now);
+                    root.Revoke(intermediatePub, now);
+                    intermediate.Revoke(endEntity, now);
 
-                    using (X509Certificate2 revocableRoot = root.CloneIssuerCert())
-                    using (X509Certificate2 intermediatePub = intermediate.CloneIssuerCert())
-                    {
-                        chain.ChainPolicy.CustomTrustStore.Clear();
-                        chain.ChainPolicy.CustomTrustStore.Add(revocableRoot);
+                    chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
 
-                        root.Revoke(revocableRoot, now);
-                        root.Revoke(intermediatePub, now);
-                        intermediate.Revoke(endEntity, now);
-
-                        chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
-
-                        SimpleRevocationBody(
-                            holder,
-                            endEntity,
-                            rootRevoked: true,
-                            issrRevoked: true,
-                            leafRevoked: true,
-                            testWithRootRevocation: true
-                        );
-                    }
+                    SimpleRevocationBody(
+                        holder,
+                        endEntity,
+                        rootRevoked: true,
+                        issrRevoked: true,
+                        leafRevoked: true,
+                        testWithRootRevocation: true
+                    );
                 }
-            );
+            });
         }
 
         [ConditionalTheory(
@@ -423,99 +396,96 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [InlineData(PkiOptions.IssuerRevocationViaCrl | PkiOptions.EndEntityRevocationViaOcsp)]
         public static void RevokeEndEntity_IssuerUnrelatedOcsp(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
-                {
-                    DateTimeOffset now = DateTimeOffset.UtcNow;
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                DateTimeOffset now = DateTimeOffset.UtcNow;
 
-                    using (RSA tmpRoot = RSA.Create())
-                    using (RSA rsa = RSA.Create())
+                using (RSA tmpRoot = RSA.Create())
+                using (RSA rsa = RSA.Create())
+                {
+                    CertificateRequest rootReq = new CertificateRequest(
+                        BuildSubject(
+                            "Unauthorized Root",
+                            nameof(RevokeEndEntity_IssuerUnrelatedOcsp),
+                            pkiOptions,
+                            true
+                        ),
+                        tmpRoot,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    );
+
+                    rootReq.CertificateExtensions.Add(
+                        new X509BasicConstraintsExtension(true, false, 0, true)
+                    );
+                    rootReq.CertificateExtensions.Add(
+                        new X509SubjectKeyIdentifierExtension(rootReq.PublicKey, false)
+                    );
+                    rootReq.CertificateExtensions.Add(
+                        new X509KeyUsageExtension(
+                            X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
+                            false
+                        )
+                    );
+
+                    using (
+                        CertificateAuthority unrelated = new CertificateAuthority(
+                            rootReq.CreateSelfSigned(now.AddMinutes(-5), now.AddMonths(1)),
+                            aiaHttpUrl: null,
+                            cdpUrl: null,
+                            ocspUrl: null
+                        )
+                    )
                     {
-                        CertificateRequest rootReq = new CertificateRequest(
+                        X509Certificate2 designatedSigner = unrelated.CreateOcspSigner(
                             BuildSubject(
-                                "Unauthorized Root",
+                                "Unrelated Designated OCSP Responder",
                                 nameof(RevokeEndEntity_IssuerUnrelatedOcsp),
                                 pkiOptions,
                                 true
                             ),
-                            tmpRoot,
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pkcs1
+                            rsa
                         );
 
-                        rootReq.CertificateExtensions.Add(
-                            new X509BasicConstraintsExtension(true, false, 0, true)
-                        );
-                        rootReq.CertificateExtensions.Add(
-                            new X509SubjectKeyIdentifierExtension(rootReq.PublicKey, false)
-                        );
-                        rootReq.CertificateExtensions.Add(
-                            new X509KeyUsageExtension(
-                                X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
-                                false
-                            )
-                        );
-
-                        using (
-                            CertificateAuthority unrelated = new CertificateAuthority(
-                                rootReq.CreateSelfSigned(now.AddMinutes(-5), now.AddMonths(1)),
-                                aiaHttpUrl: null,
-                                cdpUrl: null,
-                                ocspUrl: null
-                            )
-                        )
+                        using (designatedSigner)
                         {
-                            X509Certificate2 designatedSigner = unrelated.CreateOcspSigner(
-                                BuildSubject(
-                                    "Unrelated Designated OCSP Responder",
-                                    nameof(RevokeEndEntity_IssuerUnrelatedOcsp),
-                                    pkiOptions,
-                                    true
-                                ),
-                                rsa
+                            intermediate.DesignateOcspResponder(
+                                designatedSigner.CopyWithPrivateKey(rsa)
                             );
-
-                            using (designatedSigner)
-                            {
-                                intermediate.DesignateOcspResponder(
-                                    designatedSigner.CopyWithPrivateKey(rsa)
-                                );
-                            }
                         }
                     }
-
-                    intermediate.Revoke(endEntity, now);
-
-                    X509Chain chain = holder.Chain;
-                    chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
-
-                    bool chainBuilt = chain.Build(endEntity);
-
-                    AssertChainStatus(
-                        chain,
-                        rootStatus: X509ChainStatusFlags.NoError,
-                        issrStatus: X509ChainStatusFlags.NoError,
-                        leafStatus: ThisOsRevocationStatusUnknown
-                    );
-
-                    Assert.False(chainBuilt, "Chain built with ExcludeRoot.");
-                    holder.DisposeChainElements();
-
-                    chain.ChainPolicy.RevocationFlag = X509RevocationFlag.EndCertificateOnly;
-
-                    chainBuilt = chain.Build(endEntity);
-
-                    AssertChainStatus(
-                        chain,
-                        rootStatus: X509ChainStatusFlags.NoError,
-                        issrStatus: X509ChainStatusFlags.NoError,
-                        leafStatus: ThisOsRevocationStatusUnknown
-                    );
-
-                    Assert.False(chainBuilt, "Chain built with EndCertificateOnly");
                 }
-            );
+
+                intermediate.Revoke(endEntity, now);
+
+                X509Chain chain = holder.Chain;
+                chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
+
+                bool chainBuilt = chain.Build(endEntity);
+
+                AssertChainStatus(
+                    chain,
+                    rootStatus: X509ChainStatusFlags.NoError,
+                    issrStatus: X509ChainStatusFlags.NoError,
+                    leafStatus: ThisOsRevocationStatusUnknown
+                );
+
+                Assert.False(chainBuilt, "Chain built with ExcludeRoot.");
+                holder.DisposeChainElements();
+
+                chain.ChainPolicy.RevocationFlag = X509RevocationFlag.EndCertificateOnly;
+
+                chainBuilt = chain.Build(endEntity);
+
+                AssertChainStatus(
+                    chain,
+                    rootStatus: X509ChainStatusFlags.NoError,
+                    issrStatus: X509ChainStatusFlags.NoError,
+                    leafStatus: ThisOsRevocationStatusUnknown
+                );
+
+                Assert.False(chainBuilt, "Chain built with EndCertificateOnly");
+            });
         }
 
         [ConditionalTheory(
@@ -527,102 +497,97 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]
         public static void RevokeEndEntity_RootUnrelatedOcsp(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
-                {
-                    DateTimeOffset now = DateTimeOffset.UtcNow;
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                DateTimeOffset now = DateTimeOffset.UtcNow;
 
-                    using (RSA tmpRoot = RSA.Create())
-                    using (RSA rsa = RSA.Create())
+                using (RSA tmpRoot = RSA.Create())
+                using (RSA rsa = RSA.Create())
+                {
+                    CertificateRequest rootReq = new CertificateRequest(
+                        BuildSubject(
+                            "Unauthorized Root",
+                            nameof(RevokeEndEntity_IssuerUnrelatedOcsp),
+                            pkiOptions,
+                            true
+                        ),
+                        tmpRoot,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    );
+
+                    rootReq.CertificateExtensions.Add(
+                        new X509BasicConstraintsExtension(true, false, 0, true)
+                    );
+                    rootReq.CertificateExtensions.Add(
+                        new X509SubjectKeyIdentifierExtension(rootReq.PublicKey, false)
+                    );
+                    rootReq.CertificateExtensions.Add(
+                        new X509KeyUsageExtension(
+                            X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
+                            false
+                        )
+                    );
+
+                    using (
+                        CertificateAuthority unrelated = new CertificateAuthority(
+                            rootReq.CreateSelfSigned(now.AddMinutes(-5), now.AddMonths(1)),
+                            aiaHttpUrl: null,
+                            cdpUrl: null,
+                            ocspUrl: null
+                        )
+                    )
                     {
-                        CertificateRequest rootReq = new CertificateRequest(
+                        X509Certificate2 designatedSigner = unrelated.CreateOcspSigner(
                             BuildSubject(
-                                "Unauthorized Root",
+                                "Unrelated Designated OCSP Responder",
                                 nameof(RevokeEndEntity_IssuerUnrelatedOcsp),
                                 pkiOptions,
                                 true
                             ),
-                            tmpRoot,
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pkcs1
+                            rsa
                         );
 
-                        rootReq.CertificateExtensions.Add(
-                            new X509BasicConstraintsExtension(true, false, 0, true)
-                        );
-                        rootReq.CertificateExtensions.Add(
-                            new X509SubjectKeyIdentifierExtension(rootReq.PublicKey, false)
-                        );
-                        rootReq.CertificateExtensions.Add(
-                            new X509KeyUsageExtension(
-                                X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
-                                false
-                            )
-                        );
-
-                        using (
-                            CertificateAuthority unrelated = new CertificateAuthority(
-                                rootReq.CreateSelfSigned(now.AddMinutes(-5), now.AddMonths(1)),
-                                aiaHttpUrl: null,
-                                cdpUrl: null,
-                                ocspUrl: null
-                            )
-                        )
+                        using (designatedSigner)
                         {
-                            X509Certificate2 designatedSigner = unrelated.CreateOcspSigner(
-                                BuildSubject(
-                                    "Unrelated Designated OCSP Responder",
-                                    nameof(RevokeEndEntity_IssuerUnrelatedOcsp),
-                                    pkiOptions,
-                                    true
-                                ),
-                                rsa
-                            );
-
-                            using (designatedSigner)
-                            {
-                                root.DesignateOcspResponder(
-                                    designatedSigner.CopyWithPrivateKey(rsa)
-                                );
-                            }
+                            root.DesignateOcspResponder(designatedSigner.CopyWithPrivateKey(rsa));
                         }
                     }
-
-                    using (X509Certificate2 issuerPub = intermediate.CloneIssuerCert())
-                    {
-                        root.Revoke(issuerPub, now);
-                    }
-
-                    X509Chain chain = holder.Chain;
-                    chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
-
-                    bool chainBuilt = chain.Build(endEntity);
-
-                    AssertChainStatus(
-                        chain,
-                        rootStatus: X509ChainStatusFlags.NoError,
-                        issrStatus: ThisOsRevocationStatusUnknown,
-                        leafStatus: ThisOsNoErrorWithPreviousRevocationError
-                    );
-
-                    Assert.False(chainBuilt, "Chain built with ExcludeRoot.");
-                    holder.DisposeChainElements();
-
-                    chain.ChainPolicy.RevocationFlag = X509RevocationFlag.EndCertificateOnly;
-
-                    chainBuilt = chain.Build(endEntity);
-
-                    AssertChainStatus(
-                        chain,
-                        rootStatus: X509ChainStatusFlags.NoError,
-                        issrStatus: X509ChainStatusFlags.NoError,
-                        leafStatus: X509ChainStatusFlags.NoError
-                    );
-
-                    Assert.True(chainBuilt, "Chain built with EndCertificateOnly");
                 }
-            );
+
+                using (X509Certificate2 issuerPub = intermediate.CloneIssuerCert())
+                {
+                    root.Revoke(issuerPub, now);
+                }
+
+                X509Chain chain = holder.Chain;
+                chain.ChainPolicy.VerificationTime = now.AddSeconds(1).UtcDateTime;
+
+                bool chainBuilt = chain.Build(endEntity);
+
+                AssertChainStatus(
+                    chain,
+                    rootStatus: X509ChainStatusFlags.NoError,
+                    issrStatus: ThisOsRevocationStatusUnknown,
+                    leafStatus: ThisOsNoErrorWithPreviousRevocationError
+                );
+
+                Assert.False(chainBuilt, "Chain built with ExcludeRoot.");
+                holder.DisposeChainElements();
+
+                chain.ChainPolicy.RevocationFlag = X509RevocationFlag.EndCertificateOnly;
+
+                chainBuilt = chain.Build(endEntity);
+
+                AssertChainStatus(
+                    chain,
+                    rootStatus: X509ChainStatusFlags.NoError,
+                    issrStatus: X509ChainStatusFlags.NoError,
+                    leafStatus: X509ChainStatusFlags.NoError
+                );
+
+                Assert.True(chainBuilt, "Chain built with EndCertificateOnly");
+            });
         }
 
         public static IEnumerable<object[]> PolicyErrorsNotTimeValidData
@@ -999,15 +964,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [MemberData(nameof(AllViableRevocation))]
         public static void RevokeEndEntityWithInvalidRevocationSignature(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
-                {
-                    intermediate.CorruptRevocationSignature = true;
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                intermediate.CorruptRevocationSignature = true;
 
-                    RevokeEndEntityWithInvalidRevocation(holder, intermediate, endEntity);
-                }
-            );
+                RevokeEndEntityWithInvalidRevocation(holder, intermediate, endEntity);
+            });
         }
 
         [Theory]
@@ -1015,30 +977,24 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]
         public static void RevokeIntermediateWithInvalidRevocationSignature(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
-                {
-                    root.CorruptRevocationSignature = true;
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                root.CorruptRevocationSignature = true;
 
-                    RevokeIntermediateWithInvalidRevocation(holder, root, intermediate, endEntity);
-                }
-            );
+                RevokeIntermediateWithInvalidRevocation(holder, root, intermediate, endEntity);
+            });
         }
 
         [Theory]
         [MemberData(nameof(AllViableRevocation))]
         public static void RevokeEndEntityWithInvalidRevocationName(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
-                {
-                    intermediate.CorruptRevocationIssuerName = true;
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                intermediate.CorruptRevocationIssuerName = true;
 
-                    RevokeEndEntityWithInvalidRevocation(holder, intermediate, endEntity);
-                }
-            );
+                RevokeEndEntityWithInvalidRevocation(holder, intermediate, endEntity);
+            });
         }
 
         [Theory]
@@ -1046,56 +1002,49 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]
         public static void RevokeIntermediateWithInvalidRevocationName(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
-                {
-                    root.CorruptRevocationIssuerName = true;
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                root.CorruptRevocationIssuerName = true;
 
-                    RevokeIntermediateWithInvalidRevocation(holder, root, intermediate, endEntity);
-                }
-            );
+                RevokeIntermediateWithInvalidRevocation(holder, root, intermediate, endEntity);
+            });
         }
 
         [Theory]
         [MemberData(nameof(AllViableRevocation))]
         public static void RevokeEndEntityWithExpiredRevocation(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                DateTime revocationTime = endEntity.NotBefore;
+                if (PlatformDetection.IsAndroid)
                 {
-                    DateTime revocationTime = endEntity.NotBefore;
-                    if (PlatformDetection.IsAndroid)
-                    {
-                        // Android seems to use different times (+/- some buffer) to determine whether or not
-                        // to use the revocation data it fetches.
-                        //   CRL  : verification time
-                        //   OCSP : current time
-                        // This test dynamically build the certs such that the current time falls within their
-                        // period of validity (with more than a one second range), so we should be able to use
-                        // the current time as revocation time and one second past that as verification time.
-                        revocationTime = DateTime.UtcNow;
-                        Assert.True(
-                            revocationTime >= endEntity.NotBefore
-                                && revocationTime < endEntity.NotAfter
-                        );
-                    }
-
-                    holder.Chain.ChainPolicy.VerificationTime = revocationTime.AddSeconds(1);
-
-                    intermediate.RevocationExpiration = revocationTime;
-                    intermediate.Revoke(endEntity, revocationTime);
-
-                    SimpleRevocationBody(
-                        holder,
-                        endEntity,
-                        rootRevoked: false,
-                        issrRevoked: false,
-                        leafRevoked: true
+                    // Android seems to use different times (+/- some buffer) to determine whether or not
+                    // to use the revocation data it fetches.
+                    //   CRL  : verification time
+                    //   OCSP : current time
+                    // This test dynamically build the certs such that the current time falls within their
+                    // period of validity (with more than a one second range), so we should be able to use
+                    // the current time as revocation time and one second past that as verification time.
+                    revocationTime = DateTime.UtcNow;
+                    Assert.True(
+                        revocationTime >= endEntity.NotBefore && revocationTime < endEntity.NotAfter
                     );
                 }
-            );
+
+                holder.Chain.ChainPolicy.VerificationTime = revocationTime.AddSeconds(1);
+
+                intermediate.RevocationExpiration = revocationTime;
+                intermediate.Revoke(endEntity, revocationTime);
+
+                SimpleRevocationBody(
+                    holder,
+                    endEntity,
+                    rootRevoked: false,
+                    issrRevoked: false,
+                    leafRevoked: true
+                );
+            });
         }
 
         [Theory]
@@ -1103,45 +1052,41 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31249", PlatformSupport.AppleCrypto)]
         public static void RevokeIntermediateWithExpiredRevocation(PkiOptions pkiOptions)
         {
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                DateTime revocationTime = endEntity.NotBefore;
+                if (PlatformDetection.IsAndroid)
                 {
-                    DateTime revocationTime = endEntity.NotBefore;
-                    if (PlatformDetection.IsAndroid)
-                    {
-                        // Android seems to use different times (+/- some buffer) to determine whether or not
-                        // to use the revocation data it fetches.
-                        //   CRL  : verification time
-                        //   OCSP : current time
-                        // This test dynamically build the certs such that the current time falls within their
-                        // period of validity (with more than a one second range), so we should be able to use
-                        // the current time as revocation time and one second past that as verification time.
-                        // This should allow the fetched data from both CRL and OCSP to be considered relevant.
-                        revocationTime = DateTime.UtcNow;
-                        Assert.True(
-                            revocationTime >= endEntity.NotBefore
-                                && revocationTime < endEntity.NotAfter
-                        );
-                    }
-
-                    holder.Chain.ChainPolicy.VerificationTime = revocationTime.AddSeconds(1);
-
-                    using (X509Certificate2 intermediatePub = intermediate.CloneIssuerCert())
-                    {
-                        root.RevocationExpiration = revocationTime;
-                        root.Revoke(intermediatePub, revocationTime);
-                    }
-
-                    SimpleRevocationBody(
-                        holder,
-                        endEntity,
-                        rootRevoked: false,
-                        issrRevoked: true,
-                        leafRevoked: false
+                    // Android seems to use different times (+/- some buffer) to determine whether or not
+                    // to use the revocation data it fetches.
+                    //   CRL  : verification time
+                    //   OCSP : current time
+                    // This test dynamically build the certs such that the current time falls within their
+                    // period of validity (with more than a one second range), so we should be able to use
+                    // the current time as revocation time and one second past that as verification time.
+                    // This should allow the fetched data from both CRL and OCSP to be considered relevant.
+                    revocationTime = DateTime.UtcNow;
+                    Assert.True(
+                        revocationTime >= endEntity.NotBefore && revocationTime < endEntity.NotAfter
                     );
                 }
-            );
+
+                holder.Chain.ChainPolicy.VerificationTime = revocationTime.AddSeconds(1);
+
+                using (X509Certificate2 intermediatePub = intermediate.CloneIssuerCert())
+                {
+                    root.RevocationExpiration = revocationTime;
+                    root.Revoke(intermediatePub, revocationTime);
+                }
+
+                SimpleRevocationBody(
+                    holder,
+                    endEntity,
+                    rootRevoked: false,
+                    issrRevoked: true,
+                    leafRevoked: false
+                );
+            });
         }
 
         [Theory]
@@ -1151,26 +1096,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             bool usingCrl =
                 pkiOptions.HasFlag(PkiOptions.IssuerRevocationViaCrl)
                 || pkiOptions.HasFlag(PkiOptions.EndEntityRevocationViaCrl);
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                intermediate.RevocationExpiration = endEntity.NotBefore;
+                if (PlatformDetection.IsAndroid && usingCrl)
                 {
-                    intermediate.RevocationExpiration = endEntity.NotBefore;
-                    if (PlatformDetection.IsAndroid && usingCrl)
-                    {
-                        // Android seems to use different times (+/- some buffer) to determine whether or not
-                        // to use the revocation data it fetches.
-                        //   CRL  : verification time
-                        //   OCSP : current time
-                        // If using CRL, set the verification time to the current time. This should result in
-                        // the fetched CRL for checking the issuer being considered relevant and that for the
-                        // end entity considered irrelevant.
-                        holder.Chain.ChainPolicy.VerificationTime = DateTime.UtcNow;
-                    }
-
-                    RunWithInconclusiveEndEntityRevocation(holder, endEntity);
+                    // Android seems to use different times (+/- some buffer) to determine whether or not
+                    // to use the revocation data it fetches.
+                    //   CRL  : verification time
+                    //   OCSP : current time
+                    // If using CRL, set the verification time to the current time. This should result in
+                    // the fetched CRL for checking the issuer being considered relevant and that for the
+                    // end entity considered irrelevant.
+                    holder.Chain.ChainPolicy.VerificationTime = DateTime.UtcNow;
                 }
-            );
+
+                RunWithInconclusiveEndEntityRevocation(holder, endEntity);
+            });
         }
 
         [Theory]
@@ -1181,26 +1123,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             bool usingCrl =
                 pkiOptions.HasFlag(PkiOptions.IssuerRevocationViaCrl)
                 || pkiOptions.HasFlag(PkiOptions.EndEntityRevocationViaCrl);
-            SimpleTest(
-                pkiOptions,
-                (root, intermediate, endEntity, holder, responder) =>
+            SimpleTest(pkiOptions, (root, intermediate, endEntity, holder, responder) =>
+            {
+                root.RevocationExpiration = endEntity.NotBefore;
+                if (PlatformDetection.IsAndroid && usingCrl)
                 {
-                    root.RevocationExpiration = endEntity.NotBefore;
-                    if (PlatformDetection.IsAndroid && usingCrl)
-                    {
-                        // Android seems to use different times (+/- some buffer) to determine whether or not
-                        // to use the revocation data it fetches.
-                        //   CRL  : verification time
-                        //   OCSP : current time
-                        // If using CRL, set the verification time to the current time. This should result in
-                        // the fetched CRL for checking the issuer being considered irrelevant and that for the
-                        // end entity considered relevant.
-                        holder.Chain.ChainPolicy.VerificationTime = DateTime.UtcNow;
-                    }
-
-                    RunWithInconclusiveIntermediateRevocation(holder, endEntity);
+                    // Android seems to use different times (+/- some buffer) to determine whether or not
+                    // to use the revocation data it fetches.
+                    //   CRL  : verification time
+                    //   OCSP : current time
+                    // If using CRL, set the verification time to the current time. This should result in
+                    // the fetched CRL for checking the issuer being considered irrelevant and that for the
+                    // end entity considered relevant.
+                    holder.Chain.ChainPolicy.VerificationTime = DateTime.UtcNow;
                 }
-            );
+
+                RunWithInconclusiveIntermediateRevocation(holder, endEntity);
+            });
         }
 
         [Fact]

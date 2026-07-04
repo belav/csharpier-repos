@@ -113,13 +113,11 @@ namespace System.Reflection.Emit.Tests
                 new Type[0]
             );
             ILGenerator ilGenerator = method.GetILGenerator();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "localType",
-                () => ilGenerator.DeclareLocal(null)
+            AssertExtensions.Throws<ArgumentNullException>("localType", () =>
+                ilGenerator.DeclareLocal(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "localType",
-                () => ilGenerator.DeclareLocal(null, false)
+            AssertExtensions.Throws<ArgumentNullException>("localType", () =>
+                ilGenerator.DeclareLocal(null, false)
             );
         }
 

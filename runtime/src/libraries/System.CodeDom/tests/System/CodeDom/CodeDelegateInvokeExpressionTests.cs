@@ -58,9 +58,8 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullParameters_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeDelegateInvokeExpression(new CodePrimitiveExpression("Hello"), null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeDelegateInvokeExpression(new CodePrimitiveExpression("Hello"), null)
             );
         }
 
@@ -68,13 +67,8 @@ namespace System.CodeDom.Tests
         public void Ctor_NullObjectInParameters_ThrowsArgumentNullException()
         {
             CodeExpression[] parameters = new CodeExpression[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    new CodeDelegateInvokeExpression(
-                        new CodePrimitiveExpression("Hello"),
-                        parameters
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeDelegateInvokeExpression(new CodePrimitiveExpression("Hello"), parameters)
             );
         }
 

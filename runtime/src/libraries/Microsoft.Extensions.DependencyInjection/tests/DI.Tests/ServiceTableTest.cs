@@ -24,9 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             };
 
             // Act and Assert
-            AssertExtensions.Throws<ArgumentException>(
-                "descriptors",
-                () => new CallSiteFactory(serviceDescriptors)
+            AssertExtensions.Throws<ArgumentException>("descriptors", () =>
+                new CallSiteFactory(serviceDescriptors)
             );
         }
 
@@ -44,9 +43,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             };
 
             // Act and Assert
-            AssertExtensions.Throws<ArgumentException>(
-                "descriptors",
-                () => new CallSiteFactory(serviceDescriptors)
+            AssertExtensions.Throws<ArgumentException>("descriptors", () =>
+                new CallSiteFactory(serviceDescriptors)
             );
         }
 
@@ -64,9 +62,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             };
 
             // Act and Assert
-            AssertExtensions.Throws<ArgumentException>(
-                "descriptors",
-                () => new CallSiteFactory(serviceDescriptors)
+            AssertExtensions.Throws<ArgumentException>("descriptors", () =>
+                new CallSiteFactory(serviceDescriptors)
             );
         }
     }

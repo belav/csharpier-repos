@@ -69,9 +69,8 @@ namespace System.Reflection.Emit.Tests
         public void SetParent_InterfaceType_ThrowsArgumentException(TypeAttributes attributes)
         {
             TypeBuilder type = Helpers.DynamicType(attributes);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => type.SetParent(typeof(EmptyNonGenericInterface1))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                type.SetParent(typeof(EmptyNonGenericInterface1))
             );
         }
 

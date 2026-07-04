@@ -563,9 +563,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             await Assert.ThrowsAsync<InvalidProgramException>(() => tb2.Completion);
             await Assert.ThrowsAsync<InvalidTimeZoneException>(() => tb3.Completion);
 
-            Assert.All(
-                new[] { tb1, tb2, tb3 },
-                tb => Assert.True(tb.InputCount == 0 && tb.OutputCount == 0)
+            Assert.All(new[] { tb1, tb2, tb3 }, tb =>
+                Assert.True(tb.InputCount == 0 && tb.OutputCount == 0)
             );
         }
 

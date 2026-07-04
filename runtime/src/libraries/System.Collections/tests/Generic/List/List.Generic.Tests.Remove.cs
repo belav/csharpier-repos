@@ -65,9 +65,8 @@ namespace System.Collections.Tests
         [Fact]
         public void RemoveAll_NullMatchPredicate()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "match",
-                () => new List<T>().RemoveAll(null)
+            AssertExtensions.Throws<ArgumentNullException>("match", () =>
+                new List<T>().RemoveAll(null)
             );
         }
 
@@ -128,17 +127,13 @@ namespace System.Collections.Tests
                 Tuple.Create(3, listLength - 2),
             };
 
-            Assert.All(
-                InvalidParameters,
-                invalidSet =>
-                {
-                    if (invalidSet.Item1 >= 0 && invalidSet.Item2 >= 0)
-                        AssertExtensions.Throws<ArgumentException>(
-                            null,
-                            () => list.RemoveRange(invalidSet.Item1, invalidSet.Item2)
-                        );
-                }
-            );
+            Assert.All(InvalidParameters, invalidSet =>
+            {
+                if (invalidSet.Item1 >= 0 && invalidSet.Item2 >= 0)
+                    AssertExtensions.Throws<ArgumentException>(null, () =>
+                        list.RemoveRange(invalidSet.Item1, invalidSet.Item2)
+                    );
+            });
         }
 
         [Theory]
@@ -159,15 +154,12 @@ namespace System.Collections.Tests
                 Tuple.Create(2, -1),
             };
 
-            Assert.All(
-                InvalidParameters,
-                invalidSet =>
-                {
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        list.RemoveRange(invalidSet.Item1, invalidSet.Item2)
-                    );
-                }
-            );
+            Assert.All(InvalidParameters, invalidSet =>
+            {
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.RemoveRange(invalidSet.Item1, invalidSet.Item2)
+                );
+            });
         }
 
         #endregion

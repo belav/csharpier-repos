@@ -71,41 +71,35 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_NullAsContractNameArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "contractName",
-                () =>
-                {
-                    new ContractBasedImportDefinition(
-                        (string)null,
-                        (string)null,
-                        Enumerable.Empty<KeyValuePair<string, Type>>(),
-                        ImportCardinality.ExactlyOne,
-                        false,
-                        false,
-                        CreationPolicy.Any
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>("contractName", () =>
+            {
+                new ContractBasedImportDefinition(
+                    (string)null,
+                    (string)null,
+                    Enumerable.Empty<KeyValuePair<string, Type>>(),
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false,
+                    CreationPolicy.Any
+                );
+            });
         }
 
         [Fact]
         public void Constructor2_EmptyStringAsContractNameArgument_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "contractName",
-                () =>
-                {
-                    new ContractBasedImportDefinition(
-                        "",
-                        (string)null,
-                        Enumerable.Empty<KeyValuePair<string, Type>>(),
-                        ImportCardinality.ExactlyOne,
-                        false,
-                        false,
-                        CreationPolicy.Any
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>("contractName", () =>
+            {
+                new ContractBasedImportDefinition(
+                    "",
+                    (string)null,
+                    Enumerable.Empty<KeyValuePair<string, Type>>(),
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false,
+                    CreationPolicy.Any
+                );
+            });
         }
 
         [Fact]
@@ -199,21 +193,18 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                Assert.Throws<ArgumentException>(
-                    "cardinality",
-                    () =>
-                    {
-                        new ContractBasedImportDefinition(
-                            "ContractName",
-                            (string)null,
-                            Enumerable.Empty<KeyValuePair<string, Type>>(),
-                            e,
-                            false,
-                            false,
-                            CreationPolicy.Any
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentException>("cardinality", () =>
+                {
+                    new ContractBasedImportDefinition(
+                        "ContractName",
+                        (string)null,
+                        Enumerable.Empty<KeyValuePair<string, Type>>(),
+                        e,
+                        false,
+                        false,
+                        CreationPolicy.Any
+                    );
+                });
             }
         }
 

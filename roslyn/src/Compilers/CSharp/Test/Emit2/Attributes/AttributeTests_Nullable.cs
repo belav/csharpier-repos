@@ -173,37 +173,32 @@ public class C0 : I1<string>
                 )
             );
 
-            CompileAndVerify(
-                lib2_comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "C0");
-                    var interfaceHandles = typeDef.GetInterfaceImplementations();
+            CompileAndVerify(lib2_comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "C0");
+                var interfaceHandles = typeDef.GetInterfaceImplementations();
 
-                    var interfaceImpl1 = reader.GetInterfaceImplementation(
-                        interfaceHandles.First()
-                    );
-                    Assert.Equal(
-                        "TypeSpecification:I1`1{String}",
-                        reader.Dump(interfaceImpl1.Interface)
-                    );
-                    AssertAttributes(reader, interfaceImpl1.GetCustomAttributes());
+                var interfaceImpl1 = reader.GetInterfaceImplementation(interfaceHandles.First());
+                Assert.Equal(
+                    "TypeSpecification:I1`1{String}",
+                    reader.Dump(interfaceImpl1.Interface)
+                );
+                AssertAttributes(reader, interfaceImpl1.GetCustomAttributes());
 
-                    var interfaceImpl2 = reader.GetInterfaceImplementation(interfaceHandles.Last());
-                    Assert.Equal(
-                        "TypeSpecification:I2`2{String, Object}",
-                        reader.Dump(interfaceImpl2.Interface)
-                    );
-                    AssertAttributes(
-                        reader,
-                        interfaceImpl2.GetCustomAttributes(),
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                    );
+                var interfaceImpl2 = reader.GetInterfaceImplementation(interfaceHandles.Last());
+                Assert.Equal(
+                    "TypeSpecification:I2`2{String, Object}",
+                    reader.Dump(interfaceImpl2.Interface)
+                );
+                AssertAttributes(
+                    reader,
+                    interfaceImpl2.GetCustomAttributes(),
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                );
 
-                    assertType(reader, exists: true, "NullableAttribute");
-                }
-            );
+                assertType(reader, exists: true, "NullableAttribute");
+            });
 
             var lib3_source =
                 @"
@@ -233,18 +228,15 @@ public class C1 : C0
                 )
             );
 
-            CompileAndVerify(
-                lib3_comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "C1");
-                    var interfaceHandles = typeDef.GetInterfaceImplementations();
-                    Assert.True(interfaceHandles.IsEmpty());
+            CompileAndVerify(lib3_comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "C1");
+                var interfaceHandles = typeDef.GetInterfaceImplementations();
+                Assert.True(interfaceHandles.IsEmpty());
 
-                    assertType(reader, exists: false, "NullableAttribute");
-                }
-            );
+                assertType(reader, exists: false, "NullableAttribute");
+            });
 
             void assertType(MetadataReader reader, bool exists, string name)
             {
@@ -682,10 +674,8 @@ class A
                 MetadataImportOptions.All
             );
             var comp = CreateCompilation(sourceA, assemblyName: "A", options: options);
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    CheckAttribute(m.GlobalNamespace.GetMember("A.F").GetAttributes().Single(), "A")
+            CompileAndVerify(comp, symbolValidator: m =>
+                CheckAttribute(m.GlobalNamespace.GetMember("A.F").GetAttributes().Single(), "A")
             );
             var refA = comp.EmitToImageReference();
 
@@ -701,10 +691,8 @@ class B
                 assemblyName: "B",
                 options: options
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    CheckAttribute(m.GlobalNamespace.GetMember("B.G").GetAttributes().Single(), "B")
+            CompileAndVerify(comp, symbolValidator: m =>
+                CheckAttribute(m.GlobalNamespace.GetMember("B.G").GetAttributes().Single(), "B")
             );
         }
 
@@ -736,10 +724,8 @@ class A
                 assemblyName: "A",
                 options: options
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    CheckAttribute(m.GlobalNamespace.GetMember("A.F").GetAttributes().Single(), "A")
+            CompileAndVerify(comp, symbolValidator: m =>
+                CheckAttribute(m.GlobalNamespace.GetMember("A.F").GetAttributes().Single(), "A")
             );
             var refA = comp.EmitToImageReference();
 
@@ -755,10 +741,8 @@ class B
                 assemblyName: "B",
                 options: options
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    CheckAttribute(m.GlobalNamespace.GetMember("B.G").GetAttributes().Single(), "A")
+            CompileAndVerify(comp, symbolValidator: m =>
+                CheckAttribute(m.GlobalNamespace.GetMember("B.G").GetAttributes().Single(), "A")
             );
         }
 
@@ -1080,42 +1064,36 @@ class Program
 }";
             // C# 7.0: No NullableAttribute.
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    var type = assembly.GetTypeByMetadataName("C");
-                    var field = (FieldSymbol)type.GetMembers("F").Single();
-                    AssertNoNullableAttribute(field.GetAttributes());
-                    AssertNoNullableAttribute(module.GetAttributes());
-                    AssertAttributes(
-                        assembly.GetAttributes(),
-                        "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
-                        "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
-                        "System.Diagnostics.DebuggableAttribute"
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                var type = assembly.GetTypeByMetadataName("C");
+                var field = (FieldSymbol)type.GetMembers("F").Single();
+                AssertNoNullableAttribute(field.GetAttributes());
+                AssertNoNullableAttribute(module.GetAttributes());
+                AssertAttributes(
+                    assembly.GetAttributes(),
+                    "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
+                    "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
+                    "System.Diagnostics.DebuggableAttribute"
+                );
+            });
             // C# 8.0: NullableAttribute not included if no ? annotation.
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular8);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    var type = assembly.GetTypeByMetadataName("C");
-                    var field = (FieldSymbol)type.GetMembers("F").Single();
-                    AssertNoNullableAttribute(field.GetAttributes());
-                    AssertNoNullableAttribute(module.GetAttributes());
-                    AssertAttributes(
-                        assembly.GetAttributes(),
-                        "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
-                        "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
-                        "System.Diagnostics.DebuggableAttribute"
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                var type = assembly.GetTypeByMetadataName("C");
+                var field = (FieldSymbol)type.GetMembers("F").Single();
+                AssertNoNullableAttribute(field.GetAttributes());
+                AssertNoNullableAttribute(module.GetAttributes());
+                AssertAttributes(
+                    assembly.GetAttributes(),
+                    "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
+                    "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
+                    "System.Diagnostics.DebuggableAttribute"
+                );
+            });
         }
 
         [Fact]
@@ -1135,18 +1113,15 @@ class C
     }
 }";
             var comp = CreateCompilation(new[] { source }, parseOptions: TestOptions.Regular8);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    Assert.NotNull(
-                        assembly.GetTypeByMetadataName(
-                            "System.Runtime.CompilerServices.NullableAttribute"
-                        )
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                Assert.NotNull(
+                    assembly.GetTypeByMetadataName(
+                        "System.Runtime.CompilerServices.NullableAttribute"
+                    )
+                );
+            });
         }
 
         [Fact]
@@ -1166,18 +1141,15 @@ class C
     }
 }";
             var comp = CreateCompilation(new[] { source }, parseOptions: TestOptions.Regular8);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    Assert.NotNull(
-                        assembly.GetTypeByMetadataName(
-                            "System.Runtime.CompilerServices.NullableAttribute"
-                        )
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                Assert.NotNull(
+                    assembly.GetTypeByMetadataName(
+                        "System.Runtime.CompilerServices.NullableAttribute"
+                    )
+                );
+            });
         }
 
         [Fact]
@@ -1200,18 +1172,15 @@ class C
                 options: WithNullable(NullableContextOptions.Enable),
                 parseOptions: TestOptions.Regular8
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    Assert.NotNull(
-                        assembly.GetTypeByMetadataName(
-                            "System.Runtime.CompilerServices.NullableAttribute"
-                        )
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                Assert.NotNull(
+                    assembly.GetTypeByMetadataName(
+                        "System.Runtime.CompilerServices.NullableAttribute"
+                    )
+                );
+            });
         }
 
         [Fact]
@@ -1234,18 +1203,15 @@ class C
                 options: WithNullable(NullableContextOptions.Annotations),
                 parseOptions: TestOptions.Regular8
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    Assert.NotNull(
-                        assembly.GetTypeByMetadataName(
-                            "System.Runtime.CompilerServices.NullableAttribute"
-                        )
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                Assert.NotNull(
+                    assembly.GetTypeByMetadataName(
+                        "System.Runtime.CompilerServices.NullableAttribute"
+                    )
+                );
+            });
         }
 
         [Fact]
@@ -1265,18 +1231,15 @@ class C
     }
 }";
             var comp = CreateCompilation(new[] { source }, parseOptions: TestOptions.Regular8);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    Assert.NotNull(
-                        assembly.GetTypeByMetadataName(
-                            "System.Runtime.CompilerServices.NullableAttribute"
-                        )
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                Assert.NotNull(
+                    assembly.GetTypeByMetadataName(
+                        "System.Runtime.CompilerServices.NullableAttribute"
+                    )
+                );
+            });
         }
 
         [Fact]
@@ -1296,18 +1259,15 @@ class C
     }
 }";
             var comp = CreateCompilation(new[] { source }, parseOptions: TestOptions.Regular8);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    Assert.NotNull(
-                        assembly.GetTypeByMetadataName(
-                            "System.Runtime.CompilerServices.NullableAttribute"
-                        )
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                Assert.NotNull(
+                    assembly.GetTypeByMetadataName(
+                        "System.Runtime.CompilerServices.NullableAttribute"
+                    )
+                );
+            });
         }
 
         [Fact]
@@ -1319,23 +1279,20 @@ class C
     public object? F = new object();
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular8);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    var type = assembly.GetTypeByMetadataName("C");
-                    var field = (FieldSymbol)type.GetMembers("F").Single();
-                    AssertNullableAttribute(field.GetAttributes());
-                    AssertNoNullableAttribute(module.GetAttributes());
-                    AssertAttributes(
-                        assembly.GetAttributes(),
-                        "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
-                        "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
-                        "System.Diagnostics.DebuggableAttribute"
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                var type = assembly.GetTypeByMetadataName("C");
+                var field = (FieldSymbol)type.GetMembers("F").Single();
+                AssertNullableAttribute(field.GetAttributes());
+                AssertNoNullableAttribute(module.GetAttributes());
+                AssertAttributes(
+                    assembly.GetAttributes(),
+                    "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
+                    "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
+                    "System.Diagnostics.DebuggableAttribute"
+                );
+            });
         }
 
         [Fact]
@@ -1369,14 +1326,10 @@ class C
                 parseOptions: TestOptions.Regular8,
                 options: TestOptions.ReleaseModule
             );
-            CompileAndVerify(
-                comp,
-                verify: Verification.Skipped,
-                symbolValidator: module =>
-                {
-                    AssertAttributes(module.GetAttributes());
-                }
-            );
+            CompileAndVerify(comp, verify: Verification.Skipped, symbolValidator: module =>
+            {
+                AssertAttributes(module.GetAttributes());
+            });
         }
 
         [Fact]
@@ -1517,31 +1470,28 @@ public class B : I<object?>
                 options: WithNullableEnable(),
                 parseOptions: TestOptions.Regular8
             );
-            CompileAndVerify(
-                comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "A");
-                    var interfaceImpl = reader.GetInterfaceImplementation(
-                        typeDef.GetInterfaceImplementations().Single()
-                    );
-                    AssertAttributes(
-                        reader,
-                        interfaceImpl.GetCustomAttributes(),
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                    );
-                    typeDef = GetTypeDefinitionByName(reader, "B");
-                    interfaceImpl = reader.GetInterfaceImplementation(
-                        typeDef.GetInterfaceImplementations().Single()
-                    );
-                    AssertAttributes(
-                        reader,
-                        interfaceImpl.GetCustomAttributes(),
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                    );
-                }
-            );
+            CompileAndVerify(comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "A");
+                var interfaceImpl = reader.GetInterfaceImplementation(
+                    typeDef.GetInterfaceImplementations().Single()
+                );
+                AssertAttributes(
+                    reader,
+                    interfaceImpl.GetCustomAttributes(),
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                );
+                typeDef = GetTypeDefinitionByName(reader, "B");
+                interfaceImpl = reader.GetInterfaceImplementation(
+                    typeDef.GetInterfaceImplementations().Single()
+                );
+                AssertAttributes(
+                    reader,
+                    interfaceImpl.GetCustomAttributes(),
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                );
+            });
             var source2 =
                 @"class C
 {
@@ -1593,32 +1543,29 @@ public class B : I<(object X, object? Y)>
 {
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular8);
-            CompileAndVerify(
-                comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "A");
-                    var interfaceImpl = reader.GetInterfaceImplementation(
-                        typeDef.GetInterfaceImplementations().Single()
-                    );
-                    AssertAttributes(
-                        reader,
-                        interfaceImpl.GetCustomAttributes(),
-                        "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])"
-                    );
-                    typeDef = GetTypeDefinitionByName(reader, "B");
-                    interfaceImpl = reader.GetInterfaceImplementation(
-                        typeDef.GetInterfaceImplementations().Single()
-                    );
-                    AssertAttributes(
-                        reader,
-                        interfaceImpl.GetCustomAttributes(),
-                        "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])",
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                    );
-                }
-            );
+            CompileAndVerify(comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "A");
+                var interfaceImpl = reader.GetInterfaceImplementation(
+                    typeDef.GetInterfaceImplementations().Single()
+                );
+                AssertAttributes(
+                    reader,
+                    interfaceImpl.GetCustomAttributes(),
+                    "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])"
+                );
+                typeDef = GetTypeDefinitionByName(reader, "B");
+                interfaceImpl = reader.GetInterfaceImplementation(
+                    typeDef.GetInterfaceImplementations().Single()
+                );
+                AssertAttributes(
+                    reader,
+                    interfaceImpl.GetCustomAttributes(),
+                    "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])",
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                );
+            });
 
             var source2 =
                 @"class C
@@ -1790,35 +1737,30 @@ public class D<T> where T : A
                 options: WithNullableEnable(),
                 parseOptions: TestOptions.Regular8
             );
-            CompileAndVerify(
-                comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "C`1");
-                    var typeParameter = reader.GetGenericParameter(
-                        typeDef.GetGenericParameters()[0]
-                    );
-                    var constraint = reader.GetGenericParameterConstraint(
-                        typeParameter.GetConstraints()[0]
-                    );
-                    AssertAttributes(
-                        reader,
-                        constraint.GetCustomAttributes(),
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte)"
-                    );
-                    typeDef = GetTypeDefinitionByName(reader, "D`1");
-                    typeParameter = reader.GetGenericParameter(typeDef.GetGenericParameters()[0]);
-                    constraint = reader.GetGenericParameterConstraint(
-                        typeParameter.GetConstraints()[0]
-                    );
-                    AssertAttributes(
-                        reader,
-                        constraint.GetCustomAttributes(),
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte)"
-                    );
-                }
-            );
+            CompileAndVerify(comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "C`1");
+                var typeParameter = reader.GetGenericParameter(typeDef.GetGenericParameters()[0]);
+                var constraint = reader.GetGenericParameterConstraint(
+                    typeParameter.GetConstraints()[0]
+                );
+                AssertAttributes(
+                    reader,
+                    constraint.GetCustomAttributes(),
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte)"
+                );
+                typeDef = GetTypeDefinitionByName(reader, "D`1");
+                typeParameter = reader.GetGenericParameter(typeDef.GetGenericParameters()[0]);
+                constraint = reader.GetGenericParameterConstraint(
+                    typeParameter.GetConstraints()[0]
+                );
+                AssertAttributes(
+                    reader,
+                    constraint.GetCustomAttributes(),
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte)"
+                );
+            });
 
             var source2 =
                 @"class B : A { }
@@ -1901,21 +1843,16 @@ public class C<T> where T : A<object>
 {
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7);
-            CompileAndVerify(
-                comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "C`1");
-                    var typeParameter = reader.GetGenericParameter(
-                        typeDef.GetGenericParameters()[0]
-                    );
-                    var constraint = reader.GetGenericParameterConstraint(
-                        typeParameter.GetConstraints()[0]
-                    );
-                    AssertAttributes(reader, constraint.GetCustomAttributes());
-                }
-            );
+            CompileAndVerify(comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "C`1");
+                var typeParameter = reader.GetGenericParameter(typeDef.GetGenericParameters()[0]);
+                var constraint = reader.GetGenericParameterConstraint(
+                    typeParameter.GetConstraints()[0]
+                );
+                AssertAttributes(reader, constraint.GetCustomAttributes());
+            });
 
             var source2 =
                 @"class B1 : A<object?> { }
@@ -1970,35 +1907,30 @@ public class C<T> where T : A<object>
                 options: WithNullableEnable(),
                 parseOptions: TestOptions.Regular8
             );
-            CompileAndVerify(
-                comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "B`1");
-                    var typeParameter = reader.GetGenericParameter(
-                        typeDef.GetGenericParameters()[0]
-                    );
-                    var constraint = reader.GetGenericParameterConstraint(
-                        typeParameter.GetConstraints()[0]
-                    );
-                    AssertAttributes(
-                        reader,
-                        constraint.GetCustomAttributes(),
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                    );
-                    typeDef = GetTypeDefinitionByName(reader, "C`1");
-                    typeParameter = reader.GetGenericParameter(typeDef.GetGenericParameters()[0]);
-                    constraint = reader.GetGenericParameterConstraint(
-                        typeParameter.GetConstraints()[0]
-                    );
-                    AssertAttributes(
-                        reader,
-                        constraint.GetCustomAttributes(),
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte)"
-                    );
-                }
-            );
+            CompileAndVerify(comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "B`1");
+                var typeParameter = reader.GetGenericParameter(typeDef.GetGenericParameters()[0]);
+                var constraint = reader.GetGenericParameterConstraint(
+                    typeParameter.GetConstraints()[0]
+                );
+                AssertAttributes(
+                    reader,
+                    constraint.GetCustomAttributes(),
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                );
+                typeDef = GetTypeDefinitionByName(reader, "C`1");
+                typeParameter = reader.GetGenericParameter(typeDef.GetGenericParameters()[0]);
+                constraint = reader.GetGenericParameterConstraint(
+                    typeParameter.GetConstraints()[0]
+                );
+                AssertAttributes(
+                    reader,
+                    constraint.GetCustomAttributes(),
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte)"
+                );
+            });
 
             var source2 =
                 @"class Program
@@ -2078,25 +2010,20 @@ public class C<T> where T : A<object>
                 options: WithNullableEnable(),
                 parseOptions: TestOptions.Regular8
             );
-            CompileAndVerify(
-                comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "C`2");
-                    var typeParameter = reader.GetGenericParameter(
-                        typeDef.GetGenericParameters()[1]
-                    );
-                    var constraint = reader.GetGenericParameterConstraint(
-                        typeParameter.GetConstraints()[0]
-                    );
-                    AssertAttributes(
-                        reader,
-                        constraint.GetCustomAttributes(),
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte)"
-                    );
-                }
-            );
+            CompileAndVerify(comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "C`2");
+                var typeParameter = reader.GetGenericParameter(typeDef.GetGenericParameters()[1]);
+                var constraint = reader.GetGenericParameterConstraint(
+                    typeParameter.GetConstraints()[0]
+                );
+                AssertAttributes(
+                    reader,
+                    constraint.GetCustomAttributes(),
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte)"
+                );
+            });
 
             var source2 =
                 @"class Program
@@ -2262,31 +2189,28 @@ public class Program
         System.Object? F22
         C2()
 ";
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    AssertNullableAttributes(module, expected);
-                    verifyTypeParameterConstraint("Program.C0", null);
-                    verifyTypeParameterConstraint("Program.C1", false);
-                    verifyTypeParameterConstraint("Program.C2", true);
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                AssertNullableAttributes(module, expected);
+                verifyTypeParameterConstraint("Program.C0", null);
+                verifyTypeParameterConstraint("Program.C1", false);
+                verifyTypeParameterConstraint("Program.C2", true);
 
-                    void verifyTypeParameterConstraint(
-                        string typeName,
-                        bool? expectedConstraintIsNullable
-                    )
-                    {
-                        var typeParameter = module
-                            .GlobalNamespace.GetMember<NamedTypeSymbol>(typeName)
-                            .TypeParameters.Single();
-                        Assert.True(typeParameter.HasReferenceTypeConstraint);
-                        Assert.Equal(
-                            expectedConstraintIsNullable,
-                            typeParameter.ReferenceTypeConstraintIsNullable
-                        );
-                    }
+                void verifyTypeParameterConstraint(
+                    string typeName,
+                    bool? expectedConstraintIsNullable
+                )
+                {
+                    var typeParameter = module
+                        .GlobalNamespace.GetMember<NamedTypeSymbol>(typeName)
+                        .TypeParameters.Single();
+                    Assert.True(typeParameter.HasReferenceTypeConstraint);
+                    Assert.Equal(
+                        expectedConstraintIsNullable,
+                        typeParameter.ReferenceTypeConstraintIsNullable
+                    );
                 }
-            );
+            });
         }
 
         [Fact]
@@ -2344,31 +2268,28 @@ public class Program
         System.Object! F22
         C2()
 ";
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    AssertNullableAttributes(module, expected);
-                    verifyTypeParameterConstraint("Program.C0", null);
-                    verifyTypeParameterConstraint("Program.C1", false);
-                    verifyTypeParameterConstraint("Program.C2", true);
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                AssertNullableAttributes(module, expected);
+                verifyTypeParameterConstraint("Program.C0", null);
+                verifyTypeParameterConstraint("Program.C1", false);
+                verifyTypeParameterConstraint("Program.C2", true);
 
-                    void verifyTypeParameterConstraint(
-                        string typeName,
-                        bool? expectedConstraintIsNullable
-                    )
-                    {
-                        var typeParameter = module
-                            .GlobalNamespace.GetMember<NamedTypeSymbol>(typeName)
-                            .TypeParameters.Single();
-                        Assert.True(typeParameter.HasReferenceTypeConstraint);
-                        Assert.Equal(
-                            expectedConstraintIsNullable,
-                            typeParameter.ReferenceTypeConstraintIsNullable
-                        );
-                    }
+                void verifyTypeParameterConstraint(
+                    string typeName,
+                    bool? expectedConstraintIsNullable
+                )
+                {
+                    var typeParameter = module
+                        .GlobalNamespace.GetMember<NamedTypeSymbol>(typeName)
+                        .TypeParameters.Single();
+                    Assert.True(typeParameter.HasReferenceTypeConstraint);
+                    Assert.Equal(
+                        expectedConstraintIsNullable,
+                        typeParameter.ReferenceTypeConstraintIsNullable
+                    );
                 }
-            );
+            });
         }
 
         [Fact]
@@ -2411,24 +2332,21 @@ public class C2<T2>
     System.Object? F22
     C2()
 ";
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    AssertNullableAttributes(module, expected);
-                    verifyTypeParameterConstraint("C0");
-                    verifyTypeParameterConstraint("C1");
-                    verifyTypeParameterConstraint("C2");
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                AssertNullableAttributes(module, expected);
+                verifyTypeParameterConstraint("C0");
+                verifyTypeParameterConstraint("C1");
+                verifyTypeParameterConstraint("C2");
 
-                    void verifyTypeParameterConstraint(string typeName)
-                    {
-                        var typeParameter = module
-                            .GlobalNamespace.GetMember<NamedTypeSymbol>(typeName)
-                            .TypeParameters.Single();
-                        Assert.True(typeParameter.HasNotNullConstraint);
-                    }
+                void verifyTypeParameterConstraint(string typeName)
+                {
+                    var typeParameter = module
+                        .GlobalNamespace.GetMember<NamedTypeSymbol>(typeName)
+                        .TypeParameters.Single();
+                    Assert.True(typeParameter.HasNotNullConstraint);
                 }
-            );
+            });
         }
 
         [Fact]
@@ -6403,58 +6321,53 @@ class C
     public static (object? _1, object _2, object? _3, object _4, object? _5, object _6, object? _7, object _8, object? _9) Long;
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular8);
-            CompileAndVerify(
-                comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "A");
-                    var fieldDefs = typeDef
-                        .GetFields()
-                        .Select(f => reader.GetFieldDefinition(f))
-                        .ToArray();
+            CompileAndVerify(comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "A");
+                var fieldDefs = typeDef
+                    .GetFields()
+                    .Select(f => reader.GetFieldDefinition(f))
+                    .ToArray();
 
-                    // Nested tuple
-                    var field = fieldDefs.Single(f =>
-                        reader.StringComparer.Equals(f.Name, "Nested")
-                    );
-                    var customAttributes = field.GetCustomAttributes();
-                    AssertAttributes(
-                        reader,
-                        customAttributes,
-                        "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])",
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                    );
-                    var customAttribute = GetAttributeByConstructorName(
-                        reader,
-                        customAttributes,
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                    );
-                    AssertEx.Equal(
-                        ImmutableArray.Create<byte>(0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2),
-                        reader.ReadByteArray(customAttribute.Value)
-                    );
+                // Nested tuple
+                var field = fieldDefs.Single(f => reader.StringComparer.Equals(f.Name, "Nested"));
+                var customAttributes = field.GetCustomAttributes();
+                AssertAttributes(
+                    reader,
+                    customAttributes,
+                    "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])",
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                );
+                var customAttribute = GetAttributeByConstructorName(
+                    reader,
+                    customAttributes,
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                );
+                AssertEx.Equal(
+                    ImmutableArray.Create<byte>(0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2),
+                    reader.ReadByteArray(customAttribute.Value)
+                );
 
-                    // Long tuple
-                    field = fieldDefs.Single(f => reader.StringComparer.Equals(f.Name, "Long"));
-                    customAttributes = field.GetCustomAttributes();
-                    AssertAttributes(
-                        reader,
-                        customAttributes,
-                        "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])",
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                    );
-                    customAttribute = GetAttributeByConstructorName(
-                        reader,
-                        customAttributes,
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                    );
-                    AssertEx.Equal(
-                        ImmutableArray.Create<byte>(0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 2),
-                        reader.ReadByteArray(customAttribute.Value)
-                    );
-                }
-            );
+                // Long tuple
+                field = fieldDefs.Single(f => reader.StringComparer.Equals(f.Name, "Long"));
+                customAttributes = field.GetCustomAttributes();
+                AssertAttributes(
+                    reader,
+                    customAttributes,
+                    "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])",
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                );
+                customAttribute = GetAttributeByConstructorName(
+                    reader,
+                    customAttributes,
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                );
+                AssertEx.Equal(
+                    ImmutableArray.Create<byte>(0, 2, 0, 2, 0, 2, 0, 2, 0, 0, 2),
+                    reader.ReadByteArray(customAttribute.Value)
+                );
+            });
 
             var source2 =
                 @"class B
@@ -6555,120 +6468,115 @@ public class B<T> :
                 options: WithNullableEnable(),
                 parseOptions: TestOptions.Regular8
             );
-            CompileAndVerify(
-                comp,
-                validator: assembly =>
+            CompileAndVerify(comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "B`1");
+                // Base type
+                checkAttributesNoDynamic(typeDef.GetCustomAttributes(), addOne: 0); // add one for A<T>
+                // Interface implementation
+                var interfaceImpl = reader.GetInterfaceImplementation(
+                    typeDef.GetInterfaceImplementations().Single()
+                );
+                checkAttributesNoDynamic(interfaceImpl.GetCustomAttributes(), addOne: 0); // add one for I<T>
+                // Type parameter constraint type
+                var typeParameter = reader.GetGenericParameter(typeDef.GetGenericParameters()[0]);
+                var constraint = reader.GetGenericParameterConstraint(
+                    typeParameter.GetConstraints()[0]
+                );
+                checkAttributesNoDynamic(constraint.GetCustomAttributes(), addOne: 1); // add one for A<T>
+                // Field type
+                var field = typeDef
+                    .GetFields()
+                    .Select(f => reader.GetFieldDefinition(f))
+                    .Single(f => reader.StringComparer.Equals(f.Name, "Field"));
+                checkAttributes(field.GetCustomAttributes());
+                // Event type
+                var @event = typeDef
+                    .GetEvents()
+                    .Select(e => reader.GetEventDefinition(e))
+                    .Single(e => reader.StringComparer.Equals(e.Name, "Event"));
+                checkAttributes(@event.GetCustomAttributes(), addOne: 1); // add one for EventHandler<T>
+                // Method return type and parameter type
+                var method = typeDef
+                    .GetMethods()
+                    .Select(m => reader.GetMethodDefinition(m))
+                    .Single(m => reader.StringComparer.Equals(m.Name, "Method"));
+                var parameters = method
+                    .GetParameters()
+                    .Select(p => reader.GetParameter(p))
+                    .ToArray();
+                checkAttributes(parameters[0].GetCustomAttributes()); // return type
+                checkAttributes(parameters[1].GetCustomAttributes()); // parameter
+                // Property type
+                var property = typeDef
+                    .GetProperties()
+                    .Select(p => reader.GetPropertyDefinition(p))
+                    .Single(p => reader.StringComparer.Equals(p.Name, "Property"));
+                checkAttributes(property.GetCustomAttributes());
+
+                void checkAttributes(
+                    CustomAttributeHandleCollection customAttributes,
+                    byte? addOne = null
+                )
                 {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "B`1");
-                    // Base type
-                    checkAttributesNoDynamic(typeDef.GetCustomAttributes(), addOne: 0); // add one for A<T>
-                    // Interface implementation
-                    var interfaceImpl = reader.GetInterfaceImplementation(
-                        typeDef.GetInterfaceImplementations().Single()
+                    AssertAttributes(
+                        reader,
+                        customAttributes,
+                        "MemberReference:Void System.Runtime.CompilerServices.DynamicAttribute..ctor(Boolean[])",
+                        "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])",
+                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
                     );
-                    checkAttributesNoDynamic(interfaceImpl.GetCustomAttributes(), addOne: 0); // add one for I<T>
-                    // Type parameter constraint type
-                    var typeParameter = reader.GetGenericParameter(
-                        typeDef.GetGenericParameters()[0]
-                    );
-                    var constraint = reader.GetGenericParameterConstraint(
-                        typeParameter.GetConstraints()[0]
-                    );
-                    checkAttributesNoDynamic(constraint.GetCustomAttributes(), addOne: 1); // add one for A<T>
-                    // Field type
-                    var field = typeDef
-                        .GetFields()
-                        .Select(f => reader.GetFieldDefinition(f))
-                        .Single(f => reader.StringComparer.Equals(f.Name, "Field"));
-                    checkAttributes(field.GetCustomAttributes());
-                    // Event type
-                    var @event = typeDef
-                        .GetEvents()
-                        .Select(e => reader.GetEventDefinition(e))
-                        .Single(e => reader.StringComparer.Equals(e.Name, "Event"));
-                    checkAttributes(@event.GetCustomAttributes(), addOne: 1); // add one for EventHandler<T>
-                    // Method return type and parameter type
-                    var method = typeDef
-                        .GetMethods()
-                        .Select(m => reader.GetMethodDefinition(m))
-                        .Single(m => reader.StringComparer.Equals(m.Name, "Method"));
-                    var parameters = method
-                        .GetParameters()
-                        .Select(p => reader.GetParameter(p))
-                        .ToArray();
-                    checkAttributes(parameters[0].GetCustomAttributes()); // return type
-                    checkAttributes(parameters[1].GetCustomAttributes()); // parameter
-                    // Property type
-                    var property = typeDef
-                        .GetProperties()
-                        .Select(p => reader.GetPropertyDefinition(p))
-                        .Single(p => reader.StringComparer.Equals(p.Name, "Property"));
-                    checkAttributes(property.GetCustomAttributes());
-
-                    void checkAttributes(
-                        CustomAttributeHandleCollection customAttributes,
-                        byte? addOne = null
-                    )
-                    {
-                        AssertAttributes(
-                            reader,
-                            customAttributes,
-                            "MemberReference:Void System.Runtime.CompilerServices.DynamicAttribute..ctor(Boolean[])",
-                            "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])",
-                            "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                        );
-                        checkNullableAttribute(customAttributes, addOne);
-                    }
-
-                    void checkAttributesNoDynamic(
-                        CustomAttributeHandleCollection customAttributes,
-                        byte? addOne = null
-                    )
-                    {
-                        AssertAttributes(
-                            reader,
-                            customAttributes,
-                            "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])",
-                            "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                        );
-                        checkNullableAttribute(customAttributes, addOne);
-                    }
-
-                    void checkNullableAttribute(
-                        CustomAttributeHandleCollection customAttributes,
-                        byte? addOne
-                    )
-                    {
-                        var customAttribute = GetAttributeByConstructorName(
-                            reader,
-                            customAttributes,
-                            "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
-                        );
-                        var expectedBits = ImmutableArray.Create<byte>(
-                            0,
-                            2,
-                            0,
-                            1,
-                            2,
-                            1,
-                            2,
-                            1,
-                            2,
-                            1,
-                            0,
-                            2
-                        );
-                        if (addOne.HasValue)
-                        {
-                            expectedBits = ImmutableArray
-                                .Create(addOne.GetValueOrDefault())
-                                .Concat(expectedBits);
-                        }
-                        AssertEx.Equal(expectedBits, reader.ReadByteArray(customAttribute.Value));
-                    }
+                    checkNullableAttribute(customAttributes, addOne);
                 }
-            );
+
+                void checkAttributesNoDynamic(
+                    CustomAttributeHandleCollection customAttributes,
+                    byte? addOne = null
+                )
+                {
+                    AssertAttributes(
+                        reader,
+                        customAttributes,
+                        "MemberReference:Void System.Runtime.CompilerServices.TupleElementNamesAttribute..ctor(String[])",
+                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                    );
+                    checkNullableAttribute(customAttributes, addOne);
+                }
+
+                void checkNullableAttribute(
+                    CustomAttributeHandleCollection customAttributes,
+                    byte? addOne
+                )
+                {
+                    var customAttribute = GetAttributeByConstructorName(
+                        reader,
+                        customAttributes,
+                        "MethodDefinition:Void System.Runtime.CompilerServices.NullableAttribute..ctor(Byte[])"
+                    );
+                    var expectedBits = ImmutableArray.Create<byte>(
+                        0,
+                        2,
+                        0,
+                        1,
+                        2,
+                        1,
+                        2,
+                        1,
+                        2,
+                        1,
+                        0,
+                        2
+                    );
+                    if (addOne.HasValue)
+                    {
+                        expectedBits = ImmutableArray
+                            .Create(addOne.GetValueOrDefault())
+                            .Concat(expectedBits);
+                    }
+                    AssertEx.Equal(expectedBits, reader.ReadByteArray(customAttribute.Value));
+                }
+            });
 
             var source2 =
                 @"class C
@@ -6748,28 +6656,25 @@ public class Program
                 source,
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NullableAttribute"
-                    );
-                    AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
-                    Assert.False(attributeUsage.Inherited);
-                    Assert.False(attributeUsage.AllowMultiple);
-                    Assert.True(attributeUsage.HasValidAttributeTargets);
-                    var expectedTargets =
-                        AttributeTargets.Class
-                        | AttributeTargets.Event
-                        | AttributeTargets.Field
-                        | AttributeTargets.GenericParameter
-                        | AttributeTargets.Parameter
-                        | AttributeTargets.Property
-                        | AttributeTargets.ReturnValue;
-                    Assert.Equal(expectedTargets, attributeUsage.ValidTargets);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                    "System.Runtime.CompilerServices.NullableAttribute"
+                );
+                AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
+                Assert.False(attributeUsage.Inherited);
+                Assert.False(attributeUsage.AllowMultiple);
+                Assert.True(attributeUsage.HasValidAttributeTargets);
+                var expectedTargets =
+                    AttributeTargets.Class
+                    | AttributeTargets.Event
+                    | AttributeTargets.Field
+                    | AttributeTargets.GenericParameter
+                    | AttributeTargets.Parameter
+                    | AttributeTargets.Property
+                    | AttributeTargets.ReturnValue;
+                Assert.Equal(expectedTargets, attributeUsage.ValidTargets);
+            });
         }
 
         [Fact]
@@ -6781,22 +6686,19 @@ public class Program
     public void F(object? x, object y, object z) { }
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular8);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("C");
-                    var method = (MethodSymbol)type.GetMembers("F").Single();
-                    var attributes = method.Parameters[0].GetAttributes();
-                    AssertNullableAttribute(attributes);
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("C");
+                var method = (MethodSymbol)type.GetMembers("F").Single();
+                var attributes = method.Parameters[0].GetAttributes();
+                AssertNullableAttribute(attributes);
 
-                    var nullable = GetNullableAttribute(attributes);
+                var nullable = GetNullableAttribute(attributes);
 
-                    var field = nullable.AttributeClass.GetField("NullableFlags");
-                    Assert.NotNull(field);
-                    Assert.Equal("System.Byte[]", field.TypeWithAnnotations.ToTestDisplayString());
-                }
-            );
+                var field = nullable.AttributeClass.GetField("NullableFlags");
+                Assert.NotNull(field);
+                Assert.Equal("System.Byte[]", field.TypeWithAnnotations.ToTestDisplayString());
+            });
         }
 
         [Fact]
@@ -6825,21 +6727,17 @@ public class C
                 parseOptions: TestOptions.Regular8,
                 options: TestOptions.DebugExe
             );
-            CompileAndVerify(
-                comp,
-                expectedOutput: "{ 2 }",
-                symbolValidator: module =>
-                {
-                    var expected =
-                        @"C
+            CompileAndVerify(comp, expectedOutput: "{ 2 }", symbolValidator: module =>
+            {
+                var expected =
+                    @"C
     [NullableContext(1)] void F(System.Object? x, System.Object! y, System.Object! z)
         [Nullable(2)] System.Object? x
         System.Object! y
         System.Object! z
 ";
-                    AssertNullableAttributes(module, expected);
-                }
-            );
+                AssertNullableAttributes(module, expected);
+            });
         }
 
         [Fact]
@@ -6868,19 +6766,15 @@ public class C
                 parseOptions: TestOptions.Regular8,
                 options: TestOptions.DebugExe
             );
-            CompileAndVerify(
-                comp,
-                expectedOutput: "{ 1,2,2,1,2 }",
-                symbolValidator: module =>
-                {
-                    var expected =
-                        @"C
+            CompileAndVerify(comp, expectedOutput: "{ 1,2,2,1,2 }", symbolValidator: module =>
+            {
+                var expected =
+                    @"C
     void F(System.Action<System.Object?, System.Action<System.Object!, System.Object?>?>! c)
         [Nullable({ 1, 2, 2, 1, 2 })] System.Action<System.Object?, System.Action<System.Object!, System.Object?>?>! c
 ";
-                    AssertNullableAttributes(module, expected);
-                }
-            );
+                AssertNullableAttributes(module, expected);
+            });
         }
 
         [Fact]
@@ -7285,9 +7179,8 @@ System.Object? Program.<Main>g__f|1_1(System.String! s)
 
         private void AssertNullableAttributes(CSharpCompilation comp, string expected)
         {
-            CompileAndVerify(
-                comp,
-                symbolValidator: module => AssertNullableAttributes(module, expected)
+            CompileAndVerify(comp, symbolValidator: module =>
+                AssertNullableAttributes(module, expected)
             );
         }
 

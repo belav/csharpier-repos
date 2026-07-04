@@ -63,13 +63,11 @@ namespace System.IO.Pipes.Tests
             HandleInheritability inheritability
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inheritability",
-                () => new AnonymousPipeServerStream(direction, inheritability)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inheritability", () =>
+                new AnonymousPipeServerStream(direction, inheritability)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inheritability",
-                () => new AnonymousPipeServerStream(direction, inheritability, 500)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inheritability", () =>
+                new AnonymousPipeServerStream(direction, inheritability, 500)
             );
         }
 
@@ -82,42 +80,22 @@ namespace System.IO.Pipes.Tests
             int bufferSize
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bufferSize",
-                () =>
-                    new AnonymousPipeServerStream(direction, HandleInheritability.None, bufferSize)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () =>
+                new AnonymousPipeServerStream(direction, HandleInheritability.None, bufferSize)
             );
         }
 
         [Fact]
         public static void InvalidPipeDirection_Throws_ArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "direction",
-                () =>
-                    new AnonymousPipeServerStream(
-                        (PipeDirection)123,
-                        HandleInheritability.None,
-                        500
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("direction", () =>
+                new AnonymousPipeServerStream((PipeDirection)123, HandleInheritability.None, 500)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "direction",
-                () =>
-                    new AnonymousPipeServerStream(
-                        (PipeDirection)123,
-                        (HandleInheritability)999,
-                        -500
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("direction", () =>
+                new AnonymousPipeServerStream((PipeDirection)123, (HandleInheritability)999, -500)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "direction",
-                () =>
-                    new AnonymousPipeServerStream(
-                        (PipeDirection)123,
-                        HandleInheritability.None,
-                        -500
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("direction", () =>
+                new AnonymousPipeServerStream((PipeDirection)123, HandleInheritability.None, -500)
             );
         }
 
@@ -131,45 +109,37 @@ namespace System.IO.Pipes.Tests
             )
             using (dummyserver.ClientSafePipeHandle)
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "serverSafePipeHandle",
-                    () =>
-                        new AnonymousPipeServerStream(
-                            PipeDirection.Out,
-                            null,
-                            dummyserver.ClientSafePipeHandle
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("serverSafePipeHandle", () =>
+                    new AnonymousPipeServerStream(
+                        PipeDirection.Out,
+                        null,
+                        dummyserver.ClientSafePipeHandle
+                    )
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "clientSafePipeHandle",
-                    () =>
-                        new AnonymousPipeServerStream(
-                            PipeDirection.Out,
-                            dummyserver.SafePipeHandle,
-                            null
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("clientSafePipeHandle", () =>
+                    new AnonymousPipeServerStream(
+                        PipeDirection.Out,
+                        dummyserver.SafePipeHandle,
+                        null
+                    )
                 );
 
                 using SafePipeHandle pipeHandle = new SafePipeHandle(new IntPtr(-1), true);
-                AssertExtensions.Throws<ArgumentException>(
-                    "serverSafePipeHandle",
-                    () =>
-                        new AnonymousPipeServerStream(
-                            PipeDirection.Out,
-                            pipeHandle,
-                            dummyserver.ClientSafePipeHandle
-                        )
+                AssertExtensions.Throws<ArgumentException>("serverSafePipeHandle", () =>
+                    new AnonymousPipeServerStream(
+                        PipeDirection.Out,
+                        pipeHandle,
+                        dummyserver.ClientSafePipeHandle
+                    )
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "clientSafePipeHandle",
-                    () =>
-                        new AnonymousPipeServerStream(
-                            PipeDirection.Out,
-                            dummyserver.SafePipeHandle,
-                            pipeHandle
-                        )
+                AssertExtensions.Throws<ArgumentException>("clientSafePipeHandle", () =>
+                    new AnonymousPipeServerStream(
+                        PipeDirection.Out,
+                        dummyserver.SafePipeHandle,
+                        pipeHandle
+                    )
                 );
             }
         }

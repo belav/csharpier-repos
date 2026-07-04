@@ -614,15 +614,11 @@ namespace System.Text.Json.Serialization.Tests
 
             // Ensure the approximate size limit for the name cache (a concurrent dictionary) is honored.
             // Use multiple threads to perhaps go over the soft limit of 64, but not by more than a couple.
-            Parallel.For(
-                0,
-                8,
-                i =>
-                {
-                    dictionary = new Dictionary<MyEnum, int> { { (MyEnum)(46 + i), i } };
-                    JsonSerializer.Serialize(dictionary);
-                }
-            );
+            Parallel.For(0, 8, i =>
+            {
+                dictionary = new Dictionary<MyEnum, int> { { (MyEnum)(46 + i), i } };
+                JsonSerializer.Serialize(dictionary);
+            });
 
             // Write the remaining enum values. The cache is capped to avoid
             // OutOfMemoryException due to having too many cached items.

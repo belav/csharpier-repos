@@ -210,26 +210,22 @@ public class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                references: new[] { reference },
-                symbolValidator: module =>
-                {
-                    var typeParameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod("M")
-                        .TypeParameters.Single();
-                    Assert.True(typeParameter.HasValueTypeConstraint);
-                    Assert.True(typeParameter.HasUnmanagedTypeConstraint);
+            CompileAndVerify(text, references: new[] { reference }, symbolValidator: module =>
+            {
+                var typeParameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetMethod("M")
+                    .TypeParameters.Single();
+                Assert.True(typeParameter.HasValueTypeConstraint);
+                Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
-                    AssertReferencedIsUnmanagedAttribute(
-                        Accessibility.Public,
-                        typeParameter,
-                        reference.Display
-                    );
-                    AssertNoIsUnmanagedAttributeExists(module.ContainingAssembly);
-                }
-            );
+                AssertReferencedIsUnmanagedAttribute(
+                    Accessibility.Public,
+                    typeParameter,
+                    reference.Display
+                );
+                AssertNoIsUnmanagedAttributeExists(module.ContainingAssembly);
+            });
         }
 
         [Fact]
@@ -251,25 +247,21 @@ public class Test<T> where T : unmanaged
 }
 ";
 
-            CompileAndVerify(
-                text,
-                references: new[] { reference },
-                symbolValidator: module =>
-                {
-                    var typeParameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test`1")
-                        .TypeParameters.Single();
-                    Assert.True(typeParameter.HasValueTypeConstraint);
-                    Assert.True(typeParameter.HasUnmanagedTypeConstraint);
+            CompileAndVerify(text, references: new[] { reference }, symbolValidator: module =>
+            {
+                var typeParameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test`1")
+                    .TypeParameters.Single();
+                Assert.True(typeParameter.HasValueTypeConstraint);
+                Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
-                    AssertReferencedIsUnmanagedAttribute(
-                        Accessibility.Public,
-                        typeParameter,
-                        reference.Display
-                    );
-                    AssertNoIsUnmanagedAttributeExists(module.ContainingAssembly);
-                }
-            );
+                AssertReferencedIsUnmanagedAttribute(
+                    Accessibility.Public,
+                    typeParameter,
+                    reference.Display
+                );
+                AssertNoIsUnmanagedAttributeExists(module.ContainingAssembly);
+            });
         }
 
         [Fact]
@@ -553,24 +545,21 @@ public class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var typeParameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod("M")
-                        .TypeParameters.Single();
-                    Assert.True(typeParameter.HasValueTypeConstraint);
-                    Assert.True(typeParameter.HasUnmanagedTypeConstraint);
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var typeParameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetMethod("M")
+                    .TypeParameters.Single();
+                Assert.True(typeParameter.HasValueTypeConstraint);
+                Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
-                    AssertReferencedIsUnmanagedAttribute(
-                        Accessibility.Internal,
-                        typeParameter,
-                        module.ContainingAssembly.Name
-                    );
-                }
-            );
+                AssertReferencedIsUnmanagedAttribute(
+                    Accessibility.Internal,
+                    typeParameter,
+                    module.ContainingAssembly.Name
+                );
+            });
         }
 
         [Fact]
@@ -583,23 +572,20 @@ public class Test<T> where T : unmanaged
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var typeParameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test`1")
-                        .TypeParameters.Single();
-                    Assert.True(typeParameter.HasValueTypeConstraint);
-                    Assert.True(typeParameter.HasUnmanagedTypeConstraint);
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var typeParameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test`1")
+                    .TypeParameters.Single();
+                Assert.True(typeParameter.HasValueTypeConstraint);
+                Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
-                    AssertReferencedIsUnmanagedAttribute(
-                        Accessibility.Internal,
-                        typeParameter,
-                        module.ContainingAssembly.Name
-                    );
-                }
-            );
+                AssertReferencedIsUnmanagedAttribute(
+                    Accessibility.Internal,
+                    typeParameter,
+                    module.ContainingAssembly.Name
+                );
+            });
         }
 
         [Fact]
@@ -912,13 +898,10 @@ public class Test1<T> where T : unmanaged { }
                 options: options
             );
 
-            CompileAndVerify(
-                code2,
-                symbolValidator: module =>
-                {
-                    AssertNoIsUnmanagedAttributeExists(module.ContainingAssembly);
-                }
-            );
+            CompileAndVerify(code2, symbolValidator: module =>
+            {
+                AssertNoIsUnmanagedAttributeExists(module.ContainingAssembly);
+            });
 
             var code3 = CreateCompilation(
                 @"
@@ -928,23 +911,20 @@ public class Test2<T> : Test1<T> where T : unmanaged { }
                 options: options
             );
 
-            CompileAndVerify(
-                code3,
-                symbolValidator: module =>
-                {
-                    var typeParameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test2`1")
-                        .TypeParameters.Single();
-                    Assert.True(typeParameter.HasValueTypeConstraint);
-                    Assert.True(typeParameter.HasUnmanagedTypeConstraint);
+            CompileAndVerify(code3, symbolValidator: module =>
+            {
+                var typeParameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test2`1")
+                    .TypeParameters.Single();
+                Assert.True(typeParameter.HasValueTypeConstraint);
+                Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
-                    AssertReferencedIsUnmanagedAttribute(
-                        Accessibility.Internal,
-                        typeParameter,
-                        module.ContainingAssembly.Name
-                    );
-                }
-            );
+                AssertReferencedIsUnmanagedAttribute(
+                    Accessibility.Internal,
+                    typeParameter,
+                    module.ContainingAssembly.Name
+                );
+            });
         }
 
         [Fact]
@@ -1050,24 +1030,20 @@ public class Test1<T> where T : unmanaged
 {
 }";
 
-            var comp1 = CompileAndVerify(
-                code1,
-                options: options,
-                symbolValidator: module =>
-                {
-                    var typeParameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test1`1")
-                        .TypeParameters.Single();
-                    Assert.True(typeParameter.HasValueTypeConstraint);
-                    Assert.True(typeParameter.HasUnmanagedTypeConstraint);
+            var comp1 = CompileAndVerify(code1, options: options, symbolValidator: module =>
+            {
+                var typeParameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test1`1")
+                    .TypeParameters.Single();
+                Assert.True(typeParameter.HasValueTypeConstraint);
+                Assert.True(typeParameter.HasUnmanagedTypeConstraint);
 
-                    AssertReferencedIsUnmanagedAttribute(
-                        Accessibility.Internal,
-                        typeParameter,
-                        module.ContainingAssembly.Name
-                    );
-                }
-            );
+                AssertReferencedIsUnmanagedAttribute(
+                    Accessibility.Internal,
+                    typeParameter,
+                    module.ContainingAssembly.Name
+                );
+            });
 
             var code2 =
                 @"

@@ -206,14 +206,11 @@ public class MapPathMiddlewareTests
     public async Task ChainedRoutes_Success()
     {
         var builder = new ApplicationBuilder(serviceProvider: null!);
-        builder.Map(
-            "/route1",
-            map =>
-            {
-                map.Map("/subroute1", UseSuccess);
-                map.Run(NotImplemented);
-            }
-        );
+        builder.Map("/route1", map =>
+        {
+            map.Map("/subroute1", UseSuccess);
+            map.Run(NotImplemented);
+        });
         builder.Map("/route2/subroute2", UseSuccess);
         var app = builder.Build();
 

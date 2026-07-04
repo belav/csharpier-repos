@@ -110,27 +110,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 NetCoreAppBuilder builder
             )
             {
-                builder.WithPackage(
-                    TestVersionsPackage,
-                    "1.1.1",
-                    b =>
-                        b.WithAssemblyGroup(
-                            null,
-                            g =>
-                                g.WithAsset(TestAssemblyWithNoVersions + ".dll")
-                                    .WithAsset(
-                                        TestAssemblyWithAssemblyVersion + ".dll",
-                                        rf => rf.WithVersion("2.1.1.1", null)
-                                    )
-                                    .WithAsset(
-                                        TestAssemblyWithFileVersion + ".dll",
-                                        rf => rf.WithVersion(null, "3.2.2.2")
-                                    )
-                                    .WithAsset(
-                                        TestAssemblyWithBothVersions + ".dll",
-                                        rf => rf.WithVersion("2.1.1.1", "3.2.2.2")
-                                    )
-                        )
+                builder.WithPackage(TestVersionsPackage, "1.1.1", b =>
+                    b.WithAssemblyGroup(null, g =>
+                        g.WithAsset(TestAssemblyWithNoVersions + ".dll")
+                            .WithAsset(TestAssemblyWithAssemblyVersion + ".dll", rf =>
+                                rf.WithVersion("2.1.1.1", null)
+                            )
+                            .WithAsset(TestAssemblyWithFileVersion + ".dll", rf =>
+                                rf.WithVersion(null, "3.2.2.2")
+                            )
+                            .WithAsset(TestAssemblyWithBothVersions + ".dll", rf =>
+                                rf.WithVersion("2.1.1.1", "3.2.2.2")
+                            )
+                    )
                 );
             }
 
@@ -143,27 +135,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     path =>
                         NetCoreAppBuilder
                             .ForNETCoreApp(HighWare, TestContext.TargetRID)
-                            .WithProject(
-                                HighWare,
-                                "1.1.1",
-                                p =>
-                                    p.WithAssemblyGroup(
-                                        null,
-                                        g =>
-                                            g.WithAsset(TestAssemblyWithNoVersions + ".dll")
-                                                .WithAsset(
-                                                    TestAssemblyWithAssemblyVersion + ".dll",
-                                                    rf => rf.WithVersion("2.1.1.2", null)
-                                                )
-                                                .WithAsset(
-                                                    TestAssemblyWithFileVersion + ".dll",
-                                                    rf => rf.WithVersion(null, "3.2.2.2")
-                                                )
-                                                .WithAsset(
-                                                    TestAssemblyWithBothVersions + ".dll",
-                                                    rf => rf.WithVersion("2.1.1.0", "3.2.2.0")
-                                                )
-                                    )
+                            .WithProject(HighWare, "1.1.1", p =>
+                                p.WithAssemblyGroup(null, g =>
+                                    g.WithAsset(TestAssemblyWithNoVersions + ".dll")
+                                        .WithAsset(TestAssemblyWithAssemblyVersion + ".dll", rf =>
+                                            rf.WithVersion("2.1.1.2", null)
+                                        )
+                                        .WithAsset(TestAssemblyWithFileVersion + ".dll", rf =>
+                                            rf.WithVersion(null, "3.2.2.2")
+                                        )
+                                        .WithAsset(TestAssemblyWithBothVersions + ".dll", rf =>
+                                            rf.WithVersion("2.1.1.0", "3.2.2.0")
+                                        )
+                                )
                             )
                             .Build(new TestApp(path, HighWare))
                 );
@@ -196,18 +180,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         )
         {
             var app = SharedState.CreateTestFrameworkReferenceApp(b =>
-                b.WithPackage(
-                    TestVersionsPackage,
-                    "1.0.0",
-                    lib =>
-                        lib.WithAssemblyGroup(
-                            null,
-                            g =>
-                                g.WithAsset(
-                                    testAssemblyName + ".dll",
-                                    rf => rf.WithVersion(appAsmVersion, appFileVersion)
-                                )
+                b.WithPackage(TestVersionsPackage, "1.0.0", lib =>
+                    lib.WithAssemblyGroup(null, g =>
+                        g.WithAsset(testAssemblyName + ".dll", rf =>
+                            rf.WithVersion(appAsmVersion, appFileVersion)
                         )
+                    )
                 )
             );
             if (runtimeConfigCustomizer is not null)
@@ -259,18 +237,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         )
         {
             var component = SharedState.CreateComponentWithNoDependencies(b =>
-                b.WithPackage(
-                    TestVersionsPackage,
-                    "1.0.0",
-                    lib =>
-                        lib.WithAssemblyGroup(
-                            null,
-                            g =>
-                                g.WithAsset(
-                                    testAssemblyName + ".dll",
-                                    rf => rf.WithVersion(appAsmVersion, appFileVersion)
-                                )
+                b.WithPackage(TestVersionsPackage, "1.0.0", lib =>
+                    lib.WithAssemblyGroup(null, g =>
+                        g.WithAsset(testAssemblyName + ".dll", rf =>
+                            rf.WithVersion(appAsmVersion, appFileVersion)
                         )
+                    )
                 )
             );
             if (runtimeConfigCustomizer is not null)

@@ -157,10 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
                 // We do need to intersect the next statement analysis result to catch possible
                 // arm kind mismatch, e.g. a "return" after a non-exhaustive assignment switch.
-                return Aggregate(
-                    nextStatement,
-                    sections,
-                    (result, section) => Intersect(result, AnalyzeSwitchSection(section))
+                return Aggregate(nextStatement, sections, (result, section) =>
+                    Intersect(result, AnalyzeSwitchSection(section))
                 );
             }
 

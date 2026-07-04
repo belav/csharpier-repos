@@ -95,17 +95,14 @@ public class TempDataFilterPageApplicationModelProviderTest
         var filter = Assert.IsType<PageSaveTempDataPropertyFilterFactory>(
             Assert.Single(context.PageApplicationModel.Filters)
         );
-        Assert.Collection(
-            filter.Properties,
-            property =>
-            {
-                Assert.Equal("Test2", property.Key);
-                Assert.Equal(
-                    type.GetProperty(nameof(TestPageModel_OneTempDataProperty.Test2)),
-                    property.PropertyInfo
-                );
-            }
-        );
+        Assert.Collection(filter.Properties, property =>
+        {
+            Assert.Equal("Test2", property.Key);
+            Assert.Equal(
+                type.GetProperty(nameof(TestPageModel_OneTempDataProperty.Test2)),
+                property.PropertyInfo
+            );
+        });
     }
 
     [Fact]
@@ -123,13 +120,10 @@ public class TempDataFilterPageApplicationModelProviderTest
         var filter = Assert.IsType<PageSaveTempDataPropertyFilterFactory>(
             Assert.Single(context.PageApplicationModel.Filters)
         );
-        Assert.Collection(
-            filter.Properties,
-            property =>
-            {
-                Assert.Equal("Test2", property.Key);
-            }
-        );
+        Assert.Collection(filter.Properties, property =>
+        {
+            Assert.Equal("Test2", property.Key);
+        });
     }
 
     private static PageApplicationModelProviderContext CreateProviderContext(Type handlerType)

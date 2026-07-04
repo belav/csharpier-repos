@@ -36,9 +36,8 @@ namespace Moq.Tests
             [Fact]
             public void Void_method_call_with_coerced_nullable_arg()
             {
-                AssertReconstructable(
-                    "x => x.VoidWithNullableInt(42)",
-                    x => x.VoidWithNullableInt(42)
+                AssertReconstructable("x => x.VoidWithNullableInt(42)", x =>
+                    x.VoidWithNullableInt(42)
                 );
             }
 
@@ -139,9 +138,8 @@ namespace Moq.Tests
             [Fact]
             public void Assignment()
             {
-                AssertReconstructable(
-                    "x => x.GetY().Z.Property = \"value\"",
-                    x => x.GetY().Z.Property = "value"
+                AssertReconstructable("x => x.GetY().Z.Property = \"value\"", x =>
+                    x.GetY().Z.Property = "value"
                 );
             }
 
@@ -149,18 +147,16 @@ namespace Moq.Tests
             public void Assignment_with_captured_var_on_rhs()
             {
                 var arg = "value";
-                AssertReconstructable(
-                    "x => x.GetY().Z.Property = \"value\"",
-                    x => x.GetY().Z.Property = arg
+                AssertReconstructable("x => x.GetY().Z.Property = \"value\"", x =>
+                    x.GetY().Z.Property = arg
                 );
             }
 
             [Fact]
             public void Assignment_with_matcher_on_rhs()
             {
-                AssertReconstructable(
-                    "x => x.GetY().Z.Property = It.IsAny<string>()",
-                    x => x.GetY().Z.Property = It.IsAny<string>()
+                AssertReconstructable("x => x.GetY().Z.Property = It.IsAny<string>()", x =>
+                    x.GetY().Z.Property = It.IsAny<string>()
                 );
             }
 
@@ -173,18 +169,16 @@ namespace Moq.Tests
             [Fact]
             public void Indexer_assignment_with_matcher_on_lhs_1()
             {
-                AssertReconstructable(
-                    "x => x[It.IsAny<int>()] = null",
-                    x => x[It.IsAny<int>()] = null
+                AssertReconstructable("x => x[It.IsAny<int>()] = null", x =>
+                    x[It.IsAny<int>()] = null
                 );
             }
 
             [Fact]
             public void Indexer_assignment_with_matcher_on_lhs_2()
             {
-                AssertReconstructable(
-                    "x => x[1, It.IsAny<int>()] = 0",
-                    x => x[1, It.IsAny<int>()] = 0
+                AssertReconstructable("x => x[1, It.IsAny<int>()] = 0", x =>
+                    x[1, It.IsAny<int>()] = 0
                 );
             }
 
@@ -213,17 +207,15 @@ namespace Moq.Tests
             public void Widening_and_narrowing_and_enum_convertions()
             {
                 ushort arg = 123;
-                AssertReconstructable(
-                    "x => x.VoidWithShort(123)",
-                    x => x.VoidWithShort((short)arg)
+                AssertReconstructable("x => x.VoidWithShort(123)", x =>
+                    x.VoidWithShort((short)arg)
                 );
                 AssertReconstructable("x => x.VoidWithInt(123)", x => x.VoidWithInt(arg));
                 AssertReconstructable("x => x.VoidWithLong(123)", x => x.VoidWithLong(arg));
 
                 long longArg = 654L;
-                AssertReconstructable(
-                    "x => x.VoidWithShort(654)",
-                    x => x.VoidWithShort((short)longArg)
+                AssertReconstructable("x => x.VoidWithShort(654)", x =>
+                    x.VoidWithShort((short)longArg)
                 );
 
                 AssertReconstructable(
@@ -402,9 +394,8 @@ namespace Moq.Tests
             public void Indexer_with_default_value_on_lfs_and_matcher_on_rhs_both_having_same_types()
             {
                 // Same as above, since LHS and RHS are actually both part of a single parameter list of a method call `get_Item(...lhs, rhs).
-                AssertIncorrectlyReconstructsAs(
-                    "x => x[It.IsAny<int>()] = 0",
-                    x => x[0] = It.IsAny<int>()
+                AssertIncorrectlyReconstructsAs("x => x[It.IsAny<int>()] = 0", x =>
+                    x[0] = It.IsAny<int>()
                 );
 
                 /* Unmerged change from project 'Moq.Tests(net6.0)'

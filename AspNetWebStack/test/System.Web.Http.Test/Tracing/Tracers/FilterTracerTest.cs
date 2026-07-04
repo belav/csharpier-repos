@@ -391,21 +391,17 @@ namespace System.Web.Http.Tracing.Tracers
             // Assert
             Assert.Equal(5, wrappedFilters.Length);
             Assert.Single(wrappedFilters, f => f.Instance.GetType() == typeof(ActionFilterTracer));
-            Assert.Single(
-                wrappedFilters,
-                f => f.Instance.GetType() == typeof(AuthorizationFilterTracer)
+            Assert.Single(wrappedFilters, f =>
+                f.Instance.GetType() == typeof(AuthorizationFilterTracer)
             );
-            Assert.Single(
-                wrappedFilters,
-                f => f.Instance.GetType() == typeof(AuthenticationFilterTracer)
+            Assert.Single(wrappedFilters, f =>
+                f.Instance.GetType() == typeof(AuthenticationFilterTracer)
             );
-            Assert.Single(
-                wrappedFilters,
-                f => f.Instance.GetType() == typeof(ExceptionFilterTracer)
+            Assert.Single(wrappedFilters, f =>
+                f.Instance.GetType() == typeof(ExceptionFilterTracer)
             );
-            Assert.Single(
-                wrappedFilters,
-                f => f.Instance.GetType() == typeof(OverrideFilterTracer)
+            Assert.Single(wrappedFilters, f =>
+                f.Instance.GetType() == typeof(OverrideFilterTracer)
             );
         }
 

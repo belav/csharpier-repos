@@ -67,9 +67,8 @@ public class TransactionSqlServerTest
 
         await transaction.CommitAsync();
 
-        Assert.Contains(
-            Fixture.ListLoggerFactory.Log,
-            t => t.Id == SqlServerEventId.SavepointsDisabledBecauseOfMARS
+        Assert.Contains(Fixture.ListLoggerFactory.Log, t =>
+            t.Id == SqlServerEventId.SavepointsDisabledBecauseOfMARS
         );
     }
 

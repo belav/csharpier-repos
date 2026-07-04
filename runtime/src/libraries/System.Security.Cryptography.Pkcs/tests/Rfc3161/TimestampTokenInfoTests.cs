@@ -211,9 +211,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void BuilderCtor_PolicyIdRequired()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "policyId",
-                () => new Rfc3161TimestampTokenInfo(null, null, default, default, default)
+            AssertExtensions.Throws<ArgumentNullException>("policyId", () =>
+                new Rfc3161TimestampTokenInfo(null, null, default, default, default)
             );
         }
 
@@ -222,9 +221,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             Oid policyId = new Oid("0.0", "0.0");
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithmId",
-                () => new Rfc3161TimestampTokenInfo(policyId, null, default, default, default)
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithmId", () =>
+                new Rfc3161TimestampTokenInfo(policyId, null, default, default, default)
             );
         }
 
@@ -485,17 +483,15 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void NegativeAccuracyThrows()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "accuracyInMicroseconds",
-                () =>
-                    new Rfc3161TimestampTokenInfo(
-                        new Oid("0.0", "0.0"),
-                        new Oid(Oids.Sha256),
-                        new byte[256 / 8],
-                        new byte[] { 2 },
-                        DateTimeOffset.UtcNow,
-                        accuracyInMicroseconds: -1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("accuracyInMicroseconds", () =>
+                new Rfc3161TimestampTokenInfo(
+                    new Oid("0.0", "0.0"),
+                    new Oid(Oids.Sha256),
+                    new byte[256 / 8],
+                    new byte[] { 2 },
+                    DateTimeOffset.UtcNow,
+                    accuracyInMicroseconds: -1
+                )
             );
         }
 

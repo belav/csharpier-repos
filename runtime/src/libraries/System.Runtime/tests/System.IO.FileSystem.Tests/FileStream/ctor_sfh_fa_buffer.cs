@@ -32,9 +32,8 @@ namespace System.IO.Tests
                 var handle = File.OpenHandle(GetTestFilePath(), FileMode.Create, FileAccess.Write)
             )
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "bufferSize",
-                    () => CreateFileStream(handle, FileAccess.Read, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () =>
+                    CreateFileStream(handle, FileAccess.Read, -1)
                 );
             }
         }

@@ -1658,9 +1658,8 @@ public class SqliteDataReaderTest
             connection.Open();
 
             connection.ExecuteNonQuery("CREATE TABLE Test(Value);");
-            connection.CreateFunction<string, long>(
-                "throw",
-                message => throw new Exception(message)
+            connection.CreateFunction<string, long>("throw", message =>
+                throw new Exception(message)
             );
 
             var sql =
@@ -2141,9 +2140,8 @@ public class SqliteDataReaderTest
             connection.Open();
 
             connection.ExecuteNonQuery("CREATE TABLE Test(Value);");
-            connection.CreateFunction<string, long>(
-                "throw",
-                message => throw new Exception(message)
+            connection.CreateFunction<string, long>("throw", message =>
+                throw new Exception(message)
             );
 
             var reader = connection.ExecuteReader(
@@ -2165,9 +2163,8 @@ public class SqliteDataReaderTest
             connection.Open();
 
             connection.ExecuteNonQuery("CREATE TABLE Test(Value);");
-            connection.CreateFunction<string, long>(
-                "throw",
-                message => throw new Exception(message)
+            connection.CreateFunction<string, long>("throw", message =>
+                throw new Exception(message)
             );
 
             var reader = connection.ExecuteReader(

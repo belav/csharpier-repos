@@ -112,47 +112,44 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             );
 
             var conditionalPartLow = syntaxFacts.WalkDownParentheses(conditionalPartHigh);
-            editor.ReplaceNode(
-                conditionalExpression,
-                (c, g) =>
-                {
-                    syntaxFacts.GetPartsOfConditionalExpression(
-                        c,
-                        out var currentCondition,
-                        out var currentWhenTrue,
-                        out var currentWhenFalse
-                    );
+            editor.ReplaceNode(conditionalExpression, (c, g) =>
+            {
+                syntaxFacts.GetPartsOfConditionalExpression(
+                    c,
+                    out var currentCondition,
+                    out var currentWhenTrue,
+                    out var currentWhenFalse
+                );
 
-                    var coalesceExpression = GetCoalesceExpression(
-                            syntaxFacts,
-                            g,
-                            whenPart,
-                            whenTrue,
-                            conditionalPartLow,
-                            currentWhenTrue,
-                            currentWhenFalse
-                        )
-                        .WithTrailingTrivia(conditionalExpression.GetTrailingTrivia());
-
-                    if (
-                        semanticFacts.IsInExpressionTree(
-                            semanticModel,
-                            conditionalExpression,
-                            expressionTypeOpt,
-                            cancellationToken
-                        )
+                var coalesceExpression = GetCoalesceExpression(
+                        syntaxFacts,
+                        g,
+                        whenPart,
+                        whenTrue,
+                        conditionalPartLow,
+                        currentWhenTrue,
+                        currentWhenFalse
                     )
-                    {
-                        coalesceExpression = coalesceExpression.WithAdditionalAnnotations(
-                            WarningAnnotation.Create(
-                                AnalyzersResources.Changes_to_expression_trees_may_result_in_behavior_changes_at_runtime
-                            )
-                        );
-                    }
+                    .WithTrailingTrivia(conditionalExpression.GetTrailingTrivia());
 
-                    return coalesceExpression.WithAdditionalAnnotations(Formatter.Annotation);
+                if (
+                    semanticFacts.IsInExpressionTree(
+                        semanticModel,
+                        conditionalExpression,
+                        expressionTypeOpt,
+                        cancellationToken
+                    )
+                )
+                {
+                    coalesceExpression = coalesceExpression.WithAdditionalAnnotations(
+                        WarningAnnotation.Create(
+                            AnalyzersResources.Changes_to_expression_trees_may_result_in_behavior_changes_at_runtime
+                        )
+                    );
                 }
-            );
+
+                return coalesceExpression.WithAdditionalAnnotations(Formatter.Annotation);
+            });
         }
 
         private static SyntaxNode GetCoalesceExpression(

@@ -306,9 +306,8 @@ namespace System.Tests
         [Fact]
         public void Ctor_LargeScale_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "scale",
-                () => new Decimal(1, 2, 3, false, 29)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("scale", () =>
+                new Decimal(1, 2, 3, false, 29)
             );
         }
 
@@ -1106,9 +1105,8 @@ namespace System.Tests
         [Fact]
         public static void GetBitsSpan_TooShort_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => decimal.GetBits(123, new int[3])
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                decimal.GetBits(123, new int[3])
             );
         }
 
@@ -1577,9 +1575,8 @@ namespace System.Tests
                 Assert.Equal(default(decimal), result);
 
                 Assert.Throws(exceptionType, () => decimal.Parse(value, style));
-                Assert.Throws(
-                    exceptionType,
-                    () => decimal.Parse(value, style, NumberFormatInfo.CurrentInfo)
+                Assert.Throws(exceptionType, () =>
+                    decimal.Parse(value, style, NumberFormatInfo.CurrentInfo)
                 );
             }
         }
@@ -1741,9 +1738,8 @@ namespace System.Tests
             if (value != null)
             {
                 ReadOnlySpan<byte> valueUtf8 = Encoding.UTF8.GetBytes(value);
-                Assert.Throws(
-                    exceptionType,
-                    () => decimal.Parse(Encoding.UTF8.GetBytes(value), style, provider)
+                Assert.Throws(exceptionType, () =>
+                    decimal.Parse(Encoding.UTF8.GetBytes(value), style, provider)
                 );
 
                 Assert.False(decimal.TryParse(valueUtf8, style, provider, out decimal result));
@@ -2072,13 +2068,11 @@ namespace System.Tests
         [InlineData(29)]
         public void Round_InvalidDecimals_ThrowsArgumentOutOfRangeException(int decimals)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "decimals",
-                () => decimal.Round(1, decimals)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("decimals", () =>
+                decimal.Round(1, decimals)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "decimals",
-                () => decimal.Round(1, decimals, MidpointRounding.AwayFromZero)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("decimals", () =>
+                decimal.Round(1, decimals, MidpointRounding.AwayFromZero)
             );
         }
 

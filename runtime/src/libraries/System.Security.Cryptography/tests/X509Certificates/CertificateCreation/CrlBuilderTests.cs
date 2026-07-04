@@ -22,37 +22,29 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             DateTimeOffset now = DateTimeOffset.UtcNow;
             CertificateRevocationListBuilder builder = new CertificateRevocationListBuilder();
 
-            Assert.Throws<ArgumentNullException>(
-                "serialNumber",
-                () => builder.AddEntry((byte[])null)
+            Assert.Throws<ArgumentNullException>("serialNumber", () =>
+                builder.AddEntry((byte[])null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "serialNumber",
-                () => builder.AddEntry((byte[])null, now)
+            Assert.Throws<ArgumentNullException>("serialNumber", () =>
+                builder.AddEntry((byte[])null, now)
             );
-            Assert.Throws<ArgumentNullException>(
-                "certificate",
-                () => builder.AddEntry((X509Certificate2)null)
+            Assert.Throws<ArgumentNullException>("certificate", () =>
+                builder.AddEntry((X509Certificate2)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "certificate",
-                () => builder.AddEntry((X509Certificate2)null, now)
+            Assert.Throws<ArgumentNullException>("certificate", () =>
+                builder.AddEntry((X509Certificate2)null, now)
             );
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () => builder.AddEntry(Array.Empty<byte>())
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                builder.AddEntry(Array.Empty<byte>())
             );
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () => builder.AddEntry(Array.Empty<byte>(), now)
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                builder.AddEntry(Array.Empty<byte>(), now)
             );
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () => builder.AddEntry(ReadOnlySpan<byte>.Empty)
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                builder.AddEntry(ReadOnlySpan<byte>.Empty)
             );
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () => builder.AddEntry(ReadOnlySpan<byte>.Empty, now)
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                builder.AddEntry(ReadOnlySpan<byte>.Empty, now)
             );
         }
 
@@ -62,9 +54,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             DateTimeOffset now = DateTimeOffset.UtcNow;
             CertificateRevocationListBuilder builder = new CertificateRevocationListBuilder();
 
-            Assert.Throws<ArgumentNullException>(
-                CertParam,
-                () => builder.Build(null, 0, now, HashAlgorithmName.SHA256)
+            Assert.Throws<ArgumentNullException>(CertParam, () =>
+                builder.Build(null, 0, now, HashAlgorithmName.SHA256)
             );
         }
 
@@ -76,9 +67,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             using (X509Certificate2 cert = new X509Certificate2(TestData.MsCertificatePemBytes))
             {
-                ArgumentException e = Assert.Throws<ArgumentException>(
-                    CertParam,
-                    () => builder.Build(cert, 0, now, HashAlgorithmName.SHA256)
+                ArgumentException e = Assert.Throws<ArgumentException>(CertParam, () =>
+                    builder.Build(cert, 0, now, HashAlgorithmName.SHA256)
                 );
 
                 Assert.Contains("private key", e.Message);
@@ -88,22 +78,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         [Fact]
         public static void BuildWithCertificateWithNoBasicConstraints()
         {
-            BuildCertificateAndRun(
-                Enumerable.Empty<X509Extension>(),
-                static (cert, now) =>
-                {
-                    CertificateRevocationListBuilder builder =
-                        new CertificateRevocationListBuilder();
+            BuildCertificateAndRun(Enumerable.Empty<X509Extension>(), static (cert, now) =>
+            {
+                CertificateRevocationListBuilder builder = new CertificateRevocationListBuilder();
 
-                    ArgumentException e = Assert.Throws<ArgumentException>(
-                        CertParam,
-                        () => builder.Build(cert, 0, now.AddMinutes(5), HashAlgorithmName.SHA256)
-                    );
+                ArgumentException e = Assert.Throws<ArgumentException>(CertParam, () =>
+                    builder.Build(cert, 0, now.AddMinutes(5), HashAlgorithmName.SHA256)
+                );
 
-                    Assert.Contains("Basic Constraints", e.Message);
-                    Assert.DoesNotContain("appropriate", e.Message);
-                }
-            );
+                Assert.Contains("Basic Constraints", e.Message);
+                Assert.DoesNotContain("appropriate", e.Message);
+            });
         }
 
         [Fact]
@@ -116,9 +101,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     CertificateRevocationListBuilder builder =
                         new CertificateRevocationListBuilder();
 
-                    ArgumentException e = Assert.Throws<ArgumentException>(
-                        CertParam,
-                        () => builder.Build(cert, 0, now.AddMinutes(5), HashAlgorithmName.SHA256)
+                    ArgumentException e = Assert.Throws<ArgumentException>(CertParam, () =>
+                        builder.Build(cert, 0, now.AddMinutes(5), HashAlgorithmName.SHA256)
                     );
 
                     Assert.Contains("Basic Constraints", e.Message);
@@ -141,9 +125,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     CertificateRevocationListBuilder builder =
                         new CertificateRevocationListBuilder();
 
-                    ArgumentException e = Assert.Throws<ArgumentException>(
-                        CertParam,
-                        () => builder.Build(cert, 0, now.AddMinutes(5), HashAlgorithmName.SHA256)
+                    ArgumentException e = Assert.Throws<ArgumentException>(CertParam, () =>
+                        builder.Build(cert, 0, now.AddMinutes(5), HashAlgorithmName.SHA256)
                     );
 
                     Assert.Contains("CrlSign", e.Message);
@@ -221,9 +204,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     CertificateRevocationListBuilder builder =
                         new CertificateRevocationListBuilder();
 
-                    Assert.Throws<ArgumentNullException>(
-                        "hashAlgorithm",
-                        () => builder.Build(cert, 0, now.AddMinutes(5), hashAlg, null, now)
+                    Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                        builder.Build(cert, 0, now.AddMinutes(5), hashAlg, null, now)
                     );
 
                     using (ECDsa key = cert.GetECDsaPrivateKey())
@@ -231,9 +213,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         X509SignatureGenerator gen = X509SignatureGenerator.CreateForECDsa(key);
                         X500DistinguishedName dn = cert.SubjectName;
 
-                        Assert.Throws<ArgumentNullException>(
-                            "hashAlgorithm",
-                            () => builder.Build(dn, gen, 0, now.AddMinutes(5), hashAlg, null, now)
+                        Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                            builder.Build(dn, gen, 0, now.AddMinutes(5), hashAlg, null, now)
                         );
                     }
                 }
@@ -253,9 +234,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     HashAlgorithmName hashAlg = new HashAlgorithmName("");
                     CertificateRevocationListBuilder builder =
                         new CertificateRevocationListBuilder();
-                    ArgumentException e = Assert.Throws<ArgumentException>(
-                        "hashAlgorithm",
-                        () => builder.Build(cert, 0, now.AddMinutes(5), hashAlg, null, now)
+                    ArgumentException e = Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                        builder.Build(cert, 0, now.AddMinutes(5), hashAlg, null, now)
                     );
 
                     Assert.Contains("empty", e.Message);
@@ -265,9 +245,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         X509SignatureGenerator gen = X509SignatureGenerator.CreateForECDsa(key);
                         X500DistinguishedName dn = cert.SubjectName;
 
-                        e = Assert.Throws<ArgumentException>(
-                            "hashAlgorithm",
-                            () => builder.Build(dn, gen, 0, now.AddMinutes(5), hashAlg, null, now)
+                        e = Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                            builder.Build(dn, gen, 0, now.AddMinutes(5), hashAlg, null, now)
                         );
 
                         Assert.Contains("empty", e.Message);
@@ -290,9 +269,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     CertificateRevocationListBuilder builder =
                         new CertificateRevocationListBuilder();
 
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        "crlNumber",
-                        () => builder.Build(cert, -1, now.AddMinutes(5), hashAlg, null, now)
+                    Assert.Throws<ArgumentOutOfRangeException>("crlNumber", () =>
+                        builder.Build(cert, -1, now.AddMinutes(5), hashAlg, null, now)
                     );
 
                     using (ECDsa key = cert.GetECDsaPrivateKey())
@@ -300,9 +278,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         X509SignatureGenerator gen = X509SignatureGenerator.CreateForECDsa(key);
                         X500DistinguishedName dn = cert.SubjectName;
 
-                        Assert.Throws<ArgumentOutOfRangeException>(
-                            "crlNumber",
-                            () => builder.Build(dn, gen, -1, now.AddMinutes(5), hashAlg, null, now)
+                        Assert.Throws<ArgumentOutOfRangeException>("crlNumber", () =>
+                            builder.Build(dn, gen, -1, now.AddMinutes(5), hashAlg, null, now)
                         );
                     }
                 }
@@ -315,18 +292,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             CertificateRevocationListBuilder builder = new CertificateRevocationListBuilder();
             DateTimeOffset now = DateTimeOffset.UtcNow;
 
-            Assert.Throws<ArgumentNullException>(
-                "issuerName",
-                () =>
-                    builder.Build(
-                        null,
-                        null,
-                        0,
-                        now.AddMinutes(5),
-                        HashAlgorithmName.SHA256,
-                        null,
-                        now
-                    )
+            Assert.Throws<ArgumentNullException>("issuerName", () =>
+                builder.Build(null, null, 0, now.AddMinutes(5), HashAlgorithmName.SHA256, null, now)
             );
         }
 
@@ -337,18 +304,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             DateTimeOffset now = DateTimeOffset.UtcNow;
             X500DistinguishedName dn = new X500DistinguishedName("CN=Name");
 
-            Assert.Throws<ArgumentNullException>(
-                "generator",
-                () =>
-                    builder.Build(
-                        dn,
-                        null,
-                        0,
-                        now.AddMinutes(5),
-                        HashAlgorithmName.SHA256,
-                        null,
-                        now
-                    )
+            Assert.Throws<ArgumentNullException>("generator", () =>
+                builder.Build(dn, null, 0, now.AddMinutes(5), HashAlgorithmName.SHA256, null, now)
             );
         }
 
@@ -366,18 +323,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     RSASignaturePadding.Pkcs1
                 );
 
-                Assert.Throws<ArgumentNullException>(
-                    "authorityKeyIdentifier",
-                    () =>
-                        builder.Build(
-                            dn,
-                            gen,
-                            0,
-                            now.AddMinutes(5),
-                            HashAlgorithmName.SHA256,
-                            null,
-                            now
-                        )
+                Assert.Throws<ArgumentNullException>("authorityKeyIdentifier", () =>
+                    builder.Build(
+                        dn,
+                        gen,
+                        0,
+                        now.AddMinutes(5),
+                        HashAlgorithmName.SHA256,
+                        null,
+                        now
+                    )
                 );
             }
         }
@@ -440,44 +395,38 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             CertificateRevocationListBuilder builder = new CertificateRevocationListBuilder();
 
-            Assert.Throws<ArgumentNullException>(
-                "issuerName",
-                () =>
-                    builder.Build(
-                        (X500DistinguishedName)null,
-                        default,
-                        0,
-                        nextUpdate,
-                        default,
-                        default,
-                        thisUpdate
-                    )
+            Assert.Throws<ArgumentNullException>("issuerName", () =>
+                builder.Build(
+                    (X500DistinguishedName)null,
+                    default,
+                    0,
+                    nextUpdate,
+                    default,
+                    default,
+                    thisUpdate
+                )
             );
 
             X500DistinguishedName issuerName = new X500DistinguishedName("CN=Bad CA");
 
-            Assert.Throws<ArgumentNullException>(
-                "generator",
-                () =>
-                    builder.Build(issuerName, default, 0, nextUpdate, default, default, thisUpdate)
+            Assert.Throws<ArgumentNullException>("generator", () =>
+                builder.Build(issuerName, default, 0, nextUpdate, default, default, thisUpdate)
             );
 
             using (ECDsa key = ECDsa.Create(ECCurve.NamedCurves.nistP384))
             {
                 X509SignatureGenerator generator = X509SignatureGenerator.CreateForECDsa(key);
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    "crlNumber",
-                    () =>
-                        builder.Build(
-                            issuerName,
-                            generator,
-                            -1,
-                            nextUpdate,
-                            default,
-                            default,
-                            thisUpdate
-                        )
+                Assert.Throws<ArgumentOutOfRangeException>("crlNumber", () =>
+                    builder.Build(
+                        issuerName,
+                        generator,
+                        -1,
+                        nextUpdate,
+                        default,
+                        default,
+                        thisUpdate
+                    )
                 );
 
                 ArgumentException ex = Assert.Throws<ArgumentException>(() =>
@@ -880,34 +829,28 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             byte[] serial = { 1, 2, 3 };
             const string ParamName = "reason";
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                ParamName,
-                () => builder.AddEntry(serial, reason: (X509RevocationReason)(-1))
+            Assert.Throws<ArgumentOutOfRangeException>(ParamName, () =>
+                builder.AddEntry(serial, reason: (X509RevocationReason)(-1))
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                ParamName,
-                () => builder.AddEntry(serial, reason: (X509RevocationReason)(-2))
+            Assert.Throws<ArgumentOutOfRangeException>(ParamName, () =>
+                builder.AddEntry(serial, reason: (X509RevocationReason)(-2))
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                ParamName,
-                () => builder.AddEntry(serial, reason: (X509RevocationReason)7)
+            Assert.Throws<ArgumentOutOfRangeException>(ParamName, () =>
+                builder.AddEntry(serial, reason: (X509RevocationReason)7)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                ParamName,
-                () => builder.AddEntry(serial, reason: (X509RevocationReason)12)
+            Assert.Throws<ArgumentOutOfRangeException>(ParamName, () =>
+                builder.AddEntry(serial, reason: (X509RevocationReason)12)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                ParamName,
-                () => builder.AddEntry(serial, reason: X509RevocationReason.AACompromise)
+            Assert.Throws<ArgumentOutOfRangeException>(ParamName, () =>
+                builder.AddEntry(serial, reason: X509RevocationReason.AACompromise)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                ParamName,
-                () => builder.AddEntry(serial, reason: X509RevocationReason.RemoveFromCrl)
+            Assert.Throws<ArgumentOutOfRangeException>(ParamName, () =>
+                builder.AddEntry(serial, reason: X509RevocationReason.RemoveFromCrl)
             );
         }
 
@@ -1017,22 +960,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             CertificateRevocationListBuilder builder = new CertificateRevocationListBuilder();
 
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () => builder.AddEntry(invalidPositive)
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                builder.AddEntry(invalidPositive)
             );
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () => builder.AddEntry(invalidNegative)
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                builder.AddEntry(invalidNegative)
             );
 
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () => builder.AddEntry(new ReadOnlySpan<byte>(invalidPositive))
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                builder.AddEntry(new ReadOnlySpan<byte>(invalidPositive))
             );
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () => builder.AddEntry(new ReadOnlySpan<byte>(invalidNegative))
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                builder.AddEntry(new ReadOnlySpan<byte>(invalidNegative))
             );
         }
 

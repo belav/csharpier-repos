@@ -130,9 +130,8 @@ namespace System.Linq.Tests
         public void CreateQueryNull()
         {
             IQueryProvider provider = Enumerable.Empty<int>().AsQueryable().Provider;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => provider.CreateQuery<int>(null)
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                provider.CreateQuery<int>(null)
             );
         }
 
@@ -140,9 +139,8 @@ namespace System.Linq.Tests
         public void CreateQueryNullNonGeneric()
         {
             IQueryProvider provider = Enumerable.Empty<int>().AsQueryable().Provider;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => provider.CreateQuery(null)
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                provider.CreateQuery(null)
             );
         }
 
@@ -190,9 +188,8 @@ namespace System.Linq.Tests
         public void ExecuteNull()
         {
             IQueryProvider provider = Enumerable.Empty<string>().AsQueryable().Provider;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => provider.Execute<int>(null)
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                provider.Execute<int>(null)
             );
         }
 
@@ -200,9 +197,8 @@ namespace System.Linq.Tests
         public void ExecuteNullNonGeneric()
         {
             IQueryProvider provider = Enumerable.Empty<string>().AsQueryable().Provider;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => provider.Execute(null)
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                provider.Execute(null)
             );
         }
 
@@ -211,9 +207,8 @@ namespace System.Linq.Tests
         {
             var exp = Expression.Constant(Math.PI);
             IQueryProvider provider = Enumerable.Empty<string>().AsQueryable().Provider;
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => provider.Execute<IEnumerable<int>>(exp)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                provider.Execute<IEnumerable<int>>(exp)
             );
         }
 

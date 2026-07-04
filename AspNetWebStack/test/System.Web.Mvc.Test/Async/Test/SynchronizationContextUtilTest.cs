@@ -28,13 +28,10 @@ namespace System.Web.Mvc.Async.Test
                 );
 
             // Act
-            SynchronizationContextUtil.Sync(
-                mockSyncContext.Object,
-                () =>
-                {
-                    actionWasCalled = true;
-                }
-            );
+            SynchronizationContextUtil.Sync(mockSyncContext.Object, () =>
+            {
+                actionWasCalled = true;
+            });
 
             // Assert
             Assert.True(actionWasCalled);
@@ -71,13 +68,10 @@ namespace System.Web.Mvc.Async.Test
                 Assert.Throws<SynchronousOperationException>(
                     delegate
                     {
-                        SynchronizationContextUtil.Sync(
-                            mockSyncContext.Object,
-                            () =>
-                            {
-                                throw exception;
-                            }
-                        );
+                        SynchronizationContextUtil.Sync(mockSyncContext.Object, () =>
+                        {
+                            throw exception;
+                        });
                     },
                     @"An operation that crossed a synchronization context failed. See the inner exception for more information."
                 );

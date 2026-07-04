@@ -37,15 +37,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         public static IReadOnlyList<string> GetNameParts(this INamespaceOrTypeSymbol symbol) =>
-            s_namespaceOrTypeToNameMap.GetValue(
-                symbol,
-                static symbol =>
-                {
-                    var result = new List<string>();
-                    GetNameParts(symbol, result);
-                    return result;
-                }
-            );
+            s_namespaceOrTypeToNameMap.GetValue(symbol, static symbol =>
+            {
+                var result = new List<string>();
+                GetNameParts(symbol, result);
+                return result;
+            });
 
         public static int CompareNameParts(
             IReadOnlyList<string> names1,

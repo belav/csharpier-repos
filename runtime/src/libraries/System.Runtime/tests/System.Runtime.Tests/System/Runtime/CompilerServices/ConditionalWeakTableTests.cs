@@ -19,18 +19,15 @@ namespace System.Runtime.CompilerServices.Tests
             var cwt = new ConditionalWeakTable<object, object>();
 
             object ignored;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => cwt.Add(null, new object())
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                cwt.Add(null, new object())
             ); // null key
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => cwt.TryGetValue(null, out ignored)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                cwt.TryGetValue(null, out ignored)
             ); // null key
             AssertExtensions.Throws<ArgumentNullException>("key", () => cwt.Remove(null)); // null key
-            AssertExtensions.Throws<ArgumentNullException>(
-                "createValueCallback",
-                () => cwt.GetValue(new object(), null)
+            AssertExtensions.Throws<ArgumentNullException>("createValueCallback", () =>
+                cwt.GetValue(new object(), null)
             ); // null delegate
 
             object key = new object();
@@ -192,22 +189,18 @@ namespace System.Runtime.CompilerServices.Tests
         {
             var cwt = new ConditionalWeakTable<object, object>();
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(0.25);
-            Parallel.For(
-                0,
-                Environment.ProcessorCount,
-                i =>
+            Parallel.For(0, Environment.ProcessorCount, i =>
+            {
+                while (DateTime.UtcNow < end)
                 {
-                    while (DateTime.UtcNow < end)
-                    {
-                        object key = new object();
-                        object value = new object();
-                        cwt.Add(key, value);
-                        Assert.Same(value, cwt.GetValue(key, _ => new object()));
-                        Assert.True(cwt.Remove(key));
-                        Assert.False(cwt.Remove(key));
-                    }
+                    object key = new object();
+                    object value = new object();
+                    cwt.Add(key, value);
+                    Assert.Same(value, cwt.GetValue(key, _ => new object()));
+                    Assert.True(cwt.Remove(key));
+                    Assert.False(cwt.Remove(key));
                 }
-            );
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -215,21 +208,17 @@ namespace System.Runtime.CompilerServices.Tests
         {
             var cwt = new ConditionalWeakTable<object, object>();
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(0.25);
-            Parallel.For(
-                0,
-                Environment.ProcessorCount,
-                i =>
+            Parallel.For(0, Environment.ProcessorCount, i =>
+            {
+                while (DateTime.UtcNow < end)
                 {
-                    while (DateTime.UtcNow < end)
-                    {
-                        object key = new object();
-                        object value = new object();
-                        Assert.Same(value, cwt.GetValue(key, _ => value));
-                        Assert.True(cwt.Remove(key));
-                        Assert.False(cwt.Remove(key));
-                    }
+                    object key = new object();
+                    object value = new object();
+                    Assert.Same(value, cwt.GetValue(key, _ => value));
+                    Assert.True(cwt.Remove(key));
+                    Assert.False(cwt.Remove(key));
                 }
-            );
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -240,18 +229,14 @@ namespace System.Runtime.CompilerServices.Tests
 
             var cwt = new ConditionalWeakTable<object, object>();
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(0.25);
-            Parallel.For(
-                0,
-                Environment.ProcessorCount,
-                i =>
+            Parallel.For(0, Environment.ProcessorCount, i =>
+            {
+                while (DateTime.UtcNow < end)
                 {
-                    while (DateTime.UtcNow < end)
-                    {
-                        Assert.Same(value, cwt.GetValue(key, _ => value));
-                        cwt.Remove(key);
-                    }
+                    Assert.Same(value, cwt.GetValue(key, _ => value));
+                    cwt.Remove(key);
                 }
-            );
+            });
         }
 
         [System.Runtime.CompilerServices.MethodImplAttribute(

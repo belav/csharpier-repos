@@ -78,15 +78,13 @@ namespace System.Net.Tests
         public async Task SendAsync_NoInnerBuffer_ThrowsArgumentNullException()
         {
             HttpListenerWebSocketContext context = await GetWebSocketContext();
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                "buffer.Array",
-                () =>
-                    context.WebSocket.SendAsync(
-                        new ArraySegment<byte>(),
-                        WebSocketMessageType.Text,
-                        false,
-                        new CancellationToken()
-                    )
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>("buffer.Array", () =>
+                context.WebSocket.SendAsync(
+                    new ArraySegment<byte>(),
+                    WebSocketMessageType.Text,
+                    false,
+                    new CancellationToken()
+                )
             );
         }
 
@@ -98,15 +96,13 @@ namespace System.Net.Tests
         )
         {
             HttpListenerWebSocketContext context = await GetWebSocketContext();
-            await AssertExtensions.ThrowsAsync<ArgumentException>(
-                "messageType",
-                () =>
-                    context.WebSocket.SendAsync(
-                        new ArraySegment<byte>(),
-                        messageType,
-                        false,
-                        new CancellationToken()
-                    )
+            await AssertExtensions.ThrowsAsync<ArgumentException>("messageType", () =>
+                context.WebSocket.SendAsync(
+                    new ArraySegment<byte>(),
+                    messageType,
+                    false,
+                    new CancellationToken()
+                )
             );
         }
 
@@ -215,13 +211,8 @@ namespace System.Net.Tests
             HttpListenerWebSocketContext context = await GetWebSocketContext();
             await ClientConnectTask;
 
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                "buffer.Array",
-                () =>
-                    context.WebSocket.ReceiveAsync(
-                        new ArraySegment<byte>(),
-                        new CancellationToken()
-                    )
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>("buffer.Array", () =>
+                context.WebSocket.ReceiveAsync(new ArraySegment<byte>(), new CancellationToken())
             );
         }
 
@@ -500,19 +491,15 @@ namespace System.Net.Tests
         {
             HttpListenerWebSocketContext context = await GetWebSocketContext();
 
-            await Assert.ThrowsAsync<ArgumentException>(
-                paramName,
-                () =>
-                    context.WebSocket.CloseAsync(status, statusDescription, new CancellationToken())
+            await Assert.ThrowsAsync<ArgumentException>(paramName, () =>
+                context.WebSocket.CloseAsync(status, statusDescription, new CancellationToken())
             );
-            await Assert.ThrowsAsync<ArgumentException>(
-                paramName,
-                () =>
-                    context.WebSocket.CloseOutputAsync(
-                        status,
-                        statusDescription,
-                        new CancellationToken()
-                    )
+            await Assert.ThrowsAsync<ArgumentException>(paramName, () =>
+                context.WebSocket.CloseOutputAsync(
+                    status,
+                    statusDescription,
+                    new CancellationToken()
+                )
             );
         }
 

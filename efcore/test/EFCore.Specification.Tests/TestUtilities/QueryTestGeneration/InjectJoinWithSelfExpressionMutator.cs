@@ -35,17 +35,15 @@ public class InjectJoinWithSelfExpressionMutator : ExpressionMutator
         var outerKeySelectorPrm = Expression.Parameter(elementType, "oks");
         var innerKeySelectorPrm = Expression.Parameter(elementType, "iks");
 
-        var injector = new ExpressionInjector(
-            _expressionFinder.FoundExpressions[i],
-            e =>
-                Expression.Call(
-                    join,
-                    e,
-                    e,
-                    Expression.Lambda(outerKeySelectorPrm, outerKeySelectorPrm),
-                    Expression.Lambda(innerKeySelectorPrm, innerKeySelectorPrm),
-                    Expression.Lambda(outerKeySelectorPrm, outerKeySelectorPrm, innerKeySelectorPrm)
-                )
+        var injector = new ExpressionInjector(_expressionFinder.FoundExpressions[i], e =>
+            Expression.Call(
+                join,
+                e,
+                e,
+                Expression.Lambda(outerKeySelectorPrm, outerKeySelectorPrm),
+                Expression.Lambda(innerKeySelectorPrm, innerKeySelectorPrm),
+                Expression.Lambda(outerKeySelectorPrm, outerKeySelectorPrm, innerKeySelectorPrm)
+            )
         );
 
         return injector.Visit(expression);

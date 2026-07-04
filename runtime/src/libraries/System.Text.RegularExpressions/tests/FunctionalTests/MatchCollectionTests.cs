@@ -125,16 +125,13 @@ namespace System.Text.RegularExpressions.Tests
             ICollection collection = regex.Matches("dotnet");
 
             // Array is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destinationArray",
-                "dest",
-                () => collection.CopyTo(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("destinationArray", "dest", () =>
+                collection.CopyTo(null, 0)
             );
 
             // Array is multidimensional
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => collection.CopyTo(new object[10, 10], 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                collection.CopyTo(new object[10, 10], 0)
             );
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
@@ -156,15 +153,11 @@ namespace System.Text.RegularExpressions.Tests
             );
 
             // Invalid index + length
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                string.Empty,
-                () => collection.CopyTo(new object[collection.Count], 1)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", string.Empty, () =>
+                collection.CopyTo(new object[collection.Count], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                string.Empty,
-                () => collection.CopyTo(new object[collection.Count + 1], 2)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", string.Empty, () =>
+                collection.CopyTo(new object[collection.Count + 1], 2)
             );
         }
 

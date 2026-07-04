@@ -16,44 +16,26 @@ namespace System.Diagnostics.Contracts.Tests
             Assert.Throws<ArgumentNullException>(() =>
                 Contract.ForAll<int>(Enumerable.Empty<int>(), null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Contract.ForAll(1, 0, i => true)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Contract.ForAll(1, 0, i => true)
             ); // fromInclusive > toExclusive
         }
 
         [Fact]
         public static void EmptyInputReturnsTrue()
         {
-            Assert.True(
-                Contract.ForAll(
-                    Enumerable.Empty<int>(),
-                    i =>
-                    {
-                        throw new ShouldNotBeInvokedException();
-                    }
-                )
-            );
-            Assert.True(
-                Contract.ForAll(
-                    -2,
-                    -2,
-                    i =>
-                    {
-                        throw new ShouldNotBeInvokedException();
-                    }
-                )
-            );
-            Assert.True(
-                Contract.ForAll(
-                    1,
-                    1,
-                    i =>
-                    {
-                        throw new ShouldNotBeInvokedException();
-                    }
-                )
-            );
+            Assert.True(Contract.ForAll(Enumerable.Empty<int>(), i =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                }));
+            Assert.True(Contract.ForAll(-2, -2, i =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                }));
+            Assert.True(Contract.ForAll(1, 1, i =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                }));
         }
 
         [Fact]
@@ -62,30 +44,19 @@ namespace System.Diagnostics.Contracts.Tests
             int count;
 
             count = 0;
-            Assert.False(
-                Contract.ForAll(
-                    Enumerable.Range(0, 10),
-                    i =>
-                    {
-                        count++;
-                        return i != 3;
-                    }
-                )
-            );
+            Assert.False(Contract.ForAll(Enumerable.Range(0, 10), i =>
+                {
+                    count++;
+                    return i != 3;
+                }));
             Assert.Equal(4, count);
 
             count = 0;
-            Assert.False(
-                Contract.ForAll(
-                    -10,
-                    0,
-                    i =>
-                    {
-                        count++;
-                        return i != -8;
-                    }
-                )
-            );
+            Assert.False(Contract.ForAll(-10, 0, i =>
+                {
+                    count++;
+                    return i != -8;
+                }));
             Assert.Equal(3, count);
         }
 
@@ -102,34 +73,23 @@ namespace System.Diagnostics.Contracts.Tests
             int count;
 
             count = 0;
-            Assert.Throws<FormatException>(() =>
-                Contract.ForAll(
-                    Enumerable.Range(0, 10),
-                    i =>
-                    {
-                        count++;
-                        if (i == 3)
-                            throw new FormatException();
-                        return true;
-                    }
-                )
-            );
+            Assert.Throws<FormatException>(() => Contract.ForAll(Enumerable.Range(0, 10), i =>
+                {
+                    count++;
+                    if (i == 3)
+                        throw new FormatException();
+                    return true;
+                }));
             Assert.Equal(4, count);
 
             count = 0;
-            Assert.Throws<FormatException>(() =>
-                Contract.ForAll(
-                    100,
-                    110,
-                    i =>
-                    {
-                        count++;
-                        if (i == 105)
-                            throw new FormatException();
-                        return true;
-                    }
-                )
-            );
+            Assert.Throws<FormatException>(() => Contract.ForAll(100, 110, i =>
+                {
+                    count++;
+                    if (i == 105)
+                        throw new FormatException();
+                    return true;
+                }));
             Assert.Equal(6, count);
         }
     }

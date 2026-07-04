@@ -69,13 +69,11 @@ public class RequiredMembersTests : CSharpTestBase
                     $"Unexpected member symbol type {member.Kind}"
                 );
                 Assert.True(member.IsRequired());
-                Assert.All(
-                    member.GetAttributes(),
-                    attr =>
-                        AssertEx.NotEqual(
-                            "System.Runtime.CompilerServices.RequiredMemberAttribute",
-                            attr.AttributeClass.ToTestDisplayString()
-                        )
+                Assert.All(member.GetAttributes(), attr =>
+                    AssertEx.NotEqual(
+                        "System.Runtime.CompilerServices.RequiredMemberAttribute",
+                        attr.AttributeClass.ToTestDisplayString()
+                    )
                 );
 
                 requiredTypes.Add((NamedTypeSymbol)member.ContainingType);
@@ -116,12 +114,10 @@ public class RequiredMembersTests : CSharpTestBase
             var ctorAttributes = ctor.GetAttributes();
 
             // Attributes should be filtered out when loaded from metadata, and are only added during emit in source
-            Assert.DoesNotContain(
-                ctorAttributes,
-                attr =>
-                    attr.AttributeClass.ToTestDisplayString()
-                        is "System.ObsoleteAttribute"
-                            or "System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"
+            Assert.DoesNotContain(ctorAttributes, attr =>
+                attr.AttributeClass.ToTestDisplayString()
+                    is "System.ObsoleteAttribute"
+                        or "System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"
             );
 
             if (peModule is not null)
@@ -8148,51 +8144,48 @@ public class Derived : Base
             """
         );
 
-        CompileAndVerify(
-            comp,
-            symbolValidator: module =>
+        CompileAndVerify(comp, symbolValidator: module =>
+        {
+            var c = module.ContainingAssembly.GetTypeByMetadataName("C");
+            AssertEx.NotNull(c);
+            FieldSymbol field1 = c.GetMember<FieldSymbol>("Field1");
+            PropertySymbol property1 = c.GetMember<PropertySymbol>("Property1");
+            var d = module.ContainingAssembly.GetTypeByMetadataName("D");
+            AssertEx.NotNull(d);
+            FieldSymbol field2 = d.GetMember<FieldSymbol>("Field2");
+            PropertySymbol property2 = d.GetMember<PropertySymbol>("Property2");
+
+            if (accessAttributesFirst)
             {
-                var c = module.ContainingAssembly.GetTypeByMetadataName("C");
-                AssertEx.NotNull(c);
-                FieldSymbol field1 = c.GetMember<FieldSymbol>("Field1");
-                PropertySymbol property1 = c.GetMember<PropertySymbol>("Property1");
-                var d = module.ContainingAssembly.GetTypeByMetadataName("D");
-                AssertEx.NotNull(d);
-                FieldSymbol field2 = d.GetMember<FieldSymbol>("Field2");
-                PropertySymbol property2 = d.GetMember<PropertySymbol>("Property2");
-
-                if (accessAttributesFirst)
-                {
-                    assertAttributesEmpty();
-                    assertIsRequired();
-                }
-                else
-                {
-                    assertIsRequired();
-                    assertAttributesEmpty();
-                }
-
-                void assertIsRequired()
-                {
-                    Assert.True(c.HasDeclaredRequiredMembers);
-                    Assert.True(field1.IsRequired);
-                    Assert.True(property1.IsRequired);
-                    Assert.False(d.HasDeclaredRequiredMembers);
-                    Assert.False(field2.IsRequired);
-                    Assert.False(property2.IsRequired);
-                }
-
-                void assertAttributesEmpty()
-                {
-                    Assert.Empty(c.GetAttributes());
-                    Assert.Empty(field1.GetAttributes());
-                    Assert.Empty(property1.GetAttributes());
-                    Assert.Empty(d.GetAttributes());
-                    Assert.Empty(field2.GetAttributes());
-                    Assert.Empty(property2.GetAttributes());
-                }
+                assertAttributesEmpty();
+                assertIsRequired();
             }
-        );
+            else
+            {
+                assertIsRequired();
+                assertAttributesEmpty();
+            }
+
+            void assertIsRequired()
+            {
+                Assert.True(c.HasDeclaredRequiredMembers);
+                Assert.True(field1.IsRequired);
+                Assert.True(property1.IsRequired);
+                Assert.False(d.HasDeclaredRequiredMembers);
+                Assert.False(field2.IsRequired);
+                Assert.False(property2.IsRequired);
+            }
+
+            void assertAttributesEmpty()
+            {
+                Assert.Empty(c.GetAttributes());
+                Assert.Empty(field1.GetAttributes());
+                Assert.Empty(property1.GetAttributes());
+                Assert.Empty(d.GetAttributes());
+                Assert.Empty(field2.GetAttributes());
+                Assert.Empty(property2.GetAttributes());
+            }
+        });
     }
 
     [Fact]

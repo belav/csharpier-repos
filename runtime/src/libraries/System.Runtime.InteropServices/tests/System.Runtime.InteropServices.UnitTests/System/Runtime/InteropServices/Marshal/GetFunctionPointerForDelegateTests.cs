@@ -86,13 +86,11 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GetFunctionPointerForDelegate_NullDelegate_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "d",
-                () => Marshal.GetFunctionPointerForDelegate(null)
+            AssertExtensions.Throws<ArgumentNullException>("d", () =>
+                Marshal.GetFunctionPointerForDelegate(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "d",
-                () => Marshal.GetFunctionPointerForDelegate<string>(null)
+            AssertExtensions.Throws<ArgumentNullException>("d", () =>
+                Marshal.GetFunctionPointerForDelegate<string>(null)
             );
         }
 
@@ -111,9 +109,8 @@ namespace System.Runtime.InteropServices.Tests
                 BindingFlags.NonPublic | BindingFlags.Static
             );
             Delegate d = targetMethod.CreateDelegate(typeof(GenericDelegate<string>));
-            AssertExtensions.Throws<ArgumentException>(
-                "delegate",
-                () => Marshal.GetFunctionPointerForDelegate(d)
+            AssertExtensions.Throws<ArgumentException>("delegate", () =>
+                Marshal.GetFunctionPointerForDelegate(d)
             );
         }
 

@@ -510,34 +510,25 @@ namespace System.Data.Tests
         public void Expression_Exceptions()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    dt.Columns[0].Unique = true;
-                    dt.Columns[0].Expression = "sum(" + dt.Columns[0].ColumnName + ")";
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                dt.Columns[0].Unique = true;
+                dt.Columns[0].Expression = "sum(" + dt.Columns[0].ColumnName + ")";
+            });
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTable dt1 = DataProvider.CreateParentDataTable();
-                    dt1.Columns[0].AutoIncrement = true;
-                    dt1.Columns[0].Expression = "sum(" + dt1.Columns[0].ColumnName + ")";
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable dt1 = DataProvider.CreateParentDataTable();
+                dt1.Columns[0].AutoIncrement = true;
+                dt1.Columns[0].Expression = "sum(" + dt1.Columns[0].ColumnName + ")";
+            });
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTable dt1 = DataProvider.CreateParentDataTable();
-                    dt1.Constraints.Add(new UniqueConstraint(dt1.Columns[0], false));
-                    dt1.Columns[0].Expression = "count(" + dt1.Columns[0].ColumnName + ")";
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable dt1 = DataProvider.CreateParentDataTable();
+                dt1.Constraints.Add(new UniqueConstraint(dt1.Columns[0], false));
+                dt1.Columns[0].Expression = "count(" + dt1.Columns[0].ColumnName + ")";
+            });
 
             Assert.Throws<FormatException>(() =>
             {
@@ -546,15 +537,12 @@ namespace System.Data.Tests
                     "CONVERT(" + dt1.Columns[1].ColumnName + ",'System.Int32')";
             });
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTable dt1 = DataProvider.CreateParentDataTable();
-                    dt1.Columns[0].Expression =
-                        "CONVERT(" + dt1.Columns[0].ColumnName + ",'System.DateTime')";
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable dt1 = DataProvider.CreateParentDataTable();
+                dt1.Columns[0].Expression =
+                    "CONVERT(" + dt1.Columns[0].ColumnName + ",'System.DateTime')";
+            });
 
             Assert.Throws<InvalidCastException>(() =>
             {

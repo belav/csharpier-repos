@@ -2111,9 +2111,8 @@ namespace System.Data.Query.PlanCompiler
                     )
                     .ToList()
             );
-            DbExpression predicate = Helpers.BuildBalancedTreeInPlace(
-                predicates,
-                (left, right) => left.And(right)
+            DbExpression predicate = Helpers.BuildBalancedTreeInPlace(predicates, (left, right) =>
+                left.And(right)
             );
             DbFilterExpression result = resultBinding.Filter(predicate);
 

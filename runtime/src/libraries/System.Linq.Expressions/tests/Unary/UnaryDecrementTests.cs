@@ -176,9 +176,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void NullOperand()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => Expression.Decrement(null)
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                Expression.Decrement(null)
             );
         }
 
@@ -190,9 +189,8 @@ namespace System.Linq.Expressions.Tests
                 typeof(Unreadable<int>),
                 nameof(Unreadable<int>.WriteOnly)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.Decrement(operand)
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.Decrement(operand)
             );
         }
 

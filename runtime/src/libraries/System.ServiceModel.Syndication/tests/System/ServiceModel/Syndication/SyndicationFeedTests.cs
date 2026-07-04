@@ -317,9 +317,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => new SyndicationFeedSubclass(null, true)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                new SyndicationFeedSubclass(null, true)
             );
         }
 
@@ -340,13 +339,11 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Load_NullReader_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "reader",
-                () => SyndicationFeed.Load(null)
+            AssertExtensions.Throws<ArgumentNullException>("reader", () =>
+                SyndicationFeed.Load(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "reader",
-                () => SyndicationFeed.Load<SyndicationFeed>(null)
+            AssertExtensions.Throws<ArgumentNullException>("reader", () =>
+                SyndicationFeed.Load<SyndicationFeed>(null)
             );
         }
 
@@ -467,9 +464,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Invoke_ReturnsExpected(string version)
         {
             var feed = new SyndicationFeedSubclass();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => feed.WriteAttributeExtensionsEntryPoint(writer, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                feed.WriteAttributeExtensionsEntryPoint(writer, version)
             );
 
             feed.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
@@ -485,9 +481,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var feed = new SyndicationFeedSubclass();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => feed.WriteAttributeExtensionsEntryPoint(null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                feed.WriteAttributeExtensionsEntryPoint(null, "version")
             );
         }
 
@@ -498,9 +493,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Invoke_ReturnsExpected(string version)
         {
             var feed = new SyndicationFeedSubclass();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => feed.WriteElementExtensionsEntryPoint(writer, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                feed.WriteElementExtensionsEntryPoint(writer, version)
             );
 
             feed.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -520,9 +514,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var feed = new SyndicationFeedSubclass();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => feed.WriteElementExtensionsEntryPoint(null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                feed.WriteElementExtensionsEntryPoint(null, "version")
             );
         }
 

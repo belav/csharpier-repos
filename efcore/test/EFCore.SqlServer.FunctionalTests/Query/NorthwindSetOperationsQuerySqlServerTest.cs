@@ -1590,12 +1590,10 @@ WHERE [c1].[CustomerID] LIKE N'A%'
         bool async
     )
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Select(e => e.CompanyName)
-                    .Union(ss.Set<Customer>().Select(e => e.ContactName))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Select(e => e.CompanyName)
+                .Union(ss.Set<Customer>().Select(e => e.ContactName))
         );
 
         AssertSql(
@@ -1613,12 +1611,10 @@ FROM [Customers] AS [c0]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Union_with_type_mappings_to_same_store_type(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Select(e => e.ContactName)
-                    .Union(ss.Set<Customer>().Select(e => e.ContactTitle))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Select(e => e.ContactName)
+                .Union(ss.Set<Customer>().Select(e => e.ContactTitle))
         );
 
         AssertSql(

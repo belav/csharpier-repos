@@ -83,40 +83,32 @@ namespace System.Text.Tests
             builder.Append("Hello");
 
             AssertExtensions.Throws<ArgumentException>("oldValue", () => Replace(builder, "", "a")); // Old value is empty
-            AssertExtensions.Throws<ArgumentException>(
-                "oldValue",
-                () => Replace(builder, "", "a", 0, 0)
+            AssertExtensions.Throws<ArgumentException>("oldValue", () =>
+                Replace(builder, "", "a", 0, 0)
             ); // Old value is empty
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "requiredLength",
-                () => Replace(builder, "o", "oo")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("requiredLength", () =>
+                Replace(builder, "o", "oo")
             ); // New length > builder.MaxCapacity
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "requiredLength",
-                () => Replace(builder, "o", "oo", 0, 5)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("requiredLength", () =>
+                Replace(builder, "o", "oo", 0, 5)
             ); // New length > builder.MaxCapacity
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => Replace(builder, "a", "b", -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                Replace(builder, "a", "b", -1, 0)
             ); // Start index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Replace(builder, "a", "b", 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Replace(builder, "a", "b", 0, -1)
             ); // Count < 0
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => Replace(builder, "a", "b", 6, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                Replace(builder, "a", "b", 6, 0)
             ); // Count + start index > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Replace(builder, "a", "b", 5, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Replace(builder, "a", "b", 5, 1)
             ); // Count + start index > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Replace(builder, "a", "b", 4, 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Replace(builder, "a", "b", 4, 2)
             ); // Count + start index > builder.Length
         }
 
@@ -143,13 +135,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "oldValue",
-                () => Replace(builder, null, "")
+            AssertExtensions.Throws<ArgumentNullException>("oldValue", () =>
+                Replace(builder, null, "")
             ); // Old value is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "oldValue",
-                () => Replace(builder, null, "a", 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("oldValue", () =>
+                Replace(builder, null, "a", 0, 0)
             ); // Old value is null
         }
 

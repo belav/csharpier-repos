@@ -56,18 +56,16 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<int>)null).Last()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<int>)null).Last()
             );
         }
 
         [Fact]
         public void NullSourcePredicateUsed()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<int>)null).Last(i => i != 2)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<int>)null).Last(i => i != 2)
             );
         }
 
@@ -75,9 +73,8 @@ namespace System.Linq.Tests
         public void NullPredicate()
         {
             Expression<Func<int, bool>> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => Enumerable.Range(0, 3).AsQueryable().Last(predicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                Enumerable.Range(0, 3).AsQueryable().Last(predicate)
             );
         }
 

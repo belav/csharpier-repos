@@ -57,9 +57,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SpecialTypeConstraintKind kind,
             IEnumerable<SyntaxNode> types
         ) =>
-            editor.ReplaceNode(
-                declaration,
-                (d, g) => g.WithTypeConstraint(d, typeParameterName, kind, types)
+            editor.ReplaceNode(declaration, (d, g) =>
+                g.WithTypeConstraint(d, typeParameterName, kind, types)
             );
 
         public static void SetExpression(
@@ -98,9 +97,8 @@ namespace Microsoft.CodeAnalysis.Editing
             int index,
             SyntaxNode parameter
         ) =>
-            editor.ReplaceNode(
-                declaration,
-                (d, g) => g.InsertParameters(d, index, new[] { parameter })
+            editor.ReplaceNode(declaration, (d, g) =>
+                g.InsertParameters(d, index, new[] { parameter })
             );
 
         public static void AddAttribute(
@@ -114,9 +112,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode declaration,
             SyntaxNode attribute
         ) =>
-            editor.ReplaceNode(
-                declaration,
-                (d, g) => g.AddReturnAttributes(d, new[] { attribute })
+            editor.ReplaceNode(declaration, (d, g) =>
+                g.AddReturnAttributes(d, new[] { attribute })
             );
 
         public static void AddAttributeArgument(
@@ -124,9 +121,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode attributeDeclaration,
             SyntaxNode attributeArgument
         ) =>
-            editor.ReplaceNode(
-                attributeDeclaration,
-                (d, g) => g.AddAttributeArguments(d, new[] { attributeArgument })
+            editor.ReplaceNode(attributeDeclaration, (d, g) =>
+                g.AddAttributeArguments(d, new[] { attributeArgument })
             );
 
         public static void AddMember(

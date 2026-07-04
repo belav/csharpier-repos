@@ -386,9 +386,8 @@ namespace System.Text.Json.Reflection
                 // Interface hierarchies support multiple inheritance.
                 // For consistency with class hierarchy resolution order,
                 // sort topologically from most derived to least derived.
-                return JsonHelpers.TraverseGraphWithTopologicalSort(
-                    type,
-                    static t => t.GetInterfaces()
+                return JsonHelpers.TraverseGraphWithTopologicalSort(type, static t =>
+                    t.GetInterfaces()
                 );
             }
         }

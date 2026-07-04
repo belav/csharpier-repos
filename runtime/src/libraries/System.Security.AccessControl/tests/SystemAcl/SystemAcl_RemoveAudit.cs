@@ -488,46 +488,40 @@ namespace System.Security.AccessControl.Tests
             });
 
             //Case 2, SystemAudit Ace but non AuditFlags
-            AssertExtensions.Throws<ArgumentException>(
-                "auditFlags",
-                () =>
-                {
-                    isContainer = false;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    systemAcl.RemoveAudit(
-                        AuditFlags.None,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-                        ),
-                        1,
-                        InheritanceFlags.None,
-                        PropagationFlags.None
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("auditFlags", () =>
+            {
+                isContainer = false;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                systemAcl.RemoveAudit(
+                    AuditFlags.None,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                    ),
+                    1,
+                    InheritanceFlags.None,
+                    PropagationFlags.None
+                );
+            });
 
             //Case 3, 0 accessMask
-            AssertExtensions.Throws<ArgumentException>(
-                "accessMask",
-                () =>
-                {
-                    isContainer = false;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    systemAcl.RemoveAudit(
-                        AuditFlags.Success,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-                        ),
-                        0,
-                        InheritanceFlags.None,
-                        PropagationFlags.None
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("accessMask", () =>
+            {
+                isContainer = false;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                systemAcl.RemoveAudit(
+                    AuditFlags.Success,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                    ),
+                    0,
+                    InheritanceFlags.None,
+                    PropagationFlags.None
+                );
+            });
 
             //Case 4, remove one audit ACE from the SystemAcl with no ACE
             isContainer = true;

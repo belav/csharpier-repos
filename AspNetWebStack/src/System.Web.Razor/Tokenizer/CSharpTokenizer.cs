@@ -243,14 +243,11 @@ namespace System.Web.Razor.Tokenizer
             else if (CurrentCharacter == '@')
             {
                 // Could be escaped comment transition
-                return Transition(
-                    EndSymbol(CSharpSymbolType.Transition),
-                    () =>
-                    {
-                        TakeCurrent();
-                        return Transition(EndSymbol(CSharpSymbolType.Transition), Data);
-                    }
-                );
+                return Transition(EndSymbol(CSharpSymbolType.Transition), () =>
+                {
+                    TakeCurrent();
+                    return Transition(EndSymbol(CSharpSymbolType.Transition), Data);
+                });
             }
             return Stay(EndSymbol(CSharpSymbolType.Transition));
         }

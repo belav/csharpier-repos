@@ -25,49 +25,35 @@ namespace System.Net.WebSockets.Tests
         [Fact]
         public void CreateFromStream_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "stream",
-                () => CreateFromStream(null, true, "subProtocol", TimeSpan.FromSeconds(30))
+            AssertExtensions.Throws<ArgumentNullException>("stream", () =>
+                CreateFromStream(null, true, "subProtocol", TimeSpan.FromSeconds(30))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "stream",
-                () =>
-                    CreateFromStream(
-                        new MemoryStream(new byte[100], writable: false),
-                        true,
-                        "subProtocol",
-                        TimeSpan.FromSeconds(30)
-                    )
+            AssertExtensions.Throws<ArgumentException>("stream", () =>
+                CreateFromStream(
+                    new MemoryStream(new byte[100], writable: false),
+                    true,
+                    "subProtocol",
+                    TimeSpan.FromSeconds(30)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "stream",
-                () =>
-                    CreateFromStream(
-                        new UnreadableStream(),
-                        true,
-                        "subProtocol",
-                        TimeSpan.FromSeconds(30)
-                    )
+            AssertExtensions.Throws<ArgumentException>("stream", () =>
+                CreateFromStream(
+                    new UnreadableStream(),
+                    true,
+                    "subProtocol",
+                    TimeSpan.FromSeconds(30)
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "subProtocol",
-                () => CreateFromStream(new MemoryStream(), true, "    ", TimeSpan.FromSeconds(30))
+            AssertExtensions.Throws<ArgumentException>("subProtocol", () =>
+                CreateFromStream(new MemoryStream(), true, "    ", TimeSpan.FromSeconds(30))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "subProtocol",
-                () => CreateFromStream(new MemoryStream(), true, "\xFF", TimeSpan.FromSeconds(30))
+            AssertExtensions.Throws<ArgumentException>("subProtocol", () =>
+                CreateFromStream(new MemoryStream(), true, "\xFF", TimeSpan.FromSeconds(30))
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "keepAliveInterval",
-                () =>
-                    CreateFromStream(
-                        new MemoryStream(),
-                        true,
-                        "subProtocol",
-                        TimeSpan.FromSeconds(-2)
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("keepAliveInterval", () =>
+                CreateFromStream(new MemoryStream(), true, "subProtocol", TimeSpan.FromSeconds(-2))
             );
         }
 

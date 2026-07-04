@@ -331,14 +331,12 @@ public partial class ModelBindingCommandHandlerTests
         BindingTestCase.Create<bool>("true", o => o.Should().BeTrue()),
         BindingTestCase.Create<ClassWithCtorParameter<int>>("123", o => o.Value.Should().Be(123)),
         BindingTestCase.Create<ClassWithSetter<int>>("123", o => o.Value.Should().Be(123)),
-        BindingTestCase.Create<ClassWithCtorParameter<string>>(
-            "123",
-            o => o.Value.Should().Be("123")
+        BindingTestCase.Create<ClassWithCtorParameter<string>>("123", o =>
+            o.Value.Should().Be("123")
         ),
         BindingTestCase.Create<ClassWithSetter<string>>("123", o => o.Value.Should().Be("123")),
-        BindingTestCase.Create<FileInfo>(
-            Path.Combine(ExistingDirectory(), "file1.txt"),
-            o => o.FullName.Should().Be(Path.Combine(ExistingDirectory(), "file1.txt"))
+        BindingTestCase.Create<FileInfo>(Path.Combine(ExistingDirectory(), "file1.txt"), o =>
+            o.FullName.Should().Be(Path.Combine(ExistingDirectory(), "file1.txt"))
         ),
         BindingTestCase.Create<FileInfo[]>(
             new[]
@@ -357,13 +355,8 @@ public partial class ModelBindingCommandHandlerTests
                         }
                     )
         ),
-        BindingTestCase.Create<DirectoryInfo>(
-            ExistingDirectory(),
-            fsi =>
-                fsi.Should()
-                    .BeOfType<DirectoryInfo>()
-                    .Which.FullName.Should()
-                    .Be(ExistingDirectory())
+        BindingTestCase.Create<DirectoryInfo>(ExistingDirectory(), fsi =>
+            fsi.Should().BeOfType<DirectoryInfo>().Which.FullName.Should().Be(ExistingDirectory())
         ),
         BindingTestCase.Create<DirectoryInfo[]>(
             new[] { ExistingDirectory(), ExistingDirectory() },
@@ -418,21 +411,17 @@ public partial class ModelBindingCommandHandlerTests
                     .Be(NonexistentPathWithoutTrailingSlash()),
             variationName: nameof(NonexistentPathWithoutTrailingSlash)
         ),
-        BindingTestCase.Create<string[]>(
-            new[] { "one", "two" },
-            o => o.Should().BeEquivalentTo(new[] { "one", "two" })
+        BindingTestCase.Create<string[]>(new[] { "one", "two" }, o =>
+            o.Should().BeEquivalentTo(new[] { "one", "two" })
         ),
-        BindingTestCase.Create<List<string>>(
-            new[] { "one", "two" },
-            o => o.Should().BeEquivalentTo(new List<string> { "one", "two" })
+        BindingTestCase.Create<List<string>>(new[] { "one", "two" }, o =>
+            o.Should().BeEquivalentTo(new List<string> { "one", "two" })
         ),
-        BindingTestCase.Create<int[]>(
-            new[] { "1", "2" },
-            o => o.Should().BeEquivalentTo(new[] { 1, 2 })
+        BindingTestCase.Create<int[]>(new[] { "1", "2" }, o =>
+            o.Should().BeEquivalentTo(new[] { 1, 2 })
         ),
-        BindingTestCase.Create<List<int>>(
-            new[] { "1", "2" },
-            o => o.Should().BeEquivalentTo(new List<int> { 1, 2 })
+        BindingTestCase.Create<List<int>>(new[] { "1", "2" }, o =>
+            o.Should().BeEquivalentTo(new List<int> { 1, 2 })
         ),
     };
 

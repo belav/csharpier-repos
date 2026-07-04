@@ -103,9 +103,8 @@ public class TextTemplatingModelGeneratorTest
         var entityType = Assert.Single(result.AdditionalFiles, f => f.Path == "Entity1.cs");
         Assert.Equal("My entity type template", entityType.Code);
 
-        var entityTypeConfiguration = Assert.Single(
-            result.AdditionalFiles,
-            f => f.Path == "Entity1Configuration.cs"
+        var entityTypeConfiguration = Assert.Single(result.AdditionalFiles, f =>
+            f.Path == "Entity1Configuration.cs"
         );
         Assert.Equal("My entity type configuration template", entityTypeConfiguration.Code);
     }
@@ -271,9 +270,8 @@ ProjectDefaultNamespace: RootNamespace
             entityType.Code
         );
 
-        var entityTypeConfiguration = Assert.Single(
-            result.AdditionalFiles,
-            f => f.Path == "Entity1Configuration.cs"
+        var entityTypeConfiguration = Assert.Single(result.AdditionalFiles, f =>
+            f.Path == "Entity1Configuration.cs"
         );
         Assert.Equal(
             """
@@ -393,14 +391,11 @@ My entity type configuration template
             }
         );
 
-        Assert.Collection(
-            reporter.Messages,
-            x =>
-            {
-                Assert.Equal(LogLevel.Warning, x.Level);
-                Assert.Equal(DesignStrings.EncodingIgnored("us-ascii"), x.Message);
-            }
-        );
+        Assert.Collection(reporter.Messages, x =>
+        {
+            Assert.Equal(LogLevel.Warning, x.Level);
+            Assert.Equal(DesignStrings.EncodingIgnored("us-ascii"), x.Message);
+        });
     }
 
     [ConditionalFact]
@@ -430,14 +425,11 @@ My entity type configuration template
 
         Assert.Equal(DesignStrings.ErrorGeneratingOutput(contextTemplate), ex.Message);
 
-        Assert.Collection(
-            reporter.Messages,
-            x =>
-            {
-                Assert.Equal(LogLevel.Error, x.Level);
-                Assert.Contains("This is an error", x.Message);
-            }
-        );
+        Assert.Collection(reporter.Messages, x =>
+        {
+            Assert.Equal(LogLevel.Error, x.Level);
+            Assert.Contains("This is an error", x.Message);
+        });
     }
 
     [ConditionalFact]
@@ -527,17 +519,14 @@ My entity type configuration template
 
         Assert.Equal(DesignStrings.ErrorGeneratingOutput(contextTemplate), ex.Message);
 
-        Assert.Collection(
-            reporter.Messages,
-            x =>
-            {
-                Assert.Equal(LogLevel.Error, x.Level);
-                Assert.Contains(
-                    "DbContext.t4(1,9) : error CS1029: #error: 'This is a compiler error '",
-                    x.Message
-                );
-            }
-        );
+        Assert.Collection(reporter.Messages, x =>
+        {
+            Assert.Equal(LogLevel.Error, x.Level);
+            Assert.Contains(
+                "DbContext.t4(1,9) : error CS1029: #error: 'This is a compiler error '",
+                x.Message
+            );
+        });
     }
 
     private static TemplatedModelGenerator CreateGenerator(IOperationReporter reporter = null)

@@ -125,9 +125,8 @@ namespace System.Xml.XmlDocumentTests
         {
             var xmlDocument = new XmlDocument();
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => xmlDocument.CreateAttribute("xmlns", "aa")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                xmlDocument.CreateAttribute("xmlns", "aa")
             );
         }
     }

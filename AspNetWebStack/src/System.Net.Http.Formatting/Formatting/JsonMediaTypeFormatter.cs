@@ -196,9 +196,8 @@ namespace System.Net.Http.Formatting
                 MediaTypeFormatter.TryGetDelegatingTypeForIQueryableGenericOrSame(ref type);
 
                 // If there is a registered non-null serializer, we can support this type.
-                object serializer = _dataContractSerializerCache.GetOrAdd(
-                    type,
-                    (t) => CreateDataContractSerializer(t, throwOnError: false)
+                object serializer = _dataContractSerializerCache.GetOrAdd(type, (t) =>
+                    CreateDataContractSerializer(t, throwOnError: false)
                 );
 
                 // Null means we tested it before and know it is not supported

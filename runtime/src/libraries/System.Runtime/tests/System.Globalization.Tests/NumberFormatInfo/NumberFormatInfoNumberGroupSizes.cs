@@ -51,10 +51,8 @@ namespace System.Globalization.Tests
         public void NumberGroupSizes_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "NumberGroupSizes",
-                () => format.NumberGroupSizes = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "NumberGroupSizes", () =>
+                format.NumberGroupSizes = null
             );
         }
 
@@ -65,10 +63,8 @@ namespace System.Globalization.Tests
         public void NumberGroupSizes_SetInvalid_ThrowsArgumentException(int[] value)
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                "NumberGroupSizes",
-                () => format.NumberGroupSizes = value
+            AssertExtensions.Throws<ArgumentException>("value", "NumberGroupSizes", () =>
+                format.NumberGroupSizes = value
             );
         }
 

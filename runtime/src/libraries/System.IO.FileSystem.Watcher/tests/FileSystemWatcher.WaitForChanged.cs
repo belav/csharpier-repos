@@ -83,9 +83,8 @@ namespace System.IO.Tests
             string _ = CreateTestDirectory(TestDirectory, GetTestFileName());
             using var fsw = new FileSystemWatcher(TestDirectory);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () => fsw.WaitForChanged(WatcherChangeTypes.All, timeout)
+            Assert.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                fsw.WaitForChanged(WatcherChangeTypes.All, timeout)
             );
         }
 

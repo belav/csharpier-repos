@@ -54,9 +54,8 @@ namespace System.Composition.Hosting.Core.Tests
             var accessor = new SubAccessor();
 
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => accessor.ResolveDependencies("Site", contract, true)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                accessor.ResolveDependencies("Site", contract, true)
             );
             Assert.Same(contract, accessor.Contract);
         }
@@ -67,9 +66,8 @@ namespace System.Composition.Hosting.Core.Tests
             var accessor = new SubAccessor { Result = new ExportDescriptorPromise[] { null } };
 
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "target",
-                () => accessor.ResolveDependencies("Site", contract, true)
+            AssertExtensions.Throws<ArgumentNullException>("target", () =>
+                accessor.ResolveDependencies("Site", contract, true)
             );
             Assert.Same(contract, accessor.Contract);
         }
@@ -162,9 +160,8 @@ namespace System.Composition.Hosting.Core.Tests
             var accessor = new SubAccessor();
 
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => accessor.ResolveRequiredDependency("Site", contract, true)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                accessor.ResolveRequiredDependency("Site", contract, true)
             );
             Assert.Same(contract, accessor.Contract);
         }
@@ -175,9 +172,8 @@ namespace System.Composition.Hosting.Core.Tests
             var accessor = new SubAccessor { Result = new ExportDescriptorPromise[] { null } };
 
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "target",
-                () => accessor.ResolveRequiredDependency("Site", contract, true)
+            AssertExtensions.Throws<ArgumentNullException>("target", () =>
+                accessor.ResolveRequiredDependency("Site", contract, true)
             );
             Assert.Same(contract, accessor.Contract);
         }

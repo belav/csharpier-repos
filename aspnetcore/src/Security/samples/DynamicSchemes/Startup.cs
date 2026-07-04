@@ -28,13 +28,11 @@ public class Startup
         services.AddMvc();
         services
             .AddAuthentication()
-            .AddScheme<SimpleOptions, SimpleAuthHandler>(
-                "fromStartup1",
-                o => o.DisplayMessage = "I am from startup.."
+            .AddScheme<SimpleOptions, SimpleAuthHandler>("fromStartup1", o =>
+                o.DisplayMessage = "I am from startup.."
             )
-            .AddScheme<SimpleOptions, SimpleAuthHandler>(
-                "fromStartup2",
-                o => o.DisplayMessage = "Me too!"
+            .AddScheme<SimpleOptions, SimpleAuthHandler>("fromStartup2", o =>
+                o.DisplayMessage = "Me too!"
             );
     }
 

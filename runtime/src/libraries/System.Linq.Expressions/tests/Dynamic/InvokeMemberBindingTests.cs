@@ -158,18 +158,16 @@ namespace System.Dynamic.Tests
         public void NullName()
         {
             CallInfo info = new CallInfo(0);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new MinimumOverrideInvokeMemberBinding(null, false, info)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new MinimumOverrideInvokeMemberBinding(null, false, info)
             );
         }
 
         [Fact]
         public void NullCallInfo()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "callInfo",
-                () => new MinimumOverrideInvokeMemberBinding("Name", false, null)
+            AssertExtensions.Throws<ArgumentNullException>("callInfo", () =>
+                new MinimumOverrideInvokeMemberBinding("Name", false, null)
             );
         }
 

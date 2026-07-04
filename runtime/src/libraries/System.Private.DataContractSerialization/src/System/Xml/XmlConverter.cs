@@ -1212,22 +1212,18 @@ namespace System.Xml
                 }
             }
 
-            return string.Create(
-                count,
-                s,
-                static (chars, s) =>
+            return string.Create(count, s, static (chars, s) =>
+            {
+                int count = 0;
+                foreach (char c in s)
                 {
-                    int count = 0;
-                    foreach (char c in s)
+                    if (!IsWhitespace(c))
                     {
-                        if (!IsWhitespace(c))
-                        {
-                            chars[count++] = c;
-                        }
+                        chars[count++] = c;
                     }
-                    Debug.Assert(count == chars.Length);
                 }
-            );
+                Debug.Assert(count == chars.Length);
+            });
         }
     }
 }

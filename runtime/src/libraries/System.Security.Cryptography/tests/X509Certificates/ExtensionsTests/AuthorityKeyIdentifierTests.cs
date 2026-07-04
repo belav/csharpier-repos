@@ -1042,116 +1042,87 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         [Fact]
         public static void CreateFromSubjectKeyIdentifier_Validation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "subjectKeyIdentifier",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.CreateFromSubjectKeyIdentifier(
-                        (X509SubjectKeyIdentifierExtension)null
-                    )
+            Assert.Throws<ArgumentNullException>("subjectKeyIdentifier", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromSubjectKeyIdentifier(
+                    (X509SubjectKeyIdentifierExtension)null
+                )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "subjectKeyIdentifier",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.CreateFromSubjectKeyIdentifier((byte[])null)
+            Assert.Throws<ArgumentNullException>("subjectKeyIdentifier", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromSubjectKeyIdentifier((byte[])null)
             );
         }
 
         [Fact]
         public static void CreateFromIssuerAndSerial_Validation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "issuerName",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
-                        null,
-                        Array.Empty<byte>()
-                    )
+            Assert.Throws<ArgumentNullException>("issuerName", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
+                    null,
+                    Array.Empty<byte>()
+                )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "issuerName",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
-                        null,
-                        ReadOnlySpan<byte>.Empty
-                    )
+            Assert.Throws<ArgumentNullException>("issuerName", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
+                    null,
+                    ReadOnlySpan<byte>.Empty
+                )
             );
 
             X500DistinguishedName dn = new X500DistinguishedName("CN=Hi");
 
-            Assert.Throws<ArgumentNullException>(
-                "serialNumber",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
-                        dn,
-                        (byte[])null
-                    )
+            Assert.Throws<ArgumentNullException>("serialNumber", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
+                    dn,
+                    (byte[])null
+                )
             );
         }
 
         [Fact]
         public static void Create_Validation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "keyIdentifier",
-                () => X509AuthorityKeyIdentifierExtension.Create((byte[])null, null, (byte[])null)
+            Assert.Throws<ArgumentNullException>("keyIdentifier", () =>
+                X509AuthorityKeyIdentifierExtension.Create((byte[])null, null, (byte[])null)
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "issuerName",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.Create(
-                        Array.Empty<byte>(),
-                        null,
-                        (byte[])null
-                    )
+            Assert.Throws<ArgumentNullException>("issuerName", () =>
+                X509AuthorityKeyIdentifierExtension.Create(Array.Empty<byte>(), null, (byte[])null)
             );
 
             X500DistinguishedName dn = new X500DistinguishedName("CN=Hi");
 
-            Assert.Throws<ArgumentNullException>(
-                "serialNumber",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.Create(
-                        Array.Empty<byte>(),
-                        dn,
-                        (byte[])null
-                    )
+            Assert.Throws<ArgumentNullException>("serialNumber", () =>
+                X509AuthorityKeyIdentifierExtension.Create(Array.Empty<byte>(), dn, (byte[])null)
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "issuerName",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.Create(
-                        ReadOnlySpan<byte>.Empty,
-                        null,
-                        ReadOnlySpan<byte>.Empty
-                    )
+            Assert.Throws<ArgumentNullException>("issuerName", () =>
+                X509AuthorityKeyIdentifierExtension.Create(
+                    ReadOnlySpan<byte>.Empty,
+                    null,
+                    ReadOnlySpan<byte>.Empty
+                )
             );
         }
 
         [Fact]
         public static void CreateFromCertificate_Validation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "certificate",
-                () => X509AuthorityKeyIdentifierExtension.CreateFromCertificate(null, false, false)
+            Assert.Throws<ArgumentNullException>("certificate", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromCertificate(null, false, false)
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "certificate",
-                () => X509AuthorityKeyIdentifierExtension.CreateFromCertificate(null, false, true)
+            Assert.Throws<ArgumentNullException>("certificate", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromCertificate(null, false, true)
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "certificate",
-                () => X509AuthorityKeyIdentifierExtension.CreateFromCertificate(null, true, false)
+            Assert.Throws<ArgumentNullException>("certificate", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromCertificate(null, true, false)
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "certificate",
-                () => X509AuthorityKeyIdentifierExtension.CreateFromCertificate(null, true, true)
+            Assert.Throws<ArgumentNullException>("certificate", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromCertificate(null, true, true)
             );
         }
 
@@ -1210,40 +1181,33 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             X500DistinguishedName dn = new X500DistinguishedName("CN=Bad Serial");
 
             // Array
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () => X509AuthorityKeyIdentifierExtension.Create(invalidValue, dn, invalidValue)
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                X509AuthorityKeyIdentifierExtension.Create(invalidValue, dn, invalidValue)
             );
 
             // Span
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.Create(
-                        new ReadOnlySpan<byte>(invalidValue),
-                        dn,
-                        new ReadOnlySpan<byte>(invalidValue)
-                    )
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                X509AuthorityKeyIdentifierExtension.Create(
+                    new ReadOnlySpan<byte>(invalidValue),
+                    dn,
+                    new ReadOnlySpan<byte>(invalidValue)
+                )
             );
 
             // Array
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
-                        dn,
-                        invalidValue
-                    )
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
+                    dn,
+                    invalidValue
+                )
             );
 
             // Span
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
-                        dn,
-                        new ReadOnlySpan<byte>(invalidValue)
-                    )
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
+                    dn,
+                    new ReadOnlySpan<byte>(invalidValue)
+                )
             );
 
             // The leading 9 bits are all one, also invalid.
@@ -1251,40 +1215,33 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             invalidValue = tooManyOnes;
 
             // Array
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () => X509AuthorityKeyIdentifierExtension.Create(invalidValue, dn, invalidValue)
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                X509AuthorityKeyIdentifierExtension.Create(invalidValue, dn, invalidValue)
             );
 
             // Span
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.Create(
-                        new ReadOnlySpan<byte>(invalidValue),
-                        dn,
-                        new ReadOnlySpan<byte>(invalidValue)
-                    )
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                X509AuthorityKeyIdentifierExtension.Create(
+                    new ReadOnlySpan<byte>(invalidValue),
+                    dn,
+                    new ReadOnlySpan<byte>(invalidValue)
+                )
             );
 
             // Array
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
-                        dn,
-                        invalidValue
-                    )
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
+                    dn,
+                    invalidValue
+                )
             );
 
             // Span
-            Assert.Throws<ArgumentException>(
-                "serialNumber",
-                () =>
-                    X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
-                        dn,
-                        new ReadOnlySpan<byte>(invalidValue)
-                    )
+            Assert.Throws<ArgumentException>("serialNumber", () =>
+                X509AuthorityKeyIdentifierExtension.CreateFromIssuerNameAndSerialNumber(
+                    dn,
+                    new ReadOnlySpan<byte>(invalidValue)
+                )
             );
         }
 

@@ -86,9 +86,8 @@ namespace MonoTests.System
         [Test]
         public void InitializationWithNullValuesTest()
         {
-            Throws(
-                typeof(ArgumentNullException),
-                () => new AggregateException((IEnumerable<Exception>)null)
+            Throws(typeof(ArgumentNullException), () =>
+                new AggregateException((IEnumerable<Exception>)null)
             );
             Throws(typeof(ArgumentNullException), () => new AggregateException((Exception[])null));
         }

@@ -324,20 +324,16 @@ namespace System.IO.MemoryMappedFiles
                 const int MaxNameLength = 30;
                 // The POSIX shared memory object name must begin with '/'.  After that we just want something short (30) and unique.
                 const string NamePrefix = "/dotnet_";
-                return string.Create(
-                    MaxNameLength,
-                    0,
-                    (span, state) =>
-                    {
-                        Span<char> guid = stackalloc char[32];
-                        Guid.NewGuid().TryFormat(guid, out int charsWritten, "N");
-                        Debug.Assert(charsWritten == 32);
-                        NamePrefix.CopyTo(span);
-                        guid.Slice(0, MaxNameLength - NamePrefix.Length)
-                            .CopyTo(span.Slice(NamePrefix.Length));
-                        Debug.Assert(Encoding.UTF8.GetByteCount(span) <= MaxNameLength); // the standard uses Utf8
-                    }
-                );
+                return string.Create(MaxNameLength, 0, (span, state) =>
+                {
+                    Span<char> guid = stackalloc char[32];
+                    Guid.NewGuid().TryFormat(guid, out int charsWritten, "N");
+                    Debug.Assert(charsWritten == 32);
+                    NamePrefix.CopyTo(span);
+                    guid.Slice(0, MaxNameLength - NamePrefix.Length)
+                        .CopyTo(span.Slice(NamePrefix.Length));
+                    Debug.Assert(Encoding.UTF8.GetByteCount(span) <= MaxNameLength); // the standard uses Utf8
+                });
             }
         }
 

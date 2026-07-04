@@ -595,13 +595,11 @@ namespace System.Net.Tests
 
                 using (Stream inputStream = request.InputStream)
                 {
-                    AssertExtensions.Throws<ArgumentNullException>(
-                        "buffer",
-                        () => inputStream.Read(null, 0, 0)
+                    AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+                        inputStream.Read(null, 0, 0)
                     );
-                    await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                        "buffer",
-                        () => inputStream.ReadAsync(null, 0, 0)
+                    await AssertExtensions.ThrowsAsync<ArgumentNullException>("buffer", () =>
+                        inputStream.ReadAsync(null, 0, 0)
                     );
                 }
 
@@ -706,9 +704,8 @@ namespace System.Net.Tests
 
                 using (Stream inputStream = request.InputStream)
                 {
-                    AssertExtensions.Throws<ArgumentNullException>(
-                        "asyncResult",
-                        () => inputStream.EndRead(null)
+                    AssertExtensions.Throws<ArgumentNullException>("asyncResult", () =>
+                        inputStream.EndRead(null)
                     );
                 }
 
@@ -753,13 +750,11 @@ namespace System.Net.Tests
                         null
                     );
 
-                    AssertExtensions.Throws<ArgumentException>(
-                        "asyncResult",
-                        () => inputStream2.EndRead(new CustomAsyncResult())
+                    AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                        inputStream2.EndRead(new CustomAsyncResult())
                     );
-                    AssertExtensions.Throws<ArgumentException>(
-                        "asyncResult",
-                        () => inputStream2.EndRead(beginReadResult)
+                    AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                        inputStream2.EndRead(beginReadResult)
                     );
                 }
 

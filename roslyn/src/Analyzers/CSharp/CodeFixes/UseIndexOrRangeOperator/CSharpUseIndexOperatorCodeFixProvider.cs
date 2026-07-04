@@ -70,9 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                     cancellationToken
                 );
 
-                editor.ReplaceNode(
-                    node,
-                    (currentNode, _) => IndexExpression(((BinaryExpressionSyntax)currentNode).Right)
+                editor.ReplaceNode(node, (currentNode, _) =>
+                    IndexExpression(((BinaryExpressionSyntax)currentNode).Right)
                 );
             }
 

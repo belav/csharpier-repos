@@ -939,13 +939,10 @@ public class RazorPageTest
             p =>
             {
                 p.Layout = "bar";
-                p.DefineSection(
-                    "test-section",
-                    async () =>
-                    {
-                        await p.FlushAsync();
-                    }
-                );
+                p.DefineSection("test-section", async () =>
+                {
+                    await p.FlushAsync();
+                });
             },
             context
         );

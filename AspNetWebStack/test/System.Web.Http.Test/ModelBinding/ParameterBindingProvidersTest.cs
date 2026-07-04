@@ -93,21 +93,14 @@ namespace System.Web.Http.ModelBinding
             ParameterBindingRulesCollection pb = new ParameterBindingRulesCollection();
             HttpParameterBinding mockBinding = new EmptyParameterBinding();
 
-            pb.Add(
-                typeof(string),
-                param =>
-                {
-                    throw new InvalidOperationException("shouldn't be called");
-                }
-            );
-            pb.Insert(
-                0,
-                typeof(string),
-                param =>
-                {
-                    throw new InvalidOperationException("shouldn't be called");
-                }
-            );
+            pb.Add(typeof(string), param =>
+            {
+                throw new InvalidOperationException("shouldn't be called");
+            });
+            pb.Insert(0, typeof(string), param =>
+            {
+                throw new InvalidOperationException("shouldn't be called");
+            });
 
             // Act
             HttpParameterBinding b2 = pb.LookupBinding(

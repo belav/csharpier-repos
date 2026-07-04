@@ -229,9 +229,8 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
             type.DefineGenericParameters("T");
 
-            Assert.Throws(
-                exceptionType,
-                () => type.DefineEvent(name, EventAttributes.None, eventType)
+            Assert.Throws(exceptionType, () =>
+                type.DefineEvent(name, EventAttributes.None, eventType)
             );
         }
 

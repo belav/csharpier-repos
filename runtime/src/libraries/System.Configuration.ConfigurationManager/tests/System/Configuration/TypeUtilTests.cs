@@ -111,9 +111,8 @@ namespace System.ConfigurationTests
                     return null;
                 }
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => TypeUtil.GetType(host, "Mxyzptlk", throwOnError: true)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                TypeUtil.GetType(host, "Mxyzptlk", throwOnError: true)
             );
         }
 

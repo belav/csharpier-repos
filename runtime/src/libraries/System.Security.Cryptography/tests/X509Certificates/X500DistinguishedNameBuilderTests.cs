@@ -33,9 +33,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             X500DistinguishedNameBuilder builder = new();
             string bigEmail = new string('a', 244) + "@example.com";
-            AssertExtensions.Throws<ArgumentException>(
-                "emailAddress",
-                () => builder.AddEmailAddress(bigEmail)
+            AssertExtensions.Throws<ArgumentException>("emailAddress", () =>
+                builder.AddEmailAddress(bigEmail)
             );
         }
 
@@ -43,9 +42,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void AddEmailAddress_InvalidIA5_Fails()
         {
             X500DistinguishedNameBuilder builder = new();
-            ArgumentException ex = AssertExtensions.Throws<ArgumentException>(
-                "emailAddress",
-                () => builder.AddEmailAddress("\u043A@example.com")
+            ArgumentException ex = AssertExtensions.Throws<ArgumentException>("emailAddress", () =>
+                builder.AddEmailAddress("\u043A@example.com")
             );
             Assert.Contains("'IA5String'", ex.Message);
         }
@@ -71,9 +69,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void AddLocalityName_Success_EncodeToUTF8String()
         {
-            AssertBuilder(
-                "300F310D300B06035504070C04486F6D65",
-                builder => builder.AddLocalityName("Home")
+            AssertBuilder("300F310D300B06035504070C04486F6D65", builder =>
+                builder.AddLocalityName("Home")
             );
         }
 
@@ -109,72 +106,64 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void AddCountryOrRegion_Invalid_Fails(string countryOrRegion)
         {
             X500DistinguishedNameBuilder builder = new();
-            AssertExtensions.Throws<ArgumentException>(
-                "twoLetterCode",
-                () => builder.AddCountryOrRegion(countryOrRegion)
+            AssertExtensions.Throws<ArgumentException>("twoLetterCode", () =>
+                builder.AddCountryOrRegion(countryOrRegion)
             );
         }
 
         [Fact]
         public static void AddOrganizationName_Success_EncodeToUTF8String()
         {
-            AssertBuilder(
-                "3011310F300D060355040A0C06476974487562",
-                builder => builder.AddOrganizationName("GitHub")
+            AssertBuilder("3011310F300D060355040A0C06476974487562", builder =>
+                builder.AddOrganizationName("GitHub")
             );
         }
 
         [Fact]
         public static void AddOrganizationName_NullOrEmpty_Fails()
         {
-            AssertAddThrowsOnNullAndEmpty(
-                "organizationName",
-                builder => builder.AddOrganizationName
+            AssertAddThrowsOnNullAndEmpty("organizationName", builder =>
+                builder.AddOrganizationName
             );
         }
 
         [Fact]
         public static void AddOrganizationalUnitName_Success_EncodeToUTF8String()
         {
-            AssertBuilder(
-                "300E310C300A060355040B0C03505345",
-                builder => builder.AddOrganizationalUnitName("PSE")
+            AssertBuilder("300E310C300A060355040B0C03505345", builder =>
+                builder.AddOrganizationalUnitName("PSE")
             );
         }
 
         [Fact]
         public static void AddOrganizationalUnitName_NullOrEmpty_Fails()
         {
-            AssertAddThrowsOnNullAndEmpty(
-                "organizationalUnitName",
-                builder => builder.AddOrganizationalUnitName
+            AssertAddThrowsOnNullAndEmpty("organizationalUnitName", builder =>
+                builder.AddOrganizationalUnitName
             );
         }
 
         [Fact]
         public static void AddStateOrProvinceName_Success_EncodeToUTF8String()
         {
-            AssertBuilder(
-                "30153113301106035504080C0A43616C69666F726E6961",
-                builder => builder.AddStateOrProvinceName("California")
+            AssertBuilder("30153113301106035504080C0A43616C69666F726E6961", builder =>
+                builder.AddStateOrProvinceName("California")
             );
         }
 
         [Fact]
         public static void AddStateOrProvinceName_NullOrEmpty_Fails()
         {
-            AssertAddThrowsOnNullAndEmpty(
-                "stateOrProvinceName",
-                builder => builder.AddStateOrProvinceName
+            AssertAddThrowsOnNullAndEmpty("stateOrProvinceName", builder =>
+                builder.AddStateOrProvinceName
             );
         }
 
         [Fact]
         public static void AddDomainComponent_Success_EncodeToIA5String()
         {
-            AssertBuilder(
-                "301A31183016060A0992268993F22C6401191608494E5445524E414C",
-                builder => builder.AddDomainComponent("INTERNAL")
+            AssertBuilder("301A31183016060A0992268993F22C6401191608494E5445524E414C", builder =>
+                builder.AddDomainComponent("INTERNAL")
             );
         }
 
@@ -199,13 +188,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void Add_InvalidUniversalTagNumber()
         {
             X500DistinguishedNameBuilder builder = new();
-            AssertExtensions.Throws<ArgumentException>(
-                "stringEncodingType",
-                () => builder.Add(TestOid, "True", UniversalTagNumber.Boolean)
+            AssertExtensions.Throws<ArgumentException>("stringEncodingType", () =>
+                builder.Add(TestOid, "True", UniversalTagNumber.Boolean)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "stringEncodingType",
-                () => builder.Add(new Oid(TestOid, null), "True", UniversalTagNumber.Boolean)
+            AssertExtensions.Throws<ArgumentException>("stringEncodingType", () =>
+                builder.Add(new Oid(TestOid, null), "True", UniversalTagNumber.Boolean)
             );
         }
 
@@ -213,9 +200,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void Add_OidString_NullOrEmpty_Fails()
         {
             X500DistinguishedNameBuilder builder = new();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "oidValue",
-                () => builder.Add((string)null, "banana")
+            AssertExtensions.Throws<ArgumentNullException>("oidValue", () =>
+                builder.Add((string)null, "banana")
             );
             AssertExtensions.Throws<ArgumentException>("oidValue", () => builder.Add("", "banana"));
         }
@@ -224,9 +210,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void Add_OidString_NotAnOid_Fails()
         {
             X500DistinguishedNameBuilder builder = new();
-            AssertExtensions.Throws<ArgumentException>(
-                "oidValue",
-                () => builder.Add("strawberry", "banana")
+            AssertExtensions.Throws<ArgumentException>("oidValue", () =>
+                builder.Add("strawberry", "banana")
             );
         }
 
@@ -260,9 +245,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X500DistinguishedNameBuilder builder = new();
 
             // Cause an exception to be raised, and handled.
-            AssertExtensions.Throws<ArgumentException>(
-                "emailAddress",
-                () => builder.AddEmailAddress("\u0411\u0430\u043d\u0430\u043d")
+            AssertExtensions.Throws<ArgumentException>("emailAddress", () =>
+                builder.AddEmailAddress("\u0411\u0430\u043d\u0430\u043d")
             );
 
             // Make sure the handled exception didn't put the builder in an invalid state.
@@ -307,21 +291,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 + "3120301E06092A864886F70D01090116116B6576696E406578616D706C652E636F6D"
                 + "3114301206035504030C0B4B6576696E204A6F6E6573";
 
-            AssertBuilder(
-                ExpectedHex,
-                builder =>
-                {
-                    builder.AddCommonName("Kevin Jones");
-                    builder.AddEmailAddress("kevin@example.com");
-                    builder.AddLocalityName("Alexandria");
-                    builder.AddStateOrProvinceName("Virginia");
-                    builder.AddCountryOrRegion("US");
-                    builder.AddOrganizationName("GitHub");
-                    builder.AddOrganizationalUnitName("PSE");
-                    builder.AddDomainComponent("github");
-                    builder.AddDomainComponent("com");
-                }
-            );
+            AssertBuilder(ExpectedHex, builder =>
+            {
+                builder.AddCommonName("Kevin Jones");
+                builder.AddEmailAddress("kevin@example.com");
+                builder.AddLocalityName("Alexandria");
+                builder.AddStateOrProvinceName("Virginia");
+                builder.AddCountryOrRegion("US");
+                builder.AddOrganizationName("GitHub");
+                builder.AddOrganizationalUnitName("PSE");
+                builder.AddDomainComponent("github");
+                builder.AddDomainComponent("com");
+            });
         }
 
         public static IEnumerable<object[]> AddStringTheories
@@ -406,13 +387,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             Func<X500DistinguishedNameBuilder, Action<string>> adder
         )
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                paramName,
-                () => adder(new X500DistinguishedNameBuilder())(null)
+            AssertExtensions.Throws<ArgumentNullException>(paramName, () =>
+                adder(new X500DistinguishedNameBuilder())(null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                paramName,
-                () => adder(new X500DistinguishedNameBuilder())(string.Empty)
+            AssertExtensions.Throws<ArgumentException>(paramName, () =>
+                adder(new X500DistinguishedNameBuilder())(string.Empty)
             );
         }
 

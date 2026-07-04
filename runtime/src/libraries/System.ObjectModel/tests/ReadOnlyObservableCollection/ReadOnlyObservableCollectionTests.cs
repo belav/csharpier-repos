@@ -35,9 +35,8 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void Ctor_Tests_Negative()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "list",
-                () => new ReadOnlyObservableCollection<string>(null)
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                new ReadOnlyObservableCollection<string>(null)
             );
         }
 
@@ -193,31 +192,23 @@ namespace System.Collections.ObjectModel.Tests
             foreach (var index in iArrLargeValues)
             {
                 string[] aCopy = new string[anArray.Length];
-                AssertExtensions.Throws<ArgumentException>(
-                    "destinationArray",
-                    null,
-                    () => readOnlyCol.CopyTo(aCopy, index)
+                AssertExtensions.Throws<ArgumentException>("destinationArray", null, () =>
+                    readOnlyCol.CopyTo(aCopy, index)
                 );
             }
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destinationArray",
-                "dest",
-                () => readOnlyCol.CopyTo(null, 1)
+            AssertExtensions.Throws<ArgumentNullException>("destinationArray", "dest", () =>
+                readOnlyCol.CopyTo(null, 1)
             );
 
             string[] copy = new string[anArray.Length - 1];
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                "",
-                () => readOnlyCol.CopyTo(copy, 0)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                readOnlyCol.CopyTo(copy, 0)
             );
 
             copy = new string[0];
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                "",
-                () => readOnlyCol.CopyTo(copy, 0)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                readOnlyCol.CopyTo(copy, 0)
             );
         }
 
@@ -363,9 +354,8 @@ namespace System.Collections.ObjectModel.Tests
         public void Item_get_Tests_Negative()
         {
             // Verify get_Item with index=Int32.MinValue
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => _collection[int.MinValue]
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                _collection[int.MinValue]
             );
 
             // Verify that the collection was not mutated
@@ -388,9 +378,8 @@ namespace System.Collections.ObjectModel.Tests
             else
             {
                 // Verify get_Item with index=Count on Empty collection
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => _collection[_expectedItems.Length]
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    _collection[_expectedItems.Length]
                 );
 
                 // Verify that the collection was not mutated

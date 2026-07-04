@@ -37,68 +37,54 @@ namespace System.Security.Cryptography.Dsa.Tests
         {
             using (DSA dsa = DSAFactory.Create(1024))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "rgbHash",
-                    () => dsa.CreateSignature(null)
+                AssertExtensions.Throws<ArgumentNullException>("rgbHash", () =>
+                    dsa.CreateSignature(null)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => dsa.SignData((byte[])null, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    dsa.SignData((byte[])null, HashAlgorithmName.SHA1)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => dsa.SignData(null, 0, 0, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    dsa.SignData(null, 0, 0, HashAlgorithmName.SHA1)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => dsa.SignData(new byte[1], -1, 0, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    dsa.SignData(new byte[1], -1, 0, HashAlgorithmName.SHA1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => dsa.SignData(new byte[1], 2, 0, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    dsa.SignData(new byte[1], 2, 0, HashAlgorithmName.SHA1)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => dsa.SignData(new byte[1], 0, -1, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    dsa.SignData(new byte[1], 0, -1, HashAlgorithmName.SHA1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => dsa.SignData(new byte[1], 0, 2, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    dsa.SignData(new byte[1], 0, 2, HashAlgorithmName.SHA1)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => dsa.VerifyData((byte[])null, null, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    dsa.VerifyData((byte[])null, null, HashAlgorithmName.SHA1)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => dsa.VerifyData(null, 0, 0, null, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    dsa.VerifyData(null, 0, 0, null, HashAlgorithmName.SHA1)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "signature",
-                    () => dsa.VerifyData(new byte[1], null, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentNullException>("signature", () =>
+                    dsa.VerifyData(new byte[1], null, HashAlgorithmName.SHA1)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => dsa.VerifyData(new byte[1], -1, 0, new byte[1], HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    dsa.VerifyData(new byte[1], -1, 0, new byte[1], HashAlgorithmName.SHA1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => dsa.VerifyData(new byte[1], 2, 0, new byte[1], HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    dsa.VerifyData(new byte[1], 2, 0, new byte[1], HashAlgorithmName.SHA1)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => dsa.VerifyData(new byte[1], 0, -1, new byte[1], HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    dsa.VerifyData(new byte[1], 0, -1, new byte[1], HashAlgorithmName.SHA1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => dsa.VerifyData(new byte[1], 0, 2, new byte[1], HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    dsa.VerifyData(new byte[1], 0, 2, new byte[1], HashAlgorithmName.SHA1)
                 );
             }
         }
@@ -125,18 +111,15 @@ namespace System.Security.Cryptography.Dsa.Tests
         {
             using (DSA dsa = DSAFactory.Create(1024))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => dsa.SignData((Stream)null, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    dsa.SignData((Stream)null, HashAlgorithmName.SHA1)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => dsa.VerifyData((Stream)null, null, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    dsa.VerifyData((Stream)null, null, HashAlgorithmName.SHA1)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "signature",
-                    () => dsa.VerifyData(new MemoryStream(), null, HashAlgorithmName.SHA1)
+                AssertExtensions.Throws<ArgumentNullException>("signature", () =>
+                    dsa.VerifyData(new MemoryStream(), null, HashAlgorithmName.SHA1)
                 );
             }
         }

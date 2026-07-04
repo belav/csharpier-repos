@@ -35,22 +35,19 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(typeof(GenericSubComImportObject<>))]
         public void CreateWrapperOfType_InvalidComObjectType_ThrowsArgumentException(Type t)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "t",
-                () => Marshal.CreateWrapperOfType(new ComImportObject(), t)
+            AssertExtensions.Throws<ArgumentException>("t", () =>
+                Marshal.CreateWrapperOfType(new ComImportObject(), t)
             );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void CreateWrappedOfType_ObjectNotComObject_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "o",
-                () => Marshal.CreateWrapperOfType(10, typeof(ComImportObject))
+            AssertExtensions.Throws<ArgumentException>("o", () =>
+                Marshal.CreateWrapperOfType(10, typeof(ComImportObject))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "o",
-                () => Marshal.CreateWrapperOfType<int, ComImportObject>(10)
+            AssertExtensions.Throws<ArgumentException>("o", () =>
+                Marshal.CreateWrapperOfType<int, ComImportObject>(10)
             );
         }
     }

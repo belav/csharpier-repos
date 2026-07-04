@@ -5106,31 +5106,27 @@ public class Invoke
     }
 }
 ";
-            CompileWithCustomILSource(
-                cSharpSource,
-                ilSource,
-                compilation =>
-                {
-                    compilation.VerifyDiagnostics();
+            CompileWithCustomILSource(cSharpSource, ilSource, compilation =>
+            {
+                compilation.VerifyDiagnostics();
 
-                    var globalNamespace = compilation.GlobalNamespace;
+                var globalNamespace = compilation.GlobalNamespace;
 
-                    var baseClass = globalNamespace.GetMember<NamedTypeSymbol>("Base");
-                    var derivedClass = globalNamespace.GetMember<NamedTypeSymbol>("Derived");
-                    var overrideClass = globalNamespace.GetMember<NamedTypeSymbol>("Override");
-                    var invokeClass = globalNamespace.GetMember<NamedTypeSymbol>("Invoke");
+                var baseClass = globalNamespace.GetMember<NamedTypeSymbol>("Base");
+                var derivedClass = globalNamespace.GetMember<NamedTypeSymbol>("Derived");
+                var overrideClass = globalNamespace.GetMember<NamedTypeSymbol>("Override");
+                var invokeClass = globalNamespace.GetMember<NamedTypeSymbol>("Invoke");
 
-                    var baseMethod = baseClass.GetMember<MethodSymbol>("Foo");
-                    var derivedMethod = derivedClass.GetMember<MethodSymbol>("Bar");
-                    var overrideMethod = overrideClass.GetMember<MethodSymbol>("Bar");
+                var baseMethod = baseClass.GetMember<MethodSymbol>("Foo");
+                var derivedMethod = derivedClass.GetMember<MethodSymbol>("Bar");
+                var overrideMethod = overrideClass.GetMember<MethodSymbol>("Bar");
 
-                    Assert.True(derivedMethod.IsOverride);
-                    Assert.Null(derivedMethod.OverriddenMethod);
+                Assert.True(derivedMethod.IsOverride);
+                Assert.Null(derivedMethod.OverriddenMethod);
 
-                    Assert.True(overrideMethod.IsOverride);
-                    Assert.Equal(derivedMethod, overrideMethod.OverriddenMethod);
-                }
-            );
+                Assert.True(overrideMethod.IsOverride);
+                Assert.Equal(derivedMethod, overrideMethod.OverriddenMethod);
+            });
         }
 
         [WorkItem(542828, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542828")]

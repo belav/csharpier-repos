@@ -155,9 +155,8 @@ namespace System.Collections.Tests
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
             int capacityBefore = dictionary.Capacity;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => dictionary.Capacity = -1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                dictionary.Capacity = -1
             );
             Assert.Equal(capacityBefore, dictionary.Capacity);
         }
@@ -173,9 +172,8 @@ namespace System.Collections.Tests
             for (int i = 0; i < count; i++)
             {
                 AddToCollection(dictionary, 1);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => dictionary.Capacity = i
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    dictionary.Capacity = i
                 );
             }
         }
@@ -297,13 +295,10 @@ namespace System.Collections.Tests
         {
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
-            Assert.All(
-                Enumerable.Range(0, count),
-                index =>
-                {
-                    Assert.Equal(index, dictionary.IndexOfKey(dictionary.GetKeyAtIndex(index)));
-                }
-            );
+            Assert.All(Enumerable.Range(0, count), index =>
+            {
+                Assert.Equal(index, dictionary.IndexOfKey(dictionary.GetKeyAtIndex(index)));
+            });
         }
 
         [Theory]
@@ -331,13 +326,10 @@ namespace System.Collections.Tests
             // Assumes no duplicate elements contained in the dictionary returned by GenericIDictionaryFactory
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
-            Assert.All(
-                Enumerable.Range(0, count),
-                index =>
-                {
-                    Assert.Equal(index, dictionary.IndexOfValue(dictionary.GetValueAtIndex(index)));
-                }
-            );
+            Assert.All(Enumerable.Range(0, count), index =>
+            {
+                Assert.Equal(index, dictionary.IndexOfValue(dictionary.GetValueAtIndex(index)));
+            });
         }
 
         [Theory]
@@ -385,13 +377,10 @@ namespace System.Collections.Tests
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
             IList<TKey> keys = dictionary.Keys;
-            Assert.All(
-                Enumerable.Range(0, count),
-                index =>
-                {
-                    Assert.Equal(index, dictionary.IndexOfKey(keys[index]));
-                }
-            );
+            Assert.All(Enumerable.Range(0, count), index =>
+            {
+                Assert.Equal(index, dictionary.IndexOfKey(keys[index]));
+            });
         }
 
         #endregion
@@ -475,13 +464,10 @@ namespace System.Collections.Tests
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
             IList<TKey> keys = dictionary.Keys;
-            Assert.All(
-                Enumerable.Range(0, count),
-                index =>
-                {
-                    Assert.Equal(index, dictionary.IndexOfValue(dictionary[keys[index]]));
-                }
-            );
+            Assert.All(Enumerable.Range(0, count), index =>
+            {
+                Assert.Equal(index, dictionary.IndexOfValue(dictionary[keys[index]]));
+            });
         }
 
         #endregion
@@ -537,15 +523,12 @@ namespace System.Collections.Tests
                 SortedList<TKey, TValue> dictionary =
                     (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
                 TValue newValue = CreateTValue(seed++);
-                Assert.All(
-                    Enumerable.Range(0, count),
-                    index =>
-                    {
-                        Assert.NotEqual(newValue, dictionary.GetValueAtIndex(index));
-                        dictionary.SetValueAtIndex(index, newValue);
-                        Assert.Equal(newValue, dictionary.GetValueAtIndex(index));
-                    }
-                );
+                Assert.All(Enumerable.Range(0, count), index =>
+                {
+                    Assert.NotEqual(newValue, dictionary.GetValueAtIndex(index));
+                    dictionary.SetValueAtIndex(index, newValue);
+                    Assert.Equal(newValue, dictionary.GetValueAtIndex(index));
+                });
             }
         }
 
@@ -626,13 +609,10 @@ namespace System.Collections.Tests
             {
                 SortedList<TKey, TValue> dictionary =
                     (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
-                Assert.All(
-                    dictionary.ToList(),
-                    value =>
-                    {
-                        RemoveAt(dictionary, value);
-                    }
-                );
+                Assert.All(dictionary.ToList(), value =>
+                {
+                    RemoveAt(dictionary, value);
+                });
                 Assert.Empty(dictionary);
             }
         }

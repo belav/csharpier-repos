@@ -10,9 +10,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void PtrToStringBSTR_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ptr",
-                () => Marshal.PtrToStringBSTR(IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentNullException>("ptr", () =>
+                Marshal.PtrToStringBSTR(IntPtr.Zero)
             );
         }
     }

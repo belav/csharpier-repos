@@ -12,13 +12,11 @@ namespace System.Threading.Tests
         [Fact]
         public void Ctor_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "period",
-                () => new PeriodicTimer(TimeSpan.Zero)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () =>
+                new PeriodicTimer(TimeSpan.Zero)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "period",
-                () => new PeriodicTimer(TimeSpan.FromMilliseconds(uint.MaxValue))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () =>
+                new PeriodicTimer(TimeSpan.FromMilliseconds(uint.MaxValue))
             );
         }
 
@@ -35,13 +33,11 @@ namespace System.Threading.Tests
         public void Period_InvalidArguments_Throws()
         {
             PeriodicTimer timer = new PeriodicTimer(TimeSpan.FromMilliseconds(1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => timer.Period = TimeSpan.Zero
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                timer.Period = TimeSpan.Zero
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => timer.Period = TimeSpan.FromMilliseconds(uint.MaxValue)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                timer.Period = TimeSpan.FromMilliseconds(uint.MaxValue)
             );
 
             timer.Dispose();
@@ -62,9 +58,8 @@ namespace System.Threading.Tests
             timer.Period = TimeSpan.FromDays(1);
             Assert.Equal(TimeSpan.FromDays(1), timer.Period);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => timer.Period = TimeSpan.Zero
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                timer.Period = TimeSpan.Zero
             );
             Assert.Equal(TimeSpan.FromDays(1), timer.Period);
         }

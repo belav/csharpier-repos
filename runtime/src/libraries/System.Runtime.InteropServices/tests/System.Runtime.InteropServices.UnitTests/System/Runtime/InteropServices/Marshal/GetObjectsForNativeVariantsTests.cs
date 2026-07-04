@@ -323,26 +323,22 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public static void GetObjectsForNativeVariants_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "aSrcNativeVariant",
-                () => Marshal.GetObjectsForNativeVariants(IntPtr.Zero, 10)
+            AssertExtensions.Throws<ArgumentNullException>("aSrcNativeVariant", () =>
+                Marshal.GetObjectsForNativeVariants(IntPtr.Zero, 10)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "aSrcNativeVariant",
-                () => Marshal.GetObjectsForNativeVariants<int>(IntPtr.Zero, 10)
+            AssertExtensions.Throws<ArgumentNullException>("aSrcNativeVariant", () =>
+                Marshal.GetObjectsForNativeVariants<int>(IntPtr.Zero, 10)
             );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public static void GetObjectsForNativeVariants_NegativeCount_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "cVars",
-                () => Marshal.GetObjectsForNativeVariants((IntPtr)1, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("cVars", () =>
+                Marshal.GetObjectsForNativeVariants((IntPtr)1, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "cVars",
-                () => Marshal.GetObjectsForNativeVariants<int>((IntPtr)1, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("cVars", () =>
+                Marshal.GetObjectsForNativeVariants<int>((IntPtr)1, -1)
             );
         }
 #pragma warning restore 618

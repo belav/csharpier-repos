@@ -32,25 +32,19 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_NullAsContractNameArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "contractName",
-                () =>
-                {
-                    new ExportDefinition((string)null, new Dictionary<string, object>());
-                }
-            );
+            Assert.Throws<ArgumentNullException>("contractName", () =>
+            {
+                new ExportDefinition((string)null, new Dictionary<string, object>());
+            });
         }
 
         [Fact]
         public void Constructor2_EmptyStringAsContractNameArgument_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "contractName",
-                () =>
-                {
-                    new ExportDefinition(string.Empty, new Dictionary<string, object>());
-                }
-            );
+            Assert.Throws<ArgumentException>("contractName", () =>
+            {
+                new ExportDefinition(string.Empty, new Dictionary<string, object>());
+            });
         }
 
         [Fact]

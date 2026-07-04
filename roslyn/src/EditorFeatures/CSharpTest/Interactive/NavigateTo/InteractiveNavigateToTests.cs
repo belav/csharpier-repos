@@ -38,15 +38,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         [CombinatorialData]
         public async Task NoItemsForEmptyFile(TestHost testHost, Composition composition)
         {
-            await TestAsync(
-                testHost,
-                composition,
-                "",
-                async w =>
-                {
-                    Assert.Empty(await _aggregator.GetItemsAsync("Hello"));
-                }
-            );
+            await TestAsync(testHost, composition, "", async w =>
+            {
+                Assert.Empty(await _aggregator.GetItemsAsync("Hello"));
+            });
         }
 
         [WpfTheory]
@@ -468,28 +463,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         {
             var program =
                 @"class Goo { int[] arr; public int this[int i] { get { return arr[i]; } set { arr[i] = value; } } }";
-            await TestAsync(
-                testHost,
-                composition,
-                program,
-                async w =>
-                {
-                    var item = (await _aggregator.GetItemsAsync("this")).Single();
-                    VerifyNavigateToResultItem(
-                        item,
-                        "this",
-                        "[|this|][int]",
-                        PatternMatchKind.Exact,
-                        NavigateToItemKind.Property,
-                        Glyph.PropertyPublic,
-                        additionalInfo: string.Format(
-                            FeaturesResources.in_0_project_1,
-                            "Goo",
-                            "Test"
-                        )
-                    );
-                }
-            );
+            await TestAsync(testHost, composition, program, async w =>
+            {
+                var item = (await _aggregator.GetItemsAsync("this")).Single();
+                VerifyNavigateToResultItem(
+                    item,
+                    "this",
+                    "[|this|][int]",
+                    PatternMatchKind.Exact,
+                    NavigateToItemKind.Property,
+                    Glyph.PropertyPublic,
+                    additionalInfo: string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                );
+            });
         }
 
         [WpfTheory]
@@ -497,28 +483,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         public async Task FindEvent(TestHost testHost, Composition composition)
         {
             var program = "class Goo { public event EventHandler ChangedEventHandler; }";
-            await TestAsync(
-                testHost,
-                composition,
-                program,
-                async w =>
-                {
-                    var item = (await _aggregator.GetItemsAsync("CEH")).Single();
-                    VerifyNavigateToResultItem(
-                        item,
-                        "ChangedEventHandler",
-                        "[|C|]hanged[|E|]vent[|H|]andler",
-                        PatternMatchKind.CamelCaseExact,
-                        NavigateToItemKind.Event,
-                        Glyph.EventPublic,
-                        additionalInfo: string.Format(
-                            FeaturesResources.in_0_project_1,
-                            "Goo",
-                            "Test"
-                        )
-                    );
-                }
-            );
+            await TestAsync(testHost, composition, program, async w =>
+            {
+                var item = (await _aggregator.GetItemsAsync("CEH")).Single();
+                VerifyNavigateToResultItem(
+                    item,
+                    "ChangedEventHandler",
+                    "[|C|]hanged[|E|]vent[|H|]andler",
+                    PatternMatchKind.CamelCaseExact,
+                    NavigateToItemKind.Event,
+                    Glyph.EventPublic,
+                    additionalInfo: string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                );
+            });
         }
 
         [WpfTheory]
@@ -779,48 +756,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         {
             var program =
                 "class Goo { public virtual string Name { get; set; } } class DogBed : Goo { public override string Name { get { return base.Name; } set {} } }";
-            await TestAsync(
-                testHost,
-                composition,
-                program,
-                async w =>
-                {
-                    var expecteditem1 = new NavigateToItem(
-                        "Name",
-                        NavigateToItemKind.Property,
-                        "csharp",
-                        null,
-                        null,
-                        s_emptyExactPatternMatch,
-                        null
-                    );
-                    var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem1 };
+            await TestAsync(testHost, composition, program, async w =>
+            {
+                var expecteditem1 = new NavigateToItem(
+                    "Name",
+                    NavigateToItemKind.Property,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptyExactPatternMatch,
+                    null
+                );
+                var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem1 };
 
-                    var items = await _aggregator.GetItemsAsync("Name");
+                var items = await _aggregator.GetItemsAsync("Name");
 
-                    VerifyNavigateToResultItems(expecteditems, items);
+                VerifyNavigateToResultItems(expecteditems, items);
 
-                    var item = items.ElementAt(1);
-                    var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
-                    var unused = itemDisplay.Glyph;
+                var item = items.ElementAt(1);
+                var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
+                var unused = itemDisplay.Glyph;
 
-                    Assert.Equal("Name", itemDisplay.Name);
-                    Assert.Equal(
-                        string.Format(FeaturesResources.in_0_project_1, "DogBed", "Test"),
-                        itemDisplay.AdditionalInformation
-                    );
+                Assert.Equal("Name", itemDisplay.Name);
+                Assert.Equal(
+                    string.Format(FeaturesResources.in_0_project_1, "DogBed", "Test"),
+                    itemDisplay.AdditionalInformation
+                );
 
-                    item = items.ElementAt(0);
-                    itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
-                    unused = itemDisplay.Glyph;
+                item = items.ElementAt(0);
+                itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
+                unused = itemDisplay.Glyph;
 
-                    Assert.Equal("Name", itemDisplay.Name);
-                    Assert.Equal(
-                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"),
-                        itemDisplay.AdditionalInformation
-                    );
-                }
-            );
+                Assert.Equal("Name", itemDisplay.Name);
+                Assert.Equal(
+                    string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"),
+                    itemDisplay.AdditionalInformation
+                );
+            });
         }
 
         [WpfTheory]
@@ -1037,32 +1009,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
                 Goo
                 { }
                 """;
-            await TestAsync(
-                testHost,
-                composition,
-                code,
-                async w =>
+            await TestAsync(testHost, composition, code, async w =>
+            {
+                var item = (await _aggregator.GetItemsAsync("G")).Single(x => x.Kind != "Method");
+                var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
+
+                var descriptionItems = itemDisplay.DescriptionItems;
+
+                void assertDescription(string label, string value)
                 {
-                    var item = (await _aggregator.GetItemsAsync("G")).Single(x =>
-                        x.Kind != "Method"
+                    var descriptionItem = descriptionItems.Single(i =>
+                        i.Category.Single().Text == label
                     );
-                    var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
-
-                    var descriptionItems = itemDisplay.DescriptionItems;
-
-                    void assertDescription(string label, string value)
-                    {
-                        var descriptionItem = descriptionItems.Single(i =>
-                            i.Category.Single().Text == label
-                        );
-                        Assert.Equal(value, descriptionItem.Details.Single().Text);
-                    }
-
-                    assertDescription("File:", w.Documents.Single().Name);
-                    assertDescription("Line:", "3"); // one based line number
-                    assertDescription("Project:", "Test");
+                    Assert.Equal(value, descriptionItem.Details.Single().Text);
                 }
-            );
+
+                assertDescription("File:", w.Documents.Single().Name);
+                assertDescription("Line:", "3"); // one based line number
+                assertDescription("Project:", "Test");
+            });
         }
 
         [WpfTheory]
@@ -1071,53 +1036,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         {
             var source =
                 "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(
-                testHost,
-                composition,
-                source,
-                async w =>
+            await TestAsync(testHost, composition, source, async w =>
+            {
+                var expecteditem1 = new NavigateToItem(
+                    "get_keyword",
+                    NavigateToItemKind.Field,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive,
+                    null
+                );
+                var expecteditem2 = new NavigateToItem(
+                    "get_key_word",
+                    NavigateToItemKind.Field,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive,
+                    null
+                );
+                var expecteditem3 = new NavigateToItem(
+                    "GetKeyWord",
+                    NavigateToItemKind.Field,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptyCamelCasePrefixPatternMatch,
+                    null
+                );
+                var expecteditems = new List<NavigateToItem>
                 {
-                    var expecteditem1 = new NavigateToItem(
-                        "get_keyword",
-                        NavigateToItemKind.Field,
-                        "csharp",
-                        null,
-                        null,
-                        s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive,
-                        null
-                    );
-                    var expecteditem2 = new NavigateToItem(
-                        "get_key_word",
-                        NavigateToItemKind.Field,
-                        "csharp",
-                        null,
-                        null,
-                        s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive,
-                        null
-                    );
-                    var expecteditem3 = new NavigateToItem(
-                        "GetKeyWord",
-                        NavigateToItemKind.Field,
-                        "csharp",
-                        null,
-                        null,
-                        s_emptyCamelCasePrefixPatternMatch,
-                        null
-                    );
-                    var expecteditems = new List<NavigateToItem>
-                    {
-                        expecteditem1,
-                        expecteditem2,
-                        expecteditem3,
-                    };
+                    expecteditem1,
+                    expecteditem2,
+                    expecteditem3,
+                };
 
-                    var items = await _aggregator.GetItemsAsync("GK");
+                var items = await _aggregator.GetItemsAsync("GK");
 
-                    Assert.Equal(expecteditems.Count(), items.Count());
+                Assert.Equal(expecteditems.Count(), items.Count());
 
-                    VerifyNavigateToResultItems(expecteditems, items);
-                }
-            );
+                VerifyNavigateToResultItems(expecteditems, items);
+            });
         }
 
         [WpfTheory]
@@ -1126,37 +1086,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         {
             var source =
                 "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(
-                testHost,
-                composition,
-                source,
-                async w =>
-                {
-                    var expecteditem1 = new NavigateToItem(
-                        "get_key_word",
-                        NavigateToItemKind.Field,
-                        "csharp",
-                        null,
-                        null,
-                        s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive,
-                        null
-                    );
-                    var expecteditem2 = new NavigateToItem(
-                        "GetKeyWord",
-                        NavigateToItemKind.Field,
-                        "csharp",
-                        null,
-                        null,
-                        s_emptyCamelCaseExactPatternMatch,
-                        null
-                    );
-                    var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2 };
+            await TestAsync(testHost, composition, source, async w =>
+            {
+                var expecteditem1 = new NavigateToItem(
+                    "get_key_word",
+                    NavigateToItemKind.Field,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive,
+                    null
+                );
+                var expecteditem2 = new NavigateToItem(
+                    "GetKeyWord",
+                    NavigateToItemKind.Field,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptyCamelCaseExactPatternMatch,
+                    null
+                );
+                var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2 };
 
-                    var items = await _aggregator.GetItemsAsync("GKW");
+                var items = await _aggregator.GetItemsAsync("GKW");
 
-                    VerifyNavigateToResultItems(expecteditems, items);
-                }
-            );
+                VerifyNavigateToResultItems(expecteditems, items);
+            });
         }
 
         [WpfTheory]
@@ -1165,37 +1120,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         {
             var source =
                 "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(
-                testHost,
-                composition,
-                source,
-                async w =>
-                {
-                    var expecteditem1 = new NavigateToItem(
-                        "get_key_word",
-                        NavigateToItemKind.Field,
-                        "csharp",
-                        null,
-                        null,
-                        s_emptyCamelCaseSubstringPatternMatch_NotCaseSensitive,
-                        null
-                    );
-                    var expecteditem2 = new NavigateToItem(
-                        "GetKeyWord",
-                        NavigateToItemKind.Field,
-                        "csharp",
-                        null,
-                        null,
-                        s_emptySubstringPatternMatch,
-                        null
-                    );
-                    var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2 };
+            await TestAsync(testHost, composition, source, async w =>
+            {
+                var expecteditem1 = new NavigateToItem(
+                    "get_key_word",
+                    NavigateToItemKind.Field,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptyCamelCaseSubstringPatternMatch_NotCaseSensitive,
+                    null
+                );
+                var expecteditem2 = new NavigateToItem(
+                    "GetKeyWord",
+                    NavigateToItemKind.Field,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptySubstringPatternMatch,
+                    null
+                );
+                var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2 };
 
-                    var items = await _aggregator.GetItemsAsync("K W");
+                var items = await _aggregator.GetItemsAsync("K W");
 
-                    VerifyNavigateToResultItems(expecteditems, items);
-                }
-            );
+                VerifyNavigateToResultItems(expecteditems, items);
+            });
         }
 
         [WpfTheory]
@@ -1204,16 +1154,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         {
             var source =
                 "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(
-                testHost,
-                composition,
-                source,
-                async w =>
-                {
-                    var items = await _aggregator.GetItemsAsync("WKG");
-                    Assert.Empty(items);
-                }
-            );
+            await TestAsync(testHost, composition, source, async w =>
+            {
+                var items = await _aggregator.GetItemsAsync("WKG");
+                Assert.Empty(items);
+            });
         }
 
         [WpfTheory]
@@ -1222,23 +1167,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         {
             var source =
                 "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(
-                testHost,
-                composition,
-                source,
-                async w =>
-                {
-                    var item = (await _aggregator.GetItemsAsync("G_K_W")).Single();
-                    VerifyNavigateToResultItem(
-                        item,
-                        "get_key_word",
-                        "[|g|]et[|_k|]ey[|_w|]ord",
-                        PatternMatchKind.CamelCaseExact,
-                        NavigateToItemKind.Field,
-                        Glyph.FieldPrivate
-                    );
-                }
-            );
+            await TestAsync(testHost, composition, source, async w =>
+            {
+                var item = (await _aggregator.GetItemsAsync("G_K_W")).Single();
+                VerifyNavigateToResultItem(
+                    item,
+                    "get_key_word",
+                    "[|g|]et[|_k|]ey[|_w|]ord",
+                    PatternMatchKind.CamelCaseExact,
+                    NavigateToItemKind.Field,
+                    Glyph.FieldPrivate
+                );
+            });
         }
 
         [WpfTheory]
@@ -1248,37 +1188,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
             ////Diff from dev10
             var source =
                 "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(
-                testHost,
-                composition,
-                source,
-                async w =>
-                {
-                    var expecteditem1 = new NavigateToItem(
-                        "get_key_word",
-                        NavigateToItemKind.Field,
-                        "csharp",
-                        null,
-                        null,
-                        s_emptyCamelCaseSubstringPatternMatch_NotCaseSensitive,
-                        null
-                    );
-                    var expecteditem2 = new NavigateToItem(
-                        "GetKeyWord",
-                        NavigateToItemKind.Field,
-                        "csharp",
-                        null,
-                        null,
-                        s_emptySubstringPatternMatch,
-                        null
-                    );
-                    var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2 };
+            await TestAsync(testHost, composition, source, async w =>
+            {
+                var expecteditem1 = new NavigateToItem(
+                    "get_key_word",
+                    NavigateToItemKind.Field,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptyCamelCaseSubstringPatternMatch_NotCaseSensitive,
+                    null
+                );
+                var expecteditem2 = new NavigateToItem(
+                    "GetKeyWord",
+                    NavigateToItemKind.Field,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptySubstringPatternMatch,
+                    null
+                );
+                var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2 };
 
-                    var items = await _aggregator.GetItemsAsync("K*W");
+                var items = await _aggregator.GetItemsAsync("K*W");
 
-                    VerifyNavigateToResultItems(expecteditems, items);
-                }
-            );
+                VerifyNavigateToResultItems(expecteditems, items);
+            });
         }
 
         [WpfTheory]
@@ -1288,16 +1223,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
             ////Diff from dev10
             var source =
                 "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(
-                testHost,
-                composition,
-                source,
-                async w =>
-                {
-                    var items = await _aggregator.GetItemsAsync("GTW");
-                    Assert.Empty(items);
-                }
-            );
+            await TestAsync(testHost, composition, source, async w =>
+            {
+                var items = await _aggregator.GetItemsAsync("GTW");
+                Assert.Empty(items);
+            });
         }
     }
 }

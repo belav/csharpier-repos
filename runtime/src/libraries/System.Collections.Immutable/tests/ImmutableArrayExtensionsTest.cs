@@ -35,9 +35,8 @@ namespace System.Collections.Immutable.Tests
                 new[] { 4, 5, 6 },
                 ImmutableArrayExtensions.Select(s_manyElements, n => n + 3)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ImmutableArrayExtensions.Select<int, bool>(s_manyElements, null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ImmutableArrayExtensions.Select<int, bool>(s_manyElements, null)
             );
         }
 
@@ -55,9 +54,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void SelectEmpty()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ImmutableArrayExtensions.Select<int, bool>(s_empty, null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ImmutableArrayExtensions.Select<int, bool>(s_empty, null)
             );
             Assert.False(ImmutableArrayExtensions.Select(s_empty, n => true).Any());
         }
@@ -78,23 +76,17 @@ namespace System.Collections.Immutable.Tests
             TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
                 ImmutableArrayExtensions.SelectMany<int, int, int>(s_emptyDefault, null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "collectionSelector",
-                () =>
-                    ImmutableArrayExtensions.SelectMany<int, int, int>(
-                        s_manyElements,
-                        null,
-                        (i, e) => e
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("collectionSelector", () =>
+                ImmutableArrayExtensions.SelectMany<int, int, int>(s_manyElements, null, (i, e) =>
+                    e
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ImmutableArrayExtensions.SelectMany<int, int, int>(
-                        s_manyElements,
-                        i => new[] { i },
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ImmutableArrayExtensions.SelectMany<int, int, int>(
+                    s_manyElements,
+                    i => new[] { i },
+                    null
+                )
             );
         }
 
@@ -105,9 +97,8 @@ namespace System.Collections.Immutable.Tests
                 new[] { 2, 3 },
                 ImmutableArrayExtensions.Where(s_manyElements, n => n > 1)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.Where(s_manyElements, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.Where(s_manyElements, null)
             );
         }
 
@@ -125,9 +116,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void WhereEmpty()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.Where(s_empty, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.Where(s_empty, null)
             );
             Assert.False(ImmutableArrayExtensions.Where(s_empty, n => true).Any());
         }
@@ -135,9 +125,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void Any()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.Any(s_oneElement, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.Any(s_oneElement, null)
             );
             Assert.True(ImmutableArrayExtensions.Any(s_oneElement));
             Assert.True(ImmutableArrayExtensions.Any(s_manyElements, n => n == 2));
@@ -162,9 +151,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void AnyEmpty()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.Any(s_empty, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.Any(s_empty, null)
             );
             Assert.False(ImmutableArrayExtensions.Any(s_empty));
             Assert.False(ImmutableArrayExtensions.Any(s_empty, n => true));
@@ -173,9 +161,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void All()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.All(s_oneElement, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.All(s_oneElement, null)
             );
             Assert.False(ImmutableArrayExtensions.All(s_manyElements, n => n == 2));
             Assert.True(ImmutableArrayExtensions.All(s_manyElements, n => n > 0));
@@ -195,27 +182,20 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void AllEmpty()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.All(s_empty, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.All(s_empty, null)
             );
-            Assert.True(
-                ImmutableArrayExtensions.All(
-                    s_empty,
-                    n =>
-                    {
-                        throw new ShouldNotBeInvokedException();
-                    }
-                )
-            ); // predicate should never be invoked.
+            Assert.True(ImmutableArrayExtensions.All(s_empty, n =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                })); // predicate should never be invoked.
         }
 
         [Fact]
         public void SequenceEqual()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "items",
-                () => ImmutableArrayExtensions.SequenceEqual(s_oneElement, (IEnumerable<int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("items", () =>
+                ImmutableArrayExtensions.SequenceEqual(s_oneElement, (IEnumerable<int>)null)
             );
 
             foreach (
@@ -281,18 +261,14 @@ namespace System.Collections.Immutable.Tests
             }
 
             Assert.True(
-                ImmutableArrayExtensions.SequenceEqual(
-                    s_manyElements,
-                    s_manyElements,
-                    (a, b) => true
+                ImmutableArrayExtensions.SequenceEqual(s_manyElements, s_manyElements, (a, b) =>
+                    true
                 )
             );
 
             Assert.False(
-                ImmutableArrayExtensions.SequenceEqual(
-                    s_manyElements,
-                    s_oneElement,
-                    (a, b) => a == b
+                ImmutableArrayExtensions.SequenceEqual(s_manyElements, s_oneElement, (a, b) =>
+                    a == b
                 )
             );
             Assert.False(
@@ -317,14 +293,12 @@ namespace System.Collections.Immutable.Tests
                     (a, b) => false
                 )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () =>
-                    ImmutableArrayExtensions.SequenceEqual(
-                        s_oneElement,
-                        s_oneElement,
-                        (Func<int, int, bool>)null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.SequenceEqual(
+                    s_oneElement,
+                    s_oneElement,
+                    (Func<int, int, bool>)null
+                )
             );
         }
 
@@ -340,23 +314,20 @@ namespace System.Collections.Immutable.Tests
             TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
                 ImmutableArrayExtensions.SequenceEqual(s_emptyDefault, s_emptyDefault)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () =>
-                    ImmutableArrayExtensions.SequenceEqual(
-                        s_emptyDefault,
-                        s_emptyDefault,
-                        (Func<int, int, bool>)null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.SequenceEqual(
+                    s_emptyDefault,
+                    s_emptyDefault,
+                    (Func<int, int, bool>)null
+                )
             );
         }
 
         [Fact]
         public void SequenceEqualEmpty()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "items",
-                () => ImmutableArrayExtensions.SequenceEqual(s_empty, (IEnumerable<int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("items", () =>
+                ImmutableArrayExtensions.SequenceEqual(s_empty, (IEnumerable<int>)null)
             );
             Assert.True(ImmutableArrayExtensions.SequenceEqual(s_empty, s_empty));
             Assert.True(ImmutableArrayExtensions.SequenceEqual(s_empty, s_empty.ToArray()));
@@ -367,27 +338,22 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void Aggregate()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "func",
-                () => ImmutableArrayExtensions.Aggregate(s_oneElement, null)
+            AssertExtensions.Throws<ArgumentNullException>("func", () =>
+                ImmutableArrayExtensions.Aggregate(s_oneElement, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "func",
-                () => ImmutableArrayExtensions.Aggregate(s_oneElement, 1, null)
+            AssertExtensions.Throws<ArgumentNullException>("func", () =>
+                ImmutableArrayExtensions.Aggregate(s_oneElement, 1, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () => ImmutableArrayExtensions.Aggregate<int, int, int>(s_oneElement, 1, null, null)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ImmutableArrayExtensions.Aggregate<int, int, int>(s_oneElement, 1, null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ImmutableArrayExtensions.Aggregate<int, int, int>(
-                        s_oneElement,
-                        1,
-                        (a, b) => a + b,
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ImmutableArrayExtensions.Aggregate<int, int, int>(
+                    s_oneElement,
+                    1,
+                    (a, b) => a + b,
+                    null
+                )
             );
 
             Assert.Equal(
@@ -530,9 +496,8 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<InvalidOperationException>(() =>
                 ImmutableArrayExtensions.First(s_empty, n => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.First(s_empty, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.First(s_empty, null)
             );
 
             Assert.Throws<InvalidOperationException>(() =>
@@ -549,9 +514,8 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<NullReferenceException>(() =>
                 ImmutableArrayExtensions.First(s_emptyDefault, n => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.First(s_emptyDefault, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.First(s_emptyDefault, null)
             );
         }
 
@@ -597,9 +561,8 @@ namespace System.Collections.Immutable.Tests
         {
             Assert.Equal(0, ImmutableArrayExtensions.FirstOrDefault(s_empty));
             Assert.Equal(0, ImmutableArrayExtensions.FirstOrDefault(s_empty, n => true));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.FirstOrDefault(s_empty, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.FirstOrDefault(s_empty, null)
             );
 
             Assert.Equal(0, ImmutableArrayExtensions.FirstOrDefault(s_emptyBuilder));
@@ -614,9 +577,8 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<NullReferenceException>(() =>
                 ImmutableArrayExtensions.FirstOrDefault(s_emptyDefault, n => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.FirstOrDefault(s_emptyDefault, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.FirstOrDefault(s_emptyDefault, null)
             );
         }
 
@@ -682,9 +644,8 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<NullReferenceException>(() =>
                 ImmutableArrayExtensions.Last(s_emptyDefault, n => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.Last(s_emptyDefault, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.Last(s_emptyDefault, null)
             );
         }
 
@@ -730,9 +691,8 @@ namespace System.Collections.Immutable.Tests
         {
             Assert.Equal(0, ImmutableArrayExtensions.LastOrDefault(s_empty));
             Assert.Equal(0, ImmutableArrayExtensions.LastOrDefault(s_empty, n => true));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.LastOrDefault(s_empty, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.LastOrDefault(s_empty, null)
             );
 
             Assert.Equal(0, ImmutableArrayExtensions.LastOrDefault(s_emptyBuilder));
@@ -747,9 +707,8 @@ namespace System.Collections.Immutable.Tests
             TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
                 ImmutableArrayExtensions.LastOrDefault(s_emptyDefault, n => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.LastOrDefault(s_emptyDefault, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.LastOrDefault(s_emptyDefault, null)
             );
         }
 
@@ -787,9 +746,8 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<InvalidOperationException>(() =>
                 ImmutableArrayExtensions.Single(s_empty, n => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.Single(s_empty, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.Single(s_empty, null)
             );
         }
 
@@ -802,9 +760,8 @@ namespace System.Collections.Immutable.Tests
             TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
                 ImmutableArrayExtensions.Single(s_emptyDefault, n => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.Single(s_emptyDefault, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.Single(s_emptyDefault, null)
             );
         }
 
@@ -829,9 +786,8 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<InvalidOperationException>(() =>
                 ImmutableArrayExtensions.SingleOrDefault(s_manyElements, i => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.SingleOrDefault(s_oneElement, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.SingleOrDefault(s_oneElement, null)
             );
         }
 
@@ -840,9 +796,8 @@ namespace System.Collections.Immutable.Tests
         {
             Assert.Equal(0, ImmutableArrayExtensions.SingleOrDefault(s_empty));
             Assert.Equal(0, ImmutableArrayExtensions.SingleOrDefault(s_empty, n => true));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.SingleOrDefault(s_empty, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.SingleOrDefault(s_empty, null)
             );
         }
 
@@ -855,56 +810,42 @@ namespace System.Collections.Immutable.Tests
             TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
                 ImmutableArrayExtensions.SingleOrDefault(s_emptyDefault, n => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ImmutableArrayExtensions.SingleOrDefault(s_emptyDefault, null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ImmutableArrayExtensions.SingleOrDefault(s_emptyDefault, null)
             );
         }
 
         [Fact]
         public void ToDictionary()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => ImmutableArrayExtensions.ToDictionary(s_manyElements, (Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ImmutableArrayExtensions.ToDictionary(s_manyElements, (Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ImmutableArrayExtensions.ToDictionary(
-                        s_manyElements,
-                        (Func<int, int>)null,
-                        n => n
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ImmutableArrayExtensions.ToDictionary(s_manyElements, (Func<int, int>)null, n => n)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ImmutableArrayExtensions.ToDictionary(
-                        s_manyElements,
-                        (Func<int, int>)null,
-                        n => n,
-                        EqualityComparer<int>.Default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ImmutableArrayExtensions.ToDictionary(
+                    s_manyElements,
+                    (Func<int, int>)null,
+                    n => n,
+                    EqualityComparer<int>.Default
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    ImmutableArrayExtensions.ToDictionary(
-                        s_manyElements,
-                        n => n,
-                        (Func<int, string>)null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                ImmutableArrayExtensions.ToDictionary(
+                    s_manyElements,
+                    n => n,
+                    (Func<int, string>)null
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    ImmutableArrayExtensions.ToDictionary(
-                        s_manyElements,
-                        n => n,
-                        (Func<int, string>)null,
-                        EqualityComparer<int>.Default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                ImmutableArrayExtensions.ToDictionary(
+                    s_manyElements,
+                    n => n,
+                    (Func<int, string>)null,
+                    EqualityComparer<int>.Default
+                )
             );
 
             Dictionary<string, string> stringToString = ImmutableArrayExtensions.ToDictionary(

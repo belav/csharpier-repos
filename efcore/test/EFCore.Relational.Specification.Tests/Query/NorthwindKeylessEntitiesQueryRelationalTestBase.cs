@@ -22,21 +22,17 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<CustomerQuery>()
-                            .Select(cq => new
-                            {
-                                cq.City,
-                                cq.CompanyName,
-                                OrderDetailIds = ss.Set<Customer>()
-                                    .Where(c => c.City == cq.City)
-                                    .ToList(),
-                            })
-                            .OrderBy(x => x.City)
-                            .Take(2)
-                )
+                AssertQuery(async, ss => ss.Set<CustomerQuery>()
+                        .Select(cq => new
+                        {
+                            cq.City,
+                            cq.CompanyName,
+                            OrderDetailIds = ss.Set<Customer>()
+                                .Where(c => c.City == cq.City)
+                                .ToList(),
+                        })
+                        .OrderBy(x => x.City)
+                        .Take(2))
             )
         ).Message;
 
@@ -54,18 +50,16 @@ public abstract class NorthwindKeylessEntitiesQueryRelationalTestBase<TFixture>
     {
         var message = (
             await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Customer>()
-                            .OrderBy(c => c.CustomerID)
-                            .Select(c => new
-                            {
-                                c.City,
-                                Collection = ss.Set<CustomerQuery>()
-                                    .Where(cq => cq.City == c.City)
-                                    .ToList(),
-                            })
+                AssertQuery(async, ss =>
+                    ss.Set<Customer>()
+                        .OrderBy(c => c.CustomerID)
+                        .Select(c => new
+                        {
+                            c.City,
+                            Collection = ss.Set<CustomerQuery>()
+                                .Where(cq => cq.City == c.City)
+                                .ToList(),
+                        })
                 )
             )
         ).Message;

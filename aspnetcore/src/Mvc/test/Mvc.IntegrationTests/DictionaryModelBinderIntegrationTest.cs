@@ -378,10 +378,8 @@ public class DictionaryModelBinderIntegrationTest
         };
 
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            updateRequest,
-            options =>
-                options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
+        var testContext = ModelBindingTestHelper.GetTestContext(updateRequest, options =>
+            options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory())
         );
         var modelState = testContext.ModelState;
         var parameter = new ParameterDescriptor
@@ -906,18 +904,14 @@ public class DictionaryModelBinderIntegrationTest
 
         Assert.NotEmpty(modelState);
         Assert.False(modelState.IsValid);
-        Assert.All(
-            modelState,
-            kvp =>
-            {
-                Assert.NotEqual(ModelValidationState.Unvalidated, kvp.Value.ValidationState);
-                Assert.NotEqual(ModelValidationState.Skipped, kvp.Value.ValidationState);
-            }
-        );
+        Assert.All(modelState, kvp =>
+        {
+            Assert.NotEqual(ModelValidationState.Unvalidated, kvp.Value.ValidationState);
+            Assert.NotEqual(ModelValidationState.Skipped, kvp.Value.ValidationState);
+        });
 
-        var entry = Assert.Single(
-            modelState,
-            kvp => kvp.Value.ValidationState == ModelValidationState.Invalid
+        var entry = Assert.Single(modelState, kvp =>
+            kvp.Value.ValidationState == ModelValidationState.Invalid
         );
         var error = Assert.Single(entry.Value.Errors);
         Assert.Equal("You're out of range.", error.ErrorMessage);
@@ -1410,23 +1404,17 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, string>>(modelBindingResult.Model);
-        Assert.Collection(
-            model.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("key0", kvp.Key);
-                Assert.Null(kvp.Value);
-            }
-        );
+        Assert.Collection(model.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("key0", kvp.Key);
+            Assert.Null(kvp.Value);
+        });
 
-        Assert.Collection(
-            modelState.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("parameter[key0]", kvp.Key);
-                Assert.Equal(ModelValidationState.Valid, kvp.Value.ValidationState);
-            }
-        );
+        Assert.Collection(modelState.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("parameter[key0]", kvp.Key);
+            Assert.Equal(ModelValidationState.Valid, kvp.Value.ValidationState);
+        });
         Assert.Equal(0, modelState.ErrorCount);
         Assert.True(modelState.IsValid);
     }

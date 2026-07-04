@@ -94,9 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                     statements.Add(exprOrStatement).Cast<StatementSyntax>()
                 );
                 editor.ReplaceNode(exprOrStatement, newBody);
-                editor.ReplaceNode(
-                    exprOrStatement.GetRequiredParent(),
-                    (c, _) => c.WithAdditionalAnnotations(Formatter.Annotation)
+                editor.ReplaceNode(exprOrStatement.GetRequiredParent(), (c, _) =>
+                    c.WithAdditionalAnnotations(Formatter.Annotation)
                 );
             }
             else if (parent is BlockSyntax or SwitchSectionSyntax)

@@ -36,18 +36,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -71,18 +68,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -104,18 +98,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -140,18 +131,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -176,18 +164,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -206,18 +191,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -240,18 +222,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -277,18 +256,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -312,18 +288,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -345,18 +318,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -381,18 +351,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -417,18 +384,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -447,18 +411,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -481,18 +442,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -516,17 +474,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -550,17 +505,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -585,17 +537,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -614,17 +563,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -649,17 +595,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -678,17 +621,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -712,17 +652,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -747,17 +684,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -780,17 +714,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -814,17 +745,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -849,17 +777,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -882,17 +807,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -916,16 +838,13 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -949,16 +868,13 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -984,18 +900,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1019,18 +932,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1052,18 +962,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1088,18 +995,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1124,18 +1028,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1154,18 +1055,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1188,18 +1086,15 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1225,18 +1120,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1260,18 +1152,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1293,18 +1182,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1329,18 +1215,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1365,18 +1248,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1395,18 +1275,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1429,18 +1306,15 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1464,17 +1338,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1498,17 +1369,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1533,17 +1401,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1562,17 +1427,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1597,17 +1459,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1626,17 +1485,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1660,17 +1516,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1695,17 +1548,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1728,17 +1578,14 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1762,17 +1609,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1797,17 +1641,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1830,17 +1671,14 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1864,16 +1702,13 @@ public class FixupCompositeTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1897,16 +1732,13 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1930,21 +1762,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -1966,21 +1795,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2002,21 +1828,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Null(dependent.Category);
-                Assert.Empty(principal.Products);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Null(dependent.Category);
+            Assert.Empty(principal.Products);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2039,21 +1862,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Null(dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Null(dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2076,21 +1896,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2111,17 +1928,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(0, dependent.CategoryId1);
-                Assert.Null(dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(0, dependent.CategoryId1);
+            Assert.Null(dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2142,21 +1956,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2180,18 +1991,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2213,18 +2021,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2246,18 +2051,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Null(dependent.Category);
-                Assert.Empty(principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Null(dependent.Category);
+            Assert.Empty(principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2280,18 +2082,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2314,18 +2113,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Empty(principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Empty(principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2348,18 +2144,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2380,17 +2173,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(0, dependent.CategoryId1);
-                Assert.Same(principal, dependent.Category);
-                Assert.Empty(principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(0, dependent.CategoryId1);
+            Assert.Same(principal, dependent.Category);
+            Assert.Empty(principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2412,20 +2202,17 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Empty(principal.Products);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Empty(principal.Products);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2447,17 +2234,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Empty(principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Empty(principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2480,20 +2264,17 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2514,16 +2295,13 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(0, dependent.CategoryId1);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(0, dependent.CategoryId1);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2546,17 +2324,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2577,17 +2352,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2609,20 +2381,17 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Null(dependent.Category);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Null(dependent.Category);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2645,20 +2414,17 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2679,20 +2445,17 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2714,17 +2477,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Null(dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Null(dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2747,17 +2507,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2778,16 +2535,13 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(0, dependent.CategoryId1);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(0, dependent.CategoryId1);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2809,19 +2563,16 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2843,16 +2594,13 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -2876,21 +2624,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2912,21 +2657,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2948,21 +2690,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Null(dependent.Parent);
-                Assert.Null(principal.Child);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Null(dependent.Parent);
+            Assert.Null(principal.Child);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -2985,21 +2724,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Null(dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Null(dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -3022,21 +2758,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -3057,17 +2790,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(0, dependent.ParentId1);
-                Assert.Null(dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(0, dependent.ParentId1);
+            Assert.Null(dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3088,21 +2818,18 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -3126,18 +2853,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3159,18 +2883,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3192,18 +2913,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Null(dependent.Parent);
-                Assert.Null(principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Null(dependent.Parent);
+            Assert.Null(principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3226,18 +2944,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3260,18 +2975,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Null(principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Null(principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3292,18 +3004,15 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3324,17 +3033,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(0, dependent.ParentId1);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Null(principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(0, dependent.ParentId1);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Null(principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3356,20 +3062,17 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Null(principal.Child);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Null(principal.Child);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -3391,17 +3094,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Null(principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Null(principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3424,20 +3124,17 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -3458,16 +3155,13 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(0, dependent.ParentId1);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(0, dependent.ParentId1);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3490,17 +3184,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3521,17 +3212,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3553,20 +3241,17 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Null(dependent.Parent);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Null(dependent.Parent);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -3589,20 +3274,17 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -3623,20 +3305,17 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -3658,17 +3337,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Null(dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Null(dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3691,17 +3367,14 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3722,16 +3395,13 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(0, dependent.ParentId1);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(0, dependent.ParentId1);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3753,19 +3423,16 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                Assert.Equal(
-                    entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
-                    context.Entry(dependent).State
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+            Assert.Equal(
+                entityState == EntityState.Added ? EntityState.Added : EntityState.Modified,
+                context.Entry(dependent).State
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -3787,16 +3454,13 @@ public class FixupCompositeTest
 
         context.ChangeTracker.DetectChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -3812,19 +3476,16 @@ public class FixupCompositeTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.ID, dependent.ParentID);
-                Assert.Same(principal, dependent.ParentShared);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Children);
-                Assert.Equal(dependent.ID, principal.FavoriteChildID);
-                Assert.Same(dependent, principal.FavoriteChildShared);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.ID, dependent.ParentID);
+            Assert.Same(principal, dependent.ParentShared);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Children);
+            Assert.Equal(dependent.ID, principal.FavoriteChildID);
+            Assert.Same(dependent, principal.FavoriteChildShared);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     private class Parent

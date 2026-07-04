@@ -42,9 +42,8 @@ namespace System.ServiceProcess.Tests
             controller.WaitForStatus(ServiceControllerStatus.Stopped, _testService.ControlTimeout);
 
             Assert.Equal(ServiceControllerStatus.Stopped, controller.Status);
-            Assert.All(
-                controller.DependentServices,
-                service => Assert.Equal(ServiceControllerStatus.Stopped, service.Status)
+            Assert.All(controller.DependentServices, service =>
+                Assert.Equal(ServiceControllerStatus.Stopped, service.Status)
             );
         }
 
@@ -67,9 +66,8 @@ namespace System.ServiceProcess.Tests
             controller.WaitForStatus(ServiceControllerStatus.Stopped, _testService.ControlTimeout);
 
             Assert.Equal(ServiceControllerStatus.Stopped, controller.Status);
-            Assert.All(
-                controller.DependentServices,
-                service => Assert.Equal(ServiceControllerStatus.Stopped, service.Status)
+            Assert.All(controller.DependentServices, service =>
+                Assert.Equal(ServiceControllerStatus.Stopped, service.Status)
             );
         }
     }

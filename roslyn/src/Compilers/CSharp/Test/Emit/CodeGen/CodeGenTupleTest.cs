@@ -528,70 +528,63 @@ public class C4 : C3
 }
 "
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                {
-                    var c = m.GlobalNamespace.GetTypeMember("C");
-                    Assert.Equal(1, c.Interfaces().Length);
-                    NamedTypeSymbol iface = c.Interfaces()[0];
-                    Assert.True(iface.IsGenericType);
-                    Assert.Equal(1, iface.TypeArguments().Length);
-                    TypeSymbol typeArg = iface.TypeArguments()[0];
-                    Assert.True(typeArg.IsTupleType);
-                    Assert.False(((NamedTypeSymbol)typeArg).IsSerializable);
-                    Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
-                    Assert.All(
-                        typeArg.TupleElementTypesWithAnnotations,
-                        t => Assert.Equal(SpecialType.System_Int32, t.SpecialType)
-                    );
-                    Assert.Equal(new[] { "key", "val" }, typeArg.TupleElementNames);
+            CompileAndVerify(comp, symbolValidator: m =>
+            {
+                var c = m.GlobalNamespace.GetTypeMember("C");
+                Assert.Equal(1, c.Interfaces().Length);
+                NamedTypeSymbol iface = c.Interfaces()[0];
+                Assert.True(iface.IsGenericType);
+                Assert.Equal(1, iface.TypeArguments().Length);
+                TypeSymbol typeArg = iface.TypeArguments()[0];
+                Assert.True(typeArg.IsTupleType);
+                Assert.False(((NamedTypeSymbol)typeArg).IsSerializable);
+                Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
+                Assert.All(typeArg.TupleElementTypesWithAnnotations, t =>
+                    Assert.Equal(SpecialType.System_Int32, t.SpecialType)
+                );
+                Assert.Equal(new[] { "key", "val" }, typeArg.TupleElementNames);
 
-                    var c2 = m.GlobalNamespace.GetTypeMember("C2");
-                    var @base = c2.BaseType();
-                    Assert.Equal("Base", @base.Name);
-                    Assert.Equal(1, @base.Interfaces().Length);
-                    iface = @base.Interfaces()[0];
-                    Assert.True(iface.IsGenericType);
-                    Assert.Equal(1, iface.TypeArguments().Length);
-                    typeArg = iface.TypeArguments()[0];
-                    Assert.True(typeArg.IsTupleType);
-                    Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
-                    Assert.All(
-                        typeArg.TupleElementTypesWithAnnotations,
-                        t => Assert.Equal(SpecialType.System_Int32, t.SpecialType)
-                    );
-                    Assert.Equal(new[] { "x", "y" }, typeArg.TupleElementNames);
+                var c2 = m.GlobalNamespace.GetTypeMember("C2");
+                var @base = c2.BaseType();
+                Assert.Equal("Base", @base.Name);
+                Assert.Equal(1, @base.Interfaces().Length);
+                iface = @base.Interfaces()[0];
+                Assert.True(iface.IsGenericType);
+                Assert.Equal(1, iface.TypeArguments().Length);
+                typeArg = iface.TypeArguments()[0];
+                Assert.True(typeArg.IsTupleType);
+                Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
+                Assert.All(typeArg.TupleElementTypesWithAnnotations, t =>
+                    Assert.Equal(SpecialType.System_Int32, t.SpecialType)
+                );
+                Assert.Equal(new[] { "x", "y" }, typeArg.TupleElementNames);
 
-                    var c3 = m.GlobalNamespace.GetTypeMember("C3");
-                    Assert.Equal(2, c3.Interfaces().Length);
-                    iface = c3.Interfaces()[0];
-                    Assert.True(iface.IsGenericType);
-                    Assert.Equal(1, iface.TypeArguments().Length);
-                    typeArg = iface.TypeArguments()[0];
-                    Assert.True(typeArg.IsTupleType);
-                    Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
-                    Assert.All(
-                        typeArg.TupleElementTypesWithAnnotations,
-                        t => Assert.Equal(SpecialType.System_Int32, t.SpecialType)
-                    );
-                    Assert.Equal(new[] { "key", "val" }, typeArg.TupleElementNames);
+                var c3 = m.GlobalNamespace.GetTypeMember("C3");
+                Assert.Equal(2, c3.Interfaces().Length);
+                iface = c3.Interfaces()[0];
+                Assert.True(iface.IsGenericType);
+                Assert.Equal(1, iface.TypeArguments().Length);
+                typeArg = iface.TypeArguments()[0];
+                Assert.True(typeArg.IsTupleType);
+                Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
+                Assert.All(typeArg.TupleElementTypesWithAnnotations, t =>
+                    Assert.Equal(SpecialType.System_Int32, t.SpecialType)
+                );
+                Assert.Equal(new[] { "key", "val" }, typeArg.TupleElementNames);
 
-                    var d = m.GlobalNamespace.GetTypeMember("C3");
-                    Assert.Equal(2, d.Interfaces().Length);
-                    iface = d.Interfaces()[0];
-                    Assert.True(iface.IsGenericType);
-                    Assert.Equal(1, iface.TypeArguments().Length);
-                    typeArg = iface.TypeArguments()[0];
-                    Assert.True(typeArg.IsTupleType);
-                    Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
-                    Assert.All(
-                        typeArg.TupleElementTypesWithAnnotations,
-                        t => Assert.Equal(SpecialType.System_Int32, t.SpecialType)
-                    );
-                    Assert.Equal(new[] { "key", "val" }, typeArg.TupleElementNames);
-                }
-            );
+                var d = m.GlobalNamespace.GetTypeMember("C3");
+                Assert.Equal(2, d.Interfaces().Length);
+                iface = d.Interfaces()[0];
+                Assert.True(iface.IsGenericType);
+                Assert.Equal(1, iface.TypeArguments().Length);
+                typeArg = iface.TypeArguments()[0];
+                Assert.True(typeArg.IsTupleType);
+                Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
+                Assert.All(typeArg.TupleElementTypesWithAnnotations, t =>
+                    Assert.Equal(SpecialType.System_Int32, t.SpecialType)
+                );
+                Assert.Equal(new[] { "key", "val" }, typeArg.TupleElementNames);
+            });
 
             CompileAndVerify(
                 @"
@@ -744,51 +737,44 @@ public struct TestEnumerable : IEnumerable<(int key, int val)>
 }
 "
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                {
-                    var c = m.GlobalNamespace.GetTypeMember("C");
-                    Assert.Equal(1, c.TypeParameters.Length);
-                    var param = c.TypeParameters[0];
-                    Assert.Equal(1, param.ConstraintTypes().Length);
-                    var constraint = Assert.IsAssignableFrom<NamedTypeSymbol>(
-                        param.ConstraintTypes()[0]
-                    );
-                    Assert.True(constraint.IsGenericType);
-                    Assert.Equal(1, constraint.TypeArguments().Length);
-                    TypeSymbol typeArg = constraint.TypeArguments()[0];
-                    Assert.True(typeArg.IsTupleType);
-                    Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
-                    Assert.All(
-                        typeArg.TupleElementTypesWithAnnotations,
-                        t => Assert.Equal(SpecialType.System_Int32, t.SpecialType)
-                    );
-                    Assert.False(typeArg.TupleElementNames.IsDefault);
-                    Assert.Equal(2, typeArg.TupleElementNames.Length);
-                    Assert.Equal(new[] { "key", "val" }, typeArg.TupleElementNames);
+            CompileAndVerify(comp, symbolValidator: m =>
+            {
+                var c = m.GlobalNamespace.GetTypeMember("C");
+                Assert.Equal(1, c.TypeParameters.Length);
+                var param = c.TypeParameters[0];
+                Assert.Equal(1, param.ConstraintTypes().Length);
+                var constraint = Assert.IsAssignableFrom<NamedTypeSymbol>(
+                    param.ConstraintTypes()[0]
+                );
+                Assert.True(constraint.IsGenericType);
+                Assert.Equal(1, constraint.TypeArguments().Length);
+                TypeSymbol typeArg = constraint.TypeArguments()[0];
+                Assert.True(typeArg.IsTupleType);
+                Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
+                Assert.All(typeArg.TupleElementTypesWithAnnotations, t =>
+                    Assert.Equal(SpecialType.System_Int32, t.SpecialType)
+                );
+                Assert.False(typeArg.TupleElementNames.IsDefault);
+                Assert.Equal(2, typeArg.TupleElementNames.Length);
+                Assert.Equal(new[] { "key", "val" }, typeArg.TupleElementNames);
 
-                    var c2 = m.GlobalNamespace.GetTypeMember("C2");
-                    Assert.Equal(1, c2.TypeParameters.Length);
-                    param = c2.TypeParameters[0];
-                    Assert.Equal(1, param.ConstraintTypes().Length);
-                    constraint = Assert.IsAssignableFrom<NamedTypeSymbol>(
-                        param.ConstraintTypes()[0]
-                    );
-                    Assert.True(constraint.IsGenericType);
-                    Assert.Equal(1, constraint.TypeArguments().Length);
-                    typeArg = constraint.TypeArguments()[0];
-                    Assert.True(typeArg.IsTupleType);
-                    Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
-                    Assert.All(
-                        typeArg.TupleElementTypesWithAnnotations,
-                        t => Assert.Equal(SpecialType.System_Int32, t.SpecialType)
-                    );
-                    Assert.False(typeArg.TupleElementNames.IsDefault);
-                    Assert.Equal(2, typeArg.TupleElementNames.Length);
-                    Assert.Equal(new[] { "key", "val" }, typeArg.TupleElementNames);
-                }
-            );
+                var c2 = m.GlobalNamespace.GetTypeMember("C2");
+                Assert.Equal(1, c2.TypeParameters.Length);
+                param = c2.TypeParameters[0];
+                Assert.Equal(1, param.ConstraintTypes().Length);
+                constraint = Assert.IsAssignableFrom<NamedTypeSymbol>(param.ConstraintTypes()[0]);
+                Assert.True(constraint.IsGenericType);
+                Assert.Equal(1, constraint.TypeArguments().Length);
+                typeArg = constraint.TypeArguments()[0];
+                Assert.True(typeArg.IsTupleType);
+                Assert.Equal(2, typeArg.TupleElementTypesWithAnnotations.Length);
+                Assert.All(typeArg.TupleElementTypesWithAnnotations, t =>
+                    Assert.Equal(SpecialType.System_Int32, t.SpecialType)
+                );
+                Assert.False(typeArg.TupleElementNames.IsDefault);
+                Assert.Equal(2, typeArg.TupleElementNames.Length);
+                Assert.Equal(new[] { "key", "val" }, typeArg.TupleElementNames);
+            });
 
             CompileAndVerify(
                 @"
@@ -1108,9 +1094,8 @@ val: -2
             Assert.True(second.IsTupleType);
             Assert.True(second.TupleElementNames.IsDefault);
             Assert.Equal(2, second.TupleElementTypesWithAnnotations.Length);
-            Assert.All(
-                second.TupleElementTypesWithAnnotations,
-                t => Assert.Equal(SpecialType.System_Int32, t.SpecialType)
+            Assert.All(second.TupleElementTypesWithAnnotations, t =>
+                Assert.Equal(SpecialType.System_Int32, t.SpecialType)
             );
         }
 
@@ -28748,22 +28733,18 @@ class C
 
             // emit with pdb
             comp.VerifyEmitDiagnostics();
-            CompileAndVerify(
-                comp,
-                expectedOutput: "",
-                validator: (assembly) =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    AssertEx.SetEqual(
-                        new[] { "mscorlib 4.0", "System.ValueTuple 4.0" },
-                        reader.DumpAssemblyReferences()
-                    );
-                    Assert.Contains(
-                        "ValueTuple`2, System, AssemblyReference:System.ValueTuple",
-                        reader.DumpTypeReferences()
-                    );
-                }
-            );
+            CompileAndVerify(comp, expectedOutput: "", validator: (assembly) =>
+            {
+                var reader = assembly.GetMetadataReader();
+                AssertEx.SetEqual(
+                    new[] { "mscorlib 4.0", "System.ValueTuple 4.0" },
+                    reader.DumpAssemblyReferences()
+                );
+                Assert.Contains(
+                    "ValueTuple`2, System, AssemblyReference:System.ValueTuple",
+                    reader.DumpTypeReferences()
+                );
+            });
             // no assertion in MetadataWriter
         }
 
@@ -28810,22 +28791,18 @@ class C
 
             // emit with pdb
             comp.VerifyEmitDiagnostics();
-            CompileAndVerify(
-                comp,
-                expectedOutput: "",
-                validator: (assembly) =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    AssertEx.SetEqual(
-                        new[] { "mscorlib 4.0", "lib 0.0" },
-                        reader.DumpAssemblyReferences()
-                    );
-                    Assert.Contains(
-                        "ReferencedType, , AssemblyReference:lib",
-                        reader.DumpTypeReferences()
-                    );
-                }
-            );
+            CompileAndVerify(comp, expectedOutput: "", validator: (assembly) =>
+            {
+                var reader = assembly.GetMetadataReader();
+                AssertEx.SetEqual(
+                    new[] { "mscorlib 4.0", "lib 0.0" },
+                    reader.DumpAssemblyReferences()
+                );
+                Assert.Contains(
+                    "ReferencedType, , AssemblyReference:lib",
+                    reader.DumpTypeReferences()
+                );
+            });
             // no assertion in MetadataWriter
         }
 

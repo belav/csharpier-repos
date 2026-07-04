@@ -125,71 +125,48 @@ namespace System.DirectoryServices.Tests
         [Fact]
         public void Ctor_NegativeBeforeCount_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DirectoryVirtualListView(0, -1, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(0, -1, 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DirectoryVirtualListView(0, -1, "target")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(0, -1, "target")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DirectoryVirtualListView(0, -1, 0, new DirectoryVirtualListViewContext())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(0, -1, 0, new DirectoryVirtualListViewContext())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DirectoryVirtualListView(
-                        0,
-                        -1,
-                        "target",
-                        new DirectoryVirtualListViewContext()
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(0, -1, "target", new DirectoryVirtualListViewContext())
             );
         }
 
         [Fact]
         public void Ctor_NegativeAfterCount_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DirectoryVirtualListView(-1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(-1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DirectoryVirtualListView(-1, 0, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(-1, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DirectoryVirtualListView(-1, 0, "target")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(-1, 0, "target")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DirectoryVirtualListView(-1, 0, 0, new DirectoryVirtualListViewContext())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(-1, 0, 0, new DirectoryVirtualListViewContext())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DirectoryVirtualListView(
-                        -1,
-                        0,
-                        "target",
-                        new DirectoryVirtualListViewContext()
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(-1, 0, "target", new DirectoryVirtualListViewContext())
             );
         }
 
         [Fact]
         public void Ctor_NegativeOffset_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DirectoryVirtualListView(0, 0, -1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(0, 0, -1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DirectoryVirtualListView(0, 0, -1, new DirectoryVirtualListViewContext())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DirectoryVirtualListView(0, 0, -1, new DirectoryVirtualListViewContext())
             );
         }
 
@@ -253,9 +230,8 @@ namespace System.DirectoryServices.Tests
         public void TargetPercentage_SetInvalid_GetReturnsExpected(int value)
         {
             var listView = new DirectoryVirtualListView();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => listView.TargetPercentage = value
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                listView.TargetPercentage = value
             );
         }
     }

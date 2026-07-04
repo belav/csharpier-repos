@@ -110,16 +110,13 @@ namespace System.Data.Tests
         [Fact]
         public void AddException2()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    /* table already exist in the collection */
-                    DataTableCollection tbcol = _dataset[0].Tables;
-                    tbcol.Add(_tables[0]);
-                    tbcol.Add(_tables[0]);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                /* table already exist in the collection */
+                DataTableCollection tbcol = _dataset[0].Tables;
+                tbcol.Add(_tables[0]);
+                tbcol.Add(_tables[0]);
+            });
         }
 
         [Fact]

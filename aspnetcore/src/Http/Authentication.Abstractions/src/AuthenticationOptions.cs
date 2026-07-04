@@ -58,14 +58,11 @@ public class AuthenticationOptions
     >(string name, string? displayName)
         where THandler : IAuthenticationHandler
     {
-        AddScheme(
-            name,
-            b =>
-            {
-                b.DisplayName = displayName;
-                b.HandlerType = typeof(THandler);
-            }
-        );
+        AddScheme(name, b =>
+        {
+            b.DisplayName = displayName;
+            b.HandlerType = typeof(THandler);
+        });
     }
 
     /// <summary>

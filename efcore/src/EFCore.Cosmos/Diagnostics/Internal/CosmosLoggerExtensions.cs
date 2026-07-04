@@ -176,25 +176,23 @@ public static class CosmosLoggerExtensions
         {
             var logSensitiveData = diagnostics.ShouldLogSensitiveData();
 
-            definition.Log(
-                diagnostics,
-                l =>
-                    l.Log(
-                        definition.Level,
-                        definition.EventId,
-                        definition.MessageFormat,
-                        elapsed.TotalMilliseconds,
-                        requestCharge,
-                        activityId,
-                        containerId,
-                        logSensitiveData ? partitionKey : "?",
-                        FormatParameters(
-                            cosmosSqlQuery.Parameters,
-                            logSensitiveData && cosmosSqlQuery.Parameters.Count > 0
-                        ),
-                        Environment.NewLine,
-                        cosmosSqlQuery.Query
-                    )
+            definition.Log(diagnostics, l =>
+                l.Log(
+                    definition.Level,
+                    definition.EventId,
+                    definition.MessageFormat,
+                    elapsed.TotalMilliseconds,
+                    requestCharge,
+                    activityId,
+                    containerId,
+                    logSensitiveData ? partitionKey : "?",
+                    FormatParameters(
+                        cosmosSqlQuery.Parameters,
+                        logSensitiveData && cosmosSqlQuery.Parameters.Count > 0
+                    ),
+                    Environment.NewLine,
+                    cosmosSqlQuery.Query
+                )
             );
         }
 

@@ -3121,9 +3121,8 @@ public static class RelationalLoggerExtensions
             )
         )
         {
-            var eventData = new EventData(
-                definition,
-                (d, _) => ((EventDefinition)d).GenerateMessage()
+            var eventData = new EventData(definition, (d, _) =>
+                ((EventDefinition)d).GenerateMessage()
             );
 
             diagnostics.DispatchEventData(
@@ -3665,21 +3664,19 @@ public static class RelationalLoggerExtensions
 
             if (diagnostics.ShouldLog(definition))
             {
-                definition.Log(
-                    diagnostics,
-                    l =>
-                        l.Log(
-                            definition.Level,
-                            definition.EventId,
-                            definition.MessageFormat,
-                            index.Name,
-                            entityType.DisplayName(),
-                            index.Properties.Format(),
-                            property1Name,
-                            tablesMappedToProperty1.FormatTables(),
-                            property2Name,
-                            tablesMappedToProperty2.FormatTables()
-                        )
+                definition.Log(diagnostics, l =>
+                    l.Log(
+                        definition.Level,
+                        definition.EventId,
+                        definition.MessageFormat,
+                        index.Name,
+                        entityType.DisplayName(),
+                        index.Properties.Format(),
+                        property1Name,
+                        tablesMappedToProperty1.FormatTables(),
+                        property2Name,
+                        tablesMappedToProperty2.FormatTables()
+                    )
                 );
             }
 
@@ -3824,21 +3821,19 @@ public static class RelationalLoggerExtensions
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(
-                diagnostics,
-                l =>
-                    l.Log(
-                        definition.Level,
-                        definition.EventId,
-                        definition.MessageFormat,
-                        foreignKey.Properties.Format(),
-                        foreignKey.DeclaringEntityType.DisplayName(),
-                        foreignKey.PrincipalEntityType.DisplayName(),
-                        foreignKey.Properties.Format(),
-                        foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        foreignKey.PrincipalKey.Properties.Format(),
-                        foreignKey.PrincipalEntityType.GetSchemaQualifiedTableName()
-                    )
+            definition.Log(diagnostics, l =>
+                l.Log(
+                    definition.Level,
+                    definition.EventId,
+                    definition.MessageFormat,
+                    foreignKey.Properties.Format(),
+                    foreignKey.DeclaringEntityType.DisplayName(),
+                    foreignKey.PrincipalEntityType.DisplayName(),
+                    foreignKey.Properties.Format(),
+                    foreignKey.DeclaringEntityType.GetSchemaQualifiedTableName(),
+                    foreignKey.PrincipalKey.Properties.Format(),
+                    foreignKey.PrincipalEntityType.GetSchemaQualifiedTableName()
+                )
             );
         }
 
@@ -3902,21 +3897,19 @@ public static class RelationalLoggerExtensions
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(
-                diagnostics,
-                l =>
-                    l.Log(
-                        definition.Level,
-                        definition.EventId,
-                        definition.MessageFormat,
-                        foreignKey.Properties.Format(),
-                        foreignKey.DeclaringEntityType.DisplayName(),
-                        foreignKey.PrincipalEntityType.DisplayName(),
-                        foreignKey.PrincipalEntityType.DisplayName(),
-                        foreignKey.PrincipalEntityType.GetSchemaQualifiedTableName()!,
-                        foreignKey.DeclaringEntityType.DisplayName(),
-                        foreignKey.PrincipalEntityType.DisplayName()
-                    )
+            definition.Log(diagnostics, l =>
+                l.Log(
+                    definition.Level,
+                    definition.EventId,
+                    definition.MessageFormat,
+                    foreignKey.Properties.Format(),
+                    foreignKey.DeclaringEntityType.DisplayName(),
+                    foreignKey.PrincipalEntityType.DisplayName(),
+                    foreignKey.PrincipalEntityType.DisplayName(),
+                    foreignKey.PrincipalEntityType.GetSchemaQualifiedTableName()!,
+                    foreignKey.DeclaringEntityType.DisplayName(),
+                    foreignKey.PrincipalEntityType.DisplayName()
+                )
             );
         }
 
@@ -4462,14 +4455,11 @@ public static class RelationalLoggerExtensions
             )
         )
         {
-            var eventData = new EventData(
-                definition,
-                static (definition, _) =>
-                {
-                    var d = (EventDefinition)definition;
-                    return d.GenerateMessage();
-                }
-            );
+            var eventData = new EventData(definition, static (definition, _) =>
+            {
+                var d = (EventDefinition)definition;
+                return d.GenerateMessage();
+            });
 
             diagnostics.DispatchEventData(
                 definition,

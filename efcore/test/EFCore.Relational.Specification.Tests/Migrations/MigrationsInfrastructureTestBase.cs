@@ -83,9 +83,8 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
         migrator.Migrate("Migration1");
 
         var history = db.GetService<IHistoryRepository>();
-        Assert.Collection(
-            history.GetAppliedMigrations(),
-            x => Assert.Equal("00000000000001_Migration1", x.MigrationId)
+        Assert.Collection(history.GetAppliedMigrations(), x =>
+            Assert.Equal("00000000000001_Migration1", x.MigrationId)
         );
     }
 
@@ -120,9 +119,8 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
         migrator.Migrate("Migration1");
 
         var history = db.GetService<IHistoryRepository>();
-        Assert.Collection(
-            history.GetAppliedMigrations(),
-            x => Assert.Equal("00000000000001_Migration1", x.MigrationId)
+        Assert.Collection(history.GetAppliedMigrations(), x =>
+            Assert.Equal("00000000000001_Migration1", x.MigrationId)
         );
     }
 
@@ -378,10 +376,11 @@ public abstract class MigrationsInfrastructureFixtureBase
             MigrationsInfrastructureFixtureBase.ActiveProvider = migrationBuilder.ActiveProvider;
 
             migrationBuilder
-                .CreateTable(
-                    name: "Table1",
-                    columns: x => new { Id = x.Column<int>(), Foo = x.Column<int>() }
-                )
+                .CreateTable(name: "Table1", columns: x => new
+                {
+                    Id = x.Column<int>(),
+                    Foo = x.Column<int>(),
+                })
                 .PrimaryKey(name: "PK_Table1", columns: x => x.Id);
         }
 

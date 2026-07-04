@@ -973,20 +973,14 @@ namespace System.IO.Tests
         [Fact] // .NET Core doesn't throw on wildcards
         public void WindowsSearchPatternInvalid_Wildcards_netcoreapp()
         {
-            Assert.All(
-                OldWildcards,
-                invalidChar =>
-                {
-                    GetEntries(TestDirectory, string.Format("te{0}st", invalidChar.ToString()));
-                }
-            );
-            Assert.All(
-                NewWildcards,
-                invalidChar =>
-                {
-                    GetEntries(TestDirectory, string.Format("te{0}st", invalidChar.ToString()));
-                }
-            );
+            Assert.All(OldWildcards, invalidChar =>
+            {
+                GetEntries(TestDirectory, string.Format("te{0}st", invalidChar.ToString()));
+            });
+            Assert.All(NewWildcards, invalidChar =>
+            {
+                GetEntries(TestDirectory, string.Format("te{0}st", invalidChar.ToString()));
+            });
         }
 
         [Fact]

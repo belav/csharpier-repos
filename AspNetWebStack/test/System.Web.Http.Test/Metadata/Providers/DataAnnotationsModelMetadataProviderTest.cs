@@ -24,9 +24,8 @@ namespace System.Web.Http.Metadata.Providers
             );
 
             // Assert
-            Assert.Contains(
-                result,
-                m => m.ModelType == typeof(int) && m.PropertyName == "Length" && (int)m.Model == 3
+            Assert.Contains(result, m =>
+                m.ModelType == typeof(int) && m.PropertyName == "Length" && (int)m.Model == 3
             );
         }
 

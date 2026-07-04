@@ -23,15 +23,12 @@ namespace System.Collections.Tests
             list.Sort();
             List<T> beforeList = list.ToList();
 
-            Assert.All(
-                Enumerable.Range(0, list.Count),
-                index =>
-                {
-                    Assert.Equal(index, list.BinarySearch(beforeList[index]));
-                    Assert.Equal(index, list.BinarySearch(beforeList[index], GetIComparer()));
-                    Assert.Equal(beforeList[index], list[index]);
-                }
-            );
+            Assert.All(Enumerable.Range(0, list.Count), index =>
+            {
+                Assert.Equal(index, list.BinarySearch(beforeList[index]));
+                Assert.Equal(index, list.BinarySearch(beforeList[index], GetIComparer()));
+                Assert.Equal(beforeList[index], list[index]);
+            });
         }
 
         [Theory]
@@ -45,15 +42,12 @@ namespace System.Collections.Tests
                 list.Sort();
                 List<T> beforeList = list.ToList();
 
-                Assert.All(
-                    Enumerable.Range(0, list.Count),
-                    index =>
-                    {
-                        Assert.True(list.BinarySearch(beforeList[index]) >= 0);
-                        Assert.True(list.BinarySearch(beforeList[index], GetIComparer()) >= 0);
-                        Assert.Equal(beforeList[index], list[index]);
-                    }
-                );
+                Assert.All(Enumerable.Range(0, list.Count), index =>
+                {
+                    Assert.True(list.BinarySearch(beforeList[index]) >= 0);
+                    Assert.True(list.BinarySearch(beforeList[index], GetIComparer()) >= 0);
+                    Assert.Equal(beforeList[index], list[index]);
+                });
             }
         }
 
@@ -64,9 +58,8 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             list.Sort();
             T element = CreateT(3215);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => list.BinarySearch(0, count + 1, element, GetIComparer())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                list.BinarySearch(0, count + 1, element, GetIComparer())
             ); //"Finding items longer than array should throw ArgumentException"
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 list.BinarySearch(-1, count, element, GetIComparer())
@@ -74,9 +67,8 @@ namespace System.Collections.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 list.BinarySearch(0, -1, element, GetIComparer())
             ); //"ArgumentOutOfRangeException should be thrown on negative count."
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => list.BinarySearch(count + 1, count, element, GetIComparer())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                list.BinarySearch(count + 1, count, element, GetIComparer())
             ); //"ArgumentException should be thrown on index greater than length of array."
         }
     }

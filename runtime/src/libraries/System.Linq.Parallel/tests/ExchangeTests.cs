@@ -276,9 +276,8 @@ namespace System.Linq.Parallel.Tests
             _ = count;
             ParallelQuery<int> query = labeled.Item;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => query.WithMergeOptions((ParallelMergeOptions)4)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                query.WithMergeOptions((ParallelMergeOptions)4)
             );
         }
 
@@ -297,9 +296,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Merge_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).WithMergeOptions(ParallelMergeOptions.AutoBuffered)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).WithMergeOptions(ParallelMergeOptions.AutoBuffered)
             );
         }
 

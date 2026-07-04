@@ -2550,9 +2550,8 @@ partial class C
 
             // Verify syntax node callbacks
             Assert.Equal(expectedSyntaxNodeCallbacks.Count, analyzer.AnalyzedSyntaxNodes.Count);
-            AssertEx.All(
-                analyzer.AnalyzedSyntaxNodes,
-                node => node.IsKind(SyntaxKind.LocalDeclarationStatement)
+            AssertEx.All(analyzer.AnalyzedSyntaxNodes, node =>
+                node.IsKind(SyntaxKind.LocalDeclarationStatement)
             );
             AssertEx.SetEqual(
                 expectedSyntaxNodeCallbacks,
@@ -2563,9 +2562,8 @@ partial class C
                 expectedSyntaxNodeInsideBlockCallbacks.Count,
                 analyzer.AnalyzedSyntaxNodesInsideCodeBlock.Count
             );
-            AssertEx.All(
-                analyzer.AnalyzedSyntaxNodesInsideCodeBlock,
-                node => node.IsKind(SyntaxKind.LocalDeclarationStatement)
+            AssertEx.All(analyzer.AnalyzedSyntaxNodesInsideCodeBlock, node =>
+                node.IsKind(SyntaxKind.LocalDeclarationStatement)
             );
             AssertEx.SetEqual(
                 expectedSyntaxNodeInsideBlockCallbacks,
@@ -2574,9 +2572,8 @@ partial class C
 
             // Verify operation callbacks
             Assert.Equal(expectedOperationCallbacks.Count, analyzer.AnalyzedOperations.Count);
-            AssertEx.All(
-                analyzer.AnalyzedOperations,
-                operation => operation.Kind == OperationKind.VariableDeclaration
+            AssertEx.All(analyzer.AnalyzedOperations, operation =>
+                operation.Kind == OperationKind.VariableDeclaration
             );
             AssertEx.SetEqual(
                 expectedOperationCallbacks,
@@ -2587,9 +2584,8 @@ partial class C
                 expectedOperationInsideBlockCallbacks.Count,
                 analyzer.AnalyzedOperationsInsideOperationBlock.Count
             );
-            AssertEx.All(
-                analyzer.AnalyzedOperationsInsideOperationBlock,
-                operation => operation.Kind == OperationKind.VariableDeclaration
+            AssertEx.All(analyzer.AnalyzedOperationsInsideOperationBlock, operation =>
+                operation.Kind == OperationKind.VariableDeclaration
             );
             AssertEx.SetEqual(
                 expectedOperationInsideBlockCallbacks,

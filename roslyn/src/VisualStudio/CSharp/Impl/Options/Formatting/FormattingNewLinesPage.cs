@@ -19,10 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting
             IServiceProvider serviceProvider,
             OptionStore optionStore
         ) =>
-            new OptionPreviewControl(
-                serviceProvider,
-                optionStore,
-                (o, s) => new NewLinesViewModel(o, s)
+            new OptionPreviewControl(serviceProvider, optionStore, (o, s) =>
+                new NewLinesViewModel(o, s)
             );
     }
 }

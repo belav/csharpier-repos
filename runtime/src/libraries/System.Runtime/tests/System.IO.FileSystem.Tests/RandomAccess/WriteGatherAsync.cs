@@ -34,9 +34,8 @@ namespace System.IO.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "buffers",
-                    () => RandomAccess.WriteAsync(handle, buffers: null, 0)
+                AssertExtensions.Throws<ArgumentNullException>("buffers", () =>
+                    RandomAccess.WriteAsync(handle, buffers: null, 0)
                 );
             }
         }

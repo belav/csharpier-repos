@@ -216,9 +216,8 @@ public partial class ConsoleEncoding
     [Fact]
     public void OutputEncoding_SetNull_ThrowsArgumentNullException()
     {
-        AssertExtensions.Throws<ArgumentNullException>(
-            "value",
-            () => Console.OutputEncoding = null
+        AssertExtensions.Throws<ArgumentNullException>("value", () =>
+            Console.OutputEncoding = null
         );
     }
 

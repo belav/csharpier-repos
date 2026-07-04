@@ -601,9 +601,8 @@ class C
     }
 }";
 
-                var actual = ParseAndGetConstantFoldingSteps(
-                    source,
-                    node => node.Kind == BoundKind.BinaryOperator
+                var actual = ParseAndGetConstantFoldingSteps(source, node =>
+                    node.Kind == BoundKind.BinaryOperator
                 );
                 var expected =
                     @"E.B + 1 --> 2
@@ -653,9 +652,8 @@ class C
         const U64 u64 = ~U64.C;
     }
 }";
-            var actual = ParseAndGetConstantFoldingSteps(
-                source,
-                node => node.Kind == BoundKind.UnaryOperator
+            var actual = ParseAndGetConstantFoldingSteps(source, node =>
+                node.Kind == BoundKind.UnaryOperator
             );
             var expected =
                 @"~S8.A --> -1
@@ -1514,9 +1512,8 @@ ulong.MinValue --> 0";
 
         private static string ParseAndGetConstantFoldingSteps(string source)
         {
-            return ParseAndGetConstantFoldingSteps(
-                source,
-                node => node.Kind != BoundKind.Literal && node.Kind != BoundKind.Local
+            return ParseAndGetConstantFoldingSteps(source, node =>
+                node.Kind != BoundKind.Literal && node.Kind != BoundKind.Local
             );
         }
 

@@ -826,13 +826,11 @@ public class Test
             driver = driver.RunGenerators(compilation);
             var runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-                step =>
-                    Assert.True(
-                        step.Outputs.Single().Value
-                            is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
-                    )
+            Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
+                )
             );
         }
     }

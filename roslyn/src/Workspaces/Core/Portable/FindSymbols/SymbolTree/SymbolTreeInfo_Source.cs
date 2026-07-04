@@ -88,9 +88,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            var lazy = s_projectToSourceChecksum.GetValue(
-                project.State,
-                static p => AsyncLazy.Create(c => ComputeSourceSymbolsChecksumAsync(p, c))
+            var lazy = s_projectToSourceChecksum.GetValue(project.State, static p =>
+                AsyncLazy.Create(c => ComputeSourceSymbolsChecksumAsync(p, c))
             );
 
             return lazy.GetValueAsync(cancellationToken);

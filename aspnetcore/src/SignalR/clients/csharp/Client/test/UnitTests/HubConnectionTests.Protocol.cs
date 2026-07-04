@@ -538,9 +538,8 @@ public partial class HubConnectionTests
             {
                 await hubConnection.StartAsync().DefaultTimeout();
 
-                hubConnection.On<int, string, float>(
-                    "Foo",
-                    (r1, r2, r3) => handlerCalled.TrySetResult(new object[] { r1, r2, r3 })
+                hubConnection.On<int, string, float>("Foo", (r1, r2, r3) =>
+                    handlerCalled.TrySetResult(new object[] { r1, r2, r3 })
                 );
 
                 var args = new object[] { 1, "Foo", 2.0f };
@@ -575,13 +574,10 @@ public partial class HubConnectionTests
             {
                 await hubConnection.StartAsync().DefaultTimeout();
 
-                hubConnection.On<int>(
-                    "Foo",
-                    (val) =>
-                    {
-                        handlerCalled.TrySetResult(val);
-                    }
-                );
+                hubConnection.On<int>("Foo", (val) =>
+                {
+                    handlerCalled.TrySetResult(val);
+                });
 
                 hubConnection.Remove("Foo");
                 await connection
@@ -622,13 +618,10 @@ public partial class HubConnectionTests
             {
                 await hubConnection.StartAsync().DefaultTimeout();
 
-                var subscription = hubConnection.On<int>(
-                    "Foo",
-                    (val) =>
-                    {
-                        handlerCalled.TrySetResult(val);
-                    }
-                );
+                var subscription = hubConnection.On<int>("Foo", (val) =>
+                {
+                    handlerCalled.TrySetResult(val);
+                });
 
                 hubConnection.Remove("Foo");
                 await connection
@@ -730,13 +723,10 @@ public partial class HubConnectionTests
             try
             {
                 var tcs = new TaskCompletionSource<string>();
-                hubConnection.On<string>(
-                    "Echo",
-                    data =>
-                    {
-                        tcs.TrySetResult(data);
-                    }
-                );
+                hubConnection.On<string>("Echo", data =>
+                {
+                    tcs.TrySetResult(data);
+                });
 
                 await connection.ReceiveTextAsync(payload).DefaultTimeout();
 
@@ -760,13 +750,10 @@ public partial class HubConnectionTests
             try
             {
                 var tcs = new TaskCompletionSource<string>();
-                hubConnection.On<string>(
-                    "Echo",
-                    data =>
-                    {
-                        tcs.TrySetResult(data);
-                    }
-                );
+                hubConnection.On<string>("Echo", data =>
+                {
+                    tcs.TrySetResult(data);
+                });
 
                 await hubConnection.StartAsync().DefaultTimeout();
 
@@ -949,13 +936,10 @@ public partial class HubConnectionTests
             {
                 await hubConnection.StartAsync().DefaultTimeout();
 
-                hubConnection.On(
-                    "Result",
-                    int () =>
-                    {
-                        throw new Exception("error from client");
-                    }
-                );
+                hubConnection.On("Result", int () =>
+                {
+                    throw new Exception("error from client");
+                });
 
                 await connection
                     .ReceiveTextAsync(
@@ -986,13 +970,10 @@ public partial class HubConnectionTests
             {
                 await hubConnection.StartAsync().DefaultTimeout();
 
-                hubConnection.On(
-                    "Result",
-                    () =>
-                    {
-                        throw new Exception("error from client");
-                    }
-                );
+                hubConnection.On("Result", () =>
+                {
+                    throw new Exception("error from client");
+                });
 
                 hubConnection.On("Result", () => 20);
 
@@ -1147,14 +1128,11 @@ public partial class HubConnectionTests
                 var tcs = new TaskCompletionSource(
                     TaskCreationOptions.RunContinuationsAsynchronously
                 );
-                hubConnection.On(
-                    "Result",
-                    async () =>
-                    {
-                        await tcs.Task.DefaultTimeout();
-                        return 1;
-                    }
-                );
+                hubConnection.On("Result", async () =>
+                {
+                    await tcs.Task.DefaultTimeout();
+                    return 1;
+                });
                 hubConnection.On("Other", () => tcs.SetResult());
 
                 await connection

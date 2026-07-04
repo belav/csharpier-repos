@@ -163,15 +163,11 @@ namespace System.IO.Tests
         [Fact]
         public static void GetRelativePath_InvalidArgs()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "relativeTo",
-                null,
-                () => Path.GetRelativePath(null, ".")
+            AssertExtensions.Throws<ArgumentNullException>("relativeTo", null, () =>
+                Path.GetRelativePath(null, ".")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "relativeTo",
-                null,
-                () => Path.GetRelativePath(string.Empty, ".")
+            AssertExtensions.Throws<ArgumentException>("relativeTo", null, () =>
+                Path.GetRelativePath(string.Empty, ".")
             );
         }
     }

@@ -173,9 +173,8 @@ namespace System.Text.Tests
             string expectedParamName = !char.IsHighSurrogate(highSurrogate)
                 ? nameof(highSurrogate)
                 : nameof(lowSurrogate);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                expectedParamName,
-                () => new Rune(highSurrogate, lowSurrogate)
+            Assert.Throws<ArgumentOutOfRangeException>(expectedParamName, () =>
+                new Rune(highSurrogate, lowSurrogate)
             );
         }
 
@@ -402,9 +401,8 @@ namespace System.Text.Tests
             Assert.Throws<ArgumentOutOfRangeException>("index", () => Rune.GetRuneAt("hello", -1));
 
             // index goes past end of string
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => Rune.GetRuneAt(string.Empty, 0)
+            Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+                Rune.GetRuneAt(string.Empty, 0)
             );
         }
 
@@ -693,9 +691,8 @@ namespace System.Text.Tests
             Assert.False(success);
             Assert.Equal(0, charsWritten);
 
-            Assert.Throws<ArgumentException>(
-                "destination",
-                () => rune.EncodeToUtf16(new char[rune.Utf16SequenceLength - 1])
+            Assert.Throws<ArgumentException>("destination", () =>
+                rune.EncodeToUtf16(new char[rune.Utf16SequenceLength - 1])
             );
 
             // Then, try with a buffer that's appropriately sized
@@ -746,9 +743,8 @@ namespace System.Text.Tests
             Assert.False(success);
             Assert.Equal(0, bytesWritten);
 
-            Assert.Throws<ArgumentException>(
-                "destination",
-                () => rune.EncodeToUtf8(new byte[rune.Utf8SequenceLength - 1])
+            Assert.Throws<ArgumentException>("destination", () =>
+                rune.EncodeToUtf8(new byte[rune.Utf8SequenceLength - 1])
             );
 
             // Then, try with a buffer that's appropriately sized

@@ -46,51 +46,34 @@ namespace System.Composition.Convention.Tests
         public void ExportBuilderApiTestsNull_ShouldThrowArgumentNull()
         {
             var builder = new ConventionBuilder();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "contractName",
-                () =>
-                    builder
-                        .ForTypesMatching((t) => true)
-                        .Export(c => c.AsContractName(null as string))
+            AssertExtensions.Throws<ArgumentNullException>("contractName", () =>
+                builder.ForTypesMatching((t) => true).Export(c => c.AsContractName(null as string))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "contractName",
-                () => builder.ForTypesMatching((t) => true).Export(c => c.AsContractName(""))
+            AssertExtensions.Throws<ArgumentException>("contractName", () =>
+                builder.ForTypesMatching((t) => true).Export(c => c.AsContractName(""))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "getContractNameFromPartType",
-                () =>
-                    builder
-                        .ForTypesMatching((t) => true)
-                        .Export(c => c.AsContractName(null as Func<Type, string>))
+            AssertExtensions.Throws<ArgumentNullException>("getContractNameFromPartType", () =>
+                builder
+                    .ForTypesMatching((t) => true)
+                    .Export(c => c.AsContractName(null as Func<Type, string>))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () =>
-                    builder
-                        .ForTypesMatching((t) => true)
-                        .Export(c => c.AsContractType(null as Type))
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                builder.ForTypesMatching((t) => true).Export(c => c.AsContractType(null as Type))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    builder
-                        .ForTypesMatching((t) => true)
-                        .Export(c => c.AddMetadata(null as string, null as object))
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                builder
+                    .ForTypesMatching((t) => true)
+                    .Export(c => c.AddMetadata(null as string, null as object))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    builder
-                        .ForTypesMatching((t) => true)
-                        .Export(c => c.AddMetadata(null as string, null as Func<Type, object>))
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                builder
+                    .ForTypesMatching((t) => true)
+                    .Export(c => c.AddMetadata(null as string, null as Func<Type, object>))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "getValueFromPartType",
-                () =>
-                    builder
-                        .ForTypesMatching((t) => true)
-                        .Export(c => c.AddMetadata("name", null as Func<Type, object>))
+            AssertExtensions.Throws<ArgumentNullException>("getValueFromPartType", () =>
+                builder
+                    .ForTypesMatching((t) => true)
+                    .Export(c => c.AddMetadata("name", null as Func<Type, object>))
             );
         }
     }

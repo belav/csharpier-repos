@@ -113,9 +113,8 @@ namespace System.CommandLine.Hosting
                     for (int i = registeredBefore; i < services.Count; i++)
                     {
                         Type captured = services[i].ServiceType;
-                        bindingContext.AddService(
-                            captured,
-                            c => c.GetService<IHost>().Services.GetService(captured)
+                        bindingContext.AddService(captured, c =>
+                            c.GetService<IHost>().Services.GetService(captured)
                         );
                     }
                 });

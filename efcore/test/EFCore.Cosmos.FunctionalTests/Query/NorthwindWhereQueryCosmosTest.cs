@@ -175,9 +175,8 @@ WHERE ((c["Discriminator"] = "Order") AND ((c["OrderID"] >> 1) = 5124))
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_logical_and(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.City == "Seattle" && c.ContactTitle == "Owner")
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.City == "Seattle" && c.ContactTitle == "Owner")
         );
 
         AssertSql(
@@ -193,9 +192,8 @@ WHERE ((c["Discriminator"] = "Customer") AND ((c["City"] = "Seattle") AND (c["Co
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_logical_or(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI" || c.CustomerID == "ANATR")
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI" || c.CustomerID == "ANATR")
         );
 
         AssertSql(
@@ -316,9 +314,8 @@ WHERE ((c["Discriminator"] = "Employee") AND (c["ReportsTo"] <= 2))
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_string_concat(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => c.CustomerID + "END" == "ALFKIEND")
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => c.CustomerID + "END" == "ALFKIEND")
         );
 
         AssertSql(

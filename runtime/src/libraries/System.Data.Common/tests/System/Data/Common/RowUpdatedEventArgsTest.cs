@@ -10,9 +10,8 @@ namespace System.Data.Common
         [Fact]
         public void Ctor_InvalidStatementType_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(StatementType),
-                () => new RowUpdatedEventArgs(null, null, (StatementType)100, null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(StatementType), () =>
+                new RowUpdatedEventArgs(null, null, (StatementType)100, null)
             );
         }
 
@@ -46,9 +45,8 @@ namespace System.Data.Common
         public void Status_SetInvalidUpdateStatus_ThrowsArgumentOutOfRangeException()
         {
             var args = new RowUpdatedEventArgs(null, null, 0, null);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(UpdateStatus),
-                () => args.Status = (UpdateStatus)100
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(UpdateStatus), () =>
+                args.Status = (UpdateStatus)100
             );
         }
 

@@ -1235,57 +1235,45 @@ namespace System.Text.Tests
             Encoding encoding = Encoding.UTF8;
             // Bytes does not have enough capacity to accommodate result
             string s = "T\uD83D\uDE01est";
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => encoding.GetBytes(s, 0, 2, new byte[3], 0)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                encoding.GetBytes(s, 0, 2, new byte[3], 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => encoding.GetBytes(s, 0, 3, new byte[4], 0)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                encoding.GetBytes(s, 0, 3, new byte[4], 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => encoding.GetBytes(s, 0, 4, new byte[5], 0)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                encoding.GetBytes(s, 0, 4, new byte[5], 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => encoding.GetBytes(s, 0, 5, new byte[6], 0)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                encoding.GetBytes(s, 0, 5, new byte[6], 0)
             );
 
             char[] c = s.ToCharArray();
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => encoding.GetBytes(c, 0, 2, new byte[3], 0)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                encoding.GetBytes(c, 0, 2, new byte[3], 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => encoding.GetBytes(c, 0, 3, new byte[4], 0)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                encoding.GetBytes(c, 0, 3, new byte[4], 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => encoding.GetBytes(c, 0, 4, new byte[5], 0)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                encoding.GetBytes(c, 0, 4, new byte[5], 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => encoding.GetBytes(c, 0, 5, new byte[6], 0)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                encoding.GetBytes(c, 0, 5, new byte[6], 0)
             );
 
             byte[] b = new byte[8];
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => FixedEncodingHelper(c, 2, b, 3)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                FixedEncodingHelper(c, 2, b, 3)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => FixedEncodingHelper(c, 3, b, 4)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                FixedEncodingHelper(c, 3, b, 4)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => FixedEncodingHelper(c, 4, b, 5)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                FixedEncodingHelper(c, 4, b, 5)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => FixedEncodingHelper(c, 5, b, 6)
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                FixedEncodingHelper(c, 5, b, 6)
             );
         }
 

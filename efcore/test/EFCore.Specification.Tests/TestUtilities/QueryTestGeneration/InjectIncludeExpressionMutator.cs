@@ -41,14 +41,12 @@ public class InjectIncludeExpressionMutator : ExpressionMutator
 
             var includeMethod = IncludeMethodInfo.MakeGenericMethod(entityType, navigation.ClrType);
 
-            var injector = new ExpressionInjector(
-                _expressionFinder.FoundExpressions[i],
-                e =>
-                    Expression.Call(
-                        includeMethod,
-                        e,
-                        Expression.Lambda(Expression.Property(prm, navigation.Name), prm)
-                    )
+            var injector = new ExpressionInjector(_expressionFinder.FoundExpressions[i], e =>
+                Expression.Call(
+                    includeMethod,
+                    e,
+                    Expression.Lambda(Expression.Property(prm, navigation.Name), prm)
+                )
             );
 
             return injector.Visit(expression);

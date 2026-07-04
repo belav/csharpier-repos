@@ -69,16 +69,10 @@ dsdf137success3245somethingold";
             RegexTestClass testClass = new RegexTestClass();
 
             Assert.Equal("4success", testClass.Replace(text, "$1${output}"));
-            Assert.Equal(
-                "4success",
-                testClass.Replace(
-                    text,
-                    (match) =>
-                    {
-                        return $"{match.Groups[1]}{match.Groups["output"]}";
-                    }
-                )
-            );
+            Assert.Equal("4success", testClass.Replace(text, (match) =>
+                {
+                    return $"{match.Groups[1]}{match.Groups["output"]}";
+                }));
             Assert.Equal(
                 "4success\n5success\n6success\n7success",
                 testClass.Replace(textWithMultipleMatches, "$1${output}")

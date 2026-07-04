@@ -78,9 +78,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
 
             var hasGetPrefix = HasGetPrefix(methodName);
             var propertyName = hasGetPrefix
-                ? NameGenerator.GenerateUniqueName(
-                    methodName[GetPrefix.Length..],
-                    n => !methodSymbol.ContainingType.GetMembers(n).Any()
+                ? NameGenerator.GenerateUniqueName(methodName[GetPrefix.Length..], n =>
+                    !methodSymbol.ContainingType.GetMembers(n).Any()
                 )
                 : methodName;
             var nameChanged = hasGetPrefix;

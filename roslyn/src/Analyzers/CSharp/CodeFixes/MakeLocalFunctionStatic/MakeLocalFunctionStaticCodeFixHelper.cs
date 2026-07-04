@@ -121,47 +121,42 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             // Fix all invocations by passing in additional arguments.
             foreach (var invocation in invocations)
             {
-                syntaxEditor.ReplaceNode(
-                    invocation,
-                    (node, generator) =>
-                    {
-                        var currentInvocation = (InvocationExpressionSyntax)node;
-                        var seenNamedArgument = currentInvocation.ArgumentList.Arguments.Any(a =>
-                            a.NameColon != null
-                        );
-                        var seenDefaultArgumentValue =
-                            currentInvocation.ArgumentList.Arguments.Count
-                            < localFunction.ParameterList.Parameters.Count;
+                syntaxEditor.ReplaceNode(invocation, (node, generator) =>
+                {
+                    var currentInvocation = (InvocationExpressionSyntax)node;
+                    var seenNamedArgument = currentInvocation.ArgumentList.Arguments.Any(a =>
+                        a.NameColon != null
+                    );
+                    var seenDefaultArgumentValue =
+                        currentInvocation.ArgumentList.Arguments.Count
+                        < localFunction.ParameterList.Parameters.Count;
 
-                        // Add all the non-this parameters to the end.  If there is a 'this' parameter, add it to the start.
-                        var newArguments = parameterAndCapturedSymbols
-                            .Where(p => !p.symbol.IsThisParameter())
-                            .Select(symbolAndCapture =>
-                                (ArgumentSyntax)
-                                    generator.Argument(
-                                        seenNamedArgument || seenDefaultArgumentValue
-                                            ? symbolAndCapture.symbol.Name
-                                            : null,
-                                        symbolAndCapture.symbol.RefKind,
-                                        symbolAndCapture.capture.Name.ToIdentifierName()
-                                    )
-                            );
-
-                        var newArgumentsList = currentInvocation.ArgumentList.Arguments.AddRange(
-                            newArguments
+                    // Add all the non-this parameters to the end.  If there is a 'this' parameter, add it to the start.
+                    var newArguments = parameterAndCapturedSymbols
+                        .Where(p => !p.symbol.IsThisParameter())
+                        .Select(symbolAndCapture =>
+                            (ArgumentSyntax)
+                                generator.Argument(
+                                    seenNamedArgument || seenDefaultArgumentValue
+                                        ? symbolAndCapture.symbol.Name
+                                        : null,
+                                    symbolAndCapture.symbol.RefKind,
+                                    symbolAndCapture.capture.Name.ToIdentifierName()
+                                )
                         );
-                        if (thisParameter != null)
-                            newArgumentsList = newArgumentsList.Insert(
-                                0,
-                                (ArgumentSyntax)generator.Argument(generator.ThisExpression())
-                            );
 
-                        var newArgList = currentInvocation.ArgumentList.WithArguments(
-                            newArgumentsList
+                    var newArgumentsList = currentInvocation.ArgumentList.Arguments.AddRange(
+                        newArguments
+                    );
+                    if (thisParameter != null)
+                        newArgumentsList = newArgumentsList.Insert(
+                            0,
+                            (ArgumentSyntax)generator.Argument(generator.ThisExpression())
                         );
-                        return currentInvocation.WithArgumentList(newArgList);
-                    }
-                );
+
+                    var newArgList = currentInvocation.ArgumentList.WithArguments(newArgumentsList);
+                    return currentInvocation.WithArgumentList(newArgList);
+                });
             }
 
             // In case any of the captured variable isn't camel-cased,
@@ -191,11 +186,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                         var referenceNode = root.FindNode(referenceSpan);
                         if (referenceNode is IdentifierNameSyntax identifierNode)
                         {
-                            syntaxEditor.ReplaceNode(
-                                identifierNode,
-                                (node, generator) =>
-                                    IdentifierName(parameter.Name.ToIdentifierToken())
-                                        .WithTriviaFrom(node)
+                            syntaxEditor.ReplaceNode(identifierNode, (node, generator) =>
+                                IdentifierName(parameter.Name.ToIdentifierToken())
+                                    .WithTriviaFrom(node)
                             );
                         }
                     }
@@ -261,47 +254,44 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
 #endif
 
             // Updates the local function declaration with variables passed in as parameters
-            syntaxEditor.ReplaceNode(
-                localFunction,
-                (node, generator) =>
+            syntaxEditor.ReplaceNode(localFunction, (node, generator) =>
+            {
+                var localFunctionWithNewParameters = (LocalFunctionStatementSyntax)
+                    info.Service.AddParameters(
+                        node,
+                        parameterAndCapturedSymbols.SelectAsArray(p => p.symbol),
+                        info,
+                        cancellationToken
+                    );
+
+                // Add @this parameter as the first parameter to the local function.
+                if (thisParameter != null)
                 {
-                    var localFunctionWithNewParameters = (LocalFunctionStatementSyntax)
-                        info.Service.AddParameters(
-                            node,
-                            parameterAndCapturedSymbols.SelectAsArray(p => p.symbol),
-                            info,
-                            cancellationToken
-                        );
-
-                    // Add @this parameter as the first parameter to the local function.
-                    if (thisParameter != null)
-                    {
-                        var parameterList = localFunctionWithNewParameters.ParameterList;
-                        var parameters = parameterList.Parameters;
-                        localFunctionWithNewParameters = localFunctionWithNewParameters.ReplaceNode(
-                            parameterList,
-                            parameterList.WithParameters(
-                                parameters.Insert(
-                                    0,
-                                    Parameter(Identifier("@this"))
-                                        .WithType(thisParameter.Type.GenerateTypeSyntax())
-                                )
+                    var parameterList = localFunctionWithNewParameters.ParameterList;
+                    var parameters = parameterList.Parameters;
+                    localFunctionWithNewParameters = localFunctionWithNewParameters.ReplaceNode(
+                        parameterList,
+                        parameterList.WithParameters(
+                            parameters.Insert(
+                                0,
+                                Parameter(Identifier("@this"))
+                                    .WithType(thisParameter.Type.GenerateTypeSyntax())
                             )
-                        );
-                    }
-
-                    if (shouldWarn)
-                    {
-                        var annotation = WarningAnnotation.Create(
-                            CSharpCodeFixesResources.Warning_colon_Adding_parameters_to_local_function_declaration_may_produce_invalid_code
-                        );
-                        localFunctionWithNewParameters =
-                            localFunctionWithNewParameters.WithAdditionalAnnotations(annotation);
-                    }
-
-                    return AddStaticModifier(localFunctionWithNewParameters, generator);
+                        )
+                    );
                 }
-            );
+
+                if (shouldWarn)
+                {
+                    var annotation = WarningAnnotation.Create(
+                        CSharpCodeFixesResources.Warning_colon_Adding_parameters_to_local_function_declaration_may_produce_invalid_code
+                    );
+                    localFunctionWithNewParameters =
+                        localFunctionWithNewParameters.WithAdditionalAnnotations(annotation);
+                }
+
+                return AddStaticModifier(localFunctionWithNewParameters, generator);
+            });
         }
 
         public static SyntaxNode AddStaticModifier(

@@ -89,21 +89,15 @@ public class RedisHubLifetimeManagerTests : ScaleoutHubLifetimeManagerTests<Test
                 await client2.ReadAsync().DefaultTimeout()
             );
             Assert.Equal("Hello", message.Target);
-            Assert.Collection(
-                message.Arguments,
-                arg0 =>
+            Assert.Collection(message.Arguments, arg0 =>
+            {
+                var dict = Assert.IsType<JObject>(arg0);
+                Assert.Collection(dict.Properties(), prop =>
                 {
-                    var dict = Assert.IsType<JObject>(arg0);
-                    Assert.Collection(
-                        dict.Properties(),
-                        prop =>
-                        {
-                            Assert.Equal("testProperty", prop.Name);
-                            Assert.Equal("Foo", prop.Value.Value<string>());
-                        }
-                    );
-                }
-            );
+                    Assert.Equal("testProperty", prop.Name);
+                    Assert.Equal("Foo", prop.Value.Value<string>());
+                });
+            });
         }
     }
 

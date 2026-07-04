@@ -108,9 +108,8 @@ namespace System.Security.Cryptography.Tests
                 c =>
                 {
                     ICollection ic = c;
-                    AssertExtensions.Throws<ArgumentException>(
-                        null,
-                        () => ic.CopyTo(new Oid[4, 3], 0)
+                    AssertExtensions.Throws<ArgumentException>(null, () =>
+                        ic.CopyTo(new Oid[4, 3], 0)
                     );
                     Assert.Throws<InvalidCastException>(() => ic.CopyTo(new string[10], 0));
                 },
@@ -134,10 +133,8 @@ namespace System.Security.Cryptography.Tests
             Assert.Throws<ArgumentNullException>(() => copyTo(c, null, 0));
             Assert.Throws<ArgumentNullException>(() => copyTo(c, null, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => copyTo(c, new Oid[10], -1));
-            AssertExtensions.Throws<ArgumentException>(
-                paramName,
-                null,
-                () => copyTo(c, new Oid[10], 7)
+            AssertExtensions.Throws<ArgumentException>(paramName, null, () =>
+                copyTo(c, new Oid[10], 7)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => copyTo(c, new Oid[10], 1000));
 

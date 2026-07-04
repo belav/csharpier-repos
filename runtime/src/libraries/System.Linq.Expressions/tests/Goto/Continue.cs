@@ -21,9 +21,8 @@ namespace System.Linq.Expressions.Tests
         public void NonVoidTargetContinueHasNoValueTypeExplicit(Type type)
         {
             LabelTarget target = Expression.Label(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "target",
-                () => Expression.Continue(target, type)
+            AssertExtensions.Throws<ArgumentException>("target", () =>
+                Expression.Continue(target, type)
             );
         }
 
@@ -57,9 +56,8 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(TypesData))]
         public void NullValueOnNonVoidContinue(Type type)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "target",
-                () => Expression.Continue(Expression.Label(type))
+            AssertExtensions.Throws<ArgumentException>("target", () =>
+                Expression.Continue(Expression.Label(type))
             );
         }
 
@@ -67,58 +65,46 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(ConstantValueData))]
         public void ExplicitNullTypeWithValue(object value)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "target",
-                () => Expression.Continue(Expression.Label(value.GetType()), default(Type))
+            AssertExtensions.Throws<ArgumentException>("target", () =>
+                Expression.Continue(Expression.Label(value.GetType()), default(Type))
             );
         }
 
         [Fact]
         public void OpenGenericType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Continue(Expression.Label(typeof(void)), typeof(List<>))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Continue(Expression.Label(typeof(void)), typeof(List<>))
             );
         }
 
         [Fact]
         public static void TypeContainsGenericParameters()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Continue(Expression.Label(typeof(void)), typeof(List<>.Enumerator))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Continue(Expression.Label(typeof(void)), typeof(List<>.Enumerator))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.Continue(
-                        Expression.Label(typeof(void)),
-                        typeof(List<>).MakeGenericType(typeof(List<>))
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Continue(
+                    Expression.Label(typeof(void)),
+                    typeof(List<>).MakeGenericType(typeof(List<>))
+                )
             );
         }
 
         [Fact]
         public void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.Continue(
-                        Expression.Label(typeof(void)),
-                        typeof(int).MakePointerType()
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Continue(Expression.Label(typeof(void)), typeof(int).MakePointerType())
             );
         }
 
         [Fact]
         public void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.Continue(Expression.Label(typeof(void)), typeof(int).MakeByRefType())
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Continue(Expression.Label(typeof(void)), typeof(int).MakeByRefType())
             );
         }
 

@@ -33,9 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SyntaxNode node,
             CancellationToken cancellationToken
         ) =>
-            s_rootToDirectiveInfo.GetValue(
-                node.GetAbsoluteRoot(),
-                root => GetDirectiveInfoForRoot(root, cancellationToken)
+            s_rootToDirectiveInfo.GetValue(node.GetAbsoluteRoot(), root =>
+                GetDirectiveInfoForRoot(root, cancellationToken)
             );
 
         private static DirectiveInfo<DirectiveTriviaSyntax> GetDirectiveInfoForRoot(

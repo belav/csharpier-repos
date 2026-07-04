@@ -43,9 +43,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Release_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pUnk",
-                () => Marshal.Release(IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentNullException>("pUnk", () =>
+                Marshal.Release(IntPtr.Zero)
             );
         }
     }

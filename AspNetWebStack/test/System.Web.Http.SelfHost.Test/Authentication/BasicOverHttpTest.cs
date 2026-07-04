@@ -38,11 +38,8 @@ namespace System.Web.Http
         [Fact]
         public Task AuthenticateWithNoCredentialFail()
         {
-            return RunBasicAuthTest(
-                "Sample",
-                "",
-                null,
-                (response) => Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode)
+            return RunBasicAuthTest("Sample", "", null, (response) =>
+                Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode)
             );
         }
 

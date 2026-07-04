@@ -148,13 +148,11 @@ namespace System.Threading.Tests
             Lock lockObj = new();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => lockObj.TryEnter(-2));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () => lockObj.TryEnter(TimeSpan.FromMilliseconds(-2))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                lockObj.TryEnter(TimeSpan.FromMilliseconds(-2))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () => lockObj.TryEnter(TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                lockObj.TryEnter(TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
             );
         }
 
@@ -296,14 +294,11 @@ namespace System.Threading.Tests
             using (lockObj.EnterScope())
             {
                 var threadReady = new AutoResetEvent(false);
-                var t = ThreadTestHelpers.CreateGuardedThread(
-                    out Action waitForThread,
-                    () =>
-                    {
-                        threadReady.Set();
-                        Assert.Throws<ThreadInterruptedException>(() => lockObj.Enter());
-                    }
-                );
+                var t = ThreadTestHelpers.CreateGuardedThread(out Action waitForThread, () =>
+                {
+                    threadReady.Set();
+                    Assert.Throws<ThreadInterruptedException>(() => lockObj.Enter());
+                });
                 t.IsBackground = true;
                 t.Start();
                 threadReady.CheckedWait();

@@ -31,13 +31,11 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public async Task CopyToAsyncThrowsArgumentNullExceptionForNullDestination()
         {
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                "destination",
-                () => PipeReader.CopyToAsync((Stream)null)
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>("destination", () =>
+                PipeReader.CopyToAsync((Stream)null)
             );
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                "destination",
-                () => PipeReader.CopyToAsync((PipeWriter)null)
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>("destination", () =>
+                PipeReader.CopyToAsync((PipeWriter)null)
             );
         }
 

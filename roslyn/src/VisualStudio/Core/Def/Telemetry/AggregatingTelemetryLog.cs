@@ -84,10 +84,8 @@ namespace Microsoft.CodeAnalysis.Telemetry
             )
                 throw ExceptionUtilities.Unreachable();
 
-            var histogram = ImmutableInterlocked.GetOrAdd(
-                ref _histograms,
-                metricName,
-                metricName => _meter.CreateHistogram<int>(metricName, _histogramConfiguration)
+            var histogram = ImmutableInterlocked.GetOrAdd(ref _histograms, metricName, metricName =>
+                _meter.CreateHistogram<int>(metricName, _histogramConfiguration)
             );
 
             histogram.Record(value);

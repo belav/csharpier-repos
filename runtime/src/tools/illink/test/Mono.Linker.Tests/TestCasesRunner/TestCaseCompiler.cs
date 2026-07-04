@@ -520,9 +520,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
             if (options.AdditionalArguments != null && options.AdditionalArguments.Length > 0)
                 builder.Append(
-                    options.AdditionalArguments.Aggregate(
-                        string.Empty,
-                        (buff, arg) => $"{buff} {arg}"
+                    options.AdditionalArguments.Aggregate(string.Empty, (buff, arg) =>
+                        $"{buff} {arg}"
                     )
                 );
 

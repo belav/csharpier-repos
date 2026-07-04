@@ -43,9 +43,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => new SyndicationContentSubclass(null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                new SyndicationContentSubclass(null)
             );
         }
 
@@ -91,9 +90,8 @@ namespace System.ServiceModel.Syndication.Tests
                     content.AttributeExtensions.Add(name, attributeExtensions[name]);
                 }
             }
-            CompareHelper.AssertEqualWriteOutput(
-                expected,
-                writer => content.WriteTo(writer, outerElementName, outerElementNamespace)
+            CompareHelper.AssertEqualWriteOutput(expected, writer =>
+                content.WriteTo(writer, outerElementName, outerElementNamespace)
             );
         }
 
@@ -101,9 +99,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteTo_NullWriter_ThrowsArgumentNullException()
         {
             var content = new SyndicationContentSubclass();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => content.WriteTo(null, "outerElementName", "outerElementNamespace")
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                content.WriteTo(null, "outerElementName", "outerElementNamespace")
             );
         }
 
@@ -116,10 +113,8 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "outerElementName",
-                    null,
-                    () => content.WriteTo(writer, outerElementName, "outerElementNamespace")
+                AssertExtensions.Throws<ArgumentException>("outerElementName", null, () =>
+                    content.WriteTo(writer, outerElementName, "outerElementNamespace")
                 );
             }
         }
@@ -189,9 +184,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateUrlContent_NullUrl_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "url",
-                () => SyndicationContent.CreateUrlContent(null, "mediaType")
+            AssertExtensions.Throws<ArgumentNullException>("url", () =>
+                SyndicationContent.CreateUrlContent(null, "mediaType")
             );
         }
 
@@ -273,9 +267,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateXmlContent_NullReader_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "reader",
-                () => SyndicationContent.CreateXmlContent(null)
+            AssertExtensions.Throws<ArgumentNullException>("reader", () =>
+                SyndicationContent.CreateXmlContent(null)
             );
         }
 

@@ -286,10 +286,8 @@ public class ValueComparer<
     /// <param name="right">The second instance.</param>
     /// <returns><see langword="true" /> if they are equal; <see langword="false" /> otherwise.</returns>
     public virtual bool Equals(T? left, T? right) =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _equals,
-            this,
-            static c => c.EqualsExpression.Compile()
+        NonCapturingLazyInitializer.EnsureInitialized(ref _equals, this, static c =>
+            c.EqualsExpression.Compile()
         )(left, right);
 
     /// <summary>
@@ -298,10 +296,8 @@ public class ValueComparer<
     /// <param name="instance">The instance.</param>
     /// <returns>The hash code.</returns>
     public virtual int GetHashCode(T instance) =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _hashCode,
-            this,
-            static c => c.HashCodeExpression.Compile()
+        NonCapturingLazyInitializer.EnsureInitialized(ref _hashCode, this, static c =>
+            c.HashCodeExpression.Compile()
         )(instance);
 
     /// <summary>
@@ -330,10 +326,8 @@ public class ValueComparer<
     /// <param name="instance">The instance.</param>
     /// <returns>The snapshot.</returns>
     public virtual T Snapshot(T instance) =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _snapshot,
-            this,
-            static c => c.SnapshotExpression.Compile()
+        NonCapturingLazyInitializer.EnsureInitialized(ref _snapshot, this, static c =>
+            c.SnapshotExpression.Compile()
         )(instance);
 
     /// <summary>

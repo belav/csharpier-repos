@@ -107,9 +107,8 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullArguments_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeAttributeDeclaration("name", null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeAttributeDeclaration("name", null)
             );
         }
 
@@ -117,13 +116,11 @@ namespace System.CodeDom.Tests
         public void Ctor_NullObjectInArguments_ThrowsArgumentNullException()
         {
             CodeAttributeArgument[] arguments = new CodeAttributeArgument[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeAttributeDeclaration("name", arguments)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeAttributeDeclaration("name", arguments)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeAttributeDeclaration(new CodeTypeReference(), arguments)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeAttributeDeclaration(new CodeTypeReference(), arguments)
             );
         }
 

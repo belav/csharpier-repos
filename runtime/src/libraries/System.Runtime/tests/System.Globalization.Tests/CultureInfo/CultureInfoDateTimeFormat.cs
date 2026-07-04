@@ -62,9 +62,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void DateTimeFormat_Set_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CultureInfo("en-US").DateTimeFormat = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CultureInfo("en-US").DateTimeFormat = null
             ); // Value is null
             Assert.Throws<InvalidOperationException>(() =>
                 CultureInfo.InvariantCulture.DateTimeFormat = new DateTimeFormatInfo()

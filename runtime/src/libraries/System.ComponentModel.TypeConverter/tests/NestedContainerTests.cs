@@ -19,9 +19,8 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullOwner_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "owner",
-                () => new NestedContainer(null)
+            AssertExtensions.Throws<ArgumentNullException>("owner", () =>
+                new NestedContainer(null)
             );
         }
 
@@ -130,9 +129,8 @@ namespace System.ComponentModel.Tests
         {
             var owner = new Component();
             var container = new SubNestedContainer(owner);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "component",
-                () => container.CreateSiteEntryPoint(null, "name")
+            AssertExtensions.Throws<ArgumentNullException>("component", () =>
+                container.CreateSiteEntryPoint(null, "name")
             );
         }
 

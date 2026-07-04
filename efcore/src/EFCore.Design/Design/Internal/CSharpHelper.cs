@@ -840,15 +840,10 @@ public class CSharpHelper : ICSharpHelper
 
         builder.Append("new List<").Append(Reference(type)).Append(">");
 
-        return HandleEnumerable(
-            builder,
-            vertical,
-            values,
-            value =>
-            {
-                builder.Append(UnknownLiteral(value));
-            }
-        );
+        return HandleEnumerable(builder, vertical, values, value =>
+        {
+            builder.Append(UnknownLiteral(value));
+        });
     }
 
     /// <summary>
@@ -874,19 +869,14 @@ public class CSharpHelper : ICSharpHelper
             .Append(Reference(valueType))
             .Append(">");
 
-        return HandleEnumerable(
-            builder,
-            vertical,
-            dict.Keys,
-            key =>
-            {
-                builder
-                    .Append("[")
-                    .Append(UnknownLiteral(key))
-                    .Append("] = ")
-                    .Append(UnknownLiteral(dict[key]));
-            }
-        );
+        return HandleEnumerable(builder, vertical, dict.Keys, key =>
+        {
+            builder
+                .Append("[")
+                .Append(UnknownLiteral(key))
+                .Append("] = ")
+                .Append(UnknownLiteral(dict[key]));
+        });
     }
 
     private static string HandleEnumerable(
@@ -1007,14 +997,12 @@ public class CSharpHelper : ICSharpHelper
             }
         }
 
-        return allValues.Aggregate(
-                (string?)null,
-                (previous, current) =>
-                    previous == null
-                        ? GetSimpleEnumValue(type, Enum.GetName(type, current)!, fullName)
-                        : previous
-                            + " | "
-                            + GetSimpleEnumValue(type, Enum.GetName(type, current)!, fullName)
+        return allValues.Aggregate((string?)null, (previous, current) =>
+                previous == null
+                    ? GetSimpleEnumValue(type, Enum.GetName(type, current)!, fullName)
+                    : previous
+                        + " | "
+                        + GetSimpleEnumValue(type, Enum.GetName(type, current)!, fullName)
             )
             ?? $"({Reference(type)}){UnknownLiteral(Convert.ChangeType(flags, Enum.GetUnderlyingType(type)))}";
     }

@@ -15,9 +15,8 @@ namespace System.Tests
         [Fact]
         public void Create_NullHandler_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "handler",
-                () => PosixSignalRegistration.Create(PosixSignal.SIGCONT, null)
+            AssertExtensions.Throws<ArgumentNullException>("handler", () =>
+                PosixSignalRegistration.Create(PosixSignal.SIGCONT, null)
             );
         }
 
@@ -48,10 +47,8 @@ namespace System.Tests
         [MemberData(nameof(SupportedSignals))]
         public void Dispose_Idempotent(PosixSignal signal)
         {
-            PosixSignalRegistration registration = PosixSignalRegistration.Create(
-                signal,
-                ctx => { }
-            );
+            PosixSignalRegistration registration = PosixSignalRegistration.Create(signal, ctx =>
+            { });
             registration.Dispose();
             registration.Dispose();
         }

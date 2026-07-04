@@ -133,21 +133,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixIncorrectConstraint
                     // reflect what they meant (and what the diagnostic says).
                     if (isEnumConstraint)
                     {
-                        editor.ReplaceNode(
-                            constraintSyntax.GetRequiredParent(),
-                            (parent, _) =>
-                            {
-                                var clause = (TypeParameterConstraintClauseSyntax)parent;
-                                return clause.WithConstraints(
-                                    clause.Constraints.Insert(
-                                        0,
-                                        SyntaxFactory.ClassOrStructConstraint(
-                                            SyntaxKind.StructConstraint
-                                        )
+                        editor.ReplaceNode(constraintSyntax.GetRequiredParent(), (parent, _) =>
+                        {
+                            var clause = (TypeParameterConstraintClauseSyntax)parent;
+                            return clause.WithConstraints(
+                                clause.Constraints.Insert(
+                                    0,
+                                    SyntaxFactory.ClassOrStructConstraint(
+                                        SyntaxKind.StructConstraint
                                     )
-                                );
-                            }
-                        );
+                                )
+                            );
+                        });
                     }
                 }
             }

@@ -3741,10 +3741,8 @@ class C1 {
             AssertEx.Equal(expectedText, actualParts.ToDisplayString());
             if (expectedKinds.Length > 0)
             {
-                AssertEx.Equal(
-                    expectedKinds,
-                    actualParts.Select(p => p.Kind),
-                    itemInspector: p => $"                SymbolDisplayPartKind.{p}"
+                AssertEx.Equal(expectedKinds, actualParts.Select(p => p.Kind), itemInspector: p =>
+                    $"                SymbolDisplayPartKind.{p}"
                 );
             }
         }

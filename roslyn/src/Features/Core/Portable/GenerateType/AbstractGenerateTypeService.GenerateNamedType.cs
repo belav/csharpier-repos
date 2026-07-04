@@ -184,10 +184,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         _semanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
                     var refKinds = argumentList.SelectAsArray(syntaxFacts.GetRefKindOfArgument);
                     var parameters = parameterTypes
-                        .Zip(
-                            refKinds,
-                            (t, r) =>
-                                CodeGenerationSymbolFactory.CreateParameterSymbol(r, t, name: "")
+                        .Zip(refKinds, (t, r) =>
+                            CodeGenerationSymbolFactory.CreateParameterSymbol(r, t, name: "")
                         )
                         .ToImmutableArray();
 

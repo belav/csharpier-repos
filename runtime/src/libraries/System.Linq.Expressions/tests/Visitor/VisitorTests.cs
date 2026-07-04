@@ -180,31 +180,27 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitNullCollection()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "nodes",
-                () => new DefaultVisitor().Visit(default(ReadOnlyCollection<Expression>))
+            AssertExtensions.Throws<ArgumentNullException>("nodes", () =>
+                new DefaultVisitor().Visit(default(ReadOnlyCollection<Expression>))
             );
         }
 
         [Fact]
         public void VisitNullCollectionWithVisitorFunction()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "nodes",
-                () => ExpressionVisitor.Visit(null, (Expression i) => i)
+            AssertExtensions.Throws<ArgumentNullException>("nodes", () =>
+                ExpressionVisitor.Visit(null, (Expression i) => i)
             );
         }
 
         [Fact]
         public void VisitCollectionVisitorWithNullFunction()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementVisitor",
-                () =>
-                    ExpressionVisitor.Visit(
-                        new List<Expression> { Expression.Empty() }.AsReadOnly(),
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("elementVisitor", () =>
+                ExpressionVisitor.Visit(
+                    new List<Expression> { Expression.Empty() }.AsReadOnly(),
+                    null
+                )
             );
         }
 
@@ -217,13 +213,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitAndConvertNullCollection()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "nodes",
-                () =>
-                    new DefaultVisitor().VisitAndConvert(
-                        default(ReadOnlyCollection<Expression>),
-                        ""
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("nodes", () =>
+                new DefaultVisitor().VisitAndConvert(default(ReadOnlyCollection<Expression>), "")
             );
         }
 

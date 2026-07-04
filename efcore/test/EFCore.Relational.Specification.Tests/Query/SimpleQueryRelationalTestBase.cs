@@ -104,32 +104,26 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Hierarchy_query_with_abstract_type_sibling_TPC(bool async) =>
-            Hierarchy_query_with_abstract_type_sibling_helper(
-                async,
-                mb =>
-                {
-                    mb.Entity<Animal>().UseTpcMappingStrategy();
-                    mb.Entity<Pet>().ToTable("Pets");
-                    mb.Entity<Cat>().ToTable("Cats");
-                    mb.Entity<Dog>().ToTable("Dogs");
-                    mb.Entity<FarmAnimal>().ToTable("FarmAnimals");
-                }
-            );
+            Hierarchy_query_with_abstract_type_sibling_helper(async, mb =>
+            {
+                mb.Entity<Animal>().UseTpcMappingStrategy();
+                mb.Entity<Pet>().ToTable("Pets");
+                mb.Entity<Cat>().ToTable("Cats");
+                mb.Entity<Dog>().ToTable("Dogs");
+                mb.Entity<FarmAnimal>().ToTable("FarmAnimals");
+            });
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task Hierarchy_query_with_abstract_type_sibling_TPT(bool async) =>
-            Hierarchy_query_with_abstract_type_sibling_helper(
-                async,
-                mb =>
-                {
-                    mb.Entity<Animal>().UseTptMappingStrategy();
-                    mb.Entity<Pet>().ToTable("Pets");
-                    mb.Entity<Cat>().ToTable("Cats");
-                    mb.Entity<Dog>().ToTable("Dogs");
-                    mb.Entity<FarmAnimal>().ToTable("FarmAnimals");
-                }
-            );
+            Hierarchy_query_with_abstract_type_sibling_helper(async, mb =>
+            {
+                mb.Entity<Animal>().UseTptMappingStrategy();
+                mb.Entity<Pet>().ToTable("Pets");
+                mb.Entity<Cat>().ToTable("Cats");
+                mb.Entity<Dog>().ToTable("Dogs");
+                mb.Entity<FarmAnimal>().ToTable("FarmAnimals");
+            });
     }
 }
 

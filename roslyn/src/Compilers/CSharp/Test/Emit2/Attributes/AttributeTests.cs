@@ -5854,19 +5854,16 @@ class Program
                 class C { }
                 """;
 
-            var verifier = CompileAndVerify(
-                source,
-                symbolValidator: static module =>
-                {
-                    var c = module.GlobalNamespace.GetTypeMember("C");
-                    var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
-                    Assert.False(attr.HasErrors);
-                    Assert.Empty(attr.NamedArguments);
-                    var arg = attr.ConstructorArguments.Single();
-                    Assert.Equal(33, arg.Value);
-                    Assert.Equal("B<System.Int32>.E", arg.Type.ToTestDisplayString());
-                }
-            );
+            var verifier = CompileAndVerify(source, symbolValidator: static module =>
+            {
+                var c = module.GlobalNamespace.GetTypeMember("C");
+                var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
+                Assert.False(attr.HasErrors);
+                Assert.Empty(attr.NamedArguments);
+                var arg = attr.ConstructorArguments.Single();
+                Assert.Equal(33, arg.Value);
+                Assert.Equal("B<System.Int32>.E", arg.Type.ToTestDisplayString());
+            });
             verifier.VerifyDiagnostics();
         }
 
@@ -5889,20 +5886,17 @@ class Program
                 class C { }
                 """;
 
-            var verifier = CompileAndVerify(
-                source,
-                symbolValidator: static module =>
-                {
-                    var c = module.GlobalNamespace.GetTypeMember("C");
-                    var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
-                    Assert.False(attr.HasErrors);
-                    Assert.Empty(attr.ConstructorArguments);
-                    var arg = attr.NamedArguments.Single();
-                    Assert.Equal("E", arg.Key);
-                    Assert.Equal(33, arg.Value.Value);
-                    Assert.Equal("B<System.Int32>.E", arg.Value.Type.ToTestDisplayString());
-                }
-            );
+            var verifier = CompileAndVerify(source, symbolValidator: static module =>
+            {
+                var c = module.GlobalNamespace.GetTypeMember("C");
+                var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
+                Assert.False(attr.HasErrors);
+                Assert.Empty(attr.ConstructorArguments);
+                var arg = attr.NamedArguments.Single();
+                Assert.Equal("E", arg.Key);
+                Assert.Equal(33, arg.Value.Value);
+                Assert.Equal("B<System.Int32>.E", arg.Value.Type.ToTestDisplayString());
+            });
             verifier.VerifyDiagnostics();
         }
 
@@ -5925,19 +5919,16 @@ class Program
                 class C { }
                 """;
 
-            var verifier = CompileAndVerify(
-                source,
-                symbolValidator: static module =>
-                {
-                    var c = module.GlobalNamespace.GetTypeMember("C");
-                    var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
-                    Assert.False(attr.HasErrors);
-                    Assert.Empty(attr.NamedArguments);
-                    var arg = attr.ConstructorArguments.Single();
-                    Assert.Equal(33, arg.Value);
-                    Assert.Equal("B<System.Int32>.E", arg.Type.ToTestDisplayString());
-                }
-            );
+            var verifier = CompileAndVerify(source, symbolValidator: static module =>
+            {
+                var c = module.GlobalNamespace.GetTypeMember("C");
+                var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
+                Assert.False(attr.HasErrors);
+                Assert.Empty(attr.NamedArguments);
+                var arg = attr.ConstructorArguments.Single();
+                Assert.Equal(33, arg.Value);
+                Assert.Equal("B<System.Int32>.E", arg.Type.ToTestDisplayString());
+            });
             verifier.VerifyDiagnostics();
         }
 
@@ -5960,20 +5951,17 @@ class Program
                 class C { }
                 """;
 
-            var verifier = CompileAndVerify(
-                source,
-                symbolValidator: static module =>
-                {
-                    var c = module.GlobalNamespace.GetTypeMember("C");
-                    var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
-                    Assert.False(attr.HasErrors);
-                    Assert.Empty(attr.ConstructorArguments);
-                    var arg = attr.NamedArguments.Single();
-                    Assert.Equal("Prop", arg.Key);
-                    Assert.Equal(33, arg.Value.Value);
-                    Assert.Equal("B<System.Int32>.E", arg.Value.Type.ToTestDisplayString());
-                }
-            );
+            var verifier = CompileAndVerify(source, symbolValidator: static module =>
+            {
+                var c = module.GlobalNamespace.GetTypeMember("C");
+                var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
+                Assert.False(attr.HasErrors);
+                Assert.Empty(attr.ConstructorArguments);
+                var arg = attr.NamedArguments.Single();
+                Assert.Equal("Prop", arg.Key);
+                Assert.Equal(33, arg.Value.Value);
+                Assert.Equal("B<System.Int32>.E", arg.Value.Type.ToTestDisplayString());
+            });
             verifier.VerifyDiagnostics();
         }
 
@@ -5999,19 +5987,16 @@ class Program
                 class C { }
                 """;
 
-            var verifier = CompileAndVerify(
-                source,
-                symbolValidator: static module =>
-                {
-                    var c = module.GlobalNamespace.GetTypeMember("C");
-                    var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A2");
-                    Assert.False(attr.HasErrors);
-                    Assert.Empty(attr.NamedArguments);
-                    var arg = attr.ConstructorArguments.Single();
-                    Assert.Equal(33, arg.Value);
-                    Assert.Equal("B<System.Int32>.E", arg.Type.ToTestDisplayString());
-                }
-            );
+            var verifier = CompileAndVerify(source, symbolValidator: static module =>
+            {
+                var c = module.GlobalNamespace.GetTypeMember("C");
+                var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A2");
+                Assert.False(attr.HasErrors);
+                Assert.Empty(attr.NamedArguments);
+                var arg = attr.ConstructorArguments.Single();
+                Assert.Equal(33, arg.Value);
+                Assert.Equal("B<System.Int32>.E", arg.Type.ToTestDisplayString());
+            });
             verifier.VerifyDiagnostics();
         }
 
@@ -6033,19 +6018,16 @@ class Program
                 }
                 """;
 
-            var verifier = CompileAndVerify(
-                source,
-                symbolValidator: static module =>
-                {
-                    var c = module.GlobalNamespace.GetTypeMember("C");
-                    var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
-                    Assert.False(attr.HasErrors);
-                    Assert.Empty(attr.NamedArguments);
-                    var arg = attr.ConstructorArguments.Single();
-                    Assert.Equal(33, arg.Value);
-                    Assert.Equal("E", arg.Type.ToTestDisplayString());
-                }
-            );
+            var verifier = CompileAndVerify(source, symbolValidator: static module =>
+            {
+                var c = module.GlobalNamespace.GetTypeMember("C");
+                var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
+                Assert.False(attr.HasErrors);
+                Assert.Empty(attr.NamedArguments);
+                var arg = attr.ConstructorArguments.Single();
+                Assert.Equal(33, arg.Value);
+                Assert.Equal("E", arg.Type.ToTestDisplayString());
+            });
             verifier.VerifyDiagnostics();
         }
 
@@ -6062,19 +6044,16 @@ class Program
                 class C { }
                 """;
 
-            var verifier = CompileAndVerify(
-                source,
-                symbolValidator: static module =>
-                {
-                    var c = module.GlobalNamespace.GetTypeMember("C");
-                    var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
-                    Assert.False(attr.HasErrors);
-                    Assert.Empty(attr.NamedArguments);
-                    var arg = attr.ConstructorArguments.Single();
-                    Assert.Equal(33, arg.Value);
-                    Assert.Equal("System.Int32", arg.Type.ToTestDisplayString());
-                }
-            );
+            var verifier = CompileAndVerify(source, symbolValidator: static module =>
+            {
+                var c = module.GlobalNamespace.GetTypeMember("C");
+                var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
+                Assert.False(attr.HasErrors);
+                Assert.Empty(attr.NamedArguments);
+                var arg = attr.ConstructorArguments.Single();
+                Assert.Equal(33, arg.Value);
+                Assert.Equal("System.Int32", arg.Type.ToTestDisplayString());
+            });
             verifier.VerifyDiagnostics();
         }
 
@@ -6097,19 +6076,16 @@ class Program
                 class C { }
                 """;
 
-            var verifier = CompileAndVerify(
-                source,
-                symbolValidator: static module =>
-                {
-                    var c = module.GlobalNamespace.GetTypeMember("C");
-                    var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
-                    Assert.False(attr.HasErrors);
-                    Assert.Empty(attr.NamedArguments);
-                    var arg = attr.ConstructorArguments.Single();
-                    Assert.Equal(33, arg.Value);
-                    Assert.Equal("B<System.Int32>.E", arg.Type.ToTestDisplayString());
-                }
-            );
+            var verifier = CompileAndVerify(source, symbolValidator: static module =>
+            {
+                var c = module.GlobalNamespace.GetTypeMember("C");
+                var attr = c.GetAttributes().Single(d => d.AttributeClass?.Name == "A");
+                Assert.False(attr.HasErrors);
+                Assert.Empty(attr.NamedArguments);
+                var arg = attr.ConstructorArguments.Single();
+                Assert.Equal(33, arg.Value);
+                Assert.Equal("B<System.Int32>.E", arg.Type.ToTestDisplayString());
+            });
             verifier.VerifyDiagnostics();
         }
 
@@ -7265,33 +7241,30 @@ class C
 {
 }
 ";
-            CompileAndVerify(
-                source,
-                symbolValidator: (m) =>
-                {
-                    var c = m.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                    var attr = c.GetAttributes().Single();
-                    var args = attr.ConstructorArguments.ToArray();
+            CompileAndVerify(source, symbolValidator: (m) =>
+            {
+                var c = m.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+                var attr = c.GetAttributes().Single();
+                var args = attr.ConstructorArguments.ToArray();
 
-                    Assert.True(args[0].IsNull);
-                    Assert.Equal("object[]", args[0].Type.ToDisplayString());
-                    Assert.Throws<InvalidOperationException>(() => args[0].Value);
+                Assert.True(args[0].IsNull);
+                Assert.Equal("object[]", args[0].Type.ToDisplayString());
+                Assert.Throws<InvalidOperationException>(() => args[0].Value);
 
-                    Assert.True(args[1].IsNull);
-                    Assert.Equal("int[]", args[1].Type.ToDisplayString());
-                    Assert.Throws<InvalidOperationException>(() => args[1].Value);
+                Assert.True(args[1].IsNull);
+                Assert.Equal("int[]", args[1].Type.ToDisplayString());
+                Assert.Throws<InvalidOperationException>(() => args[1].Value);
 
-                    var named = attr.NamedArguments.ToDictionary(e => e.Key, e => e.Value);
+                var named = attr.NamedArguments.ToDictionary(e => e.Key, e => e.Value);
 
-                    Assert.True(named["P"].IsNull);
-                    Assert.Equal("object[]", named["P"].Type.ToDisplayString());
-                    Assert.Throws<InvalidOperationException>(() => named["P"].Value);
+                Assert.True(named["P"].IsNull);
+                Assert.Equal("object[]", named["P"].Type.ToDisplayString());
+                Assert.Throws<InvalidOperationException>(() => named["P"].Value);
 
-                    Assert.True(named["F"].IsNull);
-                    Assert.Equal("int[]", named["F"].Type.ToDisplayString());
-                    Assert.Throws<InvalidOperationException>(() => named["F"].Value);
-                }
-            );
+                Assert.True(named["F"].IsNull);
+                Assert.Equal("int[]", named["F"].Type.ToDisplayString());
+                Assert.Throws<InvalidOperationException>(() => named["F"].Value);
+            });
         }
 
         [Fact]
@@ -7313,23 +7286,20 @@ class C
 {
 }
 ";
-            CompileAndVerify(
-                source,
-                symbolValidator: (m) =>
-                {
-                    var c = m.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                    var attr = c.GetAttributes().Single();
-                    var args = attr.ConstructorArguments.ToArray();
+            CompileAndVerify(source, symbolValidator: (m) =>
+            {
+                var c = m.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+                var attr = c.GetAttributes().Single();
+                var args = attr.ConstructorArguments.ToArray();
 
-                    Assert.Null(args[0].Value);
-                    Assert.Equal("Type", args[0].Type.Name);
-                    Assert.Throws<InvalidOperationException>(() => args[0].Values);
+                Assert.Null(args[0].Value);
+                Assert.Equal("Type", args[0].Type.Name);
+                Assert.Throws<InvalidOperationException>(() => args[0].Values);
 
-                    Assert.Null(args[1].Value);
-                    Assert.Equal("String", args[1].Type.Name);
-                    Assert.Throws<InvalidOperationException>(() => args[1].Values);
-                }
-            );
+                Assert.Null(args[1].Value);
+                Assert.Equal("String", args[1].Type.Name);
+                Assert.Throws<InvalidOperationException>(() => args[1].Values);
+            });
         }
 
         [WorkItem(121, "https://github.com/dotnet/roslyn/issues/121")]
@@ -7345,21 +7315,18 @@ class C<T>
     public void M<[X]U>() { }
 }
 ";
-            CompileAndVerify(
-                source,
-                symbolValidator: module =>
-                {
-                    var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                    var classTypeParameter = @class.TypeParameters.Single();
-                    var method = @class.GetMember<MethodSymbol>("M");
-                    var methodTypeParameter = method.TypeParameters.Single();
+            CompileAndVerify(source, symbolValidator: module =>
+            {
+                var @class = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+                var classTypeParameter = @class.TypeParameters.Single();
+                var method = @class.GetMember<MethodSymbol>("M");
+                var methodTypeParameter = method.TypeParameters.Single();
 
-                    Assert.Empty(classTypeParameter.GetAttributes());
+                Assert.Empty(classTypeParameter.GetAttributes());
 
-                    var attribute = methodTypeParameter.GetAttributes().Single();
-                    Assert.Equal("XAttribute", attribute.AttributeClass.Name);
-                }
-            );
+                var attribute = methodTypeParameter.GetAttributes().Single();
+                Assert.Equal("XAttribute", attribute.AttributeClass.Name);
+            });
         }
 
         #endregion
@@ -12185,14 +12152,11 @@ class Test
                 new[] { new CSharpCompilationReference(compilation1) }
             );
 
-            CompileAndVerify(
-                compilation2,
-                symbolValidator: (m) =>
-                {
-                    Assert.Equal(2, m.ReferencedAssemblies.Length);
-                    Assert.Equal("Bug1020038", m.ReferencedAssemblies[1].Name);
-                }
-            );
+            CompileAndVerify(compilation2, symbolValidator: (m) =>
+            {
+                Assert.Equal(2, m.ReferencedAssemblies.Length);
+                Assert.Equal("Bug1020038", m.ReferencedAssemblies[1].Name);
+            });
 
             var source3 =
                 @"
@@ -12211,14 +12175,11 @@ class Test
                 new[] { new CSharpCompilationReference(compilation1) }
             );
 
-            CompileAndVerify(
-                compilation3,
-                symbolValidator: (m) =>
-                {
-                    Assert.Equal(2, m.ReferencedAssemblies.Length);
-                    Assert.Equal("Bug1020038", m.ReferencedAssemblies[1].Name);
-                }
-            );
+            CompileAndVerify(compilation3, symbolValidator: (m) =>
+            {
+                Assert.Equal(2, m.ReferencedAssemblies.Length);
+                Assert.Equal("Bug1020038", m.ReferencedAssemblies[1].Name);
+            });
         }
 
         [
@@ -12240,20 +12201,17 @@ class C<T>
 
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
 
-            CompileAndVerify(
-                compilation,
-                symbolValidator: (m) =>
-                {
-                    var cc = m.GlobalNamespace.GetTypeMember("C");
-                    var mm = cc.GetMember<MethodSymbol>("M");
+            CompileAndVerify(compilation, symbolValidator: (m) =>
+            {
+                var cc = m.GlobalNamespace.GetTypeMember("C");
+                var mm = cc.GetMember<MethodSymbol>("M");
 
-                    Assert.True(cc.TypeParameters.Single().GetAttributes().IsEmpty);
-                    Assert.Equal(
-                        "XAttribute",
-                        mm.TypeParameters.Single().GetAttributes().Single().ToString()
-                    );
-                }
-            );
+                Assert.True(cc.TypeParameters.Single().GetAttributes().IsEmpty);
+                Assert.Equal(
+                    "XAttribute",
+                    mm.TypeParameters.Single().GetAttributes().Single().ToString()
+                );
+            });
         }
 
         [WorkItem(1144603, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1144603")]

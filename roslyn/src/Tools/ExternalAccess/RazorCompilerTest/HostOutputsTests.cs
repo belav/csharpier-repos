@@ -37,13 +37,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.RazorCompiler.UnitTests
                     (c, _) => c.Node
                 );
 
-                ctx.RegisterHostOutput(
-                    syntaxProvider,
-                    static (hpc, node, _) =>
-                    {
-                        hpc.AddOutput("test", node.ToFullString());
-                    }
-                );
+                ctx.RegisterHostOutput(syntaxProvider, static (hpc, node, _) =>
+                {
+                    hpc.AddOutput("test", node.ToFullString());
+                });
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(

@@ -3808,9 +3808,8 @@ namespace System.Globalization.Tests
         public void AbbreviatedMonthNames_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.AbbreviatedMonthNames = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.AbbreviatedMonthNames = null
             );
         }
 
@@ -3818,25 +3817,23 @@ namespace System.Globalization.Tests
         public void AbbreviatedMonthNames_SetNullValueInValues_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    format.AbbreviatedMonthNames = new string[]
-                    {
-                        "1",
-                        "2",
-                        "3",
-                        null,
-                        "5",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11",
-                        "12",
-                        "",
-                    }
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.AbbreviatedMonthNames = new string[]
+                {
+                    "1",
+                    "2",
+                    "3",
+                    null,
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "",
+                }
             );
         }
 
@@ -3872,9 +3869,8 @@ namespace System.Globalization.Tests
         )
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => format.AbbreviatedMonthNames = value
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                format.AbbreviatedMonthNames = value
             );
         }
 

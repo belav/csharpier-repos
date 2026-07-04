@@ -140,17 +140,14 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).ElementAtOrDefault(2)
+            Assert.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).ElementAtOrDefault(2)
             );
-            Assert.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).ElementAtOrDefault(new Index(2))
+            Assert.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).ElementAtOrDefault(new Index(2))
             );
-            Assert.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).ElementAtOrDefault(^2)
+            Assert.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).ElementAtOrDefault(^2)
             );
         }
 

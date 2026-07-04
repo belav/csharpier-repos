@@ -205,13 +205,11 @@ namespace System.Net.Http.Functional.Tests
 
                                 string[] statusLineParts = receivedRequest[0].Split(' ');
                                 Assert.Equal("GET", statusLineParts[0]);
-                                Assert.DoesNotContain(
-                                    receivedRequest,
-                                    line => line.StartsWith("Transfer-Encoding")
+                                Assert.DoesNotContain(receivedRequest, line =>
+                                    line.StartsWith("Transfer-Encoding")
                                 );
-                                Assert.DoesNotContain(
-                                    receivedRequest,
-                                    line => line.StartsWith("Content-Length")
+                                Assert.DoesNotContain(receivedRequest, line =>
+                                    line.StartsWith("Content-Length")
                                 );
 
                                 using (HttpResponseMessage response = await getResponseTask)

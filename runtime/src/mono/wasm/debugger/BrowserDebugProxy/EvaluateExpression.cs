@@ -136,62 +136,53 @@ namespace Microsoft.WebAssembly.Diagnostics
                 CompilationUnitSyntax root = syntaxTree.GetCompilationUnitRoot();
 
                 // 1. Replace all this.a occurrences with this_a_ABDE
-                root = root.ReplaceNodes(
-                    memberAccesses,
-                    (maes, _) =>
+                root = root.ReplaceNodes(memberAccesses, (maes, _) =>
+                {
+                    string ma_str = maes.ToString();
+                    if (!memberAccessToParamName.TryGetValue(ma_str, out string id_name))
                     {
-                        string ma_str = maes.ToString();
-                        if (!memberAccessToParamName.TryGetValue(ma_str, out string id_name))
-                        {
-                            // Generate a random suffix
-                            string suffix = Guid.NewGuid().ToString().Substring(0, 5);
-                            string prefix = RegexForReplaceVarName().Replace(ma_str, "_");
-                            id_name = $"{prefix}_{suffix}";
+                        // Generate a random suffix
+                        string suffix = Guid.NewGuid().ToString().Substring(0, 5);
+                        string prefix = RegexForReplaceVarName().Replace(ma_str, "_");
+                        id_name = $"{prefix}_{suffix}";
 
-                            memberAccessToParamName[ma_str] = id_name;
-                        }
-
-                        return SyntaxFactory.IdentifierName(id_name);
+                        memberAccessToParamName[ma_str] = id_name;
                     }
-                );
+
+                    return SyntaxFactory.IdentifierName(id_name);
+                });
 
                 // 1.1 Replace all this.a() occurrences with this_a_ABDE
-                root = root.ReplaceNodes(
-                    methodCalls,
-                    (m, _) =>
+                root = root.ReplaceNodes(methodCalls, (m, _) =>
+                {
+                    string iesStr = m.ToString();
+                    if (!methodCallToParamName.TryGetValue(iesStr, out string id_name))
                     {
-                        string iesStr = m.ToString();
-                        if (!methodCallToParamName.TryGetValue(iesStr, out string id_name))
-                        {
-                            // Generate a random suffix
-                            string suffix = Guid.NewGuid().ToString().Substring(0, 5);
-                            string prefix = RegexForReplaceVarName().Replace(iesStr, "_");
-                            id_name = $"{prefix}_{suffix}";
-                            methodCallToParamName[iesStr] = id_name;
-                        }
-
-                        return SyntaxFactory.IdentifierName(id_name);
+                        // Generate a random suffix
+                        string suffix = Guid.NewGuid().ToString().Substring(0, 5);
+                        string prefix = RegexForReplaceVarName().Replace(iesStr, "_");
+                        id_name = $"{prefix}_{suffix}";
+                        methodCallToParamName[iesStr] = id_name;
                     }
-                );
+
+                    return SyntaxFactory.IdentifierName(id_name);
+                });
 
                 // 1.2 Replace all this.a[x] occurrences with this_a_ABDE
-                root = root.ReplaceNodes(
-                    elementAccess,
-                    (ea, _) =>
+                root = root.ReplaceNodes(elementAccess, (ea, _) =>
+                {
+                    string eaStr = ea.ToString();
+                    if (!elementAccessToParamName.TryGetValue(eaStr, out string id_name))
                     {
-                        string eaStr = ea.ToString();
-                        if (!elementAccessToParamName.TryGetValue(eaStr, out string id_name))
-                        {
-                            // Generate a random suffix
-                            string suffix = Guid.NewGuid().ToString().Substring(0, 5);
-                            string prefix = RegexForReplaceVarName().Replace(eaStr, "_");
-                            id_name = $"{prefix}_{suffix}";
-                            elementAccessToParamName[eaStr] = id_name;
-                        }
-
-                        return SyntaxFactory.IdentifierName(id_name);
+                        // Generate a random suffix
+                        string suffix = Guid.NewGuid().ToString().Substring(0, 5);
+                        string prefix = RegexForReplaceVarName().Replace(eaStr, "_");
+                        id_name = $"{prefix}_{suffix}";
+                        elementAccessToParamName[eaStr] = id_name;
                     }
-                );
+
+                    return SyntaxFactory.IdentifierName(id_name);
+                });
 
                 var localsSet = new HashSet<string>();
 

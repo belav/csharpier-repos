@@ -3844,9 +3844,8 @@ namespace System.Globalization.Tests
         public void MonthGenitiveNames_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.MonthGenitiveNames = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.MonthGenitiveNames = null
             );
         }
 
@@ -3854,25 +3853,23 @@ namespace System.Globalization.Tests
         public void MonthGenitiveNames_SetNullValueInValues_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    format.MonthGenitiveNames = new string[]
-                    {
-                        "1",
-                        "2",
-                        "3",
-                        null,
-                        "5",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11",
-                        "12",
-                        "",
-                    }
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.MonthGenitiveNames = new string[]
+                {
+                    "1",
+                    "2",
+                    "3",
+                    null,
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "",
+                }
             );
         }
 
@@ -3906,9 +3903,8 @@ namespace System.Globalization.Tests
         public void MonthGenitiveNames_SetNullValueInValues_ThrowsArgumentException(string[] value)
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => format.MonthGenitiveNames = value
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                format.MonthGenitiveNames = value
             );
         }
 

@@ -95,24 +95,20 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var cancellationToken = new CancellationToken(canceled: false);
 
 #pragma warning disable CA2012 // Use ValueTasks correctly (the instance is never created)
-            Assert.Throws<ArgumentNullException>(
-                "func",
-                () =>
-                    SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
-                        null!,
-                        transform,
-                        arg,
-                        cancellationToken
-                    )
+            Assert.Throws<ArgumentNullException>("func", () =>
+                SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
+                    null!,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "transform",
-                () =>
-                    SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync<
-                        StateType,
-                        IntermediateType,
-                        ResultType
-                    >(func, null!, arg, cancellationToken)
+            Assert.Throws<ArgumentNullException>("transform", () =>
+                SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync<
+                    StateType,
+                    IntermediateType,
+                    ResultType
+                >(func, null!, arg, cancellationToken)
             );
 #pragma warning restore CA2012 // Use ValueTasks correctly
         }

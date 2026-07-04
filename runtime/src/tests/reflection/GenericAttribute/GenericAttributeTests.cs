@@ -358,83 +358,65 @@ public class Program
         AssertAny(a1_data, a => a.AttributeType == typeof(SingleAttribute<int>));
         AssertAny(a1_data, a => a.AttributeType == typeof(SingleAttribute<bool>));
 
-        AssertAny(
-            a1_data,
-            a =>
-                a.AttributeType == typeof(MultiAttribute<int>)
-                && a.ConstructorArguments.Count == 0
-                && a.NamedArguments.Count == 0
+        AssertAny(a1_data, a =>
+            a.AttributeType == typeof(MultiAttribute<int>)
+            && a.ConstructorArguments.Count == 0
+            && a.NamedArguments.Count == 0
         );
-        AssertAny(
-            a1_data,
-            a =>
-                a.AttributeType == typeof(MultiAttribute<int>)
-                && a.ConstructorArguments.Count == 1
-                && a.NamedArguments.Count == 0
-                && a.ConstructorArguments[0].ArgumentType == typeof(int)
-                && ((int)a.ConstructorArguments[0].Value) == 1
+        AssertAny(a1_data, a =>
+            a.AttributeType == typeof(MultiAttribute<int>)
+            && a.ConstructorArguments.Count == 1
+            && a.NamedArguments.Count == 0
+            && a.ConstructorArguments[0].ArgumentType == typeof(int)
+            && ((int)a.ConstructorArguments[0].Value) == 1
         );
-        AssertAny(
-            a1_data,
-            a =>
-                a.AttributeType == typeof(MultiAttribute<int>)
-                && a.ConstructorArguments.Count == 0
-                && a.NamedArguments.Count == 1
-                && a.NamedArguments[0].TypedValue.ArgumentType == typeof(int)
-                && ((int)a.NamedArguments[0].TypedValue.Value) == 2
+        AssertAny(a1_data, a =>
+            a.AttributeType == typeof(MultiAttribute<int>)
+            && a.ConstructorArguments.Count == 0
+            && a.NamedArguments.Count == 1
+            && a.NamedArguments[0].TypedValue.ArgumentType == typeof(int)
+            && ((int)a.NamedArguments[0].TypedValue.Value) == 2
         );
 
-        AssertAny(
-            a1_data,
-            a =>
-                a.AttributeType == typeof(MultiAttribute<bool>)
-                && a.ConstructorArguments.Count == 0
-                && a.NamedArguments.Count == 0
+        AssertAny(a1_data, a =>
+            a.AttributeType == typeof(MultiAttribute<bool>)
+            && a.ConstructorArguments.Count == 0
+            && a.NamedArguments.Count == 0
         );
-        AssertAny(
-            a1_data,
-            a =>
-                a.AttributeType == typeof(MultiAttribute<bool>)
-                && a.ConstructorArguments.Count == 1
-                && a.NamedArguments.Count == 0
-                && a.ConstructorArguments[0].ArgumentType == typeof(bool)
-                && ((bool)a.ConstructorArguments[0].Value) == true
+        AssertAny(a1_data, a =>
+            a.AttributeType == typeof(MultiAttribute<bool>)
+            && a.ConstructorArguments.Count == 1
+            && a.NamedArguments.Count == 0
+            && a.ConstructorArguments[0].ArgumentType == typeof(bool)
+            && ((bool)a.ConstructorArguments[0].Value) == true
         );
-        AssertAny(
-            a1_data,
-            a =>
-                a.AttributeType == typeof(MultiAttribute<bool>)
-                && a.ConstructorArguments.Count == 0
-                && a.NamedArguments.Count == 1
-                && a.NamedArguments[0].TypedValue.ArgumentType == typeof(bool)
-                && ((bool)a.NamedArguments[0].TypedValue.Value) == true
+        AssertAny(a1_data, a =>
+            a.AttributeType == typeof(MultiAttribute<bool>)
+            && a.ConstructorArguments.Count == 0
+            && a.NamedArguments.Count == 1
+            && a.NamedArguments[0].TypedValue.ArgumentType == typeof(bool)
+            && ((bool)a.NamedArguments[0].TypedValue.Value) == true
         );
 
-        AssertAny(
-            a1_data,
-            a =>
-                a.AttributeType == typeof(MultiAttribute<bool?>)
-                && a.ConstructorArguments.Count == 0
-                && a.NamedArguments.Count == 0
+        AssertAny(a1_data, a =>
+            a.AttributeType == typeof(MultiAttribute<bool?>)
+            && a.ConstructorArguments.Count == 0
+            && a.NamedArguments.Count == 0
         );
 
-        AssertAny(
-            a1_data,
-            a =>
-                a.AttributeType == typeof(MultiAttribute<Type>)
-                && a.ConstructorArguments.Count == 1
-                && a.NamedArguments.Count == 0
-                && a.ConstructorArguments[0].ArgumentType == typeof(Type)
-                && ((Type)a.ConstructorArguments[0].Value) == typeof(Class)
+        AssertAny(a1_data, a =>
+            a.AttributeType == typeof(MultiAttribute<Type>)
+            && a.ConstructorArguments.Count == 1
+            && a.NamedArguments.Count == 0
+            && a.ConstructorArguments[0].ArgumentType == typeof(Type)
+            && ((Type)a.ConstructorArguments[0].Value) == typeof(Class)
         );
-        AssertAny(
-            a1_data,
-            a =>
-                a.AttributeType == typeof(MultiAttribute<Type>)
-                && a.ConstructorArguments.Count == 0
-                && a.NamedArguments.Count == 1
-                && a.NamedArguments[0].TypedValue.ArgumentType == typeof(Type)
-                && ((Type)a.NamedArguments[0].TypedValue.Value) == typeof(Class.Derive)
+        AssertAny(a1_data, a =>
+            a.AttributeType == typeof(MultiAttribute<Type>)
+            && a.ConstructorArguments.Count == 0
+            && a.NamedArguments.Count == 1
+            && a.NamedArguments[0].TypedValue.ArgumentType == typeof(Type)
+            && ((Type)a.NamedArguments[0].TypedValue.Value) == typeof(Class.Derive)
         );
     }
 

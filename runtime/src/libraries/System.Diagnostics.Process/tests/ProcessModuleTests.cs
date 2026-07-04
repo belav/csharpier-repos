@@ -41,9 +41,8 @@ namespace System.Diagnostics.Tests
         public void Modules_Get_ContainsHostFileName()
         {
             ProcessModuleCollection modules = Process.GetCurrentProcess().Modules;
-            Assert.Contains(
-                modules.Cast<ProcessModule>(),
-                m => m.FileName.Contains(RemoteExecutor.HostRunnerName)
+            Assert.Contains(modules.Cast<ProcessModule>(), m =>
+                m.FileName.Contains(RemoteExecutor.HostRunnerName)
             );
         }
 
@@ -54,9 +53,8 @@ namespace System.Diagnostics.Tests
         {
             ProcessModuleCollection modules = Process.GetCurrentProcess().Modules;
             Assert.Contains(modules.Cast<ProcessModule>(), m => m.FileName.Contains("libcoreclr"));
-            Assert.Contains(
-                modules.Cast<ProcessModule>(),
-                m => m.FileName.Contains("System.Native")
+            Assert.Contains(modules.Cast<ProcessModule>(), m =>
+                m.FileName.Contains("System.Native")
             );
         }
 

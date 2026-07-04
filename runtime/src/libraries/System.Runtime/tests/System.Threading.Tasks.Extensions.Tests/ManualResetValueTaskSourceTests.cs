@@ -261,9 +261,8 @@ namespace System.Threading.Tasks.Sources.Tests
         public void OnCompleted_NullDelegate_Throws()
         {
             var mrvts = new ManualResetValueTaskSource<int>();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "continuation",
-                () => mrvts.OnCompleted(null, new object(), 0, ValueTaskSourceOnCompletedFlags.None)
+            AssertExtensions.Throws<ArgumentNullException>("continuation", () =>
+                mrvts.OnCompleted(null, new object(), 0, ValueTaskSourceOnCompletedFlags.None)
             );
         }
 

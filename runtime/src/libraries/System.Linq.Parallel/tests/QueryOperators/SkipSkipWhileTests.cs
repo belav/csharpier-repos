@@ -158,9 +158,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Skip_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).Skip(0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).Skip(0)
             );
         }
 
@@ -256,9 +255,8 @@ namespace System.Linq.Parallel.Tests
                 Math.Max(skip, 0),
                 Math.Min(count, Math.Max(0, count - skip))
             );
-            Assert.All(
-                UnorderedSources.Default(count).SkipWhile(x => x < skip).ToList(),
-                x => seen.Add(x)
+            Assert.All(UnorderedSources.Default(count).SkipWhile(x => x < skip).ToList(), x =>
+                seen.Add(x)
             );
             seen.AssertComplete();
         }
@@ -381,9 +379,8 @@ namespace System.Linq.Parallel.Tests
                 Math.Max(skip, 0),
                 Math.Min(count, Math.Max(0, count - skip))
             );
-            Assert.All(
-                UnorderedSources.Default(count).SkipWhile((x, index) => index < skip),
-                x => seen.Add(x)
+            Assert.All(UnorderedSources.Default(count).SkipWhile((x, index) => index < skip), x =>
+                seen.Add(x)
             );
             seen.AssertComplete();
         }
@@ -561,17 +558,14 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void SkipWhile_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).SkipWhile(x => true)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).SkipWhile(x => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ParallelEnumerable.Empty<bool>().SkipWhile((Func<bool, bool>)null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ParallelEnumerable.Empty<bool>().SkipWhile((Func<bool, bool>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ParallelEnumerable.Empty<bool>().SkipWhile((Func<bool, int, bool>)null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ParallelEnumerable.Empty<bool>().SkipWhile((Func<bool, int, bool>)null)
             );
         }
     }

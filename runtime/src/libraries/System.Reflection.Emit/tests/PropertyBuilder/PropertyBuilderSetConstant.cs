@@ -123,9 +123,8 @@ namespace System.Reflection.Emit.Tests
                 typeof(decimal),
                 null
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => property.SetConstant((decimal)10)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                property.SetConstant((decimal)10)
             );
         }
     }

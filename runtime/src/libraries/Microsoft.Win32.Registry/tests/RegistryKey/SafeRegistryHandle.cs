@@ -19,13 +19,11 @@ namespace Microsoft.Win32.RegistryTests
             );
 
             // invalid view
-            AssertExtensions.Throws<ArgumentException>(
-                "view",
-                () => RegistryKey.FromHandle(TestRegistryKey.Handle, (RegistryView)(-1))
+            AssertExtensions.Throws<ArgumentException>("view", () =>
+                RegistryKey.FromHandle(TestRegistryKey.Handle, (RegistryView)(-1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "view",
-                () => RegistryKey.FromHandle(TestRegistryKey.Handle, (RegistryView)3)
+            AssertExtensions.Throws<ArgumentException>("view", () =>
+                RegistryKey.FromHandle(TestRegistryKey.Handle, (RegistryView)3)
             );
 
             // get handle of disposed RegistryKey

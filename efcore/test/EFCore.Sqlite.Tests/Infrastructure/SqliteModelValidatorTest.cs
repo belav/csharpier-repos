@@ -65,12 +65,10 @@ public class SqliteModelValidatorTest : RelationalModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Person>()
-            .InsertUsingStoredProcedure(
-                "Person_Insert",
-                spb =>
-                    spb.HasParameter(w => w.Id, pb => pb.IsOutput())
-                        .HasParameter(w => w.Name)
-                        .HasParameter(w => w.FavoriteBreed)
+            .InsertUsingStoredProcedure("Person_Insert", spb =>
+                spb.HasParameter(w => w.Id, pb => pb.IsOutput())
+                    .HasParameter(w => w.Name)
+                    .HasParameter(w => w.FavoriteBreed)
             );
 
         VerifyError(SqliteStrings.StoredProceduresNotSupported(nameof(Person)), modelBuilder);
@@ -82,12 +80,10 @@ public class SqliteModelValidatorTest : RelationalModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Person>()
-            .UpdateUsingStoredProcedure(
-                "Person_Update",
-                spb =>
-                    spb.HasOriginalValueParameter(w => w.Id)
-                        .HasParameter(w => w.Name)
-                        .HasParameter(w => w.FavoriteBreed)
+            .UpdateUsingStoredProcedure("Person_Update", spb =>
+                spb.HasOriginalValueParameter(w => w.Id)
+                    .HasParameter(w => w.Name)
+                    .HasParameter(w => w.FavoriteBreed)
             );
 
         VerifyError(SqliteStrings.StoredProceduresNotSupported(nameof(Person)), modelBuilder);
@@ -99,9 +95,8 @@ public class SqliteModelValidatorTest : RelationalModelValidatorTest
         var modelBuilder = CreateConventionModelBuilder();
         modelBuilder
             .Entity<Person>()
-            .DeleteUsingStoredProcedure(
-                "Person_Delete",
-                spb => spb.HasOriginalValueParameter(w => w.Id)
+            .DeleteUsingStoredProcedure("Person_Delete", spb =>
+                spb.HasOriginalValueParameter(w => w.Id)
             );
 
         VerifyError(SqliteStrings.StoredProceduresNotSupported(nameof(Person)), modelBuilder);

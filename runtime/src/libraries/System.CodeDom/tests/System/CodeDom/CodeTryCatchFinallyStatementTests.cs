@@ -112,18 +112,11 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullTryStatements_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeTryCatchFinallyStatement(null, new CodeCatchClause[0])
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTryCatchFinallyStatement(null, new CodeCatchClause[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    new CodeTryCatchFinallyStatement(
-                        null,
-                        new CodeCatchClause[0],
-                        new CodeStatement[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTryCatchFinallyStatement(null, new CodeCatchClause[0], new CodeStatement[0])
             );
         }
 
@@ -131,36 +124,26 @@ namespace System.CodeDom.Tests
         public void Ctor_NullObjectInTryStatements_ThrowsArgumentNullException()
         {
             CodeStatement[] tryStatements = new CodeStatement[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeTryCatchFinallyStatement(tryStatements, new CodeCatchClause[0])
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTryCatchFinallyStatement(tryStatements, new CodeCatchClause[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    new CodeTryCatchFinallyStatement(
-                        tryStatements,
-                        new CodeCatchClause[0],
-                        new CodeStatement[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTryCatchFinallyStatement(
+                    tryStatements,
+                    new CodeCatchClause[0],
+                    new CodeStatement[0]
+                )
             );
         }
 
         [Fact]
         public void Ctor_NullCodeCatchClauses_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeTryCatchFinallyStatement(new CodeStatement[0], null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTryCatchFinallyStatement(new CodeStatement[0], null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    new CodeTryCatchFinallyStatement(
-                        new CodeStatement[0],
-                        null,
-                        new CodeStatement[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTryCatchFinallyStatement(new CodeStatement[0], null, new CodeStatement[0])
             );
         }
 
@@ -168,32 +151,23 @@ namespace System.CodeDom.Tests
         public void Ctor_NullObjectInCodeCatchClauses_ThrowsArgumentNullException()
         {
             CodeCatchClause[] catchClauses = new CodeCatchClause[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeTryCatchFinallyStatement(new CodeStatement[0], catchClauses)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTryCatchFinallyStatement(new CodeStatement[0], catchClauses)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    new CodeTryCatchFinallyStatement(
-                        new CodeStatement[0],
-                        catchClauses,
-                        new CodeStatement[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTryCatchFinallyStatement(
+                    new CodeStatement[0],
+                    catchClauses,
+                    new CodeStatement[0]
+                )
             );
         }
 
         [Fact]
         public void Ctor_NullFinallyStatements_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    new CodeTryCatchFinallyStatement(
-                        new CodeStatement[0],
-                        new CodeCatchClause[0],
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTryCatchFinallyStatement(new CodeStatement[0], new CodeCatchClause[0], null)
             );
         }
 
@@ -201,14 +175,12 @@ namespace System.CodeDom.Tests
         public void Ctor_NullObjectInFinallyStatements_ThrowsArgumentNullException()
         {
             CodeStatement[] finallyStatements = new CodeStatement[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    new CodeTryCatchFinallyStatement(
-                        new CodeStatement[0],
-                        new CodeCatchClause[0],
-                        finallyStatements
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeTryCatchFinallyStatement(
+                    new CodeStatement[0],
+                    new CodeCatchClause[0],
+                    finallyStatements
+                )
             );
         }
 

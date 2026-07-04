@@ -91,47 +91,44 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
                     out var whenFalse
                 );
 
-                editor.ReplaceNode(
-                    conditionalExpression,
-                    (c, g) =>
-                    {
-                        syntaxFacts.GetPartsOfConditionalExpression(
-                            c,
-                            out var currentCondition,
-                            out var currentWhenTrue,
-                            out var currentWhenFalse
-                        );
+                editor.ReplaceNode(conditionalExpression, (c, g) =>
+                {
+                    syntaxFacts.GetPartsOfConditionalExpression(
+                        c,
+                        out var currentCondition,
+                        out var currentWhenTrue,
+                        out var currentWhenFalse
+                    );
 
-                        var coalesceExpression =
-                            whenPart == whenTrue
-                                ? g.CoalesceExpression(
-                                    conditionExpression,
-                                    syntaxFacts.WalkDownParentheses(currentWhenTrue)
-                                )
-                                : g.CoalesceExpression(
-                                    conditionExpression,
-                                    syntaxFacts.WalkDownParentheses(currentWhenFalse)
-                                );
-
-                        if (
-                            semanticFacts.IsInExpressionTree(
-                                semanticModel,
-                                conditionalExpression,
-                                expressionTypeOpt,
-                                cancellationToken
+                    var coalesceExpression =
+                        whenPart == whenTrue
+                            ? g.CoalesceExpression(
+                                conditionExpression,
+                                syntaxFacts.WalkDownParentheses(currentWhenTrue)
                             )
-                        )
-                        {
-                            coalesceExpression = coalesceExpression.WithAdditionalAnnotations(
-                                WarningAnnotation.Create(
-                                    AnalyzersResources.Changes_to_expression_trees_may_result_in_behavior_changes_at_runtime
-                                )
+                            : g.CoalesceExpression(
+                                conditionExpression,
+                                syntaxFacts.WalkDownParentheses(currentWhenFalse)
                             );
-                        }
 
-                        return coalesceExpression;
+                    if (
+                        semanticFacts.IsInExpressionTree(
+                            semanticModel,
+                            conditionalExpression,
+                            expressionTypeOpt,
+                            cancellationToken
+                        )
+                    )
+                    {
+                        coalesceExpression = coalesceExpression.WithAdditionalAnnotations(
+                            WarningAnnotation.Create(
+                                AnalyzersResources.Changes_to_expression_trees_may_result_in_behavior_changes_at_runtime
+                            )
+                        );
                     }
-                );
+
+                    return coalesceExpression;
+                });
             }
         }
     }

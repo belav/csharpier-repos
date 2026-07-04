@@ -52,13 +52,11 @@ namespace System.Reflection.Context.Tests
             IList<CustomAttributeData> customAttributesData =
                 _customAssembly.GetCustomAttributesData();
             Assert.NotEmpty(customAttributesData);
-            Assert.All(
-                customAttributesData,
-                cad =>
-                    Assert.Equal(
-                        ProjectionConstants.ProjectingCustomAttributeData,
-                        cad.GetType().FullName
-                    )
+            Assert.All(customAttributesData, cad =>
+                Assert.Equal(
+                    ProjectionConstants.ProjectingCustomAttributeData,
+                    cad.GetType().FullName
+                )
             );
         }
 
@@ -76,9 +74,8 @@ namespace System.Reflection.Context.Tests
         {
             Type[] exportedTypes = _customAssembly.GetExportedTypes();
             Assert.NotEmpty(exportedTypes);
-            Assert.All(
-                exportedTypes,
-                (et) => Assert.Equal(ProjectionConstants.CustomType, et.GetType().FullName)
+            Assert.All(exportedTypes, (et) =>
+                Assert.Equal(ProjectionConstants.CustomType, et.GetType().FullName)
             );
         }
 
@@ -92,9 +89,8 @@ namespace System.Reflection.Context.Tests
                     typeof(CustomAssemblyTests).Assembly.GetName().Name + ".dll",
                     loadedModules[0].Name
                 );
-            Assert.All(
-                loadedModules,
-                (mod) => Assert.Equal(ProjectionConstants.CustomModule, mod.GetType().FullName)
+            Assert.All(loadedModules, (mod) =>
+                Assert.Equal(ProjectionConstants.CustomModule, mod.GetType().FullName)
             );
         }
 
@@ -105,13 +101,11 @@ namespace System.Reflection.Context.Tests
                 .GetManifestResourceNames()
                 .Select(mrn => _customAssembly.GetManifestResourceInfo(mrn));
             Assert.NotEmpty(manifestResourceInfos);
-            Assert.All(
-                manifestResourceInfos,
-                (mri) =>
-                    Assert.Equal(
-                        ProjectionConstants.ProjectingManifestResourceInfo,
-                        mri.GetType().FullName
-                    )
+            Assert.All(manifestResourceInfos, (mri) =>
+                Assert.Equal(
+                    ProjectionConstants.ProjectingManifestResourceInfo,
+                    mri.GetType().FullName
+                )
             );
         }
 
@@ -125,10 +119,8 @@ namespace System.Reflection.Context.Tests
                     typeof(CustomAssemblyTests).Assembly.GetName().Name + ".dll",
                     modules[0].Name
                 );
-            Assert.All(
-                modules,
-                (module) =>
-                    Assert.Equal(ProjectionConstants.CustomModule, module.GetType().FullName)
+            Assert.All(modules, (module) =>
+                Assert.Equal(ProjectionConstants.CustomModule, module.GetType().FullName)
             );
         }
 
@@ -179,9 +171,8 @@ namespace System.Reflection.Context.Tests
         {
             Type[] types = _customAssembly.GetTypes();
             Assert.NotEmpty(types);
-            Assert.All(
-                types,
-                (type) => Assert.Equal(ProjectionConstants.CustomType, type.GetType().FullName)
+            Assert.All(types, (type) =>
+                Assert.Equal(ProjectionConstants.CustomType, type.GetType().FullName)
             );
         }
 

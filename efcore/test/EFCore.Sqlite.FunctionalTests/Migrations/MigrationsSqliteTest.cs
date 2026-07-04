@@ -2062,17 +2062,13 @@ PRAGMA foreign_keys = 1;
         await Test(
             builder => { },
             builder => { },
-            builder =>
-                builder.Entity(
-                    "Person",
-                    e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.Property<string>("Name");
-                        e.Property<int>("Age").HasDefaultValue(18);
-                        e.HasKey("Id");
-                    }
-                ),
+            builder => builder.Entity("Person", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<string>("Name");
+                    e.Property<int>("Age").HasDefaultValue(18);
+                    e.HasKey("Id");
+                }),
             model =>
             {
                 var personTable = Assert.Single(model.Tables);

@@ -1368,9 +1368,8 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage(""InfoDiagnostic"", ""InfoDiagnostic:InfoDiagnostic"", Justification = ""{FeaturesResources.Pending}"", Scope = ""type"", Target = ""~T:Class"")]
 ";
 
-                    Assert.All(
-                        Regex.Split(expected, "\r?\n"),
-                        line => Assert.False(HasTrailingWhitespace(line))
+                    Assert.All(Regex.Split(expected, "\r?\n"), line =>
+                        Assert.False(HasTrailingWhitespace(line))
                     );
 
                     await TestAsync(

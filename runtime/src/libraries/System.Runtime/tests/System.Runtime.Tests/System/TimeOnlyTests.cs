@@ -100,25 +100,20 @@ namespace System.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new TimeOnly(10, -2));
             Assert.Throws<ArgumentOutOfRangeException>(() => new TimeOnly(10, 10, 60));
             Assert.Throws<ArgumentOutOfRangeException>(() => new TimeOnly(10, 10, -3));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "millisecond",
-                () => new TimeOnly(10, 10, 10, 1000)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecond", () =>
+                new TimeOnly(10, 10, 10, 1000)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "millisecond",
-                () => new TimeOnly(10, 10, 10, -4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecond", () =>
+                new TimeOnly(10, 10, 10, -4)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "microsecond",
-                () => new TimeOnly(10, 10, 10, 10, 1000)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("microsecond", () =>
+                new TimeOnly(10, 10, 10, 10, 1000)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "microsecond",
-                () => new TimeOnly(10, 10, 10, 10, -4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("microsecond", () =>
+                new TimeOnly(10, 10, 10, 10, -4)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "ticks",
-                () => new TimeOnly(TimeOnly.MaxValue.Ticks + 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("ticks", () =>
+                new TimeOnly(TimeOnly.MaxValue.Ticks + 1)
             );
             AssertExtensions.Throws<ArgumentOutOfRangeException>("ticks", () => new TimeOnly(-1));
         }
@@ -359,13 +354,11 @@ namespace System.Tests
 
             Assert.Equal(TimeOnly.MaxValue, TimeOnly.FromTimeSpan(TimeOnly.MaxValue.ToTimeSpan()));
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "ticks",
-                () => TimeOnly.FromTimeSpan(new TimeSpan(24, 0, 0))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("ticks", () =>
+                TimeOnly.FromTimeSpan(new TimeSpan(24, 0, 0))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "ticks",
-                () => TimeOnly.FromTimeSpan(new TimeSpan(-1, 0, 0))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("ticks", () =>
+                TimeOnly.FromTimeSpan(new TimeSpan(-1, 0, 0))
             );
         }
 
@@ -477,14 +470,8 @@ namespace System.Tests
                     out parsedTimeOnly1
                 )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () =>
-                    TimeOnly.Parse(
-                        s,
-                        CultureInfo.InvariantCulture,
-                        DateTimeStyles.AdjustToUniversal
-                    )
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal)
             );
             Assert.False(
                 TimeOnly.TryParse(
@@ -494,9 +481,8 @@ namespace System.Tests
                     out parsedTimeOnly1
                 )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () => TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal)
             );
             Assert.False(
                 TimeOnly.TryParse(
@@ -506,10 +492,8 @@ namespace System.Tests
                     out parsedTimeOnly1
                 )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () =>
-                    TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal)
             );
             Assert.False(
                 TimeOnly.TryParse(
@@ -519,14 +503,8 @@ namespace System.Tests
                     out parsedTimeOnly1
                 )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () =>
-                    TimeOnly.Parse(
-                        s,
-                        CultureInfo.InvariantCulture,
-                        DateTimeStyles.NoCurrentDateDefault
-                    )
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault)
             );
 
             s = "     " + s + "     ";

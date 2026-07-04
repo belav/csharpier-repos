@@ -154,57 +154,54 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             var whenPartIsNullable = diagnostic.Properties.ContainsKey(
                 UseNullPropagationConstants.WhenPartIsNullable
             );
-            editor.ReplaceNode(
-                conditionalExpression,
-                (conditionalExpression, _) =>
+            editor.ReplaceNode(conditionalExpression, (conditionalExpression, _) =>
+            {
+                syntaxFacts.GetPartsOfConditionalExpression(
+                    conditionalExpression,
+                    out var currentCondition,
+                    out var currentWhenTrue,
+                    out var currentWhenFalse
+                );
+
+                var currentWhenPartToCheck =
+                    whenPart == whenTrue ? currentWhenTrue : currentWhenFalse;
+
+                var match = AbstractUseNullPropagationDiagnosticAnalyzer<
+                    TSyntaxKind,
+                    TExpressionSyntax,
+                    TStatementSyntax,
+                    TConditionalExpressionSyntax,
+                    TBinaryExpressionSyntax,
+                    TInvocationExpressionSyntax,
+                    TConditionalAccessExpressionSyntax,
+                    TElementAccessExpressionSyntax,
+                    TMemberAccessExpressionSyntax,
+                    TIfStatementSyntax,
+                    TExpressionStatementSyntax
+                >.GetWhenPartMatch(
+                    syntaxFacts,
+                    semanticModel,
+                    (TExpressionSyntax)conditionalPart,
+                    (TExpressionSyntax)currentWhenPartToCheck,
+                    cancellationToken
+                );
+                if (match == null)
                 {
-                    syntaxFacts.GetPartsOfConditionalExpression(
-                        conditionalExpression,
-                        out var currentCondition,
-                        out var currentWhenTrue,
-                        out var currentWhenFalse
-                    );
-
-                    var currentWhenPartToCheck =
-                        whenPart == whenTrue ? currentWhenTrue : currentWhenFalse;
-
-                    var match = AbstractUseNullPropagationDiagnosticAnalyzer<
-                        TSyntaxKind,
-                        TExpressionSyntax,
-                        TStatementSyntax,
-                        TConditionalExpressionSyntax,
-                        TBinaryExpressionSyntax,
-                        TInvocationExpressionSyntax,
-                        TConditionalAccessExpressionSyntax,
-                        TElementAccessExpressionSyntax,
-                        TMemberAccessExpressionSyntax,
-                        TIfStatementSyntax,
-                        TExpressionStatementSyntax
-                    >.GetWhenPartMatch(
-                        syntaxFacts,
-                        semanticModel,
-                        (TExpressionSyntax)conditionalPart,
-                        (TExpressionSyntax)currentWhenPartToCheck,
-                        cancellationToken
-                    );
-                    if (match == null)
-                    {
-                        return conditionalExpression;
-                    }
-
-                    var newNode =
-                        CreateConditionalAccessExpression(
-                            syntaxFacts,
-                            generator,
-                            whenPartIsNullable,
-                            currentWhenPartToCheck,
-                            match
-                        ) ?? conditionalExpression;
-
-                    newNode = newNode.WithTriviaFrom(conditionalExpression);
-                    return newNode;
+                    return conditionalExpression;
                 }
-            );
+
+                var newNode =
+                    CreateConditionalAccessExpression(
+                        syntaxFacts,
+                        generator,
+                        whenPartIsNullable,
+                        currentWhenPartToCheck,
+                        match
+                    ) ?? conditionalExpression;
+
+                newNode = newNode.WithTriviaFrom(conditionalExpression);
+                return newNode;
+            });
         }
 
         private void FixIfStatement(

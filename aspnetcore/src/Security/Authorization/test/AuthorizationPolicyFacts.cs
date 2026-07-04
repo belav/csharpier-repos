@@ -98,9 +98,8 @@ public class AuthorizationPolicyFacts
         Assert.Contains("dupe", combined.AuthenticationSchemes);
         Assert.Contains("default", combined.AuthenticationSchemes);
         Assert.Equal(2, combined.Requirements.Count());
-        Assert.DoesNotContain(
-            combined.Requirements,
-            r => r is DenyAnonymousAuthorizationRequirement
+        Assert.DoesNotContain(combined.Requirements, r =>
+            r is DenyAnonymousAuthorizationRequirement
         );
         Assert.Equal(2, combined.Requirements.OfType<ClaimsAuthorizationRequirement>().Count());
     }

@@ -176,10 +176,8 @@ namespace System.Web.Http.ModelBinding.Binders
             IList<TElement> newCollection
         )
         {
-            CollectionModelBinderUtil.CreateOrReplaceCollection(
-                bindingContext,
-                newCollection,
-                () => new List<TElement>()
+            CollectionModelBinderUtil.CreateOrReplaceCollection(bindingContext, newCollection, () =>
+                new List<TElement>()
             );
             return true;
         }

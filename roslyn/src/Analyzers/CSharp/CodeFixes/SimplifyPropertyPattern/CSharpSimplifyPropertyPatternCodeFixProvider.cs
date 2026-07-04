@@ -65,15 +65,12 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
 
             foreach (var subpattern in subpatterns)
             {
-                editor.ReplaceNode(
-                    subpattern,
-                    (current, _) =>
-                    {
-                        var currentSubpattern = (SubpatternSyntax)current;
-                        var simplified = TrySimplify(currentSubpattern);
-                        return simplified ?? currentSubpattern;
-                    }
-                );
+                editor.ReplaceNode(subpattern, (current, _) =>
+                {
+                    var currentSubpattern = (SubpatternSyntax)current;
+                    var simplified = TrySimplify(currentSubpattern);
+                    return simplified ?? currentSubpattern;
+                });
             }
 
             return Task.CompletedTask;

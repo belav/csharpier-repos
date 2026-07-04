@@ -525,22 +525,19 @@ namespace WebApiHelpPageWebHost.UnitTest
         [Fact]
         public void ResolveType_ThrowsInvalidEnumArgumentException()
         {
-            Assert.Throws(
-                typeof(InvalidEnumArgumentException),
-                () =>
-                {
-                    Collection<MediaTypeFormatter> formatters;
-                    HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
-                    sampleGenerator.ResolveType(
-                        new ApiDescription(),
-                        "c",
-                        "a",
-                        new[] { "p" },
-                        (SampleDirection)78,
-                        out formatters
-                    );
-                }
-            );
+            Assert.Throws(typeof(InvalidEnumArgumentException), () =>
+            {
+                Collection<MediaTypeFormatter> formatters;
+                HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
+                sampleGenerator.ResolveType(
+                    new ApiDescription(),
+                    "c",
+                    "a",
+                    new[] { "p" },
+                    (SampleDirection)78,
+                    out formatters
+                );
+            });
         }
 
         public static IEnumerable<object[]> GetSample_ThrowsArgumentNullException_PropertyData

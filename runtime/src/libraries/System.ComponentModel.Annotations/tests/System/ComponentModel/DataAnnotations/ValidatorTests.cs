@@ -58,24 +58,20 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public static void TestTryValidateObjectThrowsIfInstanceNotMatch()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "instance",
-                () =>
-                    Validator.TryValidateObject(
-                        new object(),
-                        s_estValidationContext,
-                        validationResults: null
-                    )
+            AssertExtensions.Throws<ArgumentException>("instance", () =>
+                Validator.TryValidateObject(
+                    new object(),
+                    s_estValidationContext,
+                    validationResults: null
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "instance",
-                () =>
-                    Validator.TryValidateObject(
-                        new object(),
-                        s_estValidationContext,
-                        validationResults: null,
-                        validateAllProperties: true
-                    )
+            AssertExtensions.Throws<ArgumentException>("instance", () =>
+                Validator.TryValidateObject(
+                    new object(),
+                    s_estValidationContext,
+                    validationResults: null,
+                    validateAllProperties: true
+                )
             );
         }
 
@@ -455,15 +451,12 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 )
             );
             Assert.Equal(2, validationResults.Count);
-            Assert.Contains(
-                validationResults,
-                x =>
-                    x.ErrorMessage
-                    == "ValidValueStringPropertyAttribute.IsValid failed for value Invalid Value"
+            Assert.Contains(validationResults, x =>
+                x.ErrorMessage
+                == "ValidValueStringPropertyAttribute.IsValid failed for value Invalid Value"
             );
-            Assert.Contains(
-                validationResults,
-                x => x.ErrorMessage == "The SecondPropertyToBeTested field is required."
+            Assert.Contains(validationResults, x =>
+                x.ErrorMessage == "The SecondPropertyToBeTested field is required."
             );
         }
 
@@ -493,17 +486,12 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 )
             );
             Assert.Equal(2, validationResults.Count);
-            Assert.Contains(
-                validationResults,
-                x =>
-                    x.ErrorMessage
-                    == "The SecondPropertyToBeTested field is not a valid phone number."
+            Assert.Contains(validationResults, x =>
+                x.ErrorMessage == "The SecondPropertyToBeTested field is not a valid phone number."
             );
-            Assert.Contains(
-                validationResults,
-                x =>
-                    x.ErrorMessage
-                    == "The field SecondPropertyToBeTested must be a string or array type with a maximum length of '11'."
+            Assert.Contains(validationResults, x =>
+                x.ErrorMessage
+                == "The field SecondPropertyToBeTested must be a string or array type with a maximum length of '11'."
             );
         }
 
@@ -534,17 +522,12 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 )
             );
             Assert.Equal(2, validationResults.Count);
-            Assert.Contains(
-                validationResults,
-                x =>
-                    x.ErrorMessage
-                    == "ValidValueStringPropertyAttribute.IsValid failed for value Invalid Value"
+            Assert.Contains(validationResults, x =>
+                x.ErrorMessage
+                == "ValidValueStringPropertyAttribute.IsValid failed for value Invalid Value"
             );
-            Assert.Contains(
-                validationResults,
-                x =>
-                    x.ErrorMessage
-                    == "The SecondPropertyToBeTested field is not a valid phone number."
+            Assert.Contains(validationResults, x =>
+                x.ErrorMessage == "The SecondPropertyToBeTested field is not a valid phone number."
             );
         }
 
@@ -605,13 +588,11 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public static void ValidateObjectThrowsIf_instance_does_not_match_ValidationContext_ObjectInstance()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "instance",
-                () => Validator.ValidateObject(new object(), s_estValidationContext)
+            AssertExtensions.Throws<ArgumentException>("instance", () =>
+                Validator.ValidateObject(new object(), s_estValidationContext)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "instance",
-                () => Validator.ValidateObject(new object(), s_estValidationContext, true)
+            AssertExtensions.Throws<ArgumentException>("instance", () =>
+                Validator.ValidateObject(new object(), s_estValidationContext, true)
             );
         }
 
@@ -984,9 +965,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var validationContext = new ValidationContext(new ToBeValidated());
             validationContext.MemberName = "NonExist";
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Validator.TryValidateProperty(null, validationContext, null)
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Validator.TryValidateProperty(null, validationContext, null)
             );
         }
 
@@ -995,21 +975,18 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var validationContext = new ValidationContext(new ToBeValidated());
             validationContext.MemberName = "InternalProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Validator.TryValidateProperty(null, validationContext, null)
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Validator.TryValidateProperty(null, validationContext, null)
             );
 
             validationContext.MemberName = "ProtectedProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Validator.TryValidateProperty(null, validationContext, null)
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Validator.TryValidateProperty(null, validationContext, null)
             );
 
             validationContext.MemberName = "PrivateProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Validator.TryValidateProperty(null, validationContext, null)
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Validator.TryValidateProperty(null, validationContext, null)
             );
         }
 
@@ -1018,10 +995,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var validationContext = new ValidationContext(new ToBeValidated());
             validationContext.MemberName = "Item";
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () =>
-                    Validator.TryValidateProperty(null, validationContext, validationResults: null)
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Validator.TryValidateProperty(null, validationContext, validationResults: null)
             );
         }
 
@@ -1031,9 +1006,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var validationContext = new ValidationContext(new ToBeValidated());
 
             validationContext.MemberName = "NoAttributesProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => Validator.TryValidateProperty(123, validationContext, validationResults: null)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                Validator.TryValidateProperty(123, validationContext, validationResults: null)
             );
         }
 
@@ -1044,18 +1018,14 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
             // cannot assign null to a non-value-type property
             validationContext.MemberName = "EnumProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () =>
-                    Validator.TryValidateProperty(null, validationContext, validationResults: null)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                Validator.TryValidateProperty(null, validationContext, validationResults: null)
             );
 
             // cannot assign null to a non-nullable property
             validationContext.MemberName = "NonNullableProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () =>
-                    Validator.TryValidateProperty(null, validationContext, validationResults: null)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                Validator.TryValidateProperty(null, validationContext, validationResults: null)
             );
         }
 
@@ -1233,17 +1203,12 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 Validator.TryValidateProperty("Invalid Value", validationContext, validationResults)
             );
             Assert.Equal(2, validationResults.Count);
-            Assert.Contains(
-                validationResults,
-                x =>
-                    x.ErrorMessage
-                    == "The SecondPropertyToBeTested field is not a valid phone number."
+            Assert.Contains(validationResults, x =>
+                x.ErrorMessage == "The SecondPropertyToBeTested field is not a valid phone number."
             );
-            Assert.Contains(
-                validationResults,
-                x =>
-                    x.ErrorMessage
-                    == "The field SecondPropertyToBeTested must be a string or array type with a maximum length of '11'."
+            Assert.Contains(validationResults, x =>
+                x.ErrorMessage
+                == "The field SecondPropertyToBeTested must be a string or array type with a maximum length of '11'."
             );
         }
 
@@ -1266,11 +1231,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 Validator.TryValidateProperty("Invalid Value", validationContext, validationResults)
             );
             Assert.Equal(1, validationResults.Count);
-            Assert.Contains(
-                validationResults,
-                x =>
-                    x.ErrorMessage
-                    == "ValidValueStringPropertyAttribute.IsValid failed for value Invalid Value"
+            Assert.Contains(validationResults, x =>
+                x.ErrorMessage
+                == "ValidValueStringPropertyAttribute.IsValid failed for value Invalid Value"
             );
 
             validationContext.MemberName = "SecondPropertyToBeTested";
@@ -1281,11 +1244,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 Validator.TryValidateProperty("Invalid Value", validationContext, validationResults)
             );
             //Assert.Equal(1, validationResults.Count);
-            Assert.Contains(
-                validationResults,
-                x =>
-                    x.ErrorMessage
-                    == "The SecondPropertyToBeTested field is not a valid phone number."
+            Assert.Contains(validationResults, x =>
+                x.ErrorMessage == "The SecondPropertyToBeTested field is not a valid phone number."
             );
         }
 
@@ -1329,9 +1289,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var validationContext = new ValidationContext(new ToBeValidated());
             validationContext.MemberName = "NonExist";
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Validator.ValidateProperty(null, validationContext)
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Validator.ValidateProperty(null, validationContext)
             );
         }
 
@@ -1340,21 +1299,18 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var validationContext = new ValidationContext(new ToBeValidated());
             validationContext.MemberName = "InternalProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Validator.ValidateProperty(null, validationContext)
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Validator.ValidateProperty(null, validationContext)
             );
 
             validationContext.MemberName = "ProtectedProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Validator.ValidateProperty(null, validationContext)
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Validator.ValidateProperty(null, validationContext)
             );
 
             validationContext.MemberName = "PrivateProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Validator.ValidateProperty(null, validationContext)
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Validator.ValidateProperty(null, validationContext)
             );
         }
 
@@ -1363,9 +1319,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var validationContext = new ValidationContext(new ToBeValidated());
             validationContext.MemberName = "Item";
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Validator.ValidateProperty(null, validationContext)
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Validator.ValidateProperty(null, validationContext)
             );
         }
 
@@ -1375,9 +1330,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var validationContext = new ValidationContext(new ToBeValidated());
 
             validationContext.MemberName = "NoAttributesProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => Validator.ValidateProperty(123, validationContext)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                Validator.ValidateProperty(123, validationContext)
             );
         }
 
@@ -1388,16 +1342,14 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
             // cannot assign null to a non-value-type property
             validationContext.MemberName = "EnumProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => Validator.ValidateProperty(null, validationContext)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                Validator.ValidateProperty(null, validationContext)
             );
 
             // cannot assign null to a non-nullable property
             validationContext.MemberName = "NonNullableProperty";
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => Validator.ValidateProperty(null, validationContext)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                Validator.ValidateProperty(null, validationContext)
             );
         }
 

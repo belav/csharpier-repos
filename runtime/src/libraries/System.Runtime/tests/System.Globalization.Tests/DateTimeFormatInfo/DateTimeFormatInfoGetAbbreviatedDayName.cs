@@ -74,9 +74,8 @@ namespace System.Globalization.Tests
         )
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "dayofweek",
-                () => format.GetAbbreviatedDayName(dayofweek)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("dayofweek", () =>
+                format.GetAbbreviatedDayName(dayofweek)
             );
         }
     }

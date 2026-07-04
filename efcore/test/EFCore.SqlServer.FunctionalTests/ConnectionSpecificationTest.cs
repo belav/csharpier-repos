@@ -96,9 +96,8 @@ public class ConnectionSpecificationTest
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder
                 .EnableServiceProviderCaching(false)
-                .UseSqlServer(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
-                    b => b.ApplyConfiguration()
+                .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b =>
+                    b.ApplyConfiguration()
                 );
     }
 
@@ -383,10 +382,8 @@ public class ConnectionSpecificationTest
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder
                 .EnableServiceProviderCaching(false)
-                .UseSqlServer(
-                    _connection,
-                    contextOwnsConnection: true,
-                    b => b.ApplyConfiguration()
+                .UseSqlServer(_connection, contextOwnsConnection: true, b =>
+                    b.ApplyConfiguration()
                 );
     }
 
@@ -533,9 +530,8 @@ public class ConnectionSpecificationTest
 
             optionsBuilder
                 .EnableServiceProviderCaching(false)
-                .UseSqlServer(
-                    SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
-                    b => b.ApplyConfiguration()
+                .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b =>
+                    b.ApplyConfiguration()
                 );
 
             Assert.NotSame(_options, optionsBuilder.Options);

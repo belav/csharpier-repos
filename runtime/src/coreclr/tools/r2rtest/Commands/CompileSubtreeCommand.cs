@@ -73,58 +73,53 @@ namespace R2RTest
             int folderCount = 0;
             int compilationCount = 0;
             int executionCount = 0;
-            Parallel.ForEach(
-                directories,
-                (string directory) =>
+            Parallel.ForEach(directories, (string directory) =>
+            {
+                string outputDirectoryPerFolder = options.OutputDirectory.FullName;
+                if (directory.Length > relativePathOffset)
                 {
-                    string outputDirectoryPerFolder = options.OutputDirectory.FullName;
-                    if (directory.Length > relativePathOffset)
+                    outputDirectoryPerFolder = Path.Combine(
+                        outputDirectoryPerFolder,
+                        directory.Substring(relativePathOffset)
+                    );
+                }
+                try
+                {
+                    BuildFolder folder = BuildFolder.FromDirectory(
+                        directory.ToString(),
+                        runners,
+                        outputDirectoryPerFolder,
+                        options
+                    );
+                    if (folder != null)
                     {
-                        outputDirectoryPerFolder = Path.Combine(
-                            outputDirectoryPerFolder,
-                            directory.Substring(relativePathOffset)
-                        );
-                    }
-                    try
-                    {
-                        BuildFolder folder = BuildFolder.FromDirectory(
-                            directory.ToString(),
-                            runners,
-                            outputDirectoryPerFolder,
-                            options
-                        );
-                        if (folder != null)
-                        {
-                            folders.Add(folder);
-                            Interlocked.Add(ref compilationCount, folder.Compilations.Count);
-                            Interlocked.Add(ref executionCount, folder.Executions.Count);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.Error.WriteLine(
-                            "Error scanning folder {0}: {1}",
-                            directory,
-                            ex.Message
-                        );
-                    }
-                    int currentCount = Interlocked.Increment(ref folderCount);
-                    if (currentCount % 100 == 0)
-                    {
-                        StringBuilder lineReport = new StringBuilder();
-                        lineReport.Append($@"Found {folders.Count} folders to build ");
-                        lineReport.Append($@"({compilationCount} compilations, ");
-                        if (!options.NoExe)
-                        {
-                            lineReport.Append($@"{executionCount} executions, ");
-                        }
-                        lineReport.Append(
-                            $@"{currentCount} / {directories.Length} folders scanned)"
-                        );
-                        Console.WriteLine(lineReport.ToString());
+                        folders.Add(folder);
+                        Interlocked.Add(ref compilationCount, folder.Compilations.Count);
+                        Interlocked.Add(ref executionCount, folder.Executions.Count);
                     }
                 }
-            );
+                catch (Exception ex)
+                {
+                    Console.Error.WriteLine(
+                        "Error scanning folder {0}: {1}",
+                        directory,
+                        ex.Message
+                    );
+                }
+                int currentCount = Interlocked.Increment(ref folderCount);
+                if (currentCount % 100 == 0)
+                {
+                    StringBuilder lineReport = new StringBuilder();
+                    lineReport.Append($@"Found {folders.Count} folders to build ");
+                    lineReport.Append($@"({compilationCount} compilations, ");
+                    if (!options.NoExe)
+                    {
+                        lineReport.Append($@"{executionCount} executions, ");
+                    }
+                    lineReport.Append($@"{currentCount} / {directories.Length} folders scanned)");
+                    Console.WriteLine(lineReport.ToString());
+                }
+            });
             Console.Write(
                 $@"Found {folders.Count} folders to build ({compilationCount} compilations, "
             );

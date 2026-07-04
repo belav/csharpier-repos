@@ -150,9 +150,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CreateEscapedIdentifier_NullValue_ThrowsArgumentNullException()
         {
             ICodeGenerator generator = GetGenerator();
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () => generator.CreateEscapedIdentifier(null)
+            Assert.Throws<ArgumentNullException>("name", () =>
+                generator.CreateEscapedIdentifier(null)
             );
         }
 
@@ -207,9 +206,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CreateValidIdentifier_NullValue_ThrowsArgumentNullException()
         {
             ICodeGenerator generator = GetGenerator();
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () => generator.CreateValidIdentifier(null)
+            Assert.Throws<ArgumentNullException>("name", () =>
+                generator.CreateValidIdentifier(null)
             );
         }
 
@@ -2500,14 +2498,12 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCodeFromExpression_NullE_ThrowsArgumentNullException(CodeExpression e)
         {
             ICodeGenerator generator = GetGenerator();
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () =>
-                    generator.GenerateCodeFromExpression(
-                        e,
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateCodeFromExpression(
+                    e,
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                )
             );
         }
 
@@ -2662,15 +2658,12 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCodeFromExpression_InvalidE_ThrowsArgumentException(CodeExpression e)
         {
             ICodeGenerator generator = GetGenerator();
-            AssertExtensions.Throws<ArgumentException>(
-                "e",
-                null,
-                () =>
-                    generator.GenerateCodeFromExpression(
-                        e,
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+            AssertExtensions.Throws<ArgumentException>("e", null, () =>
+                generator.GenerateCodeFromExpression(
+                    e,
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                )
             );
         }
 
@@ -2683,9 +2676,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             ICodeGenerator generator = GetGenerator();
             var e = new CodeBaseReferenceExpression();
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () => generator.GenerateCodeFromExpression(e, null, new CodeGeneratorOptions())
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                generator.GenerateCodeFromExpression(e, null, new CodeGeneratorOptions())
             );
         }
 
@@ -3827,14 +3819,12 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCodeFromStatement_NullE_ThrowsArgumentNullException(CodeStatement e)
         {
             ICodeGenerator generator = GetGenerator();
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () =>
-                    generator.GenerateCodeFromStatement(
-                        e,
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateCodeFromStatement(
+                    e,
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                )
             );
         }
 
@@ -3992,14 +3982,12 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCodeFromStatement_InvalidE_ThrowsArgumentException(CodeStatement e)
         {
             ICodeGenerator generator = GetGenerator();
-            AssertExtensions.Throws<ArgumentException>(
-                "e",
-                () =>
-                    generator.GenerateCodeFromStatement(
-                        e,
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+            AssertExtensions.Throws<ArgumentException>("e", () =>
+                generator.GenerateCodeFromStatement(
+                    e,
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                )
             );
         }
 
@@ -4012,9 +4000,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             ICodeGenerator generator = GetGenerator();
             var e = new CodeExpressionStatement(new CodeBaseReferenceExpression());
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () => generator.GenerateCodeFromStatement(e, null, new CodeGeneratorOptions())
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                generator.GenerateCodeFromStatement(e, null, new CodeGeneratorOptions())
             );
         }
 
@@ -7619,14 +7606,12 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
         public void GenerateCodeFromType_NullE_ThrowsArgumentNullException()
         {
             ICodeGenerator generator = GetGenerator();
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () =>
-                    generator.GenerateCodeFromStatement(
-                        null,
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateCodeFromStatement(
+                    null,
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                )
             );
         }
 
@@ -7658,14 +7643,8 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
         public void GenerateCodeFromType_InvalidE_ThrowsArgumentException(CodeTypeDeclaration e)
         {
             ICodeGenerator generator = GetGenerator();
-            AssertExtensions.Throws<ArgumentException>(
-                "e",
-                () =>
-                    generator.GenerateCodeFromType(
-                        e,
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+            AssertExtensions.Throws<ArgumentException>("e", () =>
+                generator.GenerateCodeFromType(e, new StringWriter(), new CodeGeneratorOptions())
             );
         }
 
@@ -7678,9 +7657,8 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
         {
             ICodeGenerator generator = GetGenerator();
             var e = new CodeTypeDeclaration("name");
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () => generator.GenerateCodeFromType(e, null, new CodeGeneratorOptions())
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                generator.GenerateCodeFromType(e, null, new CodeGeneratorOptions())
             );
         }
 
@@ -7749,10 +7727,8 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
         public void ValidateIdentifier_InvokeInvalid_ThrowsArgumentException(string value)
         {
             ICodeGenerator generator = GetGenerator();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => generator.ValidateIdentifier(value)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                generator.ValidateIdentifier(value)
             );
         }
 

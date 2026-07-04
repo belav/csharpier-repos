@@ -1934,44 +1934,36 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             // for all 'Thens' and 'Else'. At least one When/Then clause is required and the number of
             // 'When's must equal the number of 'Then's.
             //
-            validWhens = CreateExpressionList(
-                whenExpressions,
-                "whenExpressions",
-                (exp, idx) =>
-                {
-                    RequireCompatibleType(exp, PrimitiveTypeKind.Boolean, "whenExpressions", idx);
-                }
-            );
+            validWhens = CreateExpressionList(whenExpressions, "whenExpressions", (exp, idx) =>
+            {
+                RequireCompatibleType(exp, PrimitiveTypeKind.Boolean, "whenExpressions", idx);
+            });
             Debug.Assert(
                 validWhens.Count > 0,
                 "CreateExpressionList(arguments, argumentName, validationCallback) allowed empty Whens?"
             );
 
             TypeUsage commonResultType = null;
-            validThens = CreateExpressionList(
-                thenExpressions,
-                "thenExpressions",
-                (exp, idx) =>
+            validThens = CreateExpressionList(thenExpressions, "thenExpressions", (exp, idx) =>
+            {
+                if (null == commonResultType)
                 {
+                    commonResultType = exp.ResultType;
+                }
+                else
+                {
+                    commonResultType = TypeHelpers.GetCommonTypeUsage(
+                        exp.ResultType,
+                        commonResultType
+                    );
                     if (null == commonResultType)
                     {
-                        commonResultType = exp.ResultType;
-                    }
-                    else
-                    {
-                        commonResultType = TypeHelpers.GetCommonTypeUsage(
-                            exp.ResultType,
-                            commonResultType
+                        throw EntityUtil.Argument(
+                            System.Data.Entity.Strings.Cqt_Case_InvalidResultType
                         );
-                        if (null == commonResultType)
-                        {
-                            throw EntityUtil.Argument(
-                                System.Data.Entity.Strings.Cqt_Case_InvalidResultType
-                            );
-                        }
                     }
                 }
-            );
+            });
             Debug.Assert(
                 validWhens.Count > 0,
                 "CreateExpressionList(arguments, argumentName, validationCallback) allowed empty Thens?"
@@ -2098,32 +2090,28 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
         )
         {
             TypeUsage commonElementType = null;
-            validElements = CreateExpressionList(
-                elements,
-                "elements",
-                (exp, idx) =>
+            validElements = CreateExpressionList(elements, "elements", (exp, idx) =>
+            {
+                if (commonElementType == null)
                 {
-                    if (commonElementType == null)
-                    {
-                        commonElementType = exp.ResultType;
-                    }
-                    else
-                    {
-                        commonElementType = TypeSemantics.GetCommonType(
-                            commonElementType,
-                            exp.ResultType
-                        );
-                    }
-
-                    if (null == commonElementType)
-                    {
-                        throw EntityUtil.Argument(
-                            System.Data.Entity.Strings.Cqt_Factory_NewCollectionInvalidCommonType,
-                            "collectionElements"
-                        );
-                    }
+                    commonElementType = exp.ResultType;
                 }
-            );
+                else
+                {
+                    commonElementType = TypeSemantics.GetCommonType(
+                        commonElementType,
+                        exp.ResultType
+                    );
+                }
+
+                if (null == commonElementType)
+                {
+                    throw EntityUtil.Argument(
+                        System.Data.Entity.Strings.Cqt_Factory_NewCollectionInvalidCommonType,
+                        "collectionElements"
+                    );
+                }
+            });
 
             Debug.Assert(
                 validElements.Count > 0,
@@ -2200,15 +2188,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
             {
                 // Collection arguments may have zero count for empty collection construction
                 TypeUsage elementType = collectionType.TypeUsage;
-                validArguments = CreateExpressionList(
-                    arguments,
-                    "arguments",
-                    true,
-                    (exp, idx) =>
-                    {
-                        RequireCompatibleType(exp, elementType, "arguments", idx);
-                    }
-                );
+                validArguments = CreateExpressionList(arguments, "arguments", true, (exp, idx) =>
+                {
+                    RequireCompatibleType(exp, elementType, "arguments", idx);
+                });
             }
             else
             {

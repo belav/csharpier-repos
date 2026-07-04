@@ -133,9 +133,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     ); //"ArgumentOutOfRangeException expected."
                 }
 
-                Assert.Throws<ArgumentException>(
-                    "value",
-                    () => _ilist.Insert(0, new LinkedListNode<string>("blargh"))
+                Assert.Throws<ArgumentException>("value", () =>
+                    _ilist.Insert(0, new LinkedListNode<string>("blargh"))
                 ); //"ArgumentException expected."
             }
 

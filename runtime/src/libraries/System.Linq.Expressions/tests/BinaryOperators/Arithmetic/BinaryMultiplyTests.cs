@@ -552,36 +552,32 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "left",
-                () => Expression.Multiply(null, Expression.Constant(""))
+            AssertExtensions.Throws<ArgumentNullException>("left", () =>
+                Expression.Multiply(null, Expression.Constant(""))
             );
         }
 
         [Fact]
         public static void ThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "right",
-                () => Expression.Multiply(Expression.Constant(""), null)
+            AssertExtensions.Throws<ArgumentNullException>("right", () =>
+                Expression.Multiply(Expression.Constant(""), null)
             );
         }
 
         [Fact]
         public static void CheckedThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "left",
-                () => Expression.MultiplyChecked(null, Expression.Constant(""))
+            AssertExtensions.Throws<ArgumentNullException>("left", () =>
+                Expression.MultiplyChecked(null, Expression.Constant(""))
             );
         }
 
         [Fact]
         public static void CheckedThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "right",
-                () => Expression.MultiplyChecked(Expression.Constant(""), null)
+            AssertExtensions.Throws<ArgumentNullException>("right", () =>
+                Expression.MultiplyChecked(Expression.Constant(""), null)
             );
         }
 
@@ -597,9 +593,8 @@ namespace System.Linq.Expressions.Tests
         public static void ThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "left",
-                () => Expression.Multiply(value, Expression.Constant(1))
+            AssertExtensions.Throws<ArgumentException>("left", () =>
+                Expression.Multiply(value, Expression.Constant(1))
             );
         }
 
@@ -607,9 +602,8 @@ namespace System.Linq.Expressions.Tests
         public static void ThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "right",
-                () => Expression.Multiply(Expression.Constant(1), value)
+            AssertExtensions.Throws<ArgumentException>("right", () =>
+                Expression.Multiply(Expression.Constant(1), value)
             );
         }
 
@@ -617,9 +611,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckedThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "left",
-                () => Expression.MultiplyChecked(value, Expression.Constant(1))
+            AssertExtensions.Throws<ArgumentException>("left", () =>
+                Expression.MultiplyChecked(value, Expression.Constant(1))
             );
         }
 
@@ -627,9 +620,8 @@ namespace System.Linq.Expressions.Tests
         public static void CheckedThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "right",
-                () => Expression.MultiplyChecked(Expression.Constant(1), value)
+            AssertExtensions.Throws<ArgumentException>("right", () =>
+                Expression.MultiplyChecked(Expression.Constant(1), value)
             );
         }
 

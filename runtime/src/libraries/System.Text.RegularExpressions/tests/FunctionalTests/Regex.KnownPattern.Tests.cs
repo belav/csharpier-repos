@@ -152,19 +152,16 @@ namespace System.Text.RegularExpressions.Tests
                 try
                 {
                     // Normalize the domain part of the email
-                    email = r.Replace(
-                        email,
-                        match =>
-                        {
-                            // Use IdnMapping class to convert Unicode domain names.
-                            var idn = new IdnMapping();
+                    email = r.Replace(email, match =>
+                    {
+                        // Use IdnMapping class to convert Unicode domain names.
+                        var idn = new IdnMapping();
 
-                            // Pull out and process domain name (throws ArgumentException on invalid)
-                            string domainName = idn.GetAscii(match.Groups[2].Value);
+                        // Pull out and process domain name (throws ArgumentException on invalid)
+                        string domainName = idn.GetAscii(match.Groups[2].Value);
 
-                            return match.Groups[1].Value + domainName;
-                        }
-                    );
+                        return match.Groups[1].Value + domainName;
+                    });
                 }
                 catch (ArgumentException)
                 {
@@ -1381,9 +1378,8 @@ namespace System.Text.RegularExpressions.Tests
             );
 
             // Palindromes
-            Assert.All(
-                new[] { "kayak", "racecar", "never odd or even", "madam im adam" },
-                p => Assert.True(r.IsMatch(p))
+            Assert.All(new[] { "kayak", "racecar", "never odd or even", "madam im adam" }, p =>
+                Assert.True(r.IsMatch(p))
             );
 
             // Non-Palindromes
@@ -2031,28 +2027,25 @@ namespace System.Text.RegularExpressions.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/80018", TestRuntimes.Mono)]
         public void PatternsDataSet_ConstructRegexForAll_SourceGenerated()
         {
-            Parallel.ForEach(
-                s_patternsDataSet.Value.Chunk(50),
-                chunk =>
-                {
-                    RegexHelpers
-                        .GetRegexesAsync(
-                            RegexEngine.SourceGenerated,
-                            chunk
-                                .Select(r =>
-                                    (
-                                        r.Pattern,
-                                        (CultureInfo?)null,
-                                        (RegexOptions?)r.Options,
-                                        (TimeSpan?)null
-                                    )
+            Parallel.ForEach(s_patternsDataSet.Value.Chunk(50), chunk =>
+            {
+                RegexHelpers
+                    .GetRegexesAsync(
+                        RegexEngine.SourceGenerated,
+                        chunk
+                            .Select(r =>
+                                (
+                                    r.Pattern,
+                                    (CultureInfo?)null,
+                                    (RegexOptions?)r.Options,
+                                    (TimeSpan?)null
                                 )
-                                .ToArray()
-                        )
-                        .GetAwaiter()
-                        .GetResult();
-                }
-            );
+                            )
+                            .ToArray()
+                    )
+                    .GetAwaiter()
+                    .GetResult();
+            });
         }
 
         [ActiveIssue("Manual execution only for now until stability is improved")]

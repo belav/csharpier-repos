@@ -36,10 +36,8 @@ namespace System.Globalization.Tests
         public void PositiveSign_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "PositiveSign",
-                () => format.PositiveSign = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "PositiveSign", () =>
+                format.PositiveSign = null
             );
         }
 

@@ -313,80 +313,56 @@ namespace System.Drawing.Primitives.Tests
         [MemberData(nameof(InvalidValues))]
         public void FromArgb_InvalidAlpha(int alpha)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    Color.FromArgb(alpha, Color.Red);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    Color.FromArgb(alpha, 0, 0, 0);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Color.FromArgb(alpha, Color.Red);
+            });
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Color.FromArgb(alpha, 0, 0, 0);
+            });
         }
 
         [Theory]
         [MemberData(nameof(InvalidValues))]
         public void FromArgb_InvalidRed(int red)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    Color.FromArgb(red, 0, 0);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    Color.FromArgb(0, red, 0, 0);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Color.FromArgb(red, 0, 0);
+            });
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Color.FromArgb(0, red, 0, 0);
+            });
         }
 
         [Theory]
         [MemberData(nameof(InvalidValues))]
         public void FromArgb_InvalidGreen(int green)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    Color.FromArgb(0, green, 0);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    Color.FromArgb(0, 0, green, 0);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Color.FromArgb(0, green, 0);
+            });
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Color.FromArgb(0, 0, green, 0);
+            });
         }
 
         [Theory]
         [MemberData(nameof(InvalidValues))]
         public void FromArgb_InvalidBlue(int blue)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    Color.FromArgb(0, 0, blue);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    Color.FromArgb(0, 0, 0, blue);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Color.FromArgb(0, 0, blue);
+            });
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Color.FromArgb(0, 0, 0, blue);
+            });
         }
 
         [Fact]
@@ -1107,9 +1083,8 @@ namespace System.Drawing.Primitives.Tests
         };
 
         public static IEnumerable<object[]> SystemKindKnownColorPairs =>
-            SystemKindOrder.Zip(
-                AllKnownColors,
-                (isSystemKind, color) => new[] { isSystemKind, color[0] }
+            SystemKindOrder.Zip(AllKnownColors, (isSystemKind, color) =>
+                new[] { isSystemKind, color[0] }
             );
 
         [DllImport("user32.dll", SetLastError = true)]

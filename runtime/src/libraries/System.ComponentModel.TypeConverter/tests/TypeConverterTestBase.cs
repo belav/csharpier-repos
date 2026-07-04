@@ -32,78 +32,75 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void ConvertTo_DestinationType_Success()
         {
-            Assert.All(
-                ConvertToTestData(),
-                convertTest =>
+            Assert.All(ConvertToTestData(), convertTest =>
+            {
+                // We need to duplicate this test code as RemoteInvoke can't
+                // create "this" as the declaring type is an abstract class.
+                if (convertTest.RemoteInvokeCulture == null)
                 {
-                    // We need to duplicate this test code as RemoteInvoke can't
-                    // create "this" as the declaring type is an abstract class.
-                    if (convertTest.RemoteInvokeCulture == null)
+                    Assert.Equal(
+                        convertTest.CanConvert,
+                        Converter.CanConvertTo(convertTest.Context, convertTest.DestinationType)
+                    );
+
+                    if (convertTest.CanConvert)
+                    {
+                        object actual = Converter.ConvertTo(
+                            convertTest.Context,
+                            convertTest.Culture,
+                            convertTest.Source,
+                            convertTest.DestinationType
+                        );
+                        AssertEqualInstanceDescriptor(convertTest.Expected, actual);
+                    }
+                    else
+                    {
+                        Assert.Throws<NotSupportedException>(() =>
+                            Converter.ConvertTo(
+                                convertTest.Context,
+                                convertTest.Culture,
+                                convertTest.Source,
+                                convertTest.DestinationType
+                            )
+                        );
+                    }
+                }
+                else
+                {
+                    using (new ThreadCultureChange(convertTest.RemoteInvokeCulture))
                     {
                         Assert.Equal(
                             convertTest.CanConvert,
-                            Converter.CanConvertTo(convertTest.Context, convertTest.DestinationType)
+                            this.Converter.CanConvertTo(
+                                convertTest.Context,
+                                convertTest.DestinationType
+                            )
                         );
 
                         if (convertTest.CanConvert)
                         {
-                            object actual = Converter.ConvertTo(
+                            object actual = this.Converter.ConvertTo(
                                 convertTest.Context,
                                 convertTest.Culture,
                                 convertTest.Source,
                                 convertTest.DestinationType
                             );
-                            AssertEqualInstanceDescriptor(convertTest.Expected, actual);
+                            Assert.Equal(convertTest.Expected, actual);
                         }
                         else
                         {
                             Assert.Throws<NotSupportedException>(() =>
-                                Converter.ConvertTo(
+                                this.Converter.ConvertTo(
                                     convertTest.Context,
                                     convertTest.Culture,
                                     convertTest.Source,
                                     convertTest.DestinationType
                                 )
                             );
-                        }
-                    }
-                    else
-                    {
-                        using (new ThreadCultureChange(convertTest.RemoteInvokeCulture))
-                        {
-                            Assert.Equal(
-                                convertTest.CanConvert,
-                                this.Converter.CanConvertTo(
-                                    convertTest.Context,
-                                    convertTest.DestinationType
-                                )
-                            );
-
-                            if (convertTest.CanConvert)
-                            {
-                                object actual = this.Converter.ConvertTo(
-                                    convertTest.Context,
-                                    convertTest.Culture,
-                                    convertTest.Source,
-                                    convertTest.DestinationType
-                                );
-                                Assert.Equal(convertTest.Expected, actual);
-                            }
-                            else
-                            {
-                                Assert.Throws<NotSupportedException>(() =>
-                                    this.Converter.ConvertTo(
-                                        convertTest.Context,
-                                        convertTest.Culture,
-                                        convertTest.Source,
-                                        convertTest.DestinationType
-                                    )
-                                );
-                            }
                         }
                     }
                 }
-            );
+            });
         }
 
         [Fact]
@@ -118,13 +115,11 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void ConvertTo_NullDestinationType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destinationType",
-                () => Converter.ConvertTo(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("destinationType", () =>
+                Converter.ConvertTo(null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destinationType",
-                () => Converter.ConvertTo(TypeConverterTests.s_context, null, "", null)
+            AssertExtensions.Throws<ArgumentNullException>("destinationType", () =>
+                Converter.ConvertTo(TypeConverterTests.s_context, null, "", null)
             );
         }
 
@@ -143,19 +138,55 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void ConvertFrom_DestinationType_Success()
         {
-            Assert.All(
-                ConvertFromTestData(),
-                convertTest =>
+            Assert.All(ConvertFromTestData(), convertTest =>
+            {
+                // We need to duplicate this test code as RemoteInvoke can't
+                // create "this" as the declaring type is an abstract class.
+                if (convertTest.RemoteInvokeCulture == null)
                 {
-                    // We need to duplicate this test code as RemoteInvoke can't
-                    // create "this" as the declaring type is an abstract class.
-                    if (convertTest.RemoteInvokeCulture == null)
+                    if (convertTest.Source != null)
+                    {
+                        Assert.Equal(
+                            convertTest.CanConvert,
+                            Converter.CanConvertFrom(
+                                convertTest.Context,
+                                convertTest.Source.GetType()
+                            )
+                        );
+                    }
+
+                    if (convertTest.NetCoreExceptionType == null)
+                    {
+                        object actual = Converter.ConvertFrom(
+                            convertTest.Context,
+                            convertTest.Culture,
+                            convertTest.Source
+                        );
+                        Assert.Equal(convertTest.Expected, actual);
+                    }
+                    else
+                    {
+                        AssertExtensions.Throws(
+                            convertTest.NetCoreExceptionType,
+                            convertTest.NetFrameworkExceptionType,
+                            () =>
+                                Converter.ConvertFrom(
+                                    convertTest.Context,
+                                    convertTest.Culture,
+                                    convertTest.Source
+                                )
+                        );
+                    }
+                }
+                else
+                {
+                    using (new ThreadCultureChange(convertTest.RemoteInvokeCulture))
                     {
                         if (convertTest.Source != null)
                         {
                             Assert.Equal(
                                 convertTest.CanConvert,
-                                Converter.CanConvertFrom(
+                                this.Converter.CanConvertFrom(
                                     convertTest.Context,
                                     convertTest.Source.GetType()
                                 )
@@ -164,7 +195,7 @@ namespace System.ComponentModel.Tests
 
                         if (convertTest.NetCoreExceptionType == null)
                         {
-                            object actual = Converter.ConvertFrom(
+                            object actual = this.Converter.ConvertFrom(
                                 convertTest.Context,
                                 convertTest.Culture,
                                 convertTest.Source
@@ -177,7 +208,7 @@ namespace System.ComponentModel.Tests
                                 convertTest.NetCoreExceptionType,
                                 convertTest.NetFrameworkExceptionType,
                                 () =>
-                                    Converter.ConvertFrom(
+                                    this.Converter.ConvertFrom(
                                         convertTest.Context,
                                         convertTest.Culture,
                                         convertTest.Source
@@ -185,47 +216,8 @@ namespace System.ComponentModel.Tests
                             );
                         }
                     }
-                    else
-                    {
-                        using (new ThreadCultureChange(convertTest.RemoteInvokeCulture))
-                        {
-                            if (convertTest.Source != null)
-                            {
-                                Assert.Equal(
-                                    convertTest.CanConvert,
-                                    this.Converter.CanConvertFrom(
-                                        convertTest.Context,
-                                        convertTest.Source.GetType()
-                                    )
-                                );
-                            }
-
-                            if (convertTest.NetCoreExceptionType == null)
-                            {
-                                object actual = this.Converter.ConvertFrom(
-                                    convertTest.Context,
-                                    convertTest.Culture,
-                                    convertTest.Source
-                                );
-                                Assert.Equal(convertTest.Expected, actual);
-                            }
-                            else
-                            {
-                                AssertExtensions.Throws(
-                                    convertTest.NetCoreExceptionType,
-                                    convertTest.NetFrameworkExceptionType,
-                                    () =>
-                                        this.Converter.ConvertFrom(
-                                            convertTest.Context,
-                                            convertTest.Culture,
-                                            convertTest.Source
-                                        )
-                                );
-                            }
-                        }
-                    }
                 }
-            );
+            });
         }
 
         [Fact]

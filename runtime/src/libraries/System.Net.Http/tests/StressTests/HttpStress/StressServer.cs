@@ -230,190 +230,156 @@ namespace HttpStress
             var logger = loggerFactory?.CreateLogger<StressServer>();
             var head = new[] { "HEAD" };
 
-            endpoints.MapGet(
-                "/",
-                async context =>
-                {
-                    await context.Response.WriteAsync("ok");
-                }
-            );
-            endpoints.MapGet(
-                "/get",
-                async context =>
-                {
-                    // Get requests just send back the requested content.
-                    string content = CreateResponseContent(context);
-                    await context.Response.WriteAsync(content);
-                }
-            );
-            endpoints.MapGet(
-                "/slow",
-                async context =>
-                {
-                    // Sends back the content a character at a time.
-                    string content = CreateResponseContent(context);
+            endpoints.MapGet("/", async context =>
+            {
+                await context.Response.WriteAsync("ok");
+            });
+            endpoints.MapGet("/get", async context =>
+            {
+                // Get requests just send back the requested content.
+                string content = CreateResponseContent(context);
+                await context.Response.WriteAsync(content);
+            });
+            endpoints.MapGet("/slow", async context =>
+            {
+                // Sends back the content a character at a time.
+                string content = CreateResponseContent(context);
 
-                    for (int i = 0; i < content.Length; i++)
-                    {
-                        await context.Response.WriteAsync(content[i].ToString());
-                        await context.Response.Body.FlushAsync();
-                    }
-                }
-            );
-            endpoints.MapGet(
-                "/headers",
-                async context =>
+                for (int i = 0; i < content.Length; i++)
                 {
-                    (string name, StringValues values)[] headersToEcho = context
-                        .Request.Headers.Where(h => h.Key.StartsWith("header-"))
-                        // kestrel does not seem to be splitting comma separated header values, handle here
-                        .Select(h =>
-                            (
-                                h.Key,
-                                new StringValues(
-                                    h.Value.SelectMany(v => v.Split(','))
-                                        .Select(x => x.Trim())
-                                        .ToArray()
-                                )
+                    await context.Response.WriteAsync(content[i].ToString());
+                    await context.Response.Body.FlushAsync();
+                }
+            });
+            endpoints.MapGet("/headers", async context =>
+            {
+                (string name, StringValues values)[] headersToEcho = context
+                    .Request.Headers.Where(h => h.Key.StartsWith("header-"))
+                    // kestrel does not seem to be splitting comma separated header values, handle here
+                    .Select(h =>
+                        (
+                            h.Key,
+                            new StringValues(
+                                h.Value.SelectMany(v => v.Split(','))
+                                    .Select(x => x.Trim())
+                                    .ToArray()
                             )
                         )
-                        .ToArray();
+                    )
+                    .ToArray();
 
+                foreach ((string name, StringValues values) in headersToEcho)
+                {
+                    context.Response.Headers.Add(name, values);
+                }
+
+                // send back a checksum of all the echoed headers
+                ulong checksum = CRC.CalculateHeaderCrc(headersToEcho);
+                AppendChecksumHeader(context.Response.Headers, checksum);
+
+                await context.Response.WriteAsync("ok");
+
+                if (context.Response.SupportsTrailers())
+                {
+                    // just add variations of already echoed headers as trailers
                     foreach ((string name, StringValues values) in headersToEcho)
                     {
-                        context.Response.Headers.Add(name, values);
-                    }
-
-                    // send back a checksum of all the echoed headers
-                    ulong checksum = CRC.CalculateHeaderCrc(headersToEcho);
-                    AppendChecksumHeader(context.Response.Headers, checksum);
-
-                    await context.Response.WriteAsync("ok");
-
-                    if (context.Response.SupportsTrailers())
-                    {
-                        // just add variations of already echoed headers as trailers
-                        foreach ((string name, StringValues values) in headersToEcho)
-                        {
-                            context.Response.AppendTrailer(name + "-trailer", values);
-                        }
+                        context.Response.AppendTrailer(name + "-trailer", values);
                     }
                 }
-            );
-            endpoints.MapGet(
-                "/variables",
-                async context =>
+            });
+            endpoints.MapGet("/variables", async context =>
+            {
+                NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(
+                    context.Request.QueryString.Value!
+                );
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < nameValueCollection.Count; i++)
                 {
-                    NameValueCollection nameValueCollection = HttpUtility.ParseQueryString(
-                        context.Request.QueryString.Value!
-                    );
-
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < nameValueCollection.Count; i++)
-                    {
-                        sb.Append(nameValueCollection[$"Var{i}"]);
-                    }
-
-                    await context.Response.WriteAsync(sb.ToString());
+                    sb.Append(nameValueCollection[$"Var{i}"]);
                 }
-            );
-            endpoints.MapGet(
-                "/abort",
-                async context =>
+
+                await context.Response.WriteAsync(sb.ToString());
+            });
+            endpoints.MapGet("/abort", async context =>
+            {
+                // Server writes some content, then aborts the connection
+                string content = CreateResponseContent(context);
+                await context.Response.WriteAsync(content.Substring(0, content.Length / 2));
+                context.Abort();
+            });
+            endpoints.MapPost("/", async context =>
+            {
+                // Post echos back the requested content, first buffering it all server-side, then sending it all back.
+                var s = new MemoryStream();
+                await context.Request.Body.CopyToAsync(s);
+
+                ulong checksum = CRC.CalculateCRC(s.ToArray());
+                AppendChecksumHeader(context.Response.Headers, checksum);
+
+                s.Position = 0;
+                await s.CopyToAsync(context.Response.Body);
+            });
+            endpoints.MapPost("/duplex", async context =>
+            {
+                // Echos back the requested content in a full duplex manner.
+                ArrayPool<byte> bufferPool = ArrayPool<byte>.Shared;
+
+                byte[] buffer = bufferPool.Rent(512);
+                ulong hashAcc = CRC.InitialCrc;
+                int read;
+
+                try
                 {
-                    // Server writes some content, then aborts the connection
-                    string content = CreateResponseContent(context);
-                    await context.Response.WriteAsync(content.Substring(0, content.Length / 2));
-                    context.Abort();
-                }
-            );
-            endpoints.MapPost(
-                "/",
-                async context =>
-                {
-                    // Post echos back the requested content, first buffering it all server-side, then sending it all back.
-                    var s = new MemoryStream();
-                    await context.Request.Body.CopyToAsync(s);
-
-                    ulong checksum = CRC.CalculateCRC(s.ToArray());
-                    AppendChecksumHeader(context.Response.Headers, checksum);
-
-                    s.Position = 0;
-                    await s.CopyToAsync(context.Response.Body);
-                }
-            );
-            endpoints.MapPost(
-                "/duplex",
-                async context =>
-                {
-                    // Echos back the requested content in a full duplex manner.
-                    ArrayPool<byte> bufferPool = ArrayPool<byte>.Shared;
-
-                    byte[] buffer = bufferPool.Rent(512);
-                    ulong hashAcc = CRC.InitialCrc;
-                    int read;
-
-                    try
+                    while ((read = await context.Request.Body.ReadAsync(buffer)) != 0)
                     {
-                        while ((read = await context.Request.Body.ReadAsync(buffer)) != 0)
-                        {
-                            hashAcc = CRC.update_crc(hashAcc, buffer, read);
-                            await context.Response.Body.WriteAsync(buffer, 0, read);
-                        }
-                    }
-                    finally
-                    {
-                        bufferPool.Return(buffer);
-                    }
-
-                    hashAcc = CRC.InitialCrc ^ hashAcc;
-
-                    if (context.Response.SupportsTrailers())
-                    {
-                        context.Response.AppendTrailer("crc32", hashAcc.ToString());
+                        hashAcc = CRC.update_crc(hashAcc, buffer, read);
+                        await context.Response.Body.WriteAsync(buffer, 0, read);
                     }
                 }
-            );
-            endpoints.MapPost(
-                "/duplexSlow",
-                async context =>
+                finally
                 {
-                    // Echos back the requested content in a full duplex manner, but one byte at a time.
-                    var buffer = new byte[1];
-                    ulong hashAcc = CRC.InitialCrc;
-                    while ((await context.Request.Body.ReadAsync(buffer)) != 0)
-                    {
-                        hashAcc = CRC.update_crc(hashAcc, buffer, buffer.Length);
-                        await context.Response.Body.WriteAsync(buffer);
-                    }
+                    bufferPool.Return(buffer);
+                }
 
-                    hashAcc = CRC.InitialCrc ^ hashAcc;
+                hashAcc = CRC.InitialCrc ^ hashAcc;
 
-                    if (context.Response.SupportsTrailers())
-                    {
-                        context.Response.AppendTrailer("crc32", hashAcc.ToString());
-                    }
-                }
-            );
-            endpoints.MapMethods(
-                "/",
-                head,
-                context =>
+                if (context.Response.SupportsTrailers())
                 {
-                    // Just set the max content length on the response.
-                    string content = CreateResponseContent(context);
-                    context.Response.Headers.ContentLength = content.Length;
-                    return Task.CompletedTask;
+                    context.Response.AppendTrailer("crc32", hashAcc.ToString());
                 }
-            );
-            endpoints.MapPut(
-                "/",
-                async context =>
+            });
+            endpoints.MapPost("/duplexSlow", async context =>
+            {
+                // Echos back the requested content in a full duplex manner, but one byte at a time.
+                var buffer = new byte[1];
+                ulong hashAcc = CRC.InitialCrc;
+                while ((await context.Request.Body.ReadAsync(buffer)) != 0)
                 {
-                    // Read the full request but don't send back a response body.
-                    await context.Request.Body.CopyToAsync(Stream.Null);
+                    hashAcc = CRC.update_crc(hashAcc, buffer, buffer.Length);
+                    await context.Response.Body.WriteAsync(buffer);
                 }
-            );
+
+                hashAcc = CRC.InitialCrc ^ hashAcc;
+
+                if (context.Response.SupportsTrailers())
+                {
+                    context.Response.AppendTrailer("crc32", hashAcc.ToString());
+                }
+            });
+            endpoints.MapMethods("/", head, context =>
+            {
+                // Just set the max content length on the response.
+                string content = CreateResponseContent(context);
+                context.Response.Headers.ContentLength = content.Length;
+                return Task.CompletedTask;
+            });
+            endpoints.MapPut("/", async context =>
+            {
+                // Read the full request but don't send back a response body.
+                await context.Request.Body.CopyToAsync(Stream.Null);
+            });
         }
 
         private static void WorkaroundAssemblyResolutionIssues()

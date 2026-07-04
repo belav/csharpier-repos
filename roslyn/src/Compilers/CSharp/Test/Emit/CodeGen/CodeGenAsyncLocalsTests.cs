@@ -53,9 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 
             return string.Join(
                 Environment.NewLine,
-                from pair in actualLines.Zip(
-                    actualLines.Skip(1),
-                    (line1, line2) => new { line1, line2 }
+                from pair in actualLines.Zip(actualLines.Skip(1), (line1, line2) =>
+                    new { line1, line2 }
                 )
                 where pair.line2.Contains("ldfld") || pair.line2.Contains("stfld")
                 select pair.line1.Trim() + Environment.NewLine + pair.line2.Trim()

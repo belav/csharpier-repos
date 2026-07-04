@@ -185,9 +185,8 @@ namespace System.Linq.Tests
             string[] second = { "bBo", "shriC" };
 
             AssertExtensions.Throws<ArgumentNullException>("first", () => first.Except(second));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => first.Except(second, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                first.Except(second, new AnagramEqualityComparer())
             );
         }
 
@@ -198,9 +197,8 @@ namespace System.Linq.Tests
             string[] second = null;
 
             AssertExtensions.Throws<ArgumentNullException>("second", () => first.Except(second));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.Except(second, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.Except(second, new AnagramEqualityComparer())
             );
         }
 
@@ -246,13 +244,11 @@ namespace System.Linq.Tests
             string[] first = null;
             string[] second = { "bBo", "shriC" };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => first.ExceptBy(second, x => x)
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                first.ExceptBy(second, x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => first.ExceptBy(second, x => x, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                first.ExceptBy(second, x => x, new AnagramEqualityComparer())
             );
         }
 
@@ -262,13 +258,11 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Tim", "Robert", "Chris" };
             string[] second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.ExceptBy(second, x => x)
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.ExceptBy(second, x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.ExceptBy(second, x => x, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.ExceptBy(second, x => x, new AnagramEqualityComparer())
             );
         }
 
@@ -279,13 +273,11 @@ namespace System.Linq.Tests
             string[] second = { "bBo", "shriC" };
             Func<string, string> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => first.ExceptBy(second, keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                first.ExceptBy(second, keySelector)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => first.ExceptBy(second, keySelector, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                first.ExceptBy(second, keySelector, new AnagramEqualityComparer())
             );
         }
 

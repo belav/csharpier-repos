@@ -194,13 +194,10 @@ namespace System.ComponentModel.Composition
                 }
                 else
                 {
-                    Assert.All(
-                        _expectedAdds,
-                        add =>
-                        {
-                            Assert.False(this._container.IsPresent(add));
-                        }
-                    );
+                    Assert.All(_expectedAdds, add =>
+                    {
+                        Assert.False(this._container.IsPresent(add));
+                    });
                 }
 
                 if (this._expectedRemoves == null)
@@ -209,13 +206,10 @@ namespace System.ComponentModel.Composition
                 }
                 else
                 {
-                    Assert.All(
-                        _expectedRemoves,
-                        remove =>
-                        {
-                            Assert.True(this._container.IsPresent(remove));
-                        }
-                    );
+                    Assert.All(_expectedRemoves, remove =>
+                    {
+                        Assert.True(this._container.IsPresent(remove));
+                    });
                 }
 
                 this._changingEventCount++;
@@ -231,13 +225,10 @@ namespace System.ComponentModel.Composition
                 }
                 else
                 {
-                    Assert.All(
-                        _expectedAdds,
-                        add =>
-                        {
-                            Assert.True(this._container.IsPresent(add));
-                        }
-                    );
+                    Assert.All(_expectedAdds, add =>
+                    {
+                        Assert.True(this._container.IsPresent(add));
+                    });
                 }
 
                 if (this._expectedRemoves == null)
@@ -246,13 +237,10 @@ namespace System.ComponentModel.Composition
                 }
                 else
                 {
-                    Assert.All(
-                        _expectedRemoves,
-                        remove =>
-                        {
-                            Assert.False(this._container.IsPresent(remove));
-                        }
-                    );
+                    Assert.All(_expectedRemoves, remove =>
+                    {
+                        Assert.False(this._container.IsPresent(remove));
+                    });
                 }
 
                 Assert.Null(args.AtomicComposition);

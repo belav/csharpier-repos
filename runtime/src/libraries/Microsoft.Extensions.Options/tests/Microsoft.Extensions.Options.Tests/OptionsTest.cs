@@ -360,13 +360,10 @@ namespace Microsoft.Extensions.Options.Tests
         public void Options_CanCreateInstancesWithoutDefaultCtor()
         {
             var services = new ServiceCollection();
-            services.Configure<OptionsWithoutDefaultCtor>(
-                "Named",
-                options =>
-                {
-                    options.Message = "Initial value";
-                }
-            );
+            services.Configure<OptionsWithoutDefaultCtor>("Named", options =>
+            {
+                options.Message = "Initial value";
+            });
 
             services.AddSingleton<
                 IOptionsFactory<OptionsWithoutDefaultCtor>,
@@ -386,13 +383,10 @@ namespace Microsoft.Extensions.Options.Tests
         public void Options_WithoutDefaultCtor_ThrowDuringResolution()
         {
             var services = new ServiceCollection();
-            services.Configure<OptionsWithoutDefaultCtor>(
-                "Named",
-                options =>
-                {
-                    options.Message = "Initial value";
-                }
-            );
+            services.Configure<OptionsWithoutDefaultCtor>("Named", options =>
+            {
+                options.Message = "Initial value";
+            });
 
             var sp = services.BuildServiceProvider();
             Assert.Throws<MissingMethodException>(() =>

@@ -312,13 +312,10 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         using var host = await CreateHostWithServices(
             s =>
                 s.AddAuthentication(schemeName)
-                    .AddCookie(
-                        schemeName,
-                        o =>
-                        {
-                            o.LoginPath = new PathString("/login");
-                        }
-                    ),
+                    .AddCookie(schemeName, o =>
+                    {
+                        o.LoginPath = new PathString("/login");
+                    }),
             context =>
             {
                 var user = new ClaimsIdentity(new GenericIdentity("Alice", "Cookies"));
@@ -1649,15 +1646,13 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                         {
                             app.UseAuthentication();
                         }
-                        app.Map(
-                            "/login",
-                            signoutApp =>
-                                signoutApp.Run(context =>
-                                    context.ChallengeAsync(
-                                        "Cookies",
-                                        new AuthenticationProperties() { RedirectUri = "/" }
-                                    )
+                        app.Map("/login", signoutApp =>
+                            signoutApp.Run(context =>
+                                context.ChallengeAsync(
+                                    "Cookies",
+                                    new AuthenticationProperties() { RedirectUri = "/" }
                                 )
+                            )
                         );
                     })
                     .ConfigureServices(s =>
@@ -1771,9 +1766,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     .ConfigureServices(services =>
                     {
                         services.AddAuthentication().AddCookie("Cookie1");
-                        services.Configure<CookieAuthenticationOptions>(
-                            "Cookie1",
-                            o => o.Cookie.Name = "One"
+                        services.Configure<CookieAuthenticationOptions>("Cookie1", o =>
+                            o.Cookie.Name = "One"
                         );
                     })
             )
@@ -1798,15 +1792,13 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     .Configure(app =>
                     {
                         app.UseAuthentication();
-                        app.Map(
-                            "/notlogin",
-                            signoutApp =>
-                                signoutApp.Run(context =>
-                                    context.SignInAsync(
-                                        "Cookies",
-                                        new ClaimsPrincipal(new ClaimsIdentity("whatever"))
-                                    )
+                        app.Map("/notlogin", signoutApp =>
+                            signoutApp.Run(context =>
+                                context.SignInAsync(
+                                    "Cookies",
+                                    new ClaimsPrincipal(new ClaimsIdentity("whatever"))
                                 )
+                            )
                         );
                     })
                     .ConfigureServices(services =>
@@ -1835,15 +1827,13 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     .Configure(app =>
                     {
                         app.UseAuthentication();
-                        app.Map(
-                            "/login",
-                            signoutApp =>
-                                signoutApp.Run(context =>
-                                    context.SignInAsync(
-                                        "Cookies",
-                                        new ClaimsPrincipal(new ClaimsIdentity("whatever"))
-                                    )
+                        app.Map("/login", signoutApp =>
+                            signoutApp.Run(context =>
+                                context.SignInAsync(
+                                    "Cookies",
+                                    new ClaimsPrincipal(new ClaimsIdentity("whatever"))
                                 )
+                            )
                         );
                     })
                     .ConfigureServices(services =>
@@ -1876,9 +1866,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     .Configure(app =>
                     {
                         app.UseAuthentication();
-                        app.Map(
-                            "/notlogout",
-                            signoutApp => signoutApp.Run(context => context.SignOutAsync("Cookies"))
+                        app.Map("/notlogout", signoutApp =>
+                            signoutApp.Run(context => context.SignOutAsync("Cookies"))
                         );
                     })
                     .ConfigureServices(services =>
@@ -1907,9 +1896,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     .Configure(app =>
                     {
                         app.UseAuthentication();
-                        app.Map(
-                            "/logout",
-                            signoutApp => signoutApp.Run(context => context.SignOutAsync("Cookies"))
+                        app.Map("/logout", signoutApp =>
+                            signoutApp.Run(context => context.SignOutAsync("Cookies"))
                         );
                     })
                     .ConfigureServices(services =>
@@ -1942,9 +1930,8 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     .Configure(app =>
                     {
                         app.UseAuthentication();
-                        app.Map(
-                            "/forbid",
-                            signoutApp => signoutApp.Run(context => context.ForbidAsync("Cookies"))
+                        app.Map("/forbid", signoutApp =>
+                            signoutApp.Run(context => context.ForbidAsync("Cookies"))
                         );
                     })
                     .ConfigureServices(services =>
@@ -1972,25 +1959,18 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
             .ConfigureWebHost(builder =>
                 builder
                     .UseTestServer()
-                    .Configure(app =>
-                        app.Map(
-                            "/base",
-                            map =>
-                            {
-                                map.UseAuthentication();
-                                map.Map(
-                                    "/login",
-                                    signoutApp =>
-                                        signoutApp.Run(context =>
-                                            context.ChallengeAsync(
-                                                "Cookies",
-                                                new AuthenticationProperties() { RedirectUri = "/" }
-                                            )
-                                        )
-                                );
-                            }
-                        )
-                    )
+                    .Configure(app => app.Map("/base", map =>
+                        {
+                            map.UseAuthentication();
+                            map.Map("/login", signoutApp =>
+                                signoutApp.Run(context =>
+                                    context.ChallengeAsync(
+                                        "Cookies",
+                                        new AuthenticationProperties() { RedirectUri = "/" }
+                                    )
+                                )
+                            );
+                        }))
                     .ConfigureServices(services =>
                         services
                             .AddAuthentication()
@@ -2195,20 +2175,13 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
             .ConfigureWebHost(builder =>
                 builder
                     .UseTestServer()
-                    .Configure(app =>
-                        app.Map(
-                            "/base",
-                            map =>
-                            {
-                                map.UseAuthentication();
-                                map.Map(
-                                    "/forbid",
-                                    signoutApp =>
-                                        signoutApp.Run(context => context.ForbidAsync("Cookies"))
-                                );
-                            }
-                        )
-                    )
+                    .Configure(app => app.Map("/base", map =>
+                        {
+                            map.UseAuthentication();
+                            map.Map("/forbid", signoutApp =>
+                                signoutApp.Run(context => context.ForbidAsync("Cookies"))
+                            );
+                        }))
                     .ConfigureServices(services =>
                         services
                             .AddAuthentication()
@@ -2283,14 +2256,11 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     .ConfigureServices(services =>
                         services
                             .AddAuthentication()
-                            .AddCookie(
-                                "Cookies",
-                                o =>
-                                {
-                                    o.Cookie.Name = "Cookie";
-                                    o.TicketDataFormat = new TicketDataFormat(dp);
-                                }
-                            )
+                            .AddCookie("Cookies", o =>
+                            {
+                                o.Cookie.Name = "Cookie";
+                                o.TicketDataFormat = new TicketDataFormat(dp);
+                            })
                     )
             )
             .Build();

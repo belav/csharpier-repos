@@ -435,16 +435,12 @@ ORDER BY [t].[Id], [o].[MainEntityManyId]
         {
             modelBuilder
                 .Entity<MainEntityDifferentTable>()
-                .ToTable(
-                    "MainEntityDifferentTable",
-                    tb =>
-                        tb.IsTemporal(ttb =>
-                        {
-                            ttb.HasPeriodStart("StartTime");
-                            ttb.HasPeriodEnd("EndTime");
-                            ttb.UseHistoryTable("ConfHistory");
-                        })
-                );
+                .ToTable("MainEntityDifferentTable", tb => tb.IsTemporal(ttb =>
+                    {
+                        ttb.HasPeriodStart("StartTime");
+                        ttb.HasPeriodEnd("EndTime");
+                        ttb.UseHistoryTable("ConfHistory");
+                    }));
             modelBuilder
                 .Entity<MainEntityDifferentTable>()
                 .Property(me => me.Id)
@@ -459,16 +455,12 @@ ORDER BY [t].[Id], [o].[MainEntityManyId]
                     me => me.OwnedEntity,
                     oe =>
                     {
-                        oe.ToTable(
-                            "OwnedEntityDifferentTable",
-                            tb =>
-                                tb.IsTemporal(ttb =>
-                                {
-                                    ttb.HasPeriodStart("StartTime");
-                                    ttb.HasPeriodEnd("EndTime");
-                                    ttb.UseHistoryTable("OwnedEntityHistory");
-                                })
-                        );
+                        oe.ToTable("OwnedEntityDifferentTable", tb => tb.IsTemporal(ttb =>
+                            {
+                                ttb.HasPeriodStart("StartTime");
+                                ttb.HasPeriodEnd("EndTime");
+                                ttb.UseHistoryTable("OwnedEntityHistory");
+                            }));
                     }
                 );
 
@@ -569,50 +561,34 @@ WHERE [v].[Capacity] IS NOT NULL AND [v].[FuelTank_Discriminator] IS NOT NULL
 
         modelBuilder
             .Entity<Engine>()
-            .ToTable(
-                "Vehicles",
-                tb =>
-                    tb.IsTemporal(ttb =>
-                    {
-                        ttb.HasPeriodStart("Start").HasColumnName("Start");
-                        ttb.HasPeriodEnd("End").HasColumnName("End");
-                    })
-            );
+            .ToTable("Vehicles", tb => tb.IsTemporal(ttb =>
+                {
+                    ttb.HasPeriodStart("Start").HasColumnName("Start");
+                    ttb.HasPeriodEnd("End").HasColumnName("End");
+                }));
 
         modelBuilder
             .Entity<Operator>()
-            .ToTable(
-                "Vehicles",
-                tb =>
-                    tb.IsTemporal(ttb =>
-                    {
-                        ttb.HasPeriodStart("Start").HasColumnName("Start");
-                        ttb.HasPeriodEnd("End").HasColumnName("End");
-                    })
-            );
+            .ToTable("Vehicles", tb => tb.IsTemporal(ttb =>
+                {
+                    ttb.HasPeriodStart("Start").HasColumnName("Start");
+                    ttb.HasPeriodEnd("End").HasColumnName("End");
+                }));
 
         modelBuilder
             .Entity<OperatorDetails>()
-            .ToTable(
-                "Vehicles",
-                tb =>
-                    tb.IsTemporal(ttb =>
-                    {
-                        ttb.HasPeriodStart("Start").HasColumnName("Start");
-                        ttb.HasPeriodEnd("End").HasColumnName("End");
-                    })
-            );
+            .ToTable("Vehicles", tb => tb.IsTemporal(ttb =>
+                {
+                    ttb.HasPeriodStart("Start").HasColumnName("Start");
+                    ttb.HasPeriodEnd("End").HasColumnName("End");
+                }));
 
         modelBuilder
             .Entity<FuelTank>()
-            .ToTable(
-                "Vehicles",
-                tb =>
-                    tb.IsTemporal(ttb =>
-                    {
-                        ttb.HasPeriodStart("Start").HasColumnName("Start");
-                        ttb.HasPeriodEnd("End").HasColumnName("End");
-                    })
-            );
+            .ToTable("Vehicles", tb => tb.IsTemporal(ttb =>
+                {
+                    ttb.HasPeriodStart("Start").HasColumnName("Start");
+                    ttb.HasPeriodEnd("End").HasColumnName("End");
+                }));
     }
 }

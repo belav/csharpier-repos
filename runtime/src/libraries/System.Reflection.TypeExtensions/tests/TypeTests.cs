@@ -766,9 +766,8 @@ namespace System.Reflection.Tests
                     MemberInfo[] memberNamesFromMethod1 = type.GetMembers();
 
                     Assert.Equal(memberNamesFromAsterix1.Length, memberNamesFromMethod1.Length);
-                    Assert.All(
-                        memberNamesFromAsterix1,
-                        memberInfo => memberNamesFromMethod1.Contains(memberInfo)
+                    Assert.All(memberNamesFromAsterix1, memberInfo =>
+                        memberNamesFromMethod1.Contains(memberInfo)
                     );
                 }
             }
@@ -791,9 +790,8 @@ namespace System.Reflection.Tests
                 );
 
                 Assert.Equal(memberNamesFromAsterix2.Length, memberNamesFromMethod2.Length);
-                Assert.All(
-                    memberNamesFromAsterix2,
-                    memberInfo => memberNamesFromMethod2.Contains(memberInfo)
+                Assert.All(memberNamesFromAsterix2, memberInfo =>
+                    memberNamesFromMethod2.Contains(memberInfo)
                 );
             }
         }
@@ -2635,46 +2633,36 @@ namespace System.Reflection.Tests
                 typeInfo.GetDeclaredProperty("PrivateProperty")
             );
 
-            Assert.All(
-                TypeExtensions.GetFields(type, declaredFlags),
-                field => typeInfo.DeclaredFields.Contains(field)
+            Assert.All(TypeExtensions.GetFields(type, declaredFlags), field =>
+                typeInfo.DeclaredFields.Contains(field)
             );
-            Assert.All(
-                TypeExtensions.GetMethods(type, declaredFlags),
-                method => typeInfo.DeclaredMethods.Contains(method)
+            Assert.All(TypeExtensions.GetMethods(type, declaredFlags), method =>
+                typeInfo.DeclaredMethods.Contains(method)
             );
-            Assert.All(
-                TypeExtensions.GetNestedTypes(type, declaredFlags),
-                nestedType => typeInfo.DeclaredNestedTypes.Contains(nestedType.GetTypeInfo())
+            Assert.All(TypeExtensions.GetNestedTypes(type, declaredFlags), nestedType =>
+                typeInfo.DeclaredNestedTypes.Contains(nestedType.GetTypeInfo())
             );
-            Assert.All(
-                TypeExtensions.GetProperties(type, declaredFlags),
-                property => typeInfo.DeclaredProperties.Contains(property)
+            Assert.All(TypeExtensions.GetProperties(type, declaredFlags), property =>
+                typeInfo.DeclaredProperties.Contains(property)
             );
-            Assert.All(
-                TypeExtensions.GetEvents(type, declaredFlags),
-                eventInfo => typeInfo.DeclaredEvents.Contains(eventInfo)
+            Assert.All(TypeExtensions.GetEvents(type, declaredFlags), eventInfo =>
+                typeInfo.DeclaredEvents.Contains(eventInfo)
             );
-            Assert.All(
-                TypeExtensions.GetConstructors(type, declaredFlags),
-                constructor => typeInfo.DeclaredConstructors.Contains(constructor)
+            Assert.All(TypeExtensions.GetConstructors(type, declaredFlags), constructor =>
+                typeInfo.DeclaredConstructors.Contains(constructor)
             );
 
-            Assert.All(
-                TypeExtensions.GetEvents(type),
-                eventInfo => typeInfo.AsType().GetEvents().Contains(eventInfo)
+            Assert.All(TypeExtensions.GetEvents(type), eventInfo =>
+                typeInfo.AsType().GetEvents().Contains(eventInfo)
             );
-            Assert.All(
-                TypeExtensions.GetFields(type),
-                fieldInfo => typeInfo.AsType().GetFields().Contains(fieldInfo)
+            Assert.All(TypeExtensions.GetFields(type), fieldInfo =>
+                typeInfo.AsType().GetFields().Contains(fieldInfo)
             );
-            Assert.All(
-                TypeExtensions.GetMethods(type),
-                methodInfo => typeInfo.AsType().GetMethods().Contains(methodInfo)
+            Assert.All(TypeExtensions.GetMethods(type), methodInfo =>
+                typeInfo.AsType().GetMethods().Contains(methodInfo)
             );
-            Assert.All(
-                TypeExtensions.GetProperties(type),
-                propertyInfo => typeInfo.AsType().GetProperties().Contains(propertyInfo)
+            Assert.All(TypeExtensions.GetProperties(type), propertyInfo =>
+                typeInfo.AsType().GetProperties().Contains(propertyInfo)
             );
 
             Assert.Equal(type.GetType(), typeInfo.GetType());
@@ -2688,9 +2676,8 @@ namespace System.Reflection.Tests
                 | BindingFlags.NonPublic
                 | BindingFlags.Public
                 | BindingFlags.Static;
-            Assert.All(
-                type.GetNestedTypes(allFlags),
-                nestedType => typeInfo.AsType().GetNestedTypes(allFlags).Contains(nestedType)
+            Assert.All(type.GetNestedTypes(allFlags), nestedType =>
+                typeInfo.AsType().GetNestedTypes(allFlags).Contains(nestedType)
             );
 
             Assert.Equal(type.GetTypeInfo().IsClass, typeInfo.IsClass);

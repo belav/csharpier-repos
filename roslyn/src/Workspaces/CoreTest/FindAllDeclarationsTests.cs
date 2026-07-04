@@ -1264,9 +1264,8 @@ Inner i;
         {
             await Assert.ThrowsAnyAsync<ArgumentNullException>(async () =>
             {
-                await SymbolFinder.FindSourceDeclarationsAsync(
-                    (Solution)null,
-                    str => str.Contains("Test")
+                await SymbolFinder.FindSourceDeclarationsAsync((Solution)null, str =>
+                    str.Contains("Test")
                 );
             });
         }

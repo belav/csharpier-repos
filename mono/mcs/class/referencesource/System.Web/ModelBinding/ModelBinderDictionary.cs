@@ -144,14 +144,12 @@
                 return binder;
             }
 
-            binder = ModelBinders.GetBinderFromAttributes(
-                modelType,
-                () =>
-                    String.Format(
-                        CultureInfo.CurrentCulture,
-                        SR.GetString(SR.ModelBinderDictionary_MultipleAttributes),
-                        modelType.FullName
-                    )
+            binder = ModelBinders.GetBinderFromAttributes(modelType, () =>
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    SR.GetString(SR.ModelBinderDictionary_MultipleAttributes),
+                    modelType.FullName
+                )
             );
 
             return binder ?? fallbackBinder;

@@ -66,20 +66,12 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
     {
         var serviceContext = new TestServiceContext(LoggerFactory);
 
-        await using (
-            var server = new TestServer(
-                requestDelegate,
-                serviceContext,
-                listenOptions =>
-                {
-                    listenOptions.UseConnectionLogging();
-                    listenOptions.Use(next =>
-                        new AsyncConnectionMiddleware(next).OnConnectionAsync
-                    );
-                    listenOptions.UseConnectionLogging();
-                }
-            )
-        )
+        await using (var server = new TestServer(requestDelegate, serviceContext, listenOptions =>
+            {
+                listenOptions.UseConnectionLogging();
+                listenOptions.Use(next => new AsyncConnectionMiddleware(next).OnConnectionAsync);
+                listenOptions.UseConnectionLogging();
+            }))
         {
             using (var connection = server.CreateConnection())
             {
@@ -101,23 +93,17 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
     {
         var serviceContext = new TestServiceContext(LoggerFactory);
 
-        await using (
-            var server = new TestServer(
-                requestDelegate,
-                serviceContext,
-                listenOptions =>
-                {
-                    listenOptions.UseConnectionLogging();
-                    listenOptions.Use(
-                        (context, next) =>
-                        {
-                            return new AsyncConnectionMiddleware(next).OnConnectionAsync(context);
-                        }
-                    );
-                    listenOptions.UseConnectionLogging();
-                }
-            )
-        )
+        await using (var server = new TestServer(requestDelegate, serviceContext, listenOptions =>
+            {
+                listenOptions.UseConnectionLogging();
+                listenOptions.Use(
+                    (context, next) =>
+                    {
+                        return new AsyncConnectionMiddleware(next).OnConnectionAsync(context);
+                    }
+                );
+                listenOptions.UseConnectionLogging();
+            }))
         {
             using (var connection = server.CreateConnection())
             {
@@ -264,9 +250,8 @@ public class ConnectionMiddlewareTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        Assert.Contains(
-            LogMessages,
-            m => m.Message.Contains("Unhandled exception while processing " + connectionId + ".")
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("Unhandled exception while processing " + connectionId + ".")
         );
     }
 

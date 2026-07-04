@@ -146,9 +146,8 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             MethodInfo method = typeof(DefineMethodOverrideClass).GetMethod("M");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "methodInfoBody",
-                () => type.DefineMethodOverride(null, method)
+            AssertExtensions.Throws<ArgumentNullException>("methodInfoBody", () =>
+                type.DefineMethodOverride(null, method)
             );
         }
 
@@ -157,9 +156,8 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             MethodInfo method = typeof(DefineMethodOverrideInterface).GetMethod("M");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "methodInfoDeclaration",
-                () => type.DefineMethodOverride(method, null)
+            AssertExtensions.Throws<ArgumentNullException>("methodInfoDeclaration", () =>
+                type.DefineMethodOverride(method, null)
             );
         }
 
@@ -170,9 +168,8 @@ namespace System.Reflection.Emit.Tests
             MethodInfo body = typeof(DefineMethodOverrideInterface).GetMethod("M");
             MethodInfo declaration = typeof(DefineMethodOverrideClass).GetMethod("M");
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => type.DefineMethodOverride(body, declaration)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                type.DefineMethodOverride(body, declaration)
             );
         }
 
@@ -189,15 +186,13 @@ namespace System.Reflection.Emit.Tests
             globalMethod.GetILGenerator().Emit(OpCodes.Ret);
 
             TypeBuilder type = module.DefineType("Name");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    type.DefineMethodOverride(
-                        globalMethod,
-                        typeof(DefineMethodOverrideInterface).GetMethod(
-                            nameof(DefineMethodOverrideInterface.M)
-                        )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                type.DefineMethodOverride(
+                    globalMethod,
+                    typeof(DefineMethodOverrideInterface).GetMethod(
+                        nameof(DefineMethodOverrideInterface.M)
                     )
+                )
             );
         }
 

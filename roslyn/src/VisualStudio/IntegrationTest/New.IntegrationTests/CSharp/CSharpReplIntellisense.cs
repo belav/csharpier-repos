@@ -25,9 +25,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                     HangMitigatingCancellationToken
                 )
             ).SelectAsArray(item => item.DisplayText);
-            Assert.All(
-                ["var", "public", "readonly", "goto"],
-                item => Assert.Contains(item, completionItems)
+            Assert.All(["var", "public", "readonly", "goto"], item =>
+                Assert.Contains(item, completionItems)
             );
         }
 

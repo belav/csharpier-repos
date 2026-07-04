@@ -1944,24 +1944,21 @@ public class InMemoryExpressionTranslatingExpressionVisitor : ExpressionVisitor
         var rightExpressions = ((NewArrayExpression)right).Expressions;
 
         return leftExpressions
-            .Zip(
-                rightExpressions,
-                (l, r) =>
+            .Zip(rightExpressions, (l, r) =>
+            {
+                l = RemoveObjectConvert(l);
+                r = RemoveObjectConvert(r);
+                if (l.Type.IsNullableType())
                 {
-                    l = RemoveObjectConvert(l);
-                    r = RemoveObjectConvert(r);
-                    if (l.Type.IsNullableType())
-                    {
-                        r = r.Type.IsNullableType() ? r : Expression.Convert(r, l.Type);
-                    }
-                    else if (r.Type.IsNullableType())
-                    {
-                        l = l.Type.IsNullableType() ? l : Expression.Convert(l, r.Type);
-                    }
-
-                    return ExpressionExtensions.CreateEqualsExpression(l, r);
+                    r = r.Type.IsNullableType() ? r : Expression.Convert(r, l.Type);
                 }
-            )
+                else if (r.Type.IsNullableType())
+                {
+                    l = l.Type.IsNullableType() ? l : Expression.Convert(l, r.Type);
+                }
+
+                return ExpressionExtensions.CreateEqualsExpression(l, r);
+            })
             .Aggregate((a, b) => Expression.AndAlso(a, b));
 
         static Expression RemoveObjectConvert(Expression expression) =>

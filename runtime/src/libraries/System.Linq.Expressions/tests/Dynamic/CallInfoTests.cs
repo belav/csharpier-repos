@@ -13,13 +13,11 @@ namespace System.Dynamic.Tests
         [Fact]
         public void Ctor_NullNames_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "argNames",
-                () => new CallInfo(0, default(IEnumerable<string>))
+            AssertExtensions.Throws<ArgumentNullException>("argNames", () =>
+                new CallInfo(0, default(IEnumerable<string>))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "argNames",
-                () => new CallInfo(0, default(string[]))
+            AssertExtensions.Throws<ArgumentNullException>("argNames", () =>
+                new CallInfo(0, default(string[]))
             );
         }
 
@@ -31,22 +29,19 @@ namespace System.Dynamic.Tests
             string[] argNames
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CallInfo(argCount, argNames)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CallInfo(argCount, argNames)
             );
         }
 
         [Fact]
         public void Ctor_NullItemInArgNames_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "argNames[1]",
-                () => new CallInfo(3, "foo", null, "bar")
+            AssertExtensions.Throws<ArgumentNullException>("argNames[1]", () =>
+                new CallInfo(3, "foo", null, "bar")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "argNames[0]",
-                () => new CallInfo(3, Enumerable.Repeat(default(string), 2))
+            AssertExtensions.Throws<ArgumentNullException>("argNames[0]", () =>
+                new CallInfo(3, Enumerable.Repeat(default(string), 2))
             );
         }
 

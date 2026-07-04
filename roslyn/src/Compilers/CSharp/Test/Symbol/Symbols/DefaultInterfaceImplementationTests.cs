@@ -2458,18 +2458,14 @@ class Test2 : I1
 
             compilation2.VerifyDiagnostics();
 
-            CompileAndVerify(
-                compilation2,
-                verify: Verify(isStatic),
-                symbolValidator: (m) =>
-                {
-                    var test2Result = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember("Test2");
-                    Assert.Equal(
-                        "I1",
-                        test2Result.InterfacesNoUseSiteDiagnostics().Single().ToTestDisplayString()
-                    );
-                }
-            );
+            CompileAndVerify(compilation2, verify: Verify(isStatic), symbolValidator: (m) =>
+            {
+                var test2Result = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember("Test2");
+                Assert.Equal(
+                    "I1",
+                    test2Result.InterfacesNoUseSiteDiagnostics().Single().ToTestDisplayString()
+                );
+            });
 
             var compilation3 = CreateCompilation(
                 source2,
@@ -6334,19 +6330,15 @@ class Test2 : I1
 
             ValidatePropertyImplementation_501(compilation2.SourceModule, "Test2");
 
-            CompileAndVerify(
-                compilation2,
-                verify: Verify(isStatic),
-                symbolValidator: (m) =>
-                {
-                    var test2Result = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember("Test2");
-                    Assert.Equal(
-                        "I1",
-                        test2Result.InterfacesNoUseSiteDiagnostics().Single().ToTestDisplayString()
-                    );
-                    ValidatePropertyImplementation_501(m, "Test2");
-                }
-            );
+            CompileAndVerify(compilation2, verify: Verify(isStatic), symbolValidator: (m) =>
+            {
+                var test2Result = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember("Test2");
+                Assert.Equal(
+                    "I1",
+                    test2Result.InterfacesNoUseSiteDiagnostics().Single().ToTestDisplayString()
+                );
+                ValidatePropertyImplementation_501(m, "Test2");
+            });
 
             var compilation3 = CreateCompilation(
                 source2,
@@ -8383,19 +8375,15 @@ class Test2 : I1
 
             ValidateIndexerImplementation_501(compilation2.SourceModule, "Test2");
 
-            CompileAndVerify(
-                compilation2,
-                verify: VerifyOnMonoOrCoreClr,
-                symbolValidator: (m) =>
-                {
-                    var test2Result = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember("Test2");
-                    Assert.Equal(
-                        "I1",
-                        test2Result.InterfacesNoUseSiteDiagnostics().Single().ToTestDisplayString()
-                    );
-                    ValidateIndexerImplementation_501(m, "Test2");
-                }
-            );
+            CompileAndVerify(compilation2, verify: VerifyOnMonoOrCoreClr, symbolValidator: (m) =>
+            {
+                var test2Result = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember("Test2");
+                Assert.Equal(
+                    "I1",
+                    test2Result.InterfacesNoUseSiteDiagnostics().Single().ToTestDisplayString()
+                );
+                ValidateIndexerImplementation_501(m, "Test2");
+            });
 
             var compilation3 = CreateCompilation(
                 source2,
@@ -10468,19 +10456,15 @@ class Test2 : I1
 
             ValidateEventImplementation_501(compilation2.SourceModule, "Test2");
 
-            CompileAndVerify(
-                compilation2,
-                verify: Verify(isStatic),
-                symbolValidator: (m) =>
-                {
-                    var test2Result = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember("Test2");
-                    Assert.Equal(
-                        "I1",
-                        test2Result.InterfacesNoUseSiteDiagnostics().Single().ToTestDisplayString()
-                    );
-                    ValidateEventImplementation_501(m, "Test2");
-                }
-            );
+            CompileAndVerify(compilation2, verify: Verify(isStatic), symbolValidator: (m) =>
+            {
+                var test2Result = (PENamedTypeSymbol)m.GlobalNamespace.GetTypeMember("Test2");
+                Assert.Equal(
+                    "I1",
+                    test2Result.InterfacesNoUseSiteDiagnostics().Single().ToTestDisplayString()
+                );
+                ValidateEventImplementation_501(m, "Test2");
+            });
 
             var compilation3 = CreateCompilation(
                 source2,
@@ -16324,11 +16308,8 @@ class Test1 : I1
 
                 compilation3.VerifyDiagnostics();
 
-                CompileAndVerify(
-                    compilation3,
-                    expectedOutput: "M1",
-                    symbolValidator: (m) =>
-                        ValidateMethodModifiersExplicit_10(m, Accessibility.Protected)
+                CompileAndVerify(compilation3, expectedOutput: "M1", symbolValidator: (m) =>
+                    ValidateMethodModifiersExplicit_10(m, Accessibility.Protected)
                 );
 
                 ValidateMethodModifiersExplicit_10(
@@ -16424,11 +16405,8 @@ class Test1 : I1
 
                 compilation3.VerifyDiagnostics();
 
-                CompileAndVerify(
-                    compilation3,
-                    expectedOutput: "M1",
-                    symbolValidator: (m) =>
-                        ValidateMethodModifiersExplicit_10(m, Accessibility.ProtectedOrInternal)
+                CompileAndVerify(compilation3, expectedOutput: "M1", symbolValidator: (m) =>
+                    ValidateMethodModifiersExplicit_10(m, Accessibility.ProtectedOrInternal)
                 );
 
                 ValidateMethodModifiersExplicit_10(

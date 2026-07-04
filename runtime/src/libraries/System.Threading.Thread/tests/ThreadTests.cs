@@ -694,20 +694,17 @@ namespace System.Threading.Threads.Tests
         {
             string name = Guid.NewGuid().ToString("N");
             Action waitForThread;
-            var t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                () =>
-                {
-                    var ct = Thread.CurrentThread;
-                    Assert.Equal(name, ct.Name);
-                    ct.Name = name + "xyz";
-                    Assert.Equal(name + "xyz", ct.Name);
-                    ct.Name = null;
-                    Assert.Null(ct.Name);
-                    ct.Name = name;
-                    Assert.Equal(name, ct.Name);
-                }
-            );
+            var t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+            {
+                var ct = Thread.CurrentThread;
+                Assert.Equal(name, ct.Name);
+                ct.Name = name + "xyz";
+                Assert.Equal(name + "xyz", ct.Name);
+                ct.Name = null;
+                Assert.Null(ct.Name);
+                ct.Name = name;
+                Assert.Equal(name, ct.Name);
+            });
             t.IsBackground = true;
             Assert.Null(t.Name);
             t.Name = null;
@@ -779,14 +776,11 @@ namespace System.Threading.Threads.Tests
             var e0 = new ManualResetEvent(false);
             var e1 = new AutoResetEvent(false);
             Action waitForThread;
-            var t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                () =>
-                {
-                    e0.CheckedWait();
-                    ThreadTestHelpers.WaitForConditionWithoutBlocking(() => e1.WaitOne(0));
-                }
-            );
+            var t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+            {
+                e0.CheckedWait();
+                ThreadTestHelpers.WaitForConditionWithoutBlocking(() => e1.WaitOne(0));
+            });
             Assert.Equal(ThreadState.Unstarted, t.ThreadState);
             t.IsBackground = true;
             Assert.Equal(ThreadState.Unstarted | ThreadState.Background, t.ThreadState);
@@ -805,9 +799,8 @@ namespace System.Threading.Threads.Tests
             waitForThread();
             Assert.Equal(ThreadState.Stopped, t.ThreadState);
 
-            t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                () => ThreadTestHelpers.WaitForConditionWithoutBlocking(() => e1.WaitOne(0))
+            t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+                ThreadTestHelpers.WaitForConditionWithoutBlocking(() => e1.WaitOne(0))
             );
             t.Start();
             ThreadTestHelpers.WaitForCondition(() => t.ThreadState == ThreadState.Running);
@@ -956,9 +949,8 @@ namespace System.Threading.Threads.Tests
             {
                 // AllocateNamedDataSlot allocates
                 slot = Thread.AllocateNamedDataSlot(slotName);
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => Thread.AllocateNamedDataSlot(slotName)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    Thread.AllocateNamedDataSlot(slotName)
                 );
                 slot2 = Thread.AllocateNamedDataSlot(slotName2);
                 Assert.NotEqual(slot, slot2);
@@ -1032,18 +1024,15 @@ namespace System.Threading.Threads.Tests
             var continueThread = new AutoResetEvent(false);
             bool continueThreadBool = false;
             Action waitForThread;
-            var t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                () =>
-                {
-                    threadReady.Set();
-                    ThreadTestHelpers.WaitForConditionWithoutBlocking(() =>
-                        Volatile.Read(ref continueThreadBool)
-                    );
-                    threadReady.Set();
-                    Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait());
-                }
-            );
+            var t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+            {
+                threadReady.Set();
+                ThreadTestHelpers.WaitForConditionWithoutBlocking(() =>
+                    Volatile.Read(ref continueThreadBool)
+                );
+                threadReady.Set();
+                Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait());
+            });
             t.IsBackground = true;
             t.Start();
             threadReady.CheckedWait();
@@ -1058,9 +1047,8 @@ namespace System.Threading.Threads.Tests
             t.Interrupt();
 
             // Interrupting an unstarted thread causes the thread to be interrupted after it is started and starts blocking
-            t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                () => Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait())
+            t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+                Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait())
             );
             t.IsBackground = true;
             t.Interrupt();
@@ -1069,9 +1057,8 @@ namespace System.Threading.Threads.Tests
 
             // A thread that is already blocked on a synchronization primitive unblocks immediately
             continueThread.Reset();
-            t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                () => Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait())
+            t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+                Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait())
             );
             t.IsBackground = true;
             t.Start();
@@ -1101,19 +1088,14 @@ namespace System.Threading.Threads.Tests
             // not allowing it in finally blocks, so this behavior has changed in .NET Core.
             var continueThread = new AutoResetEvent(false);
             Action waitForThread;
-            Thread t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                () =>
+            Thread t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+            {
+                try { }
+                finally
                 {
-                    try { }
-                    finally
-                    {
-                        Assert.Throws<ThreadInterruptedException>(() =>
-                            continueThread.CheckedWait()
-                        );
-                    }
+                    Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait());
                 }
-            );
+            });
             t.IsBackground = true;
             t.Start();
             t.Interrupt();
@@ -1126,15 +1108,12 @@ namespace System.Threading.Threads.Tests
             var threadReady = new ManualResetEvent(false);
             var continueThread = new ManualResetEvent(false);
             Action waitForThread;
-            var t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                () =>
-                {
-                    threadReady.Set();
-                    continueThread.CheckedWait();
-                    Thread.Sleep(ExpectedTimeoutMilliseconds);
-                }
-            );
+            var t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+            {
+                threadReady.Set();
+                continueThread.CheckedWait();
+                Thread.Sleep(ExpectedTimeoutMilliseconds);
+            });
             t.IsBackground = true;
 
             Assert.Throws<ArgumentOutOfRangeException>(() => t.Join(-2));
@@ -1214,14 +1193,11 @@ namespace System.Threading.Threads.Tests
             var e = new AutoResetEvent(false);
             Action waitForThread;
             Thread t = null;
-            t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                () =>
-                {
-                    e.CheckedWait();
-                    Assert.Same(t, Thread.CurrentThread);
-                }
-            );
+            t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+            {
+                e.CheckedWait();
+                Assert.Same(t, Thread.CurrentThread);
+            });
             t.IsBackground = true;
             Assert.Throws<InvalidOperationException>(() => StartParameter(t, null));
             Assert.Throws<InvalidOperationException>(() => StartParameter(t, t));
@@ -1231,9 +1207,8 @@ namespace System.Threading.Threads.Tests
             waitForThread();
             Assert.Throws<ThreadStateException>(() => Start(t));
 
-            t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                parameter => e.CheckedWait()
+            t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, parameter =>
+                e.CheckedWait()
             );
             t.IsBackground = true;
             Start(t);
@@ -1246,58 +1221,46 @@ namespace System.Threading.Threads.Tests
             Assert.Throws<ThreadStateException>(() => StartParameter(t, null));
             Assert.Throws<ThreadStateException>(() => StartParameter(t, t));
 
-            t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                parameter =>
-                {
-                    Assert.Null(parameter);
-                    Assert.Same(t, Thread.CurrentThread);
-                }
-            );
+            t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, parameter =>
+            {
+                Assert.Null(parameter);
+                Assert.Same(t, Thread.CurrentThread);
+            });
             t.IsBackground = true;
             Start(t);
             waitForThread();
 
-            t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                parameter =>
-                {
-                    Assert.Null(parameter);
-                    Assert.Same(t, Thread.CurrentThread);
-                }
-            );
+            t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, parameter =>
+            {
+                Assert.Null(parameter);
+                Assert.Same(t, Thread.CurrentThread);
+            });
             t.IsBackground = true;
             StartParameter(t, null);
             waitForThread();
 
-            t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                parameter =>
-                {
-                    Assert.Same(t, parameter);
-                    Assert.Same(t, Thread.CurrentThread);
-                }
-            );
+            t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, parameter =>
+            {
+                Assert.Same(t, parameter);
+                Assert.Same(t, Thread.CurrentThread);
+            });
             t.IsBackground = true;
             StartParameter(t, t);
             waitForThread();
 
             var al = new AsyncLocal<int>();
             al.Value = 42;
-            t = ThreadTestHelpers.CreateGuardedThread(
-                out waitForThread,
-                parameter =>
+            t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, parameter =>
+            {
+                if (useUnsafeStart)
                 {
-                    if (useUnsafeStart)
-                    {
-                        Assert.Equal(0, al.Value);
-                    }
-                    else
-                    {
-                        Assert.Equal(42, al.Value);
-                    }
+                    Assert.Equal(0, al.Value);
                 }
-            );
+                else
+                {
+                    Assert.Equal(42, al.Value);
+                }
+            });
             t.IsBackground = true;
             StartParameter(t, t);
             waitForThread();

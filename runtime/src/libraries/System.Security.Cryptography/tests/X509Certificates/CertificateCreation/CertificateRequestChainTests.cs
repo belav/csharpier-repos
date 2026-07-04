@@ -199,13 +199,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                 if (!expectSuccess)
                 {
-                    AssertExtensions.Throws<ArgumentException>(
-                        "issuerCertificate",
-                        () =>
-                        {
-                            request.Create(signerCert, start, end, leafSerialNumber)?.Dispose();
-                        }
-                    );
+                    AssertExtensions.Throws<ArgumentException>("issuerCertificate", () =>
+                    {
+                        request.Create(signerCert, start, end, leafSerialNumber)?.Dispose();
+                    });
 
                     return;
                 }

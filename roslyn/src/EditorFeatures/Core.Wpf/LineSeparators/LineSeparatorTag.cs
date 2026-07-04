@@ -53,9 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
             // This makes the line separator line up with the outlining bracket.
             Canvas.SetTop(border, bounds.Bounds.Bottom - border.Height);
 
-            return new GraphicsResult(
-                border,
-                () => view.ViewportWidthChanged -= ViewportWidthChangedHandler
+            return new GraphicsResult(border, () =>
+                view.ViewportWidthChanged -= ViewportWidthChangedHandler
             );
 
             void ViewportWidthChangedHandler(object s, EventArgs e)

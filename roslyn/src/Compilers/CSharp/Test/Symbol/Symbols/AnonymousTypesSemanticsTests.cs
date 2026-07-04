@@ -1251,9 +1251,8 @@ public class ClassA
             CheckAnonymousType(info0.Type, "", "");
 
             //  perform emit
-            CompileAndVerify(
-                data.Compilation,
-                symbolValidator: module => CheckAnonymousTypes(module)
+            CompileAndVerify(data.Compilation, symbolValidator: module =>
+                CheckAnonymousTypes(module)
             );
         }
 

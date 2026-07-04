@@ -245,13 +245,10 @@ namespace System.Diagnostics.Tests
             });
 
             //Exception not thrown with null key
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    environment.CopyTo(kvpa, 9);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                environment.CopyTo(kvpa, 9);
+            });
 
             //Exception not thrown with null key
             Assert.Throws<ArgumentNullException>(() =>
@@ -395,13 +392,11 @@ namespace System.Diagnostics.Tests
 
             foreach (var providedEnvVar in caseSensitiveEnvVars)
             {
-                Assert.Single(
-                    printedEnvVars,
-                    envVar =>
-                        envVar.Equals(
-                            $"{providedEnvVar.Key}={providedEnvVar.Value}",
-                            StringComparison.Ordinal
-                        )
+                Assert.Single(printedEnvVars, envVar =>
+                    envVar.Equals(
+                        $"{providedEnvVar.Key}={providedEnvVar.Value}",
+                        StringComparison.Ordinal
+                    )
                 );
             }
         }
@@ -439,13 +434,11 @@ namespace System.Diagnostics.Tests
                 : StringComparison.Ordinal;
             foreach (var providedEnvVar in caseSensitiveEnvVars)
             {
-                Assert.Single(
-                    printedEnvVars,
-                    envVar =>
-                        envVar.Equals(
-                            $"{providedEnvVar.Key}={providedEnvVar.Value}",
-                            osSpecificComparison
-                        )
+                Assert.Single(printedEnvVars, envVar =>
+                    envVar.Equals(
+                        $"{providedEnvVar.Key}={providedEnvVar.Value}",
+                        osSpecificComparison
+                    )
                 );
             }
         }
@@ -485,13 +478,11 @@ namespace System.Diagnostics.Tests
                 : StringComparison.Ordinal;
             foreach (var providedEnvVar in caseSensitiveEnvVars)
             {
-                Assert.Single(
-                    printedEnvVars,
-                    envVar =>
-                        envVar.Equals(
-                            $"{providedEnvVar.Key}={providedEnvVar.Value}",
-                            osSpecificComparison
-                        )
+                Assert.Single(printedEnvVars, envVar =>
+                    envVar.Equals(
+                        $"{providedEnvVar.Key}={providedEnvVar.Value}",
+                        osSpecificComparison
+                    )
                 );
             }
         }
@@ -765,9 +756,8 @@ namespace System.Diagnostics.Tests
             Assert.Equal(2, psi.EnvironmentVariables.Count);
             Assert.Equal(psi.Environment.Count, psi.EnvironmentVariables.Count);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => psi.EnvironmentVariables.Add("NewKey2", "NewValue2")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                psi.EnvironmentVariables.Add("NewKey2", "NewValue2")
             );
             psi.EnvironmentVariables.Add("NewKey3", "NewValue3");
 
@@ -1010,13 +1000,10 @@ namespace System.Diagnostics.Tests
             Assert.Equal(CountItems + 1, environmentVariables.Count);
 
             //Exception not thrown with invalid key
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    environmentVariables.Add("NewKey2", "NewValue2");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                environmentVariables.Add("NewKey2", "NewValue2");
+            });
             Assert.False(environmentVariables.ContainsKey("NewKey"));
 
             environmentVariables.Add("newkey2", "newvalue2");
@@ -1078,9 +1065,8 @@ namespace System.Diagnostics.Tests
             //Exception not thrown with invalid key
             Assert.Throws<ArgumentNullException>(() => environmentVariables.Add(null, "NewValue2"));
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => environmentVariables.Add("newkey2", "NewValue2")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                environmentVariables.Add("newkey2", "NewValue2")
             );
 
             //Use DictionaryEntry Enumerator
@@ -1101,13 +1087,10 @@ namespace System.Diagnostics.Tests
             Assert.Equal("newvalue3", kvpa[2].Value);
 
             string[] kvp = new string[10];
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    environmentVariables.CopyTo(kvp, 6);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                environmentVariables.CopyTo(kvp, 6);
+            });
             environmentVariables.CopyTo(kvpa, 6);
             Assert.Equal("NewKey", kvpa[6].Key);
             Assert.Equal("newvalue", kvpa[6].Value);
@@ -1117,13 +1100,10 @@ namespace System.Diagnostics.Tests
                 environmentVariables.CopyTo(kvpa, -1);
             });
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    environmentVariables.CopyTo(kvpa, 9);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                environmentVariables.CopyTo(kvpa, 9);
+            });
 
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -1621,13 +1601,11 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void InitializeWithArgumentList_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "fileName",
-                () => new ProcessStartInfo(null, new[] { "a", "b" })
+            Assert.Throws<ArgumentNullException>("fileName", () =>
+                new ProcessStartInfo(null, new[] { "a", "b" })
             );
-            Assert.Throws<ArgumentNullException>(
-                "arguments",
-                () => new ProcessStartInfo("a", (IEnumerable<string>)null)
+            Assert.Throws<ArgumentNullException>("arguments", () =>
+                new ProcessStartInfo("a", (IEnumerable<string>)null)
             );
         }
 
@@ -1726,19 +1704,16 @@ namespace System.Diagnostics.Tests
                 WindowStyle = ProcessWindowStyle.Minimized,
             };
 
-            Assert.Throws<ArgumentException>(
-                "startInfo",
-                () =>
+            Assert.Throws<ArgumentException>("startInfo", () =>
+            {
+                using (var process = Process.Start(info))
                 {
-                    using (var process = Process.Start(info))
-                    {
-                        Assert.False(
-                            process != null,
-                            $"Process started despite incompatible options {nameof(info.LoadUserProfile)} and {nameof(info.UseCredentialsForNetworkingOnly)} were enabled"
-                        );
-                    }
+                    Assert.False(
+                        process != null,
+                        $"Process started despite incompatible options {nameof(info.LoadUserProfile)} and {nameof(info.UseCredentialsForNetworkingOnly)} were enabled"
+                    );
                 }
-            );
+            });
         }
 
         private static TestProcessState CreateUserAndExecute(

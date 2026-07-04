@@ -109,16 +109,13 @@ namespace System.Net.Http.Functional.Tests
                     TaskCreationOptions.RunContinuationsAsynchronously
                 );
 
-                httpConnection = new ReadInterceptStream(
-                    httpConnection,
-                    read =>
+                httpConnection = new ReadInterceptStream(httpConnection, read =>
+                {
+                    if (read == 0)
                     {
-                        if (read == 0)
-                        {
-                            sawZeroByteRead.TrySetResult();
-                        }
+                        sawZeroByteRead.TrySetResult();
                     }
-                );
+                });
 
                 using var handler = TestHelper.CreateSocketsHttpHandler(allowAllCertificates: true);
                 handler.ConnectCallback = delegate
@@ -395,16 +392,13 @@ namespace System.Net.Http.Functional.Tests
                     GetUnderlyingSocketsHttpHandler(handler).PlaintextStreamFilter = (context, _) =>
                     {
                         return new ValueTask<Stream>(
-                            new ReadInterceptStream(
-                                context.PlaintextStream,
-                                read =>
+                            new ReadInterceptStream(context.PlaintextStream, read =>
+                            {
+                                if (read == 0)
                                 {
-                                    if (read == 0)
-                                    {
-                                        zeroByteReads++;
-                                    }
+                                    zeroByteReads++;
                                 }
-                            )
+                            })
                         );
                     };
 

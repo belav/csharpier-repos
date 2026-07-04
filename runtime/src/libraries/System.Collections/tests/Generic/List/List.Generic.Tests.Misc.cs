@@ -123,9 +123,8 @@ namespace System.Collections.Tests
                     ); //"ArgumentOutOfRangeException expected."
                 }
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => _ilist.Insert(0, new LinkedListNode<string>("blargh"))
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    _ilist.Insert(0, new LinkedListNode<string>("blargh"))
                 ); //"ArgumentException expected."
             }
 
@@ -364,17 +363,12 @@ namespace System.Collections.Tests
 
                 for (int i = 0; i < bad.Length; i++)
                 {
-                    AssertExtensions.Throws<ArgumentException>(
-                        null,
-                        () =>
-                        {
-                            int index = bad[i];
-                            int count = bad[++i];
-                            return useSlice
-                                ? list.Slice(index, count)
-                                : list.GetRange(index, count);
-                        }
-                    ); //"ArgumentException expected."
+                    AssertExtensions.Throws<ArgumentException>(null, () =>
+                    {
+                        int index = bad[i];
+                        int count = bad[++i];
+                        return useSlice ? list.Slice(index, count) : list.GetRange(index, count);
+                    }); //"ArgumentException expected."
                 }
 
                 bad = new int[]

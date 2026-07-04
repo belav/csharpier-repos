@@ -113,20 +113,17 @@ public class Http3RequestTests : LoggedTest
             await connectionDuration.WaitForMeasurementsAsync(minCount: 1).DefaultTimeout();
 
             // Assert
-            Assert.Collection(
-                connectionDuration.GetMeasurementSnapshot(),
-                m =>
-                {
-                    Assert.True(m.Value > 0);
-                    Assert.Equal("ipv4", (string)m.Tags["network.type"]);
-                    Assert.Equal("http", (string)m.Tags["network.protocol.name"]);
-                    Assert.Equal("3", (string)m.Tags["network.protocol.version"]);
-                    Assert.Equal("udp", (string)m.Tags["network.transport"]);
-                    Assert.Equal("127.0.0.1", (string)m.Tags["server.address"]);
-                    Assert.Equal(host.GetPort(), (int)m.Tags["server.port"]);
-                    Assert.Equal("1.3", (string)m.Tags["tls.protocol.version"]);
-                }
-            );
+            Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
+            {
+                Assert.True(m.Value > 0);
+                Assert.Equal("ipv4", (string)m.Tags["network.type"]);
+                Assert.Equal("http", (string)m.Tags["network.protocol.name"]);
+                Assert.Equal("3", (string)m.Tags["network.protocol.version"]);
+                Assert.Equal("udp", (string)m.Tags["network.transport"]);
+                Assert.Equal("127.0.0.1", (string)m.Tags["server.address"]);
+                Assert.Equal(host.GetPort(), (int)m.Tags["server.port"]);
+                Assert.Equal("1.3", (string)m.Tags["tls.protocol.version"]);
+            });
 
             await host.StopAsync();
         }
@@ -1035,15 +1032,11 @@ public class Http3RequestTests : LoggedTest
                     },
                     configureKestrel: o =>
                     {
-                        o.Listen(
-                            IPAddress.Parse("127.0.0.1"),
-                            port,
-                            listenOptions =>
-                            {
-                                listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-                                listenOptions.UseHttps(TestResources.GetTestCertificate());
-                            }
-                        );
+                        o.Listen(IPAddress.Parse("127.0.0.1"), port, listenOptions =>
+                        {
+                            listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+                            listenOptions.UseHttps(TestResources.GetTestCertificate());
+                        });
                     }
                 );
 
@@ -1677,15 +1670,12 @@ public class Http3RequestTests : LoggedTest
             },
             configureKestrel: kestrel =>
             {
-                kestrel.ListenLocalhost(
-                    5001,
-                    listenOptions =>
-                    {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                        listenOptions.UseConnectionLogging();
-                    }
-                );
+                kestrel.ListenLocalhost(5001, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                    listenOptions.UseConnectionLogging();
+                });
             }
         );
 
@@ -1736,28 +1726,25 @@ public class Http3RequestTests : LoggedTest
             },
             configureKestrel: kestrel =>
             {
-                kestrel.ListenLocalhost(
-                    5001,
-                    listenOptions =>
-                    {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(
-                            new TlsHandshakeCallbackOptions
+                kestrel.ListenLocalhost(5001, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(
+                        new TlsHandshakeCallbackOptions
+                        {
+                            OnConnection = context =>
                             {
-                                OnConnection = context =>
-                                {
-                                    connectionContext = context.Connection;
-                                    return ValueTask.FromResult(
-                                        new SslServerAuthenticationOptions
-                                        {
-                                            ServerCertificate = TestResources.GetTestCertificate(),
-                                        }
-                                    );
-                                },
-                            }
-                        );
-                    }
-                );
+                                connectionContext = context.Connection;
+                                return ValueTask.FromResult(
+                                    new SslServerAuthenticationOptions
+                                    {
+                                        ServerCertificate = TestResources.GetTestCertificate(),
+                                    }
+                                );
+                            },
+                        }
+                    );
+                });
             }
         );
 
@@ -1801,28 +1788,24 @@ public class Http3RequestTests : LoggedTest
             },
             configureKestrel: kestrel =>
             {
-                kestrel.Listen(
-                    IPAddress.Parse("127.0.0.1"),
-                    0,
-                    listenOptions =>
-                    {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                kestrel.Listen(IPAddress.Parse("127.0.0.1"), 0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(TestResources.GetTestCertificate());
 
-                        IMultiplexedConnectionBuilder multiplexedConnectionBuilder = listenOptions;
-                        multiplexedConnectionBuilder.Use(next =>
+                    IMultiplexedConnectionBuilder multiplexedConnectionBuilder = listenOptions;
+                    multiplexedConnectionBuilder.Use(next =>
+                    {
+                        return context =>
                         {
-                            return context =>
-                            {
-                                connectionStartedTcs.SetResult();
-                                context.ConnectionClosed.Register(() =>
-                                    connectionClosedTcs.SetResult()
-                                );
-                                return next(context);
-                            };
-                        });
-                    }
-                );
+                            connectionStartedTcs.SetResult();
+                            context.ConnectionClosed.Register(() =>
+                                connectionClosedTcs.SetResult()
+                            );
+                            return next(context);
+                        };
+                    });
+                });
             }
         );
 
@@ -2011,25 +1994,21 @@ public class Http3RequestTests : LoggedTest
             },
             configureKestrel: kestrel =>
             {
-                kestrel.Listen(
-                    IPAddress.Parse("127.0.0.1"),
-                    0,
-                    listenOptions =>
-                    {
-                        listenOptions.Protocols = HttpProtocols.Http3;
-                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                kestrel.Listen(IPAddress.Parse("127.0.0.1"), 0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http3;
+                    listenOptions.UseHttps(TestResources.GetTestCertificate());
 
-                        IMultiplexedConnectionBuilder multiplexedConnectionBuilder = listenOptions;
-                        multiplexedConnectionBuilder.Use(next =>
+                    IMultiplexedConnectionBuilder multiplexedConnectionBuilder = listenOptions;
+                    multiplexedConnectionBuilder.Use(next =>
+                    {
+                        return context =>
                         {
-                            return context =>
-                            {
-                                connectionStartedTcs.SetResult(context);
-                                return next(context);
-                            };
-                        });
-                    }
-                );
+                            connectionStartedTcs.SetResult(context);
+                            return next(context);
+                        };
+                    });
+                });
             }
         );
 
@@ -2191,15 +2170,11 @@ public class Http3RequestTests : LoggedTest
                 kestrel.Limits.MinRequestBodyDataRate = null;
 
                 // This would normally be done automatically for us if the "configureKestrel" callback we're in was left null.
-                kestrel.Listen(
-                    IPAddress.Loopback,
-                    0,
-                    listenOptions =>
-                    {
-                        listenOptions.Protocols = protocol;
-                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                    }
-                );
+                kestrel.Listen(IPAddress.Loopback, 0, listenOptions =>
+                {
+                    listenOptions.Protocols = protocol;
+                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                });
             }
         );
 
@@ -2283,12 +2258,10 @@ public class Http3RequestTests : LoggedTest
                 );
             }
 
-            Assert.Contains(
-                TestSink.Writes,
-                m =>
-                    m.Message.Contains(
-                        "Some connections failed to close gracefully during server shutdown."
-                    )
+            Assert.Contains(TestSink.Writes, m =>
+                m.Message.Contains(
+                    "Some connections failed to close gracefully during server shutdown."
+                )
             );
         }
     }
@@ -2373,12 +2346,10 @@ public class Http3RequestTests : LoggedTest
 
             await stopTask.DefaultTimeout();
 
-            Assert.DoesNotContain(
-                TestSink.Writes,
-                m =>
-                    m.Message.Contains(
-                        "Some connections failed to close gracefully during server shutdown."
-                    )
+            Assert.DoesNotContain(TestSink.Writes, m =>
+                m.Message.Contains(
+                    "Some connections failed to close gracefully during server shutdown."
+                )
             );
         }
     }

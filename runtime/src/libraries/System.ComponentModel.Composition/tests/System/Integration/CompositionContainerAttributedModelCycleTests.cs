@@ -108,13 +108,10 @@ namespace Tests.Integration
             {
                 var export = GetExport(type, types);
 
-                CompositionAssert.ThrowsError(
-                    ErrorId.ImportEngine_PartCannotGetExportedValue,
-                    () =>
-                    {
-                        var value = export.Value;
-                    }
-                );
+                CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+                {
+                    var value = export.Value;
+                });
             }
         }
 

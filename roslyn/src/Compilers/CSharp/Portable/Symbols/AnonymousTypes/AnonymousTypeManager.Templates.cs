@@ -593,9 +593,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 Debug.Assert(!key.IsDelegate);
                 var templateKey = AnonymousTypeDescriptor.ComputeKey(key.Fields, f => f.Name);
-                this.AnonymousTypeTemplates.GetOrAdd(
-                    templateKey,
-                    k => this.CreatePlaceholderTemplate(key)
+                this.AnonymousTypeTemplates.GetOrAdd(templateKey, k =>
+                    this.CreatePlaceholderTemplate(key)
                 );
             }
 

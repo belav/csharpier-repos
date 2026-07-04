@@ -19,11 +19,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .InsertUsingStoredProcedure(
-                        nameof(Entity) + "_Insert",
-                        spb =>
-                            spb.HasParameter(w => w.Name)
-                                .HasParameter(w => w.Id, pb => pb.IsOutput())
+                    .InsertUsingStoredProcedure(nameof(Entity) + "_Insert", spb =>
+                        spb.HasParameter(w => w.Name).HasParameter(w => w.Id, pb => pb.IsOutput())
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -50,11 +47,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .InsertUsingStoredProcedure(
-                        nameof(Entity) + "_Insert",
-                        spb =>
-                            spb.HasParameter(w => w.Name)
-                                .HasParameter(w => w.Id, pb => pb.IsOutput())
+                    .InsertUsingStoredProcedure(nameof(Entity) + "_Insert", spb =>
+                        spb.HasParameter(w => w.Name).HasParameter(w => w.Id, pb => pb.IsOutput())
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -83,9 +77,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .InsertUsingStoredProcedure(
-                        nameof(Entity) + "_Insert",
-                        spb => spb.HasParameter(w => w.Name).HasResultColumn(w => w.Id)
+                    .InsertUsingStoredProcedure(nameof(Entity) + "_Insert", spb =>
+                        spb.HasParameter(w => w.Name).HasResultColumn(w => w.Id)
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -196,9 +189,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .UpdateUsingStoredProcedure(
-                        nameof(Entity) + "_Update",
-                        spb => spb.HasOriginalValueParameter(w => w.Id).HasParameter(w => w.Name)
+                    .UpdateUsingStoredProcedure(nameof(Entity) + "_Update", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id).HasParameter(w => w.Name)
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -381,9 +373,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .DeleteUsingStoredProcedure(
-                        nameof(Entity) + "_Delete",
-                        spb => spb.HasOriginalValueParameter(w => w.Id)
+                    .DeleteUsingStoredProcedure(nameof(Entity) + "_Delete", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -415,15 +406,11 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .InsertUsingStoredProcedure(
-                        nameof(Entity) + "_Insert",
-                        spb =>
-                            spb.HasParameter(w => w.Name)
-                                .HasParameter(w => w.Id, pb => pb.IsOutput())
+                    .InsertUsingStoredProcedure(nameof(Entity) + "_Insert", spb =>
+                        spb.HasParameter(w => w.Name).HasParameter(w => w.Id, pb => pb.IsOutput())
                     )
-                    .DeleteUsingStoredProcedure(
-                        nameof(Entity) + "_Delete",
-                        spb => spb.HasOriginalValueParameter(w => w.Id)
+                    .DeleteUsingStoredProcedure(nameof(Entity) + "_Delete", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -457,12 +444,10 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .UpdateUsingStoredProcedure(
-                        nameof(Entity) + "_Update",
-                        spb =>
-                            spb.HasOriginalValueParameter(w => w.Id)
-                                .HasParameter(w => w.Name)
-                                .HasRowsAffectedParameter()
+                    .UpdateUsingStoredProcedure(nameof(Entity) + "_Update", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
+                            .HasParameter(w => w.Name)
+                            .HasRowsAffectedParameter()
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -501,12 +486,10 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .UpdateUsingStoredProcedure(
-                        nameof(Entity) + "_Update",
-                        spb =>
-                            spb.HasOriginalValueParameter(w => w.Id)
-                                .HasParameter(w => w.Name)
-                                .HasRowsAffectedParameter()
+                    .UpdateUsingStoredProcedure(nameof(Entity) + "_Update", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
+                            .HasParameter(w => w.Name)
+                            .HasRowsAffectedParameter()
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -545,12 +528,10 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .UpdateUsingStoredProcedure(
-                        nameof(Entity) + "_Update",
-                        spb =>
-                            spb.HasOriginalValueParameter(w => w.Id)
-                                .HasParameter(w => w.Name)
-                                .HasRowsAffectedResultColumn()
+                    .UpdateUsingStoredProcedure(nameof(Entity) + "_Update", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
+                            .HasParameter(w => w.Name)
+                            .HasRowsAffectedResultColumn()
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -589,12 +570,10 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .UpdateUsingStoredProcedure(
-                        nameof(Entity) + "_Update",
-                        spb =>
-                            spb.HasOriginalValueParameter(w => w.Id)
-                                .HasParameter(w => w.Name)
-                                .HasRowsAffectedResultColumn()
+                    .UpdateUsingStoredProcedure(nameof(Entity) + "_Update", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
+                            .HasParameter(w => w.Name)
+                            .HasRowsAffectedResultColumn()
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -633,12 +612,10 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .UpdateUsingStoredProcedure(
-                        nameof(Entity) + "_Update",
-                        spb =>
-                            spb.HasOriginalValueParameter(w => w.Id)
-                                .HasParameter(w => w.Name)
-                                .HasRowsAffectedReturnValue()
+                    .UpdateUsingStoredProcedure(nameof(Entity) + "_Update", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
+                            .HasParameter(w => w.Name)
+                            .HasRowsAffectedReturnValue()
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -677,12 +654,10 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .UpdateUsingStoredProcedure(
-                        nameof(Entity) + "_Update",
-                        spb =>
-                            spb.HasOriginalValueParameter(w => w.Id)
-                                .HasParameter(w => w.Name)
-                                .HasRowsAffectedReturnValue()
+                    .UpdateUsingStoredProcedure(nameof(Entity) + "_Update", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
+                            .HasParameter(w => w.Name)
+                            .HasRowsAffectedReturnValue()
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -726,16 +701,11 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
                 {
                     ConfigureStoreGeneratedConcurrencyToken(b, "ConcurrencyToken");
 
-                    b.UpdateUsingStoredProcedure(
-                        nameof(Entity) + "_Update",
-                        spb =>
-                            spb.HasOriginalValueParameter(w => w.Id)
-                                .HasOriginalValueParameter(
-                                    "ConcurrencyToken",
-                                    pb => pb.IsInputOutput()
-                                )
-                                .HasParameter(w => w.Name)
-                                .HasRowsAffectedParameter()
+                    b.UpdateUsingStoredProcedure(nameof(Entity) + "_Update", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
+                            .HasOriginalValueParameter("ConcurrencyToken", pb => pb.IsInputOutput())
+                            .HasParameter(w => w.Name)
+                            .HasRowsAffectedParameter()
                     );
                 }),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
@@ -780,20 +750,16 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
                 {
                     ConfigureStoreGeneratedConcurrencyToken(b, "ConcurrencyToken");
 
-                    b.UpdateUsingStoredProcedure(
-                        nameof(Entity) + "_Update",
-                        spb =>
-                            spb.HasOriginalValueParameter(w => w.Id)
-                                .HasOriginalValueParameter(
-                                    "ConcurrencyToken",
-                                    pb => pb.HasName("ConcurrencyTokenIn")
-                                )
-                                .HasParameter(w => w.Name)
-                                .HasParameter(
-                                    "ConcurrencyToken",
-                                    pb => pb.HasName("ConcurrencyTokenOut").IsOutput()
-                                )
-                                .HasRowsAffectedParameter()
+                    b.UpdateUsingStoredProcedure(nameof(Entity) + "_Update", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
+                            .HasOriginalValueParameter("ConcurrencyToken", pb =>
+                                pb.HasName("ConcurrencyTokenIn")
+                            )
+                            .HasParameter(w => w.Name)
+                            .HasParameter("ConcurrencyToken", pb =>
+                                pb.HasName("ConcurrencyTokenOut").IsOutput()
+                            )
+                            .HasRowsAffectedParameter()
                     );
                 }),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
@@ -899,15 +865,13 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
             modelBuilder =>
                 modelBuilder
                     .Entity<Entity>()
-                    .UpdateUsingStoredProcedure(
-                        nameof(Entity) + "_Update",
-                        spb =>
-                            spb.HasOriginalValueParameter(w => w.Id)
-                                .HasParameter(w => w.Name, pb => pb.HasName("NameCurrent"))
-                                .HasOriginalValueParameter(
-                                    w => w.Name,
-                                    pb => pb.HasName("NameOriginal")
-                                )
+                    .UpdateUsingStoredProcedure(nameof(Entity) + "_Update", spb =>
+                        spb.HasOriginalValueParameter(w => w.Id)
+                            .HasParameter(w => w.Name, pb => pb.HasName("NameCurrent"))
+                            .HasOriginalValueParameter(
+                                w => w.Name,
+                                pb => pb.HasName("NameOriginal")
+                            )
                     ),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
         );
@@ -946,11 +910,9 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
                 {
                     b.Property(w => w.Name).IsRequired().ValueGeneratedOnAdd();
 
-                    b.InsertUsingStoredProcedure(
-                        nameof(Entity) + "_Insert",
-                        spb =>
-                            spb.HasParameter(w => w.Id, pb => pb.IsOutput())
-                                .HasParameter(w => w.Name, pb => pb.IsInputOutput())
+                    b.InsertUsingStoredProcedure(nameof(Entity) + "_Insert", spb =>
+                        spb.HasParameter(w => w.Id, pb => pb.IsOutput())
+                            .HasParameter(w => w.Name, pb => pb.IsInputOutput())
                     );
                 }),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
@@ -987,11 +949,9 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
                 {
                     b.Property(w => w.Name).IsRequired().ValueGeneratedOnAdd();
 
-                    b.InsertUsingStoredProcedure(
-                        nameof(Entity) + "_Insert",
-                        spb =>
-                            spb.HasParameter(w => w.Id, pb => pb.IsOutput())
-                                .HasParameter(w => w.Name, pb => pb.IsInputOutput())
+                    b.InsertUsingStoredProcedure(nameof(Entity) + "_Insert", spb =>
+                        spb.HasParameter(w => w.Id, pb => pb.IsOutput())
+                            .HasParameter(w => w.Name, pb => pb.IsInputOutput())
                     );
                 }),
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
@@ -1037,19 +997,16 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
                 {
                     b.ToTable("Tph");
 
-                    b.InsertUsingStoredProcedure(
-                        "Tph_Insert",
-                        spb =>
-                            spb.HasParameter(w => w.Id, pb => pb.IsOutput())
-                                .HasParameter("Discriminator")
-                                .HasParameter(w => w.Name)
-                                .HasParameter(nameof(Child2.Child2InputProperty))
-                                .HasParameter(
-                                    nameof(Child2.Child2OutputParameterProperty),
-                                    o => o.IsOutput()
-                                )
-                                .HasParameter(nameof(Child1.Child1Property))
-                                .HasResultColumn(nameof(Child2.Child2ResultColumnProperty))
+                    b.InsertUsingStoredProcedure("Tph_Insert", spb =>
+                        spb.HasParameter(w => w.Id, pb => pb.IsOutput())
+                            .HasParameter("Discriminator")
+                            .HasParameter(w => w.Name)
+                            .HasParameter(nameof(Child2.Child2InputProperty))
+                            .HasParameter(nameof(Child2.Child2OutputParameterProperty), o =>
+                                o.IsOutput()
+                            )
+                            .HasParameter(nameof(Child1.Child1Property))
+                            .HasResultColumn(nameof(Child2.Child2ResultColumnProperty))
                     );
                 });
             },
@@ -1086,19 +1043,15 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
                 {
                     b.UseTptMappingStrategy();
 
-                    b.InsertUsingStoredProcedure(
-                        "Parent_Insert",
-                        spb =>
-                            spb.HasParameter(w => w.Id, pb => pb.IsOutput())
-                                .HasParameter(w => w.Name)
+                    b.InsertUsingStoredProcedure("Parent_Insert", spb =>
+                        spb.HasParameter(w => w.Id, pb => pb.IsOutput()).HasParameter(w => w.Name)
                     );
                 });
 
                 modelBuilder
                     .Entity<Child1>()
-                    .InsertUsingStoredProcedure(
-                        nameof(Child1) + "_Insert",
-                        spb => spb.HasParameter(w => w.Id).HasParameter(w => w.Child1Property)
+                    .InsertUsingStoredProcedure(nameof(Child1) + "_Insert", spb =>
+                        spb.HasParameter(w => w.Id).HasParameter(w => w.Child1Property)
                     );
             },
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)
@@ -1134,11 +1087,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
                 {
                     b.UseTptMappingStrategy();
 
-                    b.InsertUsingStoredProcedure(
-                        nameof(Parent) + "_Insert",
-                        spb =>
-                            spb.HasParameter(w => w.Id, pb => pb.IsOutput())
-                                .HasParameter(w => w.Name)
+                    b.InsertUsingStoredProcedure(nameof(Parent) + "_Insert", spb =>
+                        spb.HasParameter(w => w.Id, pb => pb.IsOutput()).HasParameter(w => w.Name)
                     );
                 });
 
@@ -1179,12 +1129,10 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
                 modelBuilder
                     .Entity<Child1>()
                     .UseTpcMappingStrategy()
-                    .InsertUsingStoredProcedure(
-                        nameof(Child1) + "_Insert",
-                        spb =>
-                            spb.HasParameter(w => w.Id, pb => pb.IsOutput())
-                                .HasParameter(w => w.Name)
-                                .HasParameter(w => w.Child1Property)
+                    .InsertUsingStoredProcedure(nameof(Child1) + "_Insert", spb =>
+                        spb.HasParameter(w => w.Id, pb => pb.IsOutput())
+                            .HasParameter(w => w.Name)
+                            .HasParameter(w => w.Child1Property)
                     );
             },
             seed: ctx => CreateStoredProcedures(ctx, createSprocSql)

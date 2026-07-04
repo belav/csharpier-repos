@@ -98,11 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
 
             var actualSpans = GetBreakpointSequence(declarationNode, position).ToArray();
 
-            AssertEx.Equal(
-                expectedSpans,
-                actualSpans,
-                itemSeparator: "\r\n",
-                itemInspector: span => "[|" + source.Substring(span.Start, span.Length) + "|]"
+            AssertEx.Equal(expectedSpans, actualSpans, itemSeparator: "\r\n", itemInspector: span =>
+                "[|" + source.Substring(span.Start, span.Length) + "|]"
             );
 
             var expectedEnvelope = expectedSpans.IsEmpty

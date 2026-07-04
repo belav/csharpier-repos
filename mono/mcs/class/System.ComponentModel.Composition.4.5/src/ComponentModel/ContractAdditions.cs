@@ -58,9 +58,8 @@ namespace System.Diagnostics.Contracts
             {
                 Contract.Ensures(Contract.Result<IEnumerable<ExportDefinition>>() != null);
                 Contract.Ensures(
-                    Contract.ForAll(
-                        Contract.Result<IEnumerable<ExportDefinition>>(),
-                        e => e != null
+                    Contract.ForAll(Contract.Result<IEnumerable<ExportDefinition>>(), e =>
+                        e != null
                     )
                 );
 
@@ -74,9 +73,8 @@ namespace System.Diagnostics.Contracts
             {
                 Contract.Ensures(Contract.Result<IEnumerable<ImportDefinition>>() != null);
                 Contract.Ensures(
-                    Contract.ForAll(
-                        Contract.Result<IEnumerable<ImportDefinition>>(),
-                        i => i != null
+                    Contract.ForAll(Contract.Result<IEnumerable<ImportDefinition>>(), i =>
+                        i != null
                     )
                 );
 

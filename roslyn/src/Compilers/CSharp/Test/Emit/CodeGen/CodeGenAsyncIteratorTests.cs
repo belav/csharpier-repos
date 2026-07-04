@@ -965,22 +965,19 @@ public class C
 }";
             var comp = CreateCompilationWithAsyncIterator(source, options: TestOptions.DebugDll);
             comp.VerifyDiagnostics();
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
-                    AssertEx.SetEqual(
-                        new[] { "AsyncIteratorStateMachineAttribute" },
-                        GetAttributeNames(method.GetAttributes())
-                    );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
+                AssertEx.SetEqual(
+                    new[] { "AsyncIteratorStateMachineAttribute" },
+                    GetAttributeNames(method.GetAttributes())
+                );
 
-                    var attribute = method.GetAttributes().Single();
-                    var argument = attribute.ConstructorArguments.Single();
-                    Assert.Equal("System.Type", argument.Type.ToTestDisplayString());
-                    Assert.Equal("C.<M>d__0", ((ITypeSymbol)argument.Value).ToTestDisplayString());
-                }
-            );
+                var attribute = method.GetAttributes().Single();
+                var argument = attribute.ConstructorArguments.Single();
+                Assert.Equal("System.Type", argument.Type.ToTestDisplayString());
+                Assert.Equal("C.<M>d__0", ((ITypeSymbol)argument.Value).ToTestDisplayString());
+            });
         }
 
         [Fact]
@@ -1001,14 +998,11 @@ public class C
                 WellKnownType.System_Runtime_CompilerServices_AsyncIteratorStateMachineAttribute
             );
             comp.VerifyDiagnostics();
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
-                    Assert.Empty(GetAttributeNames(method.GetAttributes()));
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
+                Assert.Empty(GetAttributeNames(method.GetAttributes()));
+            });
         }
 
         [Fact]

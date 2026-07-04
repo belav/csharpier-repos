@@ -1882,21 +1882,17 @@ public class HttpClientHttp2InteropTests : LoggedTest
         {
             webHostBuilder.UseKestrel(options =>
             {
-                options.Listen(
-                    IPAddress.Loopback,
-                    0,
-                    listenOptions =>
+                options.Listen(IPAddress.Loopback, 0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http2;
+                    listenOptions.UseHttps(httpsOptions =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http2;
-                        listenOptions.UseHttps(httpsOptions =>
-                        {
-                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                            httpsOptions.ClientCertificateMode =
-                                ClientCertificateMode.RequireCertificate;
-                            httpsOptions.AllowAnyClientCertificate();
-                        });
-                    }
-                );
+                        httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                        httpsOptions.ClientCertificateMode =
+                            ClientCertificateMode.RequireCertificate;
+                        httpsOptions.AllowAnyClientCertificate();
+                    });
+                });
             });
             webHostBuilder
                 .ConfigureServices(AddTestLogging)
@@ -1938,21 +1934,16 @@ public class HttpClientHttp2InteropTests : LoggedTest
         {
             webHostBuilder.UseKestrel(options =>
             {
-                options.Listen(
-                    IPAddress.Loopback,
-                    0,
-                    listenOptions =>
+                options.Listen(IPAddress.Loopback, 0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http2;
+                    listenOptions.UseHttps(httpsOptions =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http2;
-                        listenOptions.UseHttps(httpsOptions =>
-                        {
-                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                            httpsOptions.ClientCertificateMode =
-                                ClientCertificateMode.DelayCertificate;
-                            httpsOptions.AllowAnyClientCertificate();
-                        });
-                    }
-                );
+                        httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                        httpsOptions.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
+                        httpsOptions.AllowAnyClientCertificate();
+                    });
+                });
             });
             webHostBuilder
                 .ConfigureServices(AddTestLogging)
@@ -2011,18 +2002,14 @@ public class HttpClientHttp2InteropTests : LoggedTest
     {
         webHostBuilder.UseKestrel(options =>
         {
-            options.Listen(
-                IPAddress.Loopback,
-                0,
-                listenOptions =>
+            options.Listen(IPAddress.Loopback, 0, listenOptions =>
+            {
+                listenOptions.Protocols = HttpProtocols.Http2;
+                if (scheme == "https")
                 {
-                    listenOptions.Protocols = HttpProtocols.Http2;
-                    if (scheme == "https")
-                    {
-                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                    }
+                    listenOptions.UseHttps(TestResources.GetTestCertificate());
                 }
-            );
+            });
         });
     }
 

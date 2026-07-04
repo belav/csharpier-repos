@@ -126,9 +126,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             {
                 MatchTimeoutInMilliseconds = timeout,
             };
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "matchTimeout",
-                () => attribute.Validate("a", new ValidationContext(new object()))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () =>
+                attribute.Validate("a", new ValidationContext(new object()))
             );
         }
 

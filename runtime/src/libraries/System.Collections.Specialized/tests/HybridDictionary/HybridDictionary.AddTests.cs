@@ -87,22 +87,19 @@ namespace System.Collections.Specialized.Tests
                 count,
                 caseInsensitive
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => hybridDictionary.Add(null, "value")
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                hybridDictionary.Add(null, "value")
             );
 
             hybridDictionary.Add("key", "value");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => hybridDictionary.Add("key", "value")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                hybridDictionary.Add("key", "value")
             );
 
             if (caseInsensitive)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => hybridDictionary.Add("KEY", "value")
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    hybridDictionary.Add("KEY", "value")
                 );
             }
             else

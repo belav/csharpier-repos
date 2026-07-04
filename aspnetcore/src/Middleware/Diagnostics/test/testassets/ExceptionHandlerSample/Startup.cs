@@ -41,16 +41,13 @@ public class Startup
         // app.UseExceptionHandler("/error.html");
 
         // The broken section of our application.
-        app.Map(
-            "/throw",
-            throwApp =>
+        app.Map("/throw", throwApp =>
+        {
+            throwApp.Run(context =>
             {
-                throwApp.Run(context =>
-                {
-                    throw new Exception("Application Exception");
-                });
-            }
-        );
+                throw new Exception("Application Exception");
+            });
+        });
 
         app.UseStaticFiles();
 

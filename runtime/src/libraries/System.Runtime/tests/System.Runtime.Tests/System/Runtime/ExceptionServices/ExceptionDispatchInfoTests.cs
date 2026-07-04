@@ -13,9 +13,8 @@ namespace System.Runtime.ExceptionServices.Tests
         [Fact]
         public static void StaticThrow_NullArgument_ThrowArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ExceptionDispatchInfo.Throw(null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ExceptionDispatchInfo.Throw(null)
             );
         }
 
@@ -41,17 +40,14 @@ namespace System.Runtime.ExceptionServices.Tests
 
             // Null argument
             e = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ExceptionDispatchInfo.SetCurrentStackTrace(e)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ExceptionDispatchInfo.SetCurrentStackTrace(e)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello")
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "stackTrace",
-                () => ExceptionDispatchInfo.SetRemoteStackTrace(new Exception(), stackTrace: null)
+            AssertExtensions.Throws<ArgumentNullException>("stackTrace", () =>
+                ExceptionDispatchInfo.SetRemoteStackTrace(new Exception(), stackTrace: null)
             );
 
             // Previously set current stack

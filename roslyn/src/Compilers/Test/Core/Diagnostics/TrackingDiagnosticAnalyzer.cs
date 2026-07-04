@@ -305,23 +305,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             if (!allowUnexpectedCalls)
             {
-                AssertSequenceEqual(
-                    expectedArguments,
-                    actualOnCodeBlockStartedArguments,
-                    items =>
-                        items
-                            .OrderBy(p => p.SymbolKind)
-                            .ThenBy(p => p.MethodKind)
-                            .ThenBy(p => p.ReturnsVoid)
+                AssertSequenceEqual(expectedArguments, actualOnCodeBlockStartedArguments, items =>
+                    items
+                        .OrderBy(p => p.SymbolKind)
+                        .ThenBy(p => p.MethodKind)
+                        .ThenBy(p => p.ReturnsVoid)
                 );
-                AssertSequenceEqual(
-                    expectedArguments,
-                    actualOnCodeBlockEndedArguments,
-                    items =>
-                        items
-                            .OrderBy(p => p.SymbolKind)
-                            .ThenBy(p => p.MethodKind)
-                            .ThenBy(p => p.ReturnsVoid)
+                AssertSequenceEqual(expectedArguments, actualOnCodeBlockEndedArguments, items =>
+                    items
+                        .OrderBy(p => p.SymbolKind)
+                        .ThenBy(p => p.MethodKind)
+                        .ThenBy(p => p.ReturnsVoid)
                 );
             }
             else

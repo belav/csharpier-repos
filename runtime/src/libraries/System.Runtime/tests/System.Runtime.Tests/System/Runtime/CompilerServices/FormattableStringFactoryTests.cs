@@ -11,13 +11,11 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void Create_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => FormattableStringFactory.Create(null)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                FormattableStringFactory.Create(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "arguments",
-                () => FormattableStringFactory.Create("{0}", null)
+            AssertExtensions.Throws<ArgumentNullException>("arguments", () =>
+                FormattableStringFactory.Create("{0}", null)
             );
         }
 

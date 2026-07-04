@@ -663,9 +663,8 @@ namespace Microsoft.CodeAnalysis
                 ImmutableArray<TableEntry> finalStates;
                 if (
                     _states.Count == _previous.Count
-                    && _states.SequenceEqual(
-                        _previous._states,
-                        (e1, e2) => e1.Matches(e2, _equalityComparer)
+                    && _states.SequenceEqual(_previous._states, (e1, e2) =>
+                        e1.Matches(e2, _equalityComparer)
                     )
                 )
                 {

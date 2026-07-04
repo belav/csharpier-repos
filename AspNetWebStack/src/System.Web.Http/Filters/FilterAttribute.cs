@@ -30,12 +30,10 @@ namespace System.Web.Http.Filters
 
         private static bool AllowsMultiple(Type attributeType)
         {
-            return _attributeUsageCache.GetOrAdd(
-                attributeType,
-                type =>
-                    type.GetCustomAttributes<AttributeUsageAttribute>(inherit: true)
-                        .First()
-                        .AllowMultiple
+            return _attributeUsageCache.GetOrAdd(attributeType, type =>
+                type.GetCustomAttributes<AttributeUsageAttribute>(inherit: true)
+                    .First()
+                    .AllowMultiple
             );
         }
     }

@@ -1307,9 +1307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
                     }
                 }
                 """;
-            await TestMissingAsync<ArgumentSyntax>(
-                testText,
-                n => n.Parent is TupleExpressionSyntax
+            await TestMissingAsync<ArgumentSyntax>(testText, n =>
+                n.Parent is TupleExpressionSyntax
             );
         }
 
@@ -1801,9 +1800,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RefactoringHelpers
                     }
                 }
                 """;
-            await TestAsync<ArgumentSyntax>(
-                testText,
-                predicate: n => n.Parent is TupleExpressionSyntax
+            await TestAsync<ArgumentSyntax>(testText, predicate: n =>
+                n.Parent is TupleExpressionSyntax
             );
         }
         #endregion

@@ -65,10 +65,8 @@ namespace Mono.Linker.Tests.TestCases
                 var actual = jsonSerializer.ReadObject(fsActual) as List<PInvokeInfo>;
                 var expected = jsonSerializer.ReadObject(fsExpected) as List<PInvokeInfo>;
                 foreach (
-                    var pinvokePair in Enumerable.Zip(
-                        actual,
-                        expected,
-                        (fst, snd) => Tuple.Create(fst, snd)
+                    var pinvokePair in Enumerable.Zip(actual, expected, (fst, snd) =>
+                        Tuple.Create(fst, snd)
                     )
                 )
                 {

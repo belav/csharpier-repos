@@ -26,9 +26,8 @@ public class StringConcatWithSelfExpressionMutator : ExpressionMutator
             new[] { typeof(string), typeof(string) }
         );
 
-        var injector = new ExpressionInjector(
-            _expressionFinder.FoundExpressions[i],
-            e => Expression.Add(e, e, stringConcatMethodInfo)
+        var injector = new ExpressionInjector(_expressionFinder.FoundExpressions[i], e =>
+            Expression.Add(e, e, stringConcatMethodInfo)
         );
 
         return injector.Visit(expression);

@@ -50,13 +50,10 @@ public class Column : ColumnBase<ColumnMapping>, IColumn
     public virtual ColumnAccessors Accessors
     {
         get =>
-            NonCapturingLazyInitializer.EnsureInitialized(
-                ref _accessors,
-                this,
-                static column =>
-                    RuntimeFeature.IsDynamicCodeSupported
-                        ? ColumnAccessorsFactory.Create(column)
-                        : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
+            NonCapturingLazyInitializer.EnsureInitialized(ref _accessors, this, static column =>
+                RuntimeFeature.IsDynamicCodeSupported
+                    ? ColumnAccessorsFactory.Create(column)
+                    : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
             );
         set => _accessors = value;
     }

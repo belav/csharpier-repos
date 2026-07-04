@@ -34,17 +34,14 @@ namespace System.Reflection.PortableExecutable.Tests
         public void AddCodeViewEntry_Args()
         {
             var builder = new DebugDirectoryBuilder();
-            AssertExtensions.Throws<ArgumentException>(
-                "pdbPath",
-                () => builder.AddCodeViewEntry("", default(BlobContentId), 0x0100)
+            AssertExtensions.Throws<ArgumentException>("pdbPath", () =>
+                builder.AddCodeViewEntry("", default(BlobContentId), 0x0100)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "pdbPath",
-                () => builder.AddCodeViewEntry("\0", default(BlobContentId), 0x0100)
+            AssertExtensions.Throws<ArgumentException>("pdbPath", () =>
+                builder.AddCodeViewEntry("\0", default(BlobContentId), 0x0100)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "pdbPath",
-                () => builder.AddCodeViewEntry("\0xx", default(BlobContentId), 0x0100)
+            AssertExtensions.Throws<ArgumentException>("pdbPath", () =>
+                builder.AddCodeViewEntry("\0xx", default(BlobContentId), 0x0100)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 builder.AddCodeViewEntry("xx", default(BlobContentId), 0x0100, int.MinValue)
@@ -75,21 +72,17 @@ namespace System.Reflection.PortableExecutable.Tests
         public void AddPdbChecksumEntry_Args()
         {
             var builder = new DebugDirectoryBuilder();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "algorithmName",
-                () => builder.AddPdbChecksumEntry(null, ImmutableArray.Create((byte)1))
+            AssertExtensions.Throws<ArgumentNullException>("algorithmName", () =>
+                builder.AddPdbChecksumEntry(null, ImmutableArray.Create((byte)1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "algorithmName",
-                () => builder.AddPdbChecksumEntry("", ImmutableArray.Create((byte)1))
+            AssertExtensions.Throws<ArgumentException>("algorithmName", () =>
+                builder.AddPdbChecksumEntry("", ImmutableArray.Create((byte)1))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "checksum",
-                () => builder.AddPdbChecksumEntry("XXX", default)
+            AssertExtensions.Throws<ArgumentNullException>("checksum", () =>
+                builder.AddPdbChecksumEntry("XXX", default)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "checksum",
-                () => builder.AddPdbChecksumEntry("XXX", ImmutableArray<byte>.Empty)
+            AssertExtensions.Throws<ArgumentException>("checksum", () =>
+                builder.AddPdbChecksumEntry("XXX", ImmutableArray<byte>.Empty)
             );
         }
 

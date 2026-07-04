@@ -472,9 +472,8 @@ public class Http3TimeoutTests : Http3TestBase
             expectedErrorMessage: CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
         );
 
-        Assert.Contains(
-            TestSink.Writes,
-            w => w.EventId.Name == "ResponseMinimumDataRateNotSatisfied"
+        Assert.Contains(TestSink.Writes, w =>
+            w.EventId.Name == "ResponseMinimumDataRateNotSatisfied"
         );
     }
 

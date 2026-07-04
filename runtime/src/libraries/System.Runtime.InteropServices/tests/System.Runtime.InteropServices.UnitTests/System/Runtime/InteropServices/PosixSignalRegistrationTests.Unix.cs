@@ -53,18 +53,15 @@ namespace System.Tests
                         PosixSignal signal = Enum.Parse<PosixSignal>(signalStr);
 
                         using SemaphoreSlim semaphore = new(0);
-                        using var _ = PosixSignalRegistration.Create(
-                            signal,
-                            ctx =>
-                            {
-                                Assert.Equal(signal, ctx.Signal);
+                        using var _ = PosixSignalRegistration.Create(signal, ctx =>
+                        {
+                            Assert.Equal(signal, ctx.Signal);
 
-                                // Ensure signal doesn't cause the process to terminate.
-                                ctx.Cancel = true;
+                            // Ensure signal doesn't cause the process to terminate.
+                            ctx.Cancel = true;
 
-                                semaphore.Release();
-                            }
-                        );
+                            semaphore.Release();
+                        });
 
                         // Use 'kill' command with signal name to validate the signal pal mapping.
                         string sigArg = signalStr.StartsWith("SIG")
@@ -104,18 +101,15 @@ namespace System.Tests
                         PosixSignal signal = Enum.Parse<PosixSignal>(signalStr);
 
                         using SemaphoreSlim semaphore = new(0);
-                        using var _ = PosixSignalRegistration.Create(
-                            signal,
-                            ctx =>
-                            {
-                                Assert.Equal(signal, ctx.Signal);
+                        using var _ = PosixSignalRegistration.Create(signal, ctx =>
+                        {
+                            Assert.Equal(signal, ctx.Signal);
 
-                                // Ensure signal doesn't cause the process to terminate.
-                                ctx.Cancel = true;
+                            // Ensure signal doesn't cause the process to terminate.
+                            ctx.Cancel = true;
 
-                                semaphore.Release();
-                            }
-                        );
+                            semaphore.Release();
+                        });
 
                         kill(signal);
                         bool entered = semaphore.Wait(SuccessTimeout);
@@ -134,18 +128,15 @@ namespace System.Tests
             for (int i = 0; i < 2; i++)
             {
                 using SemaphoreSlim semaphore = new(0);
-                using var _ = PosixSignalRegistration.Create(
-                    signal,
-                    ctx =>
-                    {
-                        Assert.Equal(signal, ctx.Signal);
+                using var _ = PosixSignalRegistration.Create(signal, ctx =>
+                {
+                    Assert.Equal(signal, ctx.Signal);
 
-                        // Ensure signal doesn't cause the process to terminate.
-                        ctx.Cancel = true;
+                    // Ensure signal doesn't cause the process to terminate.
+                    ctx.Cancel = true;
 
-                        semaphore.Release();
-                    }
-                );
+                    semaphore.Release();
+                });
 
                 kill(signal);
                 bool entered = semaphore.Wait(SuccessTimeout);
@@ -159,13 +150,10 @@ namespace System.Tests
             PosixSignal signal = PosixSignal.SIGCONT;
 
             PosixSignalRegistration
-                .Create(
-                    signal,
-                    ctx =>
-                    {
-                        Assert.Fail("Signal handler was called.");
-                    }
-                )
+                .Create(signal, ctx =>
+                {
+                    Assert.Fail("Signal handler was called.");
+                })
                 .Dispose();
 
             kill(signal);
@@ -191,13 +179,10 @@ namespace System.Tests
             [MethodImpl(MethodImplOptions.NoInlining)]
             void CreateDanglingRegistration()
             {
-                PosixSignalRegistration.Create(
-                    signal,
-                    ctx =>
-                    {
-                        Assert.Fail("Signal handler was called.");
-                    }
-                );
+                PosixSignalRegistration.Create(signal, ctx =>
+                {
+                    Assert.Fail("Signal handler was called.");
+                });
             }
         }
 
@@ -236,15 +221,12 @@ namespace System.Tests
                         int expected = int.Parse(expectedStr);
 
                         using SemaphoreSlim semaphore = new(0);
-                        using var _ = PosixSignalRegistration.Create(
-                            signalArg,
-                            ctx =>
-                            {
-                                ctx.Cancel = cancelArg;
+                        using var _ = PosixSignalRegistration.Create(signalArg, ctx =>
+                        {
+                            ctx.Cancel = cancelArg;
 
-                                semaphore.Release();
-                            }
-                        );
+                            semaphore.Release();
+                        });
 
                         kill(signalArg);
 

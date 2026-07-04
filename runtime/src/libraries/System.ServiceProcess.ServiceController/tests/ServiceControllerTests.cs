@@ -66,13 +66,10 @@ namespace System.ServiceProcess.Tests
             );
             AssertExpectedProperties(controller);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    new ServiceController(_testService.TestServiceName, "");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                new ServiceController(_testService.TestServiceName, "");
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]

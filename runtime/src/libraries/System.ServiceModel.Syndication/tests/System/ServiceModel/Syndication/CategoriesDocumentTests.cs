@@ -75,13 +75,11 @@ namespace System.ServiceModel.Syndication.Tests
         public void Create_NullValueInCategories_ThrowsArgumentNullException()
         {
             var categories = new Collection<SyndicationCategory> { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () => CategoriesDocument.Create(categories)
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                CategoriesDocument.Create(categories)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () => CategoriesDocument.Create(categories, true, "scheme")
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                CategoriesDocument.Create(categories, true, "scheme")
             );
         }
 
@@ -108,9 +106,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Create_NullLinkToCategoriesDocument_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "link",
-                () => CategoriesDocument.Create((Uri)null)
+            AssertExtensions.Throws<ArgumentNullException>("link", () =>
+                CategoriesDocument.Create((Uri)null)
             );
         }
 

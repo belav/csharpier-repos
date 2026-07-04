@@ -154,28 +154,25 @@ namespace Microsoft.CodeAnalysis.AddAnonymousTypeMemberName
 
             var generator = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            editor.ReplaceNode(
-                declarator,
-                (current, _) =>
-                {
-                    var currentDeclarator = (TAnonymousObjectMemberDeclaratorSyntax)current;
-                    var initializer = (TAnonymousObjectInitializer)
-                        currentDeclarator.GetRequiredParent();
-                    var existingNames = GetAnonymousObjectMemberNames(initializer);
-                    var anonymousType = current.Parent;
-                    var uniqueName = NameGenerator.EnsureUniqueness(
-                        name,
-                        existingNames,
-                        syntaxFacts.IsCaseSensitive
-                    );
+            editor.ReplaceNode(declarator, (current, _) =>
+            {
+                var currentDeclarator = (TAnonymousObjectMemberDeclaratorSyntax)current;
+                var initializer = (TAnonymousObjectInitializer)
+                    currentDeclarator.GetRequiredParent();
+                var existingNames = GetAnonymousObjectMemberNames(initializer);
+                var anonymousType = current.Parent;
+                var uniqueName = NameGenerator.EnsureUniqueness(
+                    name,
+                    existingNames,
+                    syntaxFacts.IsCaseSensitive
+                );
 
-                    var nameToken = generator.Identifier(uniqueName);
-                    if (annotation != null)
-                        nameToken = nameToken.WithAdditionalAnnotations(annotation);
+                var nameToken = generator.Identifier(uniqueName);
+                if (annotation != null)
+                    nameToken = nameToken.WithAdditionalAnnotations(annotation);
 
-                    return WithName(currentDeclarator, nameToken);
-                }
-            );
+                return WithName(currentDeclarator, nameToken);
+            });
         }
     }
 }

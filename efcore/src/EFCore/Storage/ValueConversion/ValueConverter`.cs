@@ -103,10 +103,8 @@ public class ValueConverter<TModel, TProvider> : ValueConverter
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public override Func<object?, object?> ConvertToProvider =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _convertToProvider,
-            this,
-            static c => SanitizeConverter(c.ConvertToProviderTyped, c.ConvertsNulls)
+        NonCapturingLazyInitializer.EnsureInitialized(ref _convertToProvider, this, static c =>
+            SanitizeConverter(c.ConvertToProviderTyped, c.ConvertsNulls)
         );
 
     /// <summary>
@@ -117,10 +115,8 @@ public class ValueConverter<TModel, TProvider> : ValueConverter
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public override Func<object?, object?> ConvertFromProvider =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _convertFromProvider,
-            this,
-            static c => SanitizeConverter(c.ConvertFromProviderTyped, c.ConvertsNulls)
+        NonCapturingLazyInitializer.EnsureInitialized(ref _convertFromProvider, this, static c =>
+            SanitizeConverter(c.ConvertFromProviderTyped, c.ConvertsNulls)
         );
 
     /// <summary>
@@ -130,10 +126,8 @@ public class ValueConverter<TModel, TProvider> : ValueConverter
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public virtual Func<TModel, TProvider> ConvertToProviderTyped =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _convertToProviderTyped,
-            this,
-            static c => c.ConvertToProviderExpression.Compile()
+        NonCapturingLazyInitializer.EnsureInitialized(ref _convertToProviderTyped, this, static c =>
+            c.ConvertToProviderExpression.Compile()
         );
 
     /// <summary>

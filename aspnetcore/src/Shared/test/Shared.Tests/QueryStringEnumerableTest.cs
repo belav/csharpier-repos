@@ -63,18 +63,16 @@ public class QueryStringEnumerableTest
     [Fact]
     public void ParseQueryWithEncodedKeyWorks()
     {
-        Assert.Collection(
-            Parse("?fields+%5BtodoItems%5D"),
-            kvp => AssertKeyValuePair("fields+%5BtodoItems%5D", string.Empty, kvp)
+        Assert.Collection(Parse("?fields+%5BtodoItems%5D"), kvp =>
+            AssertKeyValuePair("fields+%5BtodoItems%5D", string.Empty, kvp)
         );
     }
 
     [Fact]
     public void ParseQueryWithEncodedValueWorks()
     {
-        Assert.Collection(
-            Parse("?=fields+%5BtodoItems%5D"),
-            kvp => AssertKeyValuePair(string.Empty, "fields+%5BtodoItems%5D", kvp)
+        Assert.Collection(Parse("?=fields+%5BtodoItems%5D"), kvp =>
+            AssertKeyValuePair(string.Empty, "fields+%5BtodoItems%5D", kvp)
         );
     }
 

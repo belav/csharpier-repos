@@ -23,16 +23,14 @@ namespace System.ComponentModel.Composition
                 "The default type converter for DynamicMetadataTestClass shouldn't support round tripping"
             );
 
-            MetadataStore.AddAttribute(
-                typeof(DynamicMetadataTestClass),
-                (type, attributes) =>
-                    Enumerable.Concat(
-                        attributes,
-                        new Attribute[]
-                        {
-                            new TypeConverterAttribute(typeof(DynamicMetadataTestClassConverter)),
-                        }
-                    )
+            MetadataStore.AddAttribute(typeof(DynamicMetadataTestClass), (type, attributes) =>
+                Enumerable.Concat(
+                    attributes,
+                    new Attribute[]
+                    {
+                        new TypeConverterAttribute(typeof(DynamicMetadataTestClassConverter)),
+                    }
+                )
             );
             var attached = TypeDescriptor.GetConverter(val);
             Assert.True(

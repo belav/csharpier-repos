@@ -927,15 +927,11 @@ PRAGMA foreign_keys = 1;
     public virtual void Deferred_RenameColumn_defers_subsequent_AddColumn()
     {
         Generate(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Blog",
-                    x =>
-                    {
-                        x.Property<string>("Title");
-                        x.Property<string>("Name");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Blog", x =>
+                {
+                    x.Property<string>("Title");
+                    x.Property<string>("Name");
+                }),
             migrationBuilder =>
             {
                 migrationBuilder.DropColumn(name: "Name", table: "Blog");
@@ -975,15 +971,11 @@ PRAGMA foreign_keys = 1;
     public virtual void Deferred_RenameColumn_defers_subsequent_CreateIndex_unique()
     {
         Generate(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Blog",
-                    x =>
-                    {
-                        x.Property<string>("Name");
-                        x.HasIndex("Name").IsUnique();
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Blog", x =>
+                {
+                    x.Property<string>("Name");
+                    x.HasIndex("Name").IsUnique();
+                }),
             migrationBuilder =>
             {
                 migrationBuilder.DropColumn(name: "Name", table: "Blog");
@@ -1030,15 +1022,11 @@ PRAGMA foreign_keys = 1;
     public virtual void DropColumn_defers_subsequent_AddColumn_required()
     {
         Generate(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Blog",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Name").IsRequired();
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Blog", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Name").IsRequired();
+                }),
             migrationBuilder =>
             {
                 migrationBuilder.DropColumn(name: "Name", table: "Blog");
@@ -1082,16 +1070,12 @@ PRAGMA foreign_keys = 1;
     public virtual void Deferred_AddColumn_defers_subsequent_CreateIndex()
     {
         Generate(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Blog",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Name");
-                        x.HasIndex("Name");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Blog", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Name");
+                    x.HasIndex("Name");
+                }),
             migrationBuilder =>
             {
                 migrationBuilder.DropColumn(name: "Name", table: "Blog");
@@ -1134,16 +1118,12 @@ CREATE INDEX "IX_Blog_Name" ON "Blog" ("Name");
     public virtual void DropColumn_in_table_which_has_another_spatial_column()
     {
         Generate(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Blog",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("Name");
-                        x.Property<Geometry>("Position").HasColumnType("GEOMETRY").HasSrid(4326);
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Blog", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("Name");
+                    x.Property<Geometry>("Position").HasColumnType("GEOMETRY").HasSrid(4326);
+                }),
             migrationBuilder =>
             {
                 migrationBuilder.DropColumn(name: "Name", table: "Blog");
@@ -1222,18 +1202,11 @@ PRAGMA foreign_keys = 1;
     [ConditionalFact]
     public virtual void Rebuild_preserves_column_order()
     {
-        Generate(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Ordinal",
-                    e =>
-                    {
-                        e.Property<string>("B").HasColumnOrder(0);
-                        e.Property<string>("A").HasColumnOrder(1);
-                    }
-                ),
-            migrationBuilder => migrationBuilder.DropColumn(name: "C", table: "Ordinal")
-        );
+        Generate(modelBuilder => modelBuilder.Entity("Ordinal", e =>
+                {
+                    e.Property<string>("B").HasColumnOrder(0);
+                    e.Property<string>("A").HasColumnOrder(1);
+                }), migrationBuilder => migrationBuilder.DropColumn(name: "C", table: "Ordinal"));
 
         AssertSql(
             """

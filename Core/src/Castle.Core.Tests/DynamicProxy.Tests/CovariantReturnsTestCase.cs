@@ -38,13 +38,11 @@ namespace Castle.DynamicProxy.Tests
             Assume.That(derivedMethod != baseMethod);
 
             var methods = derivedType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
-            var derivedMethodIndex = Array.FindIndex(
-                methods,
-                m => m.Name == "Method" && m.DeclaringType == derivedType
+            var derivedMethodIndex = Array.FindIndex(methods, m =>
+                m.Name == "Method" && m.DeclaringType == derivedType
             );
-            var baseMethodIndex = Array.FindIndex(
-                methods,
-                m => m.Name == "Method" && m.DeclaringType == baseType
+            var baseMethodIndex = Array.FindIndex(methods, m =>
+                m.Name == "Method" && m.DeclaringType == baseType
             );
             Assume.That(derivedMethodIndex >= 0);
             Assume.That(baseMethodIndex >= 0);

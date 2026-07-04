@@ -11,9 +11,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GenerateProgIdForType_ImportType_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Marshal.GenerateProgIdForType(typeof(ComImportObject))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Marshal.GenerateProgIdForType(typeof(ComImportObject))
             );
         }
     }

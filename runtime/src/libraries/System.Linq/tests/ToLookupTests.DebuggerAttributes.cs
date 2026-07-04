@@ -45,13 +45,10 @@ namespace System.Linq.Tests
             var groupings = (IGrouping<TKey, TElement>[])groupingsProperty.GetValue(proxyObject);
             Assert.IsType<IGrouping<TKey, TElement>[]>(groupings); // Arrays can be covariant / of assignment-compatible types
 
-            Assert.All(
-                groupings.Zip(lookup, (l, r) => Tuple.Create(l, r)),
-                tuple =>
-                {
-                    Assert.Same(tuple.Item1, tuple.Item2);
-                }
-            );
+            Assert.All(groupings.Zip(lookup, (l, r) => Tuple.Create(l, r)), tuple =>
+            {
+                Assert.Same(tuple.Item1, tuple.Item2);
+            });
 
             Assert.Same(groupings, groupingsProperty.GetValue(proxyObject)); // The result should be cached, as Lookup is immutable.
         }

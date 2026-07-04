@@ -223,9 +223,8 @@ namespace System.Runtime.Serialization
 
             // If we've already gathered the members for this type, just return them.
             // Otherwise, get them and add them.
-            return s_memberInfoTable.GetOrAdd(
-                new MemberHolder(type, context),
-                mh => InternalGetSerializableMembers(mh._memberType)
+            return s_memberInfoTable.GetOrAdd(new MemberHolder(type, context), mh =>
+                InternalGetSerializableMembers(mh._memberType)
             );
         }
 

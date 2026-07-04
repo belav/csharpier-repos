@@ -355,9 +355,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     Assert.Same(customerTable, specialCustomerTable);
 
                     Assert.Equal(5, specialCustomerTable.EntityTypeMappings.Count());
-                    Assert.All(
-                        specialCustomerTable.EntityTypeMappings,
-                        t => Assert.Null(t.IsSharedTablePrincipal)
+                    Assert.All(specialCustomerTable.EntityTypeMappings, t =>
+                        Assert.Null(t.IsSharedTablePrincipal)
                     );
 
                     Assert.Equal(10, specialCustomerTable.Columns.Count());
@@ -3270,23 +3269,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         cb.OwnsOne(
                             c => c.Details,
                             cdb =>
-                                cdb.InsertUsingStoredProcedure(
-                                        "CustomerDetailsInsert",
-                                        s =>
-                                            s.HasParameter("SpecialCustomerId")
-                                                .HasParameter(b => b.BirthDay)
-                                                .HasParameter(b => b.Address)
+                                cdb.InsertUsingStoredProcedure("CustomerDetailsInsert", s =>
+                                        s.HasParameter("SpecialCustomerId")
+                                            .HasParameter(b => b.BirthDay)
+                                            .HasParameter(b => b.Address)
                                     )
-                                    .UpdateUsingStoredProcedure(
-                                        "CustomerDetailsUpdate",
-                                        s =>
-                                            s.HasOriginalValueParameter("SpecialCustomerId")
-                                                .HasParameter(b => b.BirthDay)
-                                                .HasParameter(b => b.Address)
+                                    .UpdateUsingStoredProcedure("CustomerDetailsUpdate", s =>
+                                        s.HasOriginalValueParameter("SpecialCustomerId")
+                                            .HasParameter(b => b.BirthDay)
+                                            .HasParameter(b => b.Address)
                                     )
-                                    .DeleteUsingStoredProcedure(
-                                        "CustomerDetailsDelete",
-                                        s => s.HasOriginalValueParameter("SpecialCustomerId")
+                                    .DeleteUsingStoredProcedure("CustomerDetailsDelete", s =>
+                                        s.HasOriginalValueParameter("SpecialCustomerId")
                                     )
                         );
                     }
@@ -3378,23 +3372,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         cb.OwnsOne(
                             c => c.Details,
                             cdb =>
-                                cdb.InsertUsingStoredProcedure(
-                                        "CustomerDetailsInsert",
-                                        s =>
-                                            s.HasParameter("ExtraSpecialCustomerId")
-                                                .HasParameter(b => b.BirthDay)
-                                                .HasParameter(b => b.Address)
+                                cdb.InsertUsingStoredProcedure("CustomerDetailsInsert", s =>
+                                        s.HasParameter("ExtraSpecialCustomerId")
+                                            .HasParameter(b => b.BirthDay)
+                                            .HasParameter(b => b.Address)
                                     )
-                                    .UpdateUsingStoredProcedure(
-                                        "CustomerDetailsUpdate",
-                                        s =>
-                                            s.HasOriginalValueParameter("ExtraSpecialCustomerId")
-                                                .HasParameter(b => b.BirthDay)
-                                                .HasParameter(b => b.Address)
+                                    .UpdateUsingStoredProcedure("CustomerDetailsUpdate", s =>
+                                        s.HasOriginalValueParameter("ExtraSpecialCustomerId")
+                                            .HasParameter(b => b.BirthDay)
+                                            .HasParameter(b => b.Address)
                                     )
-                                    .DeleteUsingStoredProcedure(
-                                        "CustomerDetailsDelete",
-                                        s => s.HasOriginalValueParameter("ExtraSpecialCustomerId")
+                                    .DeleteUsingStoredProcedure("CustomerDetailsDelete", s =>
+                                        s.HasOriginalValueParameter("ExtraSpecialCustomerId")
                                     )
                         );
                     }
@@ -3450,71 +3439,54 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
                         if (mapToSprocs)
                         {
-                            odb.InsertUsingStoredProcedure(
-                                    "OrderDetails_Insert",
-                                    s =>
-                                        s.HasParameter(c => c.OrderId)
-                                            .HasParameter(c => c.AlternateId)
-                                            .HasParameter(c => c.Active)
-                                            .HasParameter(c => c.OrderDate)
+                            odb.InsertUsingStoredProcedure("OrderDetails_Insert", s =>
+                                    s.HasParameter(c => c.OrderId)
+                                        .HasParameter(c => c.AlternateId)
+                                        .HasParameter(c => c.Active)
+                                        .HasParameter(c => c.OrderDate)
                                 )
-                                .UpdateUsingStoredProcedure(
-                                    "OrderDetails_Update",
-                                    s =>
-                                        s.HasOriginalValueParameter(c => c.OrderId)
-                                            .HasParameter(c => c.Active)
-                                            .HasParameter(c => c.OrderDate)
+                                .UpdateUsingStoredProcedure("OrderDetails_Update", s =>
+                                    s.HasOriginalValueParameter(c => c.OrderId)
+                                        .HasParameter(c => c.Active)
+                                        .HasParameter(c => c.OrderDate)
                                 )
-                                .DeleteUsingStoredProcedure(
-                                    "OrderDetails_Delete",
-                                    s => s.HasOriginalValueParameter(b => b.OrderId)
+                                .DeleteUsingStoredProcedure("OrderDetails_Delete", s =>
+                                    s.HasOriginalValueParameter(b => b.OrderId)
                                 );
 
                             odb.OwnsOne(
                                 od => od.BillingAddress,
                                 bab =>
-                                    bab.InsertUsingStoredProcedure(
-                                            "BillingAddress_Insert",
-                                            s =>
-                                                s.HasParameter(c => c.City)
-                                                    .HasParameter(c => c.Street)
-                                                    .HasParameter("OrderDetailsOrderId")
+                                    bab.InsertUsingStoredProcedure("BillingAddress_Insert", s =>
+                                            s.HasParameter(c => c.City)
+                                                .HasParameter(c => c.Street)
+                                                .HasParameter("OrderDetailsOrderId")
                                         )
-                                        .UpdateUsingStoredProcedure(
-                                            "BillingAddress_Update",
-                                            s =>
-                                                s.HasParameter(c => c.City)
-                                                    .HasParameter(c => c.Street)
-                                                    .HasOriginalValueParameter(
-                                                        "OrderDetailsOrderId"
-                                                    )
+                                        .UpdateUsingStoredProcedure("BillingAddress_Update", s =>
+                                            s.HasParameter(c => c.City)
+                                                .HasParameter(c => c.Street)
+                                                .HasOriginalValueParameter("OrderDetailsOrderId")
                                         )
-                                        .DeleteUsingStoredProcedure(
-                                            "BillingAddress_Delete",
-                                            s => s.HasOriginalValueParameter("OrderDetailsOrderId")
+                                        .DeleteUsingStoredProcedure("BillingAddress_Delete", s =>
+                                            s.HasOriginalValueParameter("OrderDetailsOrderId")
                                         )
                             );
 
                             odb.OwnsOne(
                                 od => od.ShippingAddress,
                                 sab =>
-                                    sab.InsertUsingStoredProcedure(
-                                            "ShippingAddress_Insert",
-                                            s =>
-                                                s.HasParameter("OrderDetailsOrderId")
-                                                    .HasParameter(c => c.City)
-                                                    .HasParameter(c => c.Street)
+                                    sab.InsertUsingStoredProcedure("ShippingAddress_Insert", s =>
+                                            s.HasParameter("OrderDetailsOrderId")
+                                                .HasParameter(c => c.City)
+                                                .HasParameter(c => c.Street)
                                         )
-                                        .UpdateUsingStoredProcedure(
-                                            "ShippingAddress_Update",
-                                            s =>
-                                                s.HasOriginalValueParameter("OrderDetailsOrderId")
-                                                    .HasParameter(c => c.City)
-                                                    .HasParameter(c => c.Street)
+                                        .UpdateUsingStoredProcedure("ShippingAddress_Update", s =>
+                                            s.HasOriginalValueParameter("OrderDetailsOrderId")
+                                                .HasParameter(c => c.City)
+                                                .HasParameter(c => c.Street)
                                         )
-                                        .DeleteUsingStoredProcedure(
-                                            "ShippingAddress_Delete",
-                                            s => s.HasOriginalValueParameter("OrderDetailsOrderId")
+                                        .DeleteUsingStoredProcedure("ShippingAddress_Delete", s =>
+                                            s.HasOriginalValueParameter("OrderDetailsOrderId")
                                         )
                             );
                         }
@@ -3582,43 +3554,31 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
                 if (mapToViews)
                 {
-                    cb.ToView(
-                        "CustomerView",
-                        tb =>
-                        {
-                            tb.Property(c => c.AbstractString);
-                        }
-                    );
+                    cb.ToView("CustomerView", tb =>
+                    {
+                        tb.Property(c => c.AbstractString);
+                    });
 
-                    cb.SplitToView(
-                        "CustomerDetailsView",
-                        tb =>
-                        {
-                            tb.Property(c => c.AbstractString);
-                            tb.Property(c => c.Specialty);
-                            tb.Property(c => c.RelatedCustomerSpecialty);
-                        }
-                    );
+                    cb.SplitToView("CustomerDetailsView", tb =>
+                    {
+                        tb.Property(c => c.AbstractString);
+                        tb.Property(c => c.Specialty);
+                        tb.Property(c => c.RelatedCustomerSpecialty);
+                    });
                 }
                 else
                 {
-                    cb.ToTable(
-                        "Customer",
-                        tb =>
-                        {
-                            tb.Property(c => c.AbstractString);
-                        }
-                    );
+                    cb.ToTable("Customer", tb =>
+                    {
+                        tb.Property(c => c.AbstractString);
+                    });
 
-                    cb.SplitToTable(
-                        "CustomerDetails",
-                        tb =>
-                        {
-                            tb.Property(c => c.AbstractString);
-                            tb.Property(c => c.Specialty);
-                            tb.Property(c => c.RelatedCustomerSpecialty);
-                        }
-                    );
+                    cb.SplitToTable("CustomerDetails", tb =>
+                    {
+                        tb.Property(c => c.AbstractString);
+                        tb.Property(c => c.Specialty);
+                        tb.Property(c => c.RelatedCustomerSpecialty);
+                    });
                 }
 
                 cb.OwnsOne(
@@ -3629,23 +3589,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         {
                             db.ToView("CustomerView");
 
-                            db.SplitToView(
-                                "CustomerDetailsView",
-                                tb =>
-                                {
-                                    tb.Property(d => d.BirthDay);
-                                }
-                            );
+                            db.SplitToView("CustomerDetailsView", tb =>
+                            {
+                                tb.Property(d => d.BirthDay);
+                            });
                         }
                         else
                         {
-                            db.SplitToTable(
-                                "CustomerDetails",
-                                tb =>
-                                {
-                                    tb.Property(d => d.BirthDay);
-                                }
-                            );
+                            db.SplitToTable("CustomerDetails", tb =>
+                            {
+                                tb.Property(d => d.BirthDay);
+                            });
                         }
 
                         db.Property("SpecialCustomerId").HasColumnName("Id");
@@ -3796,15 +3750,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 );
 
                 Assert.Equal(2, fkConstraint.MappedForeignKeys.Count());
-                Assert.All(
-                    fkConstraint.MappedForeignKeys,
-                    fk =>
-                    {
-                        Assert.True(fk.IsUnique);
-                        Assert.True(fk.IsRequired);
-                        Assert.True(fk.IsRequiredDependent);
-                    }
-                );
+                Assert.All(fkConstraint.MappedForeignKeys, fk =>
+                {
+                    Assert.True(fk.IsUnique);
+                    Assert.True(fk.IsRequired);
+                    Assert.True(fk.IsRequiredDependent);
+                });
             }
         }
 
@@ -3821,35 +3772,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 cb.Ignore(c => c.Orders);
                 cb.Ignore(c => c.RelatedCustomer);
 
-                cb.ToTable(
-                    "Customer",
-                    tb =>
-                    {
-                        tb.Property(c => c.AbstractString);
-                    }
-                );
+                cb.ToTable("Customer", tb =>
+                {
+                    tb.Property(c => c.AbstractString);
+                });
 
-                cb.SplitToTable(
-                    "CustomerSpecialty",
-                    tb =>
-                    {
-                        tb.Property(c => c.AbstractString);
-                        tb.Property(c => c.Specialty);
-                        tb.Property(c => c.RelatedCustomerSpecialty);
-                    }
-                );
+                cb.SplitToTable("CustomerSpecialty", tb =>
+                {
+                    tb.Property(c => c.AbstractString);
+                    tb.Property(c => c.Specialty);
+                    tb.Property(c => c.RelatedCustomerSpecialty);
+                });
 
                 cb.OwnsOne(
                     c => c.Details,
                     db =>
                     {
-                        db.SplitToTable(
-                            "CustomerDetails",
-                            tb =>
-                            {
-                                tb.Property(d => d.BirthDay);
-                            }
-                        );
+                        db.SplitToTable("CustomerDetails", tb =>
+                        {
+                            tb.Property(d => d.BirthDay);
+                        });
                         db.Property("SpecialCustomerId").HasColumnName("Id");
                     }
                 );
@@ -3961,23 +3903,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 cb.Ignore(c => c.Orders);
                 cb.Ignore(c => c.RelatedCustomer);
 
-                cb.ToTable(
-                    "Customer",
-                    tb =>
-                    {
-                        tb.Property(c => c.AbstractString);
-                    }
-                );
+                cb.ToTable("Customer", tb =>
+                {
+                    tb.Property(c => c.AbstractString);
+                });
 
-                cb.SplitToTable(
-                    "CustomerDetails",
-                    tb =>
-                    {
-                        tb.Property(c => c.AbstractString);
-                        tb.Property(c => c.Specialty);
-                        tb.Property(c => c.RelatedCustomerSpecialty);
-                    }
-                );
+                cb.SplitToTable("CustomerDetails", tb =>
+                {
+                    tb.Property(c => c.AbstractString);
+                    tb.Property(c => c.Specialty);
+                    tb.Property(c => c.RelatedCustomerSpecialty);
+                });
 
                 cb.OwnsOne(
                     c => c.Details,
@@ -3985,13 +3921,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     {
                         db.ToTable("CustomerDetails");
 
-                        db.SplitToTable(
-                            "Details",
-                            tb =>
-                            {
-                                tb.Property(d => d.BirthDay);
-                            }
-                        );
+                        db.SplitToTable("Details", tb =>
+                        {
+                            tb.Property(d => d.BirthDay);
+                        });
                         db.Property("SpecialCustomerId").HasColumnName("Id");
                     }
                 );

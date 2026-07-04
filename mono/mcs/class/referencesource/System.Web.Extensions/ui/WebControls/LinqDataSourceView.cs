@@ -1140,15 +1140,13 @@ namespace System.Web.UI.WebControls
                 )
                 .ToDictionary(c => c.Member.Name);
 
-            StoreOriginalValues(
-                results,
-                p =>
-                    columns.ContainsKey(p.Name)
-                    && (
-                        columns[p.Name].IsPrimaryKey
-                        || columns[p.Name].IsVersion
-                        || (columns[p.Name].UpdateCheck != UpdateCheck.Never)
-                    )
+            StoreOriginalValues(results, p =>
+                columns.ContainsKey(p.Name)
+                && (
+                    columns[p.Name].IsPrimaryKey
+                    || columns[p.Name].IsVersion
+                    || (columns[p.Name].UpdateCheck != UpdateCheck.Never)
+                )
             );
         }
 

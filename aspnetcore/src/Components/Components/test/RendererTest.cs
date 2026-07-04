@@ -46,14 +46,11 @@ public class RendererTest
         // Assert
         var batch = renderer.Batches.Single();
         var diff = batch.DiffsByComponentId[componentId].Single();
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+        });
         AssertFrame.Element(batch.ReferenceFrames[0], "my element", 2);
         AssertFrame.Text(batch.ReferenceFrames[1], "some text");
     }
@@ -92,17 +89,14 @@ public class RendererTest
         Assert.IsType<MessageComponent>(componentFrame.Component);
 
         // The nested component was rendered as part of the batch
-        Assert.Collection(
-            nestedComponentDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Nested component output"
-                );
-            }
-        );
+        Assert.Collection(nestedComponentDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "Nested component output"
+            );
+        });
     }
 
     [Fact]
@@ -117,30 +111,24 @@ public class RendererTest
         component.TriggerRender();
         var batch = renderer.Batches.Single();
         var firstDiff = batch.DiffsByComponentId[componentId].Single();
-        Assert.Collection(
-            firstDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-                AssertFrame.Text(batch.ReferenceFrames[0], "Initial message");
-            }
-        );
+        Assert.Collection(firstDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+            AssertFrame.Text(batch.ReferenceFrames[0], "Initial message");
+        });
 
         // Act/Assert: second render
         component.Message = "Modified message";
         component.TriggerRender();
         var secondBatch = renderer.Batches.Skip(1).Single();
         var secondDiff = secondBatch.DiffsByComponentId[componentId].Single();
-        Assert.Collection(
-            secondDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-                AssertFrame.Text(secondBatch.ReferenceFrames[0], "Modified message");
-            }
-        );
+        Assert.Collection(secondDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+            AssertFrame.Text(secondBatch.ReferenceFrames[0], "Modified message");
+        });
     }
 
     [Fact]
@@ -166,30 +154,24 @@ public class RendererTest
         nestedComponent.TriggerRender();
         var batch = renderer.Batches[1];
         var firstDiff = batch.DiffsByComponentId[nestedComponentId].Single();
-        Assert.Collection(
-            firstDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-                AssertFrame.Text(batch.ReferenceFrames[0], "Render 1");
-            }
-        );
+        Assert.Collection(firstDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+            AssertFrame.Text(batch.ReferenceFrames[0], "Render 1");
+        });
 
         // Act/Assert: re-render
         nestedComponent.Message = "Render 2";
         nestedComponent.TriggerRender();
         var secondBatch = renderer.Batches[2];
         var secondDiff = secondBatch.DiffsByComponentId[nestedComponentId].Single();
-        Assert.Collection(
-            secondDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-                AssertFrame.Text(secondBatch.ReferenceFrames[0], "Render 2");
-            }
-        );
+        Assert.Collection(secondDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+            AssertFrame.Text(secondBatch.ReferenceFrames[0], "Render 2");
+        });
     }
 
     [Fact]
@@ -215,14 +197,11 @@ public class RendererTest
         // First render
         var create = renderer.Batches[0];
         var diff = create.DiffsByComponentId[componentId].Single();
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+        });
         AssertFrame.Element(create.ReferenceFrames[0], "p", 2);
         AssertFrame.Text(create.ReferenceFrames[1], "5");
 
@@ -358,14 +337,11 @@ public class RendererTest
         // Assert 1: First render
         var batch = renderer.Batches.Single();
         var diff = batch.DiffsByComponentId[componentId].Single();
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+        });
         AssertFrame.Text(batch.ReferenceFrames[0], "Hello");
 
         // Act 2: Update params
@@ -379,14 +355,11 @@ public class RendererTest
         // Assert 2: Second render
         var batch2 = renderer.Batches.Skip(1).Single();
         var diff2 = batch2.DiffsByComponentId[componentId].Single();
-        Assert.Collection(
-            diff2.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(diff2.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+        });
         AssertFrame.Text(batch2.ReferenceFrames[0], "Goodbye");
     }
 
@@ -2065,13 +2038,10 @@ public class RendererTest
             builder.AddComponentParameter(
                 1,
                 nameof(EventComponent.OnClickEventCallback),
-                EventCallback.Factory.Create(
-                    parentComponent,
-                    async () =>
-                    {
-                        await tcs.Task;
-                    }
-                )
+                EventCallback.Factory.Create(parentComponent, async () =>
+                {
+                    await tcs.Task;
+                })
             );
             builder.CloseComponent();
         };
@@ -2109,14 +2079,11 @@ public class RendererTest
             builder.AddComponentParameter(
                 1,
                 nameof(EventComponent.OnClickEventCallbackOfT),
-                EventCallback.Factory.Create<DerivedEventArgs>(
-                    parentComponent,
-                    async (e) =>
-                    {
-                        arg = e;
-                        await tcs.Task;
-                    }
-                )
+                EventCallback.Factory.Create<DerivedEventArgs>(parentComponent, async (e) =>
+                {
+                    arg = e;
+                    await tcs.Task;
+                })
             );
             builder.CloseComponent();
         };
@@ -2199,14 +2166,11 @@ public class RendererTest
             builder.AddComponentParameter(
                 1,
                 nameof(EventComponent.OnClickEventCallback),
-                EventCallback.Factory.Create(
-                    parentComponent,
-                    async () =>
-                    {
-                        await tcs.Task;
-                        throw new TaskCanceledException();
-                    }
-                )
+                EventCallback.Factory.Create(parentComponent, async () =>
+                {
+                    await tcs.Task;
+                    throw new TaskCanceledException();
+                })
             );
             builder.CloseComponent();
         };
@@ -2246,15 +2210,12 @@ public class RendererTest
             builder.AddComponentParameter(
                 1,
                 nameof(EventComponent.OnClickEventCallbackOfT),
-                EventCallback.Factory.Create<DerivedEventArgs>(
-                    parentComponent,
-                    async (e) =>
-                    {
-                        arg = e;
-                        await tcs.Task;
-                        throw new TaskCanceledException();
-                    }
-                )
+                EventCallback.Factory.Create<DerivedEventArgs>(parentComponent, async (e) =>
+                {
+                    arg = e;
+                    await tcs.Task;
+                    throw new TaskCanceledException();
+                })
             );
             builder.CloseComponent();
         };
@@ -2338,14 +2299,11 @@ public class RendererTest
             builder.AddComponentParameter(
                 1,
                 nameof(EventComponent.OnClickEventCallback),
-                EventCallback.Factory.Create(
-                    parentComponent,
-                    async () =>
-                    {
-                        await tcs.Task;
-                        throw new InvalidTimeZoneException();
-                    }
-                )
+                EventCallback.Factory.Create(parentComponent, async () =>
+                {
+                    await tcs.Task;
+                    throw new InvalidTimeZoneException();
+                })
             );
             builder.CloseComponent();
         };
@@ -2384,15 +2342,12 @@ public class RendererTest
             builder.AddComponentParameter(
                 1,
                 nameof(EventComponent.OnClickEventCallbackOfT),
-                EventCallback.Factory.Create<DerivedEventArgs>(
-                    parentComponent,
-                    async (e) =>
-                    {
-                        arg = e;
-                        await tcs.Task;
-                        throw new InvalidTimeZoneException();
-                    }
-                )
+                EventCallback.Factory.Create<DerivedEventArgs>(parentComponent, async (e) =>
+                {
+                    arg = e;
+                    await tcs.Task;
+                    throw new InvalidTimeZoneException();
+                })
             );
             builder.CloseComponent();
         };
@@ -2444,33 +2399,27 @@ public class RendererTest
         component.TriggerRender();
         var renderer1Batch = renderer1.Batches.Single();
         var renderer1Diff = renderer1Batch.DiffsByComponentId[renderer1ComponentId].Single();
-        Assert.Collection(
-            renderer1Diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    renderer1Batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    $"Hello from {nameof(MultiRendererComponent)}",
-                    0
-                );
-            }
-        );
+        Assert.Collection(renderer1Diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                renderer1Batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                $"Hello from {nameof(MultiRendererComponent)}",
+                0
+            );
+        });
 
         var renderer2Batch = renderer2.Batches.Single();
         var renderer2Diff = renderer2Batch.DiffsByComponentId[renderer2ComponentId].Single();
-        Assert.Collection(
-            renderer2Diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    renderer2Batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    $"Hello from {nameof(MultiRendererComponent)}",
-                    0
-                );
-            }
-        );
+        Assert.Collection(renderer2Diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                renderer2Batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                $"Hello from {nameof(MultiRendererComponent)}",
+                0
+            );
+        });
     }
 
     [Fact]
@@ -2501,14 +2450,11 @@ public class RendererTest
         // Assert
         var batch = renderer.Batches[1];
         var diff = batch.DiffsByComponentId[rootComponentId].Single();
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+        });
         AssertFrame.Text(batch.ReferenceFrames[0], "Modified message");
         Assert.False(batch.DiffsByComponentId.ContainsKey(nestedComponentFrame.ComponentId));
     }
@@ -2595,14 +2541,11 @@ public class RendererTest
         var diff = renderer.Batches[1].DiffsByComponentId[childComponentId].Single();
 
         // Assert
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+        });
         AssertFrame.Text(renderer.Batches[1].ReferenceFrames[0], "second");
     }
 
@@ -2635,14 +2578,11 @@ public class RendererTest
         var diff = renderer.Batches[1].DiffsByComponentId[childComponentId].Single();
 
         // Assert
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.SetAttribute, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.SetAttribute, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+        });
         AssertFrame.Attribute(renderer.Batches[1].ReferenceFrames[0], "class", "second");
     }
 
@@ -3468,49 +3408,40 @@ public class RendererTest
             {
                 // First we triggered the root component to re-render
                 Assert.Equal(rootComponentId, diff.ComponentId);
-                Assert.Collection(
-                    diff.Edits,
-                    edit =>
-                    {
-                        Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                        AssertFrame.Text(
-                            batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                            "Child event count: 1"
-                        );
-                    }
-                );
+                Assert.Collection(diff.Edits, edit =>
+                {
+                    Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+                    AssertFrame.Text(
+                        batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                        "Child event count: 1"
+                    );
+                });
             },
             diff =>
             {
                 // Then the root re-render will have triggered an update to the child
                 Assert.Equal(childComponentId, diff.ComponentId);
-                Assert.Collection(
-                    diff.Edits,
-                    edit =>
-                    {
-                        Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                        AssertFrame.Text(
-                            batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                            "Render count: 2"
-                        );
-                    }
-                );
+                Assert.Collection(diff.Edits, edit =>
+                {
+                    Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+                    AssertFrame.Text(
+                        batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                        "Render count: 2"
+                    );
+                });
             },
             diff =>
             {
                 // Finally we explicitly requested a re-render of the child
                 Assert.Equal(childComponentId, diff.ComponentId);
-                Assert.Collection(
-                    diff.Edits,
-                    edit =>
-                    {
-                        Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                        AssertFrame.Text(
-                            batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                            "Render count: 3"
-                        );
-                    }
-                );
+                Assert.Collection(diff.Edits, edit =>
+                {
+                    Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+                    AssertFrame.Text(
+                        batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                        "Render count: 3"
+                    );
+                });
             }
         );
     }
@@ -3679,14 +3610,11 @@ public class RendererTest
         var newBatch = renderer.Batches.Skip(1).Single();
         Assert.Equal(1, newBatch.DisposedComponentIDs.Count);
         Assert.Equal(1, newBatch.DiffsByComponentId.Count);
-        Assert.Collection(
-            newBatch.DiffsByComponentId[componentId].Single().Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.RemoveFrame, edit.Type);
-                Assert.Equal(1, edit.SiblingIndex);
-            }
-        );
+        Assert.Collection(newBatch.DiffsByComponentId[componentId].Single().Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.RemoveFrame, edit.Type);
+            Assert.Equal(1, edit.SiblingIndex);
+        });
     }
 
     [Fact]
@@ -3719,9 +3647,8 @@ public class RendererTest
         // Assert: Textbox's "disabled" attribute was removed
         Assert.Equal(2, renderer.Batches.Count);
         Assert.Equal(componentId, latestDiff.ComponentId);
-        Assert.Contains(
-            latestDiff.Edits,
-            edit => edit.SiblingIndex == 1 && edit.RemovedAttributeName == "disabled"
+        Assert.Contains(latestDiff.Edits, edit =>
+            edit.SiblingIndex == 1 && edit.RemovedAttributeName == "disabled"
         );
 
         await renderTask;
@@ -3945,19 +3872,16 @@ public class RendererTest
         // Assert
         var latestBatch = renderer.Batches.Skip(1).Single();
         var latestDiff = latestBatch.DiffsInOrder.Single();
-        Assert.Collection(
-            latestDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.SetAttribute, edit.Type);
-                Assert.Equal(0, edit.SiblingIndex);
-                AssertFrame.Attribute(
-                    latestBatch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "parent elem attr",
-                    1
-                );
-            }
-        );
+        Assert.Collection(latestDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.SetAttribute, edit.Type);
+            Assert.Equal(0, edit.SiblingIndex);
+            AssertFrame.Attribute(
+                latestBatch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "parent elem attr",
+                1
+            );
+        });
     }
 
     [Fact]
@@ -5183,24 +5107,17 @@ public class RendererTest
         Assert.Equal("new property value", component.BoundString);
         Assert.Equal(2, renderer.Batches.Count);
         var batch2 = renderer.Batches[1];
-        Assert.Collection(
-            batch2.DiffsInOrder.Single().Edits.ToArray(),
-            edit =>
-            {
-                // The only edit is updating the event handler ID, since the test component
-                // deliberately uses a capturing lambda. The whole point of this test is to
-                // show that the diff does *not* update the BoundString value attribute.
-                Assert.Equal(RenderTreeEditType.SetAttribute, edit.Type);
-                var attributeFrame = batch2.ReferenceFrames[edit.ReferenceFrameIndex];
-                AssertFrame.Attribute(
-                    attributeFrame,
-                    "ontestevent",
-                    typeof(Action<ChangeEventArgs>)
-                );
-                Assert.NotEqual(default, attributeFrame.AttributeEventHandlerId);
-                Assert.NotEqual(eventHandlerId, attributeFrame.AttributeEventHandlerId);
-            }
-        );
+        Assert.Collection(batch2.DiffsInOrder.Single().Edits.ToArray(), edit =>
+        {
+            // The only edit is updating the event handler ID, since the test component
+            // deliberately uses a capturing lambda. The whole point of this test is to
+            // show that the diff does *not* update the BoundString value attribute.
+            Assert.Equal(RenderTreeEditType.SetAttribute, edit.Type);
+            var attributeFrame = batch2.ReferenceFrames[edit.ReferenceFrameIndex];
+            AssertFrame.Attribute(attributeFrame, "ontestevent", typeof(Action<ChangeEventArgs>));
+            Assert.NotEqual(default, attributeFrame.AttributeEventHandlerId);
+            Assert.NotEqual(eventHandlerId, attributeFrame.AttributeEventHandlerId);
+        });
     }
 
     [Fact]
@@ -5246,24 +5163,21 @@ public class RendererTest
             Assert.Equal(newPropertyValue, component.BoundString);
             Assert.Equal(i + 2, renderer.Batches.Count);
             var latestBatch = renderer.Batches.Last();
-            Assert.Collection(
-                latestBatch.DiffsInOrder.Single().Edits.ToArray(),
-                edit =>
-                {
-                    // The only edit is updating the event handler ID, since the test component
-                    // deliberately uses a capturing lambda. The whole point of this test is to
-                    // show that the diff does *not* update the BoundString value attribute.
-                    Assert.Equal(RenderTreeEditType.SetAttribute, edit.Type);
-                    var attributeFrame = latestBatch.ReferenceFrames[edit.ReferenceFrameIndex];
-                    AssertFrame.Attribute(
-                        attributeFrame,
-                        "ontestevent",
-                        typeof(Action<ChangeEventArgs>)
-                    );
-                    Assert.NotEqual(default, attributeFrame.AttributeEventHandlerId);
-                    Assert.NotEqual(eventHandlerId, attributeFrame.AttributeEventHandlerId);
-                }
-            );
+            Assert.Collection(latestBatch.DiffsInOrder.Single().Edits.ToArray(), edit =>
+            {
+                // The only edit is updating the event handler ID, since the test component
+                // deliberately uses a capturing lambda. The whole point of this test is to
+                // show that the diff does *not* update the BoundString value attribute.
+                Assert.Equal(RenderTreeEditType.SetAttribute, edit.Type);
+                var attributeFrame = latestBatch.ReferenceFrames[edit.ReferenceFrameIndex];
+                AssertFrame.Attribute(
+                    attributeFrame,
+                    "ontestevent",
+                    typeof(Action<ChangeEventArgs>)
+                );
+                Assert.NotEqual(default, attributeFrame.AttributeEventHandlerId);
+                Assert.NotEqual(eventHandlerId, attributeFrame.AttributeEventHandlerId);
+            });
         }
     }
 
@@ -5369,9 +5283,8 @@ public class RendererTest
 
         // Assert: We actually receive MessageComponent
         Assert.IsType<MessageComponent>(suppliedComponent);
-        Assert.Collection(
-            componentActivator.RequestedComponentTypes,
-            requestedType => Assert.Equal(typeof(TestComponent), requestedType)
+        Assert.Collection(componentActivator.RequestedComponentTypes, requestedType =>
+            Assert.Equal(typeof(TestComponent), requestedType)
         );
     }
 
@@ -5389,9 +5302,8 @@ public class RendererTest
 
         // Assert: We actually receive MessageComponent
         Assert.IsType<MessageComponent>(suppliedComponent);
-        Assert.Collection(
-            componentActivator.RequestedComponentTypes,
-            requestedType => Assert.Equal(typeof(TestComponent), requestedType)
+        Assert.Collection(componentActivator.RequestedComponentTypes, requestedType =>
+            Assert.Equal(typeof(TestComponent), requestedType)
         );
     }
 
@@ -5425,19 +5337,16 @@ public class RendererTest
         var rootComponentId = renderer.AssignRootComponentId(
             new TestComponent(builder =>
             {
-                TestErrorBoundary.RenderNestedErrorBoundaries(
-                    builder,
-                    builder =>
-                    {
-                        builder.OpenComponent<ErrorThrowingComponent>(0);
-                        builder.AddComponentParameter(
-                            1,
-                            nameof(ErrorThrowingComponent.ThrowDuringRender),
-                            exception
-                        );
-                        builder.CloseComponent();
-                    }
-                );
+                TestErrorBoundary.RenderNestedErrorBoundaries(builder, builder =>
+                {
+                    builder.OpenComponent<ErrorThrowingComponent>(0);
+                    builder.AddComponentParameter(
+                        1,
+                        nameof(ErrorThrowingComponent.ThrowDuringRender),
+                        exception
+                    );
+                    builder.CloseComponent();
+                });
             })
         );
 
@@ -5469,19 +5378,16 @@ public class RendererTest
         Exception exception = null;
         var rootComponent = new TestComponent(builder =>
         {
-            TestErrorBoundary.RenderNestedErrorBoundaries(
-                builder,
-                builder =>
-                {
-                    builder.OpenComponent<ErrorThrowingComponent>(0);
-                    builder.AddComponentParameter(
-                        1,
-                        nameof(ErrorThrowingComponent.ThrowDuringParameterSettingSync),
-                        exception
-                    );
-                    builder.CloseComponent();
-                }
-            );
+            TestErrorBoundary.RenderNestedErrorBoundaries(builder, builder =>
+            {
+                builder.OpenComponent<ErrorThrowingComponent>(0);
+                builder.AddComponentParameter(
+                    1,
+                    nameof(ErrorThrowingComponent.ThrowDuringParameterSettingSync),
+                    exception
+                );
+                builder.CloseComponent();
+            });
         });
         var rootComponentId = renderer.AssignRootComponentId(rootComponent);
         renderer.RenderRootComponent(rootComponentId);
@@ -5520,19 +5426,16 @@ public class RendererTest
         TaskCompletionSource exceptionTcs = null;
         var rootComponent = new TestComponent(builder =>
         {
-            TestErrorBoundary.RenderNestedErrorBoundaries(
-                builder,
-                builder =>
-                {
-                    builder.OpenComponent<ErrorThrowingComponent>(0);
-                    builder.AddComponentParameter(
-                        1,
-                        nameof(ErrorThrowingComponent.ThrowDuringParameterSettingAsync),
-                        exceptionTcs?.Task
-                    );
-                    builder.CloseComponent();
-                }
-            );
+            TestErrorBoundary.RenderNestedErrorBoundaries(builder, builder =>
+            {
+                builder.OpenComponent<ErrorThrowingComponent>(0);
+                builder.AddComponentParameter(
+                    1,
+                    nameof(ErrorThrowingComponent.ThrowDuringParameterSettingAsync),
+                    exceptionTcs?.Task
+                );
+                builder.CloseComponent();
+            });
         });
         var rootComponentId = renderer.AssignRootComponentId(rootComponent);
         renderer.RenderRootComponent(rootComponentId);
@@ -5575,19 +5478,16 @@ public class RendererTest
         var rootComponentId = renderer.AssignRootComponentId(
             new TestComponent(builder =>
             {
-                TestErrorBoundary.RenderNestedErrorBoundaries(
-                    builder,
-                    builder =>
-                    {
-                        builder.OpenComponent<ErrorThrowingComponent>(0);
-                        builder.AddComponentParameter(
-                            1,
-                            nameof(ErrorThrowingComponent.ThrowDuringEventSync),
-                            exception
-                        );
-                        builder.CloseComponent();
-                    }
-                );
+                TestErrorBoundary.RenderNestedErrorBoundaries(builder, builder =>
+                {
+                    builder.OpenComponent<ErrorThrowingComponent>(0);
+                    builder.AddComponentParameter(
+                        1,
+                        nameof(ErrorThrowingComponent.ThrowDuringEventSync),
+                        exception
+                    );
+                    builder.CloseComponent();
+                });
             })
         );
         renderer.RenderRootComponent(rootComponentId);
@@ -5633,19 +5533,16 @@ public class RendererTest
         var rootComponentId = renderer.AssignRootComponentId(
             new TestComponent(builder =>
             {
-                TestErrorBoundary.RenderNestedErrorBoundaries(
-                    builder,
-                    builder =>
-                    {
-                        builder.OpenComponent<ErrorThrowingComponent>(0);
-                        builder.AddComponentParameter(
-                            1,
-                            nameof(ErrorThrowingComponent.ThrowDuringEventAsync),
-                            exceptionTcs.Task
-                        );
-                        builder.CloseComponent();
-                    }
-                );
+                TestErrorBoundary.RenderNestedErrorBoundaries(builder, builder =>
+                {
+                    builder.OpenComponent<ErrorThrowingComponent>(0);
+                    builder.AddComponentParameter(
+                        1,
+                        nameof(ErrorThrowingComponent.ThrowDuringEventAsync),
+                        exceptionTcs.Task
+                    );
+                    builder.CloseComponent();
+                });
             })
         );
         renderer.RenderRootComponent(rootComponentId);
@@ -5700,19 +5597,16 @@ public class RendererTest
         {
             if (!disposeChildren)
             {
-                TestErrorBoundary.RenderNestedErrorBoundaries(
-                    builder,
-                    builder =>
-                    {
-                        builder.OpenComponent<ErrorThrowingComponent>(0);
-                        builder.AddComponentParameter(
-                            1,
-                            nameof(ErrorThrowingComponent.ThrowDuringEventAsync),
-                            exceptionTcs.Task
-                        );
-                        builder.CloseComponent();
-                    }
-                );
+                TestErrorBoundary.RenderNestedErrorBoundaries(builder, builder =>
+                {
+                    builder.OpenComponent<ErrorThrowingComponent>(0);
+                    builder.AddComponentParameter(
+                        1,
+                        nameof(ErrorThrowingComponent.ThrowDuringEventAsync),
+                        exceptionTcs.Task
+                    );
+                    builder.CloseComponent();
+                });
             }
         });
         var rootComponentId = renderer.AssignRootComponentId(rootComponent);
@@ -6701,11 +6595,9 @@ public class RendererTest
         Assert.Equal((expectedId, NestedAsyncComponent.EventType.OnInit), logStream[0]);
 
         // OnInit async completes
-        Assert.Single(
-            logStream.Skip(1),
-            e =>
-                e == (expectedId, NestedAsyncComponent.EventType.OnInitAsyncAsync)
-                || e == (expectedId, NestedAsyncComponent.EventType.OnInitAsyncSync)
+        Assert.Single(logStream.Skip(1), e =>
+            e == (expectedId, NestedAsyncComponent.EventType.OnInitAsyncAsync)
+            || e == (expectedId, NestedAsyncComponent.EventType.OnInitAsyncSync)
         );
 
         var parametersSetEvent = logStream

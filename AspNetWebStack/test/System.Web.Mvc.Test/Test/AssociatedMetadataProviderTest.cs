@@ -239,9 +239,8 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Same(metadata, result);
-            Assert.Contains(
-                provider.CreateMetadataLog.Single().Attributes,
-                a => a is RequiredAttribute
+            Assert.Contains(provider.CreateMetadataLog.Single().Attributes, a =>
+                a is RequiredAttribute
             );
         }
 

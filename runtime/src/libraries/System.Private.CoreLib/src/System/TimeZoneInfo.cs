@@ -1134,17 +1134,14 @@ namespace System
                         if (!skipSorting)
                         {
                             // sort and copy the TimeZoneInfo's into a ReadOnlyCollection for the user
-                            Array.Sort(
-                                array,
-                                static (x, y) =>
-                                {
-                                    // sort by BaseUtcOffset first and by DisplayName second - this is similar to the Windows Date/Time control panel
-                                    int comparison = x.BaseUtcOffset.CompareTo(y.BaseUtcOffset);
-                                    return comparison == 0
-                                        ? string.CompareOrdinal(x.DisplayName, y.DisplayName)
-                                        : comparison;
-                                }
-                            );
+                            Array.Sort(array, static (x, y) =>
+                            {
+                                // sort by BaseUtcOffset first and by DisplayName second - this is similar to the Windows Date/Time control panel
+                                int comparison = x.BaseUtcOffset.CompareTo(y.BaseUtcOffset);
+                                return comparison == 0
+                                    ? string.CompareOrdinal(x.DisplayName, y.DisplayName)
+                                    : comparison;
+                            });
 
                             // Always reset _readOnlyUnsortedSystemTimeZones even if it was initialized before. This prevents the need to maintain two separate cache lists in memory
                             // and guarantees that if _readOnlySystemTimeZones is initialized, _readOnlyUnsortedSystemTimeZones is also initialized.

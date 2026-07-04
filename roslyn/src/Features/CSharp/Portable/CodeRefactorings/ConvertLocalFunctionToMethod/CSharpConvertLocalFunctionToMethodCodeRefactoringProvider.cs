@@ -321,13 +321,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                 {
                     var reservedNames = GetReservedNames(node, semanticModel, cancellationToken);
                     var parameterNames = GenerateUniqueParameterNames(parameters, reservedNames);
-                    var lambdaParameters = parameters.Zip(
-                        parameterNames,
-                        (p, name) => GenerateParameter(p, name)
+                    var lambdaParameters = parameters.Zip(parameterNames, (p, name) =>
+                        GenerateParameter(p, name)
                     );
-                    var lambdaArguments = parameters.Zip(
-                        parameterNames,
-                        (p, name) => GenerateArgument(p, name)
+                    var lambdaArguments = parameters.Zip(parameterNames, (p, name) =>
+                        GenerateArgument(p, name)
                     );
                     var additionalArguments = capturesAsParameters.Select(p =>
                         GenerateArgument(p, p.Name)

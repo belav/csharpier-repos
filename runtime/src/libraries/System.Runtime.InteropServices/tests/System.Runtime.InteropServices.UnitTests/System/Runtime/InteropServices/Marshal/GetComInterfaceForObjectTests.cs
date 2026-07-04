@@ -155,40 +155,29 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetComInterfaceForObject_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "o",
-                () => Marshal.GetComInterfaceForObject(null, typeof(INonGenericInterface))
+            AssertExtensions.Throws<ArgumentNullException>("o", () =>
+                Marshal.GetComInterfaceForObject(null, typeof(INonGenericInterface))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "o",
-                () =>
-                    Marshal.GetComInterfaceForObject(
-                        null,
-                        typeof(INonGenericInterface),
-                        CustomQueryInterfaceMode.Allow
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("o", () =>
+                Marshal.GetComInterfaceForObject(
+                    null,
+                    typeof(INonGenericInterface),
+                    CustomQueryInterfaceMode.Allow
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "o",
-                () => Marshal.GetComInterfaceForObject<string, string>(null)
+            AssertExtensions.Throws<ArgumentNullException>("o", () =>
+                Marshal.GetComInterfaceForObject<string, string>(null)
             );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetComInterfaceForObject_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "T",
-                () => Marshal.GetComInterfaceForObject(new object(), null)
+            AssertExtensions.Throws<ArgumentNullException>("T", () =>
+                Marshal.GetComInterfaceForObject(new object(), null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "T",
-                () =>
-                    Marshal.GetComInterfaceForObject(
-                        new object(),
-                        null,
-                        CustomQueryInterfaceMode.Allow
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("T", () =>
+                Marshal.GetComInterfaceForObject(new object(), null, CustomQueryInterfaceMode.Allow)
             );
         }
 
@@ -249,18 +238,11 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(GetComInterfaceForObject_InvalidType_TestData))]
         public void GetComInterfaceForObject_InvalidType_ThrowsArgumentException(Type type)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "T",
-                () => Marshal.GetComInterfaceForObject(new object(), type)
+            AssertExtensions.Throws<ArgumentException>("T", () =>
+                Marshal.GetComInterfaceForObject(new object(), type)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "T",
-                () =>
-                    Marshal.GetComInterfaceForObject(
-                        new object(),
-                        type,
-                        CustomQueryInterfaceMode.Allow
-                    )
+            AssertExtensions.Throws<ArgumentException>("T", () =>
+                Marshal.GetComInterfaceForObject(new object(), type, CustomQueryInterfaceMode.Allow)
             );
         }
 
@@ -277,22 +259,18 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(GetComInterfaceForObject_InvalidObject_TestData))]
         public void GetComInterfaceForObject_InvalidObject_ThrowsArgumentException(object o)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "o",
-                () => Marshal.GetComInterfaceForObject(o, typeof(INonGenericInterface))
+            AssertExtensions.Throws<ArgumentException>("o", () =>
+                Marshal.GetComInterfaceForObject(o, typeof(INonGenericInterface))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "o",
-                () =>
-                    Marshal.GetComInterfaceForObject(
-                        o,
-                        typeof(INonGenericInterface),
-                        CustomQueryInterfaceMode.Allow
-                    )
+            AssertExtensions.Throws<ArgumentException>("o", () =>
+                Marshal.GetComInterfaceForObject(
+                    o,
+                    typeof(INonGenericInterface),
+                    CustomQueryInterfaceMode.Allow
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "o",
-                () => Marshal.GetComInterfaceForObject<object, INonGenericInterface>(o)
+            AssertExtensions.Throws<ArgumentException>("o", () =>
+                Marshal.GetComInterfaceForObject<object, INonGenericInterface>(o)
             );
         }
 

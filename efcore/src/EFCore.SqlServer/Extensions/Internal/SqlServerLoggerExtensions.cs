@@ -243,26 +243,24 @@ public static class SqlServerLoggerExtensions
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(
-                diagnostics,
-                l =>
-                    l.LogDebug(
-                        definition.EventId,
-                        null,
-                        definition.MessageFormat,
-                        tableName,
-                        columnName,
-                        ordinal,
-                        dataTypeName,
-                        maxLength,
-                        precision,
-                        scale,
-                        nullable,
-                        identity,
-                        defaultValue,
-                        computedValue,
-                        stored
-                    )
+            definition.Log(diagnostics, l =>
+                l.LogDebug(
+                    definition.EventId,
+                    null,
+                    definition.MessageFormat,
+                    tableName,
+                    columnName,
+                    ordinal,
+                    dataTypeName,
+                    maxLength,
+                    precision,
+                    scale,
+                    nullable,
+                    identity,
+                    defaultValue,
+                    computedValue,
+                    stored
+                )
             );
         }
 
@@ -570,21 +568,19 @@ public static class SqlServerLoggerExtensions
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(
-                diagnostics,
-                l =>
-                    l.LogDebug(
-                        definition.EventId,
-                        null,
-                        definition.MessageFormat,
-                        sequenceName,
-                        sequenceTypeName,
-                        cyclic,
-                        increment,
-                        start,
-                        min,
-                        max
-                    )
+            definition.Log(diagnostics, l =>
+                l.LogDebug(
+                    definition.EventId,
+                    null,
+                    definition.MessageFormat,
+                    sequenceName,
+                    sequenceTypeName,
+                    cyclic,
+                    increment,
+                    start,
+                    min,
+                    max
+                )
             );
         }
     }
@@ -680,9 +676,8 @@ public static class SqlServerLoggerExtensions
             )
         )
         {
-            var eventData = new EventData(
-                definition,
-                (d, _) => ((EventDefinition)d).GenerateMessage()
+            var eventData = new EventData(definition, (d, _) =>
+                ((EventDefinition)d).GenerateMessage()
             );
 
             diagnostics.DispatchEventData(

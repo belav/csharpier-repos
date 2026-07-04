@@ -42,9 +42,8 @@ namespace System.Tests
         [Fact]
         public static void Ctor_ValueFactory_NullValueFactory_ThrowsArguentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "valueFactory",
-                () => new Lazy<object>(null)
+            AssertExtensions.Throws<ArgumentNullException>("valueFactory", () =>
+                new Lazy<object>(null)
             ); // Value factory is null
         }
 
@@ -58,13 +57,11 @@ namespace System.Tests
         [Fact]
         public static void Ctor_LazyThreadSafetyMode_InvalidMode_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "mode",
-                () => new Lazy<string>(LazyThreadSafetyMode.None - 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () =>
+                new Lazy<string>(LazyThreadSafetyMode.None - 1)
             ); // Invalid thread saftety mode
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "mode",
-                () => new Lazy<string>(LazyThreadSafetyMode.ExecutionAndPublication + 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () =>
+                new Lazy<string>(LazyThreadSafetyMode.ExecutionAndPublication + 1)
             ); // Invalid thread saftety mode
         }
 
@@ -80,9 +77,8 @@ namespace System.Tests
         [Fact]
         public static void Ctor_ValueFactory_Bool_NullValueFactory_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "valueFactory",
-                () => new Lazy<object>(null, false)
+            AssertExtensions.Throws<ArgumentNullException>("valueFactory", () =>
+                new Lazy<object>(null, false)
             ); // Value factory is null
         }
 
@@ -99,19 +95,15 @@ namespace System.Tests
         [Fact]
         public static void Ctor_ValueFactor_LazyThreadSafetyMode_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "valueFactory",
-                () => new Lazy<object>(null, LazyThreadSafetyMode.PublicationOnly)
+            AssertExtensions.Throws<ArgumentNullException>("valueFactory", () =>
+                new Lazy<object>(null, LazyThreadSafetyMode.PublicationOnly)
             ); // Value factory is null
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "mode",
-                () => new Lazy<string>(() => "foo", LazyThreadSafetyMode.None - 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () =>
+                new Lazy<string>(() => "foo", LazyThreadSafetyMode.None - 1)
             ); // Invalid thread saftety mode
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "mode",
-                () =>
-                    new Lazy<string>(() => "foof", LazyThreadSafetyMode.ExecutionAndPublication + 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () =>
+                new Lazy<string>(() => "foof", LazyThreadSafetyMode.ExecutionAndPublication + 1)
             ); // Invalid thread saftety mode
         }
 
@@ -734,11 +726,8 @@ namespace System.Tests
             object dLock = null;
             Assert.Equal(
                 strTemplate,
-                LazyInitializer.EnsureInitialized(
-                    ref d,
-                    ref dInit,
-                    ref dLock,
-                    () => strTemplate + "bar"
+                LazyInitializer.EnsureInitialized(ref d, ref dInit, ref dLock, () =>
+                    strTemplate + "bar"
                 )
             );
             Assert.Equal(strTemplate, d);
@@ -751,34 +740,20 @@ namespace System.Tests
             object elock = null;
             int initCount = 0;
 
-            Assert.Null(
-                LazyInitializer.EnsureInitialized(
-                    ref e,
-                    ref einit,
-                    ref elock,
-                    () =>
-                    {
-                        initCount++;
-                        return null;
-                    }
-                )
-            );
+            Assert.Null(LazyInitializer.EnsureInitialized(ref e, ref einit, ref elock, () =>
+                {
+                    initCount++;
+                    return null;
+                }));
             Assert.Null(e);
             Assert.Equal(1, initCount);
             Assert.True(einit);
             Assert.NotNull(elock);
-            Assert.Null(
-                LazyInitializer.EnsureInitialized(
-                    ref e,
-                    ref einit,
-                    ref elock,
-                    () =>
-                    {
-                        initCount++;
-                        return null;
-                    }
-                )
-            );
+            Assert.Null(LazyInitializer.EnsureInitialized(ref e, ref einit, ref elock, () =>
+                {
+                    initCount++;
+                    return null;
+                }));
         }
 
         [Fact]
@@ -819,11 +794,8 @@ namespace System.Tests
             LIX c = default(LIX);
             bool cInit = false;
             object cLock = null;
-            LIX ensuredValC = LazyInitializer.EnsureInitialized(
-                ref c,
-                ref cInit,
-                ref cLock,
-                () => template
+            LIX ensuredValC = LazyInitializer.EnsureInitialized(ref c, ref cInit, ref cLock, () =>
+                template
             );
             Assert.Equal(template, c);
             Assert.Equal(template, ensuredValC);
@@ -833,11 +805,8 @@ namespace System.Tests
             bool dInit = true;
             object dLock = null;
             LIX template2 = new LIX(template.f * 2);
-            LIX ensuredValD = LazyInitializer.EnsureInitialized(
-                ref d,
-                ref dInit,
-                ref dLock,
-                () => template2
+            LIX ensuredValD = LazyInitializer.EnsureInitialized(ref d, ref dInit, ref dLock, () =>
+                template2
             );
             Assert.Equal(template, ensuredValD);
             Assert.Equal(template, d);

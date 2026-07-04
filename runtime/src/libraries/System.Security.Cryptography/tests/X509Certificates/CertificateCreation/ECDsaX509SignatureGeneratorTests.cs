@@ -14,9 +14,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         [Fact]
         public static void ECDsaX509SignatureGeneratorCtor_Exceptions()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => X509SignatureGenerator.CreateForECDsa(null)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                X509SignatureGenerator.CreateForECDsa(null)
             );
         }
 
@@ -88,9 +87,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 HashAlgorithmName hashAlgorithm = new HashAlgorithmName(hashAlgorithmName);
                 var generator = X509SignatureGenerator.CreateForECDsa(ecdsa);
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    "hashAlgorithm",
-                    () => generator.GetSignatureAlgorithmIdentifier(hashAlgorithm)
+                Assert.Throws<ArgumentOutOfRangeException>("hashAlgorithm", () =>
+                    generator.GetSignatureAlgorithmIdentifier(hashAlgorithm)
                 );
             }
         }

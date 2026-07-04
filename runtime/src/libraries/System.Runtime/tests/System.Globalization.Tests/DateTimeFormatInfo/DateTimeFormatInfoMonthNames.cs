@@ -3832,25 +3832,23 @@ namespace System.Globalization.Tests
         public void MonthNames_SetNullValueInValues_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    format.MonthNames = new string[]
-                    {
-                        "1",
-                        "2",
-                        "3",
-                        null,
-                        "5",
-                        "6",
-                        "7",
-                        "8",
-                        "9",
-                        "10",
-                        "11",
-                        "12",
-                        "",
-                    }
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.MonthNames = new string[]
+                {
+                    "1",
+                    "2",
+                    "3",
+                    null,
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
+                    "",
+                }
             );
         }
 

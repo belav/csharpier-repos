@@ -505,27 +505,22 @@ namespace System.Runtime.Serialization.DataContracts
                 {
                     lock (s_cacheLock)
                     {
-                        return s_typeToIDCache.GetOrAdd(
-                            typeHandle.Value,
-                            static _ =>
+                        return s_typeToIDCache.GetOrAdd(typeHandle.Value, static _ =>
+                        {
+                            int nextId = s_dataContractID++;
+                            if (nextId >= s_dataContractCache.Length)
                             {
-                                int nextId = s_dataContractID++;
-                                if (nextId >= s_dataContractCache.Length)
+                                int newSize =
+                                    (nextId < int.MaxValue / 2) ? nextId * 2 : int.MaxValue;
+                                if (newSize <= nextId)
                                 {
-                                    int newSize =
-                                        (nextId < int.MaxValue / 2) ? nextId * 2 : int.MaxValue;
-                                    if (newSize <= nextId)
-                                    {
-                                        Debug.Fail("DataContract cache overflow");
-                                        throw new SerializationException(
-                                            SR.DataContractCacheOverflow
-                                        );
-                                    }
-                                    s_dataContractCache.Resize(newSize);
+                                    Debug.Fail("DataContract cache overflow");
+                                    throw new SerializationException(SR.DataContractCacheOverflow);
                                 }
-                                return nextId;
+                                s_dataContractCache.Resize(newSize);
                             }
-                        );
+                            return nextId;
+                        });
                     }
                 }
                 catch (Exception ex) when (!ExceptionUtility.IsFatal(ex))
@@ -718,14 +713,11 @@ namespace System.Runtime.Serialization.DataContracts
                 if (type.IsInterface && !CollectionDataContract.IsCollectionInterface(type))
                     type = Globals.TypeOfObject;
 
-                return s_typeToBuiltInContract.GetOrAdd(
-                    type,
-                    static (Type key) =>
-                    {
-                        TryCreateBuiltInDataContract(key, out DataContract? dataContract);
-                        return dataContract;
-                    }
-                );
+                return s_typeToBuiltInContract.GetOrAdd(type, static (Type key) =>
+                {
+                    TryCreateBuiltInDataContract(key, out DataContract? dataContract);
+                    return dataContract;
+                });
             }
 
             [RequiresDynamicCode(DataContract.SerializerAOTWarning)]

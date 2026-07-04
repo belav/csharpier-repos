@@ -31,40 +31,31 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor1_NullAsDefinitionArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "definition",
-                () =>
-                {
-                    new ReflectionComposablePart((ReflectionComposablePartDefinition)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definition", () =>
+            {
+                new ReflectionComposablePart((ReflectionComposablePartDefinition)null);
+            });
         }
 
         [Fact]
         public void Constructor2_NullAsAttributedPartArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "attributedPart",
-                () =>
-                {
-                    new ReflectionComposablePart(
-                        PartDefinitionFactory.CreateAttributed(),
-                        (object)null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>("attributedPart", () =>
+            {
+                new ReflectionComposablePart(
+                    PartDefinitionFactory.CreateAttributed(),
+                    (object)null
+                );
+            });
         }
 
         [Fact]
         public void Constructor2_ValueTypeAsAttributedPartArgument_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "attributedPart",
-                () =>
-                {
-                    new ReflectionComposablePart(PartDefinitionFactory.CreateAttributed(), 42);
-                }
-            );
+            Assert.Throws<ArgumentException>("attributedPart", () =>
+            {
+                new ReflectionComposablePart(PartDefinitionFactory.CreateAttributed(), 42);
+            });
         }
 
         [Fact]
@@ -114,13 +105,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreateDefaultDisposablePart();
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                part,
-                () =>
-                {
-                    var metadata = part.Metadata;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(part, () =>
+            {
+                var metadata = part.Metadata;
+            });
         }
 
         [Fact]
@@ -129,13 +117,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreateDefaultDisposablePart();
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                part,
-                () =>
-                {
-                    var definitions = part.ImportDefinitions;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(part, () =>
+            {
+                var definitions = part.ImportDefinitions;
+            });
         }
 
         [Fact]
@@ -144,13 +129,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreateDefaultDisposablePart();
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                part,
-                () =>
-                {
-                    var definitions = part.ExportDefinitions;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(part, () =>
+            {
+                var definitions = part.ExportDefinitions;
+            });
         }
 
         [Fact]
@@ -159,13 +141,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreateDefaultDisposablePart();
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                part,
-                () =>
-                {
-                    part.Activate();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(part, () =>
+            {
+                part.Activate();
+            });
         }
 
         [Fact]
@@ -201,13 +180,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var definition = part.ImportDefinitions.First();
             part.SetImport(definition, CreateSimpleExports(21));
 
-            CompositionAssert.ThrowsPart<NotImplementedException>(
-                RetryMode.DoNotRetry,
-                () =>
-                {
-                    part.Activate();
-                }
-            );
+            CompositionAssert.ThrowsPart<NotImplementedException>(RetryMode.DoNotRetry, () =>
+            {
+                part.Activate();
+            });
         }
 
         [Fact]
@@ -218,13 +194,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                part,
-                () =>
-                {
-                    part.SetImport(definition, Enumerable.Empty<Export>());
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(part, () =>
+            {
+                part.SetImport(definition, Enumerable.Empty<Export>());
+            });
         }
 
         [Fact]
@@ -232,13 +205,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var part = CreateDefaultPart();
 
-            Assert.Throws<ArgumentNullException>(
-                "definition",
-                () =>
-                {
-                    part.SetImport((ImportDefinition)null, Enumerable.Empty<Export>());
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definition", () =>
+            {
+                part.SetImport((ImportDefinition)null, Enumerable.Empty<Export>());
+            });
         }
 
         [Fact]
@@ -247,13 +217,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreatePart(typeof(MySharedPartExport));
             var import = part.ImportDefinitions.First();
 
-            Assert.Throws<ArgumentNullException>(
-                "exports",
-                () =>
-                {
-                    part.SetImport(import, (IEnumerable<Export>)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("exports", () =>
+            {
+                part.SetImport(import, (IEnumerable<Export>)null);
+            });
         }
 
         [Fact]
@@ -262,13 +229,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreatePart(typeof(MySharedPartExport));
             var definition = part.ImportDefinitions.First();
 
-            Assert.Throws<ArgumentException>(
-                "exports",
-                () =>
-                {
-                    part.SetImport(definition, new Export[] { null });
-                }
-            );
+            Assert.Throws<ArgumentException>("exports", () =>
+            {
+                part.SetImport(definition, new Export[] { null });
+            });
         }
 
         [Fact]
@@ -278,13 +242,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var definition = ImportDefinitionFactory.Create();
 
-            Assert.Throws<ArgumentException>(
-                "definition",
-                () =>
-                {
-                    part.SetImport(definition, Enumerable.Empty<Export>());
-                }
-            );
+            Assert.Throws<ArgumentException>("definition", () =>
+            {
+                part.SetImport(definition, Enumerable.Empty<Export>());
+            });
         }
 
         [Fact]
@@ -310,13 +271,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var exports = ExportFactory.Create("Import", 2);
 
-            Assert.Throws<ArgumentException>(
-                "exports",
-                () =>
-                {
-                    part.SetImport(definition, exports);
-                }
-            );
+            Assert.Throws<ArgumentException>("exports", () =>
+            {
+                part.SetImport(definition, exports);
+            });
         }
 
         [Fact]
@@ -327,13 +285,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var exports = ExportFactory.Create("Import", 2);
 
-            Assert.Throws<ArgumentException>(
-                "exports",
-                () =>
-                {
-                    part.SetImport(definition, exports);
-                }
-            );
+            Assert.Throws<ArgumentException>("exports", () =>
+            {
+                part.SetImport(definition, exports);
+            });
         }
 
         [Fact]
@@ -344,13 +299,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var exports = Enumerable.Empty<Export>();
 
-            Assert.Throws<ArgumentException>(
-                "exports",
-                () =>
-                {
-                    part.SetImport(definition, exports);
-                }
-            );
+            Assert.Throws<ArgumentException>("exports", () =>
+            {
+                part.SetImport(definition, exports);
+            });
         }
 
         [Fact]
@@ -396,13 +348,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             ((IDisposable)part).Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                part,
-                () =>
-                {
-                    part.GetExportedValue(definition);
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(part, () =>
+            {
+                part.GetExportedValue(definition);
+            });
         }
 
         [Fact]
@@ -410,13 +359,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var part = CreateDefaultPart();
 
-            Assert.Throws<ArgumentNullException>(
-                "definition",
-                () =>
-                {
-                    part.GetExportedValue((ExportDefinition)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definition", () =>
+            {
+                part.GetExportedValue((ExportDefinition)null);
+            });
         }
 
         [Fact]
@@ -425,13 +371,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreateDefaultPart();
             var definition = ExportDefinitionFactory.Create();
 
-            Assert.Throws<ArgumentException>(
-                "definition",
-                () =>
-                {
-                    part.GetExportedValue(definition);
-                }
-            );
+            Assert.Throws<ArgumentException>("definition", () =>
+            {
+                part.GetExportedValue(definition);
+            });
         }
 
         [Fact]

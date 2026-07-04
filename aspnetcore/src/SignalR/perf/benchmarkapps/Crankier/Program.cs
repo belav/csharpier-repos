@@ -35,19 +35,16 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             WorkerCommand.Register(app);
             ServerCommand.Register(app);
 
-            app.Command(
-                "help",
-                cmd =>
-                {
-                    var commandArgument = cmd.Argument("<COMMAND>", "The command to get help for.");
+            app.Command("help", cmd =>
+            {
+                var commandArgument = cmd.Argument("<COMMAND>", "The command to get help for.");
 
-                    cmd.OnExecute(() =>
-                    {
-                        app.ShowHelp(commandArgument.Value);
-                        return 0;
-                    });
-                }
-            );
+                cmd.OnExecute(() =>
+                {
+                    app.ShowHelp(commandArgument.Value);
+                    return 0;
+                });
+            });
 
             app.OnExecute(() =>
             {

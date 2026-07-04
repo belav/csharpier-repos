@@ -213,9 +213,8 @@ internal sealed class HotReloadAgent : IDisposable
 
             foreach (var dependencyName in assembly.GetReferencedAssemblies())
             {
-                var dependency = Array.Find(
-                    assemblies,
-                    a => a.GetName().Name == dependencyName.Name
+                var dependency = Array.Find(assemblies, a =>
+                    a.GetName().Name == dependencyName.Name
                 );
                 if (dependency is not null)
                 {

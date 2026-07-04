@@ -94,26 +94,22 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () => new SubMemberDescriptor((string)null)
+            Assert.Throws<ArgumentNullException>("name", () =>
+                new SubMemberDescriptor((string)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () => new SubMemberDescriptor((string)null, new Attribute[0])
+            Assert.Throws<ArgumentNullException>("name", () =>
+                new SubMemberDescriptor((string)null, new Attribute[0])
             );
         }
 
         [Fact]
         public void Ctor_InvalidName_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => new SubMemberDescriptor(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                new SubMemberDescriptor(string.Empty)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => new SubMemberDescriptor(string.Empty, new Attribute[0])
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                new SubMemberDescriptor(string.Empty, new Attribute[0])
             );
         }
 
@@ -212,13 +208,11 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullDescr_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "descr",
-                () => new SubMemberDescriptor((MemberDescriptor)null)
+            Assert.Throws<ArgumentNullException>("descr", () =>
+                new SubMemberDescriptor((MemberDescriptor)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "oldMemberDescriptor",
-                () => new SubMemberDescriptor((MemberDescriptor)null, new Attribute[0])
+            Assert.Throws<ArgumentNullException>("oldMemberDescriptor", () =>
+                new SubMemberDescriptor((MemberDescriptor)null, new Attribute[0])
             );
         }
 
@@ -1293,9 +1287,8 @@ namespace System.ComponentModel.Tests
         public void FillAttributes_NullAttributeList_ThrowsArgumentNullException()
         {
             var descriptor = new SubMemberDescriptor("Name");
-            Assert.Throws<ArgumentNullException>(
-                "attributeList",
-                () => descriptor.FillAttributes(null)
+            Assert.Throws<ArgumentNullException>("attributeList", () =>
+                descriptor.FillAttributes(null)
             );
         }
 
@@ -1325,9 +1318,8 @@ namespace System.ComponentModel.Tests
         public void GetInvocationTarget_NullType_ThrowsArgumentNullException()
         {
             var descriptor = new SubMemberDescriptor("Name");
-            Assert.Throws<ArgumentNullException>(
-                "type",
-                () => descriptor.GetInvocationTarget(null, new object())
+            Assert.Throws<ArgumentNullException>("type", () =>
+                descriptor.GetInvocationTarget(null, new object())
             );
         }
 
@@ -1335,9 +1327,8 @@ namespace System.ComponentModel.Tests
         public void GetInvocationTarget_NullInstance_ThrowsArgumentNullException()
         {
             var descriptor = new SubMemberDescriptor("Name");
-            Assert.Throws<ArgumentNullException>(
-                "instance",
-                () => descriptor.GetInvocationTarget(typeof(object), null)
+            Assert.Throws<ArgumentNullException>("instance", () =>
+                descriptor.GetInvocationTarget(typeof(object), null)
             );
         }
 
@@ -1356,18 +1347,16 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void GetInvokee_NullComponentClass_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "componentClass",
-                () => SubMemberDescriptor.GetInvokee(null, new object())
+            Assert.Throws<ArgumentNullException>("componentClass", () =>
+                SubMemberDescriptor.GetInvokee(null, new object())
             );
         }
 
         [Fact]
         public void GetInvokee_NullComponent_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "component",
-                () => SubMemberDescriptor.GetInvokee(typeof(object), null)
+            Assert.Throws<ArgumentNullException>("component", () =>
+                SubMemberDescriptor.GetInvokee(typeof(object), null)
             );
         }
 #pragma warning restore 0618
@@ -3360,111 +3349,93 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void FindMethod_NullComponentClass_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "componentClass",
-                () =>
-                    SubMemberDescriptor.FindMethod(
-                        null,
-                        nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
-                        new Type[0],
-                        typeof(void)
-                    )
+            Assert.Throws<ArgumentNullException>("componentClass", () =>
+                SubMemberDescriptor.FindMethod(
+                    null,
+                    nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
+                    new Type[0],
+                    typeof(void)
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "componentClass",
-                () =>
-                    SubMemberDescriptor.FindMethod(
-                        null,
-                        nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
-                        new Type[0],
-                        typeof(void),
-                        true
-                    )
+            Assert.Throws<ArgumentNullException>("componentClass", () =>
+                SubMemberDescriptor.FindMethod(
+                    null,
+                    nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
+                    new Type[0],
+                    typeof(void),
+                    true
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "componentClass",
-                () =>
-                    SubMemberDescriptor.FindMethod(
-                        null,
-                        nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
-                        new Type[0],
-                        typeof(void),
-                        false
-                    )
+            Assert.Throws<ArgumentNullException>("componentClass", () =>
+                SubMemberDescriptor.FindMethod(
+                    null,
+                    nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
+                    new Type[0],
+                    typeof(void),
+                    false
+                )
             );
         }
 
         [Fact]
         public void FindMethod_NullTypes_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "types",
-                () =>
-                    SubMemberDescriptor.FindMethod(
-                        typeof(ClassWithMethods),
-                        nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
-                        null,
-                        typeof(void)
-                    )
+            Assert.Throws<ArgumentNullException>("types", () =>
+                SubMemberDescriptor.FindMethod(
+                    typeof(ClassWithMethods),
+                    nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
+                    null,
+                    typeof(void)
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "types",
-                () =>
-                    SubMemberDescriptor.FindMethod(
-                        typeof(ClassWithMethods),
-                        nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
-                        null,
-                        typeof(void),
-                        true
-                    )
+            Assert.Throws<ArgumentNullException>("types", () =>
+                SubMemberDescriptor.FindMethod(
+                    typeof(ClassWithMethods),
+                    nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
+                    null,
+                    typeof(void),
+                    true
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "types",
-                () =>
-                    SubMemberDescriptor.FindMethod(
-                        typeof(ClassWithMethods),
-                        nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
-                        null,
-                        typeof(void),
-                        false
-                    )
+            Assert.Throws<ArgumentNullException>("types", () =>
+                SubMemberDescriptor.FindMethod(
+                    typeof(ClassWithMethods),
+                    nameof(ClassWithMethods.PublicStaticMethodParameterlessReturnVoid),
+                    null,
+                    typeof(void),
+                    false
+                )
             );
         }
 
         [Fact]
         public void FindMethod_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    SubMemberDescriptor.FindMethod(
-                        typeof(ClassWithMethods),
-                        null,
-                        new Type[0],
-                        typeof(void)
-                    )
+            Assert.Throws<ArgumentNullException>("name", () =>
+                SubMemberDescriptor.FindMethod(
+                    typeof(ClassWithMethods),
+                    null,
+                    new Type[0],
+                    typeof(void)
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    SubMemberDescriptor.FindMethod(
-                        typeof(ClassWithMethods),
-                        null,
-                        new Type[0],
-                        typeof(void),
-                        true
-                    )
+            Assert.Throws<ArgumentNullException>("name", () =>
+                SubMemberDescriptor.FindMethod(
+                    typeof(ClassWithMethods),
+                    null,
+                    new Type[0],
+                    typeof(void),
+                    true
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    SubMemberDescriptor.FindMethod(
-                        typeof(ClassWithMethods),
-                        null,
-                        new Type[0],
-                        typeof(void),
-                        false
-                    )
+            Assert.Throws<ArgumentNullException>("name", () =>
+                SubMemberDescriptor.FindMethod(
+                    typeof(ClassWithMethods),
+                    null,
+                    new Type[0],
+                    typeof(void),
+                    false
+                )
             );
         }
 

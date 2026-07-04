@@ -595,15 +595,13 @@ namespace System.Reflection.Metadata
             var ilDelta = new byte[20];
 
             // Assembly can't be null
-            Assert.Throws<ArgumentNullException>(
-                "assembly",
-                () =>
-                    MetadataUpdater.ApplyUpdate(
-                        null,
-                        new ReadOnlySpan<byte>(metadataDelta),
-                        new ReadOnlySpan<byte>(ilDelta),
-                        ReadOnlySpan<byte>.Empty
-                    )
+            Assert.Throws<ArgumentNullException>("assembly", () =>
+                MetadataUpdater.ApplyUpdate(
+                    null,
+                    new ReadOnlySpan<byte>(metadataDelta),
+                    new ReadOnlySpan<byte>(ilDelta),
+                    ReadOnlySpan<byte>.Empty
+                )
             );
 
             // Tests fail on non-runtime assemblies
@@ -794,55 +792,49 @@ namespace System.Reflection.Metadata
 
                 allTypes = assm.GetTypes();
 
-                CheckReflectedType(
-                    assm,
-                    allTypes,
-                    ns,
-                    "ZExistingClass",
-                    static (ty) =>
+                CheckReflectedType(assm, allTypes, ns, "ZExistingClass", static (ty) =>
+                {
+                    var allMethods = ty.GetMethods();
+
+                    MethodInfo newMethod = null;
+                    foreach (var meth in allMethods)
                     {
-                        var allMethods = ty.GetMethods();
+                        if (meth.Name == "NewMethod")
+                            newMethod = meth;
+                    }
+                    Assert.NotNull(newMethod);
 
-                        MethodInfo newMethod = null;
-                        foreach (var meth in allMethods)
-                        {
-                            if (meth.Name == "NewMethod")
-                                newMethod = meth;
-                        }
-                        Assert.NotNull(newMethod);
+                    Assert.Equal(newMethod, ty.GetMethod("NewMethod"));
 
-                        Assert.Equal(newMethod, ty.GetMethod("NewMethod"));
+                    var allFields = ty.GetFields(
+                        BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public
+                    );
 
-                        var allFields = ty.GetFields(
-                            BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public
-                        );
-
-                        // Mono doesn't do instance fields yet
+                    // Mono doesn't do instance fields yet
 #if false
                     FieldInfo newField = null;
 #endif
-                        FieldInfo newStaticField = null;
-                        foreach (var fld in allFields)
-                        {
+                    FieldInfo newStaticField = null;
+                    foreach (var fld in allFields)
+                    {
 #if false
                         if (fld.Name == "NewField")
                             newField = fld;
 #endif
-                            if (fld.Name == "NewStaticField")
-                                newStaticField = fld;
-                        }
+                        if (fld.Name == "NewStaticField")
+                            newStaticField = fld;
+                    }
 #if false
                     Assert.NotNull(newField);
                     Assert.Equal(newField, ty.GetField("NewField"));
 #endif
 
-                        Assert.NotNull(newStaticField);
-                        Assert.Equal(
-                            newStaticField,
-                            ty.GetField("NewStaticField", BindingFlags.Static | BindingFlags.Public)
-                        );
-                    }
-                );
+                    Assert.NotNull(newStaticField);
+                    Assert.Equal(
+                        newStaticField,
+                        ty.GetField("NewStaticField", BindingFlags.Static | BindingFlags.Public)
+                    );
+                });
                 CheckReflectedType(assm, allTypes, ns, "ZExistingClass+PreviousNestedClass");
                 CheckReflectedType(assm, allTypes, ns, "IExistingInterface");
 
@@ -924,22 +916,16 @@ namespace System.Reflection.Metadata
                 CheckReflectedType(assm, allTypes, ns, "NewGenericClass`1");
                 CheckReflectedType(assm, allTypes, ns, "NewToplevelStruct");
                 CheckReflectedType(assm, allTypes, ns, "INewInterface");
-                CheckReflectedType(
-                    assm,
-                    allTypes,
-                    ns,
-                    "NewEnum",
-                    static (ty) =>
-                    {
-                        var names = Enum.GetNames(ty);
-                        Assert.Equal(3, names.Length);
-                        var vals = Enum.GetValues(ty);
-                        Assert.Equal(3, vals.Length);
+                CheckReflectedType(assm, allTypes, ns, "NewEnum", static (ty) =>
+                {
+                    var names = Enum.GetNames(ty);
+                    Assert.Equal(3, names.Length);
+                    var vals = Enum.GetValues(ty);
+                    Assert.Equal(3, vals.Length);
 
-                        Assert.NotNull(Enum.Parse(ty, "Red"));
-                        Assert.NotNull(Enum.Parse(ty, "Yellow"));
-                    }
-                );
+                    Assert.NotNull(Enum.Parse(ty, "Red"));
+                    Assert.NotNull(Enum.Parse(ty, "Yellow"));
+                });
 
                 // make some instances using reflection and use them through known interfaces
                 var o = Activator.CreateInstance(newTy);

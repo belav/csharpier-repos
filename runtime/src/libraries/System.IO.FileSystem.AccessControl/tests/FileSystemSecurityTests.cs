@@ -21,9 +21,8 @@ namespace System.IO
         public void AddAccessRule_InvalidFileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "rule",
-                () => fileSecurity.AddAccessRule(null)
+            AssertExtensions.Throws<ArgumentNullException>("rule", () =>
+                fileSecurity.AddAccessRule(null)
             );
         }
 
@@ -58,9 +57,8 @@ namespace System.IO
         public void SetAccessRule_InvalidFileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "rule",
-                () => fileSecurity.SetAccessRule(null)
+            AssertExtensions.Throws<ArgumentNullException>("rule", () =>
+                fileSecurity.SetAccessRule(null)
             );
         }
 
@@ -133,9 +131,8 @@ namespace System.IO
         public void ResetAccessRule_InvalidFileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "rule",
-                () => fileSecurity.ResetAccessRule(null)
+            AssertExtensions.Throws<ArgumentNullException>("rule", () =>
+                fileSecurity.ResetAccessRule(null)
             );
         }
 
@@ -184,9 +181,8 @@ namespace System.IO
         public void RemoveAccessRule_InvalidFileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "rule",
-                () => fileSecurity.RemoveAccessRule(null)
+            AssertExtensions.Throws<ArgumentNullException>("rule", () =>
+                fileSecurity.RemoveAccessRule(null)
             );
         }
 
@@ -289,9 +285,8 @@ namespace System.IO
         public void RemoveAccessRuleSpecific_Invalid_FileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "rule",
-                () => fileSecurity.RemoveAccessRuleSpecific(null)
+            AssertExtensions.Throws<ArgumentNullException>("rule", () =>
+                fileSecurity.RemoveAccessRuleSpecific(null)
             );
         }
 
@@ -354,9 +349,8 @@ namespace System.IO
         public void RemoveAccessRuleAll_InvalidFileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "rule",
-                () => fileSecurity.RemoveAccessRuleAll(null)
+            AssertExtensions.Throws<ArgumentNullException>("rule", () =>
+                fileSecurity.RemoveAccessRuleAll(null)
             );
         }
 

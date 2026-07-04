@@ -100,9 +100,8 @@ public partial class TypedResultsTests
     [Fact]
     public void Accepted_WithNullUriAndValue_ThrowsArgumentNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "uri",
-            () => TypedResults.Accepted(default(Uri), default(object))
+        Assert.Throws<ArgumentNullException>("uri", () =>
+            TypedResults.Accepted(default(Uri), default(object))
         );
     }
 
@@ -431,18 +430,16 @@ public partial class TypedResultsTests
     [Fact]
     public void File_WithNullContents_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "fileContents",
-            () => TypedResults.File(default(byte[]))
+        Assert.Throws<ArgumentNullException>("fileContents", () =>
+            TypedResults.File(default(byte[]))
         );
     }
 
     [Fact]
     public void File_WithNullStream_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "fileStream",
-            () => TypedResults.File(default(Stream))
+        Assert.Throws<ArgumentNullException>("fileStream", () =>
+            TypedResults.File(default(Stream))
         );
     }
 
@@ -455,18 +452,16 @@ public partial class TypedResultsTests
     [Fact]
     public void Stream_WithNullPipeReader_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "pipeReader",
-            () => TypedResults.Stream(default(PipeReader))
+        Assert.Throws<ArgumentNullException>("pipeReader", () =>
+            TypedResults.Stream(default(PipeReader))
         );
     }
 
     [Fact]
     public void Stream_WithNullCallback_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "streamWriterCallback",
-            () => TypedResults.Stream(default(Func<Stream, Task>))
+        Assert.Throws<ArgumentNullException>("streamWriterCallback", () =>
+            TypedResults.Stream(default(Func<Stream, Task>))
         );
     }
 
@@ -1130,9 +1125,8 @@ public partial class TypedResultsTests
         // Arrange
         var data = default(object);
 
-        Assert.Throws<ArgumentNullException>(
-            "context",
-            () => TypedResults.Json(data, context: null)
+        Assert.Throws<ArgumentNullException>("context", () =>
+            TypedResults.Json(data, context: null)
         );
     }
 
@@ -1154,27 +1148,24 @@ public partial class TypedResultsTests
         // Arrange
         var data = default(object);
 
-        Assert.Throws<ArgumentNullException>(
-            "jsonTypeInfo",
-            () => TypedResults.Json(data, jsonTypeInfo: null)
+        Assert.Throws<ArgumentNullException>("jsonTypeInfo", () =>
+            TypedResults.Json(data, jsonTypeInfo: null)
         );
     }
 
     [Fact]
     public void LocalRedirect_WithNullStringUrl_ThrowsArgException()
     {
-        Assert.Throws<ArgumentException>(
-            "localUrl",
-            () => TypedResults.LocalRedirect(default(string))
+        Assert.Throws<ArgumentException>("localUrl", () =>
+            TypedResults.LocalRedirect(default(string))
         );
     }
 
     [Fact]
     public void LocalRedirect_WithEmptyStringUrl_ThrowsArgException()
     {
-        Assert.Throws<ArgumentException>(
-            "localUrl",
-            () => TypedResults.LocalRedirect(string.Empty)
+        Assert.Throws<ArgumentException>("localUrl", () =>
+            TypedResults.LocalRedirect(string.Empty)
         );
     }
 
@@ -1308,9 +1299,8 @@ public partial class TypedResultsTests
     [Fact]
     public void Problem_WithNullProblem_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "problemDetails",
-            () => TypedResults.Problem(default(ProblemDetails))
+        Assert.Throws<ArgumentNullException>("problemDetails", () =>
+            TypedResults.Problem(default(ProblemDetails))
         );
     }
 
@@ -1422,9 +1412,8 @@ public partial class TypedResultsTests
     [Fact]
     public void ValidationProblem_WithNullErrors_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "errors",
-            () => TypedResults.ValidationProblem(default(IDictionary<string, string[]>))
+        Assert.Throws<ArgumentNullException>("errors", () =>
+            TypedResults.ValidationProblem(default(IDictionary<string, string[]>))
         );
     }
 

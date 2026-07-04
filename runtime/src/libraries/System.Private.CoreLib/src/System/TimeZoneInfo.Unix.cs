@@ -1286,10 +1286,8 @@ namespace System
                 // move past the opening bracket
                 index++;
 
-                ReadOnlySpan<char> result = TZif_ParsePosixString(
-                    posixFormat,
-                    ref index,
-                    c => c == '>'
+                ReadOnlySpan<char> result = TZif_ParsePosixString(posixFormat, ref index, c =>
+                    c == '>'
                 );
 
                 // move past the closing bracket
@@ -1302,10 +1300,8 @@ namespace System
             }
             else
             {
-                return TZif_ParsePosixString(
-                    posixFormat,
-                    ref index,
-                    c => char.IsDigit(c) || c == '+' || c == '-' || c == ','
+                return TZif_ParsePosixString(posixFormat, ref index, c =>
+                    char.IsDigit(c) || c == '+' || c == '-' || c == ','
                 );
             }
         }
@@ -1314,10 +1310,8 @@ namespace System
             ReadOnlySpan<char> posixFormat,
             scoped ref int index
         ) =>
-            TZif_ParsePosixString(
-                posixFormat,
-                ref index,
-                c => !char.IsDigit(c) && c != '+' && c != '-' && c != ':'
+            TZif_ParsePosixString(posixFormat, ref index, c =>
+                !char.IsDigit(c) && c != '+' && c != '-' && c != ':'
             );
 
         private static void TZif_ParsePosixDateTime(

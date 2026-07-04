@@ -12,109 +12,80 @@ namespace System.Text.Tests
         [Fact]
         public void NullArgument_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => CompositeFormat.Parse(null)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                CompositeFormat.Parse(null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => string.Format(null, (CompositeFormat)null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                string.Format(null, (CompositeFormat)null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => string.Format(null, (CompositeFormat)null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                string.Format(null, (CompositeFormat)null, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => string.Format(null, (CompositeFormat)null, 0, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                string.Format(null, (CompositeFormat)null, 0, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => string.Format(null, (CompositeFormat)null, new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                string.Format(null, (CompositeFormat)null, new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () =>
-                    string.Format(null, (CompositeFormat)null, (ReadOnlySpan<object>)new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                string.Format(null, (CompositeFormat)null, (ReadOnlySpan<object>)new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => string.Format(null, (CompositeFormat)null, null)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                string.Format(null, (CompositeFormat)null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "args",
-                () => string.Format(null, CompositeFormat.Parse("abc"), null)
+            AssertExtensions.Throws<ArgumentNullException>("args", () =>
+                string.Format(null, CompositeFormat.Parse("abc"), null)
             );
 
             var sb = new StringBuilder();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => sb.AppendFormat(null, (CompositeFormat)null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                sb.AppendFormat(null, (CompositeFormat)null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => sb.AppendFormat(null, (CompositeFormat)null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                sb.AppendFormat(null, (CompositeFormat)null, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => sb.AppendFormat(null, (CompositeFormat)null, 0, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                sb.AppendFormat(null, (CompositeFormat)null, 0, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => sb.AppendFormat(null, (CompositeFormat)null, new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                sb.AppendFormat(null, (CompositeFormat)null, new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () =>
-                    sb.AppendFormat(
-                        null,
-                        (CompositeFormat)null,
-                        (ReadOnlySpan<object>)new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                sb.AppendFormat(null, (CompositeFormat)null, (ReadOnlySpan<object>)new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => sb.AppendFormat(null, (CompositeFormat)null, null)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                sb.AppendFormat(null, (CompositeFormat)null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "args",
-                () => sb.AppendFormat(null, CompositeFormat.Parse("abc"), null)
+            AssertExtensions.Throws<ArgumentNullException>("args", () =>
+                sb.AppendFormat(null, CompositeFormat.Parse("abc"), null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => Span<char>.Empty.TryWrite(null, (CompositeFormat)null, out _, 0)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                Span<char>.Empty.TryWrite(null, (CompositeFormat)null, out _, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => Span<char>.Empty.TryWrite(null, (CompositeFormat)null, out _, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                Span<char>.Empty.TryWrite(null, (CompositeFormat)null, out _, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => Span<char>.Empty.TryWrite(null, (CompositeFormat)null, out _, 0, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                Span<char>.Empty.TryWrite(null, (CompositeFormat)null, out _, 0, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => Span<char>.Empty.TryWrite(null, (CompositeFormat)null, out _, new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                Span<char>.Empty.TryWrite(null, (CompositeFormat)null, out _, new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () =>
-                    Span<char>.Empty.TryWrite(
-                        null,
-                        (CompositeFormat)null,
-                        out _,
-                        (ReadOnlySpan<object>)new object[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                Span<char>.Empty.TryWrite(
+                    null,
+                    (CompositeFormat)null,
+                    out _,
+                    (ReadOnlySpan<object>)new object[0]
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => Span<char>.Empty.TryWrite(null, (CompositeFormat)null, out _, null)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                Span<char>.Empty.TryWrite(null, (CompositeFormat)null, out _, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "args",
-                () => Span<char>.Empty.TryWrite(null, CompositeFormat.Parse("abc"), out _, null)
+            AssertExtensions.Throws<ArgumentNullException>("args", () =>
+                Span<char>.Empty.TryWrite(null, CompositeFormat.Parse("abc"), out _, null)
             );
         }
 

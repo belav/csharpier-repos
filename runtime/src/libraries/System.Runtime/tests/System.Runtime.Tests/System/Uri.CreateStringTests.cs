@@ -144,16 +144,12 @@ namespace System.Tests
             string toString
         )
         {
-            PerformAction(
-                uriString,
-                UriKind.Absolute,
-                uri =>
-                {
-                    Assert.Equal(uriString, uri.OriginalString);
-                    Assert.Equal(absoluteUri, uri.AbsoluteUri);
-                    Assert.Equal(toString, uri.ToString());
-                }
-            );
+            PerformAction(uriString, UriKind.Absolute, uri =>
+            {
+                Assert.Equal(uriString, uri.OriginalString);
+                Assert.Equal(absoluteUri, uri.AbsoluteUri);
+                Assert.Equal(toString, uri.ToString());
+            });
         }
 
         public static IEnumerable<object[]> Scheme_Authority_TestData()
@@ -2913,25 +2909,21 @@ namespace System.Tests
             {
                 authority += ":" + port.ToString();
             }
-            PerformAction(
-                uriString,
-                UriKind.Absolute,
-                uri =>
-                {
-                    Assert.Equal(scheme, uri.Scheme);
-                    Assert.Equal(authority, uri.Authority);
-                    Assert.Equal(userInfo, uri.UserInfo);
-                    Assert.Equal(host, uri.Host);
-                    Assert.Equal(idnHost, uri.IdnHost);
-                    Assert.Equal(dnsSafeHost, uri.DnsSafeHost);
-                    Assert.Equal(hostNameType, uri.HostNameType);
-                    Assert.Equal(port, uri.Port);
-                    Assert.Equal(isDefaultPort, uri.IsDefaultPort);
-                    Assert.Equal(isLoopback, uri.IsLoopback);
-                    Assert.True(uri.IsAbsoluteUri);
-                    Assert.False(uri.UserEscaped);
-                }
-            );
+            PerformAction(uriString, UriKind.Absolute, uri =>
+            {
+                Assert.Equal(scheme, uri.Scheme);
+                Assert.Equal(authority, uri.Authority);
+                Assert.Equal(userInfo, uri.UserInfo);
+                Assert.Equal(host, uri.Host);
+                Assert.Equal(idnHost, uri.IdnHost);
+                Assert.Equal(dnsSafeHost, uri.DnsSafeHost);
+                Assert.Equal(hostNameType, uri.HostNameType);
+                Assert.Equal(port, uri.Port);
+                Assert.Equal(isDefaultPort, uri.IsDefaultPort);
+                Assert.Equal(isLoopback, uri.IsLoopback);
+                Assert.True(uri.IsAbsoluteUri);
+                Assert.False(uri.UserEscaped);
+            });
         }
 
         public static IEnumerable<object[]> Path_Query_Fragment_TestData()
@@ -3884,46 +3876,40 @@ namespace System.Tests
             IEnumerable<string> segments = null;
             string localPath = null;
             string segmentsPath = null;
-            PerformAction(
-                uriString,
-                UriKind.Absolute,
-                uri =>
+            PerformAction(uriString, UriKind.Absolute, uri =>
+            {
+                if (segments == null)
                 {
-                    if (segments == null)
+                    localPath = Uri.UnescapeDataString(path);
+                    segmentsPath = path;
+                    if (uri.IsUnc)
                     {
-                        localPath = Uri.UnescapeDataString(path);
-                        segmentsPath = path;
-                        if (uri.IsUnc)
+                        localPath = @"\\" + uri.Host + path;
+                        localPath = localPath.Replace('/', '\\');
+                        // Unescape '\\'
+                        localPath = localPath.Replace("%5C", "\\");
+                        if (path == "/")
                         {
-                            localPath = @"\\" + uri.Host + path;
-                            localPath = localPath.Replace('/', '\\');
-                            // Unescape '\\'
-                            localPath = localPath.Replace("%5C", "\\");
-                            if (path == "/")
-                            {
-                                localPath = localPath.Substring(0, localPath.Length - 1);
-                            }
+                            localPath = localPath.Substring(0, localPath.Length - 1);
                         }
-                        else if (path.Length > 2 && path[1] == ':' && path[2] == '/')
-                        {
-                            segmentsPath = '/' + segmentsPath;
-                            localPath = localPath.Replace('/', '\\');
-                        }
-                        segments = Regex
-                            .Split(segmentsPath, @"(?<=/)")
-                            .TakeWhile(s => s.Length != 0);
                     }
-
-                    Assert.Equal(path, uri.AbsolutePath);
-                    Assert.Equal(localPath, uri.LocalPath);
-                    Assert.Equal(path + query, uri.PathAndQuery);
-                    Assert.Equal(segments, uri.Segments);
-                    Assert.Equal(query, uri.Query);
-                    Assert.Equal(fragment, uri.Fragment);
-                    Assert.True(uri.IsAbsoluteUri);
-                    Assert.False(uri.UserEscaped);
+                    else if (path.Length > 2 && path[1] == ':' && path[2] == '/')
+                    {
+                        segmentsPath = '/' + segmentsPath;
+                        localPath = localPath.Replace('/', '\\');
+                    }
+                    segments = Regex.Split(segmentsPath, @"(?<=/)").TakeWhile(s => s.Length != 0);
                 }
-            );
+
+                Assert.Equal(path, uri.AbsolutePath);
+                Assert.Equal(localPath, uri.LocalPath);
+                Assert.Equal(path + query, uri.PathAndQuery);
+                Assert.Equal(segments, uri.Segments);
+                Assert.Equal(query, uri.Query);
+                Assert.Equal(fragment, uri.Fragment);
+                Assert.True(uri.IsAbsoluteUri);
+                Assert.False(uri.UserEscaped);
+            });
         }
 
         public static IEnumerable<object[]> IsFile_IsUnc_TestData()
@@ -4044,15 +4030,11 @@ namespace System.Tests
         [MemberData(nameof(IsFile_IsUnc_TestData))]
         public void IsFile_IsUnc(string uriString, bool isFile, bool isUnc)
         {
-            PerformAction(
-                uriString,
-                UriKind.Absolute,
-                uri =>
-                {
-                    Assert.Equal(isFile, uri.IsFile);
-                    Assert.Equal(isUnc, uri.IsUnc);
-                }
-            );
+            PerformAction(uriString, UriKind.Absolute, uri =>
+            {
+                Assert.Equal(isFile, uri.IsFile);
+                Assert.Equal(isUnc, uri.IsUnc);
+            });
         }
 
         public static IEnumerable<object[]> Relative_TestData()
@@ -4070,38 +4052,29 @@ namespace System.Tests
         [MemberData(nameof(Relative_TestData))]
         public void Relative(string uriString, bool relativeOrAbsolute)
         {
-            PerformAction(
-                uriString,
-                UriKind.Relative,
-                uri =>
+            PerformAction(uriString, UriKind.Relative, uri =>
+            {
+                VerifyRelativeUri(uri, uriString, uriString);
+            });
+            PerformAction(uriString, UriKind.RelativeOrAbsolute, uri =>
+            {
+                if (relativeOrAbsolute)
                 {
                     VerifyRelativeUri(uri, uriString, uriString);
                 }
-            );
-            PerformAction(
-                uriString,
-                UriKind.RelativeOrAbsolute,
-                uri =>
+                else
                 {
-                    if (relativeOrAbsolute)
-                    {
-                        VerifyRelativeUri(uri, uriString, uriString);
-                    }
-                    else
-                    {
-                        Assert.True(uri.IsAbsoluteUri);
-                    }
+                    Assert.True(uri.IsAbsoluteUri);
                 }
-            );
+            });
         }
 
         [Fact]
         public void Create_String_Null_Throws_ArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("uriString", () => new Uri(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "uriString",
-                () => new Uri(null, UriKind.Absolute)
+            AssertExtensions.Throws<ArgumentNullException>("uriString", () =>
+                new Uri(null, UriKind.Absolute)
             );
 
             Uri uri;
@@ -4112,24 +4085,20 @@ namespace System.Tests
         [Fact]
         public void Create_String_InvalidUriKind_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new Uri("http://host", UriKind.RelativeOrAbsolute - 1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new Uri("http://host", UriKind.RelativeOrAbsolute - 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new Uri("http://host", UriKind.Relative + 1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new Uri("http://host", UriKind.Relative + 1)
             );
 
             Uri uri = null;
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Uri.TryCreate("http://host", UriKind.RelativeOrAbsolute - 1, out uri)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Uri.TryCreate("http://host", UriKind.RelativeOrAbsolute - 1, out uri)
             );
             Assert.Null(uri);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Uri.TryCreate("http://host", UriKind.Relative + 1, out uri)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Uri.TryCreate("http://host", UriKind.Relative + 1, out uri)
             );
             Assert.Null(uri);
         }

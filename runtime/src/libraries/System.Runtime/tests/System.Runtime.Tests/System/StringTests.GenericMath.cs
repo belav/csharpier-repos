@@ -102,9 +102,8 @@ namespace System.Tests
                 )
             );
             Assert.Equal(default(string), result);
-            Assert.Throws(
-                exceptionType,
-                () => ParsableHelper<string>.Parse(value, provider: CultureInfo.CurrentCulture)
+            Assert.Throws(exceptionType, () =>
+                ParsableHelper<string>.Parse(value, provider: CultureInfo.CurrentCulture)
             );
         }
 
@@ -169,9 +168,8 @@ namespace System.Tests
                 SpanParsableHelper<string>.TryParse(value.AsSpan(), provider: null, out result)
             );
             Assert.Equal(default(string), result);
-            Assert.Throws(
-                exceptionType,
-                () => SpanParsableHelper<string>.Parse(value.AsSpan(), provider: null)
+            Assert.Throws(exceptionType, () =>
+                SpanParsableHelper<string>.Parse(value.AsSpan(), provider: null)
             );
 
             // Current Culture
@@ -183,13 +181,11 @@ namespace System.Tests
                 )
             );
             Assert.Equal(default(string), result);
-            Assert.Throws(
-                exceptionType,
-                () =>
-                    SpanParsableHelper<string>.Parse(
-                        value.AsSpan(),
-                        provider: CultureInfo.CurrentCulture
-                    )
+            Assert.Throws(exceptionType, () =>
+                SpanParsableHelper<string>.Parse(
+                    value.AsSpan(),
+                    provider: CultureInfo.CurrentCulture
+                )
             );
         }
     }

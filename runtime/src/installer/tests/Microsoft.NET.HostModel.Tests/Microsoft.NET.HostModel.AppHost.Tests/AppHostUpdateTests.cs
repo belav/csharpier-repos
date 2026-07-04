@@ -57,14 +57,11 @@ namespace Microsoft.NET.HostModel.Tests
         {
             using (TestDirectory testDirectory = TestDirectory.Create())
             {
-                string sourceAppHostMock = PrepareAppHostMockFile(
-                    testDirectory,
-                    content =>
-                    {
-                        // Corrupt the hash value
-                        content[WindowsFileHeader.Length + 1]++;
-                    }
-                );
+                string sourceAppHostMock = PrepareAppHostMockFile(testDirectory, content =>
+                {
+                    // Corrupt the hash value
+                    content[WindowsFileHeader.Length + 1]++;
+                });
                 string destinationFilePath = Path.Combine(
                     testDirectory.Path,
                     "DestinationAppHost.exe.mock"
@@ -143,15 +140,12 @@ namespace Microsoft.NET.HostModel.Tests
         {
             using (TestDirectory testDirectory = TestDirectory.Create())
             {
-                string sourceAppHostMock = PrepareAppHostMockFile(
-                    testDirectory,
-                    content =>
-                    {
-                        // Windows PE files must start with 0x5A4D, so write some other value here.
-                        content[0] = 1;
-                        content[1] = 2;
-                    }
-                );
+                string sourceAppHostMock = PrepareAppHostMockFile(testDirectory, content =>
+                {
+                    // Windows PE files must start with 0x5A4D, so write some other value here.
+                    content[0] = 1;
+                    content[1] = 2;
+                });
                 string destinationFilePath = Path.Combine(
                     testDirectory.Path,
                     "DestinationAppHost.exe.mock"
@@ -176,14 +170,11 @@ namespace Microsoft.NET.HostModel.Tests
         {
             using (TestDirectory testDirectory = TestDirectory.Create())
             {
-                string sourceAppHostMock = PrepareAppHostMockFile(
-                    testDirectory,
-                    content =>
-                    {
-                        // Corrupt the value of the subsystem (the default should be 3)
-                        content[SubsystemOffset] = 42;
-                    }
-                );
+                string sourceAppHostMock = PrepareAppHostMockFile(testDirectory, content =>
+                {
+                    // Corrupt the value of the subsystem (the default should be 3)
+                    content[SubsystemOffset] = 42;
+                });
                 string destinationFilePath = Path.Combine(
                     testDirectory.Path,
                     "DestinationAppHost.exe.mock"

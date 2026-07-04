@@ -27,9 +27,8 @@ namespace System.Linq.Expressions.Tests
         [InlineData(-1)]
         public void ReadOnlyCollectionBuilder_Ctor_Capacity_ArgumentChecking(int capacity)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new ReadOnlyCollectionBuilder<int>(capacity)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new ReadOnlyCollectionBuilder<int>(capacity)
             );
         }
 
@@ -49,9 +48,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void ReadOnlyCollectionBuilder_Ctor_Collection_ArgumentChecking()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "collection",
-                () => new ReadOnlyCollectionBuilder<int>(null)
+            AssertExtensions.Throws<ArgumentNullException>("collection", () =>
+                new ReadOnlyCollectionBuilder<int>(null)
             );
         }
 
@@ -111,20 +109,14 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(1, rocb.Capacity);
             Assert.Equal(1, rocb.Count);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () =>
-                {
-                    rocb.Capacity = 0;
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () =>
-                {
-                    rocb.Capacity = -1;
-                }
-            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+            {
+                rocb.Capacity = 0;
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+            {
+                rocb.Capacity = -1;
+            });
 
             rocb.Capacity = 1;
 
@@ -617,13 +609,11 @@ namespace System.Linq.Expressions.Tests
         {
             var rocb = new ReadOnlyCollectionBuilder<int>(new[] { 1, 2, 3 });
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => rocb.Reverse(-1, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                rocb.Reverse(-1, 1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => rocb.Reverse(1, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                rocb.Reverse(1, -1)
             );
 
             // CONSIDER: Throw ArgumentException just like List<T> does, see https://github.com/dotnet/runtime/issues/19499
@@ -832,9 +822,8 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Throws<ArgumentNullException>(() => rocb.CopyTo(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => rocb.CopyTo(new int[3], -1));
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                () => rocb.CopyTo(new int[3], 3)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", () =>
+                rocb.CopyTo(new int[3], 3)
             ); // NB: Consistent with List<T> behavior
         }
 
@@ -869,9 +858,8 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Throws<ArgumentNullException>(() => rocb.CopyTo(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => rocb.CopyTo(new int[3], -1));
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                () => rocb.CopyTo(new int[3], 3)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", () =>
+                rocb.CopyTo(new int[3], 3)
             ); // NB: Consistent with List<T> behavior
             AssertExtensions.Throws<ArgumentException>(null, () => rocb.CopyTo(new int[3, 3], 0));
 

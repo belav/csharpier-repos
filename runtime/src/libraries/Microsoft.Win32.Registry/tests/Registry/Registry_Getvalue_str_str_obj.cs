@@ -13,10 +13,8 @@ namespace Microsoft.Win32.RegistryTests
         [Fact]
         public static void NullKeyName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keyName",
-                null,
-                () => Registry.GetValue(null, null, null)
+            AssertExtensions.Throws<ArgumentNullException>("keyName", null, () =>
+                Registry.GetValue(null, null, null)
             );
         }
 
@@ -37,10 +35,8 @@ namespace Microsoft.Win32.RegistryTests
         [MemberData(nameof(ArgumentExceptionTestData))]
         public static void InvalidKeyName_ThrowsArgumentException(string keyName)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "keyName",
-                null,
-                () => Registry.GetValue(keyName, null, null)
+            AssertExtensions.Throws<ArgumentException>("keyName", null, () =>
+                Registry.GetValue(keyName, null, null)
             );
         }
 

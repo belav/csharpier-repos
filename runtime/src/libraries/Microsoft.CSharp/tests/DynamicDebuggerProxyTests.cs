@@ -62,9 +62,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             // ignoreException: false
             var exceptionType = GetType("DynamicBindingFailedException");
-            Assert.Throws(
-                exceptionType,
-                () => GetItems(TryGetMemberValueImpl(obj, "F", ignoreException: false))
+            Assert.Throws(exceptionType, () =>
+                GetItems(TryGetMemberValueImpl(obj, "F", ignoreException: false))
             );
         }
 

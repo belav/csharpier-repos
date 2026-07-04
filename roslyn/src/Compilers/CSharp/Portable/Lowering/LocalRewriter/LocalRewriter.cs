@@ -444,9 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (_compilation.ShouldEmitNativeIntegerAttributes())
                 {
                     if (
-                        hasReturnTypeOrParameter(
-                            localFunction,
-                            static t => t.ContainsNativeIntegerWrapperType()
+                        hasReturnTypeOrParameter(localFunction, static t =>
+                            t.ContainsNativeIntegerWrapperType()
                         )
                         || typeParameters.Any(static t =>
                             t.ConstraintTypesNoUseSiteDiagnostics.Any(static t =>
@@ -474,9 +473,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (
                         constraintsNeedNullableAttribute
-                        || hasReturnTypeOrParameter(
-                            localFunction,
-                            static t => t.NeedsNullableAttribute()
+                        || hasReturnTypeOrParameter(localFunction, static t =>
+                            t.NeedsNullableAttribute()
                         )
                     )
                     {

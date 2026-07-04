@@ -12,28 +12,22 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_NameNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                {
-                    NameValueWithParametersHeaderValue nameValue =
-                        new NameValueWithParametersHeaderValue(null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+            {
+                NameValueWithParametersHeaderValue nameValue =
+                    new NameValueWithParametersHeaderValue(null);
+            });
         }
 
         [Fact]
         public void Ctor_NameEmpty_Throw()
         {
             // null and empty should be treated the same. So we also throw for empty strings.
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () =>
-                {
-                    NameValueWithParametersHeaderValue nameValue =
-                        new NameValueWithParametersHeaderValue(string.Empty);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+            {
+                NameValueWithParametersHeaderValue nameValue =
+                    new NameValueWithParametersHeaderValue(string.Empty);
+            });
         }
 
         [Fact]

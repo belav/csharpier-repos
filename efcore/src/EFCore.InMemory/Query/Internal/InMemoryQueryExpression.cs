@@ -1647,11 +1647,8 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
     ) =>
         (
             comparer == null
-                ? outer.GroupJoin(
-                    inner,
-                    outerKeySelector,
-                    innerKeySelector,
-                    (oe, ies) => new { oe, ies }
+                ? outer.GroupJoin(inner, outerKeySelector, innerKeySelector, (oe, ies) =>
+                    new { oe, ies }
                 )
                 : outer.GroupJoin(
                     inner,

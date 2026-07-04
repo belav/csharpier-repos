@@ -108,81 +108,78 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             if (statements.Status.Failed)
                 return ExtractMethodResult.Fail(statements.Status);
 
-            return ExtractMethodResult.Success(
-                status,
-                async cancellationToken =>
+            return ExtractMethodResult.Success(status, async cancellationToken =>
+            {
+                var (analyzedDocument, insertionPoint) =
+                    await GetAnnotatedDocumentAndInsertionPointAsync(
+                            originalSemanticDocument,
+                            analyzeResult,
+                            insertionPointNode,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+
+                var triviaResult = await PreserveTriviaAsync(
+                        (TSelectionResult)OriginalSelectionResult.With(analyzedDocument),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var expandedDocument = await ExpandAsync(
+                        (TSelectionResult)
+                            OriginalSelectionResult.With(triviaResult.SemanticDocument),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+
+                var generatedCode = await GenerateCodeAsync(
+                        insertionPoint.With(expandedDocument),
+                        (TSelectionResult)OriginalSelectionResult.With(expandedDocument),
+                        analyzeResult,
+                        Options.CodeGenerationOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+
+                var afterTriviaRestored = await triviaResult
+                    .ApplyAsync(generatedCode, cancellationToken)
+                    .ConfigureAwait(false);
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var documentWithoutFinalFormatting = afterTriviaRestored.Document;
+
+                cancellationToken.ThrowIfCancellationRequested();
+
+                var newRoot = afterTriviaRestored.Root;
+                var invocationNameToken = GetInvocationNameToken(
+                    newRoot.GetAnnotatedTokens(generatedCode.MethodNameAnnotation)
+                );
+
+                // Do some final patchups of whitespace when inserting a local function.
+                if (LocalFunction)
                 {
-                    var (analyzedDocument, insertionPoint) =
-                        await GetAnnotatedDocumentAndInsertionPointAsync(
-                                originalSemanticDocument,
-                                analyzeResult,
-                                insertionPointNode,
+                    var methodDefinition = newRoot
+                        .GetAnnotatedNodesAndTokens(generatedCode.MethodDefinitionAnnotation)
+                        .FirstOrDefault()
+                        .AsNode();
+                    (documentWithoutFinalFormatting, invocationNameToken) =
+                        await InsertNewLineBeforeLocalFunctionIfNecessaryAsync(
+                                documentWithoutFinalFormatting,
+                                invocationNameToken,
+                                methodDefinition,
                                 cancellationToken
                             )
                             .ConfigureAwait(false);
-
-                    var triviaResult = await PreserveTriviaAsync(
-                            (TSelectionResult)OriginalSelectionResult.With(analyzedDocument),
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    var expandedDocument = await ExpandAsync(
-                            (TSelectionResult)
-                                OriginalSelectionResult.With(triviaResult.SemanticDocument),
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
-
-                    var generatedCode = await GenerateCodeAsync(
-                            insertionPoint.With(expandedDocument),
-                            (TSelectionResult)OriginalSelectionResult.With(expandedDocument),
-                            analyzeResult,
-                            Options.CodeGenerationOptions,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
-
-                    var afterTriviaRestored = await triviaResult
-                        .ApplyAsync(generatedCode, cancellationToken)
-                        .ConfigureAwait(false);
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    var documentWithoutFinalFormatting = afterTriviaRestored.Document;
-
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    var newRoot = afterTriviaRestored.Root;
-                    var invocationNameToken = GetInvocationNameToken(
-                        newRoot.GetAnnotatedTokens(generatedCode.MethodNameAnnotation)
-                    );
-
-                    // Do some final patchups of whitespace when inserting a local function.
-                    if (LocalFunction)
-                    {
-                        var methodDefinition = newRoot
-                            .GetAnnotatedNodesAndTokens(generatedCode.MethodDefinitionAnnotation)
-                            .FirstOrDefault()
-                            .AsNode();
-                        (documentWithoutFinalFormatting, invocationNameToken) =
-                            await InsertNewLineBeforeLocalFunctionIfNecessaryAsync(
-                                    documentWithoutFinalFormatting,
-                                    invocationNameToken,
-                                    methodDefinition,
-                                    cancellationToken
-                                )
-                                .ConfigureAwait(false);
-                    }
-
-                    return await GetFormattedDocumentAsync(
-                            documentWithoutFinalFormatting,
-                            invocationNameToken,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(false);
                 }
-            );
+
+                return await GetFormattedDocumentAsync(
+                        documentWithoutFinalFormatting,
+                        invocationNameToken,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+            });
 
             bool CanAddTo(
                 Document document,

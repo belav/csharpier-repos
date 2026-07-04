@@ -319,9 +319,8 @@ namespace System.Net.NameResolution.Tests
             Assert.NotNull(entry.HostName);
             Assert.True(entry.HostName.Length > 0, "Empty host name");
             Assert.True(entry.AddressList.Length >= 1, "No local IPs");
-            Assert.All(
-                entry.AddressList,
-                addr => Assert.True(IPAddress.IsLoopback(addr), "Not a loopback address: " + addr)
+            Assert.All(entry.AddressList, addr =>
+                Assert.True(IPAddress.IsLoopback(addr), "Not a loopback address: " + addr)
             );
         }
 
@@ -376,9 +375,8 @@ namespace System.Net.NameResolution.Tests
                 ? await Dns.GetHostEntryAsync(host, addressFamily)
                 : Dns.GetHostEntry(host, addressFamily);
 
-            Assert.All(
-                entry.AddressList,
-                address => Assert.Equal(addressFamily, address.AddressFamily)
+            Assert.All(entry.AddressList, address =>
+                Assert.Equal(addressFamily, address.AddressFamily)
             );
         }
 

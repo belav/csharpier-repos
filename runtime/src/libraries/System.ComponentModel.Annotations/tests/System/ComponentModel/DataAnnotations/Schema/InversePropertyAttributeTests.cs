@@ -19,10 +19,8 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         [InlineData(null)]
         public static void Ctor_String_NullProperty_ThrowsArgumentException(string property)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "property",
-                null,
-                () => new InversePropertyAttribute(property)
+            AssertExtensions.Throws<ArgumentNullException>("property", null, () =>
+                new InversePropertyAttribute(property)
             );
         }
 
@@ -31,10 +29,8 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         [InlineData(" \t\r\n")]
         public static void Ctor_String_WhitespaceProperty_ThrowsArgumentException(string property)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "property",
-                null,
-                () => new InversePropertyAttribute(property)
+            AssertExtensions.Throws<ArgumentException>("property", null, () =>
+                new InversePropertyAttribute(property)
             );
         }
     }

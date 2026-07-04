@@ -300,9 +300,8 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
             ParallelQuery<int> query = labeled.Item;
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => query.WithExecutionMode((ParallelExecutionMode)2)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                query.WithExecutionMode((ParallelExecutionMode)2)
             );
         }
 
@@ -321,9 +320,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void WithExecutionMode_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).WithExecutionMode(ParallelExecutionMode.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).WithExecutionMode(ParallelExecutionMode.Default)
             );
         }
 

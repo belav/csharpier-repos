@@ -52,19 +52,15 @@ namespace System.UnitTesting
         public static T Throws<T>(RetryMode retry, Action action, Action<T, int> validator)
             where T : Exception
         {
-            var exception = (T)Run(
-                retry,
-                action,
-                (actual, retryCount) =>
-                {
-                    AssertIsExactInstanceOf(typeof(T), actual, retryCount);
+            var exception = (T)Run(retry, action, (actual, retryCount) =>
+            {
+                AssertIsExactInstanceOf(typeof(T), actual, retryCount);
 
-                    if (validator != null)
-                    {
-                        validator((T)actual, retryCount);
-                    }
+                if (validator != null)
+                {
+                    validator((T)actual, retryCount);
                 }
-            );
+            });
 
             return exception;
         }
@@ -99,19 +95,15 @@ namespace System.UnitTesting
             Action<Exception, int> validator
         )
         {
-            Run(
-                retry,
-                action,
-                (actual, retryCount) =>
-                {
-                    Assert.Same(expected, actual);
+            Run(retry, action, (actual, retryCount) =>
+            {
+                Assert.Same(expected, actual);
 
-                    if (validator != null)
-                    {
-                        validator(actual, retryCount);
-                    }
+                if (validator != null)
+                {
+                    validator(actual, retryCount);
                 }
-            );
+            });
         }
 
         private static Exception Run(

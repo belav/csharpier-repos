@@ -174,17 +174,15 @@ public class ValueConverterSelector : IValueConverterSelector
         {
             if (providerClrType == null || providerClrType == typeof(string))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(string)),
-                    _ => GuidToStringConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(string)), _ =>
+                    GuidToStringConverter.DefaultInfo
                 );
             }
 
             if (providerClrType == null || providerClrType == typeof(byte[]))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(byte[])),
-                    _ => GuidToBytesConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(byte[])), _ =>
+                    GuidToBytesConverter.DefaultInfo
                 );
             }
         }
@@ -192,9 +190,8 @@ public class ValueConverterSelector : IValueConverterSelector
         {
             if (providerClrType == null || providerClrType == typeof(string))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(string)),
-                    _ => BytesToStringConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(string)), _ =>
+                    BytesToStringConverter.DefaultInfo
                 );
             }
         }
@@ -202,9 +199,8 @@ public class ValueConverterSelector : IValueConverterSelector
         {
             if (providerClrType == null || providerClrType == typeof(string))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(string)),
-                    _ => UriToStringConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(string)), _ =>
+                    UriToStringConverter.DefaultInfo
                 );
             }
         }
@@ -212,19 +208,16 @@ public class ValueConverterSelector : IValueConverterSelector
         {
             if (providerClrType == null || providerClrType == typeof(byte[]))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(byte[])),
-                    _ => StringToBytesConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(byte[])), _ =>
+                    StringToBytesConverter.DefaultInfo
                 );
             }
             else if (providerClrType.IsEnum)
             {
-                yield return _converters.GetOrAdd(
-                    (typeof(string), providerClrType),
-                    k =>
-                        GetDefaultValueConverterInfo(
-                            typeof(StringToEnumConverter<>).MakeGenericType(k.ProviderClrType)
-                        )
+                yield return _converters.GetOrAdd((typeof(string), providerClrType), k =>
+                    GetDefaultValueConverterInfo(
+                        typeof(StringToEnumConverter<>).MakeGenericType(k.ProviderClrType)
+                    )
                 );
             }
             else if (Numerics.Contains(providerClrType))
@@ -243,65 +236,56 @@ public class ValueConverterSelector : IValueConverterSelector
             }
             else if (providerClrType == typeof(DateTime))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(DateTime)),
-                    _ => StringToDateTimeConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(DateTime)), _ =>
+                    StringToDateTimeConverter.DefaultInfo
                 );
             }
             else if (providerClrType == typeof(DateTimeOffset))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(DateTimeOffset)),
-                    _ => StringToDateTimeOffsetConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(DateTimeOffset)), _ =>
+                    StringToDateTimeOffsetConverter.DefaultInfo
                 );
             }
             else if (providerClrType == typeof(DateOnly))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(DateOnly)),
-                    _ => StringToDateOnlyConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(DateOnly)), _ =>
+                    StringToDateOnlyConverter.DefaultInfo
                 );
             }
             else if (providerClrType == typeof(TimeSpan))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(TimeSpan)),
-                    _ => StringToTimeSpanConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(TimeSpan)), _ =>
+                    StringToTimeSpanConverter.DefaultInfo
                 );
             }
             else if (providerClrType == typeof(TimeOnly))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(TimeOnly)),
-                    _ => StringToTimeOnlyConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(TimeOnly)), _ =>
+                    StringToTimeOnlyConverter.DefaultInfo
                 );
             }
             else if (providerClrType == typeof(Guid))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(Guid)),
-                    _ => StringToGuidConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(Guid)), _ =>
+                    StringToGuidConverter.DefaultInfo
                 );
             }
             else if (providerClrType == typeof(bool))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(bool)),
-                    _ => StringToBoolConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(bool)), _ =>
+                    StringToBoolConverter.DefaultInfo
                 );
             }
             else if (providerClrType == typeof(char))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(char)),
-                    _ => StringToCharConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(char)), _ =>
+                    StringToCharConverter.DefaultInfo
                 );
             }
             else if (providerClrType == typeof(Uri))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(Uri)),
-                    _ => StringToUriConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(Uri)), _ =>
+                    StringToUriConverter.DefaultInfo
                 );
             }
         }
@@ -314,36 +298,31 @@ public class ValueConverterSelector : IValueConverterSelector
         {
             if (providerClrType == null || providerClrType == typeof(string))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(string)),
-                    k =>
-                        k.ModelClrType == typeof(DateTime) ? DateTimeToStringConverter.DefaultInfo
-                        : k.ModelClrType == typeof(DateTimeOffset)
-                            ? DateTimeOffsetToStringConverter.DefaultInfo
-                        : k.ModelClrType == typeof(TimeSpan) ? TimeSpanToStringConverter.DefaultInfo
-                        : TimeOnlyToStringConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(string)), k =>
+                    k.ModelClrType == typeof(DateTime) ? DateTimeToStringConverter.DefaultInfo
+                    : k.ModelClrType == typeof(DateTimeOffset)
+                        ? DateTimeOffsetToStringConverter.DefaultInfo
+                    : k.ModelClrType == typeof(TimeSpan) ? TimeSpanToStringConverter.DefaultInfo
+                    : TimeOnlyToStringConverter.DefaultInfo
                 );
             }
 
             if (providerClrType == null || providerClrType == typeof(long))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(long)),
-                    k =>
-                        k.ModelClrType == typeof(DateTime) ? DateTimeToBinaryConverter.DefaultInfo
-                        : k.ModelClrType == typeof(DateTimeOffset)
-                            ? DateTimeOffsetToBinaryConverter.DefaultInfo
-                        : k.ModelClrType == typeof(TimeSpan) ? TimeSpanToTicksConverter.DefaultInfo
-                        : TimeOnlyToTicksConverter.DefaultInfo
-                );
+                yield return _converters.GetOrAdd((modelClrType, typeof(long)), k => k.ModelClrType
+                    == typeof(DateTime)
+                        ? DateTimeToBinaryConverter.DefaultInfo
+                    : k.ModelClrType == typeof(DateTimeOffset)
+                        ? DateTimeOffsetToBinaryConverter.DefaultInfo
+                    : k.ModelClrType == typeof(TimeSpan) ? TimeSpanToTicksConverter.DefaultInfo
+                    : TimeOnlyToTicksConverter.DefaultInfo);
             }
 
             if (providerClrType == null || providerClrType == typeof(byte[]))
             {
                 yield return modelClrType == typeof(DateTimeOffset)
-                    ? _converters.GetOrAdd(
-                        (modelClrType, typeof(byte[])),
-                        _ => DateTimeOffsetToBytesConverter.DefaultInfo
+                    ? _converters.GetOrAdd((modelClrType, typeof(byte[])), _ =>
+                        DateTimeOffsetToBytesConverter.DefaultInfo
                     )
                     : _converters.GetOrAdd(
                         (modelClrType, typeof(byte[])),
@@ -367,9 +346,8 @@ public class ValueConverterSelector : IValueConverterSelector
         {
             if (providerClrType == null || providerClrType == typeof(string))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(string)),
-                    _ => DateOnlyToStringConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(string)), _ =>
+                    DateOnlyToStringConverter.DefaultInfo
                 );
             }
 
@@ -393,17 +371,15 @@ public class ValueConverterSelector : IValueConverterSelector
         {
             if (providerClrType == null || providerClrType == typeof(string))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(string)),
-                    _ => IPAddressToStringConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(string)), _ =>
+                    IPAddressToStringConverter.DefaultInfo
                 );
             }
 
             if (providerClrType == typeof(byte[]))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(byte[])),
-                    _ => IPAddressToBytesConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(byte[])), _ =>
+                    IPAddressToBytesConverter.DefaultInfo
                 );
             }
         }
@@ -411,17 +387,15 @@ public class ValueConverterSelector : IValueConverterSelector
         {
             if (providerClrType == null || providerClrType == typeof(string))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(string)),
-                    _ => PhysicalAddressToStringConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(string)), _ =>
+                    PhysicalAddressToStringConverter.DefaultInfo
                 );
             }
 
             if (providerClrType == typeof(byte[]))
             {
-                yield return _converters.GetOrAdd(
-                    (modelClrType, typeof(byte[])),
-                    _ => PhysicalAddressToBytesConverter.DefaultInfo
+                yield return _converters.GetOrAdd((modelClrType, typeof(byte[])), _ =>
+                    PhysicalAddressToBytesConverter.DefaultInfo
                 );
             }
         }
@@ -456,9 +430,8 @@ public class ValueConverterSelector : IValueConverterSelector
     {
         if (underlyingProviderType == null || underlyingProviderType == typeof(string))
         {
-            yield return _converters.GetOrAdd(
-                (underlyingModelType, typeof(string)),
-                k => CharToStringConverter.DefaultInfo
+            yield return _converters.GetOrAdd((underlyingModelType, typeof(string)), k =>
+                CharToStringConverter.DefaultInfo
             );
         }
 
@@ -482,9 +455,8 @@ public class ValueConverterSelector : IValueConverterSelector
     {
         if (underlyingProviderType == null || underlyingProviderType == typeof(byte[]))
         {
-            yield return _converters.GetOrAdd(
-                (underlyingModelType, typeof(byte[])),
-                _ => NumberToBytesConverter<char>.DefaultInfo
+            yield return _converters.GetOrAdd((underlyingModelType, typeof(byte[])), _ =>
+                NumberToBytesConverter<char>.DefaultInfo
             );
         }
     }
@@ -496,43 +468,38 @@ public class ValueConverterSelector : IValueConverterSelector
     {
         if (underlyingProviderType == null || underlyingProviderType == typeof(string))
         {
-            yield return _converters.GetOrAdd(
-                (underlyingModelType, typeof(string)),
-                k =>
-                    GetDefaultValueConverterInfo(
-                        typeof(EnumToStringConverter<>).MakeGenericType(k.ModelClrType)
-                    )
+            yield return _converters.GetOrAdd((underlyingModelType, typeof(string)), k =>
+                GetDefaultValueConverterInfo(
+                    typeof(EnumToStringConverter<>).MakeGenericType(k.ModelClrType)
+                )
             );
         }
 
         if (underlyingProviderType == null || underlyingProviderType == typeof(byte[]))
         {
-            yield return _converters.GetOrAdd(
-                (underlyingModelType, typeof(byte[])),
-                static k =>
-                {
-                    var (modelClrType, _) = k;
-                    var toNumber = GetDefaultValueConverterInfo(
-                        typeof(EnumToNumberConverter<,>).MakeGenericType(
-                            modelClrType,
-                            modelClrType.GetEnumUnderlyingType()
-                        )
-                    );
-
-                    var toBytes = GetDefaultValueConverterInfo(
-                        typeof(NumberToBytesConverter<>).MakeGenericType(
-                            modelClrType.GetEnumUnderlyingType()
-                        )
-                    );
-
-                    return new ValueConverterInfo(
+            yield return _converters.GetOrAdd((underlyingModelType, typeof(byte[])), static k =>
+            {
+                var (modelClrType, _) = k;
+                var toNumber = GetDefaultValueConverterInfo(
+                    typeof(EnumToNumberConverter<,>).MakeGenericType(
                         modelClrType,
-                        typeof(byte[]),
-                        _ => toNumber.Create().ComposeWith(toBytes.Create()),
-                        toBytes.MappingHints
-                    );
-                }
-            );
+                        modelClrType.GetEnumUnderlyingType()
+                    )
+                );
+
+                var toBytes = GetDefaultValueConverterInfo(
+                    typeof(NumberToBytesConverter<>).MakeGenericType(
+                        modelClrType.GetEnumUnderlyingType()
+                    )
+                );
+
+                return new ValueConverterInfo(
+                    modelClrType,
+                    typeof(byte[]),
+                    _ => toNumber.Create().ComposeWith(toBytes.Create()),
+                    toBytes.MappingHints
+                );
+            });
         }
     }
 
@@ -543,23 +510,19 @@ public class ValueConverterSelector : IValueConverterSelector
     {
         if (underlyingProviderType == null || underlyingProviderType == typeof(string))
         {
-            yield return _converters.GetOrAdd(
-                (underlyingModelType, typeof(string)),
-                k =>
-                    GetDefaultValueConverterInfo(
-                        typeof(NumberToStringConverter<>).MakeGenericType(k.ModelClrType)
-                    )
+            yield return _converters.GetOrAdd((underlyingModelType, typeof(string)), k =>
+                GetDefaultValueConverterInfo(
+                    typeof(NumberToStringConverter<>).MakeGenericType(k.ModelClrType)
+                )
             );
         }
 
         if (underlyingProviderType == null || underlyingProviderType == typeof(byte[]))
         {
-            yield return _converters.GetOrAdd(
-                (underlyingModelType, typeof(byte[])),
-                k =>
-                    GetDefaultValueConverterInfo(
-                        typeof(NumberToBytesConverter<>).MakeGenericType(k.ModelClrType)
-                    )
+            yield return _converters.GetOrAdd((underlyingModelType, typeof(byte[])), k =>
+                GetDefaultValueConverterInfo(
+                    typeof(NumberToBytesConverter<>).MakeGenericType(k.ModelClrType)
+                )
             );
         }
     }

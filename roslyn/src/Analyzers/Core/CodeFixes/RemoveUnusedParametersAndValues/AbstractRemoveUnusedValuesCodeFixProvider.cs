@@ -385,9 +385,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 .ConfigureAwait(false);
             var memberDeclarations = GetDiagnosticsGroupedByMember(diagnostics, syntaxFacts, root)
                 .Select(g => g.Key);
-            root = root.ReplaceNodes(
-                memberDeclarations,
-                computeReplacementNode: (_, n) => n.WithAdditionalAnnotations(s_memberAnnotation)
+            root = root.ReplaceNodes(memberDeclarations, computeReplacementNode: (_, n) =>
+                n.WithAdditionalAnnotations(s_memberAnnotation)
             );
             return document.WithSyntaxRoot(root);
         }
@@ -593,53 +592,45 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         var expression = syntaxFacts.GetExpressionOfExpressionStatement(
                             expressionStatement
                         );
-                        editor.ReplaceNode(
-                            expression,
-                            (node, generator) =>
-                            {
-                                var discardAssignmentExpression = (TExpressionSyntax)
-                                    generator
-                                        .AssignmentStatement(
-                                            left: generator.IdentifierName(
-                                                AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
-                                            ),
-                                            right: node.WithoutTrivia()
-                                        )
-                                        .WithTriviaFrom(node)
-                                        .WithAdditionalAnnotations(
-                                            Simplifier.Annotation,
-                                            Formatter.Annotation
-                                        );
-                                return discardAssignmentExpression;
-                            }
-                        );
-                        break;
-
-                    case UnusedValuePreference.UnusedLocalVariable:
-                        var name = nameGenerator
-                            .GenerateUniqueNameAtSpanStart(expressionStatement)
-                            .ValueText;
-                        editor.ReplaceNode(
-                            expressionStatement,
-                            (node, generator) =>
-                            {
-                                var expression = syntaxFacts.GetExpressionOfExpressionStatement(
-                                    node
-                                );
-                                // Add Simplifier annotation so that 'var'/explicit type is correctly added based on user options.
-                                var localDecl = editor
-                                    .Generator.LocalDeclarationStatement(
-                                        name: name,
-                                        initializer: expression.WithoutLeadingTrivia()
+                        editor.ReplaceNode(expression, (node, generator) =>
+                        {
+                            var discardAssignmentExpression = (TExpressionSyntax)
+                                generator
+                                    .AssignmentStatement(
+                                        left: generator.IdentifierName(
+                                            AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
+                                        ),
+                                        right: node.WithoutTrivia()
                                     )
                                     .WithTriviaFrom(node)
                                     .WithAdditionalAnnotations(
                                         Simplifier.Annotation,
                                         Formatter.Annotation
                                     );
-                                return localDecl;
-                            }
-                        );
+                            return discardAssignmentExpression;
+                        });
+                        break;
+
+                    case UnusedValuePreference.UnusedLocalVariable:
+                        var name = nameGenerator
+                            .GenerateUniqueNameAtSpanStart(expressionStatement)
+                            .ValueText;
+                        editor.ReplaceNode(expressionStatement, (node, generator) =>
+                        {
+                            var expression = syntaxFacts.GetExpressionOfExpressionStatement(node);
+                            // Add Simplifier annotation so that 'var'/explicit type is correctly added based on user options.
+                            var localDecl = editor
+                                .Generator.LocalDeclarationStatement(
+                                    name: name,
+                                    initializer: expression.WithoutLeadingTrivia()
+                                )
+                                .WithTriviaFrom(node)
+                                .WithAdditionalAnnotations(
+                                    Simplifier.Annotation,
+                                    Formatter.Annotation
+                                );
+                            return localDecl;
+                        });
                         break;
                 }
             }
@@ -954,9 +945,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             }
 
             foreach (var (node, replacement) in nodeReplacementMap)
-                editor.ReplaceNode(
-                    node,
-                    (oldNode, _) => ComputeReplacementNode(node, oldNode, replacement)
+                editor.ReplaceNode(node, (oldNode, _) =>
+                    ComputeReplacementNode(node, oldNode, replacement)
                 );
 
             return;

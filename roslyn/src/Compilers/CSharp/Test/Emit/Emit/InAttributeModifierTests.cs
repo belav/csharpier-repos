@@ -2996,17 +2996,14 @@ public abstract class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var parameter = type.GetMethod("M").Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var parameter = type.GetMethod("M").Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3060,17 +3057,14 @@ public class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var parameter = type.GetMethod("M").Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var parameter = type.GetMethod("M").Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3123,17 +3117,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var parameter = type.GetMethod("M").Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var parameter = type.GetMethod("M").Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3199,17 +3190,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var parameter = type.GetMethod("M").Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var parameter = type.GetMethod("M").Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3263,17 +3251,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var parameter = type.GetMethod("M").Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var parameter = type.GetMethod("M").Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3326,17 +3311,14 @@ public abstract class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var method = type.GetMethod("M");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var method = type.GetMethod("M");
 
-                    Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(method.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(method.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3387,17 +3369,14 @@ public class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var method = type.GetMethod("M");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var method = type.GetMethod("M");
 
-                    Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(method.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(method.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3448,17 +3427,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var method = type.GetMethod("M");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var method = type.GetMethod("M");
 
-                    Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(method.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(method.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3509,17 +3485,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var implicitMethod = type.GetMethod("M");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var implicitMethod = type.GetMethod("M");
 
-                    Assert.Empty(implicitMethod.ReturnTypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(implicitMethod.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(implicitMethod.ReturnTypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(implicitMethod.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3570,17 +3543,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var implicitMethod = type.GetMethod("M");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var implicitMethod = type.GetMethod("M");
 
-                    Assert.Empty(implicitMethod.ReturnTypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(implicitMethod.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(implicitMethod.ReturnTypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(implicitMethod.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3631,17 +3601,14 @@ public abstract class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var property = type.GetProperty("P");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var property = type.GetProperty("P");
 
-                    Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(property.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(property.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3692,17 +3659,14 @@ public class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var property = type.GetProperty("P");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var property = type.GetProperty("P");
 
-                    Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(property.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(property.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3754,17 +3718,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var property = type.GetProperty("P");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var property = type.GetProperty("P");
 
-                    Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(property.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(property.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3816,17 +3777,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var property = type.GetProperty("P");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var property = type.GetProperty("P");
 
-                    Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(property.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(property.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3878,17 +3836,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var property = type.GetProperty("P");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var property = type.GetProperty("P");
 
-                    Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(property.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(property.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(property.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -3940,17 +3895,14 @@ public abstract class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var parameter = type.GetProperty("this[]").Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var parameter = type.GetProperty("this[]").Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4004,17 +3956,14 @@ public class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var parameter = type.GetProperty("this[]").Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var parameter = type.GetProperty("this[]").Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4068,17 +4017,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var parameter = type.GetProperty("this[]").Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var parameter = type.GetProperty("this[]").Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4144,17 +4090,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var parameter = type.GetProperty("this[]").Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var parameter = type.GetProperty("this[]").Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4208,17 +4151,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var parameter = type.GetProperty("this[]").Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var parameter = type.GetProperty("this[]").Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4272,17 +4212,14 @@ public abstract class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var indexer = type.GetProperty("this[]");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var indexer = type.GetProperty("this[]");
 
-                    Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(indexer.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(indexer.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4334,17 +4271,14 @@ public class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var indexer = type.GetProperty("this[]");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var indexer = type.GetProperty("this[]");
 
-                    Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(indexer.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(indexer.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4396,17 +4330,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var indexer = type.GetProperty("this[]");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var indexer = type.GetProperty("this[]");
 
-                    Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(indexer.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(indexer.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4458,17 +4389,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var indexer = type.GetProperty("this[]");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var indexer = type.GetProperty("this[]");
 
-                    Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(indexer.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(indexer.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4520,17 +4448,14 @@ public interface Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
-                    var indexer = type.GetProperty("this[]");
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Parent");
+                var indexer = type.GetProperty("this[]");
 
-                    Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(indexer.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(indexer.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(indexer.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4576,18 +4501,15 @@ public class Program
         {
             var reference = CreateCompilation("public delegate void D(in int p);");
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod.Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var parameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("D")
+                    .DelegateInvokeMethod.Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4623,18 +4545,15 @@ public class Test
         {
             var reference = CreateCompilation("public delegate ref readonly int D();");
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod;
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var method = module
+                    .ContainingAssembly.GetTypeByMetadataName("D")
+                    .DelegateInvokeMethod;
 
-                    Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(method.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(method.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4678,18 +4597,15 @@ namespace System.Runtime.InteropServices
 public delegate void D(in int p);"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod.Parameters.Single();
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var parameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("D")
+                    .DelegateInvokeMethod.Parameters.Single();
 
-                    Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(parameter.TypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(parameter.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -4736,18 +4652,15 @@ namespace System.Runtime.InteropServices
 public delegate ref readonly int D();"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod;
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var method = module
+                    .ContainingAssembly.GetTypeByMetadataName("D")
+                    .DelegateInvokeMethod;
 
-                    Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
-                    AssertSingleInAttributeRequiredModifier(method.RefCustomModifiers);
-                }
-            );
+                Assert.Empty(method.ReturnTypeWithAnnotations.CustomModifiers);
+                AssertSingleInAttributeRequiredModifier(method.RefCustomModifiers);
+            });
 
             var code =
                 @"
@@ -5165,18 +5078,15 @@ public class Parent
                 assemblyName: "testRef"
             );
 
-            CompileAndVerify(
-                testRef,
-                symbolValidator: module =>
-                {
-                    var parentModifier = module
-                        .ContainingAssembly.GetTypeByMetadataName("Parent")
-                        .GetMethod("M")
-                        .RefCustomModifiers.Single()
-                        .Modifier;
-                    Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
-                }
-            );
+            CompileAndVerify(testRef, symbolValidator: module =>
+            {
+                var parentModifier = module
+                    .ContainingAssembly.GetTypeByMetadataName("Parent")
+                    .GetMethod("M")
+                    .RefCustomModifiers.Single()
+                    .Modifier;
+                Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
+            });
 
             var userCode =
                 @"
@@ -5239,18 +5149,15 @@ public abstract class Parent
                 assemblyName: "testRef"
             );
 
-            CompileAndVerify(
-                testRef,
-                symbolValidator: module =>
-                {
-                    var parentModifier = module
-                        .ContainingAssembly.GetTypeByMetadataName("Parent")
-                        .GetMethod("M")
-                        .RefCustomModifiers.Single()
-                        .Modifier;
-                    Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
-                }
-            );
+            CompileAndVerify(testRef, symbolValidator: module =>
+            {
+                var parentModifier = module
+                    .ContainingAssembly.GetTypeByMetadataName("Parent")
+                    .GetMethod("M")
+                    .RefCustomModifiers.Single()
+                    .Modifier;
+                Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
+            });
 
             var userCode =
                 @"
@@ -5313,18 +5220,15 @@ public interface Parent
                 assemblyName: "testRef"
             );
 
-            CompileAndVerify(
-                testRef,
-                symbolValidator: module =>
-                {
-                    var parentModifier = module
-                        .ContainingAssembly.GetTypeByMetadataName("Parent")
-                        .GetMethod("M")
-                        .RefCustomModifiers.Single()
-                        .Modifier;
-                    Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
-                }
-            );
+            CompileAndVerify(testRef, symbolValidator: module =>
+            {
+                var parentModifier = module
+                    .ContainingAssembly.GetTypeByMetadataName("Parent")
+                    .GetMethod("M")
+                    .RefCustomModifiers.Single()
+                    .Modifier;
+                Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
+            });
 
             var userCode =
                 @"
@@ -5387,18 +5291,15 @@ public interface Parent
                 assemblyName: "testRef"
             );
 
-            CompileAndVerify(
-                testRef,
-                symbolValidator: module =>
-                {
-                    var parentModifier = module
-                        .ContainingAssembly.GetTypeByMetadataName("Parent")
-                        .GetMethod("M")
-                        .RefCustomModifiers.Single()
-                        .Modifier;
-                    Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
-                }
-            );
+            CompileAndVerify(testRef, symbolValidator: module =>
+            {
+                var parentModifier = module
+                    .ContainingAssembly.GetTypeByMetadataName("Parent")
+                    .GetMethod("M")
+                    .RefCustomModifiers.Single()
+                    .Modifier;
+                Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
+            });
 
             var userCode =
                 @"
@@ -5467,18 +5368,15 @@ public interface Parent
                 assemblyName: "testRef"
             );
 
-            CompileAndVerify(
-                testRef,
-                symbolValidator: module =>
-                {
-                    var parentModifier = module
-                        .ContainingAssembly.GetTypeByMetadataName("Parent")
-                        .GetMethod("M")
-                        .RefCustomModifiers.Single()
-                        .Modifier;
-                    Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
-                }
-            );
+            CompileAndVerify(testRef, symbolValidator: module =>
+            {
+                var parentModifier = module
+                    .ContainingAssembly.GetTypeByMetadataName("Parent")
+                    .GetMethod("M")
+                    .RefCustomModifiers.Single()
+                    .Modifier;
+                Assert.Equal("testRef", parentModifier.ContainingAssembly.Name);
+            });
 
             var userCode =
                 @"
@@ -5649,44 +5547,40 @@ class Child: Parent, IM
     public void M(in int x) { }
 }";
 
-            CompileAndVerify(
-                    code,
-                    verify: Verification.Passes,
-                    symbolValidator: module =>
-                    {
-                        // Nothing on Parent
-                        var parentMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("Parent")
-                            .GetMethod("M");
-                        Assert.False(parentMethod.IsMetadataVirtual());
-                        Assert.Empty(parentMethod.Parameters.Single().RefCustomModifiers);
+            CompileAndVerify(code, verify: Verification.Passes, symbolValidator: module =>
+                {
+                    // Nothing on Parent
+                    var parentMethod = module
+                        .ContainingAssembly.GetTypeByMetadataName("Parent")
+                        .GetMethod("M");
+                    Assert.False(parentMethod.IsMetadataVirtual());
+                    Assert.Empty(parentMethod.Parameters.Single().RefCustomModifiers);
 
-                        // Nothing on Child
-                        var childMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("Child")
-                            .GetMethod("M");
-                        Assert.False(childMethod.IsMetadataVirtual());
-                        Assert.Empty(childMethod.Parameters.Single().RefCustomModifiers);
+                    // Nothing on Child
+                    var childMethod = module
+                        .ContainingAssembly.GetTypeByMetadataName("Child")
+                        .GetMethod("M");
+                    Assert.False(childMethod.IsMetadataVirtual());
+                    Assert.Empty(childMethod.Parameters.Single().RefCustomModifiers);
 
-                        // Modreq on Interface
-                        var interfaceMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("IM")
-                            .GetMethod("M");
-                        Assert.True(interfaceMethod.IsMetadataVirtual());
-                        AssertSingleInAttributeRequiredModifier(
-                            interfaceMethod.Parameters.Single().RefCustomModifiers
-                        );
+                    // Modreq on Interface
+                    var interfaceMethod = module
+                        .ContainingAssembly.GetTypeByMetadataName("IM")
+                        .GetMethod("M");
+                    Assert.True(interfaceMethod.IsMetadataVirtual());
+                    AssertSingleInAttributeRequiredModifier(
+                        interfaceMethod.Parameters.Single().RefCustomModifiers
+                    );
 
-                        // Modreq on proxy
-                        var proxyMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("Child")
-                            .GetMethod("IM.M");
-                        Assert.True(proxyMethod.IsMetadataVirtual());
-                        AssertSingleInAttributeRequiredModifier(
-                            proxyMethod.Parameters.Single().RefCustomModifiers
-                        );
-                    }
-                )
+                    // Modreq on proxy
+                    var proxyMethod = module
+                        .ContainingAssembly.GetTypeByMetadataName("Child")
+                        .GetMethod("IM.M");
+                    Assert.True(proxyMethod.IsMetadataVirtual());
+                    AssertSingleInAttributeRequiredModifier(
+                        proxyMethod.Parameters.Single().RefCustomModifiers
+                    );
+                })
                 .VerifyDiagnostics(
                     // (12,17): warning CS0108: 'Child.M(in int)' hides inherited member 'Parent.M(in int)'. Use the new keyword if hiding was intended.
                     //     public void M(in int x) { }
@@ -5713,43 +5607,39 @@ class Child: Parent, IM
 {
 }";
 
-            CompileAndVerify(
-                    code,
-                    verify: Verification.Passes,
-                    symbolValidator: module =>
-                    {
-                        // Nothing on Parent
-                        var parentMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("Parent")
-                            .GetMethod("M");
-                        Assert.False(parentMethod.IsMetadataVirtual());
-                        Assert.Empty(parentMethod.Parameters.Single().RefCustomModifiers);
+            CompileAndVerify(code, verify: Verification.Passes, symbolValidator: module =>
+                {
+                    // Nothing on Parent
+                    var parentMethod = module
+                        .ContainingAssembly.GetTypeByMetadataName("Parent")
+                        .GetMethod("M");
+                    Assert.False(parentMethod.IsMetadataVirtual());
+                    Assert.Empty(parentMethod.Parameters.Single().RefCustomModifiers);
 
-                        // No method on Child
-                        Assert.DoesNotContain(
-                            "M",
-                            module.ContainingAssembly.GetTypeByMetadataName("Child").MemberNames
-                        );
+                    // No method on Child
+                    Assert.DoesNotContain(
+                        "M",
+                        module.ContainingAssembly.GetTypeByMetadataName("Child").MemberNames
+                    );
 
-                        // Modreq on Interface
-                        var interfaceMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("IM")
-                            .GetMethod("M");
-                        Assert.True(interfaceMethod.IsMetadataVirtual());
-                        AssertSingleInAttributeRequiredModifier(
-                            interfaceMethod.Parameters.Single().RefCustomModifiers
-                        );
+                    // Modreq on Interface
+                    var interfaceMethod = module
+                        .ContainingAssembly.GetTypeByMetadataName("IM")
+                        .GetMethod("M");
+                    Assert.True(interfaceMethod.IsMetadataVirtual());
+                    AssertSingleInAttributeRequiredModifier(
+                        interfaceMethod.Parameters.Single().RefCustomModifiers
+                    );
 
-                        // Modreq on proxy
-                        var proxyMethod = module
-                            .ContainingAssembly.GetTypeByMetadataName("Child")
-                            .GetMethod("IM.M");
-                        Assert.True(proxyMethod.IsMetadataVirtual());
-                        AssertSingleInAttributeRequiredModifier(
-                            proxyMethod.Parameters.Single().RefCustomModifiers
-                        );
-                    }
-                )
+                    // Modreq on proxy
+                    var proxyMethod = module
+                        .ContainingAssembly.GetTypeByMetadataName("Child")
+                        .GetMethod("IM.M");
+                    Assert.True(proxyMethod.IsMetadataVirtual());
+                    AssertSingleInAttributeRequiredModifier(
+                        proxyMethod.Parameters.Single().RefCustomModifiers
+                    );
+                })
                 .VerifyDiagnostics();
         }
 

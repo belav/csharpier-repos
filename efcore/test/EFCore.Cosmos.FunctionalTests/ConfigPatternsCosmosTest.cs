@@ -37,9 +37,8 @@ public class ConfigPatternsCosmosTest : IClassFixture<ConfigPatternsCosmosTest.C
             Assert.Same(client, context.Database.GetCosmosClient());
         }
 
-        await using var testDatabase2 = CosmosTestStore.CreateInitialized(
-            DatabaseName,
-            o => o.Region(Regions.AustraliaCentral)
+        await using var testDatabase2 = CosmosTestStore.CreateInitialized(DatabaseName, o =>
+            o.Region(Regions.AustraliaCentral)
         );
         options = CreateOptions(testDatabase2);
 
@@ -54,9 +53,8 @@ public class ConfigPatternsCosmosTest : IClassFixture<ConfigPatternsCosmosTest.C
     {
         var regionName = Regions.AustraliaCentral;
 
-        await using var testDatabase = CosmosTestStore.CreateInitialized(
-            DatabaseName,
-            o => o.Region(regionName)
+        await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName, o =>
+            o.Region(regionName)
         );
         var options = CreateOptions(testDatabase);
 
@@ -75,9 +73,8 @@ public class ConfigPatternsCosmosTest : IClassFixture<ConfigPatternsCosmosTest.C
     {
         var exception = await Assert.ThrowsAsync<ArgumentException>(async () =>
         {
-            await using var testDatabase = CosmosTestStore.CreateInitialized(
-                DatabaseName,
-                o => o.Region("FakeRegion")
+            await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName, o =>
+                o.Region("FakeRegion")
             );
             var options = CreateOptions(testDatabase);
 
@@ -102,9 +99,8 @@ public class ConfigPatternsCosmosTest : IClassFixture<ConfigPatternsCosmosTest.C
     {
         var connectionMode = ConnectionMode.Direct;
 
-        await using var testDatabase = CosmosTestStore.CreateInitialized(
-            DatabaseName,
-            o => o.ConnectionMode(connectionMode)
+        await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName, o =>
+            o.ConnectionMode(connectionMode)
         );
         var options = CreateOptions(testDatabase);
 
@@ -123,9 +119,8 @@ public class ConfigPatternsCosmosTest : IClassFixture<ConfigPatternsCosmosTest.C
     {
         var exception = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
         {
-            await using var testDatabase = CosmosTestStore.CreateInitialized(
-                DatabaseName,
-                o => o.ConnectionMode((ConnectionMode)123456)
+            await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName, o =>
+                o.ConnectionMode((ConnectionMode)123456)
             );
             var options = CreateOptions(testDatabase);
 

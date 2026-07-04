@@ -395,9 +395,8 @@ namespace Microsoft.CodeAnalysis
                     {
                         // use GetValue to avoid race condition exceptions from Add.
                         // the first one to set the value wins.
-                        s_assemblyOrModuleSymbolToProjectMap.GetValue(
-                            assemblyOrModuleSymbol,
-                            _ => projectId
+                        s_assemblyOrModuleSymbolToProjectMap.GetValue(assemblyOrModuleSymbol, _ =>
+                            projectId
                         );
                     }
                     else

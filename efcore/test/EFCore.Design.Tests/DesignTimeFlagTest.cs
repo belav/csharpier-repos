@@ -14,14 +14,11 @@ public class DesignTimeFlagTest
 
         var handler = new OperationResultHandler();
 
-        new MockOperation<string>(
-            handler,
-            () =>
-            {
-                Assert.True(EF.IsDesignTime);
-                return "Twilight Sparkle";
-            }
-        );
+        new MockOperation<string>(handler, () =>
+        {
+            Assert.True(EF.IsDesignTime);
+            return "Twilight Sparkle";
+        });
 
         Assert.False(EF.IsDesignTime);
         Assert.Equal("Twilight Sparkle", handler.Result);

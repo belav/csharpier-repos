@@ -78,9 +78,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GenerateGuidForType_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Marshal.GenerateGuidForType(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Marshal.GenerateGuidForType(null)
             );
         }
 
@@ -96,9 +95,8 @@ namespace System.Runtime.InteropServices.Tests
             );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Marshal.GenerateGuidForType(typeBuilder)
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Marshal.GenerateGuidForType(typeBuilder)
             );
         }
     }

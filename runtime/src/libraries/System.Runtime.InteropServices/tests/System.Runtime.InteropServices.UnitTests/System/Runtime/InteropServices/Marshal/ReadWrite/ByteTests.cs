@@ -194,9 +194,8 @@ namespace System.Runtime.InteropServices.Tests
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Marshal.ReadByte(collectibleObject, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Marshal.ReadByte(collectibleObject, 0)
             );
         }
 
@@ -241,9 +240,8 @@ namespace System.Runtime.InteropServices.Tests
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Marshal.WriteByte(collectibleObject, 0, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Marshal.WriteByte(collectibleObject, 0, 0)
             );
         }
 

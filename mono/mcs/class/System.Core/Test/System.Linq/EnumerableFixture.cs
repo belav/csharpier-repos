@@ -160,13 +160,10 @@ namespace MonoTests.System.Linq
         [ExpectedException(typeof(ArgumentNullException))]
         public void All_NullSource_ThrowsArgumentNullException()
         {
-            Enumerable.All(
-                null,
-                (int i) =>
-                {
-                    throw new NotImplementedException();
-                }
-            );
+            Enumerable.All(null, (int i) =>
+            {
+                throw new NotImplementedException();
+            });
         }
 
         [Test]

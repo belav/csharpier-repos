@@ -3315,10 +3315,8 @@ namespace System.Text.Json.Serialization.Tests
                         $@"{{""case"":""derivedClass"",""$id"":""{id}"",""Number"":42,""String"":""str""}}"
                 );
 
-                yield return (
-                    Value: new DerivedCollection { 42 },
-                    JsonTemplate: id =>
-                        $@"{{""case"":""derivedCollection"",""$id"":""{id}"",""$values"":[42,42,42]}}"
+                yield return (Value: new DerivedCollection { 42 }, JsonTemplate: id =>
+                    $@"{{""case"":""derivedCollection"",""$id"":""{id}"",""$values"":[42,42,42]}}"
                 );
             }
 

@@ -69,14 +69,11 @@ public class Vector2_3_4Test
 
         Assert.Equal(
             newVector,
-            Vector2_3_4TestNative.PassThroughVector2ToCallback(
-                startingVector,
-                vectorParam =>
-                {
-                    Assert.Equal(startingVector, vectorParam);
-                    return newVector;
-                }
-            )
+            Vector2_3_4TestNative.PassThroughVector2ToCallback(startingVector, vectorParam =>
+            {
+                Assert.Equal(startingVector, vectorParam);
+                return newVector;
+            })
         );
     }
 
@@ -149,14 +146,11 @@ public class Vector2_3_4Test
 
         Assert.Equal(
             newVector,
-            Vector2_3_4TestNative.PassThroughVector3ToCallback(
-                startingVector,
-                vectorParam =>
-                {
-                    Assert.Equal(startingVector, vectorParam);
-                    return newVector;
-                }
-            )
+            Vector2_3_4TestNative.PassThroughVector3ToCallback(startingVector, vectorParam =>
+            {
+                Assert.Equal(startingVector, vectorParam);
+                return newVector;
+            })
         );
     }
 
@@ -234,14 +228,11 @@ public class Vector2_3_4Test
 
         Assert.Equal(
             newVector,
-            Vector2_3_4TestNative.PassThroughVector4ToCallback(
-                startingVector,
-                vectorParam =>
-                {
-                    Assert.Equal(startingVector, vectorParam);
-                    return newVector;
-                }
-            )
+            Vector2_3_4TestNative.PassThroughVector4ToCallback(startingVector, vectorParam =>
+            {
+                Assert.Equal(startingVector, vectorParam);
+                return newVector;
+            })
         );
     }
 }

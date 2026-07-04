@@ -2924,19 +2924,15 @@ Implemented B",
                 ilSource,
                 options: TestOptions.ReleaseExe
             );
-            CompileAndVerifyCommon(
-                compilation,
-                expectedOutput: "2",
-                assemblyValidator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    // Verify synthesized forwarding method I.F was generated.
-                    AssertEx.SetEqual(
-                        new[] { ".ctor", "F", "I.F", "Main" },
-                        new[] { reader }.GetStrings(reader.GetMethodDefNames())
-                    );
-                }
-            );
+            CompileAndVerifyCommon(compilation, expectedOutput: "2", assemblyValidator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                // Verify synthesized forwarding method I.F was generated.
+                AssertEx.SetEqual(
+                    new[] { ".ctor", "F", "I.F", "Main" },
+                    new[] { reader }.GetStrings(reader.GetMethodDefNames())
+                );
+            });
         }
 
         [Fact, WorkItem(6372, "https://github.com/dotnet/roslyn/issues/6372")]

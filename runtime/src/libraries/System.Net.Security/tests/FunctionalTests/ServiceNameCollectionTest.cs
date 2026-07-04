@@ -19,30 +19,24 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         [Fact]
         public void Constructor_CollectionContainsNullOrEmpty_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serviceName",
-                () => new ServiceNameCollection(new[] { (string)null })
+            AssertExtensions.Throws<ArgumentNullException>("serviceName", () =>
+                new ServiceNameCollection(new[] { (string)null })
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serviceName",
-                () => new ServiceNameCollection(new[] { "first", null })
+            AssertExtensions.Throws<ArgumentNullException>("serviceName", () =>
+                new ServiceNameCollection(new[] { "first", null })
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serviceName",
-                () => new ServiceNameCollection(new[] { null, "second" })
+            AssertExtensions.Throws<ArgumentNullException>("serviceName", () =>
+                new ServiceNameCollection(new[] { null, "second" })
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "serviceName",
-                () => new ServiceNameCollection(new[] { "" })
+            AssertExtensions.Throws<ArgumentException>("serviceName", () =>
+                new ServiceNameCollection(new[] { "" })
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "serviceName",
-                () => new ServiceNameCollection(new[] { "first", "" })
+            AssertExtensions.Throws<ArgumentException>("serviceName", () =>
+                new ServiceNameCollection(new[] { "first", "" })
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "serviceName",
-                () => new ServiceNameCollection(new[] { "", "second" })
+            AssertExtensions.Throws<ArgumentException>("serviceName", () =>
+                new ServiceNameCollection(new[] { "", "second" })
             );
         }
 
@@ -164,10 +158,8 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         {
             ICollection collection = new ServiceNameCollection(new[] { "first", "second" });
             int[] destination = new int[collection.Count - 1];
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                "",
-                () => collection.CopyTo(destination, 0)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                collection.CopyTo(destination, 0)
             );
         }
 
@@ -177,10 +169,8 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
             ICollection collection = new ServiceNameCollection(new[] { "first", "second" });
             int[] destination = new int[collection.Count];
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(destination, -1));
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                "",
-                () => collection.CopyTo(destination, destination.Length)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                collection.CopyTo(destination, destination.Length)
             );
         }
 
@@ -233,13 +223,11 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         public void Merge_NullOrEmptyString_Throws()
         {
             var collection = new ServiceNameCollection(new[] { "first", "second" });
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serviceName",
-                () => collection.Merge((string)null)
+            AssertExtensions.Throws<ArgumentNullException>("serviceName", () =>
+                collection.Merge((string)null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "serviceName",
-                () => collection.Merge(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("serviceName", () =>
+                collection.Merge(string.Empty)
             );
         }
 
@@ -279,21 +267,17 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         public void Merge_EnumerableContainingNullOrEmpty_Throws()
         {
             var collection = new ServiceNameCollection(new[] { "first", "second" });
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serviceName",
-                () => collection.Merge(new[] { (string)null })
+            AssertExtensions.Throws<ArgumentNullException>("serviceName", () =>
+                collection.Merge(new[] { (string)null })
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serviceName",
-                () => collection.Merge(new[] { "third", null })
+            AssertExtensions.Throws<ArgumentNullException>("serviceName", () =>
+                collection.Merge(new[] { "third", null })
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "serviceName",
-                () => collection.Merge(new[] { "" })
+            AssertExtensions.Throws<ArgumentException>("serviceName", () =>
+                collection.Merge(new[] { "" })
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "serviceName",
-                () => collection.Merge(new[] { "third", "" })
+            AssertExtensions.Throws<ArgumentException>("serviceName", () =>
+                collection.Merge(new[] { "third", "" })
             );
         }
 
@@ -301,13 +285,11 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         public void Merge_NonStringEnumerable_Throws()
         {
             var collection = new ServiceNameCollection(new[] { "first", "second" });
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serviceName",
-                () => collection.Merge(new[] { 3 })
+            AssertExtensions.Throws<ArgumentNullException>("serviceName", () =>
+                collection.Merge(new[] { 3 })
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serviceName",
-                () => collection.Merge(new[] { new object() })
+            AssertExtensions.Throws<ArgumentNullException>("serviceName", () =>
+                collection.Merge(new[] { new object() })
             );
         }
 

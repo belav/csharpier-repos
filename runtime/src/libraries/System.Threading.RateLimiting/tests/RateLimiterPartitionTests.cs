@@ -122,36 +122,30 @@ namespace System.Threading.RateLimiting.Tests
         [Fact]
         public void Create_AnyLimiter()
         {
-            var partition = RateLimitPartition.Get(
-                1,
-                key => new ConcurrencyLimiter(
-                    new ConcurrencyLimiterOptions
-                    {
-                        PermitLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 10,
-                    }
-                )
-            );
+            var partition = RateLimitPartition.Get(1, key => new ConcurrencyLimiter(
+                new ConcurrencyLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 10,
+                }
+            ));
 
             var limiter = partition.Factory(1);
             var concurrencyLimiter = Assert.IsType<ConcurrencyLimiter>(limiter);
             Assert.Equal(1, concurrencyLimiter.GetStatistics().CurrentAvailablePermits);
 
-            var partition2 = RateLimitPartition.Get(
-                1,
-                key => new TokenBucketRateLimiter(
-                    new TokenBucketRateLimiterOptions
-                    {
-                        TokenLimit = 1,
-                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 10,
-                        ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
-                        TokensPerPeriod = 1,
-                        AutoReplenishment = false,
-                    }
-                )
-            );
+            var partition2 = RateLimitPartition.Get(1, key => new TokenBucketRateLimiter(
+                new TokenBucketRateLimiterOptions
+                {
+                    TokenLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 10,
+                    ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
+                    TokensPerPeriod = 1,
+                    AutoReplenishment = false,
+                }
+            ));
             limiter = partition2.Factory(1);
             var tokenBucketLimiter = Assert.IsType<TokenBucketRateLimiter>(limiter);
             Assert.Equal(1, tokenBucketLimiter.GetStatistics().CurrentAvailablePermits);

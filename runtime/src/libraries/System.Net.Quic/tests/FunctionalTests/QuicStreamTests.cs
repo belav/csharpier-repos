@@ -553,9 +553,8 @@ namespace System.Net.Quic.Tests
                 using (clientStream)
                 using (serverStream)
                 {
-                    Task exTask = AssertThrowsQuicExceptionAsync(
-                        QuicError.OperationAborted,
-                        () => serverStream.ReadAsync(new byte[1]).AsTask()
+                    Task exTask = AssertThrowsQuicExceptionAsync(QuicError.OperationAborted, () =>
+                        serverStream.ReadAsync(new byte[1]).AsTask()
                     );
                     Assert.False(exTask.IsCompleted);
 
@@ -644,9 +643,8 @@ namespace System.Net.Quic.Tests
                     );
 
                     // aborting write causes the write direction to throw on subsequent operations
-                    await AssertThrowsQuicExceptionAsync(
-                        QuicError.OperationAborted,
-                        () => stream.WriteAsync(new byte[1]).AsTask()
+                    await AssertThrowsQuicExceptionAsync(QuicError.OperationAborted, () =>
+                        stream.WriteAsync(new byte[1]).AsTask()
                     );
                 },
                 serverFunction: async connection =>
@@ -691,9 +689,8 @@ namespace System.Net.Quic.Tests
                     );
 
                     // next write would also throw
-                    await AssertThrowsQuicExceptionAsync(
-                        QuicError.OperationAborted,
-                        () => stream.WriteAsync(new byte[1]).AsTask()
+                    await AssertThrowsQuicExceptionAsync(QuicError.OperationAborted, () =>
+                        stream.WriteAsync(new byte[1]).AsTask()
                     );
                 },
                 serverFunction: async connection =>
@@ -865,9 +862,8 @@ namespace System.Net.Quic.Tests
                     var writeTask = WriteForever(serverStream, 1024 * 1024);
                     serverStream.Abort(QuicAbortDirection.Write, ExpectedErrorCode);
 
-                    await AssertThrowsQuicExceptionAsync(
-                        QuicError.OperationAborted,
-                        () => writeTask.WaitAsync(TimeSpan.FromSeconds(3))
+                    await AssertThrowsQuicExceptionAsync(QuicError.OperationAborted, () =>
+                        writeTask.WaitAsync(TimeSpan.FromSeconds(3))
                     );
                     sem.Release();
                 }
@@ -1490,9 +1486,8 @@ namespace System.Net.Quic.Tests
                 }
                 else
                 {
-                    var ex = await AssertThrowsQuicExceptionAsync(
-                        expectedError,
-                        () => stream.ReadsClosed
+                    var ex = await AssertThrowsQuicExceptionAsync(expectedError, () =>
+                        stream.ReadsClosed
                     );
                     if (expectedError == QuicError.OperationAborted)
                     {
@@ -1580,9 +1575,8 @@ namespace System.Net.Quic.Tests
                 long expectedErrorCode
             )
             {
-                var ex = await AssertThrowsQuicExceptionAsync(
-                    expectedError,
-                    () => stream.WritesClosed
+                var ex = await AssertThrowsQuicExceptionAsync(expectedError, () =>
+                    stream.WritesClosed
                 );
                 if (expectedError == QuicError.OperationAborted)
                 {
@@ -1667,9 +1661,8 @@ namespace System.Net.Quic.Tests
                 await stream.DisposeAsync();
 
                 // Reads should be aborted as we didn't consume the data.
-                var readEx = await AssertThrowsQuicExceptionAsync(
-                    QuicError.OperationAborted,
-                    () => stream.ReadsClosed
+                var readEx = await AssertThrowsQuicExceptionAsync(QuicError.OperationAborted, () =>
+                    stream.ReadsClosed
                 );
                 Assert.Null(readEx.ApplicationErrorCode);
 
@@ -1697,9 +1690,8 @@ namespace System.Net.Quic.Tests
                 // Reads will be aborted by the peer as we didn't consume them all.
                 if (abortCode.HasValue)
                 {
-                    var readEx = await AssertThrowsQuicExceptionAsync(
-                        QuicError.StreamAborted,
-                        () => stream.ReadsClosed
+                    var readEx = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () =>
+                        stream.ReadsClosed
                     );
                     Assert.Equal(abortCode.Value, readEx.ApplicationErrorCode);
                 }

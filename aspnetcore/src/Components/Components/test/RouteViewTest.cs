@@ -117,14 +117,8 @@ public class RouteViewTest
         // Assert: page itself is rendered, having received parameters from the original route data
         var pageComponentId = batch.GetComponentFrames<ComponentWithLayout>().Single().ComponentId;
         var pageFrames = _renderer.GetCurrentRenderTreeFrames(pageComponentId).AsEnumerable();
-        Assert.Collection(
-            pageFrames,
-            frame =>
-                AssertFrame.Text(
-                    frame,
-                    "Hello from the page with message 'Test message'",
-                    sequence: 0
-                )
+        Assert.Collection(pageFrames, frame =>
+            AssertFrame.Text(frame, "Hello from the page with message 'Test message'", sequence: 0)
         );
 
         // Assert: nothing else was rendered

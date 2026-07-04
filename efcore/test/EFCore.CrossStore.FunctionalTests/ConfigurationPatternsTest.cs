@@ -70,9 +70,8 @@ public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisp
         {
             Assert.Same(_options, optionsBuilder.Options);
 
-            optionsBuilder.UseSqlServer(
-                SqlServerTestStore.CreateConnectionString(StoreName),
-                b => b.ApplyConfiguration()
+            optionsBuilder.UseSqlServer(SqlServerTestStore.CreateConnectionString(StoreName), b =>
+                b.ApplyConfiguration()
             );
 
             Assert.NotSame(_options, optionsBuilder.Options);
@@ -358,9 +357,8 @@ public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisp
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder
-                    .UseSqlServer(
-                        SqlServerTestStore.CreateConnectionString(StoreName),
-                        b => b.ApplyConfiguration()
+                    .UseSqlServer(SqlServerTestStore.CreateConnectionString(StoreName), b =>
+                        b.ApplyConfiguration()
                     )
                     .UseInternalServiceProvider(_serviceProvider);
         }

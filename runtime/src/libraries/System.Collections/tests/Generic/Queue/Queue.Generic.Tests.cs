@@ -116,13 +116,11 @@ namespace System.Collections.Tests
         [Fact]
         public void Queue_Generic_Constructor_int_Negative_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new Queue<T>(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new Queue<T>(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new Queue<T>(int.MinValue)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new Queue<T>(int.MinValue)
             );
         }
 
@@ -466,9 +464,8 @@ namespace System.Collections.Tests
         public void Queue_Generic_EnsureCapacity_NegativeCapacityRequested_Throws()
         {
             var queue = GenericQueueFactory();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => queue.EnsureCapacity(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                queue.EnsureCapacity(-1)
             );
         }
 

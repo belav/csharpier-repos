@@ -189,38 +189,35 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.EnableNullable
                 directives.Add((NullableDirectiveTriviaSyntax)directive);
             }
 
-            var updatedRoot = root.ReplaceNodes(
-                directives,
-                (originalNode, rewrittenNode) =>
+            var updatedRoot = root.ReplaceNodes(directives, (originalNode, rewrittenNode) =>
+            {
+                if (originalNode.SettingToken.IsKind(SyntaxKind.DisableKeyword))
                 {
-                    if (originalNode.SettingToken.IsKind(SyntaxKind.DisableKeyword))
-                    {
-                        // 'disable' keeps its meaning
-                        return rewrittenNode;
-                    }
-
-                    if (originalNode.SettingToken.IsKind(SyntaxKind.RestoreKeyword))
-                    {
-                        return rewrittenNode.WithSettingToken(
-                            SyntaxFactory
-                                .Token(SyntaxKind.DisableKeyword)
-                                .WithTriviaFrom(rewrittenNode.SettingToken)
-                        );
-                    }
-
-                    if (originalNode.SettingToken.IsKind(SyntaxKind.EnableKeyword))
-                    {
-                        return rewrittenNode.WithSettingToken(
-                            SyntaxFactory
-                                .Token(SyntaxKind.RestoreKeyword)
-                                .WithTriviaFrom(rewrittenNode.SettingToken)
-                        );
-                    }
-
-                    Debug.Fail("Unexpected state?");
+                    // 'disable' keeps its meaning
                     return rewrittenNode;
                 }
-            );
+
+                if (originalNode.SettingToken.IsKind(SyntaxKind.RestoreKeyword))
+                {
+                    return rewrittenNode.WithSettingToken(
+                        SyntaxFactory
+                            .Token(SyntaxKind.DisableKeyword)
+                            .WithTriviaFrom(rewrittenNode.SettingToken)
+                    );
+                }
+
+                if (originalNode.SettingToken.IsKind(SyntaxKind.EnableKeyword))
+                {
+                    return rewrittenNode.WithSettingToken(
+                        SyntaxFactory
+                            .Token(SyntaxKind.RestoreKeyword)
+                            .WithTriviaFrom(rewrittenNode.SettingToken)
+                    );
+                }
+
+                Debug.Fail("Unexpected state?");
+                return rewrittenNode;
+            });
 
             return (updatedRoot, GetFirstTokenOfInterest(updatedRoot));
         }

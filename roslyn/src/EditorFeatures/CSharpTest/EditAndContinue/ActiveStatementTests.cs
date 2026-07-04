@@ -13211,9 +13211,8 @@ class C
                         activeStatements: GetActiveStatements(srcA1, srcA2, documentIndex: 0),
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("F2")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("F2")
                             ),
                         }
                     ),
@@ -13248,9 +13247,8 @@ class C
                         activeStatements: GetActiveStatements(srcA1, srcA2, documentIndex: 0),
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("F")
                             ),
                         }
                     ),
@@ -13289,9 +13287,8 @@ class C
                         activeStatements: GetActiveStatements(srcA1, srcA2, documentIndex: 0),
                         semanticEdits: new[]
                         {
-                            SemanticEdit(
-                                SemanticEditKind.Update,
-                                c => c.GetMember<INamedTypeSymbol>("C").GetMember("F")
+                            SemanticEdit(SemanticEditKind.Update, c =>
+                                c.GetMember<INamedTypeSymbol>("C").GetMember("F")
                             ),
                         }
                     ),

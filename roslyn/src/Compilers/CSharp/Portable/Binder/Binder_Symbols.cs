@@ -3928,12 +3928,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DiagnosticBag? diagnostics,
             Location location
         ) =>
-            CheckFeatureAvailability(
-                tree,
-                feature,
-                diagnostics,
-                location,
-                static location => location
+            CheckFeatureAvailability(tree, feature, diagnostics, location, static location =>
+                location
             );
 
         /// <param name="getLocation">Callback function that computes the location to report the diagnostics at

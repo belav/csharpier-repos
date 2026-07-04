@@ -647,9 +647,8 @@ public class CustomParsingTests
 
         parseResult
             .UnmatchedTokens.Should()
-            .BeEquivalentTo(
-                new[] { "4", "5", "6", "7", "8" },
-                options => options.WithStrictOrdering()
+            .BeEquivalentTo(new[] { "4", "5", "6", "7", "8" }, options =>
+                options.WithStrictOrdering()
             );
     }
 
@@ -688,9 +687,8 @@ public class CustomParsingTests
             .GetResult(argument2)
             .Tokens.Select(t => t.Value)
             .Should()
-            .BeEquivalentTo(
-                new[] { "4", "5", "6", "7", "8" },
-                options => options.WithStrictOrdering()
+            .BeEquivalentTo(new[] { "4", "5", "6", "7", "8" }, options =>
+                options.WithStrictOrdering()
             );
     }
 

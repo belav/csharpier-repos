@@ -104,13 +104,10 @@ public partial class HttpConnectionTests : VerifiableLoggedTest
         httpOptions.Proxy = Mock.Of<IWebProxy>();
         httpOptions.Transports = HttpTransportType.LongPolling;
 
-        await WithConnectionAsync(
-            CreateConnection(httpOptions),
-            async (connection) =>
-            {
-                await connection.StartAsync().DefaultTimeout();
-            }
-        );
+        await WithConnectionAsync(CreateConnection(httpOptions), async (connection) =>
+        {
+            await connection.StartAsync().DefaultTimeout();
+        });
 
         Assert.NotNull(httpClientHandler);
         Assert.Equal(1, httpClientHandler.CookieContainer.Count);

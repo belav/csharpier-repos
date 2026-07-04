@@ -53,9 +53,8 @@ public class EndpointMetadataProviderTest
         var endpoint = GetEndpoint(controllerType, actionName);
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
         );
     }
 
@@ -72,14 +71,12 @@ public class EndpointMetadataProviderTest
         Assert.Collection(
             endpoints,
             endpoint =>
-                Assert.Contains(
-                    endpoint.Metadata,
-                    m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+                Assert.Contains(endpoint.Metadata, m =>
+                    m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
                 ),
             endpoint =>
-                Assert.Contains(
-                    endpoint.Metadata,
-                    m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+                Assert.Contains(endpoint.Metadata, m =>
+                    m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
                 )
         );
     }
@@ -110,14 +107,12 @@ public class EndpointMetadataProviderTest
         Assert.Collection(
             endpoints,
             endpoint =>
-                Assert.Contains(
-                    endpoint.Metadata,
-                    m => m is ParameterNameMetadata { Name: "param1" }
+                Assert.Contains(endpoint.Metadata, m =>
+                    m is ParameterNameMetadata { Name: "param1" }
                 ),
             endpoint =>
-                Assert.Contains(
-                    endpoint.Metadata,
-                    m => m is ParameterNameMetadata { Name: "param1" }
+                Assert.Contains(endpoint.Metadata, m =>
+                    m is ParameterNameMetadata { Name: "param1" }
                 )
         );
     }
@@ -132,9 +127,8 @@ public class EndpointMetadataProviderTest
         );
 
         // Assert
-        Assert.Contains(
-            endpoint.Metadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        Assert.Contains(endpoint.Metadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
         );
     }
 
@@ -151,14 +145,12 @@ public class EndpointMetadataProviderTest
         Assert.Collection(
             endpoints,
             endpoint =>
-                Assert.Contains(
-                    endpoint.Metadata,
-                    m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+                Assert.Contains(endpoint.Metadata, m =>
+                    m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
                 ),
             endpoint =>
-                Assert.Contains(
-                    endpoint.Metadata,
-                    m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+                Assert.Contains(endpoint.Metadata, m =>
+                    m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
                 )
         );
     }
@@ -333,14 +325,12 @@ public class EndpointMetadataProviderTest
         Assert.Collection(
             endpoints,
             endpoint =>
-                Assert.Contains(
-                    endpoint.Metadata,
-                    m => m is RoutePatternMetadata { RoutePattern: "selector1" }
+                Assert.Contains(endpoint.Metadata, m =>
+                    m is RoutePatternMetadata { RoutePattern: "selector1" }
                 ),
             endpoint =>
-                Assert.Contains(
-                    endpoint.Metadata,
-                    m => m is RoutePatternMetadata { RoutePattern: "selector2" }
+                Assert.Contains(endpoint.Metadata, m =>
+                    m is RoutePatternMetadata { RoutePattern: "selector2" }
                 )
         );
     }

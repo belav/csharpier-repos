@@ -3015,18 +3015,14 @@ namespace System.Data.SqlClient
                     source != null,
                     "source should already be initialized if task is not null"
                 );
-                AsyncHelper.ContinueTask(
-                    task,
-                    source,
-                    () =>
-                    {
-                        TaskCompletionSource<object> newSource = action();
-                        Debug.Assert(
-                            newSource == null,
-                            "Shouldn't create a new source when one already exists"
-                        );
-                    }
-                );
+                AsyncHelper.ContinueTask(task, source, () =>
+                {
+                    TaskCompletionSource<object> newSource = action();
+                    Debug.Assert(
+                        newSource == null,
+                        "Shouldn't create a new source when one already exists"
+                    );
+                });
             }
             return null;
         }
@@ -3708,14 +3704,10 @@ namespace System.Data.SqlClient
                                 cancellableReconnectTS.TrySetCanceled()
                             );
                         }
-                        AsyncHelper.ContinueTask(
-                            reconnectTask,
-                            cancellableReconnectTS,
-                            () =>
-                            {
-                                cancellableReconnectTS.SetResult(null);
-                            }
-                        );
+                        AsyncHelper.ContinueTask(reconnectTask, cancellableReconnectTS, () =>
+                        {
+                            cancellableReconnectTS.SetResult(null);
+                        });
                         // no need to cancel timer since SqlBulkCopy creates specific task source for reconnection
                         AsyncHelper.SetTimeoutException(
                             cancellableReconnectTS,
@@ -3762,14 +3754,10 @@ namespace System.Data.SqlClient
                     {
                         try
                         {
-                            AsyncHelper.WaitForCompletion(
-                                reconnectTask,
-                                this.BulkCopyTimeout,
-                                () =>
-                                {
-                                    throw SQL.CR_ReconnectTimeout();
-                                }
-                            );
+                            AsyncHelper.WaitForCompletion(reconnectTask, this.BulkCopyTimeout, () =>
+                            {
+                                throw SQL.CR_ReconnectTimeout();
+                            });
                         }
                         catch (SqlException ex)
                         {

@@ -55,10 +55,8 @@ namespace System.Collections.Tests
             if (DefaultValueAllowed && !IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 ICollection<string> collection = GenericICollectionFactory(count);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "item",
-                    null,
-                    () => collection.Add(default(string))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("item", null, () =>
+                    collection.Add(default(string))
                 );
             }
         }

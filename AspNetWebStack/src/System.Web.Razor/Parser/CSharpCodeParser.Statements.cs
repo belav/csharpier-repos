@@ -53,15 +53,12 @@ namespace System.Web.Razor.Parser
 
         private void KeywordBlock(bool topLevel)
         {
-            HandleKeyword(
-                topLevel,
-                () =>
-                {
-                    Context.CurrentBlock.Type = BlockType.Expression;
-                    Context.CurrentBlock.CodeGenerator = new ExpressionCodeGenerator();
-                    ImplicitExpression();
-                }
-            );
+            HandleKeyword(topLevel, () =>
+            {
+                Context.CurrentBlock.Type = BlockType.Expression;
+                Context.CurrentBlock.CodeGenerator = new ExpressionCodeGenerator();
+                ImplicitExpression();
+            });
         }
 
         private void CaseStatement(bool topLevel)

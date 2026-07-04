@@ -8032,55 +8032,52 @@ class Program
                 false
             );
 
-            CompileAndVerify(
-                    compilation,
-                    symbolValidator: module =>
-                    {
-                        ((PEModuleSymbol)module).Module.PretendThereArentNoPiaLocalTypes();
-                        AssertParametersWithoutNames(
-                            module
-                                .GlobalNamespace.GetMember<NamedTypeSymbol>("I1")
-                                .GetMember<MethodSymbol>("M1")
-                                .Parameters,
-                            true
-                        );
+            CompileAndVerify(compilation, symbolValidator: module =>
+                {
+                    ((PEModuleSymbol)module).Module.PretendThereArentNoPiaLocalTypes();
+                    AssertParametersWithoutNames(
+                        module
+                            .GlobalNamespace.GetMember<NamedTypeSymbol>("I1")
+                            .GetMember<MethodSymbol>("M1")
+                            .Parameters,
+                        true
+                    );
 
-                        PEParameterSymbol p;
-                        p = (PEParameterSymbol)
-                            module
-                                .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
-                                .GetMember<MethodSymbol>("M")
-                                .Parameters[0];
-                        Assert.Equal(
-                            "x",
-                            ((PEModuleSymbol)module).Module.GetParamNameOrThrow(p.Handle)
-                        );
-                        Assert.Equal("x", p.Name);
-                        Assert.Equal("x", p.MetadataName);
-                        p = (PEParameterSymbol)
-                            module
-                                .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
-                                .GetMember<MethodSymbol>("M1")
-                                .Parameters[0];
-                        Assert.Equal(
-                            "value",
-                            ((PEModuleSymbol)module).Module.GetParamNameOrThrow(p.Handle)
-                        );
-                        Assert.Equal("value", p.Name);
-                        Assert.Equal("value", p.MetadataName);
-                        p = (PEParameterSymbol)
-                            module
-                                .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
-                                .GetMember<MethodSymbol>("M2")
-                                .Parameters[0];
-                        Assert.Equal(
-                            "Param",
-                            ((PEModuleSymbol)module).Module.GetParamNameOrThrow(p.Handle)
-                        );
-                        Assert.Equal("Param", p.Name);
-                        Assert.Equal("Param", p.MetadataName);
-                    }
-                )
+                    PEParameterSymbol p;
+                    p = (PEParameterSymbol)
+                        module
+                            .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
+                            .GetMember<MethodSymbol>("M")
+                            .Parameters[0];
+                    Assert.Equal(
+                        "x",
+                        ((PEModuleSymbol)module).Module.GetParamNameOrThrow(p.Handle)
+                    );
+                    Assert.Equal("x", p.Name);
+                    Assert.Equal("x", p.MetadataName);
+                    p = (PEParameterSymbol)
+                        module
+                            .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
+                            .GetMember<MethodSymbol>("M1")
+                            .Parameters[0];
+                    Assert.Equal(
+                        "value",
+                        ((PEModuleSymbol)module).Module.GetParamNameOrThrow(p.Handle)
+                    );
+                    Assert.Equal("value", p.Name);
+                    Assert.Equal("value", p.MetadataName);
+                    p = (PEParameterSymbol)
+                        module
+                            .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
+                            .GetMember<MethodSymbol>("M2")
+                            .Parameters[0];
+                    Assert.Equal(
+                        "Param",
+                        ((PEModuleSymbol)module).Module.GetParamNameOrThrow(p.Handle)
+                    );
+                    Assert.Equal("Param", p.Name);
+                    Assert.Equal("Param", p.MetadataName);
+                })
                 .VerifyDiagnostics();
         }
 

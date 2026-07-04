@@ -78,9 +78,8 @@ namespace System.Reflection.Emit.Tests
         public void AddInterfaceImplementation_NullInterfaceType_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "interfaceType",
-                () => type.AddInterfaceImplementation(null)
+            AssertExtensions.Throws<ArgumentNullException>("interfaceType", () =>
+                type.AddInterfaceImplementation(null)
             );
         }
 

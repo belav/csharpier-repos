@@ -79,10 +79,8 @@ public partial class HelpBuilderTests
             var optionBFirstColumnText = "option b help";
 
             var helpBuilder = new HelpBuilder(LargeMaxWidth);
-            helpBuilder.CustomizeSymbol(
-                option,
-                firstColumnText: ctx =>
-                    ctx.Command.Equals(commandA) ? optionAFirstColumnText : optionBFirstColumnText
+            helpBuilder.CustomizeSymbol(option, firstColumnText: ctx =>
+                ctx.Command.Equals(commandA) ? optionAFirstColumnText : optionBFirstColumnText
             );
             command.Options.Add(
                 new HelpOption() { Action = new HelpAction() { Builder = helpBuilder } }
@@ -110,10 +108,8 @@ public partial class HelpBuilderTests
             var optionBDescription = "option b help";
 
             var helpBuilder = new HelpBuilder(LargeMaxWidth);
-            helpBuilder.CustomizeSymbol(
-                option,
-                secondColumnText: ctx =>
-                    ctx.Command.Equals(commandA) ? optionADescription : optionBDescription
+            helpBuilder.CustomizeSymbol(option, secondColumnText: ctx =>
+                ctx.Command.Equals(commandA) ? optionADescription : optionBDescription
             );
             command.Options.Add(
                 new HelpOption { Action = new HelpAction { Builder = helpBuilder } }

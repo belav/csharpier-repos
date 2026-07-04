@@ -43,11 +43,9 @@ public class TestServiceFactory
         var exceptions = specialCases.Concat(_wellKnownExceptions).ToList();
 
         return _factories
-            .GetOrAdd(
-                typeof(TService),
-                t =>
-                    AddType(new ServiceCollection(), typeof(TService), exceptions)
-                        .BuildServiceProvider(validateScopes: true)
+            .GetOrAdd(typeof(TService), t =>
+                AddType(new ServiceCollection(), typeof(TService), exceptions)
+                    .BuildServiceProvider(validateScopes: true)
             )
             .GetService<TService>();
     }

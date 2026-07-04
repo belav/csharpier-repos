@@ -15,9 +15,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         [Fact]
         public static void CertificateTypeRequired()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "certificateType",
-                () => new Pkcs12CertBag(null, ReadOnlyMemory<byte>.Empty)
+            AssertExtensions.Throws<ArgumentNullException>("certificateType", () =>
+                new Pkcs12CertBag(null, ReadOnlyMemory<byte>.Empty)
             );
         }
 

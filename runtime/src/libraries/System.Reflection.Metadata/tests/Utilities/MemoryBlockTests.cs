@@ -213,18 +213,15 @@ namespace System.Reflection.Metadata.Tests
             int bytesRead;
             bool prefixed = false;
 
-            var decoder = new TestMetadataStringDecoder(
-                Encoding.UTF8,
-                (bytes, byteCount) =>
-                {
-                    Assert.True(ptr != null);
-                    Assert.True(prefixed != (ptr == bytes));
-                    Assert.Equal(prefixed ? "PrefixTest".Length : "Test".Length, byteCount);
-                    string s = Encoding.UTF8.GetString(bytes, byteCount);
-                    Assert.Equal(s, prefixed ? "PrefixTest" : "Test");
-                    return "Intercepted";
-                }
-            );
+            var decoder = new TestMetadataStringDecoder(Encoding.UTF8, (bytes, byteCount) =>
+            {
+                Assert.True(ptr != null);
+                Assert.True(prefixed != (ptr == bytes));
+                Assert.Equal(prefixed ? "PrefixTest".Length : "Test".Length, byteCount);
+                string s = Encoding.UTF8.GetString(bytes, byteCount);
+                Assert.Equal(s, prefixed ? "PrefixTest" : "Test");
+                return "Intercepted";
+            });
 
             fixed (byte* fixedPtr = (buffer = "Test"u8.ToArray()))
             {

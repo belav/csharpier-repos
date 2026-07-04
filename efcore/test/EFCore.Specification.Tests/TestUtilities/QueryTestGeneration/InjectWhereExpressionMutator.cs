@@ -112,9 +112,8 @@ public class InjectWhereExpressionMutator : ExpressionMutator
 
         var where = QueryableMethods.Where.MakeGenericMethod(typeArgument);
         var lambda = Expression.Lambda(lambdaBody, prm);
-        var injector = new ExpressionInjector(
-            expressionToInject,
-            e => Expression.Call(where, e, lambda)
+        var injector = new ExpressionInjector(expressionToInject, e =>
+            Expression.Call(where, e, lambda)
         );
 
         return injector.Visit(expression);

@@ -87,13 +87,10 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
             var editedStr = new String(newChars);
             Assert.Equal(editedStr, newStr);
 
-            Array.ForEach(
-                oldChars,
-                (c) =>
-                {
-                    Assert.Equal('\0', c);
-                }
-            );
+            Array.ForEach(oldChars, (c) =>
+            {
+                Assert.Equal('\0', c);
+            });
         }
 
         [Fact]

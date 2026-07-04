@@ -1273,18 +1273,14 @@ namespace System.Security.Cryptography
         /// </remarks>
         public override void ImportFromPem(ReadOnlySpan<char> input)
         {
-            PemKeyHelpers.ImportPem(
-                input,
-                label =>
-                    label switch
-                    {
-                        PemLabels.RsaPrivateKey => ImportRSAPrivateKey,
-                        PemLabels.Pkcs8PrivateKey => ImportPkcs8PrivateKey,
-                        PemLabels.RsaPublicKey => ImportRSAPublicKey,
-                        PemLabels.SpkiPublicKey => ImportSubjectPublicKeyInfo,
-                        _ => null,
-                    }
-            );
+            PemKeyHelpers.ImportPem(input, label => label switch
+                {
+                    PemLabels.RsaPrivateKey => ImportRSAPrivateKey,
+                    PemLabels.Pkcs8PrivateKey => ImportPkcs8PrivateKey,
+                    PemLabels.RsaPublicKey => ImportRSAPublicKey,
+                    PemLabels.SpkiPublicKey => ImportSubjectPublicKeyInfo,
+                    _ => null,
+                });
         }
 
         /// <summary>

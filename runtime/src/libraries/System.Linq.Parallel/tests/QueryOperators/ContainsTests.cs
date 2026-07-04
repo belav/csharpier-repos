@@ -134,13 +134,11 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Contains_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).Contains(false)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).Contains(false)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).Contains(false, EqualityComparer<bool>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).Contains(false, EqualityComparer<bool>.Default)
             );
         }
     }

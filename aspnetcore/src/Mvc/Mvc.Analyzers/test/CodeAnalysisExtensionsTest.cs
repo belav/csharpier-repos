@@ -64,9 +64,8 @@ namespace TestApp
         var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute, inherit: true);
 
         // Assert
-        Assert.Collection(
-            attributes,
-            attributeData => Assert.Equal(201, attributeData.ConstructorArguments[0].Value)
+        Assert.Collection(attributes, attributeData =>
+            Assert.Equal(201, attributeData.ConstructorArguments[0].Value)
         );
     }
 
@@ -105,9 +104,8 @@ namespace TestApp
         var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute, inherit: false);
 
         // Assert
-        Assert.Collection(
-            attributes,
-            attributeData => Assert.Equal(400, attributeData.ConstructorArguments[0].Value)
+        Assert.Collection(attributes, attributeData =>
+            Assert.Equal(400, attributeData.ConstructorArguments[0].Value)
         );
     }
 
@@ -146,9 +144,8 @@ namespace TestApp
         var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute);
 
         // Assert
-        Assert.Collection(
-            attributes,
-            attributeData => Assert.Equal(400, attributeData.ConstructorArguments[0].Value)
+        Assert.Collection(attributes, attributeData =>
+            Assert.Equal(400, attributeData.ConstructorArguments[0].Value)
         );
     }
 
@@ -236,9 +233,8 @@ namespace TestApp
         var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute, inherit: true);
 
         // Assert
-        Assert.Collection(
-            attributes,
-            attributeData => Assert.Equal(400, attributeData.ConstructorArguments[0].Value)
+        Assert.Collection(attributes, attributeData =>
+            Assert.Equal(400, attributeData.ConstructorArguments[0].Value)
         );
     }
 
@@ -283,9 +279,8 @@ namespace TestApp
         var attributes = CodeAnalysisExtensions.GetAttributes(method, attribute, inherit: true);
 
         // Assert
-        Assert.Collection(
-            attributes,
-            attributeData => Assert.Equal(401, attributeData.ConstructorArguments[0].Value)
+        Assert.Collection(attributes, attributeData =>
+            Assert.Equal(401, attributeData.ConstructorArguments[0].Value)
         );
     }
 
@@ -457,17 +452,14 @@ namespace TestApp
         var attributes = CodeAnalysisExtensions.GetAttributes(testClass, attribute, inherit: false);
 
         // Assert
-        Assert.Collection(
-            attributes,
-            attributeData =>
-            {
-                Assert.Same(attribute, attributeData.AttributeClass);
-                Assert.Equal(
-                    attributeData.ConstructorArguments[0].Value,
-                    compilation.GetSpecialType(SpecialType.System_Int32)
-                );
-            }
-        );
+        Assert.Collection(attributes, attributeData =>
+        {
+            Assert.Same(attribute, attributeData.AttributeClass);
+            Assert.Equal(
+                attributeData.ConstructorArguments[0].Value,
+                compilation.GetSpecialType(SpecialType.System_Int32)
+            );
+        });
     }
 
     [Fact]
@@ -505,17 +497,14 @@ namespace TestApp
         );
 
         // Assert
-        Assert.Collection(
-            attributes,
-            attributeData =>
-            {
-                Assert.Same(attribute, attributeData.AttributeClass);
-                Assert.Equal(
-                    attributeData.ConstructorArguments[0].Value,
-                    compilation.GetSpecialType(SpecialType.System_Int32)
-                );
-            }
-        );
+        Assert.Collection(attributes, attributeData =>
+        {
+            Assert.Same(attribute, attributeData.AttributeClass);
+            Assert.Equal(
+                attributeData.ConstructorArguments[0].Value,
+                compilation.GetSpecialType(SpecialType.System_Int32)
+            );
+        });
     }
 
     [Fact]

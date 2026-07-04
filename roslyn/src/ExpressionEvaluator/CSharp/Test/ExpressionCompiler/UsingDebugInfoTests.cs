@@ -46,19 +46,16 @@ class C
 }
 ";
             var comp = CreateCompilation(source);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    GetMethodDebugInfo(runtime, "C.M")
-                        .ImportRecordGroups.Verify(
-                            @"
+            WithRuntimeInstance(comp, runtime =>
+            {
+                GetMethodDebugInfo(runtime, "C.M")
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System'
                 }"
-                        );
-                }
-            );
+                    );
+            });
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21386")]
@@ -82,13 +79,11 @@ namespace N1
 }
 ";
             var comp = CreateCompilation(source);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    GetMethodDebugInfo(runtime, "N1.N2.N3.C.M")
-                        .ImportRecordGroups.Verify(
-                            @"
+            WithRuntimeInstance(comp, runtime =>
+            {
+                GetMethodDebugInfo(runtime, "N1.N2.N3.C.M")
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                 }
                 {
@@ -99,9 +94,8 @@ namespace N1
                 {
                     Namespace: string='System'
                 }"
-                        );
-                }
-            );
+                    );
+            });
         }
 
         [Fact]
@@ -145,19 +139,16 @@ class C
 "
                 );
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    GetMethodDebugInfo(runtime, "C.M", ilOffset: 0x0004)
-                        .ImportRecordGroups.Verify(
-                            @"
+            WithRuntimeInstance(comp, runtime =>
+            {
+                GetMethodDebugInfo(runtime, "C.M", ilOffset: 0x0004)
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System'
                 }"
-                        );
-                }
-            );
+                    );
+            });
         }
 
         [Fact]
@@ -181,13 +172,11 @@ namespace A
 }
 ";
             var comp = CreateCompilation(source);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    GetMethodDebugInfo(runtime, "A.C.M")
-                        .ImportRecordGroups.Verify(
-                            @"
+            WithRuntimeInstance(comp, runtime =>
+            {
+                GetMethodDebugInfo(runtime, "A.C.M")
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
@@ -195,9 +184,8 @@ namespace A
                 {
                     Namespace: string='System'
                 }"
-                        );
-                }
-            );
+                    );
+            });
         }
 
         [Fact]
@@ -221,13 +209,11 @@ namespace A
 }
 ";
             var comp = CreateCompilation(source);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    GetMethodDebugInfo(runtime, "A.C.M1")
-                        .ImportRecordGroups.Verify(
-                            @"
+            WithRuntimeInstance(comp, runtime =>
+            {
+                GetMethodDebugInfo(runtime, "A.C.M1")
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
@@ -235,11 +221,11 @@ namespace A
                 {
                     Namespace: string='System'
                 }"
-                        );
+                    );
 
-                    GetMethodDebugInfo(runtime, "A.C.M2")
-                        .ImportRecordGroups.Verify(
-                            @"
+                GetMethodDebugInfo(runtime, "A.C.M2")
+                    .ImportRecordGroups.Verify(
+                        @"
                 {
                     Namespace: string='System.IO'
                     Namespace: string='System.Text'
@@ -247,9 +233,8 @@ namespace A
                 {
                     Namespace: string='System'
                 }"
-                        );
-                }
-            );
+                    );
+            });
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30030")]
@@ -281,14 +266,12 @@ namespace B
                 )
                 .EmitToImageReference(aliases: ImmutableArray.Create("A"));
             var comp = CreateCompilation(source, new[] { aliasedRef }, parseOptions: parseOptions);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var info = GetMethodDebugInfo(runtime, "B.C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var info = GetMethodDebugInfo(runtime, "B.C.M");
 
-                    info.ImportRecordGroups.Verify(
-                        @"
+                info.ImportRecordGroups.Verify(
+                    @"
                 {
                     Namespace: string='System.Text'
                     Type: alias='F' type='System.IO.File'
@@ -297,13 +280,12 @@ namespace B
                     Assembly: alias='A'
                     Namespace: alias='S' string='System'
                 }"
-                    );
+                );
 
-                    info.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
-                }
-            );
+                info.ExternAliasRecords.Verify(
+                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
+                );
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1084059")]
@@ -345,14 +327,12 @@ namespace B
                 .EmitToImageReference(aliases: ImmutableArray.Create("A"));
             var comp = CreateCompilation(source, new[] { aliasedRef }, parseOptions: parseOptions);
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var info = GetMethodDebugInfo(runtime, "B.C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var info = GetMethodDebugInfo(runtime, "B.C.M");
 
-                    info.ImportRecordGroups.Verify(
-                        @"
+                info.ImportRecordGroups.Verify(
+                    @"
                 {
                     Type: type='N.Static'
                 }
@@ -360,13 +340,12 @@ namespace B
                     Assembly: alias='A'
                     Type: type='System.Math'
                 }"
-                    );
+                );
 
-                    info.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
-                }
-            );
+                info.ExternAliasRecords.Verify(
+                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
+                );
+            });
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30030")]
@@ -409,43 +388,40 @@ namespace D
                 .EmitToImageReference(aliases: ImmutableArray.Create("A"));
             var comp = CreateCompilation(source, new[] { aliasedRef }, parseOptions: parseOptions);
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var debugInfo1 = GetMethodDebugInfo(runtime, "B.C.M1");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var debugInfo1 = GetMethodDebugInfo(runtime, "B.C.M1");
 
-                    debugInfo1.ImportRecordGroups.Verify(
-                        @"
+                debugInfo1.ImportRecordGroups.Verify(
+                    @"
                 {
                     Namespace: string='System'
                 }
                 {
                     Assembly: alias='A'
                 }"
-                    );
+                );
 
-                    debugInfo1.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
+                debugInfo1.ExternAliasRecords.Verify(
+                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
+                );
 
-                    var debugInfo2 = GetMethodDebugInfo(runtime, "D.E.M2");
+                var debugInfo2 = GetMethodDebugInfo(runtime, "D.E.M2");
 
-                    debugInfo2.ImportRecordGroups.Verify(
-                        @"
+                debugInfo2.ImportRecordGroups.Verify(
+                    @"
                 {
                     Namespace: string='System.Text'
                 }
                 {
                     Assembly: alias='A'
                 }"
-                    );
+                );
 
-                    debugInfo2.ExternAliasRecords.Verify(
-                        "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
-                    );
-                }
-            );
+                debugInfo2.ExternAliasRecords.Verify(
+                    "A = 'Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'"
+                );
+            });
         }
 
         #endregion
@@ -831,26 +807,20 @@ class C
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7);
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var importsList = GetImports(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
 
-                    var imports = importsList.Single();
+                var imports = importsList.Single();
 
-                    Assert.Equal(0, imports.UsingAliases.Count);
-                    Assert.Equal(0, imports.ExternAliases.Length);
+                Assert.Equal(0, imports.UsingAliases.Count);
+                Assert.Equal(0, imports.ExternAliases.Length);
 
-                    var actualNamespace = imports.Usings.Single().NamespaceOrType;
-                    Assert.Equal(SymbolKind.Namespace, actualNamespace.Kind);
-                    Assert.Equal(
-                        NamespaceKind.Module,
-                        ((NamespaceSymbol)actualNamespace).Extent.Kind
-                    );
-                    Assert.Equal("System", actualNamespace.ToTestDisplayString());
-                }
-            );
+                var actualNamespace = imports.Usings.Single().NamespaceOrType;
+                Assert.Equal(SymbolKind.Namespace, actualNamespace.Kind);
+                Assert.Equal(NamespaceKind.Module, ((NamespaceSymbol)actualNamespace).Extent.Kind);
+                Assert.Equal("System", actualNamespace.ToTestDisplayString());
+            });
         }
 
         [Fact]
@@ -873,33 +843,30 @@ class C
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7);
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
+
+                var imports = importsList.Single();
+
+                Assert.Equal(0, imports.UsingAliases.Count);
+                Assert.Equal(0, imports.ExternAliases.Length);
+
+                var usings = imports.Usings.Select(u => u.NamespaceOrType).ToArray();
+                Assert.Equal(3, usings.Length);
+
+                var expectedNames = new[] { "System", "System.IO", "System.Text" };
+                for (int i = 0; i < usings.Length; i++)
                 {
-                    var importsList = GetImports(runtime, "C.M");
-
-                    var imports = importsList.Single();
-
-                    Assert.Equal(0, imports.UsingAliases.Count);
-                    Assert.Equal(0, imports.ExternAliases.Length);
-
-                    var usings = imports.Usings.Select(u => u.NamespaceOrType).ToArray();
-                    Assert.Equal(3, usings.Length);
-
-                    var expectedNames = new[] { "System", "System.IO", "System.Text" };
-                    for (int i = 0; i < usings.Length; i++)
-                    {
-                        var actualNamespace = usings[i];
-                        Assert.Equal(SymbolKind.Namespace, actualNamespace.Kind);
-                        Assert.Equal(
-                            NamespaceKind.Module,
-                            ((NamespaceSymbol)actualNamespace).Extent.Kind
-                        );
-                        Assert.Equal(expectedNames[i], actualNamespace.ToTestDisplayString());
-                    }
+                    var actualNamespace = usings[i];
+                    Assert.Equal(SymbolKind.Namespace, actualNamespace.Kind);
+                    Assert.Equal(
+                        NamespaceKind.Module,
+                        ((NamespaceSymbol)actualNamespace).Extent.Kind
+                    );
+                    Assert.Equal(expectedNames[i], actualNamespace.ToTestDisplayString());
                 }
-            );
+            });
         }
 
         [Fact]
@@ -925,31 +892,28 @@ namespace A
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7);
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "A.C.M").AsEnumerable().ToArray();
+                Assert.Equal(2, importsList.Length);
+
+                var expectedNames = new[] { "System.IO", "System" }; // Innermost-to-outermost
+                for (int i = 0; i < importsList.Length; i++)
                 {
-                    var importsList = GetImports(runtime, "A.C.M").AsEnumerable().ToArray();
-                    Assert.Equal(2, importsList.Length);
+                    var imports = importsList[i];
 
-                    var expectedNames = new[] { "System.IO", "System" }; // Innermost-to-outermost
-                    for (int i = 0; i < importsList.Length; i++)
-                    {
-                        var imports = importsList[i];
+                    Assert.Equal(0, imports.UsingAliases.Count);
+                    Assert.Equal(0, imports.ExternAliases.Length);
 
-                        Assert.Equal(0, imports.UsingAliases.Count);
-                        Assert.Equal(0, imports.ExternAliases.Length);
-
-                        var actualNamespace = imports.Usings.Single().NamespaceOrType;
-                        Assert.Equal(SymbolKind.Namespace, actualNamespace.Kind);
-                        Assert.Equal(
-                            NamespaceKind.Module,
-                            ((NamespaceSymbol)actualNamespace).Extent.Kind
-                        );
-                        Assert.Equal(expectedNames[i], actualNamespace.ToTestDisplayString());
-                    }
+                    var actualNamespace = imports.Usings.Single().NamespaceOrType;
+                    Assert.Equal(SymbolKind.Namespace, actualNamespace.Kind);
+                    Assert.Equal(
+                        NamespaceKind.Module,
+                        ((NamespaceSymbol)actualNamespace).Extent.Kind
+                    );
+                    Assert.Equal(expectedNames[i], actualNamespace.ToTestDisplayString());
                 }
-            );
+            });
         }
 
         [Fact]
@@ -970,34 +934,28 @@ class C
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7);
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var importsList = GetImports(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
 
-                    var imports = importsList.Single();
+                var imports = importsList.Single();
 
-                    Assert.Equal(0, imports.Usings.Length);
-                    Assert.Equal(0, imports.ExternAliases.Length);
+                Assert.Equal(0, imports.Usings.Length);
+                Assert.Equal(0, imports.ExternAliases.Length);
 
-                    var usingAliases = imports.UsingAliases;
+                var usingAliases = imports.UsingAliases;
 
-                    Assert.Equal(1, usingAliases.Count);
-                    Assert.Equal("S", usingAliases.Keys.Single());
+                Assert.Equal(1, usingAliases.Count);
+                Assert.Equal("S", usingAliases.Keys.Single());
 
-                    var aliasSymbol = usingAliases.Values.Single().Alias;
-                    Assert.Equal("S", aliasSymbol.Name);
+                var aliasSymbol = usingAliases.Values.Single().Alias;
+                Assert.Equal("S", aliasSymbol.Name);
 
-                    var namespaceSymbol = aliasSymbol.Target;
-                    Assert.Equal(SymbolKind.Namespace, namespaceSymbol.Kind);
-                    Assert.Equal(
-                        NamespaceKind.Module,
-                        ((NamespaceSymbol)namespaceSymbol).Extent.Kind
-                    );
-                    Assert.Equal("System", namespaceSymbol.ToTestDisplayString());
-                }
-            );
+                var namespaceSymbol = aliasSymbol.Target;
+                Assert.Equal(SymbolKind.Namespace, namespaceSymbol.Kind);
+                Assert.Equal(NamespaceKind.Module, ((NamespaceSymbol)namespaceSymbol).Extent.Kind);
+                Assert.Equal("System", namespaceSymbol.ToTestDisplayString());
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1084059")]
@@ -1018,22 +976,19 @@ class C
             var comp = CreateCompilation(source);
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var importsList = GetImports(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
 
-                    var imports = importsList.Single();
+                var imports = importsList.Single();
 
-                    Assert.Equal(0, imports.UsingAliases.Count);
-                    Assert.Equal(0, imports.ExternAliases.Length);
+                Assert.Equal(0, imports.UsingAliases.Count);
+                Assert.Equal(0, imports.ExternAliases.Length);
 
-                    var actualType = imports.Usings.Single().NamespaceOrType;
-                    Assert.Equal(SymbolKind.NamedType, actualType.Kind);
-                    Assert.Equal("System.Math", actualType.ToTestDisplayString());
-                }
-            );
+                var actualType = imports.Usings.Single().NamespaceOrType;
+                Assert.Equal(SymbolKind.NamedType, actualType.Kind);
+                Assert.Equal("System.Math", actualType.ToTestDisplayString());
+            });
         }
 
         [Fact]
@@ -1054,33 +1009,27 @@ class C
             var comp = CreateCompilation(source);
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var importsList = GetImports(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
 
-                    var imports = importsList.Single();
+                var imports = importsList.Single();
 
-                    Assert.Equal(0, imports.Usings.Length);
-                    Assert.Equal(0, imports.ExternAliases.Length);
+                Assert.Equal(0, imports.Usings.Length);
+                Assert.Equal(0, imports.ExternAliases.Length);
 
-                    var usingAliases = imports.UsingAliases;
+                var usingAliases = imports.UsingAliases;
 
-                    Assert.Equal(1, usingAliases.Count);
-                    Assert.Equal("I", usingAliases.Keys.Single());
+                Assert.Equal(1, usingAliases.Count);
+                Assert.Equal("I", usingAliases.Keys.Single());
 
-                    var aliasSymbol = usingAliases.Values.Single().Alias;
-                    Assert.Equal("I", aliasSymbol.Name);
+                var aliasSymbol = usingAliases.Values.Single().Alias;
+                Assert.Equal("I", aliasSymbol.Name);
 
-                    var typeSymbol = aliasSymbol.Target;
-                    Assert.Equal(SymbolKind.NamedType, typeSymbol.Kind);
-                    Assert.Equal(
-                        SpecialType.System_Int32,
-                        ((NamedTypeSymbol)typeSymbol).SpecialType
-                    );
-                }
-            );
+                var typeSymbol = aliasSymbol.Target;
+                Assert.Equal(SymbolKind.NamedType, typeSymbol.Kind);
+                Assert.Equal(SpecialType.System_Int32, ((NamedTypeSymbol)typeSymbol).SpecialType);
+            });
         }
 
         [Fact]
@@ -1117,44 +1066,41 @@ class C
             var comp = CreateCompilation(source);
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var importsList = GetImports(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
 
-                    var imports = importsList.Single();
+                var imports = importsList.Single();
 
-                    Assert.Equal(0, imports.ExternAliases.Length);
+                Assert.Equal(0, imports.ExternAliases.Length);
 
-                    var @using = imports.Usings.Single();
-                    var importedNamespace = @using.NamespaceOrType;
-                    Assert.Equal(SymbolKind.Namespace, importedNamespace.Kind);
-                    Assert.Equal("namespace", importedNamespace.Name);
+                var @using = imports.Usings.Single();
+                var importedNamespace = @using.NamespaceOrType;
+                Assert.Equal(SymbolKind.Namespace, importedNamespace.Kind);
+                Assert.Equal("namespace", importedNamespace.Name);
 
-                    var usingAliases = imports.UsingAliases;
+                var usingAliases = imports.UsingAliases;
 
-                    const string keyword1 = "object";
-                    const string keyword2 = "string";
-                    AssertEx.SetEqual(usingAliases.Keys, keyword1, keyword2);
+                const string keyword1 = "object";
+                const string keyword2 = "string";
+                AssertEx.SetEqual(usingAliases.Keys, keyword1, keyword2);
 
-                    var namespaceAlias = usingAliases[keyword1];
-                    var typeAlias = usingAliases[keyword2];
+                var namespaceAlias = usingAliases[keyword1];
+                var typeAlias = usingAliases[keyword2];
 
-                    Assert.Equal(keyword1, namespaceAlias.Alias.Name);
-                    var aliasedNamespace = namespaceAlias.Alias.Target;
-                    Assert.Equal(SymbolKind.Namespace, aliasedNamespace.Kind);
-                    Assert.Equal("@namespace", aliasedNamespace.ToTestDisplayString());
+                Assert.Equal(keyword1, namespaceAlias.Alias.Name);
+                var aliasedNamespace = namespaceAlias.Alias.Target;
+                Assert.Equal(SymbolKind.Namespace, aliasedNamespace.Kind);
+                Assert.Equal("@namespace", aliasedNamespace.ToTestDisplayString());
 
-                    Assert.Equal(keyword2, typeAlias.Alias.Name);
-                    var aliasedType = typeAlias.Alias.Target;
-                    Assert.Equal(SymbolKind.NamedType, aliasedType.Kind);
-                    Assert.Equal(
-                        "@namespace.@class<@namespace.@interface>.@struct",
-                        aliasedType.ToTestDisplayString()
-                    );
-                }
-            );
+                Assert.Equal(keyword2, typeAlias.Alias.Name);
+                var aliasedType = typeAlias.Alias.Target;
+                Assert.Equal(SymbolKind.NamedType, aliasedType.Kind);
+                Assert.Equal(
+                    "@namespace.@class<@namespace.@interface>.@struct",
+                    aliasedType.ToTestDisplayString()
+                );
+            });
         }
 
         [Fact]
@@ -1175,33 +1121,30 @@ class C
             var comp = CreateCompilation(source);
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var importsList = GetImports(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
 
-                    var imports = importsList.Single();
+                var imports = importsList.Single();
 
-                    Assert.Equal(0, imports.Usings.Length);
-                    Assert.Equal(0, imports.ExternAliases.Length);
+                Assert.Equal(0, imports.Usings.Length);
+                Assert.Equal(0, imports.ExternAliases.Length);
 
-                    var usingAliases = imports.UsingAliases;
+                var usingAliases = imports.UsingAliases;
 
-                    Assert.Equal(1, usingAliases.Count);
-                    Assert.Equal("I", usingAliases.Keys.Single());
+                Assert.Equal(1, usingAliases.Count);
+                Assert.Equal("I", usingAliases.Keys.Single());
 
-                    var aliasSymbol = usingAliases.Values.Single().Alias;
-                    Assert.Equal("I", aliasSymbol.Name);
+                var aliasSymbol = usingAliases.Values.Single().Alias;
+                Assert.Equal("I", aliasSymbol.Name);
 
-                    var typeSymbol = aliasSymbol.Target;
-                    Assert.Equal(SymbolKind.NamedType, typeSymbol.Kind);
-                    Assert.Equal(
-                        "System.Collections.Generic.IEnumerable<System.String>",
-                        typeSymbol.ToTestDisplayString()
-                    );
-                }
-            );
+                var typeSymbol = aliasSymbol.Target;
+                Assert.Equal(SymbolKind.NamedType, typeSymbol.Kind);
+                Assert.Equal(
+                    "System.Collections.Generic.IEnumerable<System.String>",
+                    typeSymbol.ToTestDisplayString()
+                );
+            });
         }
 
         [Fact]
@@ -1226,30 +1169,27 @@ class C
             );
             comp.VerifyDiagnostics();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var importsList = GetImports(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
 
-                    var imports = importsList.Single();
+                var imports = importsList.Single();
 
-                    Assert.Equal(0, imports.Usings.Length);
-                    Assert.Equal(0, imports.UsingAliases.Count);
+                Assert.Equal(0, imports.Usings.Length);
+                Assert.Equal(0, imports.UsingAliases.Count);
 
-                    var externAliases = imports.ExternAliases;
+                var externAliases = imports.ExternAliases;
 
-                    Assert.Equal(1, externAliases.Length);
+                Assert.Equal(1, externAliases.Length);
 
-                    var aliasSymbol = externAliases.Single().Alias;
-                    Assert.Equal("X", aliasSymbol.Name);
+                var aliasSymbol = externAliases.Single().Alias;
+                Assert.Equal("X", aliasSymbol.Name);
 
-                    var targetSymbol = aliasSymbol.Target;
-                    Assert.Equal(SymbolKind.Namespace, targetSymbol.Kind);
-                    Assert.True(((NamespaceSymbol)targetSymbol).IsGlobalNamespace);
-                    Assert.Equal("System.Xml.Linq", targetSymbol.ContainingAssembly.Name);
-                }
-            );
+                var targetSymbol = aliasSymbol.Target;
+                Assert.Equal(SymbolKind.Namespace, targetSymbol.Kind);
+                Assert.True(((NamespaceSymbol)targetSymbol).IsGlobalNamespace);
+                Assert.Equal("System.Xml.Linq", targetSymbol.ContainingAssembly.Name);
+            });
         }
 
         [Fact]
@@ -1277,37 +1217,34 @@ class C
             );
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var importsList = GetImports(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
 
-                    var imports = importsList.Single();
+                var imports = importsList.Single();
 
-                    Assert.Equal(1, imports.ExternAliases.Length);
+                Assert.Equal(1, imports.ExternAliases.Length);
 
-                    var @using = imports.Usings.Single();
-                    var importedNamespace = @using.NamespaceOrType;
-                    Assert.Equal(SymbolKind.Namespace, importedNamespace.Kind);
-                    Assert.Equal("System.Xml", importedNamespace.ToTestDisplayString());
+                var @using = imports.Usings.Single();
+                var importedNamespace = @using.NamespaceOrType;
+                Assert.Equal(SymbolKind.Namespace, importedNamespace.Kind);
+                Assert.Equal("System.Xml", importedNamespace.ToTestDisplayString());
 
-                    var usingAliases = imports.UsingAliases;
-                    Assert.Equal(2, usingAliases.Count);
-                    AssertEx.SetEqual(usingAliases.Keys, "SXL", "LO");
+                var usingAliases = imports.UsingAliases;
+                Assert.Equal(2, usingAliases.Count);
+                AssertEx.SetEqual(usingAliases.Keys, "SXL", "LO");
 
-                    var typeAlias = usingAliases["SXL"].Alias;
-                    Assert.Equal("SXL", typeAlias.Name);
-                    Assert.Equal("System.Xml.Linq", typeAlias.Target.ToTestDisplayString());
+                var typeAlias = usingAliases["SXL"].Alias;
+                Assert.Equal("SXL", typeAlias.Name);
+                Assert.Equal("System.Xml.Linq", typeAlias.Target.ToTestDisplayString());
 
-                    var namespaceAlias = usingAliases["LO"].Alias;
-                    Assert.Equal("LO", namespaceAlias.Name);
-                    Assert.Equal(
-                        "System.Xml.Linq.LoadOptions",
-                        namespaceAlias.Target.ToTestDisplayString()
-                    );
-                }
-            );
+                var namespaceAlias = usingAliases["LO"].Alias;
+                Assert.Equal("LO", namespaceAlias.Name);
+                Assert.Equal(
+                    "System.Xml.Linq.LoadOptions",
+                    namespaceAlias.Target.ToTestDisplayString()
+                );
+            });
         }
 
         [Fact]
@@ -1335,30 +1272,27 @@ class C
             );
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var importsList = GetImports(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
 
-                    var imports = importsList.Single();
+                var imports = importsList.Single();
 
-                    Assert.Equal(0, imports.Usings.Length);
-                    Assert.Equal(1, imports.ExternAliases.Length);
+                Assert.Equal(0, imports.Usings.Length);
+                Assert.Equal(1, imports.ExternAliases.Length);
 
-                    var usingAliases = imports.UsingAliases;
-                    Assert.Equal(2, usingAliases.Count);
-                    AssertEx.SetEqual(usingAliases.Keys, "A", "B");
+                var usingAliases = imports.UsingAliases;
+                Assert.Equal(2, usingAliases.Count);
+                AssertEx.SetEqual(usingAliases.Keys, "A", "B");
 
-                    var aliasA = usingAliases["A"].Alias;
-                    Assert.Equal("A", aliasA.Name);
-                    Assert.Equal("System.Xml.Linq", aliasA.Target.ToTestDisplayString());
+                var aliasA = usingAliases["A"].Alias;
+                Assert.Equal("A", aliasA.Name);
+                Assert.Equal("System.Xml.Linq", aliasA.Target.ToTestDisplayString());
 
-                    var aliasB = usingAliases["B"].Alias;
-                    Assert.Equal("B", aliasB.Name);
-                    Assert.Equal(aliasA.Target, aliasB.Target);
-                }
-            );
+                var aliasB = usingAliases["B"].Alias;
+                Assert.Equal("B", aliasB.Name);
+                Assert.Equal(aliasA.Target, aliasB.Target);
+            });
         }
 
         [Fact]
@@ -1381,29 +1315,26 @@ class C
             var comp = CreateCompilation(source);
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
 
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var importsList = GetImports(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var importsList = GetImports(runtime, "C.M");
 
-                    var imports = importsList.Single();
+                var imports = importsList.Single();
 
-                    Assert.Equal(0, imports.Usings.Length);
+                Assert.Equal(0, imports.Usings.Length);
 
-                    var usingAliases = imports.UsingAliases;
-                    Assert.Equal(2, usingAliases.Count);
-                    AssertEx.SetEqual(usingAliases.Keys, "A", "B");
+                var usingAliases = imports.UsingAliases;
+                Assert.Equal(2, usingAliases.Count);
+                AssertEx.SetEqual(usingAliases.Keys, "A", "B");
 
-                    var aliasA = usingAliases["A"].Alias;
-                    Assert.Equal("A", aliasA.Name);
-                    Assert.Equal("System.Int32", aliasA.Target.ToTestDisplayString());
+                var aliasA = usingAliases["A"].Alias;
+                Assert.Equal("A", aliasA.Name);
+                Assert.Equal("System.Int32", aliasA.Target.ToTestDisplayString());
 
-                    var aliasB = usingAliases["B"].Alias;
-                    Assert.Equal("B", aliasB.Name);
-                    Assert.NotEqual(aliasA.Target, aliasB.Target);
-                }
-            );
+                var aliasB = usingAliases["B"].Alias;
+                Assert.Equal("B", aliasB.Name);
+                Assert.NotEqual(aliasA.Target, aliasB.Target);
+            });
         }
 
         private static ImportChain GetImports(RuntimeInstance runtime, string methodName)

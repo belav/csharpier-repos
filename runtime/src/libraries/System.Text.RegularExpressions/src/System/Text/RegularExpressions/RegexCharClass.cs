@@ -618,33 +618,29 @@ namespace System.Text.RegularExpressions
 #else
             StringExtensions
 #endif
-            .Create(
-                strLength,
-                (set, category, startsWithNulls),
-                static (span, state) =>
+            .Create(strLength, (set, category, startsWithNulls), static (span, state) =>
+            {
+                int index;
+
+                if (state.startsWithNulls)
                 {
-                    int index;
-
-                    if (state.startsWithNulls)
-                    {
-                        span[FlagsIndex] = (char)0x1;
-                        span[SetLengthIndex] = (char)(state.set.Length - 2);
-                        span[CategoryLengthIndex] = (char)state.category.Length;
-                        state.set.AsSpan(2).CopyTo(span.Slice(SetStartIndex));
-                        index = SetStartIndex + state.set.Length - 2;
-                    }
-                    else
-                    {
-                        span[FlagsIndex] = '\0';
-                        span[SetLengthIndex] = (char)state.set.Length;
-                        span[CategoryLengthIndex] = (char)state.category.Length;
-                        state.set.AsSpan().CopyTo(span.Slice(SetStartIndex));
-                        index = SetStartIndex + state.set.Length;
-                    }
-
-                    state.category.AsSpan().CopyTo(span.Slice(index));
+                    span[FlagsIndex] = (char)0x1;
+                    span[SetLengthIndex] = (char)(state.set.Length - 2);
+                    span[CategoryLengthIndex] = (char)state.category.Length;
+                    state.set.AsSpan(2).CopyTo(span.Slice(SetStartIndex));
+                    index = SetStartIndex + state.set.Length - 2;
                 }
-            );
+                else
+                {
+                    span[FlagsIndex] = '\0';
+                    span[SetLengthIndex] = (char)state.set.Length;
+                    span[CategoryLengthIndex] = (char)state.category.Length;
+                    state.set.AsSpan().CopyTo(span.Slice(SetStartIndex));
+                    index = SetStartIndex + state.set.Length;
+                }
+
+                state.category.AsSpan().CopyTo(span.Slice(index));
+            });
         }
 
         /// <summary>
@@ -1693,27 +1689,23 @@ namespace System.Text.RegularExpressions
 #else
             StringExtensions
 #endif
-            .Create(
-                SetStartIndex + count,
-                (IntPtr)(&tmpChars),
-                static (span, charsPtr) =>
+            .Create(SetStartIndex + count, (IntPtr)(&tmpChars), static (span, charsPtr) =>
+            {
+                // Fill in the set string
+                span[FlagsIndex] = (char)0;
+                span[SetLengthIndex] = (char)(span.Length - SetStartIndex);
+                span[CategoryLengthIndex] = (char)0;
+                int i = SetStartIndex;
+                foreach (char c in *(ReadOnlySpan<char>*)charsPtr)
                 {
-                    // Fill in the set string
-                    span[FlagsIndex] = (char)0;
-                    span[SetLengthIndex] = (char)(span.Length - SetStartIndex);
-                    span[CategoryLengthIndex] = (char)0;
-                    int i = SetStartIndex;
-                    foreach (char c in *(ReadOnlySpan<char>*)charsPtr)
+                    span[i++] = c;
+                    if (c != LastChar)
                     {
-                        span[i++] = c;
-                        if (c != LastChar)
-                        {
-                            span[i++] = (char)(c + 1);
-                        }
+                        span[i++] = (char)(c + 1);
                     }
-                    Debug.Assert(i == span.Length);
                 }
-            );
+                Debug.Assert(i == span.Length);
+            });
 #pragma warning restore CS8500
         }
 

@@ -76,9 +76,8 @@ namespace XDocumentTests.SDMSample
             // Not allowed to add attributes in the general case.
             // The only general case of a container is a document.
             XDocument document = new XDocument();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => document.Add(new XAttribute("foo", "bar"))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                document.Add(new XAttribute("foo", "bar"))
             );
 
             // Can add to elements, but no duplicates allowed.

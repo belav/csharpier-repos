@@ -38,9 +38,8 @@ public class InputRadioTest
 
         var inputRadioComponents = await RenderAndGetTestInputComponentAsync(rootComponent);
 
-        Assert.All(
-            inputRadioComponents,
-            inputRadio => Assert.True(Guid.TryParseExact(inputRadio.GroupName, "N", out _))
+        Assert.All(inputRadioComponents, inputRadio =>
+            Assert.True(Guid.TryParseExact(inputRadio.GroupName, "N", out _))
         );
     }
 
@@ -57,9 +56,8 @@ public class InputRadioTest
 
         var inputRadioComponents = await RenderAndGetTestInputComponentAsync(rootComponent);
 
-        Assert.All(
-            inputRadioComponents,
-            inputRadio => Assert.Equal(groupName, inputRadio.GroupName)
+        Assert.All(inputRadioComponents, inputRadio =>
+            Assert.Equal(groupName, inputRadio.GroupName)
         );
     }
 

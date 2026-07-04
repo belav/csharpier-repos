@@ -15,14 +15,12 @@ namespace System.IO.Hashing.Tests
         public void Hash_InvalidInputs_Throws()
         {
             AssertExtensions.Throws<ArgumentNullException>("source", () => XxHash128.Hash(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => XxHash128.Hash(null, 42)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                XxHash128.Hash(null, 42)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => XxHash128.Hash(new byte[] { 1, 2, 3 }, new byte[7])
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                XxHash128.Hash(new byte[] { 1, 2, 3 }, new byte[7])
             );
         }
 

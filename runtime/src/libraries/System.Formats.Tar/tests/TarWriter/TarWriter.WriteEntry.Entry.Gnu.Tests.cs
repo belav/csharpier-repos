@@ -274,9 +274,8 @@ namespace System.Formats.Tar.Tests
         {
             using MemoryStream archiveStream = new MemoryStream();
             using TarWriter writer = new TarWriter(archiveStream, leaveOpen: false);
-            Assert.Throws<ArgumentException>(
-                "entry",
-                () => writer.WriteEntry(new GnuTarEntry(entryType, "link"))
+            Assert.Throws<ArgumentException>("entry", () =>
+                writer.WriteEntry(new GnuTarEntry(entryType, "link"))
             );
         }
     }

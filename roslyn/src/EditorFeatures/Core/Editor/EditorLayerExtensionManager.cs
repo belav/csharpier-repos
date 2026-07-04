@@ -81,15 +81,11 @@ internal sealed class EditorLayerExtensionManager(
                             () => ShowDetailedErrorInfo(exception),
                             closeAfterAction: false
                         ),
-                        new InfoBarUI(
-                            WorkspacesResources.Enable,
-                            InfoBarUI.UIKind.Button,
-                            () =>
-                            {
-                                EnableProvider(provider);
-                                LogEnableProvider(provider);
-                            }
-                        ),
+                        new InfoBarUI(WorkspacesResources.Enable, InfoBarUI.UIKind.Button, () =>
+                        {
+                            EnableProvider(provider);
+                            LogEnableProvider(provider);
+                        }),
                         new InfoBarUI(
                             WorkspacesResources.Enable_and_ignore_future_errors,
                             InfoBarUI.UIKind.Button,
@@ -100,10 +96,8 @@ internal sealed class EditorLayerExtensionManager(
                                 LogEnableAndIgnoreProvider(provider);
                             }
                         ),
-                        new InfoBarUI(
-                            string.Empty,
-                            InfoBarUI.UIKind.Close,
-                            () => LogLeaveDisabled(provider)
+                        new InfoBarUI(string.Empty, InfoBarUI.UIKind.Close, () =>
+                            LogLeaveDisabled(provider)
                         )
                     );
                 }

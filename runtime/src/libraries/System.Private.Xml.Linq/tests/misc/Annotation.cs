@@ -187,14 +187,12 @@ namespace System.Xml.Linq.Tests
         [MemberData(nameof(GetXObjects))]
         public void AddNull(XObject xo)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "annotation",
-                () => xo.AddAnnotation(null)
+            AssertExtensions.Throws<ArgumentNullException>("annotation", () =>
+                xo.AddAnnotation(null)
             );
             Assert.Null(xo.Annotation<object>());
-            AssertExtensions.Throws<ArgumentNullException>(
-                "annotation",
-                () => xo.AddAnnotation(null)
+            AssertExtensions.Throws<ArgumentNullException>("annotation", () =>
+                xo.AddAnnotation(null)
             );
         }
 
@@ -202,13 +200,11 @@ namespace System.Xml.Linq.Tests
         [MemberData(nameof(GetXObjects))]
         public void RemoveNull(XObject xo)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => xo.RemoveAnnotations(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                xo.RemoveAnnotations(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => xo.RemoveAnnotations(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                xo.RemoveAnnotations(null)
             );
         }
 
@@ -232,14 +228,12 @@ namespace System.Xml.Linq.Tests
         [MemberData(nameof(GetXObjects))]
         public void AddNullString(XObject xo)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "annotation",
-                () => xo.AddAnnotation((string)null)
+            AssertExtensions.Throws<ArgumentNullException>("annotation", () =>
+                xo.AddAnnotation((string)null)
             );
             Assert.Null(xo.Annotation<object>());
-            AssertExtensions.Throws<ArgumentNullException>(
-                "annotation",
-                () => xo.AddAnnotation((string)null)
+            AssertExtensions.Throws<ArgumentNullException>("annotation", () =>
+                xo.AddAnnotation((string)null)
             );
         }
 

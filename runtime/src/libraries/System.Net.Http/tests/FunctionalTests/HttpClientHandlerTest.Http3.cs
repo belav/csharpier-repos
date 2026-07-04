@@ -164,22 +164,18 @@ namespace System.Net.Http.Functional.Tests
                 using HttpClient client = CreateHttpClient();
 
                 var tasks = new Task<HttpResponseMessage>[streamLimit];
-                Parallel.For(
-                    0,
-                    streamLimit,
-                    i =>
+                Parallel.For(0, streamLimit, i =>
+                {
+                    HttpRequestMessage request = new()
                     {
-                        HttpRequestMessage request = new()
-                        {
-                            Method = HttpMethod.Get,
-                            RequestUri = server.Address,
-                            Version = HttpVersion30,
-                            VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        };
+                        Method = HttpMethod.Get,
+                        RequestUri = server.Address,
+                        Version = HttpVersion30,
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    };
 
-                        tasks[i] = client.SendAsync(request);
-                    }
-                );
+                    tasks[i] = client.SendAsync(request);
+                });
 
                 var responses = await Task.WhenAll(tasks);
                 foreach (var response in responses)
@@ -247,32 +243,28 @@ namespace System.Net.Http.Functional.Tests
                 // Fire out the first streamLimit requests in parallel, no waiting for the responses yet.
                 var countdown = new CountdownEvent(streamLimit);
                 var tasks = new Task<HttpResponseMessage>[streamLimit];
-                Parallel.For(
-                    0,
-                    streamLimit,
-                    i =>
+                Parallel.For(0, streamLimit, i =>
+                {
+                    HttpRequestMessage request = new()
                     {
-                        HttpRequestMessage request = new()
-                        {
-                            Method = HttpMethod.Post,
-                            RequestUri = server.Address,
-                            Version = HttpVersion30,
-                            VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                            Content = new StreamContent(
-                                new DelegateStream(
-                                    canReadFunc: () => true,
-                                    readFunc: (buffer, offset, count) =>
-                                    {
-                                        countdown.Signal();
-                                        return 0;
-                                    }
-                                )
-                            ),
-                        };
+                        Method = HttpMethod.Post,
+                        RequestUri = server.Address,
+                        Version = HttpVersion30,
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                        Content = new StreamContent(
+                            new DelegateStream(
+                                canReadFunc: () => true,
+                                readFunc: (buffer, offset, count) =>
+                                {
+                                    countdown.Signal();
+                                    return 0;
+                                }
+                            )
+                        ),
+                    };
 
-                        tasks[i] = client.SendAsync(request);
-                    }
-                );
+                    tasks[i] = client.SendAsync(request);
+                });
 
                 // Wait for the first streamLimit request to get started.
                 countdown.Wait();
@@ -349,9 +341,8 @@ namespace System.Net.Http.Functional.Tests
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                await AssertProtocolErrorAsync(
-                    UnexpectedFrameErrorCode,
-                    () => client.SendAsync(request)
+                await AssertProtocolErrorAsync(UnexpectedFrameErrorCode, () =>
+                    client.SendAsync(request)
                 );
             });
 
@@ -386,9 +377,8 @@ namespace System.Net.Http.Functional.Tests
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                await AssertProtocolErrorAsync(
-                    GeneralProtocolError,
-                    () => client.SendAsync(request)
+                await AssertProtocolErrorAsync(GeneralProtocolError, () =>
+                    client.SendAsync(request)
                 );
             });
 
@@ -426,9 +416,8 @@ namespace System.Net.Http.Functional.Tests
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
-                await AssertProtocolErrorAsync(
-                    GeneralProtocolError,
-                    () => client.SendAsync(request)
+                await AssertProtocolErrorAsync(GeneralProtocolError, () =>
+                    client.SendAsync(request)
                 );
                 semaphore.Release();
             });
@@ -1047,9 +1036,8 @@ namespace System.Net.Http.Functional.Tests
                 // In that case even with synchronization via semaphores, first writes after peer aborting may "succeed" (get SEND_COMPLETE event)
                 // We are asserting that PEER_RECEIVE_ABORTED would still arrive eventually
 
-                var ex = await AssertThrowsQuicExceptionAsync(
-                    QuicError.StreamAborted,
-                    () => SendDataForever(stream).WaitAsync(TimeSpan.FromSeconds(10))
+                var ex = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () =>
+                    SendDataForever(stream).WaitAsync(TimeSpan.FromSeconds(10))
                 );
                 Assert.Equal(268, ex.ApplicationErrorCode);
 
@@ -1652,9 +1640,8 @@ namespace System.Net.Http.Functional.Tests
             await clientTask.WaitAsync(TimeSpan.FromSeconds(120));
 
             // server receives cancellation
-            QuicException ex = await AssertThrowsQuicExceptionAsync(
-                QuicError.StreamAborted,
-                () => serverTask.WaitAsync(TimeSpan.FromSeconds(120))
+            QuicException ex = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () =>
+                serverTask.WaitAsync(TimeSpan.FromSeconds(120))
             );
             Assert.Equal(
                 268 /*H3_REQUEST_CANCELLED (0x10C)*/
@@ -1729,9 +1716,8 @@ namespace System.Net.Http.Functional.Tests
             await clientTask.WaitAsync(TimeSpan.FromSeconds(120));
 
             // server receives cancellation
-            QuicException ex = await AssertThrowsQuicExceptionAsync(
-                QuicError.StreamAborted,
-                () => serverTask.WaitAsync(TimeSpan.FromSeconds(120))
+            QuicException ex = await AssertThrowsQuicExceptionAsync(QuicError.StreamAborted, () =>
+                serverTask.WaitAsync(TimeSpan.FromSeconds(120))
             );
             Assert.Equal(
                 268 /*H3_REQUEST_CANCELLED (0x10C)*/

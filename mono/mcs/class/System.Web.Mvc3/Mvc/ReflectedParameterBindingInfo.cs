@@ -24,15 +24,13 @@
         {
             get
             {
-                IModelBinder binder = ModelBinders.GetBinderFromAttributes(
-                    _parameterInfo,
-                    () =>
-                        String.Format(
-                            CultureInfo.CurrentCulture,
-                            MvcResources.ReflectedParameterBindingInfo_MultipleConverterAttributes,
-                            _parameterInfo.Name,
-                            _parameterInfo.Member
-                        )
+                IModelBinder binder = ModelBinders.GetBinderFromAttributes(_parameterInfo, () =>
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.ReflectedParameterBindingInfo_MultipleConverterAttributes,
+                        _parameterInfo.Name,
+                        _parameterInfo.Member
+                    )
                 );
 
                 return binder;

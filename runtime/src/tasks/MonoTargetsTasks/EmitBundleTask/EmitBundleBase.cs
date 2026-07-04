@@ -237,20 +237,12 @@ public abstract class EmitBundleBase : Microsoft.Build.Utilities.Task, ICancelab
                         destinationFile
                     );
                     var symbolName = _resourceDataSymbolDictionary[registeredName];
-                    if (
-                        !EmitBundleFile(
-                            destinationFile,
-                            (codeStream) =>
-                            {
-                                using var inputStream = File.OpenRead(inputFile);
-                                using var outputUtf8Writer = new StreamWriter(
-                                    codeStream,
-                                    Utf8NoBom
-                                );
-                                BundleFileToCSource(symbolName, inputStream, outputUtf8Writer);
-                            }
-                        )
-                    )
+                    if (!EmitBundleFile(destinationFile, (codeStream) =>
+                        {
+                            using var inputStream = File.OpenRead(inputFile);
+                            using var outputUtf8Writer = new StreamWriter(codeStream, Utf8NoBom);
+                            BundleFileToCSource(symbolName, inputStream, outputUtf8Writer);
+                        }))
                     {
                         state.Stop();
                     }
@@ -313,19 +305,16 @@ public abstract class EmitBundleBase : Microsoft.Build.Utilities.Task, ICancelab
             string bundleFilePath = Path.Combine(OutputDirectory, BundleFile);
 
             // Generate source file to preallocate resources and register bundled resources
-            EmitBundleFile(
-                bundleFilePath,
-                (outputStream) =>
-                {
-                    using var outputUtf8Writer = new StreamWriter(outputStream, Utf8NoBom);
-                    GenerateBundledResourcePreallocationAndRegistration(
-                        resourceSymbols,
-                        BundleRegistrationFunctionName,
-                        files,
-                        outputUtf8Writer
-                    );
-                }
-            );
+            EmitBundleFile(bundleFilePath, (outputStream) =>
+            {
+                using var outputUtf8Writer = new StreamWriter(outputStream, Utf8NoBom);
+                GenerateBundledResourcePreallocationAndRegistration(
+                    resourceSymbols,
+                    BundleRegistrationFunctionName,
+                    files,
+                    outputUtf8Writer
+                );
+            });
 
             BundleRegistrationFile = bundleFilePath;
         }

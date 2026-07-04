@@ -235,13 +235,11 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetObjectForNativeVariant_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pSrcNativeVariant",
-                () => Marshal.GetObjectForNativeVariant(IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentNullException>("pSrcNativeVariant", () =>
+                Marshal.GetObjectForNativeVariant(IntPtr.Zero)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pSrcNativeVariant",
-                () => Marshal.GetObjectForNativeVariant<int>(IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentNullException>("pSrcNativeVariant", () =>
+                Marshal.GetObjectForNativeVariant<int>(IntPtr.Zero)
             );
         }
 
@@ -303,9 +301,8 @@ namespace System.Runtime.InteropServices.Tests
             variant.m_Variant.vt = vt;
             variant.m_Variant._unionTypes._byref = IntPtr.Zero;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => GetObjectForNativeVariant(variant)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                GetObjectForNativeVariant(variant)
             );
         }
 
@@ -321,9 +318,8 @@ namespace System.Runtime.InteropServices.Tests
         public void GetObjectForNativeVariant_InvalidDate_ThrowsArgumentException(double value)
         {
             Variant variant = CreateVariant(VT_DATE, new UnionTypes { _date = value });
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => GetObjectForNativeVariant(variant)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                GetObjectForNativeVariant(variant)
             );
         }
 
@@ -334,9 +330,8 @@ namespace System.Runtime.InteropServices.Tests
                 VT_RECORD,
                 new UnionTypes { _record = new Record { _recordInfo = IntPtr.Zero } }
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => GetObjectForNativeVariant(variant)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                GetObjectForNativeVariant(variant)
             );
         }
 
@@ -370,9 +365,8 @@ namespace System.Runtime.InteropServices.Tests
                         _record = new Record { _record = pRecord, _recordInfo = pRecordInfo },
                     }
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => GetObjectForNativeVariant(variant)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    GetObjectForNativeVariant(variant)
                 );
             }
             finally
@@ -423,9 +417,8 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(GetObjectForNativeVariant_CantMap_ThrowsArgumentException_Data))]
         public void GetObjectForNativeVariant_CantMap_ThrowsArgumentException(Variant variant)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => GetObjectForNativeVariant(variant)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                GetObjectForNativeVariant(variant)
             );
         }
 
@@ -437,9 +430,8 @@ namespace System.Runtime.InteropServices.Tests
         public void GetObjectForNativeVariant_CantMapByRef_ThrowsArgumentException(Variant variant)
         {
             variant.m_Variant.vt |= VT_BYREF;
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => GetObjectForNativeVariant(variant)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                GetObjectForNativeVariant(variant)
             );
         }
 

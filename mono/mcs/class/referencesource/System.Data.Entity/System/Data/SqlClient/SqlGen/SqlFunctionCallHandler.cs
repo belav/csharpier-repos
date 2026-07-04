@@ -193,119 +193,95 @@ namespace System.Data.SqlClient.SqlGen
 
             // Spatial functions are mapped to static or instance members of geography/geometry
             // Geography Static functions
-            functionHandlers.Add(
-                "POINTGEOGRAPHY",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(sqlgen, functionExpression, "geography::Point")
+            functionHandlers.Add("POINTGEOGRAPHY", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(sqlgen, functionExpression, "geography::Point")
             );
 
             // Geometry Static functions
-            functionHandlers.Add(
-                "POINTGEOMETRY",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(sqlgen, functionExpression, "geometry::Point")
+            functionHandlers.Add("POINTGEOMETRY", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(sqlgen, functionExpression, "geometry::Point")
             );
 
             // Spatial Instance functions (shared)
-            functionHandlers.Add(
-                "ASTEXTZM",
-                (sqlgen, functionExpression) =>
-                    WriteInstanceFunctionCall(
-                        sqlgen,
-                        "AsTextZM",
-                        functionExpression,
-                        isPropertyAccess: false
-                    )
+            functionHandlers.Add("ASTEXTZM", (sqlgen, functionExpression) =>
+                WriteInstanceFunctionCall(
+                    sqlgen,
+                    "AsTextZM",
+                    functionExpression,
+                    isPropertyAccess: false
+                )
             );
-            functionHandlers.Add(
-                "BUFFERWITHTOLERANCE",
-                (sqlgen, functionExpression) =>
-                    WriteInstanceFunctionCall(
-                        sqlgen,
-                        "BufferWithTolerance",
-                        functionExpression,
-                        isPropertyAccess: false
-                    )
+            functionHandlers.Add("BUFFERWITHTOLERANCE", (sqlgen, functionExpression) =>
+                WriteInstanceFunctionCall(
+                    sqlgen,
+                    "BufferWithTolerance",
+                    functionExpression,
+                    isPropertyAccess: false
+                )
             );
-            functionHandlers.Add(
-                "ENVELOPEANGLE",
-                (sqlgen, functionExpression) =>
-                    WriteInstanceFunctionCall(
-                        sqlgen,
-                        "EnvelopeAngle",
-                        functionExpression,
-                        isPropertyAccess: false
-                    )
+            functionHandlers.Add("ENVELOPEANGLE", (sqlgen, functionExpression) =>
+                WriteInstanceFunctionCall(
+                    sqlgen,
+                    "EnvelopeAngle",
+                    functionExpression,
+                    isPropertyAccess: false
+                )
             );
-            functionHandlers.Add(
-                "ENVELOPECENTER",
-                (sqlgen, functionExpression) =>
-                    WriteInstanceFunctionCall(
-                        sqlgen,
-                        "EnvelopeCenter",
-                        functionExpression,
-                        isPropertyAccess: false
-                    )
+            functionHandlers.Add("ENVELOPECENTER", (sqlgen, functionExpression) =>
+                WriteInstanceFunctionCall(
+                    sqlgen,
+                    "EnvelopeCenter",
+                    functionExpression,
+                    isPropertyAccess: false
+                )
             );
-            functionHandlers.Add(
-                "INSTANCEOF",
-                (sqlgen, functionExpression) =>
-                    WriteInstanceFunctionCall(
-                        sqlgen,
-                        "InstanceOf",
-                        functionExpression,
-                        isPropertyAccess: false
-                    )
+            functionHandlers.Add("INSTANCEOF", (sqlgen, functionExpression) =>
+                WriteInstanceFunctionCall(
+                    sqlgen,
+                    "InstanceOf",
+                    functionExpression,
+                    isPropertyAccess: false
+                )
             );
-            functionHandlers.Add(
-                "FILTER",
-                (sqlgen, functionExpression) =>
-                    WriteInstanceFunctionCall(
-                        sqlgen,
-                        "Filter",
-                        functionExpression,
-                        isPropertyAccess: false
-                    )
+            functionHandlers.Add("FILTER", (sqlgen, functionExpression) =>
+                WriteInstanceFunctionCall(
+                    sqlgen,
+                    "Filter",
+                    functionExpression,
+                    isPropertyAccess: false
+                )
             );
-            functionHandlers.Add(
-                "MAKEVALID",
-                (sqlgen, functionExpression) =>
-                    WriteInstanceFunctionCall(
-                        sqlgen,
-                        "MakeValid",
-                        functionExpression,
-                        isPropertyAccess: false
-                    )
+            functionHandlers.Add("MAKEVALID", (sqlgen, functionExpression) =>
+                WriteInstanceFunctionCall(
+                    sqlgen,
+                    "MakeValid",
+                    functionExpression,
+                    isPropertyAccess: false
+                )
             );
-            functionHandlers.Add(
-                "REDUCE",
-                (sqlgen, functionExpression) =>
-                    WriteInstanceFunctionCall(
-                        sqlgen,
-                        "Reduce",
-                        functionExpression,
-                        isPropertyAccess: false
-                    )
+            functionHandlers.Add("REDUCE", (sqlgen, functionExpression) =>
+                WriteInstanceFunctionCall(
+                    sqlgen,
+                    "Reduce",
+                    functionExpression,
+                    isPropertyAccess: false
+                )
             );
-            functionHandlers.Add(
-                "NUMRINGS",
-                (sqlgen, functionExpression) =>
-                    WriteInstanceFunctionCall(
-                        sqlgen,
-                        "NumRings",
-                        functionExpression,
-                        isPropertyAccess: false
-                    )
+            functionHandlers.Add("NUMRINGS", (sqlgen, functionExpression) =>
+                WriteInstanceFunctionCall(
+                    sqlgen,
+                    "NumRings",
+                    functionExpression,
+                    isPropertyAccess: false
+                )
             );
-            functionHandlers.Add(
-                "RINGN",
-                (sqlgen, functionExpression) =>
-                    WriteInstanceFunctionCall(
-                        sqlgen,
-                        "RingN",
-                        functionExpression,
-                        isPropertyAccess: false
-                    )
+            functionHandlers.Add("RINGN", (sqlgen, functionExpression) =>
+                WriteInstanceFunctionCall(
+                    sqlgen,
+                    "RingN",
+                    functionExpression,
+                    isPropertyAccess: false
+                )
             );
 
             return functionHandlers;
@@ -476,32 +452,26 @@ namespace System.Data.SqlClient.SqlGen
 
             // Well Known Text constructors
             staticGeographyFunctions.Add("GeographyFromText", HandleSpatialFromTextFunction);
-            staticGeographyFunctions.Add(
-                "GeographyPointFromText",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geography::STPointFromText"
-                    )
+            staticGeographyFunctions.Add("GeographyPointFromText", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geography::STPointFromText"
+                )
             );
-            staticGeographyFunctions.Add(
-                "GeographyLineFromText",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geography::STLineFromText"
-                    )
+            staticGeographyFunctions.Add("GeographyLineFromText", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geography::STLineFromText"
+                )
             );
-            staticGeographyFunctions.Add(
-                "GeographyPolygonFromText",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geography::STPolyFromText"
-                    )
+            staticGeographyFunctions.Add("GeographyPolygonFromText", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geography::STPolyFromText"
+                )
             );
             staticGeographyFunctions.Add(
                 "GeographyMultiPointFromText",
@@ -542,23 +512,19 @@ namespace System.Data.SqlClient.SqlGen
 
             // Well Known Binary constructors
             staticGeographyFunctions.Add("GeographyFromBinary", HandleSpatialFromBinaryFunction);
-            staticGeographyFunctions.Add(
-                "GeographyPointFromBinary",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geography::STPointFromWKB"
-                    )
+            staticGeographyFunctions.Add("GeographyPointFromBinary", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geography::STPointFromWKB"
+                )
             );
-            staticGeographyFunctions.Add(
-                "GeographyLineFromBinary",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geography::STLineFromWKB"
-                    )
+            staticGeographyFunctions.Add("GeographyLineFromBinary", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geography::STLineFromWKB"
+                )
             );
             staticGeographyFunctions.Add(
                 "GeographyPolygonFromBinary",
@@ -688,32 +654,26 @@ namespace System.Data.SqlClient.SqlGen
 
             // Well Known Text constructors
             staticGeometryFunctions.Add("GeometryFromText", HandleSpatialFromTextFunction);
-            staticGeometryFunctions.Add(
-                "GeometryPointFromText",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geometry::STPointFromText"
-                    )
+            staticGeometryFunctions.Add("GeometryPointFromText", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geometry::STPointFromText"
+                )
             );
-            staticGeometryFunctions.Add(
-                "GeometryLineFromText",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geometry::STLineFromText"
-                    )
+            staticGeometryFunctions.Add("GeometryLineFromText", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geometry::STLineFromText"
+                )
             );
-            staticGeometryFunctions.Add(
-                "GeometryPolygonFromText",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geometry::STPolyFromText"
-                    )
+            staticGeometryFunctions.Add("GeometryPolygonFromText", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geometry::STPolyFromText"
+                )
             );
             staticGeometryFunctions.Add(
                 "GeometryMultiPointFromText",
@@ -724,14 +684,12 @@ namespace System.Data.SqlClient.SqlGen
                         "geometry::STMPointFromText"
                     )
             );
-            staticGeometryFunctions.Add(
-                "GeometryMultiLineFromText",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geometry::STMLineFromText"
-                    )
+            staticGeometryFunctions.Add("GeometryMultiLineFromText", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geometry::STMLineFromText"
+                )
             );
             staticGeometryFunctions.Add(
                 "GeometryMultiPolygonFromText",
@@ -754,32 +712,26 @@ namespace System.Data.SqlClient.SqlGen
 
             // Well Known Binary constructors
             staticGeometryFunctions.Add("GeometryFromBinary", HandleSpatialFromBinaryFunction);
-            staticGeometryFunctions.Add(
-                "GeometryPointFromBinary",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geometry::STPointFromWKB"
-                    )
+            staticGeometryFunctions.Add("GeometryPointFromBinary", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geometry::STPointFromWKB"
+                )
             );
-            staticGeometryFunctions.Add(
-                "GeometryLineFromBinary",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geometry::STLineFromWKB"
-                    )
+            staticGeometryFunctions.Add("GeometryLineFromBinary", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geometry::STLineFromWKB"
+                )
             );
-            staticGeometryFunctions.Add(
-                "GeometryPolygonFromBinary",
-                (sqlgen, functionExpression) =>
-                    HandleFunctionDefaultGivenName(
-                        sqlgen,
-                        functionExpression,
-                        "geometry::STPolyFromWKB"
-                    )
+            staticGeometryFunctions.Add("GeometryPolygonFromBinary", (sqlgen, functionExpression) =>
+                HandleFunctionDefaultGivenName(
+                    sqlgen,
+                    functionExpression,
+                    "geometry::STPolyFromWKB"
+                )
             );
             staticGeometryFunctions.Add(
                 "GeometryMultiPointFromBinary",
@@ -1166,22 +1118,19 @@ namespace System.Data.SqlClient.SqlGen
             string returnType
         )
         {
-            return WrapWithCast(
-                returnType,
-                result =>
+            return WrapWithCast(returnType, result =>
+            {
+                if (functionName == null)
                 {
-                    if (functionName == null)
-                    {
-                        WriteFunctionName(result, e.Function);
-                    }
-                    else
-                    {
-                        result.Append(functionName);
-                    }
-
-                    HandleFunctionArgumentsDefault(sqlgen, e, result);
+                    WriteFunctionName(result, e.Function);
                 }
-            );
+                else
+                {
+                    result.Append(functionName);
+                }
+
+                HandleFunctionArgumentsDefault(sqlgen, e, result);
+            });
         }
 
         private static ISqlFragment WrapWithCast(string returnType, Action<SqlBuilder> toWrap)
@@ -1458,34 +1407,27 @@ namespace System.Data.SqlClient.SqlGen
                 "Property accessor instance functions should have only the single instance argument"
             );
 
-            return WrapWithCast(
-                castReturnTypeTo,
-                result =>
+            return WrapWithCast(castReturnTypeTo, result =>
+            {
+                DbExpression instanceExpression = functionExpression.Arguments[0];
+
+                // Write the instance - if this is another function call, it need not be enclosed in parentheses.
+                if (instanceExpression.ExpressionKind != DbExpressionKind.Function)
                 {
-                    DbExpression instanceExpression = functionExpression.Arguments[0];
-
-                    // Write the instance - if this is another function call, it need not be enclosed in parentheses.
-                    if (instanceExpression.ExpressionKind != DbExpressionKind.Function)
-                    {
-                        sqlgen.ParenthesizeExpressionIfNeeded(instanceExpression, result);
-                    }
-                    else
-                    {
-                        result.Append(instanceExpression.Accept(sqlgen));
-                    }
-                    result.Append(".");
-                    result.Append(functionName);
-
-                    if (!isPropertyAccess)
-                    {
-                        WriteFunctionArguments(
-                            sqlgen,
-                            functionExpression.Arguments.Skip(1),
-                            result
-                        );
-                    }
+                    sqlgen.ParenthesizeExpressionIfNeeded(instanceExpression, result);
                 }
-            );
+                else
+                {
+                    result.Append(instanceExpression.Accept(sqlgen));
+                }
+                result.Append(".");
+                result.Append(functionName);
+
+                if (!isPropertyAccess)
+                {
+                    WriteFunctionArguments(sqlgen, functionExpression.Arguments.Skip(1), result);
+                }
+            });
         }
 
         /// <summary>

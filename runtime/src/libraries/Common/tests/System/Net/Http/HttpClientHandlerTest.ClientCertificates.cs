@@ -43,9 +43,8 @@ namespace System.Net.Http.Functional.Tests
         {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.ClientCertificateOptions = option
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.ClientCertificateOptions = option
                 );
             }
         }

@@ -464,18 +464,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 }
             }
 
-            documentEditor.ReplaceNode(
-                typeDeclaration,
-                (declaration, _) =>
-                    CreateRecordDeclaration(
-                        type,
-                        (TypeDeclarationSyntax)declaration,
-                        modifiedClassTrivia,
-                        propertiesToAddAsParams,
-                        recordKeyword,
-                        constructorTrivia,
-                        baseList
-                    )
+            documentEditor.ReplaceNode(typeDeclaration, (declaration, _) =>
+                CreateRecordDeclaration(
+                    type,
+                    (TypeDeclarationSyntax)declaration,
+                    modifiedClassTrivia,
+                    propertiesToAddAsParams,
+                    recordKeyword,
+                    constructorTrivia,
+                    baseList
+                )
             );
 
             return solutionEditor.GetChangedSolution();
@@ -657,66 +655,61 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                             )
                     );
 
-                    documentEditor.ReplaceNode(
-                        objectCreationExpression,
-                        (node, generator) =>
+                    documentEditor.ReplaceNode(objectCreationExpression, (node, generator) =>
+                    {
+                        var updatedObjectCreation = (ObjectCreationExpressionSyntax)node;
+                        var newInitializer = (InitializerExpressionSyntax)
+                            generator.RemoveNodes(
+                                updatedObjectCreation.Initializer!,
+                                expressionIndices
+                                    .Where(i => i != -1)
+                                    .Select(i => updatedObjectCreation.Initializer!.Expressions[i])
+                            );
+
+                        // if there are no more assignments other than the ones that
+                        // could go in the primary constructor, we can remove the block entirely
+                        if (newInitializer.Expressions.IsEmpty())
                         {
-                            var updatedObjectCreation = (ObjectCreationExpressionSyntax)node;
-                            var newInitializer = (InitializerExpressionSyntax)
-                                generator.RemoveNodes(
-                                    updatedObjectCreation.Initializer!,
-                                    expressionIndices
-                                        .Where(i => i != -1)
-                                        .Select(i =>
-                                            updatedObjectCreation.Initializer!.Expressions[i]
-                                        )
-                                );
-
-                            // if there are no more assignments other than the ones that
-                            // could go in the primary constructor, we can remove the block entirely
-                            if (newInitializer.Expressions.IsEmpty())
-                            {
-                                newInitializer = null;
-                            }
-
-                            // note: index here is the position in the initializer assignment list of the expression
-                            // if it was found at all. The expressions are actually in order of how they should be
-                            // supplied as arguments for the primary constructor.
-                            var updatedExpressions = expressions.Zip(
-                                expressionIndices,
-                                (expression, index) =>
-                                {
-                                    if (index == -1)
-                                    {
-                                        // default/null constructed expression
-                                        return expression;
-                                    }
-                                    else
-                                    {
-                                        // corresponds to a real node, need to get the updated one
-                                        var assignmentExpression = (AssignmentExpressionSyntax)
-                                            updatedObjectCreation.Initializer!.Expressions[index];
-                                        return assignmentExpression.Right;
-                                    }
-                                }
-                            );
-
-                            // replace: new C { Foo = 0; Bar = false; };
-                            // with: new C(0, false);
-                            return SyntaxFactory.ObjectCreationExpression(
-                                updatedObjectCreation.NewKeyword,
-                                updatedObjectCreation.Type.WithoutTrailingTrivia(),
-                                SyntaxFactory.ArgumentList(
-                                    SyntaxFactory.SeparatedList(
-                                        updatedExpressions.Select(expression =>
-                                            SyntaxFactory.Argument(expression.WithoutTrivia())
-                                        )
-                                    )
-                                ),
-                                newInitializer
-                            );
+                            newInitializer = null;
                         }
-                    );
+
+                        // note: index here is the position in the initializer assignment list of the expression
+                        // if it was found at all. The expressions are actually in order of how they should be
+                        // supplied as arguments for the primary constructor.
+                        var updatedExpressions = expressions.Zip(
+                            expressionIndices,
+                            (expression, index) =>
+                            {
+                                if (index == -1)
+                                {
+                                    // default/null constructed expression
+                                    return expression;
+                                }
+                                else
+                                {
+                                    // corresponds to a real node, need to get the updated one
+                                    var assignmentExpression = (AssignmentExpressionSyntax)
+                                        updatedObjectCreation.Initializer!.Expressions[index];
+                                    return assignmentExpression.Right;
+                                }
+                            }
+                        );
+
+                        // replace: new C { Foo = 0; Bar = false; };
+                        // with: new C(0, false);
+                        return SyntaxFactory.ObjectCreationExpression(
+                            updatedObjectCreation.NewKeyword,
+                            updatedObjectCreation.Type.WithoutTrailingTrivia(),
+                            SyntaxFactory.ArgumentList(
+                                SyntaxFactory.SeparatedList(
+                                    updatedExpressions.Select(expression =>
+                                        SyntaxFactory.Argument(expression.WithoutTrivia())
+                                    )
+                                )
+                            ),
+                            newInitializer
+                        );
+                    });
                 }
             }
         }

@@ -118,9 +118,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 }
             }
 
-            var membersHandled = AllAnalyzerMemberNames.Zip(
-                handled,
-                (m, h) => new { Member = m, Handled = h }
+            var membersHandled = AllAnalyzerMemberNames.Zip(handled, (m, h) =>
+                new { Member = m, Handled = h }
             );
             Assert.True(
                 !handled.Any(h => h == false) && handled.Any(h => true),

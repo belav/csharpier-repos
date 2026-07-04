@@ -3752,18 +3752,16 @@ namespace System.Linq.Expressions.Tests
         public static void ArrayIndexNotArray()
         {
             Expression intExp = Expression.Constant(1);
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                () => Expression.ArrayIndex(intExp, intExp)
+            AssertExtensions.Throws<ArgumentException>("array", () =>
+                Expression.ArrayIndex(intExp, intExp)
             );
         }
 
         [Fact]
         public static void ArrayIndexNullArray()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "array",
-                () => Expression.ArrayIndex(null, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentNullException>("array", () =>
+                Expression.ArrayIndex(null, Expression.Constant(0))
             );
         }
 
@@ -3771,9 +3769,8 @@ namespace System.Linq.Expressions.Tests
         public static void ArrayIndexNullIndices()
         {
             Expression array = Expression.Constant(new[] { 1, 2 });
-            AssertExtensions.Throws<ArgumentNullException>(
-                "index",
-                () => Expression.ArrayIndex(array, default(Expression))
+            AssertExtensions.Throws<ArgumentNullException>("index", () =>
+                Expression.ArrayIndex(array, default(Expression))
             );
         }
 
@@ -3787,9 +3784,8 @@ namespace System.Linq.Expressions.Tests
                     { 2, 1 },
                 }
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.ArrayIndex(array, Expression.Constant(2))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.ArrayIndex(array, Expression.Constant(2))
             );
         }
 
@@ -3797,9 +3793,8 @@ namespace System.Linq.Expressions.Tests
         public static void ArrayIndexWrongType()
         {
             Expression array = Expression.Constant(new[] { 1, 2 });
-            AssertExtensions.Throws<ArgumentException>(
-                "index",
-                () => Expression.ArrayIndex(array, Expression.Constant(2L))
+            AssertExtensions.Throws<ArgumentException>("index", () =>
+                Expression.ArrayIndex(array, Expression.Constant(2L))
             );
         }
 
@@ -3811,9 +3806,8 @@ namespace System.Linq.Expressions.Tests
                 typeof(Unreadable<int[]>),
                 nameof(Unreadable<int>.WriteOnly)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                () => Expression.ArrayIndex(array, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("array", () =>
+                Expression.ArrayIndex(array, Expression.Constant(0))
             );
         }
 
@@ -3826,9 +3820,8 @@ namespace System.Linq.Expressions.Tests
                 typeof(Unreadable<int>),
                 nameof(Unreadable<int>.WriteOnly)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "index",
-                () => Expression.ArrayIndex(array, index)
+            AssertExtensions.Throws<ArgumentException>("index", () =>
+                Expression.ArrayIndex(array, index)
             );
         }
 

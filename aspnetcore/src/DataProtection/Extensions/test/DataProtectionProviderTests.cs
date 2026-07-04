@@ -115,13 +115,10 @@ public class DataProtectionProviderTests
 
             // Step 2: instantiate the system and round-trip a payload
             var protector = DataProtectionProvider
-                .Create(
-                    directory,
-                    configure =>
-                    {
-                        configure.ProtectKeysWithDpapi();
-                    }
-                )
+                .Create(directory, configure =>
+                {
+                    configure.ProtectKeysWithDpapi();
+                })
                 .CreateProtector("purpose");
             Assert.Equal("payload", protector.Unprotect(protector.Protect("payload")));
 
@@ -261,9 +258,8 @@ public class DataProtectionProviderTests
                     Assert.Throws<CryptographicException>(() => keylessUnprotector.Unprotect(data));
 
                     var unprotector = DataProtectionProvider
-                        .Create(
-                            directory,
-                            o => o.UnprotectKeysWithAnyCertificate(certInStore, certWithKey)
+                        .Create(directory, o =>
+                            o.UnprotectKeysWithAnyCertificate(certInStore, certWithKey)
                         )
                         .CreateProtector("purpose");
                     Assert.Equal("payload", unprotector.Unprotect(data));
@@ -392,9 +388,8 @@ public class DataProtectionProviderTests
             Assert.Contains("X509Certificate", fileText, StringComparison.Ordinal);
 
             // Step 4: setup a second system and validate it can decrypt keys and unprotect data
-            var unprotector = DataProtectionProvider.Create(
-                directory,
-                b => b.UnprotectKeysWithAnyCertificate(certificate)
+            var unprotector = DataProtectionProvider.Create(directory, b =>
+                b.UnprotectKeysWithAnyCertificate(certificate)
             );
             Assert.Equal("payload", unprotector.CreateProtector("purpose").Unprotect(data));
         });

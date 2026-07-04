@@ -164,10 +164,8 @@ namespace Microsoft.Extensions.Logging
             Func<string?, LogLevel, bool> categoryLevelFilter
         )
             where T : ILoggerProvider =>
-            AddRule(
-                builder,
-                type: typeof(T).FullName,
-                filter: (type, name, level) => categoryLevelFilter(name, level)
+            AddRule(builder, type: typeof(T).FullName, filter: (type, name, level) =>
+                categoryLevelFilter(name, level)
             );
 
         /// <summary>
@@ -193,10 +191,8 @@ namespace Microsoft.Extensions.Logging
             Func<LogLevel, bool> levelFilter
         )
             where T : ILoggerProvider =>
-            AddRule(
-                builder,
-                type: typeof(T).FullName,
-                filter: (type, name, level) => levelFilter(level)
+            AddRule(builder, type: typeof(T).FullName, filter: (type, name, level) =>
+                levelFilter(level)
             );
 
         /// <summary>

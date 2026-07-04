@@ -211,12 +211,10 @@ namespace Castle.DynamicProxy.Contributors
                 null
             );
 
-            return scope.TypeCache.GetOrAddWithoutTakingLock(
-                key,
-                _ =>
-                    new DelegateTypeGenerator(method, targetType)
-                        .Generate(@class, namingScope)
-                        .BuildType()
+            return scope.TypeCache.GetOrAddWithoutTakingLock(key, _ =>
+                new DelegateTypeGenerator(method, targetType)
+                    .Generate(@class, namingScope)
+                    .BuildType()
             );
         }
 

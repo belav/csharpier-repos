@@ -100,9 +100,8 @@ namespace System.ServiceProcess.Tests
                 | ServiceType.KernelDriver
                 | ServiceType.RecognizerDriver;
 
-            Assert.All(
-                devices,
-                device => Assert.NotEqual(0, (int)(device.ServiceType & SERVICE_DRIVER))
+            Assert.All(devices, device =>
+                Assert.NotEqual(0, (int)(device.ServiceType & SERVICE_DRIVER))
             );
         }
 

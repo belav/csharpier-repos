@@ -1699,9 +1699,8 @@ namespace System.Web.UI.WebControls
             }
 
             MethodInfo[] allMethods = type.GetMethods(flags);
-            MethodInfo[] actionMethods = Array.FindAll(
-                allMethods,
-                methodInfo => methodInfo.Name.Equals(methodName, StringComparison.OrdinalIgnoreCase)
+            MethodInfo[] actionMethods = Array.FindAll(allMethods, methodInfo =>
+                methodInfo.Name.Equals(methodName, StringComparison.OrdinalIgnoreCase)
             );
 
             if (actionMethods.Length != 1)

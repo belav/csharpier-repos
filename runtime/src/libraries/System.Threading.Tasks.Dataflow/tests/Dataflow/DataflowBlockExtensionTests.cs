@@ -626,10 +626,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             using (source.LinkTo(target))
             {
                 source.LinkTo(target, new DataflowLinkOptions { PropagateCompletion = true });
-                source.LinkTo(
-                    target,
-                    new DataflowLinkOptions { PropagateCompletion = true },
-                    f => false
+                source.LinkTo(target, new DataflowLinkOptions { PropagateCompletion = true }, f =>
+                    false
                 );
             }
             source.Fault(new FormatException());
@@ -1008,9 +1006,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
                 if (withCancellation)
                 {
-                    await AssertExtensions.CanceledAsync(
-                        cts.Token,
-                        () => target.SendAsync(42, cts.Token)
+                    await AssertExtensions.CanceledAsync(cts.Token, () =>
+                        target.SendAsync(42, cts.Token)
                     );
                 }
                 else
@@ -2062,13 +2059,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     await AssertExtensions.CanceledAsync(cts.Token, choose);
 
                     int expectedLinkCount = cancelBeforeChoose ? 0 : 1;
-                    Assert.All(
-                        linkCounts,
-                        i => Assert.Equal(expected: expectedLinkCount, actual: i)
+                    Assert.All(linkCounts, i =>
+                        Assert.Equal(expected: expectedLinkCount, actual: i)
                     );
-                    Assert.All(
-                        unlinkCounts,
-                        i => Assert.Equal(expected: expectedLinkCount, actual: i)
+                    Assert.All(unlinkCounts, i =>
+                        Assert.Equal(expected: expectedLinkCount, actual: i)
                     );
                 }
             }

@@ -15,36 +15,24 @@ namespace System.Tests
         [Fact]
         public void InvalidArguments_ThrowsExceptions()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "variable",
-                () => Environment.GetEnvironmentVariable(null)
+            AssertExtensions.Throws<ArgumentNullException>("variable", () =>
+                Environment.GetEnvironmentVariable(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "variable",
-                () => Environment.SetEnvironmentVariable(null, "test")
+            AssertExtensions.Throws<ArgumentNullException>("variable", () =>
+                Environment.SetEnvironmentVariable(null, "test")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "variable",
-                () => Environment.SetEnvironmentVariable("", "test")
+            AssertExtensions.Throws<ArgumentException>("variable", () =>
+                Environment.SetEnvironmentVariable("", "test")
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "variable",
-                () =>
-                    Environment.SetEnvironmentVariable(
-                        "",
-                        "test",
-                        EnvironmentVariableTarget.Machine
-                    )
+            AssertExtensions.Throws<ArgumentException>("variable", () =>
+                Environment.SetEnvironmentVariable("", "test", EnvironmentVariableTarget.Machine)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "variable",
-                () =>
-                    Environment.SetEnvironmentVariable(null, "test", EnvironmentVariableTarget.User)
+            AssertExtensions.Throws<ArgumentNullException>("variable", () =>
+                Environment.SetEnvironmentVariable(null, "test", EnvironmentVariableTarget.User)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "variable",
-                () => Environment.GetEnvironmentVariable(null, EnvironmentVariableTarget.Process)
+            AssertExtensions.Throws<ArgumentNullException>("variable", () =>
+                Environment.GetEnvironmentVariable(null, EnvironmentVariableTarget.Process)
             );
             AssertExtensions.Throws<ArgumentOutOfRangeException, ArgumentException>(
                 "target",
@@ -73,15 +61,12 @@ namespace System.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "variable",
-                    null,
-                    () =>
-                        Environment.SetEnvironmentVariable(
-                            new string('s', 256),
-                            "value",
-                            EnvironmentVariableTarget.User
-                        )
+                AssertExtensions.Throws<ArgumentException>("variable", null, () =>
+                    Environment.SetEnvironmentVariable(
+                        new string('s', 256),
+                        "value",
+                        EnvironmentVariableTarget.User
+                    )
                 );
             }
         }

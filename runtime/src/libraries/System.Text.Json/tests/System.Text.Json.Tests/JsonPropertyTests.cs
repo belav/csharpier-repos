@@ -16,9 +16,8 @@ namespace System.Text.Json.Tests
             {
                 foreach (JsonProperty property in doc.RootElement.EnumerateObject())
                 {
-                    AssertExtensions.Throws<ArgumentNullException>(
-                        "writer",
-                        () => property.WriteTo(null)
+                    AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                        property.WriteTo(null)
                     );
                 }
             }

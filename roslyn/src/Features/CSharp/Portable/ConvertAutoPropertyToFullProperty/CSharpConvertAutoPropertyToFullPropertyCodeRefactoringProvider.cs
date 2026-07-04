@@ -63,13 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
                 .ConfigureAwait(false);
 
             var fieldName = rule.NamingStyle.MakeCompliant(property.Name).First();
-            return NameGenerator.GenerateUniqueName(
-                fieldName,
-                n =>
-                    !(
-                        property.ContainingType.Name == n
-                        || property.ContainingType.GetMembers(n).Any()
-                    )
+            return NameGenerator.GenerateUniqueName(fieldName, n =>
+                !(property.ContainingType.Name == n || property.ContainingType.GetMembers(n).Any())
             );
         }
 

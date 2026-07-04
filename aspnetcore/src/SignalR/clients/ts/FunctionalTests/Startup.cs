@@ -49,14 +49,11 @@ public class Startup
 
         services.AddAuthorization(options =>
         {
-            options.AddPolicy(
-                JwtBearerDefaults.AuthenticationScheme,
-                policy =>
-                {
-                    policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-                    policy.RequireClaim(ClaimTypes.NameIdentifier);
-                }
-            );
+            options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
+            {
+                policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                policy.RequireClaim(ClaimTypes.NameIdentifier);
+            });
         });
 
         services
@@ -263,24 +260,19 @@ public class Startup
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapHub<TestHub>("/testhub");
-            endpoints.MapHub<TestHub>(
-                "/testhub-nowebsockets",
-                options =>
-                    options.Transports =
-                        HttpTransportType.ServerSentEvents | HttpTransportType.LongPolling
+            endpoints.MapHub<TestHub>("/testhub-nowebsockets", options =>
+                options.Transports =
+                    HttpTransportType.ServerSentEvents | HttpTransportType.LongPolling
             );
             endpoints.MapHub<UncreatableHub>("/uncreatable");
             endpoints.MapHub<HubWithAuthorization>("/authorizedhub");
 
             endpoints.MapConnectionHandler<EchoConnectionHandler>("/echo");
 
-            endpoints.MapGet(
-                "/generateJwtToken",
-                context =>
-                {
-                    return context.Response.WriteAsync(GenerateJwtToken());
-                }
-            );
+            endpoints.MapGet("/generateJwtToken", context =>
+            {
+                return context.Response.WriteAsync(GenerateJwtToken());
+            });
 
             endpoints.MapGet(
                 "/clientresult/{id}",
@@ -300,45 +292,42 @@ public class Startup
                 }
             );
 
-            endpoints.MapGet(
-                "/deployment",
-                context =>
+            endpoints.MapGet("/deployment", context =>
+            {
+                var attributes = Assembly
+                    .GetAssembly(typeof(Startup))
+                    .GetCustomAttributes<AssemblyMetadataAttribute>();
+
+                context.Response.ContentType = "application/json";
+                using (var textWriter = new StreamWriter(context.Response.Body))
+                using (var writer = new JsonTextWriter(textWriter))
                 {
-                    var attributes = Assembly
-                        .GetAssembly(typeof(Startup))
-                        .GetCustomAttributes<AssemblyMetadataAttribute>();
+                    var json = new JObject();
+                    var commitHash = string.Empty;
 
-                    context.Response.ContentType = "application/json";
-                    using (var textWriter = new StreamWriter(context.Response.Body))
-                    using (var writer = new JsonTextWriter(textWriter))
+                    foreach (var attribute in attributes)
                     {
-                        var json = new JObject();
-                        var commitHash = string.Empty;
+                        json.Add(attribute.Key, attribute.Value);
 
-                        foreach (var attribute in attributes)
+                        if (string.Equals(attribute.Key, "CommitHash"))
                         {
-                            json.Add(attribute.Key, attribute.Value);
-
-                            if (string.Equals(attribute.Key, "CommitHash"))
-                            {
-                                commitHash = attribute.Value;
-                            }
+                            commitHash = attribute.Value;
                         }
-
-                        if (!string.IsNullOrEmpty(commitHash))
-                        {
-                            json.Add(
-                                "GitHubUrl",
-                                $"https://github.com/aspnet/SignalR/commit/{commitHash}"
-                            );
-                        }
-
-                        json.WriteTo(writer);
                     }
 
-                    return Task.CompletedTask;
+                    if (!string.IsNullOrEmpty(commitHash))
+                    {
+                        json.Add(
+                            "GitHubUrl",
+                            $"https://github.com/aspnet/SignalR/commit/{commitHash}"
+                        );
+                    }
+
+                    json.WriteTo(writer);
                 }
-            );
+
+                return Task.CompletedTask;
+            });
         });
     }
 

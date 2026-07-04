@@ -93,9 +93,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     );
                 }
             }
-            var wl = new WorkList(
-                workList,
-                e => completionRoutine(DkmEvaluationAsyncResult.CreateErrorResult(e))
+            var wl = new WorkList(workList, e =>
+                completionRoutine(DkmEvaluationAsyncResult.CreateErrorResult(e))
             );
             wl.ContinueWith(() =>
                 GetRootResultAndContinue(
@@ -1256,11 +1255,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             }
             if (index < numRows)
             {
-                GetChild(
-                    parent,
-                    workList,
-                    rows[index],
-                    child => workList.ContinueWith(() => completionRoutine(child))
+                GetChild(parent, workList, rows[index], child =>
+                    workList.ContinueWith(() => completionRoutine(child))
                 );
             }
             else

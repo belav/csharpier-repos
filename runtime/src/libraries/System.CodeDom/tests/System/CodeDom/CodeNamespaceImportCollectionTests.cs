@@ -81,13 +81,11 @@ namespace System.CodeDom.Tests
         public void AddRange_Null_ThrowsArgumentNullException()
         {
             var collection = new CodeNamespaceImportCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => collection.AddRange(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                collection.AddRange(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => collection.AddRange(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                collection.AddRange(null)
             );
         }
 
@@ -107,9 +105,8 @@ namespace System.CodeDom.Tests
         {
             var collection = new CodeNamespaceCollection();
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection[index]);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => collection[index] = new CodeNamespace()
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                collection[index] = new CodeNamespace()
             );
         }
 

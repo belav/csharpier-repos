@@ -179,9 +179,8 @@ namespace System.Linq.Tests
         public void NullSource()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.OrderDescending()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.OrderDescending()
             );
         }
 

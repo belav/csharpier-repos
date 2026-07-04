@@ -51,28 +51,22 @@ namespace System.Net.Sockets.Tests
                     Count = count,
                 }.ToActual();
 
-                await Assert.ThrowsAsync(
-                    expectedExceptionType,
-                    () => ReceiveAsync(s, invalidBuffer)
+                await Assert.ThrowsAsync(expectedExceptionType, () =>
+                    ReceiveAsync(s, invalidBuffer)
                 );
-                await Assert.ThrowsAsync(
-                    expectedExceptionType,
-                    () => ReceiveAsync(s, new List<ArraySegment<byte>> { invalidBuffer })
+                await Assert.ThrowsAsync(expectedExceptionType, () =>
+                    ReceiveAsync(s, new List<ArraySegment<byte>> { invalidBuffer })
                 );
-                await Assert.ThrowsAsync(
-                    expectedExceptionType,
-                    () =>
-                        ReceiveAsync(s, new List<ArraySegment<byte>> { validBuffer, invalidBuffer })
+                await Assert.ThrowsAsync(expectedExceptionType, () =>
+                    ReceiveAsync(s, new List<ArraySegment<byte>> { validBuffer, invalidBuffer })
                 );
 
                 await Assert.ThrowsAsync(expectedExceptionType, () => SendAsync(s, invalidBuffer));
-                await Assert.ThrowsAsync(
-                    expectedExceptionType,
-                    () => SendAsync(s, new List<ArraySegment<byte>> { invalidBuffer })
+                await Assert.ThrowsAsync(expectedExceptionType, () =>
+                    SendAsync(s, new List<ArraySegment<byte>> { invalidBuffer })
                 );
-                await Assert.ThrowsAsync(
-                    expectedExceptionType,
-                    () => SendAsync(s, new List<ArraySegment<byte>> { validBuffer, invalidBuffer })
+                await Assert.ThrowsAsync(expectedExceptionType, () =>
+                    SendAsync(s, new List<ArraySegment<byte>> { validBuffer, invalidBuffer })
                 );
             }
         }

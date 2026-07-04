@@ -182,9 +182,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 cancellationToken
             );
 
-            destinationEditor.ReplaceNode(
-                destinationSyntaxNode,
-                (syntaxNode, generator) => destinationWithMembersAdded
+            destinationEditor.ReplaceNode(destinationSyntaxNode, (syntaxNode, generator) =>
+                destinationWithMembersAdded
             );
 
             // Change original members
@@ -498,10 +497,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                         var declarationSyntax = originalMemberEditor.Generator.GetDeclaration(
                             syntax
                         );
-                        originalMemberEditor.ReplaceNode(
-                            declarationSyntax,
-                            (node, generator) =>
-                                generator.WithModifiers(node, DeclarationModifiers.Override)
+                        originalMemberEditor.ReplaceNode(declarationSyntax, (node, generator) =>
+                            generator.WithModifiers(node, DeclarationModifiers.Override)
                         );
                     }
                 }
@@ -534,23 +531,20 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 syntaxFacts
             );
 
-            destinationEditor.ReplaceNode(
-                destinationEditor.OriginalRoot,
-                (root, _) => RemoveLeadingTriviaBeforeFirstMember(root, syntaxFacts)
+            destinationEditor.ReplaceNode(destinationEditor.OriginalRoot, (root, _) =>
+                RemoveLeadingTriviaBeforeFirstMember(root, syntaxFacts)
             );
 
-            destinationEditor.ReplaceNode(
-                destinationEditor.OriginalRoot,
-                (node, generator) =>
-                    addImportsService.AddImports(
-                        destinationEditor.SemanticModel.Compilation,
-                        node,
-                        node.GetAnnotatedNodes(s_destinationNodeAnnotation).FirstOrDefault(),
-                        sourceImports,
-                        generator,
-                        options.CleanupOptions.AddImportOptions,
-                        cancellationToken
-                    )
+            destinationEditor.ReplaceNode(destinationEditor.OriginalRoot, (node, generator) =>
+                addImportsService.AddImports(
+                    destinationEditor.SemanticModel.Compilation,
+                    node,
+                    node.GetAnnotatedNodes(s_destinationNodeAnnotation).FirstOrDefault(),
+                    sourceImports,
+                    generator,
+                    options.CleanupOptions.AddImportOptions,
+                    cancellationToken
+                )
             );
 
             var removeImportsService =

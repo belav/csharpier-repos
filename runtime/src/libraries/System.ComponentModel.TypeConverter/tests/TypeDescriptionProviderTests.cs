@@ -110,9 +110,8 @@ namespace System.ComponentModel.Tests
         public void CreateInstance_NullObjectType_ThrowsArgumentNullException()
         {
             var provider = new SubTypeDescriptionProvider();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "objectType",
-                () => provider.CreateInstance(null, null, null, null)
+            AssertExtensions.Throws<ArgumentNullException>("objectType", () =>
+                provider.CreateInstance(null, null, null, null)
             );
         }
 
@@ -295,9 +294,8 @@ namespace System.ComponentModel.Tests
         public void GetExtenderProviders_NullInstance_ThrowsArgumentNullException()
         {
             var provider = new SubTypeDescriptionProvider();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "instance",
-                () => provider.GetExtenderProviders(null)
+            AssertExtensions.Throws<ArgumentNullException>("instance", () =>
+                provider.GetExtenderProviders(null)
             );
         }
 
@@ -450,9 +448,8 @@ namespace System.ComponentModel.Tests
         public void GetFullComponentName_NullComponent_ReturnsNull()
         {
             var provider = new SubTypeDescriptionProvider();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "instance",
-                () => provider.GetFullComponentName(null)
+            AssertExtensions.Throws<ArgumentNullException>("instance", () =>
+                provider.GetFullComponentName(null)
             );
         }
 
@@ -671,9 +668,8 @@ namespace System.ComponentModel.Tests
         public void GetReflectionType_NullInstance_ThrowsArgumentNullException()
         {
             var provider = new SubTypeDescriptionProvider();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "instance",
-                () => provider.GetReflectionType((object)null)
+            AssertExtensions.Throws<ArgumentNullException>("instance", () =>
+                provider.GetReflectionType((object)null)
             );
         }
 
@@ -686,9 +682,8 @@ namespace System.ComponentModel.Tests
         {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             var provider = new SubTypeDescriptionProvider(mockParentProvider.Object);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "instance",
-                () => provider.GetReflectionType((object)null)
+            AssertExtensions.Throws<ArgumentNullException>("instance", () =>
+                provider.GetReflectionType((object)null)
             );
         }
 
@@ -770,9 +765,8 @@ namespace System.ComponentModel.Tests
         public void GetRuntimeType_NullReflectionType_ThrowsArgumentNullException()
         {
             var provider = new SubTypeDescriptionProvider();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "reflectionType",
-                () => provider.GetRuntimeType(null)
+            AssertExtensions.Throws<ArgumentNullException>("reflectionType", () =>
+                provider.GetRuntimeType(null)
             );
         }
 
@@ -1042,9 +1036,8 @@ namespace System.ComponentModel.Tests
         public void GetTypeDescriptor_NullInstance_ThrowsArgumentNullException()
         {
             var provider = new SubTypeDescriptionProvider();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "instance",
-                () => provider.GetTypeDescriptor((object)null)
+            AssertExtensions.Throws<ArgumentNullException>("instance", () =>
+                provider.GetTypeDescriptor((object)null)
             );
         }
 
@@ -1057,9 +1050,8 @@ namespace System.ComponentModel.Tests
         {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             var provider = new SubTypeDescriptionProvider(mockParentProvider.Object);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "instance",
-                () => provider.GetTypeDescriptor((object)null)
+            AssertExtensions.Throws<ArgumentNullException>("instance", () =>
+                provider.GetTypeDescriptor((object)null)
             );
         }
 
@@ -1098,9 +1090,8 @@ namespace System.ComponentModel.Tests
         public void IsSupportedType_NullType_ThrowsArgumentNullException()
         {
             var provider = new SubTypeDescriptionProvider();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => provider.IsSupportedType(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                provider.IsSupportedType(null)
             );
         }
 
@@ -1113,9 +1104,8 @@ namespace System.ComponentModel.Tests
         {
             var mockParentProvider = new Mock<TypeDescriptionProvider>(MockBehavior.Strict);
             var provider = new SubTypeDescriptionProvider(mockParentProvider.Object);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => provider.IsSupportedType(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                provider.IsSupportedType(null)
             );
         }
 

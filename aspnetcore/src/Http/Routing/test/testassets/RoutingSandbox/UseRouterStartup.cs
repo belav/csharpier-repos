@@ -30,17 +30,11 @@ public class UseRouterStartup
             );
 
             routes
-                .MapGet(
-                    "api/get/{id}",
-                    (request, response, routeData) =>
-                        response.WriteAsync($"API Get {routeData.Values["id"]}")
+                .MapGet("api/get/{id}", (request, response, routeData) =>
+                    response.WriteAsync($"API Get {routeData.Values["id"]}")
                 )
-                .MapMiddlewareRoute(
-                    "api/middleware",
-                    (appBuilder) =>
-                        appBuilder.Run(httpContext =>
-                            httpContext.Response.WriteAsync("Middleware!")
-                        )
+                .MapMiddlewareRoute("api/middleware", (appBuilder) =>
+                    appBuilder.Run(httpContext => httpContext.Response.WriteAsync("Middleware!"))
                 )
                 .MapRoute(
                     name: "AllVerbs",

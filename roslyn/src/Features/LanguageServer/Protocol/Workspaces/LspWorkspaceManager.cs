@@ -140,16 +140,13 @@ internal sealed class LspWorkspaceManager : IDocumentChangeTracker, ILspService
             var registeredWorkspaces = _lspWorkspaceRegistrationService.GetAllRegistrations();
             foreach (var workspace in registeredWorkspaces)
             {
-                await ApplyChangeToMutatingWorkspaceAsync(
-                        workspace,
-                        uri,
-                        (_, documentId) =>
-                            workspace.TryOnDocumentOpenedAsync(
-                                documentId,
-                                documentText.Container,
-                                isCurrentContext: false,
-                                cancellationToken
-                            )
+                await ApplyChangeToMutatingWorkspaceAsync(workspace, uri, (_, documentId) =>
+                        workspace.TryOnDocumentOpenedAsync(
+                            documentId,
+                            documentText.Container,
+                            isCurrentContext: false,
+                            cancellationToken
+                        )
                     )
                     .ConfigureAwait(false);
             }
@@ -188,11 +185,8 @@ internal sealed class LspWorkspaceManager : IDocumentChangeTracker, ILspService
             var registeredWorkspaces = _lspWorkspaceRegistrationService.GetAllRegistrations();
             foreach (var workspace in registeredWorkspaces)
             {
-                await ApplyChangeToMutatingWorkspaceAsync(
-                        workspace,
-                        uri,
-                        (_, documentId) =>
-                            workspace.TryOnDocumentClosedAsync(documentId, cancellationToken)
+                await ApplyChangeToMutatingWorkspaceAsync(workspace, uri, (_, documentId) =>
+                        workspace.TryOnDocumentClosedAsync(documentId, cancellationToken)
                     )
                     .ConfigureAwait(false);
             }

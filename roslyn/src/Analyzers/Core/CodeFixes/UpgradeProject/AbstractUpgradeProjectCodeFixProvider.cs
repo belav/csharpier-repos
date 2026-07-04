@@ -57,9 +57,8 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
             }
 
             var fixOneProjectTitle = string.Format(UpgradeThisProjectResource, newVersion);
-            var fixOneProject = ProjectOptionsChangeAction.Create(
-                fixOneProjectTitle,
-                _ => Task.FromResult(UpgradeProject(project, newVersion))
+            var fixOneProject = ProjectOptionsChangeAction.Create(fixOneProjectTitle, _ =>
+                Task.FromResult(UpgradeProject(project, newVersion))
             );
 
             result.Add(fixOneProject);
@@ -68,9 +67,8 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
             {
                 var fixAllProjectsTitle = string.Format(UpgradeAllProjectsResource, newVersion);
 
-                var fixAllProjects = ProjectOptionsChangeAction.Create(
-                    fixAllProjectsTitle,
-                    ct => Task.FromResult(UpgradeAllProjects(solution, language, newVersion, ct))
+                var fixAllProjects = ProjectOptionsChangeAction.Create(fixAllProjectsTitle, ct =>
+                    Task.FromResult(UpgradeAllProjects(solution, language, newVersion, ct))
                 );
 
                 result.Add(fixAllProjects);

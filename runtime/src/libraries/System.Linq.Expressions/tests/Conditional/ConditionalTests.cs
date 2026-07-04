@@ -33,22 +33,17 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullTest()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "test",
-                () => Expression.IfThen(null, Expression.Empty())
+            AssertExtensions.Throws<ArgumentNullException>("test", () =>
+                Expression.IfThen(null, Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "test",
-                () => Expression.IfThenElse(null, Expression.Empty(), Expression.Empty())
+            AssertExtensions.Throws<ArgumentNullException>("test", () =>
+                Expression.IfThenElse(null, Expression.Empty(), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "test",
-                () => Expression.Condition(null, Expression.Empty(), Expression.Empty())
+            AssertExtensions.Throws<ArgumentNullException>("test", () =>
+                Expression.Condition(null, Expression.Empty(), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "test",
-                () =>
-                    Expression.Condition(null, Expression.Empty(), Expression.Empty(), typeof(void))
+            AssertExtensions.Throws<ArgumentNullException>("test", () =>
+                Expression.Condition(null, Expression.Empty(), Expression.Empty(), typeof(void))
             );
         }
 
@@ -60,49 +55,39 @@ namespace System.Linq.Expressions.Tests
                 typeof(Unreadable<bool>),
                 nameof(Unreadable<bool>.WriteOnly)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () => Expression.IfThen(test, Expression.Empty())
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.IfThen(test, Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () => Expression.IfThenElse(test, Expression.Empty(), Expression.Empty())
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.IfThenElse(test, Expression.Empty(), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () => Expression.Condition(test, Expression.Empty(), Expression.Empty())
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.Condition(test, Expression.Empty(), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.Condition(test, Expression.Empty(), Expression.Empty(), typeof(void))
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.Condition(test, Expression.Empty(), Expression.Empty(), typeof(void))
             );
         }
 
         [Fact]
         public void NullIfTrue()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ifTrue",
-                () => Expression.IfThen(Expression.Constant(true), null)
+            AssertExtensions.Throws<ArgumentNullException>("ifTrue", () =>
+                Expression.IfThen(Expression.Constant(true), null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ifTrue",
-                () => Expression.IfThenElse(Expression.Constant(true), null, Expression.Empty())
+            AssertExtensions.Throws<ArgumentNullException>("ifTrue", () =>
+                Expression.IfThenElse(Expression.Constant(true), null, Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ifTrue",
-                () => Expression.Condition(Expression.Constant(true), null, Expression.Empty())
+            AssertExtensions.Throws<ArgumentNullException>("ifTrue", () =>
+                Expression.Condition(Expression.Constant(true), null, Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ifTrue",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        null,
-                        Expression.Empty(),
-                        typeof(void)
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("ifTrue", () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    null,
+                    Expression.Empty(),
+                    typeof(void)
+                )
             );
         }
 
@@ -114,51 +99,41 @@ namespace System.Linq.Expressions.Tests
                 typeof(Unreadable<int>),
                 nameof(Unreadable<int>.WriteOnly)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "ifTrue",
-                () => Expression.IfThen(Expression.Constant(true), ifTrue)
+            AssertExtensions.Throws<ArgumentException>("ifTrue", () =>
+                Expression.IfThen(Expression.Constant(true), ifTrue)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "ifTrue",
-                () => Expression.IfThenElse(Expression.Constant(true), ifTrue, Expression.Empty())
+            AssertExtensions.Throws<ArgumentException>("ifTrue", () =>
+                Expression.IfThenElse(Expression.Constant(true), ifTrue, Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "ifTrue",
-                () =>
-                    Expression.Condition(Expression.Constant(true), ifTrue, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("ifTrue", () =>
+                Expression.Condition(Expression.Constant(true), ifTrue, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "ifTrue",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        ifTrue,
-                        Expression.Empty(),
-                        typeof(void)
-                    )
+            AssertExtensions.Throws<ArgumentException>("ifTrue", () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    ifTrue,
+                    Expression.Empty(),
+                    typeof(void)
+                )
             );
         }
 
         [Fact]
         public void NullIfFalse()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ifFalse",
-                () => Expression.IfThenElse(Expression.Constant(true), Expression.Empty(), null)
+            AssertExtensions.Throws<ArgumentNullException>("ifFalse", () =>
+                Expression.IfThenElse(Expression.Constant(true), Expression.Empty(), null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ifFalse",
-                () => Expression.Condition(Expression.Constant(true), Expression.Empty(), null)
+            AssertExtensions.Throws<ArgumentNullException>("ifFalse", () =>
+                Expression.Condition(Expression.Constant(true), Expression.Empty(), null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ifFalse",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Empty(),
-                        null,
-                        typeof(void)
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("ifFalse", () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Empty(),
+                    null,
+                    typeof(void)
+                )
             );
         }
 
@@ -170,280 +145,216 @@ namespace System.Linq.Expressions.Tests
                 typeof(Unreadable<int>),
                 nameof(Unreadable<int>.WriteOnly)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "ifFalse",
-                () => Expression.IfThenElse(Expression.Constant(true), Expression.Empty(), ifFalse)
+            AssertExtensions.Throws<ArgumentException>("ifFalse", () =>
+                Expression.IfThenElse(Expression.Constant(true), Expression.Empty(), ifFalse)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "ifFalse",
-                () =>
-                    Expression.Condition(Expression.Constant(true), Expression.Constant(0), ifFalse)
+            AssertExtensions.Throws<ArgumentException>("ifFalse", () =>
+                Expression.Condition(Expression.Constant(true), Expression.Constant(0), ifFalse)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "ifFalse",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Empty(),
-                        ifFalse,
-                        typeof(void)
-                    )
+            AssertExtensions.Throws<ArgumentException>("ifFalse", () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Empty(),
+                    ifFalse,
+                    typeof(void)
+                )
             );
         }
 
         [Fact]
         public void NullType()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Empty(),
-                        Expression.Empty(),
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Empty(),
+                    Expression.Empty(),
+                    null
+                )
             );
         }
 
         [Fact]
         public void NonBooleanTest()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () => Expression.IfThen(Expression.Constant(0), Expression.Empty())
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.IfThen(Expression.Constant(0), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.IfThenElse(
-                        Expression.Constant(0),
-                        Expression.Empty(),
-                        Expression.Empty()
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.IfThenElse(
+                    Expression.Constant(0),
+                    Expression.Empty(),
+                    Expression.Empty()
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(0),
-                        Expression.Empty(),
-                        Expression.Empty()
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.Condition(Expression.Constant(0), Expression.Empty(), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(0),
-                        Expression.Empty(),
-                        Expression.Empty(),
-                        typeof(void)
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.Condition(
+                    Expression.Constant(0),
+                    Expression.Empty(),
+                    Expression.Empty(),
+                    typeof(void)
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () => Expression.IfThen(Expression.Empty(), Expression.Empty())
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.IfThen(Expression.Empty(), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.IfThenElse(
-                        Expression.Empty(),
-                        Expression.Empty(),
-                        Expression.Empty()
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.IfThenElse(Expression.Empty(), Expression.Empty(), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.Condition(Expression.Empty(), Expression.Empty(), Expression.Empty())
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.Condition(Expression.Empty(), Expression.Empty(), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.Condition(
-                        Expression.Empty(),
-                        Expression.Empty(),
-                        Expression.Empty(),
-                        typeof(void)
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.Condition(
+                    Expression.Empty(),
+                    Expression.Empty(),
+                    Expression.Empty(),
+                    typeof(void)
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.IfThen(Expression.Constant(true, typeof(bool?)), Expression.Empty())
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.IfThen(Expression.Constant(true, typeof(bool?)), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.IfThenElse(
-                        Expression.Constant(true, typeof(bool?)),
-                        Expression.Empty(),
-                        Expression.Empty()
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.IfThenElse(
+                    Expression.Constant(true, typeof(bool?)),
+                    Expression.Empty(),
+                    Expression.Empty()
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true, typeof(bool?)),
-                        Expression.Empty(),
-                        Expression.Empty()
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.Condition(
+                    Expression.Constant(true, typeof(bool?)),
+                    Expression.Empty(),
+                    Expression.Empty()
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true, typeof(bool?)),
-                        Expression.Empty(),
-                        Expression.Empty(),
-                        typeof(void)
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.Condition(
+                    Expression.Constant(true, typeof(bool?)),
+                    Expression.Empty(),
+                    Expression.Empty(),
+                    typeof(void)
+                )
             );
 
             ConstantExpression truthyConstant = Expression.Constant(new Truthiness(true));
 
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () => Expression.IfThen(Expression.Constant(truthyConstant), Expression.Empty())
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.IfThen(Expression.Constant(truthyConstant), Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.IfThenElse(
-                        Expression.Constant(truthyConstant),
-                        Expression.Empty(),
-                        Expression.Empty()
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.IfThenElse(
+                    Expression.Constant(truthyConstant),
+                    Expression.Empty(),
+                    Expression.Empty()
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(truthyConstant),
-                        Expression.Empty(),
-                        Expression.Empty()
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.Condition(
+                    Expression.Constant(truthyConstant),
+                    Expression.Empty(),
+                    Expression.Empty()
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "test",
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(truthyConstant),
-                        Expression.Empty(),
-                        Expression.Empty(),
-                        typeof(void)
-                    )
+            AssertExtensions.Throws<ArgumentException>("test", () =>
+                Expression.Condition(
+                    Expression.Constant(truthyConstant),
+                    Expression.Empty(),
+                    Expression.Empty(),
+                    typeof(void)
+                )
             );
         }
 
         [Fact]
         public void IncompatibleImplicitTypes()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(0),
-                        Expression.Constant(0L)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(0),
+                    Expression.Constant(0L)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(0L),
-                        Expression.Constant(0)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(0L),
+                    Expression.Constant(0)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant("hello"),
-                        Expression.Constant(new object())
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant("hello"),
+                    Expression.Constant(new object())
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(new object()),
-                        Expression.Constant("hello")
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(new object()),
+                    Expression.Constant("hello")
+                )
             );
         }
 
         [Fact]
         public void IncompatibleExplicitTypes()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(0),
-                        Expression.Constant(0L),
-                        typeof(int)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(0),
+                    Expression.Constant(0L),
+                    typeof(int)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(0L),
-                        Expression.Constant(0),
-                        typeof(int)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(0L),
+                    Expression.Constant(0),
+                    typeof(int)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(0),
-                        Expression.Constant(0L),
-                        typeof(long)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(0),
+                    Expression.Constant(0L),
+                    typeof(long)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(0L),
-                        Expression.Constant(0),
-                        typeof(long)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(0L),
+                    Expression.Constant(0),
+                    typeof(long)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(0),
-                        Expression.Constant("hello"),
-                        typeof(object)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(0),
+                    Expression.Constant("hello"),
+                    typeof(object)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant("hello"),
-                        Expression.Constant(0),
-                        typeof(object)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant("hello"),
+                    Expression.Constant(0),
+                    typeof(object)
+                )
             );
         }
 
@@ -580,70 +491,60 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(null),
-                        Expression.Constant(null),
-                        typeof(string).MakeByRefType()
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(null),
+                    Expression.Constant(null),
+                    typeof(string).MakeByRefType()
+                )
             );
         }
 
         [Fact]
         public void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(null),
-                        Expression.Constant(null),
-                        typeof(string).MakePointerType()
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(null),
+                    Expression.Constant(null),
+                    typeof(string).MakePointerType()
+                )
             );
         }
 
         [Fact]
         public void GenericType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(null),
-                        Expression.Constant(null),
-                        typeof(List<>)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(null),
+                    Expression.Constant(null),
+                    typeof(List<>)
+                )
             );
         }
 
         [Fact]
         public void TypeContainsGenericParameters()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(null),
-                        Expression.Constant(null),
-                        typeof(List<>.Enumerator)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(null),
+                    Expression.Constant(null),
+                    typeof(List<>.Enumerator)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Condition(
-                        Expression.Constant(true),
-                        Expression.Constant(null),
-                        Expression.Constant(null),
-                        typeof(List<>).MakeGenericType(typeof(List<>))
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(null),
+                    Expression.Constant(null),
+                    typeof(List<>).MakeGenericType(typeof(List<>))
+                )
             );
         }
 

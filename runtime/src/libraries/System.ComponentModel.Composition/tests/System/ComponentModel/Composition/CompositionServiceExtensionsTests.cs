@@ -35,26 +35,20 @@ namespace System.ComponentModel.Composition
         public void SatisfyImports_AttributedOverride_NullAsCompositionService()
         {
             ICompositionService compositionService = null;
-            Assert.Throws<ArgumentNullException>(
-                "compositionService",
-                () =>
-                {
-                    compositionService.SatisfyImportsOnce(new MockAttributedPart());
-                }
-            );
+            Assert.Throws<ArgumentNullException>("compositionService", () =>
+            {
+                compositionService.SatisfyImportsOnce(new MockAttributedPart());
+            });
         }
 
         [Fact]
         public void SatisfyImports_AttributedOverride_NullAsAttributedPart()
         {
             MockCompositionService compositionService = new MockCompositionService();
-            Assert.Throws<ArgumentNullException>(
-                "attributedPart",
-                () =>
-                {
-                    compositionService.SatisfyImportsOnce((object)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("attributedPart", () =>
+            {
+                compositionService.SatisfyImportsOnce((object)null);
+            });
         }
 
         [Fact]
@@ -86,26 +80,20 @@ namespace System.ComponentModel.Composition
         public void SatisfyImports_AttributedAndBooleanOverride_NullAsCompositionService()
         {
             ICompositionService compositionService = null;
-            Assert.Throws<ArgumentNullException>(
-                "compositionService",
-                () =>
-                {
-                    compositionService.SatisfyImportsOnce(new MockAttributedPart());
-                }
-            );
+            Assert.Throws<ArgumentNullException>("compositionService", () =>
+            {
+                compositionService.SatisfyImportsOnce(new MockAttributedPart());
+            });
         }
 
         [Fact]
         public void SatisfyImports_AttributedAndBooleanOverride_NullAsAttributedPart()
         {
             MockCompositionService compositionService = new MockCompositionService();
-            Assert.Throws<ArgumentNullException>(
-                "attributedPart",
-                () =>
-                {
-                    compositionService.SatisfyImportsOnce((object)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("attributedPart", () =>
+            {
+                compositionService.SatisfyImportsOnce((object)null);
+            });
         }
 
         [Fact]

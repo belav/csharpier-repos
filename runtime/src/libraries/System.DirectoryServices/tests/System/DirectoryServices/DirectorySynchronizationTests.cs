@@ -71,13 +71,11 @@ namespace System.DirectoryServices.Tests
             DirectorySynchronizationOptions options
         )
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "value",
-                () => new DirectorySynchronization(options)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () =>
+                new DirectorySynchronization(options)
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "value",
-                () => new DirectorySynchronization(options, new byte[0])
+            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () =>
+                new DirectorySynchronization(options, new byte[0])
             );
         }
 

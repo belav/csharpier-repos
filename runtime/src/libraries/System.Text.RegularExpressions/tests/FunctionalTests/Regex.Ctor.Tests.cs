@@ -139,122 +139,93 @@ namespace System.Text.RegularExpressions.Tests
         {
             // Pattern is null
             AssertExtensions.Throws<ArgumentNullException>("pattern", () => new Regex(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pattern",
-                () => new Regex(null, RegexOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("pattern", () =>
+                new Regex(null, RegexOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pattern",
-                () => new Regex(null, RegexOptions.None, new TimeSpan())
+            AssertExtensions.Throws<ArgumentNullException>("pattern", () =>
+                new Regex(null, RegexOptions.None, new TimeSpan())
             );
 
             // Options are invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => new Regex("foo", (RegexOptions)(-1))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new Regex("foo", (RegexOptions)(-1))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => new Regex("foo", (RegexOptions)(-1), new TimeSpan())
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new Regex("foo", (RegexOptions)(-1), new TimeSpan())
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => new Regex("foo", (RegexOptions)0x800)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new Regex("foo", (RegexOptions)0x800)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => new Regex("foo", (RegexOptions)0x800, new TimeSpan())
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new Regex("foo", (RegexOptions)0x800, new TimeSpan())
             );
             if (PlatformDetection.IsNetFramework)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "options",
-                    () => new Regex("foo", RegexHelpers.RegexOptionNonBacktracking)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                    new Regex("foo", RegexHelpers.RegexOptionNonBacktracking)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "options",
-                    () => new Regex("foo", RegexHelpers.RegexOptionNonBacktracking, new TimeSpan())
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                    new Regex("foo", RegexHelpers.RegexOptionNonBacktracking, new TimeSpan())
                 );
             }
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    new Regex(
-                        "foo",
-                        RegexOptions.ECMAScript
-                            | RegexOptions.IgnoreCase
-                            | RegexOptions.Multiline
-                            | RegexOptions.CultureInvariant
-                            | RegexOptions.RightToLeft
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new Regex(
+                    "foo",
+                    RegexOptions.ECMAScript
+                        | RegexOptions.IgnoreCase
+                        | RegexOptions.Multiline
+                        | RegexOptions.CultureInvariant
+                        | RegexOptions.RightToLeft
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    new Regex(
-                        "foo",
-                        RegexOptions.ECMAScript
-                            | RegexOptions.IgnoreCase
-                            | RegexOptions.Multiline
-                            | RegexOptions.CultureInvariant
-                            | RegexOptions.ExplicitCapture
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new Regex(
+                    "foo",
+                    RegexOptions.ECMAScript
+                        | RegexOptions.IgnoreCase
+                        | RegexOptions.Multiline
+                        | RegexOptions.CultureInvariant
+                        | RegexOptions.ExplicitCapture
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    new Regex(
-                        "foo",
-                        RegexOptions.ECMAScript
-                            | RegexOptions.IgnoreCase
-                            | RegexOptions.Multiline
-                            | RegexOptions.CultureInvariant
-                            | RegexOptions.Singleline
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new Regex(
+                    "foo",
+                    RegexOptions.ECMAScript
+                        | RegexOptions.IgnoreCase
+                        | RegexOptions.Multiline
+                        | RegexOptions.CultureInvariant
+                        | RegexOptions.Singleline
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    new Regex(
-                        "foo",
-                        RegexOptions.ECMAScript
-                            | RegexOptions.IgnoreCase
-                            | RegexOptions.Multiline
-                            | RegexOptions.CultureInvariant
-                            | RegexOptions.IgnorePatternWhitespace
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new Regex(
+                    "foo",
+                    RegexOptions.ECMAScript
+                        | RegexOptions.IgnoreCase
+                        | RegexOptions.Multiline
+                        | RegexOptions.CultureInvariant
+                        | RegexOptions.IgnorePatternWhitespace
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    new Regex(
-                        "foo",
-                        RegexOptions.ECMAScript | RegexHelpers.RegexOptionNonBacktracking
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new Regex("foo", RegexOptions.ECMAScript | RegexHelpers.RegexOptionNonBacktracking)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    new Regex(
-                        "foo",
-                        RegexOptions.RightToLeft | RegexHelpers.RegexOptionNonBacktracking
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                new Regex("foo", RegexOptions.RightToLeft | RegexHelpers.RegexOptionNonBacktracking)
             );
 
             // MatchTimeout is invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "matchTimeout",
-                () => new Regex("foo", RegexOptions.None, new TimeSpan(-1))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () =>
+                new Regex("foo", RegexOptions.None, new TimeSpan(-1))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "matchTimeout",
-                () => new Regex("foo", RegexOptions.None, TimeSpan.Zero)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () =>
+                new Regex("foo", RegexOptions.None, TimeSpan.Zero)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "matchTimeout",
-                () => new Regex("foo", RegexOptions.None, TimeSpan.FromMilliseconds(int.MaxValue))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () =>
+                new Regex("foo", RegexOptions.None, TimeSpan.FromMilliseconds(int.MaxValue))
             );
 
             if (PlatformDetection.IsNetCore)

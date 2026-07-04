@@ -149,9 +149,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => somethingElse
+        var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model =>
+            somethingElse
         );
 
         // Assert
@@ -170,9 +169,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.Id
+        var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model =>
+            model.Id
         );
 
         // Assert
@@ -191,9 +189,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.SubModel.Id
+        var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model =>
+            model.SubModel.Id
         );
 
         // Assert
@@ -212,9 +209,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.SubModel.SubSubModel.Id
+        var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model =>
+            model.SubModel.SubSubModel.Id
         );
 
         // Assert
@@ -234,9 +230,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => somethingElse
+        var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model =>
+            somethingElse
         );
 
         // Assert
@@ -255,9 +250,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.Name
+        var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model =>
+            model.Name
         );
 
         // Assert
@@ -276,9 +270,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.SubModel.SubSubModel.Name
+        var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model =>
+            model.SubModel.SubSubModel.Name
         );
 
         // Assert
@@ -297,9 +290,8 @@ public class RazorPageCreateModelExpressionTest
         var page = CreatePage(viewContext);
 
         // Act
-        var result = page.ModelExpressionProvider.CreateModelExpression(
-            page.ViewData,
-            model => model.SubModel.Name
+        var result = page.ModelExpressionProvider.CreateModelExpression(page.ViewData, model =>
+            model.SubModel.Name
         );
 
         // Assert
@@ -406,9 +398,8 @@ public class RazorPageCreateModelExpressionTest
 
         public ModelExpression CreateModelExpression3()
         {
-            return ModelExpressionProvider.CreateModelExpression(
-                ViewData,
-                m => ViewContext.ViewData.Model
+            return ModelExpressionProvider.CreateModelExpression(ViewData, m =>
+                ViewContext.ViewData.Model
             );
         }
 

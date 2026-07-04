@@ -19,9 +19,8 @@ public class CompileTimeIncrementalityTests : RequestDelegateCreationTestBase
         var (result, compilation) = await RunGeneratorAsync(source, updatedSource);
         var outputSteps = GetRunStepOutputs(result);
 
-        Assert.All(
-            outputSteps,
-            (value) => Assert.Equal(IncrementalStepRunReason.Cached, value.Reason)
+        Assert.All(outputSteps, (value) =>
+            Assert.Equal(IncrementalStepRunReason.Cached, value.Reason)
         );
     }
 
@@ -34,9 +33,8 @@ public class CompileTimeIncrementalityTests : RequestDelegateCreationTestBase
         var (result, compilation) = await RunGeneratorAsync(source, updatedSource);
         var outputSteps = GetRunStepOutputs(result);
 
-        Assert.All(
-            outputSteps,
-            (value) => Assert.Equal(IncrementalStepRunReason.Cached, value.Reason)
+        Assert.All(outputSteps, (value) =>
+            Assert.Equal(IncrementalStepRunReason.Cached, value.Reason)
         );
     }
 

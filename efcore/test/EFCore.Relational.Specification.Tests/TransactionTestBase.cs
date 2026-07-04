@@ -54,13 +54,11 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.AutoTransactionBehavior = AutoTransactionBehavior.WhenNeeded;
         }
 
-        Assert.DoesNotContain(
-            Fixture.ListLoggerFactory.Log,
-            l => l.Id == RelationalEventId.TransactionStarted
+        Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l =>
+            l.Id == RelationalEventId.TransactionStarted
         );
-        Assert.DoesNotContain(
-            Fixture.ListLoggerFactory.Log,
-            l => l.Id == RelationalEventId.TransactionCommitted
+        Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l =>
+            l.Id == RelationalEventId.TransactionCommitted
         );
 
         using (var context = CreateContext())
@@ -99,13 +97,11 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.AutoTransactionBehavior = AutoTransactionBehavior.WhenNeeded;
         }
 
-        Assert.DoesNotContain(
-            Fixture.ListLoggerFactory.Log,
-            l => l.Id == RelationalEventId.TransactionStarted
+        Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l =>
+            l.Id == RelationalEventId.TransactionStarted
         );
-        Assert.DoesNotContain(
-            Fixture.ListLoggerFactory.Log,
-            l => l.Id == RelationalEventId.TransactionCommitted
+        Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l =>
+            l.Id == RelationalEventId.TransactionCommitted
         );
 
         using (var context = CreateContext())
@@ -146,9 +142,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.AutoTransactionBehavior = AutoTransactionBehavior.WhenNeeded;
         }
 
-        Assert.Contains(
-            Fixture.ListLoggerFactory.Log,
-            l => l.Id == RelationalEventId.TransactionStarted
+        Assert.Contains(Fixture.ListLoggerFactory.Log, l =>
+            l.Id == RelationalEventId.TransactionStarted
         );
 
         using (var context = CreateContext())

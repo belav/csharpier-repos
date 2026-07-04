@@ -118,59 +118,56 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    EvaluationContext context;
-                    CompilationTestData testData;
-                    string error;
+            WithRuntimeInstance(comp, runtime =>
+            {
+                EvaluationContext context;
+                CompilationTestData testData;
+                string error;
 
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 500);
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(expectedError, error);
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 500);
+                context.CompileExpression("x", out error);
+                Assert.Equal(expectedError, error);
 
-                    testData = new CompilationTestData();
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 550);
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(string.Format(expectedIlTemplate, "<x>5__1"));
+                testData = new CompilationTestData();
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 550);
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(string.Format(expectedIlTemplate, "<x>5__1"));
 
-                    testData = new CompilationTestData();
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 600);
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(string.Format(expectedIlTemplate, "<x>5__1"));
+                testData = new CompilationTestData();
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 600);
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(string.Format(expectedIlTemplate, "<x>5__1"));
 
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 650);
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(expectedError, error);
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 650);
+                context.CompileExpression("x", out error);
+                Assert.Equal(expectedError, error);
 
-                    testData = new CompilationTestData();
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 700);
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(string.Format(expectedIlTemplate, "<x>5__2"));
+                testData = new CompilationTestData();
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 700);
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(string.Format(expectedIlTemplate, "<x>5__2"));
 
-                    testData = new CompilationTestData();
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 750);
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(string.Format(expectedIlTemplate, "<x>5__2"));
+                testData = new CompilationTestData();
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 750);
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(string.Format(expectedIlTemplate, "<x>5__2"));
 
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 800);
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(expectedError, error);
-                }
-            );
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 800);
+                context.CompileExpression("x", out error);
+                Assert.Equal(expectedError, error);
+            });
         }
 
         [Fact]
@@ -241,59 +238,56 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    EvaluationContext context;
-                    CompilationTestData testData;
-                    string error;
+            WithRuntimeInstance(comp, runtime =>
+            {
+                EvaluationContext context;
+                CompilationTestData testData;
+                string error;
 
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 500);
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(expectedError, error);
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 500);
+                context.CompileExpression("x", out error);
+                Assert.Equal(expectedError, error);
 
-                    testData = new CompilationTestData();
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 550);
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(string.Format(expectedIlTemplate, "<x>5__1"));
+                testData = new CompilationTestData();
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 550);
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(string.Format(expectedIlTemplate, "<x>5__1"));
 
-                    testData = new CompilationTestData();
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 600);
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(string.Format(expectedIlTemplate, "<x>5__1"));
+                testData = new CompilationTestData();
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 600);
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(string.Format(expectedIlTemplate, "<x>5__1"));
 
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 650);
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(expectedError, error);
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 650);
+                context.CompileExpression("x", out error);
+                Assert.Equal(expectedError, error);
 
-                    testData = new CompilationTestData();
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 700);
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(string.Format(expectedIlTemplate, "<x>5__2"));
+                testData = new CompilationTestData();
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 700);
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(string.Format(expectedIlTemplate, "<x>5__2"));
 
-                    testData = new CompilationTestData();
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 750);
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(string.Format(expectedIlTemplate, "<x>5__2"));
+                testData = new CompilationTestData();
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 750);
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(string.Format(expectedIlTemplate, "<x>5__2"));
 
-                    context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 800);
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(expectedError, error);
-                }
-            );
+                context = CreateMethodContext(runtime, "C.<M>d__0.MoveNext", atLineNumber: 800);
+                context.CompileExpression("x", out error);
+                Assert.Equal(expectedError, error);
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -305,40 +299,38 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "D.<>c.<<M>b__1_0>d.MoveNext");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "D.<>c.<<M>b__1_0>d.MoveNext");
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0027: Keyword 'this' is not available in the current context",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0027: Keyword 'this' is not available in the current context",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -350,10 +342,9 @@ class C
   IL_0006:  ret
 }
 "
-                        );
-                    AssertEx.SetEqual(GetLocalNames(context), "ch");
-                }
-            );
+                    );
+                AssertEx.SetEqual(GetLocalNames(context), "ch");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -365,37 +356,35 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(
-                        runtime,
-                        "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
-                    );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(
+                    runtime,
+                    "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
+                );
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0027: Keyword 'this' is not available in the current context",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0027: Keyword 'this' is not available in the current context",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -408,15 +397,15 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -428,10 +417,9 @@ class C
   IL_0006:  ret
 }
 "
-                        );
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "x");
-                }
-            );
+                    );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "x");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -447,31 +435,29 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(
-                        runtime,
-                        "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
-                    );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(
+                    runtime,
+                    "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
+                );
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0027: Keyword 'this' is not available in the current context",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0027: Keyword 'this' is not available in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("u", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("u", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -484,21 +470,21 @@ class C
   IL_000b:  ret
 }
 "
-                        );
-
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
                     );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
+
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -510,10 +496,9 @@ class C
   IL_0006:  ret
 }
 "
-                        );
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "u");
-                }
-            );
+                    );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "u");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -529,40 +514,38 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "D.<>c.<<M>b__1_0>d.MoveNext");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "D.<>c.<<M>b__1_0>d.MoveNext");
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0027: Keyword 'this' is not available in the current context",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0027: Keyword 'this' is not available in the current context",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -574,10 +557,9 @@ class C
   IL_0006:  ret
 }
 "
-                        );
-                    AssertEx.SetEqual(GetLocalNames(context), "ch");
-                }
-            );
+                    );
+                AssertEx.SetEqual(GetLocalNames(context), "ch");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -593,22 +575,20 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "D.<<M>b__1_0>d.MoveNext");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "D.<<M>b__1_0>d.MoveNext");
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("t", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("t", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -621,27 +601,27 @@ class C
   IL_000b:  ret
 }
 "
-                        );
-
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
                     );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
+
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -653,10 +633,9 @@ class C
   IL_0006:  ret
 }
 "
-                        );
-                    AssertEx.SetEqual(GetLocalNames(context), "this", "ch");
-                }
-            );
+                    );
+                AssertEx.SetEqual(GetLocalNames(context), "this", "ch");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -672,25 +651,23 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(
-                        runtime,
-                        "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
-                    );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(
+                    runtime,
+                    "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
+                );
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("t", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("t", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       17 (0x11)
   .maxstack  1
@@ -704,21 +681,21 @@ class C
   IL_0010:  ret
 }
 "
-                        );
-
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
                     );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
+
+                testData = new CompilationTestData();
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -731,15 +708,15 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -751,10 +728,9 @@ class C
   IL_0006:  ret
 }
 "
-                        );
-                    AssertEx.SetEqual(GetLocalNames(context), "this", "ch", "x");
-                }
-            );
+                    );
+                AssertEx.SetEqual(GetLocalNames(context), "this", "ch", "x");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -766,40 +742,38 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "D.<>c.<<M>b__1_0>d.MoveNext");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "D.<>c.<<M>b__1_0>d.MoveNext");
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0120: An object reference is required for the non-static field, method, or property 'D.t'",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0120: An object reference is required for the non-static field, method, or property 'D.t'",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -811,10 +785,9 @@ class C
   IL_0006:  ret
 }
 "
-                        );
-                    AssertEx.SetEqual(GetLocalNames(context), "ch");
-                }
-            );
+                    );
+                AssertEx.SetEqual(GetLocalNames(context), "ch");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -826,37 +799,35 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(
-                        runtime,
-                        "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
-                    );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(
+                    runtime,
+                    "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
+                );
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0120: An object reference is required for the non-static field, method, or property 'D.t'",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0120: An object reference is required for the non-static field, method, or property 'D.t'",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -869,15 +840,15 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -889,10 +860,9 @@ class C
   IL_0006:  ret
 }
 "
-                        );
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "x");
-                }
-            );
+                    );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "x");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -904,31 +874,29 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(
-                        runtime,
-                        "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
-                    );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(
+                    runtime,
+                    "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
+                );
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0120: An object reference is required for the non-static field, method, or property 'D.t'",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0120: An object reference is required for the non-static field, method, or property 'D.t'",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("u", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("u", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -941,21 +909,21 @@ class C
   IL_000b:  ret
 }
 "
-                        );
-
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
                     );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
+
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -967,10 +935,9 @@ class C
   IL_0006:  ret
 }
 "
-                        );
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "u");
-                }
-            );
+                    );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "u");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -982,40 +949,38 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "D.<>c.<<M>b__1_0>d.MoveNext");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "D.<>c.<<M>b__1_0>d.MoveNext");
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0120: An object reference is required for the non-static field, method, or property 'D.t'",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0120: An object reference is required for the non-static field, method, or property 'D.t'",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1027,10 +992,9 @@ class C
   IL_0006:  ret
 }
 "
-                        );
-                    AssertEx.SetEqual(GetLocalNames(context), "ch");
-                }
-            );
+                    );
+                AssertEx.SetEqual(GetLocalNames(context), "ch");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -1042,40 +1006,38 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "D.<>c__1.<<M>b__1_0>d.MoveNext");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "D.<>c__1.<<M>b__1_0>d.MoveNext");
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0027: Keyword 'this' is not available in the current context",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0027: Keyword 'this' is not available in the current context",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1087,16 +1049,15 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
-                    context.CompileExpression("typeof(T)", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("typeof(U)", out error);
-                    Assert.Null(error);
+                context.CompileExpression("typeof(T)", out error);
+                Assert.Null(error);
+                context.CompileExpression("typeof(U)", out error);
+                Assert.Null(error);
 
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "<>TypeVariables");
-                }
-            );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "<>TypeVariables");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -1108,37 +1069,35 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(
-                        runtime,
-                        "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
-                    );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(
+                    runtime,
+                    "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
+                );
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0027: Keyword 'this' is not available in the current context",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0027: Keyword 'this' is not available in the current context",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1151,15 +1110,15 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1171,16 +1130,15 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
-                    context.CompileExpression("typeof(T)", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("typeof(U)", out error);
-                    Assert.Null(error);
+                context.CompileExpression("typeof(T)", out error);
+                Assert.Null(error);
+                context.CompileExpression("typeof(U)", out error);
+                Assert.Null(error);
 
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "x", "<>TypeVariables");
-                }
-            );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "x", "<>TypeVariables");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -1196,31 +1154,29 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(
-                        runtime,
-                        "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
-                    );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(
+                    runtime,
+                    "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
+                );
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0027: Keyword 'this' is not available in the current context",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0027: Keyword 'this' is not available in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("u", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("u", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1233,21 +1189,21 @@ class C
   IL_000b:  ret
 }
 "
-                        );
-
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
                     );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
+
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1259,16 +1215,15 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
-                    context.CompileExpression("typeof(T)", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("typeof(U)", out error);
-                    Assert.Null(error);
+                context.CompileExpression("typeof(T)", out error);
+                Assert.Null(error);
+                context.CompileExpression("typeof(U)", out error);
+                Assert.Null(error);
 
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "u", "<>TypeVariables");
-                }
-            );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "u", "<>TypeVariables");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -1284,40 +1239,38 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "D.<>c__1.<<M>b__1_0>d.MoveNext");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "D.<>c__1.<<M>b__1_0>d.MoveNext");
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0027: Keyword 'this' is not available in the current context",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0027: Keyword 'this' is not available in the current context",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1329,16 +1282,15 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
-                    context.CompileExpression("typeof(T)", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("typeof(U)", out error);
-                    Assert.Null(error);
+                context.CompileExpression("typeof(T)", out error);
+                Assert.Null(error);
+                context.CompileExpression("typeof(U)", out error);
+                Assert.Null(error);
 
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "<>TypeVariables");
-                }
-            );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "<>TypeVariables");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -1354,22 +1306,20 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "D.<<M>b__1_0>d.MoveNext");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "D.<<M>b__1_0>d.MoveNext");
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("t", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("t", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1382,27 +1332,27 @@ class C
   IL_000b:  ret
 }
 "
-                        );
-
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
                     );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
+
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1414,16 +1364,15 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
-                    context.CompileExpression("typeof(T)", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("typeof(U)", out error);
-                    Assert.Null(error);
+                context.CompileExpression("typeof(T)", out error);
+                Assert.Null(error);
+                context.CompileExpression("typeof(U)", out error);
+                Assert.Null(error);
 
-                    AssertEx.SetEqual(GetLocalNames(context), "this", "ch", "<>TypeVariables");
-                }
-            );
+                AssertEx.SetEqual(GetLocalNames(context), "this", "ch", "<>TypeVariables");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -1439,25 +1388,23 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(
-                        runtime,
-                        "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
-                    );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(
+                    runtime,
+                    "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
+                );
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("t", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("t", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       17 (0x11)
   .maxstack  1
@@ -1471,21 +1418,21 @@ class C
   IL_0010:  ret
 }
 "
-                        );
-
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
                     );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
+
+                testData = new CompilationTestData();
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1498,15 +1445,15 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1518,16 +1465,15 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
-                    context.CompileExpression("typeof(T)", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("typeof(U)", out error);
-                    Assert.Null(error);
+                context.CompileExpression("typeof(T)", out error);
+                Assert.Null(error);
+                context.CompileExpression("typeof(U)", out error);
+                Assert.Null(error);
 
-                    AssertEx.SetEqual(GetLocalNames(context), "this", "ch", "x", "<>TypeVariables");
-                }
-            );
+                AssertEx.SetEqual(GetLocalNames(context), "this", "ch", "x", "<>TypeVariables");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -1539,40 +1485,38 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "D.<>c__1.<<M>b__1_0>d.MoveNext");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "D.<>c__1.<<M>b__1_0>d.MoveNext");
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0120: An object reference is required for the non-static field, method, or property 'D<T>.t'",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0120: An object reference is required for the non-static field, method, or property 'D<T>.t'",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1584,16 +1528,15 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
-                    context.CompileExpression("typeof(T)", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("typeof(U)", out error);
-                    Assert.Null(error);
+                context.CompileExpression("typeof(T)", out error);
+                Assert.Null(error);
+                context.CompileExpression("typeof(U)", out error);
+                Assert.Null(error);
 
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "<>TypeVariables");
-                }
-            );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "<>TypeVariables");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -1605,37 +1548,35 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(
-                        runtime,
-                        "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
-                    );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(
+                    runtime,
+                    "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
+                );
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0120: An object reference is required for the non-static field, method, or property 'D<T>.t'",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0120: An object reference is required for the non-static field, method, or property 'D<T>.t'",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("x", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("x", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1648,15 +1589,15 @@ class C
   IL_000b:  ret
 }
 "
-                        );
+                    );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1668,16 +1609,15 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
-                    context.CompileExpression("typeof(T)", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("typeof(U)", out error);
-                    Assert.Null(error);
+                context.CompileExpression("typeof(T)", out error);
+                Assert.Null(error);
+                context.CompileExpression("typeof(U)", out error);
+                Assert.Null(error);
 
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "x", "<>TypeVariables");
-                }
-            );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "x", "<>TypeVariables");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -1693,31 +1633,29 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(
-                        runtime,
-                        "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
-                    );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(
+                    runtime,
+                    "D.<>c__DisplayClass1_0.<<M>b__0>d.MoveNext"
+                );
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0120: An object reference is required for the non-static field, method, or property 'D<T>.t'",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0120: An object reference is required for the non-static field, method, or property 'D<T>.t'",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("u", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("u", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -1730,21 +1668,21 @@ class C
   IL_000b:  ret
 }
 "
-                        );
-
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
                     );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
+
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1756,16 +1694,15 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
-                    context.CompileExpression("typeof(T)", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("typeof(U)", out error);
-                    Assert.Null(error);
+                context.CompileExpression("typeof(T)", out error);
+                Assert.Null(error);
+                context.CompileExpression("typeof(U)", out error);
+                Assert.Null(error);
 
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "u", "<>TypeVariables");
-                }
-            );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "u", "<>TypeVariables");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1112496")]
@@ -1781,40 +1718,38 @@ class C
                 options: TestOptions.DebugDll,
                 assemblyName: GetUniqueName()
             );
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "D.<>c__1.<<M>b__1_0>d.MoveNext");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "D.<>c__1.<<M>b__1_0>d.MoveNext");
 
-                    string error;
-                    CompilationTestData testData;
+                string error;
+                CompilationTestData testData;
 
-                    context.CompileExpression("t", out error);
-                    Assert.Equal(
-                        "error CS0120: An object reference is required for the non-static field, method, or property 'D<T>.t'",
-                        error
-                    );
+                context.CompileExpression("t", out error);
+                Assert.Equal(
+                    "error CS0120: An object reference is required for the non-static field, method, or property 'D<T>.t'",
+                    error
+                );
 
-                    context.CompileExpression("u", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'u' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("u", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'u' does not exist in the current context",
+                    error
+                );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'x' does not exist in the current context",
-                        error
-                    );
+                context.CompileExpression("x", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'x' does not exist in the current context",
+                    error
+                );
 
-                    testData = new CompilationTestData();
-                    context.CompileExpression("ch", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x<T, U>.<>m0")
-                        .VerifyIL(
-                            @"
+                testData = new CompilationTestData();
+                context.CompileExpression("ch", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x<T, U>.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -1826,16 +1761,15 @@ class C
   IL_0006:  ret
 }
 "
-                        );
+                    );
 
-                    context.CompileExpression("typeof(T)", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("typeof(U)", out error);
-                    Assert.Null(error);
+                context.CompileExpression("typeof(T)", out error);
+                Assert.Null(error);
+                context.CompileExpression("typeof(U)", out error);
+                Assert.Null(error);
 
-                    AssertEx.SetEqual(GetLocalNames(context), "ch", "<>TypeVariables");
-                }
-            );
+                AssertEx.SetEqual(GetLocalNames(context), "ch", "<>TypeVariables");
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1134746")]
@@ -1861,75 +1795,72 @@ class C
     }
 }";
             var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll);
-            WithRuntimeInstance(
-                compilation0,
-                runtime =>
-                {
-                    ImmutableArray<MetadataBlock> blocks;
-                    Guid moduleVersionId;
-                    ISymUnmanagedReader symReader;
-                    int methodToken;
-                    int localSignatureToken;
-                    GetContextState(
-                        runtime,
-                        "C.<M>d__0.MoveNext",
-                        out blocks,
-                        out moduleVersionId,
-                        out symReader,
-                        out methodToken,
-                        out localSignatureToken
-                    );
+            WithRuntimeInstance(compilation0, runtime =>
+            {
+                ImmutableArray<MetadataBlock> blocks;
+                Guid moduleVersionId;
+                ISymUnmanagedReader symReader;
+                int methodToken;
+                int localSignatureToken;
+                GetContextState(
+                    runtime,
+                    "C.<M>d__0.MoveNext",
+                    out blocks,
+                    out moduleVersionId,
+                    out symReader,
+                    out methodToken,
+                    out localSignatureToken
+                );
 
-                    var appDomain = new AppDomain();
-                    uint ilOffset = ExpressionCompilerTestHelpers.GetOffset(
-                        methodToken,
-                        symReader,
-                        atLineNumber: 100
-                    );
-                    var context = CreateMethodContext(
-                        appDomain,
-                        blocks,
-                        symReader,
-                        moduleVersionId,
-                        methodToken: methodToken,
-                        methodVersion: 1,
-                        ilOffset: ilOffset,
-                        localSignatureToken: localSignatureToken,
-                        kind: MakeAssemblyReferencesKind.AllAssemblies
-                    );
+                var appDomain = new AppDomain();
+                uint ilOffset = ExpressionCompilerTestHelpers.GetOffset(
+                    methodToken,
+                    symReader,
+                    atLineNumber: 100
+                );
+                var context = CreateMethodContext(
+                    appDomain,
+                    blocks,
+                    symReader,
+                    moduleVersionId,
+                    methodToken: methodToken,
+                    methodVersion: 1,
+                    ilOffset: ilOffset,
+                    localSignatureToken: localSignatureToken,
+                    kind: MakeAssemblyReferencesKind.AllAssemblies
+                );
 
-                    string error;
-                    context.CompileExpression("x", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("y", out error);
-                    Assert.Equal(
-                        "error CS0103: The name 'y' does not exist in the current context",
-                        error
-                    );
+                string error;
+                context.CompileExpression("x", out error);
+                Assert.Null(error);
+                context.CompileExpression("y", out error);
+                Assert.Equal(
+                    "error CS0103: The name 'y' does not exist in the current context",
+                    error
+                );
 
-                    ilOffset = ExpressionCompilerTestHelpers.GetOffset(
-                        methodToken,
-                        symReader,
-                        atLineNumber: 200
-                    );
-                    context = CreateMethodContext(
-                        appDomain,
-                        blocks,
-                        symReader,
-                        moduleVersionId,
-                        methodToken: methodToken,
-                        methodVersion: 1,
-                        ilOffset: ilOffset,
-                        localSignatureToken: localSignatureToken,
-                        kind: MakeAssemblyReferencesKind.AllAssemblies
-                    );
+                ilOffset = ExpressionCompilerTestHelpers.GetOffset(
+                    methodToken,
+                    symReader,
+                    atLineNumber: 200
+                );
+                context = CreateMethodContext(
+                    appDomain,
+                    blocks,
+                    symReader,
+                    moduleVersionId,
+                    methodToken: methodToken,
+                    methodVersion: 1,
+                    ilOffset: ilOffset,
+                    localSignatureToken: localSignatureToken,
+                    kind: MakeAssemblyReferencesKind.AllAssemblies
+                );
 
-                    context.CompileExpression("x", out error);
-                    Assert.Null(error);
-                    context.CompileExpression("y", out error);
-                    Assert.Null(error);
-                }
-            );
+                context.CompileExpression("x", out error);
+                Assert.Null(error);
+                context.CompileExpression("y", out error);
+                Assert.Null(error);
+            });
         }
 
         private static string[] GetLocalNames(EvaluationContext context)

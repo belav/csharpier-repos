@@ -77,9 +77,8 @@ namespace System.Net.Http.Functional.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => client.BaseAddress = new Uri("/onlyabsolutesupported", UriKind.Relative)
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    client.BaseAddress = new Uri("/onlyabsolutesupported", UriKind.Relative)
                 );
             }
         }
@@ -125,17 +124,14 @@ namespace System.Net.Http.Functional.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => client.Timeout = TimeSpan.FromSeconds(-2)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    client.Timeout = TimeSpan.FromSeconds(-2)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => client.Timeout = TimeSpan.FromSeconds(0)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    client.Timeout = TimeSpan.FromSeconds(0)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => client.Timeout = TimeSpan.FromSeconds(int.MaxValue)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    client.Timeout = TimeSpan.FromSeconds(int.MaxValue)
                 );
             }
         }
@@ -166,17 +162,14 @@ namespace System.Net.Http.Functional.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => client.MaxResponseContentBufferSize = -1
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    client.MaxResponseContentBufferSize = -1
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => client.MaxResponseContentBufferSize = 0
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    client.MaxResponseContentBufferSize = 0
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => client.MaxResponseContentBufferSize = 1 + (long)int.MaxValue
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    client.MaxResponseContentBufferSize = 1 + (long)int.MaxValue
                 );
             }
         }
@@ -1035,10 +1028,8 @@ namespace System.Net.Http.Functional.Tests
                     .Select(_ => client.GetAsync(CreateFakeUri()))
                     .ToArray();
                 client.CancelPendingRequests();
-                Assert.All(
-                    tasks,
-                    task =>
-                        Assert.Throws<TaskCanceledException>(() => task.GetAwaiter().GetResult())
+                Assert.All(tasks, task =>
+                    Assert.Throws<TaskCanceledException>(() => task.GetAwaiter().GetResult())
                 );
             }
         }
@@ -1065,19 +1056,16 @@ namespace System.Net.Http.Functional.Tests
                     .Range(0, 3)
                     .Select(_ => client.GetAsync(CreateFakeUri(), completionOption))
                     .ToArray();
-                Assert.All(
-                    tasks,
-                    task =>
-                    {
-                        OperationCanceledException e = Assert.ThrowsAny<OperationCanceledException>(
-                            () =>
-                                task.GetAwaiter().GetResult()
-                        );
-                        TimeoutException timeoutException = (TimeoutException)e.InnerException;
-                        Assert.NotNull(timeoutException);
-                        Assert.NotNull(timeoutException.InnerException);
-                    }
-                );
+                Assert.All(tasks, task =>
+                {
+                    OperationCanceledException e = Assert.ThrowsAny<OperationCanceledException>(
+                        () =>
+                            task.GetAwaiter().GetResult()
+                    );
+                    TimeoutException timeoutException = (TimeoutException)e.InnerException;
+                    Assert.NotNull(timeoutException);
+                    Assert.NotNull(timeoutException.InnerException);
+                });
             }
         }
 
@@ -1914,9 +1902,8 @@ namespace System.Net.Http.Functional.Tests
         {
             using (var client = new HttpClient())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "value",
-                    () => client.DefaultRequestVersion = null
+                AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                    client.DefaultRequestVersion = null
                 );
                 client.DefaultRequestVersion = new Version(1, 0); // still usable after
                 Assert.Equal(new Version(1, 0), client.DefaultRequestVersion);
@@ -2063,9 +2050,8 @@ namespace System.Net.Http.Functional.Tests
                     )
                 )
                 {
-                    await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                        "request",
-                        () => client.SendAsync(TestAsync, null)
+                    await AssertExtensions.ThrowsAsync<ArgumentNullException>("request", () =>
+                        client.SendAsync(TestAsync, null)
                     );
                 }
             }
@@ -2287,9 +2273,8 @@ namespace System.Net.Http.Functional.Tests
         public void Send_NullRequest_ThrowsException()
         {
             using var client = new CustomHttpClient();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "request",
-                () => client.PublicSend(null)
+            AssertExtensions.Throws<ArgumentNullException>("request", () =>
+                client.PublicSend(null)
             );
         }
 
@@ -2297,9 +2282,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task SendAsync_NullRequest_ThrowsException()
         {
             using var client = new CustomHttpClient();
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                "request",
-                () => client.PublicSendAsync(null)
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>("request", () =>
+                client.PublicSendAsync(null)
             );
         }
     }

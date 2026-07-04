@@ -280,9 +280,8 @@ namespace System.Diagnostics.Tests
                         EventLogEntry eventLogEntry = listener.EventLog.Entries.LastOrDefault();
                         if (eventLogEntry != null)
                         {
-                            Assert.All(
-                                messages,
-                                message => eventLogEntry.Message.Contains(message)
+                            Assert.All(messages, message =>
+                                eventLogEntry.Message.Contains(message)
                             );
                         }
                     }
@@ -297,9 +296,8 @@ namespace System.Diagnostics.Tests
                         EventLogEntry eventLogEntry = listener.EventLog.Entries.LastOrDefault();
                         if (eventLogEntry != null)
                         {
-                            Assert.All(
-                                messages,
-                                message => eventLogEntry.Message.Contains(message)
+                            Assert.All(messages, message =>
+                                eventLogEntry.Message.Contains(message)
                             );
                         }
                     }

@@ -196,9 +196,8 @@ namespace System.Net.Http.Json.Functional.Tests
 
         [Fact]
         public void JsonContentInputTypeIsNull() =>
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inputType",
-                () => JsonContent.Create(null, inputType: null, mediaType: null)
+            AssertExtensions.Throws<ArgumentNullException>("inputType", () =>
+                JsonContent.Create(null, inputType: null, mediaType: null)
             );
 
         [Fact]
@@ -233,14 +232,11 @@ namespace System.Net.Http.Json.Functional.Tests
         [Fact]
         public void JsonContentTypeInfoIsNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "jsonTypeInfo",
-                () => JsonContent.Create(null, jsonTypeInfo: (JsonTypeInfo)null, mediaType: null)
+            AssertExtensions.Throws<ArgumentNullException>("jsonTypeInfo", () =>
+                JsonContent.Create(null, jsonTypeInfo: (JsonTypeInfo)null, mediaType: null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "jsonTypeInfo",
-                () =>
-                    JsonContent.Create(null, jsonTypeInfo: (JsonTypeInfo<Foo>)null, mediaType: null)
+            AssertExtensions.Throws<ArgumentNullException>("jsonTypeInfo", () =>
+                JsonContent.Create(null, jsonTypeInfo: (JsonTypeInfo<Foo>)null, mediaType: null)
             );
         }
 

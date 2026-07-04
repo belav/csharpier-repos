@@ -227,16 +227,8 @@ namespace System.Security.Cryptography.Cose.Tests
             CoseHeaderMap protectedHeaders = GetEmptyHeaderMap();
             CoseHeaderMap unprotectedHeaders = GetHeaderMapWithAlgorithm(DefaultAlgorithm);
 
-            Assert.Throws<ArgumentException>(
-                "unprotectedHeaders",
-                () =>
-                    Sign(
-                        s_sampleContent,
-                        DefaultKey,
-                        DefaultHash,
-                        protectedHeaders,
-                        unprotectedHeaders
-                    )
+            Assert.Throws<ArgumentException>("unprotectedHeaders", () =>
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders, unprotectedHeaders)
             );
         }
 
@@ -380,32 +372,16 @@ namespace System.Security.Cryptography.Cose.Tests
             Initialize(DefaultAlgorithm);
             unprotectedHeaders.Add(CoseHeaderLabel.Algorithm, (int)DefaultAlgorithm);
 
-            Assert.Throws<ArgumentException>(
-                "signer",
-                () =>
-                    Sign(
-                        s_sampleContent,
-                        DefaultKey,
-                        DefaultHash,
-                        protectedHeaders,
-                        unprotectedHeaders
-                    )
+            Assert.Throws<ArgumentException>("signer", () =>
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders, unprotectedHeaders)
             );
 
             // other known header is duplicate.
             Initialize(DefaultAlgorithm);
             protectedHeaders.Add(CoseHeaderLabel.ContentType, ContentTypeDummyValue);
             unprotectedHeaders.Add(CoseHeaderLabel.ContentType, ContentTypeDummyValue);
-            Assert.Throws<ArgumentException>(
-                "signer",
-                () =>
-                    Sign(
-                        s_sampleContent,
-                        DefaultKey,
-                        DefaultHash,
-                        protectedHeaders,
-                        unprotectedHeaders
-                    )
+            Assert.Throws<ArgumentException>("signer", () =>
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders, unprotectedHeaders)
             );
 
             // not-known int header is duplicate.
@@ -413,16 +389,8 @@ namespace System.Security.Cryptography.Cose.Tests
             var myLabel = new CoseHeaderLabel(42);
             protectedHeaders.Add(myLabel, 42);
             unprotectedHeaders.Add(myLabel, 42);
-            Assert.Throws<ArgumentException>(
-                "signer",
-                () =>
-                    Sign(
-                        s_sampleContent,
-                        DefaultKey,
-                        DefaultHash,
-                        protectedHeaders,
-                        unprotectedHeaders
-                    )
+            Assert.Throws<ArgumentException>("signer", () =>
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders, unprotectedHeaders)
             );
 
             // not-known tstr header is duplicate.
@@ -430,16 +398,8 @@ namespace System.Security.Cryptography.Cose.Tests
             myLabel = new CoseHeaderLabel("42");
             protectedHeaders.Add(myLabel, 42);
             unprotectedHeaders.Add(myLabel, 42);
-            Assert.Throws<ArgumentException>(
-                "signer",
-                () =>
-                    Sign(
-                        s_sampleContent,
-                        DefaultKey,
-                        DefaultHash,
-                        protectedHeaders,
-                        unprotectedHeaders
-                    )
+            Assert.Throws<ArgumentException>("signer", () =>
+                Sign(s_sampleContent, DefaultKey, DefaultHash, protectedHeaders, unprotectedHeaders)
             );
 
             void Initialize(CoseAlgorithm algorithm)
@@ -477,9 +437,8 @@ namespace System.Security.Cryptography.Cose.Tests
                 protectedHeaders,
                 unprotectedHeaders
             );
-            Assert.Throws<ArgumentException>(
-                "signer",
-                () => AddSignature(msg, s_sampleContent, signer)
+            Assert.Throws<ArgumentException>("signer", () =>
+                AddSignature(msg, s_sampleContent, signer)
             );
 
             // other known header is duplicate.
@@ -487,9 +446,8 @@ namespace System.Security.Cryptography.Cose.Tests
             protectedHeaders.Add(CoseHeaderLabel.ContentType, ContentTypeDummyValue);
             unprotectedHeaders.Add(CoseHeaderLabel.ContentType, ContentTypeDummyValue);
             signer = GetCoseSigner(DefaultKey, DefaultHash, protectedHeaders, unprotectedHeaders);
-            Assert.Throws<ArgumentException>(
-                "signer",
-                () => AddSignature(msg, s_sampleContent, signer)
+            Assert.Throws<ArgumentException>("signer", () =>
+                AddSignature(msg, s_sampleContent, signer)
             );
 
             // not-known int header is duplicate.
@@ -498,9 +456,8 @@ namespace System.Security.Cryptography.Cose.Tests
             protectedHeaders.Add(myLabel, 42);
             unprotectedHeaders.Add(myLabel, 42);
             signer = GetCoseSigner(DefaultKey, DefaultHash, protectedHeaders, unprotectedHeaders);
-            Assert.Throws<ArgumentException>(
-                "signer",
-                () => AddSignature(msg, s_sampleContent, signer)
+            Assert.Throws<ArgumentException>("signer", () =>
+                AddSignature(msg, s_sampleContent, signer)
             );
 
             // not-known tstr header is duplicate.
@@ -509,9 +466,8 @@ namespace System.Security.Cryptography.Cose.Tests
             protectedHeaders.Add(myLabel, 42);
             unprotectedHeaders.Add(myLabel, 42);
             signer = GetCoseSigner(DefaultKey, DefaultHash, protectedHeaders, unprotectedHeaders);
-            Assert.Throws<ArgumentException>(
-                "signer",
-                () => AddSignature(msg, s_sampleContent, signer)
+            Assert.Throws<ArgumentException>("signer", () =>
+                AddSignature(msg, s_sampleContent, signer)
             );
 
             void Initialize(CoseAlgorithm algorithm)
@@ -875,9 +831,8 @@ namespace System.Security.Cryptography.Cose.Tests
             AddCriticalHeaders(bodyProtectedHeaders, null, includeSpecifiedCritHeader: false);
 
             CoseSigner signer = GetCoseSigner(DefaultKey, DefaultHash);
-            Assert.Throws<ArgumentException>(
-                "protectedHeaders",
-                () => Sign(s_sampleContent, signer, bodyProtectedHeaders)
+            Assert.Throws<ArgumentException>("protectedHeaders", () =>
+                Sign(s_sampleContent, signer, bodyProtectedHeaders)
             );
         }
 
@@ -942,9 +897,8 @@ namespace System.Security.Cryptography.Cose.Tests
             AddCriticalHeaders(signProtectedHeaders, null, includeSpecifiedCritHeader: false);
 
             CoseSigner signer = GetCoseSigner(DefaultKey, DefaultHash, signProtectedHeaders);
-            Assert.Throws<ArgumentException>(
-                "signer",
-                () => AddSignature(multiSignMsg, s_sampleContent, signer)
+            Assert.Throws<ArgumentException>("signer", () =>
+                AddSignature(multiSignMsg, s_sampleContent, signer)
             );
         }
 

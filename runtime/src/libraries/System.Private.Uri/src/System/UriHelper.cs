@@ -13,15 +13,11 @@ namespace System
         public static unsafe string SpanToLowerInvariantString(ReadOnlySpan<char> span)
         {
 #pragma warning disable CS8500 // takes address of managed type
-            return string.Create(
-                span.Length,
-                (IntPtr)(&span),
-                static (buffer, spanPtr) =>
-                {
-                    int charsWritten = (*(ReadOnlySpan<char>*)spanPtr).ToLowerInvariant(buffer);
-                    Debug.Assert(charsWritten == buffer.Length);
-                }
-            );
+            return string.Create(span.Length, (IntPtr)(&span), static (buffer, spanPtr) =>
+            {
+                int charsWritten = (*(ReadOnlySpan<char>*)spanPtr).ToLowerInvariant(buffer);
+                Debug.Assert(charsWritten == buffer.Length);
+            });
 #pragma warning restore CS8500
         }
 

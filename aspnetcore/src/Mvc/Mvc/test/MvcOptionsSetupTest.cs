@@ -107,9 +107,8 @@ public class MvcOptionsSetupTest
         var options = GetOptions<MvcOptions>();
 
         // Assert
-        Assert.Collection(
-            options.InputFormatters,
-            formatter => Assert.IsType<SystemTextJsonInputFormatter>(formatter)
+        Assert.Collection(options.InputFormatters, formatter =>
+            Assert.IsType<SystemTextJsonInputFormatter>(formatter)
         );
     }
 

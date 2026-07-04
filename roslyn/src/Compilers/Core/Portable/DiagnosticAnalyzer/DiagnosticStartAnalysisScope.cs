@@ -910,10 +910,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         protected StrongBox<AnalyzerActions> GetOrCreateAnalyzerActions(DiagnosticAnalyzer analyzer)
         {
-            return _analyzerActions.GetOrAdd(
-                analyzer,
-                _ => new StrongBox<AnalyzerActions>(AnalyzerActions.Empty)
-            );
+            return _analyzerActions.GetOrAdd(analyzer, _ => new StrongBox<AnalyzerActions>(
+                AnalyzerActions.Empty
+            ));
         }
     }
 

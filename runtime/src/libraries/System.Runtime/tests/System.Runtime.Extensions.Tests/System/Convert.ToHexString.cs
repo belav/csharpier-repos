@@ -62,21 +62,17 @@ namespace System.Tests
         [Fact]
         public static void InvalidInputBuffer()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inArray",
-                () => Convert.ToHexString(null)
+            AssertExtensions.Throws<ArgumentNullException>("inArray", () =>
+                Convert.ToHexString(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inArray",
-                () => Convert.ToHexString(null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("inArray", () =>
+                Convert.ToHexString(null, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inArray",
-                () => Convert.ToHexStringLower(null)
+            AssertExtensions.Throws<ArgumentNullException>("inArray", () =>
+                Convert.ToHexStringLower(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inArray",
-                () => Convert.ToHexStringLower(null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("inArray", () =>
+                Convert.ToHexStringLower(null, 0, 0)
             );
         }
 
@@ -84,21 +80,17 @@ namespace System.Tests
         public static void InvalidOffset()
         {
             byte[] inputBytes = Convert.FromHexString("000102FDFEFF");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => Convert.ToHexString(inputBytes, -1, inputBytes.Length)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                Convert.ToHexString(inputBytes, -1, inputBytes.Length)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => Convert.ToHexString(inputBytes, inputBytes.Length, inputBytes.Length)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                Convert.ToHexString(inputBytes, inputBytes.Length, inputBytes.Length)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => Convert.ToHexStringLower(inputBytes, -1, inputBytes.Length)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                Convert.ToHexStringLower(inputBytes, -1, inputBytes.Length)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => Convert.ToHexStringLower(inputBytes, inputBytes.Length, inputBytes.Length)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                Convert.ToHexStringLower(inputBytes, inputBytes.Length, inputBytes.Length)
             );
         }
 
@@ -106,42 +98,34 @@ namespace System.Tests
         public static void InvalidLength()
         {
             byte[] inputBytes = Convert.FromHexString("000102FDFEFF");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => Convert.ToHexString(inputBytes, 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                Convert.ToHexString(inputBytes, 0, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => Convert.ToHexString(inputBytes, 0, inputBytes.Length + 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                Convert.ToHexString(inputBytes, 0, inputBytes.Length + 1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => Convert.ToHexString(inputBytes, 1, inputBytes.Length)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                Convert.ToHexString(inputBytes, 1, inputBytes.Length)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => Convert.ToHexStringLower(inputBytes, 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                Convert.ToHexStringLower(inputBytes, 0, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => Convert.ToHexStringLower(inputBytes, 0, inputBytes.Length + 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                Convert.ToHexStringLower(inputBytes, 0, inputBytes.Length + 1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => Convert.ToHexStringLower(inputBytes, 1, inputBytes.Length)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                Convert.ToHexStringLower(inputBytes, 1, inputBytes.Length)
             );
         }
 
         [Fact]
         public static unsafe void InputTooLarge()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bytes",
-                () => Convert.ToHexString(new ReadOnlySpan<byte>((void*)0, Int32.MaxValue))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bytes", () =>
+                Convert.ToHexString(new ReadOnlySpan<byte>((void*)0, Int32.MaxValue))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bytes",
-                () => Convert.ToHexStringLower(new ReadOnlySpan<byte>((void*)0, Int32.MaxValue))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bytes", () =>
+                Convert.ToHexStringLower(new ReadOnlySpan<byte>((void*)0, Int32.MaxValue))
             );
         }
 

@@ -169,9 +169,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
         {
             Assert.Throws<ArgumentNullException>(() => ECCurve.CreateFromFriendlyName(null));
             Assert.Throws<ArgumentNullException>(() => ECCurve.CreateFromValue(null));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => ECCurve.CreateFromFriendlyName("")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                ECCurve.CreateFromFriendlyName("")
             );
             Assert.Throws<PlatformNotSupportedException>(() =>
                 ECDsaFactory
@@ -184,13 +183,11 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     .Create(ECCurve.CreateFromValue("Invalid"))
                     .ExportExplicitParameters(false)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => ECCurve.CreateFromOid(new Oid(null, null))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                ECCurve.CreateFromOid(new Oid(null, null))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => ECCurve.CreateFromOid(new Oid("", ""))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                ECCurve.CreateFromOid(new Oid("", ""))
             );
         }
 

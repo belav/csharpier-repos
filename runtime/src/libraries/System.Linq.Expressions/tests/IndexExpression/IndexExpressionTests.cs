@@ -161,13 +161,11 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = info.DeclaredProperties.First();
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", Expression.Constant(0))
             );
         }
 
@@ -212,13 +210,11 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", Expression.Constant(0))
             );
         }
 
@@ -256,13 +252,11 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", Expression.Constant(0))
             );
         }
 
@@ -301,13 +295,11 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", Expression.Constant(0))
             );
         }
 
@@ -345,13 +337,11 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", Expression.Constant(0))
             );
         }
 
@@ -389,13 +379,11 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", Expression.Constant(0))
             );
         }
 
@@ -433,13 +421,11 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", Expression.Constant(0))
             );
         }
 
@@ -493,13 +479,11 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", Expression.Constant(0))
             );
         }
 
@@ -538,13 +522,11 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", Expression.Constant(0))
             );
         }
 
@@ -597,13 +579,11 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", Expression.Constant(0))
             );
         }
 
@@ -656,27 +636,23 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () =>
-                    Expression.Property(
-                        instance,
-                        prop,
-                        Expression.Constant(0),
-                        Expression.Constant(0),
-                        Expression.Constant(0)
-                    )
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(
+                    instance,
+                    prop,
+                    Expression.Constant(0),
+                    Expression.Constant(0),
+                    Expression.Constant(0)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () =>
-                    Expression.Property(
-                        instance,
-                        "Item",
-                        Expression.Constant(0),
-                        Expression.Constant(0),
-                        Expression.Constant(0)
-                    )
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(
+                    instance,
+                    "Item",
+                    Expression.Constant(0),
+                    Expression.Constant(0),
+                    Expression.Constant(0)
+                )
             );
         }
 
@@ -716,27 +692,23 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () =>
-                    Expression.Property(
-                        instance,
-                        prop,
-                        Expression.Constant(0),
-                        Expression.Constant(0),
-                        Expression.Constant(0)
-                    )
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(
+                    instance,
+                    prop,
+                    Expression.Constant(0),
+                    Expression.Constant(0),
+                    Expression.Constant(0)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () =>
-                    Expression.Property(
-                        instance,
-                        "Item",
-                        Expression.Constant(0),
-                        Expression.Constant(0),
-                        Expression.Constant(0)
-                    )
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(
+                    instance,
+                    "Item",
+                    Expression.Constant(0),
+                    Expression.Constant(0),
+                    Expression.Constant(0)
+                )
             );
         }
 
@@ -745,9 +717,8 @@ namespace System.Linq.Expressions.Tests
         {
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
             ConstantExpression index = Expression.Constant(0);
-            AssertExtensions.Throws<ArgumentException>(
-                "instance",
-                () => Expression.Property(null, prop, index)
+            AssertExtensions.Throws<ArgumentException>("instance", () =>
+                Expression.Property(null, prop, index)
             );
         }
 
@@ -787,9 +758,8 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "instance",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("instance", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
         }
 
@@ -828,9 +798,8 @@ namespace System.Linq.Expressions.Tests
             Type type = info;
             PropertyInfo prop = type.GetProperties()[0];
             Expression instance = Expression.Default(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexes[0]",
-                () => Expression.Property(instance, prop, Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("indexes[0]", () =>
+                Expression.Property(instance, prop, Expression.Constant(0))
             );
         }
 
@@ -839,9 +808,8 @@ namespace System.Linq.Expressions.Tests
         {
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
             DefaultExpression dict = Expression.Default(typeof(Dictionary<int, int>));
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(dict, prop, Array.Empty<Expression>())
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(dict, prop, Array.Empty<Expression>())
             );
         }
 
@@ -851,9 +819,8 @@ namespace System.Linq.Expressions.Tests
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
             DefaultExpression dict = Expression.Default(typeof(Dictionary<int, int>));
             ConstantExpression index = Expression.Constant(0);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(dict, prop, index, index)
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(dict, prop, index, index)
             );
         }
 
@@ -863,9 +830,8 @@ namespace System.Linq.Expressions.Tests
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
             DefaultExpression dict = Expression.Default(typeof(Dictionary<int, int>));
             ConstantExpression index = Expression.Constant(0L);
-            AssertExtensions.Throws<ArgumentException>(
-                "arguments[0]",
-                () => Expression.Property(dict, prop, index)
+            AssertExtensions.Throws<ArgumentException>("arguments[0]", () =>
+                Expression.Property(dict, prop, index)
             );
         }
 
@@ -904,9 +870,8 @@ namespace System.Linq.Expressions.Tests
             ConstantExpression instance = Expression.Constant("");
             PropertyInfo prop = typeof(string).GetProperty(nameof(string.Length));
             ConstantExpression index = Expression.Constant(0);
-            AssertExtensions.Throws<ArgumentException>(
-                "indexer",
-                () => Expression.Property(instance, prop, index)
+            AssertExtensions.Throws<ArgumentException>("indexer", () =>
+                Expression.Property(instance, prop, index)
             );
         }
 
@@ -938,13 +903,11 @@ namespace System.Linq.Expressions.Tests
         public void NoSuchPropertyExplicitlyNoIndices()
         {
             ConstantExpression instance = Expression.Constant("");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Property(instance, "ThisDoesNotExist", Array.Empty<Expression>())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Property(instance, "ThisDoesNotExist", Array.Empty<Expression>())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Property(instance, "ThisDoesNotExist", null)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Property(instance, "ThisDoesNotExist", null)
             );
         }
 
@@ -962,9 +925,8 @@ namespace System.Linq.Expressions.Tests
         public void FindNothingForNullArgument()
         {
             ConstantExpression instance = Expression.Constant("123");
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Length", new Expression[] { null })
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Length", new Expression[] { null })
             );
         }
 
@@ -973,13 +935,11 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression instance = Expression.Constant(new Dictionary<int, int>());
             PropertyInfo prop = typeof(Dictionary<int, int>).GetProperty("Item");
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyName",
-                () => Expression.Property(instance, "Item", new Expression[] { null })
+            AssertExtensions.Throws<ArgumentException>("propertyName", () =>
+                Expression.Property(instance, "Item", new Expression[] { null })
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "arguments[0]",
-                () => Expression.Property(instance, prop, new Expression[] { null })
+            AssertExtensions.Throws<ArgumentNullException>("arguments[0]", () =>
+                Expression.Property(instance, prop, new Expression[] { null })
             );
         }
 
@@ -992,13 +952,11 @@ namespace System.Linq.Expressions.Tests
                 null,
                 typeof(Unreadable<int>).GetProperty(nameof(Unreadable<int>.WriteOnly))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "arguments[0]",
-                () => Expression.Property(instance, "Item", index)
+            AssertExtensions.Throws<ArgumentException>("arguments[0]", () =>
+                Expression.Property(instance, "Item", index)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "arguments[0]",
-                () => Expression.Property(instance, prop, index)
+            AssertExtensions.Throws<ArgumentException>("arguments[0]", () =>
+                Expression.Property(instance, prop, index)
             );
         }
 

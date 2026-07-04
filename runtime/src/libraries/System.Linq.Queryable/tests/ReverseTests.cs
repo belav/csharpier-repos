@@ -10,9 +10,8 @@ namespace System.Linq.Tests
         [Fact]
         public void InvalidArguments()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<string>)null).Reverse()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<string>)null).Reverse()
             );
         }
 

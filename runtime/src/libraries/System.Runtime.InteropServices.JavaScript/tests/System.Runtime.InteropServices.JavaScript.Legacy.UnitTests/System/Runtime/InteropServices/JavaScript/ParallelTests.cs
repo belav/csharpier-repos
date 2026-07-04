@@ -50,14 +50,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 expected = 0;
             for (int i = 0; i < count; i++)
                 expected += i;
-            Parallel.For(
-                0,
-                count,
-                (i) =>
-                {
-                    sum += i;
-                }
-            );
+            Parallel.For(0, count, (i) =>
+            {
+                sum += i;
+            });
             Assert.Equal(expected, sum);
         }
 
@@ -76,13 +72,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 items.Add(i);
                 expected += i;
             }
-            Parallel.ForEach(
-                items,
-                (i) =>
-                {
-                    sum += i;
-                }
-            );
+            Parallel.ForEach(items, (i) =>
+            {
+                sum += i;
+            });
             Assert.Equal(expected, sum);
         }
     }

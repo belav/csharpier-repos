@@ -328,9 +328,8 @@ namespace System.CodeDom.Tests
         public void Ctor_NullWriter_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>("writer", () => new IndentedTextWriter(null));
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () => new IndentedTextWriter(null, "TabString")
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                new IndentedTextWriter(null, "TabString")
             );
         }
 

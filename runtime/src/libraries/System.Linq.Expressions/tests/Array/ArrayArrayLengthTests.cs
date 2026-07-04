@@ -2733,9 +2733,8 @@ namespace System.Linq.Expressions.Tests
                 }
             )
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "array",
-                    () => Expression.ArrayLength(e)
+                AssertExtensions.Throws<ArgumentException>("array", () =>
+                    Expression.ArrayLength(e)
                 );
             }
         }

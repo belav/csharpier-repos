@@ -271,13 +271,11 @@ namespace System.Linq.Tests
         public void SourceIsNull()
         {
             Record[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.GroupBy(e => e.Name, e => e.Score, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(e => e.Name, e => e.Score, new AnagramEqualityComparer())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.GroupBy(e => e.Name, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(e => e.Name, new AnagramEqualityComparer())
             );
         }
 
@@ -285,15 +283,13 @@ namespace System.Linq.Tests
         public void SourceIsNullResultSelectorUsed()
         {
             Record[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    source.GroupBy(
-                        e => e.Name,
-                        e => e.Score,
-                        (k, es) => es.Sum(),
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(
+                    e => e.Name,
+                    e => e.Score,
+                    (k, es) => es.Sum(),
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -301,9 +297,8 @@ namespace System.Linq.Tests
         public void SourceIsNullResultSelectorUsedNoComparer()
         {
             Record[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.GroupBy(e => e.Name, e => e.Score, (k, es) => es.Sum())
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(e => e.Name, e => e.Score, (k, es) => es.Sum())
             );
         }
 
@@ -311,9 +306,8 @@ namespace System.Linq.Tests
         public void SourceIsNullResultSelectorUsedNoComparerOrElementSelector()
         {
             Record[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.GroupBy(e => e.Name, (k, es) => es.Sum(e => e.Score))
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(e => e.Name, (k, es) => es.Sum(e => e.Score))
             );
         }
 
@@ -330,13 +324,11 @@ namespace System.Linq.Tests
                 new Record { Name = "Tim", Score = 25 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.GroupBy(null, e => e.Score, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.GroupBy(null, e => e.Score, new AnagramEqualityComparer())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.GroupBy(null, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.GroupBy(null, new AnagramEqualityComparer())
             );
         }
 
@@ -353,15 +345,13 @@ namespace System.Linq.Tests
                 new Record { Name = "Tim", Score = 25 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    source.GroupBy(
-                        null,
-                        e => e.Score,
-                        (k, es) => es.Sum(),
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.GroupBy(
+                    null,
+                    e => e.Score,
+                    (k, es) => es.Sum(),
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -380,9 +370,8 @@ namespace System.Linq.Tests
 
             Func<Record, string> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.GroupBy(keySelector, e => e.Score, (k, es) => es.Sum())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.GroupBy(keySelector, e => e.Score, (k, es) => es.Sum())
             );
         }
 
@@ -393,14 +382,8 @@ namespace System.Linq.Tests
             int[] element = { 60, -10, 40, 100 };
             var source = key.Zip(element, (k, e) => new Record { Name = k, Score = e });
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    source.GroupBy(
-                        null,
-                        (k, es) => es.Sum(e => e.Score),
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.GroupBy(null, (k, es) => es.Sum(e => e.Score), new AnagramEqualityComparer())
             );
         }
 
@@ -419,9 +402,8 @@ namespace System.Linq.Tests
 
             Func<Record, int> elementSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () => source.GroupBy(e => e.Name, elementSelector, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                source.GroupBy(e => e.Name, elementSelector, new AnagramEqualityComparer())
             );
         }
 
@@ -440,9 +422,8 @@ namespace System.Linq.Tests
 
             Func<Record, int> elementSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () => source.GroupBy(e => e.Name, elementSelector, (k, es) => es.Sum())
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                source.GroupBy(e => e.Name, elementSelector, (k, es) => es.Sum())
             );
         }
 
@@ -461,15 +442,13 @@ namespace System.Linq.Tests
 
             Func<string, IEnumerable<int>, long> resultSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    source.GroupBy(
-                        e => e.Name,
-                        e => e.Score,
-                        resultSelector,
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                source.GroupBy(
+                    e => e.Name,
+                    e => e.Score,
+                    resultSelector,
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -488,9 +467,8 @@ namespace System.Linq.Tests
 
             Func<string, IEnumerable<int>, long> resultSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () => source.GroupBy(e => e.Name, e => e.Score, resultSelector)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                source.GroupBy(e => e.Name, e => e.Score, resultSelector)
             );
         }
 
@@ -509,9 +487,8 @@ namespace System.Linq.Tests
 
             Func<string, IEnumerable<Record>, long> resultSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () => source.GroupBy(e => e.Name, resultSelector)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                source.GroupBy(e => e.Name, resultSelector)
             );
         }
 
@@ -524,9 +501,8 @@ namespace System.Linq.Tests
 
             Func<string, IEnumerable<Record>, long> resultSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () => source.GroupBy(e => e.Name, resultSelector, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                source.GroupBy(e => e.Name, resultSelector, new AnagramEqualityComparer())
             );
         }
 

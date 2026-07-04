@@ -181,16 +181,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                 // Our parent namespace has another symbol in it.  Keep the namespace declaration around, removing only
                 // the existing Program type from it.
                 editor.RemoveNode(typeDeclaration);
-                editor.ReplaceNode(
-                    root,
-                    (current, _) =>
-                    {
-                        var currentRoot = (CompilationUnitSyntax)current;
-                        return currentRoot.WithMembers(
-                            currentRoot.Members.InsertRange(0, globalStatements)
-                        );
-                    }
-                );
+                editor.ReplaceNode(root, (current, _) =>
+                {
+                    var currentRoot = (CompilationUnitSyntax)current;
+                    return currentRoot.WithMembers(
+                        currentRoot.Members.InsertRange(0, globalStatements)
+                    );
+                });
             }
             else if (namespaceDeclaration != null)
             {
@@ -349,9 +346,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
             CancellationToken cancellationToken
         )
         {
-            return declaration.ReplaceNodes(
-                declaration.Variables,
-                (v, _) => ConvertVariable(semanticModel, v, cancellationToken)
+            return declaration.ReplaceNodes(declaration.Variables, (v, _) =>
+                ConvertVariable(semanticModel, v, cancellationToken)
             );
         }
 

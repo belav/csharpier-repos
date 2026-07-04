@@ -39,9 +39,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 contents = MakeReadonly(contents);
             }
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "safeBag",
-                () => contents.AddSafeBag(null)
+            AssertExtensions.Throws<ArgumentNullException>("safeBag", () =>
+                contents.AddSafeBag(null)
             );
         }
 
@@ -67,9 +66,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 contents = MakeReadonly(contents);
             }
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "certificate",
-                () => contents.AddCertificate(null)
+            AssertExtensions.Throws<ArgumentNullException>("certificate", () =>
+                contents.AddCertificate(null)
             );
         }
 
@@ -94,9 +92,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 contents = MakeReadonly(contents);
             }
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => contents.AddKeyUnencrypted(null)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                contents.AddKeyUnencrypted(null)
             );
         }
 
@@ -123,9 +120,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 contents = MakeReadonly(contents);
             }
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "safeContents",
-                () => contents.AddNestedContents(null)
+            AssertExtensions.Throws<ArgumentNullException>("safeContents", () =>
+                contents.AddNestedContents(null)
             );
         }
 
@@ -158,9 +154,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Pkcs12SafeContents newContents = new Pkcs12SafeContents();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "safeContents",
-                () => newContents.AddNestedContents(info.AuthenticatedSafe[0])
+            AssertExtensions.Throws<ArgumentException>("safeContents", () =>
+                newContents.AddNestedContents(info.AuthenticatedSafe[0])
             );
         }
 
@@ -176,14 +171,12 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 contents = MakeReadonly(contents);
             }
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => contents.AddShroudedKey(null, ReadOnlySpan<byte>.Empty, s_pbeParameters)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                contents.AddShroudedKey(null, ReadOnlySpan<byte>.Empty, s_pbeParameters)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => contents.AddShroudedKey(null, Array.Empty<byte>(), s_pbeParameters)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                contents.AddShroudedKey(null, Array.Empty<byte>(), s_pbeParameters)
             );
         }
 
@@ -199,9 +192,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 contents = MakeReadonly(contents);
             }
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => contents.AddShroudedKey(null, ReadOnlySpan<char>.Empty, s_pbeParameters)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                contents.AddShroudedKey(null, ReadOnlySpan<char>.Empty, s_pbeParameters)
             );
         }
 

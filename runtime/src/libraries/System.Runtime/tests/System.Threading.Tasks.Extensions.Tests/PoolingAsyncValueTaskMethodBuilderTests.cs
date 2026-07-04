@@ -287,9 +287,8 @@ namespace System.Threading.Tasks.Tests
         public void NonGeneric_SetStateMachine_InvalidArgument_ThrowsException()
         {
             PoolingAsyncValueTaskMethodBuilder b = PoolingAsyncValueTaskMethodBuilder.Create();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "stateMachine",
-                () => b.SetStateMachine(null)
+            AssertExtensions.Throws<ArgumentNullException>("stateMachine", () =>
+                b.SetStateMachine(null)
             );
         }
 
@@ -298,9 +297,8 @@ namespace System.Threading.Tasks.Tests
         {
             PoolingAsyncValueTaskMethodBuilder<int> b =
                 PoolingAsyncValueTaskMethodBuilder<int>.Create();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "stateMachine",
-                () => b.SetStateMachine(null)
+            AssertExtensions.Throws<ArgumentNullException>("stateMachine", () =>
+                b.SetStateMachine(null)
             );
         }
 

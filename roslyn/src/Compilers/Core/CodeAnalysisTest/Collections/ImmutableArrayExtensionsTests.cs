@@ -307,9 +307,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var roa = new string[] { "one:1", "two:2", "three:3" }.AsImmutableOrNull();
 
             // Call extension method directly to resolve the ambiguity with EnumerableExtensions.ToDictionary
-            var dict = System.Linq.ImmutableArrayExtensions.ToDictionary(
-                roa,
-                s => s.Split(':').First()
+            var dict = System.Linq.ImmutableArrayExtensions.ToDictionary(roa, s =>
+                s.Split(':').First()
             );
             Assert.Equal("one:1", dict["one"]);
             Assert.Equal("two:2", dict["two"]);
@@ -485,10 +484,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var single3 = ImmutableArray.Create(13);
             Assert.True(
                 single3.SequenceEqual(
-                    single1.ZipAsArray(
-                        single2,
-                        2,
-                        (item1, item2, i, arg) => item1 + item2 + i + arg
+                    single1.ZipAsArray(single2, 2, (item1, item2, i, arg) =>
+                        item1 + item2 + i + arg
                     )
                 )
             );
@@ -507,10 +504,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var triple3 = ImmutableArray.Create(13, 16, 19);
             Assert.True(
                 triple3.SequenceEqual(
-                    triple1.ZipAsArray(
-                        triple2,
-                        2,
-                        (item1, item2, i, arg) => item1 + item2 + i + arg
+                    triple1.ZipAsArray(triple2, 2, (item1, item2, i, arg) =>
+                        item1 + item2 + i + arg
                     )
                 )
             );

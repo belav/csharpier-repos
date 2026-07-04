@@ -1248,10 +1248,8 @@ public class ChangeTrackerTest
         var cache = context.GetService<IValueGeneratorCache>();
 
         var generator = (ResettableValueGenerator)
-            cache.GetOrAdd(
-                property,
-                property.DeclaringType,
-                (p, e) => new ResettableValueGenerator()
+            cache.GetOrAdd(property, property.DeclaringType, (p, e) =>
+                new ResettableValueGenerator()
             );
 
         generator.Reset(generateTemporaryValues);
@@ -3615,16 +3613,13 @@ public class ChangeTrackerTest
                 CoreStrings.TrackingTypeMismatch(nameof(OfThis), "Dreams.Are#AreMade"),
                 Assert
                     .Throws<InvalidOperationException>(() =>
-                        context.ChangeTracker.TrackGraph(
-                            dreams,
-                            e =>
-                            {
-                                e.Entry.State =
-                                    e.Entry.IsKeySet && !e.Entry.Metadata.IsOwned()
-                                        ? EntityState.Unchanged
-                                        : EntityState.Added;
-                            }
-                        )
+                        context.ChangeTracker.TrackGraph(dreams, e =>
+                        {
+                            e.Entry.State =
+                                e.Entry.IsKeySet && !e.Entry.Metadata.IsOwned()
+                                    ? EntityState.Unchanged
+                                    : EntityState.Added;
+                        })
                     )
                     .Message
             );

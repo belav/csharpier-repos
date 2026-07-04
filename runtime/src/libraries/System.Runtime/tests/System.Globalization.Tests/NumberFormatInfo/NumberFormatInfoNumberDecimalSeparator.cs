@@ -27,10 +27,8 @@ namespace System.Globalization.Tests
         public void NumberDecimalSeparator_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "NumberDecimalSeparator",
-                () => format.NumberDecimalSeparator = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "NumberDecimalSeparator", () =>
+                format.NumberDecimalSeparator = null
             );
         }
 
@@ -38,10 +36,8 @@ namespace System.Globalization.Tests
         public void NumberDecimalSeparator_SetEmpty_ThrowsArgumentException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => format.NumberDecimalSeparator = ""
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                format.NumberDecimalSeparator = ""
             );
         }
 

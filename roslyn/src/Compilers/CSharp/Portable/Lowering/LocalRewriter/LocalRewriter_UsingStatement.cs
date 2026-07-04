@@ -644,11 +644,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(
                     method
                         .Parameters.AsSpan()[1..]
-                        .All(
-                            assertParametersAreOptional,
-                            (p, assertOptional) =>
-                                (p.IsOptional || p.IsParams || !assertOptional)
-                                && p.RefKind == RefKind.None
+                        .All(assertParametersAreOptional, (p, assertOptional) =>
+                            (p.IsOptional || p.IsParams || !assertOptional)
+                            && p.RefKind == RefKind.None
                         )
                 );
                 Debug.Assert(

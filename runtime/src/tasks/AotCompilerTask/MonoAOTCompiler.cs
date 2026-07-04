@@ -788,9 +788,8 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
         if (DirectPInvokes.Length > 0)
         {
             var directPInvokesSB = new StringBuilder("direct-pinvokes=");
-            Array.ForEach(
-                DirectPInvokes,
-                directPInvokeItem => directPInvokesSB.Append($"{directPInvokeItem.ItemSpec};")
+            Array.ForEach(DirectPInvokes, directPInvokeItem =>
+                directPInvokesSB.Append($"{directPInvokeItem.ItemSpec};")
             );
             aotArgs.Add(directPInvokesSB.ToString());
         }
@@ -798,10 +797,8 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
         if (DirectPInvokeLists.Length > 0)
         {
             var directPInvokeListsSB = new StringBuilder("direct-pinvoke-lists=");
-            Array.ForEach(
-                DirectPInvokeLists,
-                directPInvokeListItem =>
-                    directPInvokeListsSB.Append($"{directPInvokeListItem.GetMetadata("FullPath")};")
+            Array.ForEach(DirectPInvokeLists, directPInvokeListItem =>
+                directPInvokeListsSB.Append($"{directPInvokeListItem.GetMetadata("FullPath")};")
             );
             aotArgs.Add(directPInvokeListsSB.ToString());
         }

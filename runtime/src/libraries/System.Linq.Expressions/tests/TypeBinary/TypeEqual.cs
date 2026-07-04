@@ -10,9 +10,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullExpression()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => Expression.TypeEqual(null, typeof(int))
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                Expression.TypeEqual(null, typeof(int))
             );
         }
 
@@ -20,9 +19,8 @@ namespace System.Linq.Expressions.Tests
         public void NullType()
         {
             Expression exp = Expression.Constant(0);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Expression.TypeEqual(exp, null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Expression.TypeEqual(exp, null)
             );
         }
 
@@ -31,9 +29,8 @@ namespace System.Linq.Expressions.Tests
         {
             Expression exp = Expression.Constant(0);
             Type byRef = typeof(int).MakeByRefType();
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.TypeEqual(exp, byRef)
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.TypeEqual(exp, byRef)
             );
         }
 
@@ -52,9 +49,8 @@ namespace System.Linq.Expressions.Tests
         public void UnreadableExpression()
         {
             Expression exp = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.TypeEqual(exp, typeof(int))
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.TypeEqual(exp, typeof(int))
             );
         }
 

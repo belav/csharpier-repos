@@ -1250,10 +1250,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 return extensionManager.PerformFunction(
                     fixer,
                     () =>
-                        ImmutableInterlocked.GetOrAdd(
-                            ref _fixerToFixableIdsMap,
-                            fixer,
-                            f => GetAndTestFixableDiagnosticIds(f)
+                        ImmutableInterlocked.GetOrAdd(ref _fixerToFixableIdsMap, fixer, f =>
+                            GetAndTestFixableDiagnosticIds(f)
                         ),
                     defaultValue: ImmutableArray<DiagnosticId>.Empty
                 );
@@ -1261,10 +1259,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
             try
             {
-                return ImmutableInterlocked.GetOrAdd(
-                    ref _fixerToFixableIdsMap,
-                    fixer,
-                    f => GetAndTestFixableDiagnosticIds(f)
+                return ImmutableInterlocked.GetOrAdd(ref _fixerToFixableIdsMap, fixer, f =>
+                    GetAndTestFixableDiagnosticIds(f)
                 );
             }
             catch (Exception e) when (e is not OperationCanceledException)
@@ -1457,9 +1453,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             // TODO (https://github.com/dotnet/roslyn/issues/4932): Don't restrict CodeFixes in Interactive
             return document.Project.Solution.WorkspaceKind == WorkspaceKind.Interactive
                 ? ImmutableDictionary<DiagnosticId, ImmutableArray<CodeFixProvider>>.Empty
-                : _projectFixersMap.GetValue(
-                    document.Project.AnalyzerReferences,
-                    _ => ComputeProjectFixers(document)
+                : _projectFixersMap.GetValue(document.Project.AnalyzerReferences, _ =>
+                    ComputeProjectFixers(document)
                 );
         }
 

@@ -74,9 +74,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
 
             var editor = new SyntaxEditor(root, generator);
 
-            editor.ReplaceNode(
-                ifOrElseIf,
-                (currentNode, _) => ifGenerator.WithCondition(currentNode, leftCondition)
+            editor.ReplaceNode(ifOrElseIf, (currentNode, _) =>
+                ifGenerator.WithCondition(currentNode, leftCondition)
             );
 
             if (
@@ -107,9 +106,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 if (!blockFacts.IsExecutableBlock(ifOrElseIf.Parent))
                 {
                     // In order to insert a new statement, we have to be inside a block.
-                    editor.ReplaceNode(
-                        ifOrElseIf,
-                        (currentNode, _) => generator.ScopeBlock(ImmutableArray.Create(currentNode))
+                    editor.ReplaceNode(ifOrElseIf, (currentNode, _) =>
+                        generator.ScopeBlock(ImmutableArray.Create(currentNode))
                     );
                 }
 

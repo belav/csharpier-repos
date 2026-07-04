@@ -249,16 +249,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 {
                     var xMembers = x.GetValidAnonymousTypeProperties();
 
-                    return xMembers.Aggregate(
-                        currentHash,
-                        (a, p) =>
-                        {
-                            return Hash.Combine(
-                                p.Name,
-                                Hash.Combine(p.IsReadOnly, GetHashCode(p.Type, a))
-                            );
-                        }
-                    );
+                    return xMembers.Aggregate(currentHash, (a, p) =>
+                    {
+                        return Hash.Combine(
+                            p.Name,
+                            Hash.Combine(p.IsReadOnly, GetHashCode(p.Type, a))
+                        );
+                    });
                 }
             }
 

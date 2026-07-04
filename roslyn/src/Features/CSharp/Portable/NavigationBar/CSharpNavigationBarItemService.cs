@@ -289,26 +289,17 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             if (symbol.Kind == SymbolKind.Field)
             {
                 return symbol.ContainingType.TypeKind == TypeKind.Enum
-                    ? GetSymbolLocation(
-                        solution,
-                        symbol,
-                        tree,
-                        static reference => GetEnumMemberSpan(reference)
+                    ? GetSymbolLocation(solution, symbol, tree, static reference =>
+                        GetEnumMemberSpan(reference)
                     )
-                    : GetSymbolLocation(
-                        solution,
-                        symbol,
-                        tree,
-                        static reference => GetFieldReferenceSpan(reference)
+                    : GetSymbolLocation(solution, symbol, tree, static reference =>
+                        GetFieldReferenceSpan(reference)
                     );
             }
             else
             {
-                return GetSymbolLocation(
-                    solution,
-                    symbol,
-                    tree,
-                    static reference => reference.Span
+                return GetSymbolLocation(solution, symbol, tree, static reference =>
+                    reference.Span
                 );
             }
         }

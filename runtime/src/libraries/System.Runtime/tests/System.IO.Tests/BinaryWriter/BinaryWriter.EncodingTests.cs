@@ -249,17 +249,13 @@ namespace System.IO.Tests
 
         private static string GenerateLargeUnicodeString(int charCount)
         {
-            return string.Create(
-                charCount,
-                (object)null,
-                static (buffer, _) =>
+            return string.Create(charCount, (object)null, static (buffer, _) =>
+            {
+                for (int i = 0; i < buffer.Length; i++)
                 {
-                    for (int i = 0; i < buffer.Length; i++)
-                    {
-                        buffer[i] = (char)((i % 0xF00) + 0x100); // U+0100..U+0FFF (mix of 2-byte and 3-byte chars)
-                    }
+                    buffer[i] = (char)((i % 0xF00) + 0x100); // U+0100..U+0FFF (mix of 2-byte and 3-byte chars)
                 }
-            );
+            });
         }
 
         private static int Get7BitEncodedIntByteLength(uint value) =>

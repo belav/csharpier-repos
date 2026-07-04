@@ -279,14 +279,11 @@ namespace System.Runtime.InteropServices.JavaScript
             else if (typeof(Task<object>) == type)
             {
                 Task<object>? val = value as Task<object>;
-                ToJS<object>(
-                    val,
-                    (ref JSMarshalerArgument arg, object value) =>
-                    {
-                        object? valueRef = value;
-                        arg.ToJS(valueRef);
-                    }
-                );
+                ToJS<object>(val, (ref JSMarshalerArgument arg, object value) =>
+                {
+                    object? valueRef = value;
+                    arg.ToJS(valueRef);
+                });
             }
             else if (typeof(Task).IsAssignableFrom(type))
             {

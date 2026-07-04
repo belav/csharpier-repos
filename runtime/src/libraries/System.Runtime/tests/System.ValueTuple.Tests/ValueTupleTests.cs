@@ -397,9 +397,8 @@ namespace System.Tests
             internal void TestCompareToThrows()
             {
                 ValueTuple<int> ValueTupleB = new ValueTuple<int>((int)10000);
-                AssertExtensions.Throws<ArgumentException>(
-                    "other",
-                    () => ((IComparable)valueTuple).CompareTo(ValueTupleB)
+                AssertExtensions.Throws<ArgumentException>("other", () =>
+                    ((IComparable)valueTuple).CompareTo(ValueTupleB)
                 );
             }
         }
@@ -2423,9 +2422,8 @@ namespace System.Tests
             Assert.Equal(0, a.CompareTo(new ValueTuple()));
 
             Assert.Equal(1, ((IStructuralComparable)a).CompareTo(null, DummyTestComparer.Instance));
-            AssertExtensions.Throws<ArgumentException>(
-                "other",
-                () => ((IStructuralComparable)a).CompareTo("string", DummyTestComparer.Instance)
+            AssertExtensions.Throws<ArgumentException>("other", () =>
+                ((IStructuralComparable)a).CompareTo("string", DummyTestComparer.Instance)
             );
 
             Assert.Equal(
@@ -2450,9 +2448,8 @@ namespace System.Tests
             IStructuralComparable sc = (IStructuralComparable)c;
 
             Assert.Equal(1, sc.CompareTo(null, DummyTestComparer.Instance));
-            AssertExtensions.Throws<ArgumentException>(
-                "other",
-                () => ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
+            AssertExtensions.Throws<ArgumentException>("other", () =>
+                ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
             );
 
             Assert.Equal(1, sc.CompareTo(ValueTuple.Create(3), TestComparer.Instance));
@@ -2504,9 +2501,8 @@ namespace System.Tests
             IStructuralComparable sc = (IStructuralComparable)c;
 
             Assert.Equal(1, sc.CompareTo(null, DummyTestComparer.Instance));
-            AssertExtensions.Throws<ArgumentException>(
-                "other",
-                () => ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
+            AssertExtensions.Throws<ArgumentException>("other", () =>
+                ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
             );
 
             Assert.Equal(1, sc.CompareTo(ValueTuple.Create(1, 3), TestComparer.Instance));
@@ -2567,9 +2563,8 @@ namespace System.Tests
             IStructuralComparable sc = (IStructuralComparable)c;
 
             Assert.Equal(1, sc.CompareTo(null, DummyTestComparer.Instance));
-            AssertExtensions.Throws<ArgumentException>(
-                "other",
-                () => ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
+            AssertExtensions.Throws<ArgumentException>("other", () =>
+                ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
             );
 
             Assert.Equal(1, sc.CompareTo(ValueTuple.Create(1, 3, 1), TestComparer.Instance));
@@ -2640,9 +2635,8 @@ namespace System.Tests
             IStructuralComparable sc = (IStructuralComparable)c;
 
             Assert.Equal(1, sc.CompareTo(null, DummyTestComparer.Instance));
-            AssertExtensions.Throws<ArgumentException>(
-                "other",
-                () => ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
+            AssertExtensions.Throws<ArgumentException>("other", () =>
+                ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
             );
 
             Assert.Equal(1, sc.CompareTo(ValueTuple.Create(3, 1, 1, 1), TestComparer.Instance));
@@ -2724,9 +2718,8 @@ namespace System.Tests
             IStructuralComparable sc = (IStructuralComparable)c;
 
             Assert.Equal(1, sc.CompareTo(null, DummyTestComparer.Instance));
-            AssertExtensions.Throws<ArgumentException>(
-                "other",
-                () => ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
+            AssertExtensions.Throws<ArgumentException>("other", () =>
+                ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
             );
 
             Assert.Equal(1, sc.CompareTo(ValueTuple.Create(3, 1, 1, 1, 1), TestComparer.Instance));
@@ -2830,9 +2823,8 @@ namespace System.Tests
             IStructuralComparable sc = (IStructuralComparable)c;
 
             Assert.Equal(1, sc.CompareTo(null, DummyTestComparer.Instance));
-            AssertExtensions.Throws<ArgumentException>(
-                "other",
-                () => ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
+            AssertExtensions.Throws<ArgumentException>("other", () =>
+                ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
             );
 
             Assert.Equal(
@@ -2980,9 +2972,8 @@ namespace System.Tests
             IStructuralComparable sc = (IStructuralComparable)c;
 
             Assert.Equal(1, sc.CompareTo(null, DummyTestComparer.Instance));
-            AssertExtensions.Throws<ArgumentException>(
-                "other",
-                () => ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
+            AssertExtensions.Throws<ArgumentException>("other", () =>
+                ((IStructuralComparable)sc).CompareTo("string", DummyTestComparer.Instance)
             );
 
             Assert.Equal(
@@ -3236,9 +3227,8 @@ namespace System.Tests
 
             IStructuralComparable sc = t;
             Assert.Equal(1, sc.CompareTo(null, DummyTestComparer.Instance));
-            AssertExtensions.Throws<ArgumentException>(
-                "other",
-                () => sc.CompareTo("string", DummyTestComparer.Instance)
+            AssertExtensions.Throws<ArgumentException>("other", () =>
+                sc.CompareTo("string", DummyTestComparer.Instance)
             );
 
             Assert.Equal(

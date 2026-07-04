@@ -210,12 +210,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineDefaultConstructor_StaticVirtual_ThrowsArgumentException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    type.DefineDefaultConstructor(
-                        MethodAttributes.Virtual | MethodAttributes.Static
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                type.DefineDefaultConstructor(MethodAttributes.Virtual | MethodAttributes.Static)
             );
         }
     }

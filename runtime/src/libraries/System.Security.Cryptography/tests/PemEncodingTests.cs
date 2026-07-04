@@ -42,18 +42,16 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void GetEncodedSize_LabelLength_Overflow()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "labelLength",
-                () => PemEncoding.GetEncodedSize(labelLength: 1_073_741_809, dataLength: 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("labelLength", () =>
+                PemEncoding.GetEncodedSize(labelLength: 1_073_741_809, dataLength: 0)
             );
         }
 
         [Fact]
         public static void GetEncodedSize_DataLength_Overflow()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "dataLength",
-                () => PemEncoding.GetEncodedSize(labelLength: 0, dataLength: 1_585_834_054)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("dataLength", () =>
+                PemEncoding.GetEncodedSize(labelLength: 0, dataLength: 1_585_834_054)
             );
         }
 
@@ -68,18 +66,16 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void GetEncodedSize_DataLength_Negative()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "dataLength",
-                () => PemEncoding.GetEncodedSize(labelLength: 0, dataLength: -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("dataLength", () =>
+                PemEncoding.GetEncodedSize(labelLength: 0, dataLength: -1)
             );
         }
 
         [Fact]
         public static void GetEncodedSize_LabelLength_Negative()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "labelLength",
-                () => PemEncoding.GetEncodedSize(labelLength: -1, dataLength: 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("labelLength", () =>
+                PemEncoding.GetEncodedSize(labelLength: -1, dataLength: 0)
             );
         }
 
@@ -437,27 +433,24 @@ namespace System.Security.Cryptography.Tests
         public static void TryWrite_Throws_InvalidLabel()
         {
             char[] buffer = new char[50];
-            AssertExtensions.Throws<ArgumentException>(
-                "label",
-                () => PemEncoding.TryWrite("\n", default, buffer, out _)
+            AssertExtensions.Throws<ArgumentException>("label", () =>
+                PemEncoding.TryWrite("\n", default, buffer, out _)
             );
         }
 
         [Fact]
         public static void Write_Throws_InvalidLabel()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "label",
-                () => PemEncoding.Write("\n", default)
+            AssertExtensions.Throws<ArgumentException>("label", () =>
+                PemEncoding.Write("\n", default)
             );
         }
 
         [Fact]
         public static void WriteString_Throws_InvalidLabel()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "label",
-                () => PemEncoding.WriteString("\n", default)
+            AssertExtensions.Throws<ArgumentException>("label", () =>
+                PemEncoding.WriteString("\n", default)
             );
         }
 

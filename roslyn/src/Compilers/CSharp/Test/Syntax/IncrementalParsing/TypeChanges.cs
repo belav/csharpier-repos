@@ -27,16 +27,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
                               public construct(){}   
                               }";
 
-            ParseAndVerify(
-                oldText,
-                validator: oldTree =>
-                {
-                    var newTree = oldTree.WithReplace(16, "construct", "~construct");
-                    var classType =
-                        newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
-                    Assert.IsType<DestructorDeclarationSyntax>(classType.Members[0]);
-                }
-            );
+            ParseAndVerify(oldText, validator: oldTree =>
+            {
+                var newTree = oldTree.WithReplace(16, "construct", "~construct");
+                var classType =
+                    newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
+                Assert.IsType<DestructorDeclarationSyntax>(classType.Members[0]);
+            });
         }
 
         [Fact]
@@ -47,16 +44,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
                               public M(){}   
                               }";
 
-            ParseAndVerify(
-                oldText,
-                validator: oldTree =>
-                {
-                    var newTree = oldTree.WithReplace(16, "M", "construct");
-                    var classType =
-                        newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
-                    Assert.IsType<ConstructorDeclarationSyntax>(classType.Members[0]);
-                }
-            );
+            ParseAndVerify(oldText, validator: oldTree =>
+            {
+                var newTree = oldTree.WithReplace(16, "M", "construct");
+                var classType =
+                    newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
+                Assert.IsType<ConstructorDeclarationSyntax>(classType.Members[0]);
+            });
         }
 
         [Fact]
@@ -67,16 +61,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
                               public construct(){}   
                               }";
 
-            ParseAndVerify(
-                oldText,
-                validator: oldTree =>
-                {
-                    var newTree = oldTree.WithReplace(16, "construct", "M");
-                    var classType =
-                        newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
-                    Assert.IsType<ConstructorDeclarationSyntax>(classType.Members[0]);
-                }
-            );
+            ParseAndVerify(oldText, validator: oldTree =>
+            {
+                var newTree = oldTree.WithReplace(16, "construct", "M");
+                var classType =
+                    newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
+                Assert.IsType<ConstructorDeclarationSyntax>(classType.Members[0]);
+            });
         }
 
         [Fact]
@@ -87,16 +78,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
                               public ~construct(){}   
                               }";
 
-            ParseAndVerify(
-                oldText,
-                validator: oldTree =>
-                {
-                    var newTree = oldTree.WithReplace(16, "~construct", "construct");
-                    var classType =
-                        newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
-                    Assert.IsType<ConstructorDeclarationSyntax>(classType.Members[0]);
-                }
-            );
+            ParseAndVerify(oldText, validator: oldTree =>
+            {
+                var newTree = oldTree.WithReplace(16, "~construct", "construct");
+                var classType =
+                    newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
+                Assert.IsType<ConstructorDeclarationSyntax>(classType.Members[0]);
+            });
         }
 
         [Fact]
@@ -107,20 +95,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
                                 public int B {get {} }
                               }";
 
-            ParseAndVerify(
-                oldText,
-                validator: oldTree =>
-                {
-                    var newTree = oldTree.WithReplace(16, "get", "set");
-                    var classType =
-                        newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
-                    var propertyType = classType.Members[0] as PropertyDeclarationSyntax;
-                    Assert.Equal(
-                        SyntaxKind.SetAccessorDeclaration,
-                        propertyType.AccessorList.Accessors[0].Kind()
-                    );
-                }
-            );
+            ParseAndVerify(oldText, validator: oldTree =>
+            {
+                var newTree = oldTree.WithReplace(16, "get", "set");
+                var classType =
+                    newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
+                var propertyType = classType.Members[0] as PropertyDeclarationSyntax;
+                Assert.Equal(
+                    SyntaxKind.SetAccessorDeclaration,
+                    propertyType.AccessorList.Accessors[0].Kind()
+                );
+            });
         }
 
         [Fact]
@@ -131,20 +116,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
                                 public int B {set {} }
                               }";
 
-            ParseAndVerify(
-                oldText,
-                validator: oldTree =>
-                {
-                    var newTree = oldTree.WithReplace(16, "set", "get");
-                    var classType =
-                        newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
-                    var propertyType = classType.Members[0] as PropertyDeclarationSyntax;
-                    Assert.Equal(
-                        SyntaxKind.GetAccessorDeclaration,
-                        propertyType.AccessorList.Accessors[0].Kind()
-                    );
-                }
-            );
+            ParseAndVerify(oldText, validator: oldTree =>
+            {
+                var newTree = oldTree.WithReplace(16, "set", "get");
+                var classType =
+                    newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
+                var propertyType = classType.Members[0] as PropertyDeclarationSyntax;
+                Assert.Equal(
+                    SyntaxKind.GetAccessorDeclaration,
+                    propertyType.AccessorList.Accessors[0].Kind()
+                );
+            });
         }
 
         [Fact]
@@ -155,20 +137,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
                                 public event B b {add {} }
                               }";
 
-            ParseAndVerify(
-                oldText,
-                validator: oldTree =>
-                {
-                    var newTree = oldTree.WithReplace(16, "add", "remove");
-                    var classType =
-                        newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
-                    var propertyType = classType.Members[0] as EventDeclarationSyntax;
-                    Assert.Equal(
-                        SyntaxKind.RemoveAccessorDeclaration,
-                        propertyType.AccessorList.Accessors[0].Kind()
-                    );
-                }
-            );
+            ParseAndVerify(oldText, validator: oldTree =>
+            {
+                var newTree = oldTree.WithReplace(16, "add", "remove");
+                var classType =
+                    newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
+                var propertyType = classType.Members[0] as EventDeclarationSyntax;
+                Assert.Equal(
+                    SyntaxKind.RemoveAccessorDeclaration,
+                    propertyType.AccessorList.Accessors[0].Kind()
+                );
+            });
         }
 
         [Fact]
@@ -179,20 +158,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
                                 public event B b {remove {} }
                               }";
 
-            ParseAndVerify(
-                oldText,
-                validator: oldTree =>
-                {
-                    var newTree = oldTree.WithReplace(16, "remove", "add");
-                    var classType =
-                        newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
-                    var propertyType = classType.Members[0] as EventDeclarationSyntax;
-                    Assert.Equal(
-                        SyntaxKind.AddAccessorDeclaration,
-                        propertyType.AccessorList.Accessors[0].Kind()
-                    );
-                }
-            );
+            ParseAndVerify(oldText, validator: oldTree =>
+            {
+                var newTree = oldTree.WithReplace(16, "remove", "add");
+                var classType =
+                    newTree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax;
+                var propertyType = classType.Members[0] as EventDeclarationSyntax;
+                Assert.Equal(
+                    SyntaxKind.AddAccessorDeclaration,
+                    propertyType.AccessorList.Accessors[0].Kind()
+                );
+            });
         }
 
         #region Helpers

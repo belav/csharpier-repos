@@ -79,9 +79,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             Assert.True(
                 _mismatchedOptions.Count == 0,
-                _mismatchedOptions.Aggregate(
-                    "Mismatched calls: ",
-                    (s, m) => s + "\r\nfrom : " + m.Key + ", options :" + m.Value
+                _mismatchedOptions.Aggregate("Mismatched calls: ", (s, m) =>
+                    s + "\r\nfrom : " + m.Key + ", options :" + m.Value
                 )
             );
         }

@@ -25,9 +25,8 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipThrowsOnNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<DateTime>)null).Skip(3)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<DateTime>)null).Skip(3)
             );
         }
 

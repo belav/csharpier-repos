@@ -68,9 +68,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(SearchScope.Subtree + 1)]
         public void Ctor_InvalidScope_ThrowsInvalidEnumArgumentException(SearchScope searchScope)
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "value",
-                () => new SearchRequest("DistinguishedName", "LdapFilter", searchScope)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () =>
+                new SearchRequest("DistinguishedName", "LdapFilter", searchScope)
             );
         }
 
@@ -111,9 +110,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Aliases_SetInvalid_ThrowsInvalidEnumArgumentException(DereferenceAlias aliases)
         {
             var request = new SearchRequest();
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "value",
-                () => request.Aliases = aliases
+            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () =>
+                request.Aliases = aliases
             );
         }
 
@@ -144,9 +142,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void TimeLimit_SetInvalid_ThrowsArgumentException(long totalSeconds)
         {
             var request = new SearchRequest();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => request.TimeLimit = TimeSpan.FromSeconds(totalSeconds)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                request.TimeLimit = TimeSpan.FromSeconds(totalSeconds)
             );
         }
 

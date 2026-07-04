@@ -266,9 +266,8 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
                     var baseFieldName = fieldNameRule
                         .NamingStyle.MakeCompliant(parameter.Name)
                         .First();
-                    var fieldName = NameGenerator.GenerateUniqueName(
-                        baseFieldName,
-                        n => namedType.Name != n && !namedType.GetMembers(n).Any()
+                    var fieldName = NameGenerator.GenerateUniqueName(baseFieldName, n =>
+                        namedType.Name != n && !namedType.GetMembers(n).Any()
                     );
 
                     var isWrittenTo = parameterReferences[parameter]
@@ -351,11 +350,9 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
         void RemovePrimaryConstructorBaseTypeArgumentList()
         {
             if (baseType != null)
-                mainDocumentEditor.ReplaceNode(
-                    baseType,
-                    (current, _) =>
-                        SimpleBaseType(((PrimaryConstructorBaseTypeSyntax)current).Type)
-                            .WithTriviaFrom(baseType)
+                mainDocumentEditor.ReplaceNode(baseType, (current, _) =>
+                    SimpleBaseType(((PrimaryConstructorBaseTypeSyntax)current).Type)
+                        .WithTriviaFrom(baseType)
                 );
         }
 
@@ -394,87 +391,78 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
 
         void AddNewFields()
         {
-            mainDocumentEditor.ReplaceNode(
-                typeDeclaration,
-                (current, _) =>
-                {
-                    var currentTypeDeclaration = (TypeDeclarationSyntax)current;
-                    var fieldsInOrder = parameters
-                        .Select(p =>
-                            parameterToSynthesizedFields.TryGetValue(p, out var field)
-                                ? field
-                                : null
-                        )
-                        .WhereNotNull();
-                    var codeGenService =
-                        document.GetRequiredLanguageService<ICodeGenerationService>();
-                    return codeGenService.AddMembers(
-                        currentTypeDeclaration,
-                        fieldsInOrder,
-                        contextInfo,
-                        cancellationToken
-                    );
-                }
-            );
+            mainDocumentEditor.ReplaceNode(typeDeclaration, (current, _) =>
+            {
+                var currentTypeDeclaration = (TypeDeclarationSyntax)current;
+                var fieldsInOrder = parameters
+                    .Select(p =>
+                        parameterToSynthesizedFields.TryGetValue(p, out var field) ? field : null
+                    )
+                    .WhereNotNull();
+                var codeGenService = document.GetRequiredLanguageService<ICodeGenerationService>();
+                return codeGenService.AddMembers(
+                    currentTypeDeclaration,
+                    fieldsInOrder,
+                    contextInfo,
+                    cancellationToken
+                );
+            });
         }
 
         void AddConstructorDeclaration()
         {
-            mainDocumentEditor.ReplaceNode(
-                typeDeclaration,
-                (current, _) =>
+            mainDocumentEditor.ReplaceNode(typeDeclaration, (current, _) =>
+            {
+                // Move any <param> tags from the type decl to the constructor decl.
+                var currentTypeDeclaration = (TypeDeclarationSyntax)current;
+                currentTypeDeclaration = RemoveParamXmlElements(currentTypeDeclaration);
+
+                var constructorDeclaration = CreateConstructorDeclaration()
+                    .WithAdditionalAnnotations(constructorAnnotation);
+
+                // If there is an existing non-static constructor, place it before that
+                var firstConstructorIndex = currentTypeDeclaration.Members.IndexOf(m =>
+                    m is ConstructorDeclarationSyntax c
+                    && !c.Modifiers.Any(SyntaxKind.StaticKeyword)
+                );
+                if (firstConstructorIndex >= 0)
                 {
-                    // Move any <param> tags from the type decl to the constructor decl.
-                    var currentTypeDeclaration = (TypeDeclarationSyntax)current;
-                    currentTypeDeclaration = RemoveParamXmlElements(currentTypeDeclaration);
-
-                    var constructorDeclaration = CreateConstructorDeclaration()
-                        .WithAdditionalAnnotations(constructorAnnotation);
-
-                    // If there is an existing non-static constructor, place it before that
-                    var firstConstructorIndex = currentTypeDeclaration.Members.IndexOf(m =>
-                        m is ConstructorDeclarationSyntax c
-                        && !c.Modifiers.Any(SyntaxKind.StaticKeyword)
-                    );
-                    if (firstConstructorIndex >= 0)
-                    {
-                        return currentTypeDeclaration.WithMembers(
-                            currentTypeDeclaration.Members.Insert(
-                                firstConstructorIndex,
-                                constructorDeclaration
-                            )
-                        );
-                    }
-
-                    // No constructors.  Place after any fields if present, or any properties if there are no fields.
-                    var lastFieldOrProperty = currentTypeDeclaration.Members.LastIndexOf(m =>
-                        m is FieldDeclarationSyntax
-                    );
-                    if (lastFieldOrProperty < 0)
-                        lastFieldOrProperty = currentTypeDeclaration.Members.LastIndexOf(m =>
-                            m is PropertyDeclarationSyntax
-                        );
-
-                    if (lastFieldOrProperty >= 0)
-                    {
-                        constructorDeclaration = constructorDeclaration.WithPrependedLeadingTrivia(
-                            ElasticCarriageReturnLineFeed
-                        );
-
-                        return currentTypeDeclaration.WithMembers(
-                            currentTypeDeclaration.Members.Insert(
-                                lastFieldOrProperty + 1,
-                                constructorDeclaration
-                            )
-                        );
-                    }
-
-                    // Nothing at all.  Just place the construct at the top of the type.
                     return currentTypeDeclaration.WithMembers(
-                        currentTypeDeclaration.Members.Insert(0, constructorDeclaration)
+                        currentTypeDeclaration.Members.Insert(
+                            firstConstructorIndex,
+                            constructorDeclaration
+                        )
                     );
                 }
-            );
+
+                // No constructors.  Place after any fields if present, or any properties if there are no fields.
+                var lastFieldOrProperty = currentTypeDeclaration.Members.LastIndexOf(m =>
+                    m is FieldDeclarationSyntax
+                );
+                if (lastFieldOrProperty < 0)
+                    lastFieldOrProperty = currentTypeDeclaration.Members.LastIndexOf(m =>
+                        m is PropertyDeclarationSyntax
+                    );
+
+                if (lastFieldOrProperty >= 0)
+                {
+                    constructorDeclaration = constructorDeclaration.WithPrependedLeadingTrivia(
+                        ElasticCarriageReturnLineFeed
+                    );
+
+                    return currentTypeDeclaration.WithMembers(
+                        currentTypeDeclaration.Members.Insert(
+                            lastFieldOrProperty + 1,
+                            constructorDeclaration
+                        )
+                    );
+                }
+
+                // Nothing at all.  Just place the construct at the top of the type.
+                return currentTypeDeclaration.WithMembers(
+                    currentTypeDeclaration.Members.Insert(0, constructorDeclaration)
+                );
+            });
         }
 
         async Task RewritePrimaryConstructorParameterReferencesAsync()
@@ -592,25 +580,20 @@ internal sealed partial class ConvertPrimaryToRegularConstructorCodeRefactoringP
             )
             {
                 var indentation = constructorLeadingWhitespace[typeLeadingWhitespace.Length..];
-                return list.ReplaceNodes(
-                    getElements(list),
-                    (p, _) =>
+                return list.ReplaceNodes(getElements(list), (p, _) =>
+                {
+                    var elementLeadingWhitespace = GetLeadingWhitespace(p);
+                    if (
+                        elementLeadingWhitespace.Length > 0
+                        && elementLeadingWhitespace.StartsWith(typeLeadingWhitespace)
+                    )
                     {
-                        var elementLeadingWhitespace = GetLeadingWhitespace(p);
-                        if (
-                            elementLeadingWhitespace.Length > 0
-                            && elementLeadingWhitespace.StartsWith(typeLeadingWhitespace)
-                        )
-                        {
-                            var leadingTrivia = p.GetLeadingTrivia();
-                            return p.WithLeadingTrivia(
-                                leadingTrivia.Concat(Whitespace(indentation))
-                            );
-                        }
-
-                        return p;
+                        var leadingTrivia = p.GetLeadingTrivia();
+                        return p.WithLeadingTrivia(leadingTrivia.Concat(Whitespace(indentation)));
                     }
-                );
+
+                    return p;
+                });
             }
 
             return list;

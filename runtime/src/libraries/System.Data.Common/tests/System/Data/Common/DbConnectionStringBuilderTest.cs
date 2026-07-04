@@ -1835,17 +1835,14 @@ namespace System.Data.Tests.Common
         [Fact]
         public void NegICollectionCopyToTest()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    KeyValuePair<string, object>[] dict = new KeyValuePair<string, object>[1];
-                    _builder.Add(SERVER, SERVER_VALUE);
-                    _builder.Add(SERVER + "1", SERVER_VALUE + "1");
-                    ((ICollection)_builder).CopyTo(dict, 0);
-                    Assert.Fail();
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                KeyValuePair<string, object>[] dict = new KeyValuePair<string, object>[1];
+                _builder.Add(SERVER, SERVER_VALUE);
+                _builder.Add(SERVER + "1", SERVER_VALUE + "1");
+                ((ICollection)_builder).CopyTo(dict, 0);
+                Assert.Fail();
+            });
         }
 
         [Fact]

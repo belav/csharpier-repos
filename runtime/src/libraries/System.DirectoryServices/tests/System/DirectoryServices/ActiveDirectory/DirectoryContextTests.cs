@@ -46,13 +46,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             DirectoryContextType contextType
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "contextType",
-                () => new DirectoryContext(contextType)
+            AssertExtensions.Throws<ArgumentException>("contextType", () =>
+                new DirectoryContext(contextType)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "contextType",
-                () => new DirectoryContext(contextType, "username", "password")
+            AssertExtensions.Throws<ArgumentException>("contextType", () =>
+                new DirectoryContext(contextType, "username", "password")
             );
         }
 
@@ -96,51 +94,43 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
             DirectoryContextType contextType
         )
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "contextType",
-                () => new DirectoryContext(contextType, "name")
+            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () =>
+                new DirectoryContext(contextType, "name")
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "contextType",
-                () => new DirectoryContext(contextType, "name", "userName", "password")
+            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () =>
+                new DirectoryContext(contextType, "name", "userName", "password")
             );
         }
 
         [Fact]
         public void Ctor_NullName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new DirectoryContext(DirectoryContextType.ConfigurationSet, null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DirectoryContext(DirectoryContextType.ConfigurationSet, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    new DirectoryContext(
-                        DirectoryContextType.ConfigurationSet,
-                        null,
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DirectoryContext(
+                    DirectoryContextType.ConfigurationSet,
+                    null,
+                    "userName",
+                    "password"
+                )
             );
         }
 
         [Fact]
         public void Ctor_EmptyName_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => new DirectoryContext(DirectoryContextType.ConfigurationSet, string.Empty)
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                new DirectoryContext(DirectoryContextType.ConfigurationSet, string.Empty)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () =>
-                    new DirectoryContext(
-                        DirectoryContextType.ConfigurationSet,
-                        string.Empty,
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                new DirectoryContext(
+                    DirectoryContextType.ConfigurationSet,
+                    string.Empty,
+                    "userName",
+                    "password"
+                )
             );
         }
     }

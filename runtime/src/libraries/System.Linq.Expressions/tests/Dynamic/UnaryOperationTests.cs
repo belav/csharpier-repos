@@ -313,9 +313,8 @@ namespace System.Dynamic.Tests
         [Theory, MemberData(nameof(NonUnaryExpressionTypes))]
         public void NonUnaryOperation(ExpressionType type)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "operation",
-                () => new MinimumOverrideUnaryOperationBinder(type)
+            AssertExtensions.Throws<ArgumentException>("operation", () =>
+                new MinimumOverrideUnaryOperationBinder(type)
             );
         }
 
@@ -353,9 +352,8 @@ namespace System.Dynamic.Tests
                 BindingRestrictions.Empty
             );
             var binder = new MinimumOverrideUnaryOperationBinder(ExpressionType.Negate);
-            AssertExtensions.Throws<ArgumentException>(
-                "args",
-                () => binder.Bind(target, new[] { arg })
+            AssertExtensions.Throws<ArgumentException>("args", () =>
+                binder.Bind(target, new[] { arg })
             );
         }
 

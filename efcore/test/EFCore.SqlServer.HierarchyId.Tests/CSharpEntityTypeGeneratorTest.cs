@@ -13,15 +13,12 @@ public class CSharpEntityTypeGeneratorTest : ModelCodeGeneratorTestBase
         Test(
             modelBuilder =>
             {
-                modelBuilder.Entity(
-                    "Patriarch",
-                    b =>
-                    {
-                        b.Property<HierarchyId>("Id");
-                        b.HasKey("Id");
-                        b.Property<string>("Name");
-                    }
-                );
+                modelBuilder.Entity("Patriarch", b =>
+                {
+                    b.Property<HierarchyId>("Id");
+                    b.HasKey("Id");
+                    b.Property<string>("Name");
+                });
             },
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -53,16 +50,13 @@ public partial class Patriarch
         Test(
             modelBuilder =>
             {
-                modelBuilder.Entity(
-                    "Patriarch",
-                    b =>
-                    {
-                        b.Property<int>("Id");
-                        b.HasKey("Id");
-                        b.Property<string>("Name");
-                        b.Property<HierarchyId>("Hierarchy");
-                    }
-                );
+                modelBuilder.Entity("Patriarch", b =>
+                {
+                    b.Property<int>("Id");
+                    b.HasKey("Id");
+                    b.Property<string>("Name");
+                    b.Property<HierarchyId>("Hierarchy");
+                });
             },
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -96,16 +90,13 @@ public partial class Patriarch
         Test(
             modelBuilder =>
             {
-                modelBuilder.Entity(
-                    "Patriarch",
-                    b =>
-                    {
-                        b.Property<HierarchyId>("Id");
-                        b.HasKey("Id");
-                        b.Property<string>("Name");
-                        b.Property<HierarchyId>("Hierarchy");
-                    }
-                );
+                modelBuilder.Entity("Patriarch", b =>
+                {
+                    b.Property<HierarchyId>("Id");
+                    b.HasKey("Id");
+                    b.Property<string>("Name");
+                    b.Property<HierarchyId>("Hierarchy");
+                });
             },
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>

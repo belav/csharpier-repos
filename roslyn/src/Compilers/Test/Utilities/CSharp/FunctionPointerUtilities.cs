@@ -236,11 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     }
                     else
                     {
-                        Assert.Contains(
-                            semanticInfo.MemberGroup,
-                            actual =>
-                                actual.ToTestDisplayString(includeNonNullable: false)
-                                == expectedSymbol
+                        Assert.Contains(semanticInfo.MemberGroup, actual =>
+                            actual.ToTestDisplayString(includeNonNullable: false) == expectedSymbol
                         );
                     }
 

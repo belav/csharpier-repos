@@ -388,15 +388,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            return FindSourceDeclarationsWithPatternInCurrentProcessAsync(
-                pattern,
-                query =>
-                    SymbolFinder.FindSourceDeclarationsWithCustomQueryAsync(
-                        solution,
-                        query,
-                        criteria,
-                        cancellationToken
-                    )
+            return FindSourceDeclarationsWithPatternInCurrentProcessAsync(pattern, query =>
+                SymbolFinder.FindSourceDeclarationsWithCustomQueryAsync(
+                    solution,
+                    query,
+                    criteria,
+                    cancellationToken
+                )
             );
         }
 
@@ -409,15 +407,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            return FindSourceDeclarationsWithPatternInCurrentProcessAsync(
-                pattern,
-                query =>
-                    SymbolFinder.FindSourceDeclarationsWithCustomQueryAsync(
-                        project,
-                        query,
-                        criteria,
-                        cancellationToken
-                    )
+            return FindSourceDeclarationsWithPatternInCurrentProcessAsync(pattern, query =>
+                SymbolFinder.FindSourceDeclarationsWithCustomQueryAsync(
+                    project,
+                    query,
+                    criteria,
+                    cancellationToken
+                )
             );
         }
 

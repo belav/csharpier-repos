@@ -125,48 +125,38 @@ namespace System.Linq.Tests
         public void SourceIsNull()
         {
             IQueryable<Record> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.GroupBy(e => e.Name, e => e.Score, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(e => e.Name, e => e.Score, new AnagramEqualityComparer())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.GroupBy(e => e.Name, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(e => e.Name, new AnagramEqualityComparer())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.GroupBy(e => e.Name, e => e.Score)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(e => e.Name, e => e.Score)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.GroupBy(e => e.Name)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(e => e.Name)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    source.GroupBy(
-                        e => e.Name,
-                        e => e.Score,
-                        (k, es) => es.Sum(),
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(
+                    e => e.Name,
+                    e => e.Score,
+                    (k, es) => es.Sum(),
+                    new AnagramEqualityComparer()
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.GroupBy(e => e.Name, e => e.Score, (k, es) => es.Sum())
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(e => e.Name, e => e.Score, (k, es) => es.Sum())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.GroupBy(e => e.Name, (k, es) => es.Sum(e => e.Score))
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(e => e.Name, (k, es) => es.Sum(e => e.Score))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    source.GroupBy(
-                        e => e.Name,
-                        (k, es) => es.Sum(e => e.Score),
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.GroupBy(
+                    e => e.Name,
+                    (k, es) => es.Sum(e => e.Score),
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -184,57 +174,36 @@ namespace System.Linq.Tests
             };
             Expression<Func<Record, string>> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    source.AsQueryable().GroupBy(null, e => e.Score, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AsQueryable().GroupBy(null, e => e.Score, new AnagramEqualityComparer())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    source
-                        .AsQueryable()
-                        .GroupBy(
-                            null,
-                            e => e.Score,
-                            (k, es) => es.Sum(),
-                            new AnagramEqualityComparer()
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source
+                    .AsQueryable()
+                    .GroupBy(null, e => e.Score, (k, es) => es.Sum(), new AnagramEqualityComparer())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.AsQueryable().GroupBy(keySelector, e => e.Score, (k, es) => es.Sum())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AsQueryable().GroupBy(keySelector, e => e.Score, (k, es) => es.Sum())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.AsQueryable().GroupBy(keySelector, e => e.Score)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AsQueryable().GroupBy(keySelector, e => e.Score)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.AsQueryable().GroupBy(keySelector, e => e.Score, (k, es) => es.Sum())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AsQueryable().GroupBy(keySelector, e => e.Score, (k, es) => es.Sum())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    source
-                        .AsQueryable()
-                        .GroupBy(
-                            null,
-                            (k, es) => es.Sum(e => e.Score),
-                            new AnagramEqualityComparer()
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source
+                    .AsQueryable()
+                    .GroupBy(null, (k, es) => es.Sum(e => e.Score), new AnagramEqualityComparer())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.AsQueryable().GroupBy(keySelector, (k, es) => es.Sum(e => e.Score))
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AsQueryable().GroupBy(keySelector, (k, es) => es.Sum(e => e.Score))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.AsQueryable().GroupBy(null, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AsQueryable().GroupBy(null, new AnagramEqualityComparer())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.AsQueryable().GroupBy(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AsQueryable().GroupBy(keySelector)
             );
         }
 
@@ -253,33 +222,26 @@ namespace System.Linq.Tests
 
             Expression<Func<Record, int>> elementSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () => source.AsQueryable().GroupBy(e => e.Name, elementSelector)
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                source.AsQueryable().GroupBy(e => e.Name, elementSelector)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    source
-                        .AsQueryable()
-                        .GroupBy(e => e.Name, elementSelector, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                source
+                    .AsQueryable()
+                    .GroupBy(e => e.Name, elementSelector, new AnagramEqualityComparer())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    source.AsQueryable().GroupBy(e => e.Name, elementSelector, (k, es) => es.Sum())
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                source.AsQueryable().GroupBy(e => e.Name, elementSelector, (k, es) => es.Sum())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    source
-                        .AsQueryable()
-                        .GroupBy(
-                            e => e.Name,
-                            elementSelector,
-                            (k, es) => es.Sum(),
-                            new AnagramEqualityComparer()
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                source
+                    .AsQueryable()
+                    .GroupBy(
+                        e => e.Name,
+                        elementSelector,
+                        (k, es) => es.Sum(),
+                        new AnagramEqualityComparer()
+                    )
             );
         }
 
@@ -298,17 +260,15 @@ namespace System.Linq.Tests
 
             Expression<Func<string, IEnumerable<int>, long>> resultSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    source
-                        .AsQueryable()
-                        .GroupBy(
-                            e => e.Name,
-                            e => e.Score,
-                            resultSelector,
-                            new AnagramEqualityComparer()
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                source
+                    .AsQueryable()
+                    .GroupBy(
+                        e => e.Name,
+                        e => e.Score,
+                        resultSelector,
+                        new AnagramEqualityComparer()
+                    )
             );
         }
 
@@ -327,9 +287,8 @@ namespace System.Linq.Tests
 
             Expression<Func<string, IEnumerable<int>, long>> resultSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () => source.AsQueryable().GroupBy(e => e.Name, e => e.Score, resultSelector)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                source.AsQueryable().GroupBy(e => e.Name, e => e.Score, resultSelector)
             );
         }
 
@@ -348,9 +307,8 @@ namespace System.Linq.Tests
 
             Expression<Func<string, IEnumerable<Record>, long>> resultSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () => source.AsQueryable().GroupBy(e => e.Name, resultSelector)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                source.AsQueryable().GroupBy(e => e.Name, resultSelector)
             );
         }
 
@@ -363,12 +321,10 @@ namespace System.Linq.Tests
 
             Expression<Func<string, IEnumerable<Record>, long>> resultSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    source
-                        .AsQueryable()
-                        .GroupBy(e => e.Name, resultSelector, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                source
+                    .AsQueryable()
+                    .GroupBy(e => e.Name, resultSelector, new AnagramEqualityComparer())
             );
         }
 

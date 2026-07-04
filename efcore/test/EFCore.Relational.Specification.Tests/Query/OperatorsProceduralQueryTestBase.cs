@@ -45,16 +45,11 @@ public abstract class OperatorsProceduralQueryTestBase : NonSharedModelTestBase
         {
             ((typeof(string), typeof(string)), typeof(bool), Expression.Equal),
             ((typeof(string), typeof(string)), typeof(bool), Expression.NotEqual),
-            (
-                (typeof(string), typeof(string)),
-                typeof(string),
-                (x, y) => Expression.Add(x, y, StringConcatMethodInfo)
+            ((typeof(string), typeof(string)), typeof(string), (x, y) =>
+                Expression.Add(x, y, StringConcatMethodInfo)
             ),
-            (
-                (typeof(string), typeof(string)),
-                typeof(bool),
-                (x, y) =>
-                    Expression.Call(null, LikeMethodInfo, Expression.Constant(EF.Functions), x, y)
+            ((typeof(string), typeof(string)), typeof(bool), (x, y) =>
+                Expression.Call(null, LikeMethodInfo, Expression.Constant(EF.Functions), x, y)
             ),
             ((typeof(int), typeof(int)), typeof(int), Expression.Multiply),
             ((typeof(int), typeof(int)), typeof(int), Expression.Divide),
@@ -102,66 +97,48 @@ public abstract class OperatorsProceduralQueryTestBase : NonSharedModelTestBase
             Func<Expression, Expression> OperatorCreator
         )>
         {
-            (
-                typeof(string),
-                typeof(bool),
-                x => Expression.Equal(x, Expression.Constant(null, typeof(string)))
+            (typeof(string), typeof(bool), x =>
+                Expression.Equal(x, Expression.Constant(null, typeof(string)))
             ),
-            (
-                typeof(string),
-                typeof(bool),
-                x => Expression.NotEqual(x, Expression.Constant(null, typeof(string)))
+            (typeof(string), typeof(bool), x =>
+                Expression.NotEqual(x, Expression.Constant(null, typeof(string)))
             ),
-            (
-                typeof(string),
-                typeof(bool),
-                x =>
-                    Expression.Call(
-                        null,
-                        LikeMethodInfo,
-                        Expression.Constant(EF.Functions),
-                        x,
-                        Expression.Constant("A%")
-                    )
+            (typeof(string), typeof(bool), x =>
+                Expression.Call(
+                    null,
+                    LikeMethodInfo,
+                    Expression.Constant(EF.Functions),
+                    x,
+                    Expression.Constant("A%")
+                )
             ),
-            (
-                typeof(string),
-                typeof(bool),
-                x =>
-                    Expression.Call(
-                        null,
-                        LikeMethodInfo,
-                        Expression.Constant(EF.Functions),
-                        x,
-                        Expression.Constant("%B")
-                    )
+            (typeof(string), typeof(bool), x =>
+                Expression.Call(
+                    null,
+                    LikeMethodInfo,
+                    Expression.Constant(EF.Functions),
+                    x,
+                    Expression.Constant("%B")
+                )
             ),
             (typeof(int), typeof(int), Expression.Not),
             (typeof(int), typeof(int), Expression.Negate),
             (typeof(int), typeof(long), x => Expression.Convert(x, typeof(long))),
-            (
-                typeof(int?),
-                typeof(bool),
-                x => Expression.Equal(x, Expression.Constant(null, typeof(int?)))
+            (typeof(int?), typeof(bool), x =>
+                Expression.Equal(x, Expression.Constant(null, typeof(int?)))
             ),
-            (
-                typeof(int?),
-                typeof(bool),
-                x => Expression.NotEqual(x, Expression.Constant(null, typeof(int?)))
+            (typeof(int?), typeof(bool), x =>
+                Expression.NotEqual(x, Expression.Constant(null, typeof(int?)))
             ),
             (typeof(long), typeof(long), Expression.Not),
             (typeof(long), typeof(long), Expression.Negate),
             (typeof(long), typeof(int), x => Expression.Convert(x, typeof(int))),
             (typeof(bool), typeof(bool), Expression.Not),
-            (
-                typeof(bool?),
-                typeof(bool),
-                x => Expression.Equal(x, Expression.Constant(null, typeof(bool?)))
+            (typeof(bool?), typeof(bool), x =>
+                Expression.Equal(x, Expression.Constant(null, typeof(bool?)))
             ),
-            (
-                typeof(bool?),
-                typeof(bool),
-                x => Expression.NotEqual(x, Expression.Constant(null, typeof(bool?)))
+            (typeof(bool?), typeof(bool), x =>
+                Expression.NotEqual(x, Expression.Constant(null, typeof(bool?)))
             ),
         };
 

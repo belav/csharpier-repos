@@ -60,10 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertNamespace
             }
 
             public void SendTypeChar(char ch) =>
-                SendTypeChar(
-                    ch,
-                    _commandHandler.ExecuteCommand,
-                    () => EditorOperations.InsertText(ch.ToString())
+                SendTypeChar(ch, _commandHandler.ExecuteCommand, () =>
+                    EditorOperations.InsertText(ch.ToString())
                 );
         }
 

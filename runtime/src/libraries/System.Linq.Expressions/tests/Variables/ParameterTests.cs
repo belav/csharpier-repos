@@ -45,13 +45,11 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void ParameterCannotBeTypeVoid()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Parameter(typeof(void))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Parameter(typeof(void))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Parameter(typeof(void), "var")
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Parameter(typeof(void), "var")
             );
         }
 
@@ -60,22 +58,19 @@ namespace System.Linq.Expressions.Tests
         public void OpenGenericType_ThrowsArgumentException(Type type)
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Parameter(type));
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Parameter(type, "name")
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Parameter(type, "name")
             );
         }
 
         [Fact]
         public void NullType()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Expression.Parameter(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Expression.Parameter(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Expression.Parameter(null, "var")
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Expression.Parameter(null, "var")
             );
         }
 
@@ -347,13 +342,11 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void CannotBePointerType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Parameter(typeof(int*))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Parameter(typeof(int*))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Parameter(typeof(int*), "pointer")
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Parameter(typeof(int*), "pointer")
             );
         }
 

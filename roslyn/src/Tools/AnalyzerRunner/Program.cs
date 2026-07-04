@@ -231,21 +231,17 @@ namespace AnalyzerRunner
         {
             var sums = new ConcurrentBag<Statistic>();
 
-            Parallel.ForEach(
-                projects.SelectMany(project => project.Documents),
-                document =>
-                {
-                    var documentStatistics = GetSolutionStatisticsAsync(document, cancellationToken)
-                        .ConfigureAwait(false)
-                        .GetAwaiter()
-                        .GetResult();
-                    sums.Add(documentStatistics);
-                }
-            );
+            Parallel.ForEach(projects.SelectMany(project => project.Documents), document =>
+            {
+                var documentStatistics = GetSolutionStatisticsAsync(document, cancellationToken)
+                    .ConfigureAwait(false)
+                    .GetAwaiter()
+                    .GetResult();
+                sums.Add(documentStatistics);
+            });
 
-            var sum = sums.Aggregate(
-                new Statistic(0, 0, 0),
-                (currentResult, value) => currentResult + value
+            var sum = sums.Aggregate(new Statistic(0, 0, 0), (currentResult, value) =>
+                currentResult + value
             );
             return sum;
         }

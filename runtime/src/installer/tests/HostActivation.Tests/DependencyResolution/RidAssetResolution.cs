@@ -277,17 +277,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         {
             RunTest(
                 p =>
-                    p.WithNativeLibraryGroup(
-                            "win",
-                            g => g.WithAsset("win/WindowsNativeLibrary.dll")
+                    p.WithNativeLibraryGroup("win", g =>
+                            g.WithAsset("win/WindowsNativeLibrary.dll")
                         )
-                        .WithNativeLibraryGroup(
-                            "linux",
-                            g => g.WithAsset("linux/LinuxNativeLibrary.so")
+                        .WithNativeLibraryGroup("linux", g =>
+                            g.WithAsset("linux/LinuxNativeLibrary.so")
                         )
-                        .WithNativeLibraryGroup(
-                            "osx",
-                            g => g.WithAsset("osx/MacOSNativeLibrary.dylib")
+                        .WithNativeLibraryGroup("osx", g =>
+                            g.WithAsset("osx/MacOSNativeLibrary.dylib")
                         ),
                 setup,
                 new ResolvedPaths()
@@ -529,9 +526,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 p =>
                     p.WithNativeLibraryGroup("any", g => g.WithAsset("any/NativeAny.dll"))
                         .WithNativeLibraryGroup("win", g => g.WithAsset("win/NativeWin.dll"))
-                        .WithNativeLibraryGroup(
-                            "win-x64",
-                            g => g.WithAsset("win-x64/NativeWin64.dll")
+                        .WithNativeLibraryGroup("win-x64", g =>
+                            g.WithAsset("win-x64/NativeWin64.dll")
                         ),
                 new TestSetup()
                 {
@@ -668,13 +664,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             RunTest(
                 p =>
                     p.WithAssemblyGroup(CurrentOS, g => g.WithAsset(CurrentOSAsset))
-                        .WithNativeLibraryGroup(
-                            CurrentOS,
-                            g => g.WithAsset($"native/{CurrentOSAsset}")
+                        .WithNativeLibraryGroup(CurrentOS, g =>
+                            g.WithAsset($"native/{CurrentOSAsset}")
                         )
-                        .WithNativeLibraryGroup(
-                            CurrentRid,
-                            g => g.WithAsset($"native/{CurrentRidAsset}")
+                        .WithNativeLibraryGroup(CurrentRid, g =>
+                            g.WithAsset($"native/{CurrentRidAsset}")
                         ),
                 // RID is computed at run-time
                 new TestSetup()
@@ -714,53 +708,33 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             RunTest(
                 assetsCustomizer: null,
                 appCustomizer: b =>
-                    b.WithPackage(
-                            "ridSpecificLib",
-                            "1.0.0",
-                            p =>
-                                p.WithAssemblyGroup(null, g => g.WithAsset("DependencyLib.dll"))
-                                    .WithAssemblyGroup(
-                                        "win",
-                                        g => g.WithAsset("win/ManagedWin.dll")
-                                    )
-                                    .WithAssemblyGroup(
-                                        "win",
-                                        g => g.WithAsset("win/AnotherWin.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "win10-x64",
-                                        g => g.WithAsset("native/win10-x64/n1.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "win10-x64",
-                                        g => g.WithAsset("native/win10-x64/n2.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "win10-x64",
-                                        g => g.WithAsset("native/win10-x64-2/n3.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "win-x86",
-                                        g => g.WithAsset("native/win-x86/n1.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "win-x86",
-                                        g => g.WithAsset("native/win-x86/n2.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        "linux",
-                                        g => g.WithAsset("native/linux/n.so")
-                                    )
-                        )
-                        .WithPackage(
-                            "ridAgnosticLib",
-                            "2.0.0",
-                            p =>
-                                p.WithAssemblyGroup(
-                                    null,
-                                    g =>
-                                        g.WithAsset("PortableLib.dll").WithAsset("PortableLib2.dll")
+                    b.WithPackage("ridSpecificLib", "1.0.0", p =>
+                            p.WithAssemblyGroup(null, g => g.WithAsset("DependencyLib.dll"))
+                                .WithAssemblyGroup("win", g => g.WithAsset("win/ManagedWin.dll"))
+                                .WithAssemblyGroup("win", g => g.WithAsset("win/AnotherWin.dll"))
+                                .WithNativeLibraryGroup("win10-x64", g =>
+                                    g.WithAsset("native/win10-x64/n1.dll")
                                 )
+                                .WithNativeLibraryGroup("win10-x64", g =>
+                                    g.WithAsset("native/win10-x64/n2.dll")
+                                )
+                                .WithNativeLibraryGroup("win10-x64", g =>
+                                    g.WithAsset("native/win10-x64-2/n3.dll")
+                                )
+                                .WithNativeLibraryGroup("win-x86", g =>
+                                    g.WithAsset("native/win-x86/n1.dll")
+                                )
+                                .WithNativeLibraryGroup("win-x86", g =>
+                                    g.WithAsset("native/win-x86/n2.dll")
+                                )
+                                .WithNativeLibraryGroup("linux", g =>
+                                    g.WithAsset("native/linux/n.so")
+                                )
+                        )
+                        .WithPackage("ridAgnosticLib", "2.0.0", p =>
+                            p.WithAssemblyGroup(null, g =>
+                                g.WithAsset("PortableLib.dll").WithAsset("PortableLib2.dll")
+                            )
                         ),
                 setup: new TestSetup()
                 {
@@ -811,58 +785,39 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             RunTest(
                 assetsCustomizer: null,
                 appCustomizer: b =>
-                    b.WithPackage(
-                            "ridSpecificLib",
-                            "1.0.0",
-                            p =>
-                                p.WithAssemblyGroup(null, g => g.WithAsset("ridSpecificLib.dll"))
-                                    .WithAssemblyGroup(CurrentOS, g => g.WithAsset(CurrentOSAsset))
-                                    .WithAssemblyGroup(
-                                        CurrentOS,
-                                        g =>
-                                            g.WithAsset($"{CurrentOS}/{CurrentOS}Asset{suffix}.dll")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        CurrentOS,
-                                        g => g.WithAsset($"native/{CurrentOSAsset}")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        CurrentRid,
-                                        g => g.WithAsset($"native/{CurrentRidAsset}")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        CurrentRid,
-                                        g => g.WithAsset($"native/{CurrentRid}{suffix}/Asset")
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        CurrentRid,
-                                        g => g.WithAsset($"native{suffix}/{CurrentRidAsset}")
-                                    )
-                        )
-                        .WithPackage(
-                            "noRidMatch",
-                            "1.0.0",
-                            p =>
-                                p.WithAssemblyGroup(null, g => g.WithAsset("noRidMatch.dll"))
-                                    .WithAssemblyGroup(
-                                        DifferentArch,
-                                        g => g.WithAsset(DifferentArchAsset)
-                                    )
-                                    .WithNativeLibraryGroup(null, g => g.WithAsset($"noRidMatch"))
-                                    .WithNativeLibraryGroup(
-                                        DifferentArch,
-                                        g => g.WithAsset($"native/{DifferentArchAsset}")
-                                    )
-                        )
-                        .WithPackage(
-                            "ridAgnosticLib",
-                            "1.0.0",
-                            p =>
-                                p.WithAssemblyGroup(
-                                    null,
-                                    g =>
-                                        g.WithAsset("PortableLib.dll").WithAsset("PortableLib2.dll")
+                    b.WithPackage("ridSpecificLib", "1.0.0", p =>
+                            p.WithAssemblyGroup(null, g => g.WithAsset("ridSpecificLib.dll"))
+                                .WithAssemblyGroup(CurrentOS, g => g.WithAsset(CurrentOSAsset))
+                                .WithAssemblyGroup(CurrentOS, g =>
+                                    g.WithAsset($"{CurrentOS}/{CurrentOS}Asset{suffix}.dll")
                                 )
+                                .WithNativeLibraryGroup(CurrentOS, g =>
+                                    g.WithAsset($"native/{CurrentOSAsset}")
+                                )
+                                .WithNativeLibraryGroup(CurrentRid, g =>
+                                    g.WithAsset($"native/{CurrentRidAsset}")
+                                )
+                                .WithNativeLibraryGroup(CurrentRid, g =>
+                                    g.WithAsset($"native/{CurrentRid}{suffix}/Asset")
+                                )
+                                .WithNativeLibraryGroup(CurrentRid, g =>
+                                    g.WithAsset($"native{suffix}/{CurrentRidAsset}")
+                                )
+                        )
+                        .WithPackage("noRidMatch", "1.0.0", p =>
+                            p.WithAssemblyGroup(null, g => g.WithAsset("noRidMatch.dll"))
+                                .WithAssemblyGroup(DifferentArch, g =>
+                                    g.WithAsset(DifferentArchAsset)
+                                )
+                                .WithNativeLibraryGroup(null, g => g.WithAsset($"noRidMatch"))
+                                .WithNativeLibraryGroup(DifferentArch, g =>
+                                    g.WithAsset($"native/{DifferentArchAsset}")
+                                )
+                        )
+                        .WithPackage("ridAgnosticLib", "1.0.0", p =>
+                            p.WithAssemblyGroup(null, g =>
+                                g.WithAsset("PortableLib.dll").WithAsset("PortableLib2.dll")
+                            )
                         ),
                 setup: new TestSetup()
                 {
@@ -922,9 +877,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 DotNetWithNetCoreApp_NoRuntimeFallbacks = DotNet(
                         "WithNetCoreApp_NoRuntimeFallbacks"
                     )
-                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(
-                        "4.0.0",
-                        b => b.RuntimeFallbacks.Clear()
+                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr("4.0.0", b =>
+                        b.RuntimeFallbacks.Clear()
                     )
                     .Build();
             }

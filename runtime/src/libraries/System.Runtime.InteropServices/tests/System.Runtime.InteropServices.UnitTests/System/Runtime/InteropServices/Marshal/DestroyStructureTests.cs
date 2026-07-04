@@ -57,22 +57,19 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void DestroyStructure_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ptr",
-                () => Marshal.DestroyStructure<TestStruct>(IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentNullException>("ptr", () =>
+                Marshal.DestroyStructure<TestStruct>(IntPtr.Zero)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ptr",
-                () => Marshal.DestroyStructure(IntPtr.Zero, typeof(TestStruct))
+            AssertExtensions.Throws<ArgumentNullException>("ptr", () =>
+                Marshal.DestroyStructure(IntPtr.Zero, typeof(TestStruct))
             );
         }
 
         [Fact]
         public void DestroyStructure_NullStructureType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "structuretype",
-                () => Marshal.DestroyStructure((IntPtr)1, null)
+            AssertExtensions.Throws<ArgumentNullException>("structuretype", () =>
+                Marshal.DestroyStructure((IntPtr)1, null)
             );
         }
 
@@ -118,9 +115,8 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(DestroyStructure_InvalidType_TestData))]
         public void DestroyStructure_NonRuntimeType_ThrowsArgumentException(Type invalidType)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "structuretype",
-                () => Marshal.DestroyStructure((IntPtr)1, invalidType)
+            AssertExtensions.Throws<ArgumentException>("structuretype", () =>
+                Marshal.DestroyStructure((IntPtr)1, invalidType)
             );
         }
 
@@ -132,13 +128,11 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void DestroyStructure_AutoLayout_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "structuretype",
-                () => Marshal.DestroyStructure<AutoLayoutStruct>((IntPtr)1)
+            AssertExtensions.Throws<ArgumentException>("structuretype", () =>
+                Marshal.DestroyStructure<AutoLayoutStruct>((IntPtr)1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "structuretype",
-                () => Marshal.DestroyStructure((IntPtr)1, typeof(AutoLayoutStruct))
+            AssertExtensions.Throws<ArgumentException>("structuretype", () =>
+                Marshal.DestroyStructure((IntPtr)1, typeof(AutoLayoutStruct))
             );
         }
 

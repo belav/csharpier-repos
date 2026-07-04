@@ -903,21 +903,18 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
         }
         else
         {
-            TestHelpers.ExecuteWithStrategyInTransaction(
-                CreateContext,
-                UseTransaction,
-                context =>
-                    Assert.Contains(
-                        RelationalStrings.NonQueryTranslationFailedWithDetails(
-                            "",
-                            RelationalStrings.ExecuteDeleteOnTableSplitting("Vehicles")
-                        )[21..],
-                        Assert
-                            .Throws<InvalidOperationException>(() =>
-                                context.Set<Vehicle>().ExecuteDelete()
-                            )
-                            .Message
-                    )
+            TestHelpers.ExecuteWithStrategyInTransaction(CreateContext, UseTransaction, context =>
+                Assert.Contains(
+                    RelationalStrings.NonQueryTranslationFailedWithDetails(
+                        "",
+                        RelationalStrings.ExecuteDeleteOnTableSplitting("Vehicles")
+                    )[21..],
+                    Assert
+                        .Throws<InvalidOperationException>(() =>
+                            context.Set<Vehicle>().ExecuteDelete()
+                        )
+                        .Message
+                )
             );
         }
     }

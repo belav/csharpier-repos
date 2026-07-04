@@ -854,18 +854,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 IEnumerable<SyntaxTrivia> leadingOrTrailingTriviaList
             )
             {
-                return token.ReplaceTrivia(
-                    leadingOrTrailingTriviaList,
-                    (oldTrivia, newTrivia) =>
+                return token.ReplaceTrivia(leadingOrTrailingTriviaList, (oldTrivia, newTrivia) =>
+                {
+                    if (newTrivia.IsSingleLineComment() || newTrivia.IsMultiLineComment())
                     {
-                        if (newTrivia.IsSingleLineComment() || newTrivia.IsMultiLineComment())
-                        {
-                            return RenameInCommentTrivia(newTrivia);
-                        }
-
-                        return newTrivia;
+                        return RenameInCommentTrivia(newTrivia);
                     }
-                );
+
+                    return newTrivia;
+                });
             }
 
             private SyntaxTrivia RenameInCommentTrivia(SyntaxTrivia trivia)

@@ -536,9 +536,8 @@ namespace System.Web.Mvc
             // need to reverse the filter list because the continuations are built up backward
             Func<ActionExecutedContext> thunk = filters
                 .Reverse()
-                .Aggregate(
-                    continuation,
-                    (next, filter) => () => InvokeActionMethodFilter(filter, preContext, next)
+                .Aggregate(continuation, (next, filter) =>
+                    () => InvokeActionMethodFilter(filter, preContext, next)
                 );
             return thunk();
         }

@@ -59,15 +59,11 @@ public class HandshakeTests : LoggedTest
                 new TestServiceContext(LoggerFactory),
                 kestrelOptions =>
                 {
-                    kestrelOptions.Listen(
-                        IPAddress.Loopback,
-                        0,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http2;
-                            listenOptions.UseHttps(_x509Certificate2);
-                        }
-                    );
+                    kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                        listenOptions.UseHttps(_x509Certificate2);
+                    });
                 }
             )
         );
@@ -101,15 +97,11 @@ public class HandshakeTests : LoggedTest
                 new TestServiceContext(LoggerFactory),
                 kestrelOptions =>
                 {
-                    kestrelOptions.Listen(
-                        IPAddress.Loopback,
-                        0,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                            listenOptions.UseHttps(_x509Certificate2);
-                        }
-                    );
+                    kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                        listenOptions.UseHttps(_x509Certificate2);
+                    });
                 }
             )
         )
@@ -142,15 +134,11 @@ public class HandshakeTests : LoggedTest
                 new TestServiceContext(LoggerFactory),
                 kestrelOptions =>
                 {
-                    kestrelOptions.Listen(
-                        IPAddress.Loopback,
-                        0,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http2;
-                            listenOptions.UseHttps(_x509Certificate2);
-                        }
-                    );
+                    kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                        listenOptions.UseHttps(_x509Certificate2);
+                    });
                 }
             )
         )

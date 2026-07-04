@@ -80,9 +80,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void AddRange_NullAttributes_ThrowsArgumentNullException()
         {
             var collection = new DirectoryAttributeModificationCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "attributes",
-                () => collection.AddRange((DirectoryAttributeModification[])null)
+            AssertExtensions.Throws<ArgumentNullException>("attributes", () =>
+                collection.AddRange((DirectoryAttributeModification[])null)
             );
         }
 
@@ -122,9 +121,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void AddRange_NullAttributeCollection_ThrowsArgumentNullException()
         {
             var collection = new DirectoryAttributeModificationCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "attributeCollection",
-                () => collection.AddRange((DirectoryAttributeModificationCollection)null)
+            AssertExtensions.Throws<ArgumentNullException>("attributeCollection", () =>
+                collection.AddRange((DirectoryAttributeModificationCollection)null)
             );
         }
 

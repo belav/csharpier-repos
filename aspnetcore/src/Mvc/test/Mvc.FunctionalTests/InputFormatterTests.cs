@@ -110,15 +110,12 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
         var result = JObject.Parse(await response.Content.ReadAsStringAsync());
-        Assert.Collection(
-            result.Properties(),
-            p =>
-            {
-                Assert.Equal("DerivedProperty", p.Name);
-                var value = Assert.IsType<JArray>(p.Value);
-                Assert.Equal("The DerivedProperty field is required.", value.First);
-            }
-        );
+        Assert.Collection(result.Properties(), p =>
+        {
+            Assert.Equal("DerivedProperty", p.Name);
+            var value = Assert.IsType<JArray>(p.Value);
+            Assert.Equal("The DerivedProperty field is required.", value.First);
+        });
     }
 
     [Fact]
@@ -148,15 +145,12 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
         var result = JObject.Parse(await response.Content.ReadAsStringAsync());
-        Assert.Collection(
-            result.Properties(),
-            p =>
-            {
-                Assert.Equal("DerivedProperty", p.Name);
-                var value = Assert.IsType<JArray>(p.Value);
-                Assert.Equal("The DerivedProperty field is required.", value.First);
-            }
-        );
+        Assert.Collection(result.Properties(), p =>
+        {
+            Assert.Equal("DerivedProperty", p.Name);
+            var value = Assert.IsType<JArray>(p.Value);
+            Assert.Equal("The DerivedProperty field is required.", value.First);
+        });
     }
 
     [Fact]
@@ -186,15 +180,12 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
         var result = JObject.Parse(await response.Content.ReadAsStringAsync());
-        Assert.Collection(
-            result.Properties(),
-            p =>
-            {
-                Assert.Equal("DerivedProperty", p.Name);
-                var value = Assert.IsType<JArray>(p.Value);
-                Assert.Equal("The DerivedProperty field is required.", value.First);
-            }
-        );
+        Assert.Collection(result.Properties(), p =>
+        {
+            Assert.Equal("DerivedProperty", p.Name);
+            var value = Assert.IsType<JArray>(p.Value);
+            Assert.Equal("The DerivedProperty field is required.", value.First);
+        });
     }
 
     [Fact]
@@ -209,14 +200,11 @@ public class InputFormatterTests : IClassFixture<MvcTestFixture<FormatterWebSite
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
         var problemDetails = await response.Content.ReadFromJsonAsync<ValidationProblemDetails>();
-        Assert.Collection(
-            problemDetails.Errors,
-            kvp =>
-            {
-                Assert.Empty(kvp.Key);
-                Assert.Equal("A non-empty request body is required.", Assert.Single(kvp.Value));
-            }
-        );
+        Assert.Collection(problemDetails.Errors, kvp =>
+        {
+            Assert.Empty(kvp.Key);
+            Assert.Equal("A non-empty request body is required.", Assert.Single(kvp.Value));
+        });
     }
 
     [Fact]

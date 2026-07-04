@@ -41,23 +41,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                     .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("6.1.1-preview.2")
                     .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("6.1.1-preview.3")
                     .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("6.2.1")
-                    .AddFramework(
-                        MiddleWare,
-                        "2.1.2",
-                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.3")
+                    .AddFramework(MiddleWare, "2.1.2", runtimeConfig =>
+                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.3")
                     )
-                    .AddFramework(
-                        AnotherMiddleWare,
-                        "3.0.0",
-                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.3")
+                    .AddFramework(AnotherMiddleWare, "3.0.0", runtimeConfig =>
+                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.3")
                     )
-                    .AddFramework(
-                        HighWare,
-                        "7.3.1",
-                        runtimeConfig =>
-                            runtimeConfig
-                                .WithFramework(MicrosoftNETCoreApp, "5.1.3")
-                                .WithFramework(MiddleWare, "2.1.2")
+                    .AddFramework(HighWare, "7.3.1", runtimeConfig =>
+                        runtimeConfig
+                            .WithFramework(MicrosoftNETCoreApp, "5.1.3")
+                            .WithFramework(MiddleWare, "2.1.2")
                     )
                     .Build();
 

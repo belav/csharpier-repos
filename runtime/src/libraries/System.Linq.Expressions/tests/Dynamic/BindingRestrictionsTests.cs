@@ -66,40 +66,35 @@ namespace System.Dynamic.Tests
         [Fact]
         public void MergeNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "restrictions",
-                () => BindingRestrictions.Empty.Merge(null)
+            AssertExtensions.Throws<ArgumentNullException>("restrictions", () =>
+                BindingRestrictions.Empty.Merge(null)
             );
         }
 
         [Fact]
         public void ExpressionRestrictionFromNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => BindingRestrictions.GetExpressionRestriction(null)
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                BindingRestrictions.GetExpressionRestriction(null)
             );
         }
 
         [Fact]
         public void ExpressionRestrictionFromNonBooleanExpression()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => BindingRestrictions.GetExpressionRestriction(Expression.Empty())
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                BindingRestrictions.GetExpressionRestriction(Expression.Empty())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => BindingRestrictions.GetExpressionRestriction(Expression.Constant(""))
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                BindingRestrictions.GetExpressionRestriction(Expression.Constant(""))
             );
         }
 
         [Fact]
         public void InstanceRestrictionFromNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => BindingRestrictions.GetInstanceRestriction(null, new object())
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                BindingRestrictions.GetInstanceRestriction(null, new object())
             );
         }
 

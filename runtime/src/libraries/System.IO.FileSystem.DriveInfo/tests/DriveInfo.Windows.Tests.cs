@@ -30,10 +30,8 @@ namespace System.IO.FileSystem.Tests
         [InlineData(" c")]
         public void Ctor_InvalidPath_ThrowsArgumentException(string driveName)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "driveName",
-                null,
-                () => new DriveInfo(driveName)
+            AssertExtensions.Throws<ArgumentException>("driveName", null, () =>
+                new DriveInfo(driveName)
             );
         }
 

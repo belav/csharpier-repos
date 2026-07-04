@@ -218,13 +218,10 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertFrom_ArgumentException(string value)
         {
             var conv = new ColorConverter();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    conv.ConvertFrom(null, CultureInfo.InvariantCulture, value);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                conv.ConvertFrom(null, CultureInfo.InvariantCulture, value);
+            });
         }
 
         [Theory]
@@ -408,13 +405,10 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertFromInvariantString_Invalid()
         {
             var conv = new ColorConverter();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    conv.ConvertFromInvariantString("1, 2, 3, 4, 5");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                conv.ConvertFromInvariantString("1, 2, 3, 4, 5");
+            });
         }
 
         [Fact]
@@ -464,18 +458,15 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertFromString_Invalid()
         {
             var conv = new ColorConverter();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    conv.ConvertFromString(
-                        string.Format(
-                            "1{0} 2{0} 3{0} 4{0} 5",
-                            CultureInfo.CurrentCulture.TextInfo.ListSeparator
-                        )
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                conv.ConvertFromString(
+                    string.Format(
+                        "1{0} 2{0} 3{0} 4{0} 5",
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
+                );
+            });
         }
 
         [Fact]

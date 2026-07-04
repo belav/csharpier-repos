@@ -66,9 +66,8 @@ public class InjectThenByPropertyExpressionMutator : ExpressionMutator
         }
 
         var lambda = Expression.Lambda(lambdaBody, prm);
-        var injector = new ExpressionInjector(
-            expressionToInject,
-            e => Expression.Call(thenBy, e, lambda)
+        var injector = new ExpressionInjector(expressionToInject, e =>
+            Expression.Call(thenBy, e, lambda)
         );
 
         return injector.Visit(expression);

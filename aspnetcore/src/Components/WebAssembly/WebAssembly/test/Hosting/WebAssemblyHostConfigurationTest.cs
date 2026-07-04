@@ -52,14 +52,11 @@ public class WebAssemblyHostConfigurationTest
         // Assert
         Assert.Equal("car", configuration["type"]);
         IConfigurationRoot root = configuration;
-        Assert.All(
-            root.Providers,
-            provider =>
-            {
-                provider.TryGet("type", out var value);
-                Assert.Equal("car", value);
-            }
-        );
+        Assert.All(root.Providers, provider =>
+        {
+            provider.TryGet("type", out var value);
+            Assert.Equal("car", value);
+        });
     }
 
     [Fact]

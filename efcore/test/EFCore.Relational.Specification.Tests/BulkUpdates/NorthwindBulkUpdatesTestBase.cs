@@ -311,53 +311,45 @@ public abstract class NorthwindBulkUpdatesTestBase<TFixture> : BulkUpdatesTestBa
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Delete_non_entity_projection(bool async) =>
-        AssertTranslationFailed(
-            RelationalStrings.ExecuteDeleteOnNonEntityType,
-            () =>
-                AssertDelete(
-                    async,
-                    ss =>
-                        ss.Set<OrderDetail>()
-                            .Where(od => od.OrderID < 10250)
-                            .Select(e => e.ProductID),
-                    rowsAffectedCount: 0
-                )
+        AssertTranslationFailed(RelationalStrings.ExecuteDeleteOnNonEntityType, () =>
+            AssertDelete(
+                async,
+                ss =>
+                    ss.Set<OrderDetail>().Where(od => od.OrderID < 10250).Select(e => e.ProductID),
+                rowsAffectedCount: 0
+            )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Delete_non_entity_projection_2(bool async) =>
-        AssertTranslationFailed(
-            RelationalStrings.ExecuteDeleteOnNonEntityType,
-            () =>
-                AssertDelete(
-                    async,
-                    ss =>
-                        ss.Set<OrderDetail>()
-                            .Where(od => od.OrderID < 10250)
-                            .Select(e => new OrderDetail
-                            {
-                                OrderID = e.OrderID,
-                                ProductID = e.ProductID,
-                            }),
-                    rowsAffectedCount: 0
-                )
+        AssertTranslationFailed(RelationalStrings.ExecuteDeleteOnNonEntityType, () =>
+            AssertDelete(
+                async,
+                ss =>
+                    ss.Set<OrderDetail>()
+                        .Where(od => od.OrderID < 10250)
+                        .Select(e => new OrderDetail
+                        {
+                            OrderID = e.OrderID,
+                            ProductID = e.ProductID,
+                        }),
+                rowsAffectedCount: 0
+            )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Delete_non_entity_projection_3(bool async) =>
-        AssertTranslationFailed(
-            RelationalStrings.ExecuteDeleteOnNonEntityType,
-            () =>
-                AssertDelete(
-                    async,
-                    ss =>
-                        ss.Set<OrderDetail>()
-                            .Where(od => od.OrderID < 10250)
-                            .Select(e => new { OrderDetail = e, e.ProductID }),
-                    rowsAffectedCount: 0
-                )
+        AssertTranslationFailed(RelationalStrings.ExecuteDeleteOnNonEntityType, () =>
+            AssertDelete(
+                async,
+                ss =>
+                    ss.Set<OrderDetail>()
+                        .Where(od => od.OrderID < 10250)
+                        .Select(e => new { OrderDetail = e, e.ProductID }),
+                rowsAffectedCount: 0
+            )
         );
 
     [ConditionalTheory]
@@ -940,31 +932,27 @@ WHERE [OrderID] < 10300"
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Update_without_property_to_set_throws(bool async) =>
-        AssertTranslationFailed(
-            RelationalStrings.NoSetPropertyInvocation,
-            () =>
-                AssertUpdate(
-                    async,
-                    ss => ss.Set<OrderDetail>().Where(od => od.OrderID < 10250),
-                    e => e,
-                    s => s,
-                    rowsAffectedCount: 0
-                )
+        AssertTranslationFailed(RelationalStrings.NoSetPropertyInvocation, () =>
+            AssertUpdate(
+                async,
+                ss => ss.Set<OrderDetail>().Where(od => od.OrderID < 10250),
+                e => e,
+                s => s,
+                rowsAffectedCount: 0
+            )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Update_with_invalid_lambda_throws(bool async) =>
-        AssertTranslationFailed(
-            RelationalStrings.InvalidArgumentToExecuteUpdate,
-            () =>
-                AssertUpdate(
-                    async,
-                    ss => ss.Set<OrderDetail>().Where(od => od.OrderID < 10250),
-                    e => e,
-                    s => s.Maybe(e => e),
-                    rowsAffectedCount: 0
-                )
+        AssertTranslationFailed(RelationalStrings.InvalidArgumentToExecuteUpdate, () =>
+            AssertUpdate(
+                async,
+                ss => ss.Set<OrderDetail>().Where(od => od.OrderID < 10250),
+                e => e,
+                s => s.Maybe(e => e),
+                rowsAffectedCount: 0
+            )
         );
 
     [ConditionalTheory]
@@ -978,15 +966,11 @@ WHERE [OrderID] < 10300"
             e => e,
             s => s.SetProperty(c => c.ContactName, c => value).SetProperty(c => c.City, "Seattle"),
             rowsAffectedCount: 8,
-            (b, a) =>
-                Assert.All(
-                    a,
-                    c =>
-                    {
-                        Assert.Equal("Abc", c.ContactName);
-                        Assert.Equal("Seattle", c.City);
-                    }
-                )
+            (b, a) => Assert.All(a, c =>
+                {
+                    Assert.Equal("Abc", c.ContactName);
+                    Assert.Equal("Seattle", c.City);
+                })
         );
     }
 
@@ -1327,21 +1311,17 @@ WHERE [CustomerID] LIKE 'A%'"
             e => e.c,
             s => s.SetProperty(c => c.c.City, c => c.LastOrder.OrderDate.Value.Year.ToString()),
             rowsAffectedCount: 8,
-            (b, a) =>
-                Assert.All(
-                    a,
-                    c =>
+            (b, a) => Assert.All(a, c =>
+                {
+                    if (c.CustomerID == "FISSA")
                     {
-                        if (c.CustomerID == "FISSA")
-                        {
-                            Assert.Null(c.City);
-                        }
-                        else
-                        {
-                            Assert.NotNull(c.City);
-                        }
+                        Assert.Null(c.City);
                     }
-                )
+                    else
+                    {
+                        Assert.NotNull(c.City);
+                    }
+                })
         );
 
     [ConditionalTheory]
@@ -1379,21 +1359,17 @@ WHERE [CustomerID] LIKE 'A%'"
             e => e.c,
             s => s.SetProperty(c => c.c.City, c => c.LastOrderDate.ToString()),
             rowsAffectedCount: 8,
-            (b, a) =>
-                Assert.All(
-                    a,
-                    c =>
+            (b, a) => Assert.All(a, c =>
+                {
+                    if (c.CustomerID == "FISSA")
                     {
-                        if (c.CustomerID == "FISSA")
-                        {
-                            Assert.Null(c.City);
-                        }
-                        else
-                        {
-                            Assert.NotNull(c.City);
-                        }
+                        Assert.Null(c.City);
                     }
-                )
+                    else
+                    {
+                        Assert.NotNull(c.City);
+                    }
+                })
         );
 
     [ConditionalTheory]

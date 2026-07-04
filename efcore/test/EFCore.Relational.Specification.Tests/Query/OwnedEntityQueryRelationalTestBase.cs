@@ -291,14 +291,11 @@ public abstract class OwnedEntityQueryRelationalTestBase : OwnedEntityQueryTestB
 
         var result = async ? await query.ToListAsync() : query.ToList();
 
-        Assert.Collection(
-            result,
-            t =>
-            {
-                Assert.Equal(1, t.ServiceType);
-                Assert.Equal("1", t.ApartmentNo);
-            }
-        );
+        Assert.Collection(result, t =>
+        {
+            Assert.Equal(1, t.ServiceType);
+            Assert.Equal("1", t.ApartmentNo);
+        });
     }
 
     [ConditionalTheory]

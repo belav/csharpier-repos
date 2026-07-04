@@ -31,29 +31,20 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipWhileThrowsOnNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<int>)null).SkipWhile(i => i < 40)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<int>)null).SkipWhile(i => i < 40)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<int>)null).SkipWhile((i, idx) => i == idx)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<int>)null).SkipWhile((i, idx) => i == idx)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () =>
-                    Enumerable
-                        .Range(0, 20)
-                        .AsQueryable()
-                        .SkipWhile((Expression<Func<int, int, bool>>)null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                Enumerable
+                    .Range(0, 20)
+                    .AsQueryable()
+                    .SkipWhile((Expression<Func<int, int, bool>>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () =>
-                    Enumerable
-                        .Range(0, 20)
-                        .AsQueryable()
-                        .SkipWhile((Expression<Func<int, bool>>)null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                Enumerable.Range(0, 20).AsQueryable().SkipWhile((Expression<Func<int, bool>>)null)
             );
         }
 

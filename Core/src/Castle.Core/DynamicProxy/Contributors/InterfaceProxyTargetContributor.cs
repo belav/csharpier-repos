@@ -64,10 +64,8 @@ namespace Castle.DynamicProxy.Contributors
         {
             if (!method.Proxyable)
             {
-                return new ForwardingMethodGenerator(
-                    method,
-                    overrideMethod,
-                    (c, m) => c.GetField("__target")
+                return new ForwardingMethodGenerator(method, overrideMethod, (c, m) =>
+                    c.GetField("__target")
                 );
             }
 
@@ -106,18 +104,16 @@ namespace Castle.DynamicProxy.Contributors
 
             // no locking required as we're already within a lock
 
-            return scope.TypeCache.GetOrAddWithoutTakingLock(
-                key,
-                _ =>
-                    new CompositionInvocationTypeGenerator(
-                        method.Method.DeclaringType,
-                        method,
-                        method.Method,
-                        canChangeTarget,
-                        null
-                    )
-                        .Generate(@class, namingScope)
-                        .BuildType()
+            return scope.TypeCache.GetOrAddWithoutTakingLock(key, _ =>
+                new CompositionInvocationTypeGenerator(
+                    method.Method.DeclaringType,
+                    method,
+                    method.Method,
+                    canChangeTarget,
+                    null
+                )
+                    .Generate(@class, namingScope)
+                    .BuildType()
             );
         }
     }

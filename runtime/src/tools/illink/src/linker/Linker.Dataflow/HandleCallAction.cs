@@ -170,10 +170,8 @@ namespace ILLink.Shared.TrimAnalysis
             );
 
         private partial void MarkPublicParameterlessConstructorOnType(TypeProxy type) =>
-            _reflectionMarker.MarkConstructorsOnType(
-                _diagnosticContext.Origin,
-                type.Type,
-                m => m.IsPublic && !m.HasMetadataParameters()
+            _reflectionMarker.MarkConstructorsOnType(_diagnosticContext.Origin, type.Type, m =>
+                m.IsPublic && !m.HasMetadataParameters()
             );
 
         private partial void MarkConstructorsOnType(

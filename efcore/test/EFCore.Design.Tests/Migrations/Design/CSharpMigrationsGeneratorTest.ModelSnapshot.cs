@@ -1312,27 +1312,17 @@ namespace RootNamespace
                     b.Ignore(e => e.OrderInfo);
 
                     b.Property<int>("Shadow").HasColumnName("Shadow");
-                    b.ToTable(
-                        "Order",
-                        "DefaultSchema",
-                        tb =>
-                        {
-                            tb.Property(e => e.Id)
-                                .UseIdentityColumn(2, 3)
-                                .HasAnnotation("fii", "arr");
-                            tb.Property("Shadow");
-                        }
-                    );
-                    b.SplitToTable(
-                        "SplitOrder",
-                        "DefaultSchema",
-                        sb =>
-                        {
-                            sb.Property("Shadow");
-                            sb.HasTrigger("splitTrigger").HasAnnotation("oof", "rab");
-                            sb.HasAnnotation("foo", "bar");
-                        }
-                    );
+                    b.ToTable("Order", "DefaultSchema", tb =>
+                    {
+                        tb.Property(e => e.Id).UseIdentityColumn(2, 3).HasAnnotation("fii", "arr");
+                        tb.Property("Shadow");
+                    });
+                    b.SplitToTable("SplitOrder", "DefaultSchema", sb =>
+                    {
+                        sb.Property("Shadow");
+                        sb.HasTrigger("splitTrigger").HasAnnotation("oof", "rab");
+                        sb.HasAnnotation("foo", "bar");
+                    });
 
                     b.OwnsOne(
                         p => p.OrderBillingDetails,
@@ -1341,22 +1331,14 @@ namespace RootNamespace
                             od.OwnsOne(c => c.StreetAddress);
 
                             od.Property<int>("BillingShadow");
-                            od.ToTable(
-                                "SplitOrder",
-                                "DefaultSchema",
-                                tb =>
-                                {
-                                    tb.Property("BillingShadow").HasColumnName("Shadow");
-                                }
-                            );
-                            od.SplitToTable(
-                                "BillingDetails",
-                                "DefaultSchema",
-                                sb =>
-                                {
-                                    sb.Property("BillingShadow").HasColumnName("Shadow");
-                                }
-                            );
+                            od.ToTable("SplitOrder", "DefaultSchema", tb =>
+                            {
+                                tb.Property("BillingShadow").HasColumnName("Shadow");
+                            });
+                            od.SplitToTable("BillingDetails", "DefaultSchema", sb =>
+                            {
+                                sb.Property("BillingShadow").HasColumnName("Shadow");
+                            });
                         }
                     );
 
@@ -1367,22 +1349,14 @@ namespace RootNamespace
                             od.OwnsOne(c => c.StreetAddress).ToTable("ShippingDetails");
 
                             od.Property<int>("ShippingShadow");
-                            od.ToTable(
-                                "Order",
-                                "DefaultSchema",
-                                tb =>
-                                {
-                                    tb.Property("ShippingShadow").HasColumnName("Shadow");
-                                }
-                            );
-                            od.SplitToTable(
-                                "ShippingDetails",
-                                "DefaultSchema",
-                                sb =>
-                                {
-                                    sb.Property("ShippingShadow");
-                                }
-                            );
+                            od.ToTable("Order", "DefaultSchema", tb =>
+                            {
+                                tb.Property("ShippingShadow").HasColumnName("Shadow");
+                            });
+                            od.SplitToTable("ShippingDetails", "DefaultSchema", sb =>
+                            {
+                                sb.Property("ShippingShadow");
+                            });
                         }
                     );
                 });
@@ -1672,20 +1646,14 @@ namespace RootNamespace
                 builder.Entity<EntityWithOneProperty>(b =>
                 {
                     b.Property<int>("Shadow");
-                    b.ToView(
-                        "EntityWithOneProperty",
-                        tb =>
-                        {
-                            tb.Property("Shadow");
-                        }
-                    );
-                    b.SplitToView(
-                        "SplitView",
-                        sb =>
-                        {
-                            sb.Property("Shadow");
-                        }
-                    );
+                    b.ToView("EntityWithOneProperty", tb =>
+                    {
+                        tb.Property("Shadow");
+                    });
+                    b.SplitToView("SplitView", sb =>
+                    {
+                        sb.Property("Shadow");
+                    });
 
                     b.OwnsOne(
                         eo => eo.EntityWithTwoProperties,
@@ -1693,20 +1661,14 @@ namespace RootNamespace
                         {
                             eb.Ignore(e => e.EntityWithStringKey);
 
-                            eb.ToView(
-                                "EntityWithOneProperty",
-                                tb =>
-                                {
-                                    tb.Property(e => e.AlternateId).HasColumnName("SomeId");
-                                }
-                            );
-                            eb.SplitToView(
-                                "SplitView",
-                                sb =>
-                                {
-                                    sb.Property(e => e.AlternateId).HasColumnName("SomeOtherId");
-                                }
-                            );
+                            eb.ToView("EntityWithOneProperty", tb =>
+                            {
+                                tb.Property(e => e.AlternateId).HasColumnName("SomeId");
+                            });
+                            eb.SplitToView("SplitView", sb =>
+                            {
+                                sb.Property(e => e.AlternateId).HasColumnName("SomeOtherId");
+                            });
                         }
                     );
                 });
@@ -2335,17 +2297,14 @@ namespace RootNamespace
             builder =>
             {
                 builder.UseIdentityColumns(long.MaxValue, 5);
-                builder.Entity(
-                    "Building",
-                    b =>
-                    {
-                        b.Property<int>("Id");
+                builder.Entity("Building", b =>
+                {
+                    b.Property<int>("Id");
 
-                        b.HasKey("Id");
+                    b.HasKey("Id");
 
-                        b.ToTable("Buildings", "DefaultSchema");
-                    }
-                );
+                    b.ToTable("Buildings", "DefaultSchema");
+                });
             },
             AddBoilerPlate(
                 """
@@ -3155,20 +3114,14 @@ namespace RootNamespace
                             "Microsoft.EntityFrameworkCore.Migrations.Design.CSharpMigrationsGeneratorTest+ManyToManyLeft",
                             fk.PrincipalEntityType.Name
                         );
-                        Assert.Collection(
-                            fk.PrincipalKey.Properties,
-                            p =>
-                            {
-                                Assert.Equal("Id", p.Name);
-                            }
-                        );
-                        Assert.Collection(
-                            fk.Properties,
-                            p =>
-                            {
-                                Assert.Equal("LeftsId", p.Name);
-                            }
-                        );
+                        Assert.Collection(fk.PrincipalKey.Properties, p =>
+                        {
+                            Assert.Equal("Id", p.Name);
+                        });
+                        Assert.Collection(fk.Properties, p =>
+                        {
+                            Assert.Equal("LeftsId", p.Name);
+                        });
                     },
                     fk =>
                     {
@@ -3176,20 +3129,14 @@ namespace RootNamespace
                             "Microsoft.EntityFrameworkCore.Migrations.Design.CSharpMigrationsGeneratorTest+ManyToManyRight",
                             fk.PrincipalEntityType.Name
                         );
-                        Assert.Collection(
-                            fk.PrincipalKey.Properties,
-                            p =>
-                            {
-                                Assert.Equal("Id", p.Name);
-                            }
-                        );
-                        Assert.Collection(
-                            fk.Properties,
-                            p =>
-                            {
-                                Assert.Equal("RightsId", p.Name);
-                            }
-                        );
+                        Assert.Collection(fk.PrincipalKey.Properties, p =>
+                        {
+                            Assert.Equal("Id", p.Name);
+                        });
+                        Assert.Collection(fk.Properties, p =>
+                        {
+                            Assert.Equal("RightsId", p.Name);
+                        });
                     }
                 );
 
@@ -3314,20 +3261,14 @@ namespace RootNamespace
                             "Microsoft.EntityFrameworkCore.Migrations.Design.CSharpMigrationsGeneratorTest+ManyToManyLeft",
                             fk.PrincipalEntityType.Name
                         );
-                        Assert.Collection(
-                            fk.PrincipalKey.Properties,
-                            p =>
-                            {
-                                Assert.Equal("Id", p.Name);
-                            }
-                        );
-                        Assert.Collection(
-                            fk.Properties,
-                            p =>
-                            {
-                                Assert.Equal("LeftsId", p.Name);
-                            }
-                        );
+                        Assert.Collection(fk.PrincipalKey.Properties, p =>
+                        {
+                            Assert.Equal("Id", p.Name);
+                        });
+                        Assert.Collection(fk.Properties, p =>
+                        {
+                            Assert.Equal("LeftsId", p.Name);
+                        });
                     },
                     fk =>
                     {
@@ -3335,20 +3276,14 @@ namespace RootNamespace
                             "Microsoft.EntityFrameworkCore.Migrations.Design.CSharpMigrationsGeneratorTest+ManyToManyRight",
                             fk.PrincipalEntityType.Name
                         );
-                        Assert.Collection(
-                            fk.PrincipalKey.Properties,
-                            p =>
-                            {
-                                Assert.Equal("Id", p.Name);
-                            }
-                        );
-                        Assert.Collection(
-                            fk.Properties,
-                            p =>
-                            {
-                                Assert.Equal("RightsId", p.Name);
-                            }
-                        );
+                        Assert.Collection(fk.PrincipalKey.Properties, p =>
+                        {
+                            Assert.Equal("Id", p.Name);
+                        });
+                        Assert.Collection(fk.Properties, p =>
+                        {
+                            Assert.Equal("RightsId", p.Name);
+                        });
                     }
                 );
             }
@@ -3716,27 +3651,20 @@ namespace RootNamespace
                 var annotations = temporalEntity.GetAnnotations().ToList();
 
                 Assert.Equal(7, annotations.Count);
-                Assert.Contains(
-                    annotations,
-                    a => a.Name == SqlServerAnnotationNames.IsTemporal && a.Value as bool? == true
+                Assert.Contains(annotations, a =>
+                    a.Name == SqlServerAnnotationNames.IsTemporal && a.Value as bool? == true
                 );
-                Assert.Contains(
-                    annotations,
-                    a =>
-                        a.Name == SqlServerAnnotationNames.TemporalHistoryTableName
-                        && a.Value as string == "HistoryTable"
+                Assert.Contains(annotations, a =>
+                    a.Name == SqlServerAnnotationNames.TemporalHistoryTableName
+                    && a.Value as string == "HistoryTable"
                 );
-                Assert.Contains(
-                    annotations,
-                    a =>
-                        a.Name == SqlServerAnnotationNames.TemporalPeriodStartPropertyName
-                        && a.Value as string == "Start"
+                Assert.Contains(annotations, a =>
+                    a.Name == SqlServerAnnotationNames.TemporalPeriodStartPropertyName
+                    && a.Value as string == "Start"
                 );
-                Assert.Contains(
-                    annotations,
-                    a =>
-                        a.Name == SqlServerAnnotationNames.TemporalPeriodEndPropertyName
-                        && a.Value as string == "End"
+                Assert.Contains(annotations, a =>
+                    a.Name == SqlServerAnnotationNames.TemporalPeriodEndPropertyName
+                    && a.Value as string == "End"
                 );
             }
         );
@@ -3795,21 +3723,16 @@ namespace RootNamespace
                 var annotations = temporalEntity.GetAnnotations().ToList();
 
                 Assert.Equal(7, annotations.Count);
-                Assert.Contains(
-                    annotations,
-                    a => a.Name == SqlServerAnnotationNames.IsTemporal && a.Value as bool? == true
+                Assert.Contains(annotations, a =>
+                    a.Name == SqlServerAnnotationNames.IsTemporal && a.Value as bool? == true
                 );
-                Assert.Contains(
-                    annotations,
-                    a =>
-                        a.Name == SqlServerAnnotationNames.TemporalPeriodStartPropertyName
-                        && a.Value as string == "PeriodStart"
+                Assert.Contains(annotations, a =>
+                    a.Name == SqlServerAnnotationNames.TemporalPeriodStartPropertyName
+                    && a.Value as string == "PeriodStart"
                 );
-                Assert.Contains(
-                    annotations,
-                    a =>
-                        a.Name == SqlServerAnnotationNames.TemporalPeriodEndPropertyName
-                        && a.Value as string == "PeriodEnd"
+                Assert.Contains(annotations, a =>
+                    a.Name == SqlServerAnnotationNames.TemporalPeriodEndPropertyName
+                    && a.Value as string == "PeriodEnd"
                 );
             }
         );
@@ -4100,10 +4023,8 @@ namespace RootNamespace
 
                     b.HasData(new EntityWithOneProperty { Id = 1 });
 
-                    b.ToTable(
-                        "EntityWithOneProperty",
-                        "DefaultSchema",
-                        e => e.ExcludeFromMigrations()
+                    b.ToTable("EntityWithOneProperty", "DefaultSchema", e =>
+                        e.ExcludeFromMigrations()
                     );
                 });
 
@@ -6225,22 +6146,19 @@ namespace RootNamespace
                     SqlServerValueGenerationStrategy.IdentityColumn
                 );
 
-                builder.Entity(
-                    "Building",
-                    b =>
-                    {
-                        b.Property<int>("Id")
-                            .ValueGeneratedOnAdd()
-                            .HasAnnotation(
-                                SqlServerAnnotationNames.ValueGenerationStrategy,
-                                SqlServerValueGenerationStrategy.IdentityColumn
-                            );
+                builder.Entity("Building", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation(
+                            SqlServerAnnotationNames.ValueGenerationStrategy,
+                            SqlServerValueGenerationStrategy.IdentityColumn
+                        );
 
-                        b.HasKey("Id");
+                    b.HasKey("Id");
 
-                        b.ToTable("Buildings", "DefaultSchema");
-                    }
-                );
+                    b.ToTable("Buildings", "DefaultSchema");
+                });
             },
             AddBoilerPlate(
                 GetHeading()
@@ -6271,17 +6189,14 @@ namespace RootNamespace
         Test(
             builder =>
             {
-                builder.Entity(
-                    "Building",
-                    b =>
-                    {
-                        b.Property<int>("Id").UseIdentityColumn();
+                builder.Entity("Building", b =>
+                {
+                    b.Property<int>("Id").UseIdentityColumn();
 
-                        b.HasKey("Id");
+                    b.HasKey("Id");
 
-                        b.ToTable("Buildings", "DefaultSchema");
-                    }
-                );
+                    b.ToTable("Buildings", "DefaultSchema");
+                });
             },
             AddBoilerPlate(
                 GetHeading()
@@ -6317,17 +6232,14 @@ namespace RootNamespace
         Test(
             builder =>
             {
-                builder.Entity(
-                    "Building",
-                    b =>
-                    {
-                        b.Property<int>("Id").UseIdentityColumn(seed: 5);
+                builder.Entity("Building", b =>
+                {
+                    b.Property<int>("Id").UseIdentityColumn(seed: 5);
 
-                        b.HasKey("Id");
+                    b.HasKey("Id");
 
-                        b.ToTable("Buildings", "DefaultSchema");
-                    }
-                );
+                    b.ToTable("Buildings", "DefaultSchema");
+                });
             },
             AddBoilerPlate(
                 GetHeading()
@@ -6363,17 +6275,14 @@ namespace RootNamespace
         Test(
             builder =>
             {
-                builder.Entity(
-                    "Building",
-                    b =>
-                    {
-                        b.Property<int>("Id").UseIdentityColumn(increment: 5);
+                builder.Entity("Building", b =>
+                {
+                    b.Property<int>("Id").UseIdentityColumn(increment: 5);
 
-                        b.HasKey("Id");
+                    b.HasKey("Id");
 
-                        b.ToTable("Buildings", "DefaultSchema");
-                    }
-                );
+                    b.ToTable("Buildings", "DefaultSchema");
+                });
             },
             AddBoilerPlate(
                 GetHeading()
@@ -6409,17 +6318,14 @@ namespace RootNamespace
         Test(
             builder =>
             {
-                builder.Entity(
-                    "Building",
-                    b =>
-                    {
-                        b.Property<int>("Id").UseIdentityColumn(5, 5);
+                builder.Entity("Building", b =>
+                {
+                    b.Property<int>("Id").UseIdentityColumn(5, 5);
 
-                        b.HasKey("Id");
+                    b.HasKey("Id");
 
-                        b.ToTable("Buildings", "DefaultSchema");
-                    }
-                );
+                    b.ToTable("Buildings", "DefaultSchema");
+                });
             },
             AddBoilerPlate(
                 GetHeading()
@@ -7045,24 +6951,21 @@ namespace RootNamespace
                 var entityType = o.GetEntityTypes().Single();
                 Assert.Equal(5, entityType.GetIndexes().Count());
 
-                var unspecifiedIndex = Assert.Single(
-                    entityType.GetIndexes(),
-                    i => i.Name == "IX_unspecified"
+                var unspecifiedIndex = Assert.Single(entityType.GetIndexes(), i =>
+                    i.Name == "IX_unspecified"
                 );
                 Assert.Null(unspecifiedIndex.IsDescending);
 
                 var emptyIndex = Assert.Single(entityType.GetIndexes(), i => i.Name == "IX_empty");
                 Assert.Equal(Array.Empty<bool>(), emptyIndex.IsDescending);
 
-                var allAscendingIndex = Assert.Single(
-                    entityType.GetIndexes(),
-                    i => i.Name == "IX_all_ascending"
+                var allAscendingIndex = Assert.Single(entityType.GetIndexes(), i =>
+                    i.Name == "IX_all_ascending"
                 );
                 Assert.Null(allAscendingIndex.IsDescending);
 
-                var allDescendingIndex = Assert.Single(
-                    entityType.GetIndexes(),
-                    i => i.Name == "IX_all_descending"
+                var allDescendingIndex = Assert.Single(entityType.GetIndexes(), i =>
+                    i.Name == "IX_all_descending"
                 );
                 Assert.Equal(Array.Empty<bool>(), allDescendingIndex.IsDescending);
 

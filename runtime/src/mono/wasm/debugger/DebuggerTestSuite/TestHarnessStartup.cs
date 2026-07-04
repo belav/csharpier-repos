@@ -129,99 +129,93 @@ namespace DebuggerTests
 
             app.UseRouter(router =>
             {
-                router.MapGet(
-                    "launch-host-and-connect",
-                    async context =>
+                router.MapGet("launch-host-and-connect", async context =>
+                {
+                    string test_id;
+                    if (
+                        context.Request.Query.TryGetValue("test_id", out var value)
+                        && value.Count == 1
+                    )
+                        test_id = value[0];
+                    else
+                        test_id = "unknown";
+
+                    WasmHost host = WasmHost.Chrome;
+                    if (context.Request.Query.TryGetValue("host", out value) && value.Count == 1)
                     {
-                        string test_id;
-                        if (
-                            context.Request.Query.TryGetValue("test_id", out var value)
-                            && value.Count == 1
-                        )
-                            test_id = value[0];
-                        else
-                            test_id = "unknown";
-
-                        WasmHost host = WasmHost.Chrome;
-                        if (
-                            context.Request.Query.TryGetValue("host", out value)
-                            && value.Count == 1
-                        )
-                        {
-                            if (!Enum.TryParse(value[0], true, out host))
-                                throw new ArgumentException($"Unknown wasm host - {value[0]}");
-                        }
-
-                        int firefox_proxy_port = 6002;
-                        if (
-                            context.Request.Query.TryGetValue("firefox-proxy-port", out value)
-                            && value.Count == 1
-                            && int.TryParse(value[0], out int port)
-                        )
-                        {
-                            firefox_proxy_port = port;
-                        }
-
-                        string message_prefix = $"[testId: {test_id}]";
-                        Logger.LogInformation(
-                            $"{message_prefix} New test request for test id {test_id}"
-                        );
-                        CancellationTokenSource cts = new();
-                        try
-                        {
-                            int browserPort;
-                            if (host == WasmHost.Chrome)
-                            {
-                                using var provider = new ChromeProvider(test_id, Logger);
-                                browserPort = options.DevToolsUrl.Port;
-                                await provider
-                                    .StartBrowserAndProxyAsync(
-                                        context,
-                                        $"http://{TestHarnessProxy.Endpoint.Authority}/{options.PagePath}",
-                                        browserPort,
-                                        message_prefix,
-                                        _loggerFactory,
-                                        cts,
-                                        locale: options.Locale
-                                    )
-                                    .ConfigureAwait(false);
-                            }
-                            else if (host == WasmHost.Firefox)
-                            {
-                                using var provider = new FirefoxProvider(test_id, Logger);
-                                browserPort = 6500 + int.Parse(test_id);
-                                await provider
-                                    .StartBrowserAndProxyAsync(
-                                        context,
-                                        $"http://{TestHarnessProxy.Endpoint.Authority}/{options.PagePath}",
-                                        browserPort,
-                                        firefox_proxy_port,
-                                        message_prefix,
-                                        _loggerFactory,
-                                        cts,
-                                        locale: options.Locale
-                                    )
-                                    .ConfigureAwait(false);
-                            }
-                            Logger.LogDebug($"{message_prefix} TestHarnessStartup done");
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.LogError(
-                                $"{message_prefix} launch-host-and-connect failed with {ex}"
-                            );
-                            TestHarnessProxy.RegisterProxyExitState(
-                                test_id,
-                                new(RunLoopStopReason.Exception, ex)
-                            );
-                        }
-                        finally
-                        {
-                            Logger.LogDebug($"TestHarnessStartup: closing for {test_id}");
-                            cts.Cancel();
-                        }
+                        if (!Enum.TryParse(value[0], true, out host))
+                            throw new ArgumentException($"Unknown wasm host - {value[0]}");
                     }
-                );
+
+                    int firefox_proxy_port = 6002;
+                    if (
+                        context.Request.Query.TryGetValue("firefox-proxy-port", out value)
+                        && value.Count == 1
+                        && int.TryParse(value[0], out int port)
+                    )
+                    {
+                        firefox_proxy_port = port;
+                    }
+
+                    string message_prefix = $"[testId: {test_id}]";
+                    Logger.LogInformation(
+                        $"{message_prefix} New test request for test id {test_id}"
+                    );
+                    CancellationTokenSource cts = new();
+                    try
+                    {
+                        int browserPort;
+                        if (host == WasmHost.Chrome)
+                        {
+                            using var provider = new ChromeProvider(test_id, Logger);
+                            browserPort = options.DevToolsUrl.Port;
+                            await provider
+                                .StartBrowserAndProxyAsync(
+                                    context,
+                                    $"http://{TestHarnessProxy.Endpoint.Authority}/{options.PagePath}",
+                                    browserPort,
+                                    message_prefix,
+                                    _loggerFactory,
+                                    cts,
+                                    locale: options.Locale
+                                )
+                                .ConfigureAwait(false);
+                        }
+                        else if (host == WasmHost.Firefox)
+                        {
+                            using var provider = new FirefoxProvider(test_id, Logger);
+                            browserPort = 6500 + int.Parse(test_id);
+                            await provider
+                                .StartBrowserAndProxyAsync(
+                                    context,
+                                    $"http://{TestHarnessProxy.Endpoint.Authority}/{options.PagePath}",
+                                    browserPort,
+                                    firefox_proxy_port,
+                                    message_prefix,
+                                    _loggerFactory,
+                                    cts,
+                                    locale: options.Locale
+                                )
+                                .ConfigureAwait(false);
+                        }
+                        Logger.LogDebug($"{message_prefix} TestHarnessStartup done");
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.LogError(
+                            $"{message_prefix} launch-host-and-connect failed with {ex}"
+                        );
+                        TestHarnessProxy.RegisterProxyExitState(
+                            test_id,
+                            new(RunLoopStopReason.Exception, ex)
+                        );
+                    }
+                    finally
+                    {
+                        Logger.LogDebug($"TestHarnessStartup: closing for {test_id}");
+                        cts.Cancel();
+                    }
+                });
             });
 
             if (options.NodeApp != null)
@@ -244,14 +238,11 @@ namespace DebuggerTests
                     router.MapGet("json", SendNodeList);
                     router.MapGet("json/list", SendNodeList);
                     router.MapGet("json/version", SendNodeVersion);
-                    router.MapGet(
-                        "launch-done-and-connect",
-                        async context =>
-                        {
-                            await Task.CompletedTask;
-                            // await LaunchAndServe(psi, context, null, null, null, null);
-                        }
-                    );
+                    router.MapGet("launch-done-and-connect", async context =>
+                    {
+                        await Task.CompletedTask;
+                        // await LaunchAndServe(psi, context, null, null, null, null);
+                    });
                 });
             }
         }

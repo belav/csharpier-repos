@@ -76,9 +76,8 @@ namespace System.ConfigurationTests
                 Path.GetTempPath(),
                 Path.GetRandomFileName() + ".config"
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "machineConfigFilename",
-                () => new ConfigurationFileMap(missingFile)
+            AssertExtensions.Throws<ArgumentException>("machineConfigFilename", () =>
+                new ConfigurationFileMap(missingFile)
             );
         }
 

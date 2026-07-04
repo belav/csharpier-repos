@@ -77,10 +77,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             ReadOnlyCollection<string> FormatSpecifiers
         )
         {
-            return InspectionSession.InvokeFormatter(
-                this,
-                MethodId.GetTypeName,
-                f => f.GetTypeName(this, ClrType, CustomTypeInfo, FormatSpecifiers)
+            return InspectionSession.InvokeFormatter(this, MethodId.GetTypeName, f =>
+                f.GetTypeName(this, ClrType, CustomTypeInfo, FormatSpecifiers)
             );
         }
 

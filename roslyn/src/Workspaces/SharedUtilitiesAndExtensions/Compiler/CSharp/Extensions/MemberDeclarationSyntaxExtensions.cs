@@ -22,20 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static LocalDeclarationMap GetLocalDeclarationMap(
             this MemberDeclarationSyntax member
-        ) =>
-            new(
-                s_declarationCache.GetValue(
-                    member,
-                    static member =>
-                    {
-                        var dictionary = DeclarationFinder.GetAllDeclarations(member);
-                        return dictionary.ToDictionary(
-                            kvp => kvp.Key,
-                            kvp => kvp.Value.AsImmutable()
-                        );
-                    }
-                )
-            );
+        ) => new(s_declarationCache.GetValue(member, static member =>
+                {
+                    var dictionary = DeclarationFinder.GetAllDeclarations(member);
+                    return dictionary.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.AsImmutable());
+                }));
 
         public static SyntaxToken GetNameToken(this MemberDeclarationSyntax member)
         {

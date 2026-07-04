@@ -239,15 +239,12 @@ public class RedisProtocolTests
             );
 
             var writtenMessages = hubProtocol.GetWrittenMessages();
-            Assert.Collection(
-                writtenMessages,
-                actualMessage =>
-                {
-                    var invocation = Assert.IsType<InvocationMessage>(actualMessage);
-                    Assert.Same(_testMessage.Target, invocation.Target);
-                    Assert.Same(_testMessage.Arguments, invocation.Arguments);
-                }
-            );
+            Assert.Collection(writtenMessages, actualMessage =>
+            {
+                var invocation = Assert.IsType<InvocationMessage>(actualMessage);
+                Assert.Same(_testMessage.Target, invocation.Target);
+                Assert.Same(_testMessage.Arguments, invocation.Arguments);
+            });
         }
     }
 

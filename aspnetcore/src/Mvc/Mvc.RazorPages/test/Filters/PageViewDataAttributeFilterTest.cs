@@ -35,9 +35,8 @@ public class PageViewDataAttributeFilterTest
         filter.OnPageHandlerExecuting(context);
 
         // Assert
-        var feature = Assert.Single(
-            httpContext.Features,
-            f => f.Key == typeof(IViewDataValuesProviderFeature)
+        var feature = Assert.Single(httpContext.Features, f =>
+            f.Key == typeof(IViewDataValuesProviderFeature)
         );
         Assert.Same(filter, feature.Value);
     }

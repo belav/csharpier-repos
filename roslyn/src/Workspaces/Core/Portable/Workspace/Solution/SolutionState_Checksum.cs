@@ -29,9 +29,8 @@ namespace Microsoft.CodeAnalysis
         public static IReadOnlyList<ProjectId> GetOrCreateSortedProjectIds(
             IReadOnlyList<ProjectId> unorderedList
         ) =>
-            s_projectIdToSortedProjectsMap.GetValue(
-                unorderedList,
-                projectIds => projectIds.OrderBy(id => id.Id).ToImmutableArray()
+            s_projectIdToSortedProjectsMap.GetValue(unorderedList, projectIds =>
+                projectIds.OrderBy(id => id.Id).ToImmutableArray()
             );
 
         public bool TryGetStateChecksums(

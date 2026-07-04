@@ -29,39 +29,31 @@ namespace System.IO.MemoryMappedFiles.Tests
                 using (mmf)
                 {
                     // Offset
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "offset",
-                        () => mmf.CreateViewAccessor(-1, mapLength)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                        mmf.CreateViewAccessor(-1, mapLength)
                     );
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "offset",
-                        () =>
-                            mmf.CreateViewAccessor(-1, mapLength, MemoryMappedFileAccess.ReadWrite)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                        mmf.CreateViewAccessor(-1, mapLength, MemoryMappedFileAccess.ReadWrite)
                     );
 
                     // Size
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "size",
-                        () => mmf.CreateViewAccessor(0, -1)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("size", () =>
+                        mmf.CreateViewAccessor(0, -1)
                     );
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "size",
-                        () => mmf.CreateViewAccessor(0, -1, MemoryMappedFileAccess.ReadWrite)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("size", () =>
+                        mmf.CreateViewAccessor(0, -1, MemoryMappedFileAccess.ReadWrite)
                     );
                     if (IntPtr.Size == 4)
                     {
-                        AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                            "size",
-                            () => mmf.CreateViewAccessor(0, 1 + (long)uint.MaxValue)
+                        AssertExtensions.Throws<ArgumentOutOfRangeException>("size", () =>
+                            mmf.CreateViewAccessor(0, 1 + (long)uint.MaxValue)
                         );
-                        AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                            "size",
-                            () =>
-                                mmf.CreateViewAccessor(
-                                    0,
-                                    1 + (long)uint.MaxValue,
-                                    MemoryMappedFileAccess.ReadWrite
-                                )
+                        AssertExtensions.Throws<ArgumentOutOfRangeException>("size", () =>
+                            mmf.CreateViewAccessor(
+                                0,
+                                1 + (long)uint.MaxValue,
+                                MemoryMappedFileAccess.ReadWrite
+                            )
                         );
                     }
                     else
@@ -91,13 +83,11 @@ namespace System.IO.MemoryMappedFiles.Tests
                     );
 
                     // Access
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "access",
-                        () => mmf.CreateViewAccessor(0, mapLength, (MemoryMappedFileAccess)(-1))
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("access", () =>
+                        mmf.CreateViewAccessor(0, mapLength, (MemoryMappedFileAccess)(-1))
                     );
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "access",
-                        () => mmf.CreateViewAccessor(0, mapLength, (MemoryMappedFileAccess)(42))
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("access", () =>
+                        mmf.CreateViewAccessor(0, mapLength, (MemoryMappedFileAccess)(42))
                     );
                 }
             }
@@ -481,218 +471,166 @@ namespace System.IO.MemoryMappedFiles.Tests
             // Failed reads and writes just at the border of the end. This triggers different exception types
             // for some types than when we're completely beyond the end.
             long beyondEnd = acc.Capacity + 1;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadBoolean(beyondEnd - sizeof(bool))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadBoolean(beyondEnd - sizeof(bool))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadByte(beyondEnd - sizeof(byte))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadByte(beyondEnd - sizeof(byte))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadSByte(beyondEnd - sizeof(sbyte))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadSByte(beyondEnd - sizeof(sbyte))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.ReadChar(beyondEnd - sizeof(char))
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.ReadChar(beyondEnd - sizeof(char))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.ReadDecimal(beyondEnd - sizeof(decimal))
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.ReadDecimal(beyondEnd - sizeof(decimal))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.ReadDouble(beyondEnd - sizeof(double))
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.ReadDouble(beyondEnd - sizeof(double))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.ReadInt16(beyondEnd - sizeof(short))
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.ReadInt16(beyondEnd - sizeof(short))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.ReadInt32(beyondEnd - sizeof(int))
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.ReadInt32(beyondEnd - sizeof(int))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.ReadInt64(beyondEnd - sizeof(long))
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.ReadInt64(beyondEnd - sizeof(long))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.ReadSingle(beyondEnd - sizeof(float))
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.ReadSingle(beyondEnd - sizeof(float))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.ReadUInt16(beyondEnd - sizeof(ushort))
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.ReadUInt16(beyondEnd - sizeof(ushort))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.ReadUInt32(beyondEnd - sizeof(uint))
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.ReadUInt32(beyondEnd - sizeof(uint))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.ReadUInt64(beyondEnd - sizeof(ulong))
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.ReadUInt64(beyondEnd - sizeof(ulong))
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(bool), false)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(bool), false)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(byte), (byte)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(byte), (byte)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(sbyte), (sbyte)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(sbyte), (sbyte)0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(char), 'c')
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.Write(beyondEnd - sizeof(char), 'c')
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(decimal), (decimal)0)
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.Write(beyondEnd - sizeof(decimal), (decimal)0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(double), (double)0)
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.Write(beyondEnd - sizeof(double), (double)0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(short), (short)0)
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.Write(beyondEnd - sizeof(short), (short)0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(int), (int)0)
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.Write(beyondEnd - sizeof(int), (int)0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(long), (long)0)
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.Write(beyondEnd - sizeof(long), (long)0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(float), (float)0)
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.Write(beyondEnd - sizeof(float), (float)0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(ushort), (ushort)0)
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.Write(beyondEnd - sizeof(ushort), (ushort)0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(uint), (uint)0)
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.Write(beyondEnd - sizeof(uint), (uint)0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(ulong), (ulong)0)
+            AssertExtensions.Throws<ArgumentException>("position", () =>
+                acc.Write(beyondEnd - sizeof(ulong), (ulong)0)
             );
 
             // Failed reads and writes well past the end
             beyondEnd = acc.Capacity + 20;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadBoolean(beyondEnd - sizeof(bool))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadBoolean(beyondEnd - sizeof(bool))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadByte(beyondEnd - sizeof(byte))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadByte(beyondEnd - sizeof(byte))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadSByte(beyondEnd - sizeof(sbyte))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadSByte(beyondEnd - sizeof(sbyte))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadChar(beyondEnd - sizeof(char))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadChar(beyondEnd - sizeof(char))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadDecimal(beyondEnd - sizeof(decimal))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadDecimal(beyondEnd - sizeof(decimal))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadDouble(beyondEnd - sizeof(double))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadDouble(beyondEnd - sizeof(double))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadInt16(beyondEnd - sizeof(short))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadInt16(beyondEnd - sizeof(short))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadInt32(beyondEnd - sizeof(int))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadInt32(beyondEnd - sizeof(int))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadInt64(beyondEnd - sizeof(long))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadInt64(beyondEnd - sizeof(long))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadSingle(beyondEnd - sizeof(float))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadSingle(beyondEnd - sizeof(float))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadUInt16(beyondEnd - sizeof(ushort))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadUInt16(beyondEnd - sizeof(ushort))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadUInt32(beyondEnd - sizeof(uint))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadUInt32(beyondEnd - sizeof(uint))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.ReadUInt64(beyondEnd - sizeof(ulong))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.ReadUInt64(beyondEnd - sizeof(ulong))
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(bool), false)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(bool), false)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(byte), (byte)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(byte), (byte)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(sbyte), (sbyte)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(sbyte), (sbyte)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(char), 'c')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(char), 'c')
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(decimal), (decimal)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(decimal), (decimal)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(double), (double)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(double), (double)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(short), (short)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(short), (short)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(int), (int)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(int), (int)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(long), (long)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(long), (long)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(float), (float)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(float), (float)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(ushort), (ushort)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(ushort), (ushort)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(uint), (uint)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(uint), (uint)0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "position",
-                () => acc.Write(beyondEnd - sizeof(ulong), (ulong)0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                acc.Write(beyondEnd - sizeof(ulong), (ulong)0)
             );
         }
 

@@ -30,13 +30,11 @@ namespace System.IO.Tests
         [Fact]
         public async Task NullParametersAsync()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "path",
-                async () => await WriteAsync(null, "Text")
+            await Assert.ThrowsAsync<ArgumentNullException>("path", async () =>
+                await WriteAsync(null, "Text")
             );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "path",
-                async () => await ReadAsync(null)
+            await Assert.ThrowsAsync<ArgumentNullException>("path", async () =>
+                await ReadAsync(null)
             );
         }
 
@@ -68,9 +66,8 @@ namespace System.IO.Tests
         [Fact]
         public async Task InvalidParametersAsync()
         {
-            await Assert.ThrowsAsync<ArgumentException>(
-                "path",
-                async () => await WriteAsync(string.Empty, "Text")
+            await Assert.ThrowsAsync<ArgumentException>("path", async () =>
+                await WriteAsync(string.Empty, "Text")
             );
             await Assert.ThrowsAsync<ArgumentException>("path", async () => await ReadAsync(""));
         }
@@ -253,13 +250,11 @@ namespace System.IO.Tests
         public async Task NullEncodingAsync()
         {
             string path = GetTestFilePath();
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "encoding",
-                async () => await File.WriteAllTextAsync(path, "Text", null)
+            await Assert.ThrowsAsync<ArgumentNullException>("encoding", async () =>
+                await File.WriteAllTextAsync(path, "Text", null)
             );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "encoding",
-                async () => await File.ReadAllTextAsync(path, null)
+            await Assert.ThrowsAsync<ArgumentNullException>("encoding", async () =>
+                await File.ReadAllTextAsync(path, null)
             );
         }
 

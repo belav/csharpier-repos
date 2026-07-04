@@ -145,15 +145,11 @@ namespace System.Web.Http.Filters
 
             // Act & Assert
             Exception exception = await Assert.ThrowsAsync<Exception>(() =>
-                filter.ExecuteAuthorizationFilterAsync(
-                    context,
-                    CancellationToken.None,
-                    () =>
-                    {
-                        continuationCalled = true;
-                        return null;
-                    }
-                )
+                filter.ExecuteAuthorizationFilterAsync(context, CancellationToken.None, () =>
+                {
+                    continuationCalled = true;
+                    return null;
+                })
             );
 
             // Assert
@@ -173,14 +169,10 @@ namespace System.Web.Http.Filters
             var filter = (IAuthorizationFilter)filterMock.Object;
 
             // Act
-            await filter.ExecuteAuthorizationFilterAsync(
-                context,
-                CancellationToken.None,
-                () =>
-                {
-                    return Task.FromResult(new HttpResponseMessage());
-                }
-            );
+            await filter.ExecuteAuthorizationFilterAsync(context, CancellationToken.None, () =>
+            {
+                return Task.FromResult(new HttpResponseMessage());
+            });
 
             // Assert
             filterMock.Verify(f => f.OnAuthorization(context));
@@ -200,10 +192,8 @@ namespace System.Web.Http.Filters
 
             // Act & Assert
             return Assert.ThrowsAsync<TaskCanceledException>(() =>
-                filter.ExecuteAuthorizationFilterAsync(
-                    context,
-                    CancellationToken.None,
-                    () => TaskHelpers.Canceled<HttpResponseMessage>()
+                filter.ExecuteAuthorizationFilterAsync(context, CancellationToken.None, () =>
+                    TaskHelpers.Canceled<HttpResponseMessage>()
                 )
             );
         }
@@ -247,10 +237,8 @@ namespace System.Web.Http.Filters
 
             // Act
             var exception = await Assert.ThrowsAsync<Exception>(() =>
-                filter.ExecuteAuthorizationFilterAsync(
-                    context,
-                    CancellationToken.None,
-                    () => TaskHelpers.FromError<HttpResponseMessage>(expectedException)
+                filter.ExecuteAuthorizationFilterAsync(context, CancellationToken.None, () =>
+                    TaskHelpers.FromError<HttpResponseMessage>(expectedException)
                 )
             );
 

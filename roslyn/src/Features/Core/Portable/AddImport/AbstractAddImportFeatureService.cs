@@ -506,9 +506,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
             foreach (var (referenceProject, reference) in newReferences)
             {
-                var compilation = referenceToCompilation.GetOrAdd(
-                    reference,
-                    r => CreateCompilation(project, r)
+                var compilation = referenceToCompilation.GetOrAdd(reference, r =>
+                    CreateCompilation(project, r)
                 );
 
                 // Ignore netmodules.  First, they're incredibly esoteric and barely used.
@@ -623,10 +622,9 @@ namespace Microsoft.CodeAnalysis.AddImport
         private static bool IsInPackagesDirectory(PortableExecutableReference reference)
         {
             return s_isInPackagesDirectory
-                .GetValue(
-                    reference,
-                    static reference => new StrongBox<bool>(ComputeIsInPackagesDirectory(reference))
-                )
+                .GetValue(reference, static reference => new StrongBox<bool>(
+                    ComputeIsInPackagesDirectory(reference)
+                ))
                 .Value;
 
             static bool ComputeIsInPackagesDirectory(PortableExecutableReference reference)

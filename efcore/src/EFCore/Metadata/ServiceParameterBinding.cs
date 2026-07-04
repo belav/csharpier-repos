@@ -79,34 +79,28 @@ public abstract class ServiceParameterBinding : ParameterBinding
     ///     A delegate to set a CLR service property on an entity instance.
     /// </summary>
     public virtual Func<MaterializationContext, IEntityType, object, object?> ServiceDelegate =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _serviceDelegate,
-            this,
-            static b =>
-            {
-                var materializationContextParam = Expression.Parameter(
-                    typeof(MaterializationContext)
-                );
-                var entityTypeParam = Expression.Parameter(typeof(IEntityType));
-                var entityParam = Expression.Parameter(typeof(object));
+        NonCapturingLazyInitializer.EnsureInitialized(ref _serviceDelegate, this, static b =>
+        {
+            var materializationContextParam = Expression.Parameter(typeof(MaterializationContext));
+            var entityTypeParam = Expression.Parameter(typeof(IEntityType));
+            var entityParam = Expression.Parameter(typeof(object));
 
-                return Expression
-                    .Lambda<Func<MaterializationContext, IEntityType, object, object>>(
-                        b.BindToParameter(
-                            materializationContextParam,
-                            Expression.New(
-                                typeof(ParameterBindingInfo).GetConstructor(
-                                    new[] { typeof(IEntityType), typeof(Expression) }
-                                )!,
-                                entityTypeParam,
-                                Expression.Constant(materializationContextParam)
-                            )
-                        ),
+            return Expression
+                .Lambda<Func<MaterializationContext, IEntityType, object, object>>(
+                    b.BindToParameter(
                         materializationContextParam,
-                        entityTypeParam,
-                        entityParam
-                    )
-                    .Compile();
-            }
-        );
+                        Expression.New(
+                            typeof(ParameterBindingInfo).GetConstructor(
+                                new[] { typeof(IEntityType), typeof(Expression) }
+                            )!,
+                            entityTypeParam,
+                            Expression.Constant(materializationContextParam)
+                        )
+                    ),
+                    materializationContextParam,
+                    entityTypeParam,
+                    entityParam
+                )
+                .Compile();
+        });
 }

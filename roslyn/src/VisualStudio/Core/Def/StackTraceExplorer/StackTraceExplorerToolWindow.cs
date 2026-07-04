@@ -43,16 +43,10 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             Caption = ServicesVSResources.Stack_Trace_Explorer;
             var dockPanel = new DockPanel { LastChildFill = true };
 
-            dockPanel.CommandBindings.Add(
-                new CommandBinding(
-                    ApplicationCommands.Paste,
-                    (s, e) =>
-                    {
-                        Root?.ViewModel.DoPasteAsync(default)
-                            .FileAndForget("StackTraceExplorerPaste");
-                    }
-                )
-            );
+            dockPanel.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, (s, e) =>
+                {
+                    Root?.ViewModel.DoPasteAsync(default).FileAndForget("StackTraceExplorerPaste");
+                }));
 
             Content = dockPanel;
         }

@@ -57,15 +57,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
             );
 
             Guid result = default(Guid);
-            base.CompileAndVerify(
-                compilation,
-                emitOptions: emitOptions,
-                validator: a =>
-                {
-                    var module = a.Modules[0];
-                    result = module.GetModuleVersionIdOrThrow();
-                }
-            );
+            base.CompileAndVerify(compilation, emitOptions: emitOptions, validator: a =>
+            {
+                var module = a.Modules[0];
+                result = module.GetModuleVersionIdOrThrow();
+            });
 
             return result;
         }

@@ -50,13 +50,10 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var catalogs = new ComposablePartCatalog[] { null };
 
-            AssertExtensions.Throws<ArgumentException>(
-                "catalogs",
-                () =>
-                {
-                    new AggregateCatalog(catalogs);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("catalogs", () =>
+            {
+                new AggregateCatalog(catalogs);
+            });
         }
 
         [Fact]
@@ -65,13 +62,10 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateAggregateCatalog();
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    var catalogs = catalog.Catalogs;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                var catalogs = catalog.Catalogs;
+            });
         }
 
         [Fact]
@@ -80,13 +74,10 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateAggregateCatalog();
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    var parts = catalog.Parts;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                var parts = catalog.Parts;
+            });
         }
 
         [Fact]
@@ -96,13 +87,10 @@ namespace System.ComponentModel.Composition.Hosting
             catalog.Dispose();
             var definition = ImportDefinitionFactory.Create();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    catalog.GetExports(definition);
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                catalog.GetExports(definition);
+            });
         }
 
         [Fact]
@@ -111,13 +99,10 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var catalog = CreateAggregateCatalog();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "definition",
-                () =>
-                {
-                    catalog.GetExports((ImportDefinition)null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("definition", () =>
+            {
+                catalog.GetExports((ImportDefinition)null);
+            });
         }
 
         [Fact]
@@ -334,79 +319,52 @@ namespace System.ComponentModel.Composition.Hosting
             Assert.True(changedNotification == 0);
 
             //Ensure that the other catalogs are
-            ExceptionAssert.ThrowsDisposed(
-                typePartCatalog1,
-                () =>
-                {
-                    var iEnum = typePartCatalog1.Parts.GetEnumerator();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(typePartCatalog1, () =>
+            {
+                var iEnum = typePartCatalog1.Parts.GetEnumerator();
+            });
 
-            ExceptionAssert.ThrowsDisposed(
-                typePartCatalog2,
-                () =>
-                {
-                    var iEnum = typePartCatalog2.Parts.GetEnumerator();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(typePartCatalog2, () =>
+            {
+                var iEnum = typePartCatalog2.Parts.GetEnumerator();
+            });
 
-            ExceptionAssert.ThrowsDisposed(
-                typePartCatalog3,
-                () =>
-                {
-                    var iEnum = typePartCatalog3.Parts.GetEnumerator();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(typePartCatalog3, () =>
+            {
+                var iEnum = typePartCatalog3.Parts.GetEnumerator();
+            });
 
             //Ensure that the other catalogs are
-            ExceptionAssert.ThrowsDisposed(
-                assemblyPartCatalog1,
-                () =>
-                {
-                    var iEnum = assemblyPartCatalog1.Parts.GetEnumerator();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(assemblyPartCatalog1, () =>
+            {
+                var iEnum = assemblyPartCatalog1.Parts.GetEnumerator();
+            });
 
-            ExceptionAssert.ThrowsDisposed(
-                assemblyPartCatalog2,
-                () =>
-                {
-                    var iEnum = assemblyPartCatalog2.Parts.GetEnumerator();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(assemblyPartCatalog2, () =>
+            {
+                var iEnum = assemblyPartCatalog2.Parts.GetEnumerator();
+            });
 
-            ExceptionAssert.ThrowsDisposed(
-                assemblyPartCatalog3,
-                () =>
-                {
-                    var iEnum = assemblyPartCatalog3.Parts.GetEnumerator();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(assemblyPartCatalog3, () =>
+            {
+                var iEnum = assemblyPartCatalog3.Parts.GetEnumerator();
+            });
 
             //Ensure that the other catalogs are
-            ExceptionAssert.ThrowsDisposed(
-                dirPartCatalog1,
-                () =>
-                {
-                    var iEnum = dirPartCatalog1.Parts.GetEnumerator();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(dirPartCatalog1, () =>
+            {
+                var iEnum = dirPartCatalog1.Parts.GetEnumerator();
+            });
 
-            ExceptionAssert.ThrowsDisposed(
-                dirPartCatalog2,
-                () =>
-                {
-                    var iEnum = dirPartCatalog2.Parts.GetEnumerator();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(dirPartCatalog2, () =>
+            {
+                var iEnum = dirPartCatalog2.Parts.GetEnumerator();
+            });
 
-            ExceptionAssert.ThrowsDisposed(
-                dirPartCatalog3,
-                () =>
-                {
-                    var iEnum = dirPartCatalog3.Parts.GetEnumerator();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(dirPartCatalog3, () =>
+            {
+                var iEnum = dirPartCatalog3.Parts.GetEnumerator();
+            });
         }
 
         private static void CreateMainAndOtherChildren(

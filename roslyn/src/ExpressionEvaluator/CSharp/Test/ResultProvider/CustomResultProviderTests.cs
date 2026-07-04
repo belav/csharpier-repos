@@ -171,34 +171,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         {
                             var r = (DkmSuccessEvaluationResult)result.Result;
                             // TODO: Why aren't modopts for & properties included?
-                            r.GetChildren(
-                                workList,
-                                1,
-                                inspectionContext,
-                                children =>
-                                {
-                                    var c = (DkmSuccessEvaluationResult)children.InitialChildren[0];
-                                    r = DkmSuccessEvaluationResult.Create(
-                                        c.InspectionContext,
-                                        c.StackFrame,
-                                        r.Name,
-                                        r.FullName,
-                                        c.Flags,
-                                        c.Value,
-                                        r.EditableValue,
-                                        r.Type,
-                                        r.Category,
-                                        r.Access,
-                                        r.StorageType,
-                                        r.TypeModifierFlags,
-                                        null,
-                                        r.CustomUIVisualizers,
-                                        null,
-                                        null
-                                    );
-                                    completionRoutine(new DkmEvaluationAsyncResult(r));
-                                }
-                            );
+                            r.GetChildren(workList, 1, inspectionContext, children =>
+                            {
+                                var c = (DkmSuccessEvaluationResult)children.InitialChildren[0];
+                                r = DkmSuccessEvaluationResult.Create(
+                                    c.InspectionContext,
+                                    c.StackFrame,
+                                    r.Name,
+                                    r.FullName,
+                                    c.Flags,
+                                    c.Value,
+                                    r.EditableValue,
+                                    r.Type,
+                                    r.Category,
+                                    r.Access,
+                                    r.StorageType,
+                                    r.TypeModifierFlags,
+                                    null,
+                                    r.CustomUIVisualizers,
+                                    null,
+                                    null
+                                );
+                                completionRoutine(new DkmEvaluationAsyncResult(r));
+                            });
                         }
                         else
                         {

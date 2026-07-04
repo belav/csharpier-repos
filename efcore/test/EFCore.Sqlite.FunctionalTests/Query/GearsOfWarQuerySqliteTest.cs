@@ -711,9 +711,8 @@ WHERE date("m"."Date", CAST(3 AS TEXT) || ' years') = '1993-11-10'
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_DateOnly_AddYears_Year(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Mission>().Where(m => m.Date.AddYears(3).Year == 1993).AsTracking()
+        await AssertQuery(async, ss =>
+            ss.Set<Mission>().Where(m => m.Date.AddYears(3).Year == 1993).AsTracking()
         );
 
         AssertSql(
@@ -729,12 +728,10 @@ WHERE CAST(strftime('%Y', "m"."Date", CAST(3 AS TEXT) || ' years') AS INTEGER) =
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_DateOnly_AddYears_AddMonths(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Mission>()
-                    .Where(m => m.Date.AddYears(3).AddMonths(3) == new DateOnly(1994, 2, 10))
-                    .AsTracking()
+        await AssertQuery(async, ss =>
+            ss.Set<Mission>()
+                .Where(m => m.Date.AddYears(3).AddMonths(3) == new DateOnly(1994, 2, 10))
+                .AsTracking()
         );
 
         AssertSql(

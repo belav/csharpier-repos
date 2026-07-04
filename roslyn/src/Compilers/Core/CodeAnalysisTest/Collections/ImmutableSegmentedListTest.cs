@@ -319,13 +319,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void InsertRangeTest()
         {
             var list = ImmutableSegmentedList<int>.Empty;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => list.InsertRange(1, new[] { 1 })
+            Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+                list.InsertRange(1, new[] { 1 })
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => list.InsertRange(-1, new[] { 1 })
+            Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+                list.InsertRange(-1, new[] { 1 })
             );
 
             list = list.InsertRange(0, new[] { 1, 4, 5 });
@@ -333,13 +331,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             list = list.InsertRange(2, new int[0]);
             Assert.Equal(Enumerable.Range(1, 5), list);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => list.InsertRange(6, new[] { 1 })
+            Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+                list.InsertRange(6, new[] { 1 })
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => list.InsertRange(-1, new[] { 1 })
+            Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+                list.InsertRange(-1, new[] { 1 })
             );
         }
 
@@ -348,13 +344,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             var list = ImmutableSegmentedList<int>.Empty;
             var nonEmptyList = ImmutableSegmentedList.Create(1);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => list.InsertRange(1, nonEmptyList)
+            Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+                list.InsertRange(1, nonEmptyList)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => list.InsertRange(-1, nonEmptyList)
+            Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+                list.InsertRange(-1, nonEmptyList)
             );
 
             list = list.InsertRange(0, ImmutableSegmentedList.Create(1, 104, 105));
@@ -366,13 +360,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             );
             Assert.Equal(Enumerable.Range(1, 105), list);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => list.InsertRange(106, nonEmptyList)
+            Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+                list.InsertRange(106, nonEmptyList)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => list.InsertRange(-1, nonEmptyList)
+            Assert.Throws<ArgumentOutOfRangeException>("index", () =>
+                list.InsertRange(-1, nonEmptyList)
             );
         }
 
@@ -716,9 +708,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ReplaceMissingThrowsTest()
         {
-            Assert.Throws<ArgumentException>(
-                "oldValue",
-                () => ImmutableSegmentedList<int>.Empty.Replace(5, 3)
+            Assert.Throws<ArgumentException>("oldValue", () =>
+                ImmutableSegmentedList<int>.Empty.Replace(5, 3)
             );
         }
 
@@ -775,9 +766,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void RemoveAllNullTest()
         {
-            Assert.Throws<ArgumentNullException>(
-                "match",
-                () => ImmutableSegmentedList<int>.Empty.RemoveAll(null!)
+            Assert.Throws<ArgumentNullException>("match", () =>
+                ImmutableSegmentedList<int>.Empty.RemoveAll(null!)
             );
         }
 
@@ -837,14 +827,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(new[] { 1, 2, 3 }, listWithDuplicates.RemoveRange(new[] { 2 }));
             Assert.Equal(new[] { 1, 3 }, listWithDuplicates.RemoveRange(new[] { 2, 2 }));
 
-            Assert.Throws<ArgumentNullException>(
-                "items",
-                () =>
-                    System.Collections.Immutable.ImmutableList.RemoveRange(
-                        (System.Collections.Immutable.IImmutableList<int>)
-                            ImmutableSegmentedList.Create(1, 2, 3),
-                        null!
-                    )
+            Assert.Throws<ArgumentNullException>("items", () =>
+                System.Collections.Immutable.ImmutableList.RemoveRange(
+                    (System.Collections.Immutable.IImmutableList<int>)
+                        ImmutableSegmentedList.Create(1, 2, 3),
+                    null!
+                )
             );
             Assert.Equal(
                 new[] { 1, 3 },

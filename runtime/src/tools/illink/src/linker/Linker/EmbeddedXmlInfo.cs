@@ -30,9 +30,8 @@ namespace Mono.Linker
             if (context.Annotations.GetAction(assembly) == AssemblyAction.Skip)
                 return;
 
-            var rsc = GetEmbeddedXml(
-                assembly,
-                res => ShouldProcessRootDescriptorResource(assembly, context, res.Name)
+            var rsc = GetEmbeddedXml(assembly, res =>
+                ShouldProcessRootDescriptorResource(assembly, context, res.Name)
             );
             if (rsc == null)
                 return;
@@ -62,10 +61,8 @@ namespace Mono.Linker
             if (context.Annotations.GetAction(assembly) == AssemblyAction.Skip)
                 return null;
 
-            var rsc = GetEmbeddedXml(
-                assembly,
-                res =>
-                    res.Name.Equals("ILLink.Substitutions.xml", StringComparison.OrdinalIgnoreCase)
+            var rsc = GetEmbeddedXml(assembly, res =>
+                res.Name.Equals("ILLink.Substitutions.xml", StringComparison.OrdinalIgnoreCase)
             );
             if (rsc == null)
                 return null;
@@ -96,10 +93,8 @@ namespace Mono.Linker
             if (context.Annotations.GetAction(assembly) == AssemblyAction.Skip)
                 return null;
 
-            var rsc = GetEmbeddedXml(
-                assembly,
-                res =>
-                    res.Name.Equals("ILLink.LinkAttributes.xml", StringComparison.OrdinalIgnoreCase)
+            var rsc = GetEmbeddedXml(assembly, res =>
+                res.Name.Equals("ILLink.LinkAttributes.xml", StringComparison.OrdinalIgnoreCase)
             );
             if (rsc == null)
                 return null;

@@ -3414,9 +3414,8 @@ namespace System.Data.Tests
             Assert.Equal(dt4, ds.Tables[dt4.TableName]);
 
             // Checking get table by name with different case, ArgumentException
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => ds.Tables[dt4.TableName.ToLower()]
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                ds.Tables[dt4.TableName.ToLower()]
             );
         }
 

@@ -137,9 +137,8 @@ namespace System.Linq.Tests
         public void ThrowsOnNullSource()
         {
             int[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.TakeWhile(x => true)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.TakeWhile(x => true)
             );
         }
 
@@ -149,9 +148,8 @@ namespace System.Linq.Tests
             int[] source = { 1, 2, 3 };
             Func<int, bool> nullPredicate = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => source.TakeWhile(nullPredicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                source.TakeWhile(nullPredicate)
             );
         }
 
@@ -159,9 +157,8 @@ namespace System.Linq.Tests
         public void ThrowsOnNullSourceIndexed()
         {
             int[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.TakeWhile((x, i) => true)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.TakeWhile((x, i) => true)
             );
         }
 
@@ -171,9 +168,8 @@ namespace System.Linq.Tests
             int[] source = { 1, 2, 3 };
             Func<int, int, bool> nullPredicate = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => source.TakeWhile(nullPredicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                source.TakeWhile(nullPredicate)
             );
         }
 

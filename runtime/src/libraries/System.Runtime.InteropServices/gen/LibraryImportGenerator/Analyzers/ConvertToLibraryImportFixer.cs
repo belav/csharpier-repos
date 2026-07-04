@@ -409,32 +409,29 @@ namespace Microsoft.Interop.Analyzers
                     else if (invocation.Parent.IsKind(SyntaxKind.ExpressionStatement))
                     {
                         // The return value isn't used, so discard the new out parameter value
-                        editor.ReplaceNode(
-                            invocation,
-                            (node, generator) =>
-                            {
-                                return WrapInvocationWithHRExceptionThrow(
-                                    ((InvocationExpressionSyntax)node).AddArgumentListArguments(
-                                        SyntaxFactory
-                                            .Argument(
-                                                SyntaxFactory.IdentifierName(
-                                                    SyntaxFactory.Identifier(
-                                                        SyntaxFactory.TriviaList(),
-                                                        SyntaxKind.UnderscoreToken,
-                                                        "_",
-                                                        "_",
-                                                        SyntaxFactory.TriviaList()
-                                                    )
+                        editor.ReplaceNode(invocation, (node, generator) =>
+                        {
+                            return WrapInvocationWithHRExceptionThrow(
+                                ((InvocationExpressionSyntax)node).AddArgumentListArguments(
+                                    SyntaxFactory
+                                        .Argument(
+                                            SyntaxFactory.IdentifierName(
+                                                SyntaxFactory.Identifier(
+                                                    SyntaxFactory.TriviaList(),
+                                                    SyntaxKind.UnderscoreToken,
+                                                    "_",
+                                                    "_",
+                                                    SyntaxFactory.TriviaList()
                                                 )
                                             )
-                                            .WithRefKindKeyword(
-                                                SyntaxFactory.Token(SyntaxKind.OutKeyword)
-                                            )
-                                    ),
-                                    generator
-                                );
-                            }
-                        );
+                                        )
+                                        .WithRefKindKeyword(
+                                            SyntaxFactory.Token(SyntaxKind.OutKeyword)
+                                        )
+                                ),
+                                generator
+                            );
+                        });
                     }
                     else if (invocation.Parent.IsKind(SyntaxKind.EqualsValueClause))
                     {
@@ -456,60 +453,54 @@ namespace Microsoft.Interop.Analyzers
                         }
                         // The result was used to initialize a variable,
                         // so initialize the variable inline
-                        editor.ReplaceNode(
-                            declaration,
-                            (node, generator) =>
-                            {
-                                var declaration = (LocalDeclarationStatementSyntax)node;
-                                var invocation = (InvocationExpressionSyntax)
-                                    declaration.Declaration.Variables[0].Initializer.Value;
-                                return generator.ExpressionStatement(
-                                    WrapInvocationWithHRExceptionThrow(
-                                        invocation.AddArgumentListArguments(
-                                            SyntaxFactory
-                                                .Argument(
-                                                    SyntaxFactory.DeclarationExpression(
-                                                        declaration.Declaration.Type,
-                                                        SyntaxFactory.SingleVariableDesignation(
-                                                            declaration
-                                                                .Declaration.Variables[0]
-                                                                .Identifier.WithoutTrivia()
-                                                        )
+                        editor.ReplaceNode(declaration, (node, generator) =>
+                        {
+                            var declaration = (LocalDeclarationStatementSyntax)node;
+                            var invocation = (InvocationExpressionSyntax)
+                                declaration.Declaration.Variables[0].Initializer.Value;
+                            return generator.ExpressionStatement(
+                                WrapInvocationWithHRExceptionThrow(
+                                    invocation.AddArgumentListArguments(
+                                        SyntaxFactory
+                                            .Argument(
+                                                SyntaxFactory.DeclarationExpression(
+                                                    declaration.Declaration.Type,
+                                                    SyntaxFactory.SingleVariableDesignation(
+                                                        declaration
+                                                            .Declaration.Variables[0]
+                                                            .Identifier.WithoutTrivia()
                                                     )
                                                 )
-                                                .WithRefKindKeyword(
-                                                    SyntaxFactory.Token(SyntaxKind.OutKeyword)
-                                                )
-                                        ),
-                                        generator
-                                    )
-                                );
-                            }
-                        );
+                                            )
+                                            .WithRefKindKeyword(
+                                                SyntaxFactory.Token(SyntaxKind.OutKeyword)
+                                            )
+                                    ),
+                                    generator
+                                )
+                            );
+                        });
                     }
                     else if (
                         invocation.Parent.IsKind(SyntaxKind.SimpleAssignmentExpression)
                         && invocation.Parent.Parent.IsKind(SyntaxKind.ExpressionStatement)
                     )
                     {
-                        editor.ReplaceNode(
-                            invocation.Parent,
-                            (node, generator) =>
-                            {
-                                var assignment = (AssignmentExpressionSyntax)node;
-                                var invocation = (InvocationExpressionSyntax)assignment.Right;
-                                return WrapInvocationWithHRExceptionThrow(
-                                    invocation.AddArgumentListArguments(
-                                        SyntaxFactory
-                                            .Argument(generator.ClearTrivia(assignment.Left))
-                                            .WithRefKindKeyword(
-                                                SyntaxFactory.Token(SyntaxKind.OutKeyword)
-                                            )
-                                    ),
-                                    generator
-                                );
-                            }
-                        );
+                        editor.ReplaceNode(invocation.Parent, (node, generator) =>
+                        {
+                            var assignment = (AssignmentExpressionSyntax)node;
+                            var invocation = (InvocationExpressionSyntax)assignment.Right;
+                            return WrapInvocationWithHRExceptionThrow(
+                                invocation.AddArgumentListArguments(
+                                    SyntaxFactory
+                                        .Argument(generator.ClearTrivia(assignment.Left))
+                                        .WithRefKindKeyword(
+                                            SyntaxFactory.Token(SyntaxKind.OutKeyword)
+                                        )
+                                ),
+                                generator
+                            );
+                        });
                     }
                     else
                     {

@@ -16,171 +16,107 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void InvalidArguments_ThrowsException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                {
-                    Parallel.ForEachAsync(
-                        (IEnumerable<int>)null,
-                        (item, cancellationToken) => default
-                    );
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                {
-                    Parallel.ForEachAsync(
-                        (IEnumerable<int>)null,
-                        CancellationToken.None,
-                        (item, cancellationToken) => default
-                    );
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                {
-                    Parallel.ForEachAsync(
-                        (IEnumerable<int>)null,
-                        new ParallelOptions(),
-                        (item, cancellationToken) => default
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+            {
+                Parallel.ForEachAsync((IEnumerable<int>)null, (item, cancellationToken) => default);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+            {
+                Parallel.ForEachAsync(
+                    (IEnumerable<int>)null,
+                    CancellationToken.None,
+                    (item, cancellationToken) => default
+                );
+            });
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+            {
+                Parallel.ForEachAsync(
+                    (IEnumerable<int>)null,
+                    new ParallelOptions(),
+                    (item, cancellationToken) => default
+                );
+            });
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                {
-                    Parallel.ForEachAsync(
-                        (IAsyncEnumerable<int>)null,
-                        (item, cancellationToken) => default
-                    );
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                {
-                    Parallel.ForEachAsync(
-                        (IAsyncEnumerable<int>)null,
-                        CancellationToken.None,
-                        (item, cancellationToken) => default
-                    );
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                {
-                    Parallel.ForEachAsync(
-                        (IAsyncEnumerable<int>)null,
-                        new ParallelOptions(),
-                        (item, cancellationToken) => default
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+            {
+                Parallel.ForEachAsync((IAsyncEnumerable<int>)null, (item, cancellationToken) =>
+                    default
+                );
+            });
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+            {
+                Parallel.ForEachAsync(
+                    (IAsyncEnumerable<int>)null,
+                    CancellationToken.None,
+                    (item, cancellationToken) => default
+                );
+            });
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+            {
+                Parallel.ForEachAsync(
+                    (IAsyncEnumerable<int>)null,
+                    new ParallelOptions(),
+                    (item, cancellationToken) => default
+                );
+            });
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "parallelOptions",
-                () =>
-                {
-                    Parallel.ForAsync(1, 10, null, (item, cancellationToken) => default);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "parallelOptions",
-                () =>
-                {
-                    Parallel.ForEachAsync(
-                        Enumerable.Range(1, 10),
-                        null,
-                        (item, cancellationToken) => default
-                    );
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "parallelOptions",
-                () =>
-                {
-                    Parallel.ForEachAsync(
-                        EnumerableRangeAsync(1, 10),
-                        null,
-                        (item, cancellationToken) => default
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () =>
+            {
+                Parallel.ForAsync(1, 10, null, (item, cancellationToken) => default);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () =>
+            {
+                Parallel.ForEachAsync(Enumerable.Range(1, 10), null, (item, cancellationToken) =>
+                    default
+                );
+            });
+            AssertExtensions.Throws<ArgumentNullException>("parallelOptions", () =>
+            {
+                Parallel.ForEachAsync(
+                    EnumerableRangeAsync(1, 10),
+                    null,
+                    (item, cancellationToken) => default
+                );
+            });
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () =>
-                {
-                    Parallel.ForAsync(1, 10, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () =>
-                {
-                    Parallel.ForAsync(1, 10, CancellationToken.None, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () =>
-                {
-                    Parallel.ForAsync(1, 10, new ParallelOptions(), null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+            {
+                Parallel.ForAsync(1, 10, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+            {
+                Parallel.ForAsync(1, 10, CancellationToken.None, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+            {
+                Parallel.ForAsync(1, 10, new ParallelOptions(), null);
+            });
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () =>
-                {
-                    Parallel.ForEachAsync(Enumerable.Range(1, 10), null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () =>
-                {
-                    Parallel.ForEachAsync(Enumerable.Range(1, 10), CancellationToken.None, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () =>
-                {
-                    Parallel.ForEachAsync(Enumerable.Range(1, 10), new ParallelOptions(), null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+            {
+                Parallel.ForEachAsync(Enumerable.Range(1, 10), null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+            {
+                Parallel.ForEachAsync(Enumerable.Range(1, 10), CancellationToken.None, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+            {
+                Parallel.ForEachAsync(Enumerable.Range(1, 10), new ParallelOptions(), null);
+            });
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () =>
-                {
-                    Parallel.ForEachAsync(EnumerableRangeAsync(1, 10), null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () =>
-                {
-                    Parallel.ForEachAsync(
-                        EnumerableRangeAsync(1, 10),
-                        CancellationToken.None,
-                        null
-                    );
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () =>
-                {
-                    Parallel.ForEachAsync(EnumerableRangeAsync(1, 10), new ParallelOptions(), null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+            {
+                Parallel.ForEachAsync(EnumerableRangeAsync(1, 10), null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+            {
+                Parallel.ForEachAsync(EnumerableRangeAsync(1, 10), CancellationToken.None, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+            {
+                Parallel.ForEachAsync(EnumerableRangeAsync(1, 10), new ParallelOptions(), null);
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -588,10 +524,8 @@ namespace System.Threading.Tasks.Tests
 
             var cts = new CancellationTokenSource();
 
-            Task t = Parallel.ForEachAsync(
-                Iterate(),
-                cts.Token,
-                (item, cancellationToken) => default
+            Task t = Parallel.ForEachAsync(Iterate(), cts.Token, (item, cancellationToken) =>
+                default
             );
             Assert.False(t.IsCompleted);
 
@@ -613,10 +547,8 @@ namespace System.Threading.Tasks.Tests
 
             var cts = new CancellationTokenSource();
 
-            Task t = Parallel.ForEachAsync(
-                IterateAsync(),
-                cts.Token,
-                (item, cancellationToken) => default
+            Task t = Parallel.ForEachAsync(IterateAsync(), cts.Token, (item, cancellationToken) =>
+                default
             );
             Assert.False(t.IsCompleted);
 
@@ -675,15 +607,11 @@ namespace System.Threading.Tasks.Tests
         public void EmptyRange_For()
         {
             int counter = 0;
-            Task t = Parallel.ForAsync(
-                10,
-                10,
-                (item, cancellationToken) =>
-                {
-                    Interlocked.Increment(ref counter);
-                    return default;
-                }
-            );
+            Task t = Parallel.ForAsync(10, 10, (item, cancellationToken) =>
+            {
+                Interlocked.Increment(ref counter);
+                return default;
+            });
             Assert.True(t.IsCompletedSuccessfully);
 
             Assert.Equal(0, counter);
@@ -693,14 +621,11 @@ namespace System.Threading.Tasks.Tests
         public async Task EmptySource_Sync()
         {
             int counter = 0;
-            await Parallel.ForEachAsync(
-                Enumerable.Range(0, 0),
-                (item, cancellationToken) =>
-                {
-                    Interlocked.Increment(ref counter);
-                    return default;
-                }
-            );
+            await Parallel.ForEachAsync(Enumerable.Range(0, 0), (item, cancellationToken) =>
+            {
+                Interlocked.Increment(ref counter);
+                return default;
+            });
 
             Assert.Equal(0, counter);
         }
@@ -709,14 +634,11 @@ namespace System.Threading.Tasks.Tests
         public async Task EmptySource_Async()
         {
             int counter = 0;
-            await Parallel.ForEachAsync(
-                EnumerableRangeAsync(0, 0),
-                (item, cancellationToken) =>
-                {
-                    Interlocked.Increment(ref counter);
-                    return default;
-                }
-            );
+            await Parallel.ForEachAsync(EnumerableRangeAsync(0, 0), (item, cancellationToken) =>
+            {
+                Interlocked.Increment(ref counter);
+                return default;
+            });
 
             Assert.Equal(0, counter);
         }
@@ -1018,14 +940,10 @@ namespace System.Threading.Tasks.Tests
             using var cts = new CancellationTokenSource(10);
             OperationCanceledException oce =
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
-                    Parallel.ForEachAsync(
-                        Infinite(),
-                        cts.Token,
-                        async (item, cancellationToken) =>
-                        {
-                            await Task.Yield();
-                        }
-                    )
+                    Parallel.ForEachAsync(Infinite(), cts.Token, async (item, cancellationToken) =>
+                    {
+                        await Task.Yield();
+                    })
                 );
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
@@ -1069,14 +987,11 @@ namespace System.Threading.Tasks.Tests
                 yield return cancellationToken;
             }
 
-            await Parallel.ForEachAsync(
-                YieldTokenAsync(default),
-                (item, cancellationToken) =>
-                {
-                    Assert.Equal(cancellationToken, item);
-                    return default;
-                }
-            );
+            await Parallel.ForEachAsync(YieldTokenAsync(default), (item, cancellationToken) =>
+            {
+                Assert.Equal(cancellationToken, item);
+                return default;
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1084,15 +999,11 @@ namespace System.Threading.Tasks.Tests
         {
             var cq = new ConcurrentQueue<CancellationToken>();
 
-            await Parallel.ForAsync(
-                1,
-                101,
-                async (item, cancellationToken) =>
-                {
-                    cq.Enqueue(cancellationToken);
-                    await Task.Yield();
-                }
-            );
+            await Parallel.ForAsync(1, 101, async (item, cancellationToken) =>
+            {
+                cq.Enqueue(cancellationToken);
+                await Task.Yield();
+            });
 
             Assert.Equal(100, cq.Count);
             Assert.Equal(1, cq.Distinct().Count());
@@ -1103,14 +1014,11 @@ namespace System.Threading.Tasks.Tests
         {
             var cq = new ConcurrentQueue<CancellationToken>();
 
-            await Parallel.ForEachAsync(
-                Enumerable.Range(1, 100),
-                async (item, cancellationToken) =>
-                {
-                    cq.Enqueue(cancellationToken);
-                    await Task.Yield();
-                }
-            );
+            await Parallel.ForEachAsync(Enumerable.Range(1, 100), async (item, cancellationToken) =>
+            {
+                cq.Enqueue(cancellationToken);
+                await Task.Yield();
+            });
 
             Assert.Equal(100, cq.Count);
             Assert.Equal(1, cq.Distinct().Count());
@@ -1650,18 +1558,14 @@ namespace System.Threading.Tasks.Tests
         public async Task Exception_ImplicitlyCancelsOtherWorkers_For()
         {
             await Assert.ThrowsAsync<Exception>(() =>
-                Parallel.ForAsync(
-                    0,
-                    long.MaxValue,
-                    async (item, cancellationToken) =>
+                Parallel.ForAsync(0, long.MaxValue, async (item, cancellationToken) =>
+                {
+                    await Task.Yield();
+                    if (item == 1000)
                     {
-                        await Task.Yield();
-                        if (item == 1000)
-                        {
-                            throw new Exception();
-                        }
+                        throw new Exception();
                     }
-                )
+                })
             );
 
             await Assert.ThrowsAsync<FormatException>(() =>
@@ -1700,17 +1604,14 @@ namespace System.Threading.Tasks.Tests
             }
 
             await Assert.ThrowsAsync<Exception>(() =>
-                Parallel.ForEachAsync(
-                    Iterate(),
-                    async (item, cancellationToken) =>
+                Parallel.ForEachAsync(Iterate(), async (item, cancellationToken) =>
+                {
+                    await Task.Yield();
+                    if (item == 1000)
                     {
-                        await Task.Yield();
-                        if (item == 1000)
-                        {
-                            throw new Exception();
-                        }
+                        throw new Exception();
                     }
-                )
+                })
             );
 
             await Assert.ThrowsAsync<FormatException>(() =>
@@ -1749,17 +1650,14 @@ namespace System.Threading.Tasks.Tests
             }
 
             await Assert.ThrowsAsync<Exception>(() =>
-                Parallel.ForEachAsync(
-                    Iterate(),
-                    async (item, cancellationToken) =>
+                Parallel.ForEachAsync(Iterate(), async (item, cancellationToken) =>
+                {
+                    await Task.Yield();
+                    if (item == 1000)
                     {
-                        await Task.Yield();
-                        if (item == 1000)
-                        {
-                            throw new Exception();
-                        }
+                        throw new Exception();
                     }
-                )
+                })
             );
 
             await Assert.ThrowsAsync<FormatException>(() =>
@@ -1838,15 +1736,11 @@ namespace System.Threading.Tasks.Tests
 
             var al = new AsyncLocal<int>();
             al.Value = 42;
-            await Parallel.ForAsync(
-                0,
-                100,
-                async (item, cancellationToken) =>
-                {
-                    await Task.Yield();
-                    Assert.Equal(42, al.Value);
-                }
-            );
+            await Parallel.ForAsync(0, 100, async (item, cancellationToken) =>
+            {
+                await Task.Yield();
+                Assert.Equal(42, al.Value);
+            });
         }
 
         [ConditionalTheory(
@@ -1871,14 +1765,11 @@ namespace System.Threading.Tasks.Tests
 
             var al = new AsyncLocal<int>();
             al.Value = 42;
-            await Parallel.ForEachAsync(
-                Iterate(),
-                async (item, cancellationToken) =>
-                {
-                    await Task.Yield();
-                    Assert.Equal(42, al.Value);
-                }
-            );
+            await Parallel.ForEachAsync(Iterate(), async (item, cancellationToken) =>
+            {
+                await Task.Yield();
+                Assert.Equal(42, al.Value);
+            });
         }
 
         [ConditionalTheory(
@@ -1913,14 +1804,11 @@ namespace System.Threading.Tasks.Tests
             Task t;
             using (!flowContext ? ExecutionContext.SuppressFlow() : default)
             {
-                t = Parallel.ForEachAsync(
-                    Iterate(),
-                    async (item, cancellationToken) =>
-                    {
-                        await Task.Yield();
-                        Assert.Equal(flowContext ? 42 : 0, al.Value);
-                    }
-                );
+                t = Parallel.ForEachAsync(Iterate(), async (item, cancellationToken) =>
+                {
+                    await Task.Yield();
+                    Assert.Equal(flowContext ? 42 : 0, al.Value);
+                });
             }
 
             await t;

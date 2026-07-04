@@ -24,9 +24,8 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public void Constructor_Null()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "el",
-                () => new SignatureDescription(null)
+            AssertExtensions.Throws<ArgumentNullException>("el", () =>
+                new SignatureDescription(null)
             );
         }
 
@@ -172,9 +171,8 @@ namespace System.Security.Cryptography.Tests
             DSA dsa = DSA.Create();
 
             // Deformatter with all properties null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => sig.CreateDeformatter(dsa)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                sig.CreateDeformatter(dsa)
             );
 
             // Deformatter with invalid DeformatterAlgorithm property

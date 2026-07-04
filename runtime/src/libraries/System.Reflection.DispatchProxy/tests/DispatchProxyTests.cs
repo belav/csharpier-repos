@@ -252,13 +252,11 @@ namespace DispatchProxyTests
         [Fact]
         public static void Create_Using__Generic_BaseType_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "proxyType",
-                () =>
-                    DispatchProxy.Create(
-                        typeof(TestType_IHelloService),
-                        typeof(TestType_DipatchProxyGenericConstraint<TestDispatchProxy>)
-                    )
+            AssertExtensions.Throws<ArgumentException>("proxyType", () =>
+                DispatchProxy.Create(
+                    typeof(TestType_IHelloService),
+                    typeof(TestType_DipatchProxyGenericConstraint<TestDispatchProxy>)
+                )
             );
         }
 
@@ -281,27 +279,24 @@ namespace DispatchProxyTests
         [Fact]
         public static void Non_Generic_Create_With_Null_InterfaceType_Throws_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "interfaceType",
-                () => DispatchProxy.Create(null, typeof(NoDefaultCtor_TestDispatchProxy))
+            AssertExtensions.Throws<ArgumentNullException>("interfaceType", () =>
+                DispatchProxy.Create(null, typeof(NoDefaultCtor_TestDispatchProxy))
             );
         }
 
         [Fact]
         public static void Non_Generic_Create_With_Null_ProxyType_Throws_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "proxyType",
-                () => DispatchProxy.Create(typeof(TestType_IHelloService), null)
+            AssertExtensions.Throws<ArgumentNullException>("proxyType", () =>
+                DispatchProxy.Create(typeof(TestType_IHelloService), null)
             );
         }
 
         [Fact]
         public static void Non_Generic_Create_With_ProxyType_That_Is_Not_Assignable_To_DispatchProxy_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "proxyType",
-                () => DispatchProxy.Create(typeof(TestType_IHelloService), typeof(object))
+            AssertExtensions.Throws<ArgumentException>("proxyType", () =>
+                DispatchProxy.Create(typeof(TestType_IHelloService), typeof(object))
             );
         }
 

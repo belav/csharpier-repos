@@ -35,9 +35,8 @@ namespace Roslyn.VisualStudio.IntegrationTests
             string value
         )
         {
-            Assert.Contains(
-                projectElement.Elements().Where(IsUnconditionalPropertyGroup),
-                group => GetPropertyValue(group, name) == value
+            Assert.Contains(projectElement.Elements().Where(IsUnconditionalPropertyGroup), group =>
+                GetPropertyValue(group, name) == value
             );
 
             static bool IsUnconditionalPropertyGroup(XElement element) =>
@@ -51,9 +50,8 @@ namespace Roslyn.VisualStudio.IntegrationTests
             string value
         )
         {
-            Assert.All(
-                projectElement.Elements().Where(IsConditionalPropertyGroup),
-                group => Assert.Equal(value, GetPropertyValue(group, name))
+            Assert.All(projectElement.Elements().Where(IsConditionalPropertyGroup), group =>
+                Assert.Equal(value, GetPropertyValue(group, name))
             );
 
             static bool IsConditionalPropertyGroup(XElement element) =>

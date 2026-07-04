@@ -59,22 +59,19 @@ class FakeKerberosPrincipal : IKerberosPrincipal
 
     public KerberosKey RetrieveLongTermCredential(EncryptionType etype)
     {
-        return KeyCache.GetOrAdd(
-            etype + this.PrincipalName,
-            pn =>
-            {
-                return new KerberosKey(
-                    password: this._password,
-                    principal: new PrincipalName(
-                        PrincipalNameType.NT_PRINCIPAL,
-                        Realm,
-                        new[] { this.PrincipalName }
-                    ),
-                    etype: etype,
-                    saltType: SaltType.ActiveDirectoryUser
-                );
-            }
-        );
+        return KeyCache.GetOrAdd(etype + this.PrincipalName, pn =>
+        {
+            return new KerberosKey(
+                password: this._password,
+                principal: new PrincipalName(
+                    PrincipalNameType.NT_PRINCIPAL,
+                    Realm,
+                    new[] { this.PrincipalName }
+                ),
+                etype: etype,
+                saltType: SaltType.ActiveDirectoryUser
+            );
+        });
     }
 
     public void Validate(X509Certificate2Collection certificates) { }

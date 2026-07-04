@@ -2267,24 +2267,20 @@ public class UserManager<TUser> : IDisposable
     protected virtual string CreateTwoFactorRecoveryCode()
     {
 #if NET6_0_OR_GREATER
-        return string.Create(
-            11,
-            0,
-            static (buffer, _) =>
-            {
-                buffer[10] = GetRandomRecoveryCodeChar();
-                buffer[9] = GetRandomRecoveryCodeChar();
-                buffer[8] = GetRandomRecoveryCodeChar();
-                buffer[7] = GetRandomRecoveryCodeChar();
-                buffer[6] = GetRandomRecoveryCodeChar();
-                buffer[5] = '-';
-                buffer[4] = GetRandomRecoveryCodeChar();
-                buffer[3] = GetRandomRecoveryCodeChar();
-                buffer[2] = GetRandomRecoveryCodeChar();
-                buffer[1] = GetRandomRecoveryCodeChar();
-                buffer[0] = GetRandomRecoveryCodeChar();
-            }
-        );
+        return string.Create(11, 0, static (buffer, _) =>
+        {
+            buffer[10] = GetRandomRecoveryCodeChar();
+            buffer[9] = GetRandomRecoveryCodeChar();
+            buffer[8] = GetRandomRecoveryCodeChar();
+            buffer[7] = GetRandomRecoveryCodeChar();
+            buffer[6] = GetRandomRecoveryCodeChar();
+            buffer[5] = '-';
+            buffer[4] = GetRandomRecoveryCodeChar();
+            buffer[3] = GetRandomRecoveryCodeChar();
+            buffer[2] = GetRandomRecoveryCodeChar();
+            buffer[1] = GetRandomRecoveryCodeChar();
+            buffer[0] = GetRandomRecoveryCodeChar();
+        });
 #else
         var recoveryCode = new StringBuilder(11);
         recoveryCode.Append(GetRandomRecoveryCodeChar());

@@ -78,9 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     .WithAppendedTrailingTrivia(block.CloseBraceToken.GetAllTrivia());
 
                 // create new block with new tokens
-                block = block.ReplaceTokens(
-                    new[] { firstToken, lastToken },
-                    (o, c) => (o == firstToken) ? firstTokenWithAsset : lastTokenWithAsset
+                block = block.ReplaceTokens(new[] { firstToken, lastToken }, (o, c) =>
+                    (o == firstToken) ? firstTokenWithAsset : lastTokenWithAsset
                 );
 
                 // return only statements without the wrapping block

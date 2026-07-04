@@ -35,9 +35,8 @@ public class SqliteMigrationAnnotationProviderTest
         _modelBuilder.Entity<Entity>().HasKey(e => e.IntProp);
         FinalizeModel();
 
-        Assert.Contains(
-            _provider.For(property.GetTableColumnMappings().Single().Column, true),
-            a => a.Name == _autoincrement.Name && (bool)a.Value
+        Assert.Contains(_provider.For(property.GetTableColumnMappings().Single().Column, true), a =>
+            a.Name == _autoincrement.Name && (bool)a.Value
         );
     }
 

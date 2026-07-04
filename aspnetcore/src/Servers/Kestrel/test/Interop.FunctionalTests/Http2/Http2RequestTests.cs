@@ -39,21 +39,14 @@ public class Http2RequestTests : LoggedTest
             configureKestrel: o =>
             {
                 // Test IPv6 endpoint with metrics.
-                o.Listen(
-                    IPAddress.IPv6Loopback,
-                    0,
-                    listenOptions =>
+                o.Listen(IPAddress.IPv6Loopback, 0, listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http2;
+                    listenOptions.UseHttps(TestResources.GetTestCertificate(), https =>
                     {
-                        listenOptions.Protocols = HttpProtocols.Http2;
-                        listenOptions.UseHttps(
-                            TestResources.GetTestCertificate(),
-                            https =>
-                            {
-                                https.SslProtocols = SslProtocols.Tls12;
-                            }
-                        );
-                    }
-                );
+                        https.SslProtocols = SslProtocols.Tls12;
+                    });
+                });
             }
         );
 
@@ -89,20 +82,17 @@ public class Http2RequestTests : LoggedTest
             await connectionDuration.WaitForMeasurementsAsync(minCount: 1).DefaultTimeout();
 
             // Assert
-            Assert.Collection(
-                connectionDuration.GetMeasurementSnapshot(),
-                m =>
-                {
-                    Assert.True(m.Value > 0);
-                    Assert.Equal("http", (string)m.Tags["network.protocol.name"]);
-                    Assert.Equal("2", (string)m.Tags["network.protocol.version"]);
-                    Assert.Equal("tcp", (string)m.Tags["network.transport"]);
-                    Assert.Equal("ipv6", (string)m.Tags["network.type"]);
-                    Assert.Equal("::1", (string)m.Tags["server.address"]);
-                    Assert.Equal(host.GetPort(), (int)m.Tags["server.port"]);
-                    Assert.Equal("1.2", (string)m.Tags["tls.protocol.version"]);
-                }
-            );
+            Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
+            {
+                Assert.True(m.Value > 0);
+                Assert.Equal("http", (string)m.Tags["network.protocol.name"]);
+                Assert.Equal("2", (string)m.Tags["network.protocol.version"]);
+                Assert.Equal("tcp", (string)m.Tags["network.transport"]);
+                Assert.Equal("ipv6", (string)m.Tags["network.type"]);
+                Assert.Equal("::1", (string)m.Tags["server.address"]);
+                Assert.Equal(host.GetPort(), (int)m.Tags["server.port"]);
+                Assert.Equal("1.2", (string)m.Tags["tls.protocol.version"]);
+            });
 
             await host.StopAsync();
         }

@@ -56,10 +56,9 @@ namespace Microsoft.CodeAnalysis.Text
                     throw new ArgumentNullException(nameof(buffer));
                 }
 
-                return s_textContainerMap.GetValue(
-                    buffer,
-                    static buffer => new TextBufferContainer(buffer)
-                );
+                return s_textContainerMap.GetValue(buffer, static buffer => new TextBufferContainer(
+                    buffer
+                ));
             }
 
             public ITextBuffer? TryFindEditorTextBuffer() => _weakEditorBuffer.GetTarget();

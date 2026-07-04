@@ -311,12 +311,10 @@ namespace Mono.Linker
 
                         case "--strip-descriptors":
                             if (
-                                !GetBoolParam(
-                                    token,
-                                    l =>
-                                        set_optimizations.Add(
-                                            (CodeOptimizations.RemoveDescriptors, null, l)
-                                        )
+                                !GetBoolParam(token, l =>
+                                    set_optimizations.Add(
+                                        (CodeOptimizations.RemoveDescriptors, null, l)
+                                    )
                                 )
                             )
                                 return -1;
@@ -325,12 +323,10 @@ namespace Mono.Linker
 
                         case "--strip-substitutions":
                             if (
-                                !GetBoolParam(
-                                    token,
-                                    l =>
-                                        set_optimizations.Add(
-                                            (CodeOptimizations.RemoveSubstitutions, null, l)
-                                        )
+                                !GetBoolParam(token, l =>
+                                    set_optimizations.Add(
+                                        (CodeOptimizations.RemoveSubstitutions, null, l)
+                                    )
                                 )
                             )
                                 return -1;
@@ -339,12 +335,10 @@ namespace Mono.Linker
 
                         case "--strip-link-attributes":
                             if (
-                                !GetBoolParam(
-                                    token,
-                                    l =>
-                                        set_optimizations.Add(
-                                            (CodeOptimizations.RemoveLinkAttributes, null, l)
-                                        )
+                                !GetBoolParam(token, l =>
+                                    set_optimizations.Add(
+                                        (CodeOptimizations.RemoveLinkAttributes, null, l)
+                                    )
                                 )
                             )
                                 return -1;
@@ -445,16 +439,14 @@ namespace Mono.Linker
 
                         case "--keep-dep-attributes":
                             if (
-                                !GetBoolParam(
-                                    token,
-                                    l =>
-                                        set_optimizations.Add(
-                                            (
-                                                CodeOptimizations.RemoveDynamicDependencyAttribute,
-                                                null,
-                                                !l
-                                            )
+                                !GetBoolParam(token, l =>
+                                    set_optimizations.Add(
+                                        (
+                                            CodeOptimizations.RemoveDynamicDependencyAttribute,
+                                            null,
+                                            !l
                                         )
+                                    )
                                 )
                             )
                                 return -1;
@@ -535,15 +527,10 @@ namespace Mono.Linker
                             if (!GetStringParam(token, out string? featureName))
                                 return -1;
 
-                            if (
-                                !GetBoolParam(
-                                    token,
-                                    value =>
-                                    {
-                                        context.SetFeatureValue(featureName, value);
-                                    }
-                                )
-                            )
+                            if (!GetBoolParam(token, value =>
+                                {
+                                    context.SetFeatureValue(featureName, value);
+                                }))
                                 return -1;
 
                             continue;
@@ -554,16 +541,11 @@ namespace Mono.Linker
                             // from stable assembly content. This option creates a new random
                             // mvid or uses mvid of the source assembly.
                             //
-                            if (
-                                !GetBoolParam(
-                                    token,
-                                    l =>
-                                    {
-                                        if (!l)
-                                            p.RemoveStep(typeof(RegenerateGuidStep));
-                                    }
-                                )
-                            )
+                            if (!GetBoolParam(token, l =>
+                                {
+                                    if (!l)
+                                        p.RemoveStep(typeof(RegenerateGuidStep));
+                                }))
                                 return -1;
 
                             new_mvid_used = true;

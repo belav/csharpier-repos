@@ -189,16 +189,13 @@ namespace System.Data.Tests
             ForeignKeyConstraint fc = null;
 
             // Ctor ArgumentException
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    fc = new ForeignKeyConstraint(
-                        new DataColumn[] { dtParent.Columns[0] },
-                        new DataColumn[] { dtChild.Columns[0], dtChild.Columns[1] }
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                fc = new ForeignKeyConstraint(
+                    new DataColumn[] { dtParent.Columns[0] },
+                    new DataColumn[] { dtChild.Columns[0], dtChild.Columns[1] }
+                );
+            });
 
             fc = new ForeignKeyConstraint(
                 new DataColumn[] { dtParent.Columns[0], dtParent.Columns[1] },
@@ -206,13 +203,10 @@ namespace System.Data.Tests
             );
 
             // Add constraint to table - ArgumentException
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    dtChild.Constraints.Add(fc);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                dtChild.Constraints.Add(fc);
+            });
 
             // Child Table Constraints Count - two columnns
             Assert.Equal(0, dtChild.Constraints.Count);
@@ -492,41 +486,35 @@ namespace System.Data.Tests
         [Fact]
         public void Ctor_DclmDclm2()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    var ds = new DataSet();
-                    ds.Tables.Add(DataProvider.CreateParentDataTable());
-                    ds.Tables.Add(DataProvider.CreateChildDataTable());
-                    ds.Tables["Parent"].Columns["ParentId"].Expression = "2";
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                var ds = new DataSet();
+                ds.Tables.Add(DataProvider.CreateParentDataTable());
+                ds.Tables.Add(DataProvider.CreateChildDataTable());
+                ds.Tables["Parent"].Columns["ParentId"].Expression = "2";
 
-                    ForeignKeyConstraint fc = new ForeignKeyConstraint(
-                        ds.Tables[0].Columns[0],
-                        ds.Tables[1].Columns[0]
-                    );
-                }
-            );
+                ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                    ds.Tables[0].Columns[0],
+                    ds.Tables[1].Columns[0]
+                );
+            });
         }
 
         [Fact]
         public void Ctor_DclmDclm3()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    var ds = new DataSet();
-                    ds.Tables.Add(DataProvider.CreateParentDataTable());
-                    ds.Tables.Add(DataProvider.CreateChildDataTable());
-                    ds.Tables["Child"].Columns["ParentId"].Expression = "2";
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                var ds = new DataSet();
+                ds.Tables.Add(DataProvider.CreateParentDataTable());
+                ds.Tables.Add(DataProvider.CreateChildDataTable());
+                ds.Tables["Child"].Columns["ParentId"].Expression = "2";
 
-                    ForeignKeyConstraint fc = new ForeignKeyConstraint(
-                        ds.Tables[0].Columns[0],
-                        ds.Tables[1].Columns[0]
-                    );
-                }
-            );
+                ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                    ds.Tables[0].Columns[0],
+                    ds.Tables[1].Columns[0]
+                );
+            });
         }
 
         [Fact]

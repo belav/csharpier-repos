@@ -935,106 +935,82 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Max_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Range(0, 1).Max((Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Range(0, 1).Max((Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int?>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int?>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((int?)0, 1).Max((Func<int?, int?>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((int?)0, 1).Max((Func<int?, int?>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<long>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<long>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((long)0, 1).Max((Func<long, long>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((long)0, 1).Max((Func<long, long>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<long?>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<long?>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((long?)0, 1).Max((Func<long?, long?>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((long?)0, 1).Max((Func<long?, long?>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<float>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<float>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((float)0, 1).Max((Func<float, float>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((float)0, 1).Max((Func<float, float>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<float?>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<float?>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((float?)0, 1).Max((Func<float?, float>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((float?)0, 1).Max((Func<float?, float>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<double>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<double>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((double)0, 1).Max((Func<double, double>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((double)0, 1).Max((Func<double, double>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<double?>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<double?>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((double?)0, 1).Max((Func<double?, double>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((double?)0, 1).Max((Func<double?, double>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<decimal>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<decimal>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((decimal)0, 1).Max((Func<decimal, decimal>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((decimal)0, 1).Max((Func<decimal, decimal>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<decimal?>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<decimal?>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((decimal?)0, 1).Max((Func<decimal?, decimal>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((decimal?)0, 1).Max((Func<decimal?, decimal>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<NotComparable>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<NotComparable>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat(0, 1).Max((Func<int, NotComparable>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat(0, 1).Max((Func<int, NotComparable>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<object>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<object>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat(new object(), 1).Max((Func<object, object>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat(new object(), 1).Max((Func<object, object>)null)
             );
         }
     }

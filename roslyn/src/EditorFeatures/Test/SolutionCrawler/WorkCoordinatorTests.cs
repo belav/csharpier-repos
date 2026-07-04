@@ -123,9 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             var expectedDocumentEvents = 1;
 
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.OnSolutionAdded(solutionInfo)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.OnSolutionAdded(solutionInfo)
             );
 
             Assert.Equal(expectedDocumentEvents, worker.SyntaxDocumentIds.Count);
@@ -220,9 +219,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             var expectedDocumentEvents = 10;
             var expectedProjectEvents = 2;
 
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.OnSolutionReloaded(solution)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.OnSolutionReloaded(solution)
             );
             Assert.Equal(expectedDocumentEvents, worker.DocumentIds.Count);
             Assert.Equal(expectedProjectEvents, worker.ProjectIds.Count);
@@ -257,9 +255,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             var expectedDocumentEvents = 1;
 
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeSolutionAsync(changedSolution)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeSolutionAsync(changedSolution)
             );
             Assert.Equal(expectedDocumentEvents, worker.SyntaxDocumentIds.Count);
         }
@@ -349,9 +346,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             var documentId = project.DocumentIds[0];
             var solution = workspace.CurrentSolution.RemoveDocument(documentId);
 
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeProjectAsync(project.Id, solution)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeProjectAsync(project.Id, solution)
             );
             Assert.Equal(0, worker.SyntaxDocumentIds.Count);
             Assert.Equal(1, worker.InvalidateDocumentIds.Count);
@@ -390,9 +386,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             await WaitWaiterAsync(workspace.ExportProvider);
 
             project = project.WithAssemblyName("newName");
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeProjectAsync(project.Id, project.Solution)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeProjectAsync(project.Id, project.Solution)
             );
 
             var expectedDocumentEvents = 5;
@@ -434,9 +429,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             await WaitWaiterAsync(workspace.ExportProvider);
 
             project = project.WithDefaultNamespace("newNamespace");
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeProjectAsync(project.Id, project.Solution)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeProjectAsync(project.Id, project.Solution)
             );
 
             var expectedDocumentEvents = 5;
@@ -478,9 +472,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             await WaitWaiterAsync(workspace.ExportProvider);
 
             project = project.AddAdditionalDocument("a1", SourceText.From("")).Project;
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeProjectAsync(project.Id, project.Solution)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeProjectAsync(project.Id, project.Solution)
             );
 
             var expectedDocumentEvents = 5;
@@ -527,9 +520,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 project.Id,
                 "/newPath"
             );
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeProjectAsync(project.Id, newSolution)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeProjectAsync(project.Id, newSolution)
             );
 
             var expectedDocumentEvents = 5;
@@ -574,9 +566,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 project.Id,
                 "/newPath"
             );
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeProjectAsync(project.Id, newSolution)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeProjectAsync(project.Id, newSolution)
             );
 
             var expectedDocumentEvents = 5;
@@ -621,9 +612,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 project.Id,
                 new CompilationOutputInfo(assemblyPath: "/newPath")
             );
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeProjectAsync(project.Id, newSolution)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeProjectAsync(project.Id, newSolution)
             );
 
             var expectedDocumentEvents = 5;
@@ -667,9 +657,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             Assert.True(project.State.RunAnalyzers);
 
             var newSolution = workspace.CurrentSolution.WithRunAnalyzers(project.Id, false);
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeProjectAsync(project.Id, newSolution)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeProjectAsync(project.Id, newSolution)
             );
 
             project = workspace.CurrentSolution.GetProject(project.Id);
@@ -692,9 +681,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             workspace.OnSolutionAdded(solutionInfo);
             await WaitWaiterAsync(workspace.ExportProvider);
 
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.GlobalOptions.SetGlobalOption(Analyzer.TestOption, false)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.GlobalOptions.SetGlobalOption(Analyzer.TestOption, false)
             );
 
             Assert.Equal(10, worker.SyntaxDocumentIds.Count);
@@ -720,14 +708,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             );
 
             var newAnalysisScope = BackgroundAnalysisScope.OpenFiles;
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w =>
-                    w.GlobalOptions.SetGlobalOption(
-                        SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
-                        LanguageNames.CSharp,
-                        newAnalysisScope
-                    )
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.GlobalOptions.SetGlobalOption(
+                    SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    newAnalysisScope
+                )
             );
 
             Assert.Equal(
@@ -756,14 +742,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             );
 
             var newAnalysisScope = BackgroundAnalysisScope.FullSolution;
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w =>
-                    w.GlobalOptions.SetGlobalOption(
-                        SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
-                        LanguageNames.CSharp,
-                        newAnalysisScope
-                    )
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.GlobalOptions.SetGlobalOption(
+                    SolutionCrawlerOptionsStorage.BackgroundAnalysisScopeOption,
+                    LanguageNames.CSharp,
+                    newAnalysisScope
+                )
             );
 
             Assert.Equal(
@@ -828,19 +812,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             var project = workspace.CurrentSolution.Projects.First(p => p.Name == "P1");
             var info = DocumentInfo.Create(DocumentId.CreateNewId(project.Id), "D6");
 
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w =>
-                {
-                    w.OnDocumentAdded(info);
+            var worker = await ExecuteOperationAsync(workspace, w =>
+            {
+                w.OnDocumentAdded(info);
 
-                    if (activeDocument)
-                    {
-                        var document = w.CurrentSolution.GetDocument(info.Id);
-                        MakeDocumentActive(document);
-                    }
+                if (activeDocument)
+                {
+                    var document = w.CurrentSolution.GetDocument(info.Id);
+                    MakeDocumentActive(document);
                 }
-            );
+            });
 
             var expectedDocumentSyntaxEvents = 1;
             var expectedDocumentSemanticEvents = 6;
@@ -881,9 +862,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             await WaitWaiterAsync(workspace.ExportProvider);
 
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.OnDocumentRemoved(document.Id)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.OnDocumentRemoved(document.Id)
             );
 
             var expectedDocumentInvalidatedEvents = 1;
@@ -1040,9 +1020,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             await WaitWaiterAsync(workspace.ExportProvider);
 
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeDocumentAsync(document.Id, SourceText.From("//"))
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeDocumentAsync(document.Id, SourceText.From("//"))
             );
 
             var expectedDocumentEvents = 1;
@@ -1088,26 +1067,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             var ncfile = DocumentInfo.Create(DocumentId.CreateNewId(project.Id), "D6");
 
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.OnAdditionalDocumentAdded(ncfile)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.OnAdditionalDocumentAdded(ncfile)
             );
             Assert.Equal(expectedDocumentSyntaxEvents, worker.SyntaxDocumentIds.Count);
             Assert.Equal(expectedDocumentSemanticEvents, worker.DocumentIds.Count);
             Assert.Equal(expectedNonSourceDocumentEvents, worker.NonSourceDocumentIds.Count);
 
-            worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeAdditionalDocument(ncfile.Id, SourceText.From("//"))
+            worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeAdditionalDocument(ncfile.Id, SourceText.From("//"))
             );
 
             Assert.Equal(expectedDocumentSyntaxEvents, worker.SyntaxDocumentIds.Count);
             Assert.Equal(expectedDocumentSemanticEvents, worker.DocumentIds.Count);
             Assert.Equal(expectedNonSourceDocumentEvents, worker.NonSourceDocumentIds.Count);
 
-            worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.OnAdditionalDocumentRemoved(ncfile.Id)
+            worker = await ExecuteOperationAsync(workspace, w =>
+                w.OnAdditionalDocumentRemoved(ncfile.Id)
             );
 
             Assert.Equal(expectedDocumentSyntaxEvents, worker.SyntaxDocumentIds.Count);
@@ -1160,24 +1136,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 filePath: analyzerConfigDocFilePath
             );
 
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.OnAnalyzerConfigDocumentAdded(analyzerConfigFile)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.OnAnalyzerConfigDocumentAdded(analyzerConfigFile)
             );
             Assert.Equal(expectedDocumentSyntaxEvents, worker.SyntaxDocumentIds.Count);
             Assert.Equal(expectedDocumentSemanticEvents, worker.DocumentIds.Count);
 
-            worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.ChangeAnalyzerConfigDocument(analyzerConfigFile.Id, SourceText.From("//"))
+            worker = await ExecuteOperationAsync(workspace, w =>
+                w.ChangeAnalyzerConfigDocument(analyzerConfigFile.Id, SourceText.From("//"))
             );
 
             Assert.Equal(expectedDocumentSyntaxEvents, worker.SyntaxDocumentIds.Count);
             Assert.Equal(expectedDocumentSemanticEvents, worker.DocumentIds.Count);
 
-            worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.OnAnalyzerConfigDocumentRemoved(analyzerConfigFile.Id)
+            worker = await ExecuteOperationAsync(workspace, w =>
+                w.OnAnalyzerConfigDocumentRemoved(analyzerConfigFile.Id)
             );
 
             Assert.Equal(expectedDocumentSyntaxEvents, worker.SyntaxDocumentIds.Count);
@@ -1480,9 +1453,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             };
 
             // Switch to another active source document and verify expected document analysis callbacks
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => MakeDocumentActive(secondDocument)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                MakeDocumentActive(secondDocument)
             );
             Assert.Equal(expectedSyntaxDocumentEvents, worker.SyntaxDocumentIds.Count);
             Assert.Equal(expectedDocumentEvents, worker.DocumentIds.Count);
@@ -1594,9 +1566,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             workspace.TextDocumentClosed += (o, e) => closed = true;
 
             var id = workspace.AnalyzerConfigDocuments.First().Id;
-            var worker = await ExecuteOperationAsync(
-                workspace,
-                w => w.OpenAnalyzerConfigDocument(id)
+            var worker = await ExecuteOperationAsync(workspace, w =>
+                w.OpenAnalyzerConfigDocument(id)
             );
             Assert.True(opened);
             Assert.Equal(1, worker.OpenedNonSourceDocumentIds.Count);
@@ -2189,15 +2160,11 @@ class C
         private static Task<Analyzer> ExecuteOperationAsync(
             TestWorkspace workspace,
             Action<TestWorkspace> operation
-        ) =>
-            ExecuteOperationAsync(
-                workspace,
-                w =>
-                {
-                    operation(w);
-                    return Task.CompletedTask;
-                }
-            );
+        ) => ExecuteOperationAsync(workspace, w =>
+            {
+                operation(w);
+                return Task.CompletedTask;
+            });
 
         private static async Task<Analyzer> ExecuteOperationAsync(
             TestWorkspace workspace,

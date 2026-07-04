@@ -223,9 +223,8 @@ public class HeaderPropagationIntegrationTest
                     {
                         services.AddHeaderPropagation(configure);
                         var client = services
-                            .AddHttpClient(
-                                "example.com",
-                                c => c.BaseAddress = new Uri("http://example.com")
+                            .AddHttpClient("example.com", c =>
+                                c.BaseAddress = new Uri("http://example.com")
                             )
                             .ConfigurePrimaryHttpMessageHandler(() => primaryHandler);
 

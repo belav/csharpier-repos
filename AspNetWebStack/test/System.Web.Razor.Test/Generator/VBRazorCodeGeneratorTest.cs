@@ -359,27 +359,22 @@ namespace System.Web.Razor.Test.Generator
         [Fact]
         public void VBCodeGeneratorRendersHelpersBlockCorrectlyWhenInstanceHelperRequested()
         {
-            RunTest(
-                "Helpers",
-                baselineName: "Helpers.Instance",
-                hostConfig: h => h.StaticHelpers = false
+            RunTest("Helpers", baselineName: "Helpers.Instance", hostConfig: h =>
+                h.StaticHelpers = false
             );
         }
 
         [Fact]
         public void VBCodeGeneratorCorrectlyInstrumentsRazorCodeWhenInstrumentationRequested()
         {
-            RunTest(
-                "Instrumented",
-                hostConfig: host =>
-                {
-                    host.EnableInstrumentation = true;
-                    host.InstrumentedSourceFilePath = String.Format(
-                        "~/{0}.vbhtml",
-                        host.DefaultClassName
-                    );
-                }
-            );
+            RunTest("Instrumented", hostConfig: host =>
+            {
+                host.EnableInstrumentation = true;
+                host.InstrumentedSourceFilePath = String.Format(
+                    "~/{0}.vbhtml",
+                    host.DefaultClassName
+                );
+            });
         }
     }
 }

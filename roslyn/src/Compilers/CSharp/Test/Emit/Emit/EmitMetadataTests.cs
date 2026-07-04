@@ -355,32 +355,29 @@ abstract public class B : I2, I3
 }
 ";
 
-            CompileAndVerify(
-                source,
-                symbolValidator: module =>
-                {
-                    var classA = module.GlobalNamespace.GetMember<NamedTypeSymbol>("A");
-                    var classB = module.GlobalNamespace.GetMember<NamedTypeSymbol>("B");
-                    var i1 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I1");
-                    var i2 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I2");
-                    var i3 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I3");
+            CompileAndVerify(source, symbolValidator: module =>
+            {
+                var classA = module.GlobalNamespace.GetMember<NamedTypeSymbol>("A");
+                var classB = module.GlobalNamespace.GetMember<NamedTypeSymbol>("B");
+                var i1 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I1");
+                var i2 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I2");
+                var i3 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I3");
 
-                    Assert.Equal(TypeKind.Interface, i1.TypeKind);
-                    Assert.Equal(TypeKind.Interface, i2.TypeKind);
-                    Assert.Equal(TypeKind.Interface, i3.TypeKind);
-                    Assert.Equal(TypeKind.Class, classA.TypeKind);
-                    Assert.Equal(TypeKind.Class, classB.TypeKind);
+                Assert.Equal(TypeKind.Interface, i1.TypeKind);
+                Assert.Equal(TypeKind.Interface, i2.TypeKind);
+                Assert.Equal(TypeKind.Interface, i3.TypeKind);
+                Assert.Equal(TypeKind.Class, classA.TypeKind);
+                Assert.Equal(TypeKind.Class, classB.TypeKind);
 
-                    Assert.Same(i1, classA.Interfaces().Single());
+                Assert.Same(i1, classA.Interfaces().Single());
 
-                    var interfaces = classB.Interfaces();
-                    Assert.Same(i2, interfaces[0]);
-                    Assert.Same(i3, interfaces[1]);
+                var interfaces = classB.Interfaces();
+                Assert.Same(i2, interfaces[0]);
+                Assert.Same(i3, interfaces[1]);
 
-                    Assert.Equal(1, i2.GetMembers("M2").Length);
-                    Assert.Equal(1, i3.GetMembers("M3").Length);
-                }
-            );
+                Assert.Equal(1, i2.GetMembers("M2").Length);
+                Assert.Equal(1, i3.GetMembers("M3").Length);
+            });
         }
 
         [Fact]
@@ -399,47 +396,42 @@ interface I7 { }
 class C : I1 { }
 ";
 
-            CompileAndVerify(
-                source,
-                symbolValidator: module =>
-                {
-                    var i1 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I1");
-                    var i2 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I2");
-                    var i3 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I3");
-                    var i4 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I4");
-                    var i5 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I5");
-                    var i6 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I6");
-                    var i7 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I7");
-                    var c = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+            CompileAndVerify(source, symbolValidator: module =>
+            {
+                var i1 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I1");
+                var i2 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I2");
+                var i3 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I3");
+                var i4 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I4");
+                var i5 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I5");
+                var i6 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I6");
+                var i7 = module.GlobalNamespace.GetMember<NamedTypeSymbol>("I7");
+                var c = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
 
-                    // Order is important - should be pre-order depth-first with declaration order at each level
-                    Assert.True(
-                        i1.Interfaces()
-                            .SequenceEqual(
-                                ImmutableArray.Create<NamedTypeSymbol>(i2, i3, i4, i5, i6, i7)
-                            )
-                    );
-                    Assert.True(
-                        i2.Interfaces()
-                            .SequenceEqual(ImmutableArray.Create<NamedTypeSymbol>(i3, i4))
-                    );
-                    Assert.False(i3.Interfaces().Any());
-                    Assert.False(i4.Interfaces().Any());
-                    Assert.True(
-                        i5.Interfaces()
-                            .SequenceEqual(ImmutableArray.Create<NamedTypeSymbol>(i6, i7))
-                    );
-                    Assert.False(i6.Interfaces().Any());
-                    Assert.False(i7.Interfaces().Any());
+                // Order is important - should be pre-order depth-first with declaration order at each level
+                Assert.True(
+                    i1.Interfaces()
+                        .SequenceEqual(
+                            ImmutableArray.Create<NamedTypeSymbol>(i2, i3, i4, i5, i6, i7)
+                        )
+                );
+                Assert.True(
+                    i2.Interfaces().SequenceEqual(ImmutableArray.Create<NamedTypeSymbol>(i3, i4))
+                );
+                Assert.False(i3.Interfaces().Any());
+                Assert.False(i4.Interfaces().Any());
+                Assert.True(
+                    i5.Interfaces().SequenceEqual(ImmutableArray.Create<NamedTypeSymbol>(i6, i7))
+                );
+                Assert.False(i6.Interfaces().Any());
+                Assert.False(i7.Interfaces().Any());
 
-                    Assert.True(
-                        c.Interfaces()
-                            .SequenceEqual(
-                                ImmutableArray.Create<NamedTypeSymbol>(i1, i2, i3, i4, i5, i6, i7)
-                            )
-                    );
-                }
-            );
+                Assert.True(
+                    c.Interfaces()
+                        .SequenceEqual(
+                            ImmutableArray.Create<NamedTypeSymbol>(i1, i2, i3, i4, i5, i6, i7)
+                        )
+                );
+            });
         }
 
         [Fact]
@@ -493,113 +485,73 @@ abstract public class A
     public abstract void M5<T, S>(T p17, S p18);
 }";
 
-            CompileAndVerify(
-                source,
-                options: TestOptions.ReleaseDll,
-                symbolValidator: module =>
-                {
-                    var classA = module.GlobalNamespace.GetTypeMembers("A").Single();
+            CompileAndVerify(source, options: TestOptions.ReleaseDll, symbolValidator: module =>
+            {
+                var classA = module.GlobalNamespace.GetTypeMembers("A").Single();
 
-                    var m1 = classA.GetMembers("M1").OfType<MethodSymbol>().Single();
-                    var m2 = classA.GetMembers("M2").OfType<MethodSymbol>().Single();
-                    var m3 = classA.GetMembers("M3").OfType<MethodSymbol>().Single();
-                    var m4 = classA.GetMembers("M4").OfType<MethodSymbol>().Single();
-                    var m5 = classA.GetMembers("M5").OfType<MethodSymbol>().Single();
+                var m1 = classA.GetMembers("M1").OfType<MethodSymbol>().Single();
+                var m2 = classA.GetMembers("M2").OfType<MethodSymbol>().Single();
+                var m3 = classA.GetMembers("M3").OfType<MethodSymbol>().Single();
+                var m4 = classA.GetMembers("M4").OfType<MethodSymbol>().Single();
+                var m5 = classA.GetMembers("M5").OfType<MethodSymbol>().Single();
 
-                    var method1Ret = (ArrayTypeSymbol)m1.ReturnType;
-                    var method2Ret = (ArrayTypeSymbol)m2.ReturnType;
-                    var method3Ret = (ArrayTypeSymbol)m3.ReturnType;
+                var method1Ret = (ArrayTypeSymbol)m1.ReturnType;
+                var method2Ret = (ArrayTypeSymbol)m2.ReturnType;
+                var method3Ret = (ArrayTypeSymbol)m3.ReturnType;
 
-                    Assert.True(method1Ret.IsSZArray);
-                    Assert.Same(classA, method1Ret.ElementType);
-                    Assert.Equal(2, method2Ret.Rank);
-                    Assert.Same(classA, method2Ret.ElementType);
-                    Assert.Equal(3, method3Ret.Rank);
-                    Assert.Same(classA, method3Ret.ElementType);
+                Assert.True(method1Ret.IsSZArray);
+                Assert.Same(classA, method1Ret.ElementType);
+                Assert.Equal(2, method2Ret.Rank);
+                Assert.Same(classA, method2Ret.ElementType);
+                Assert.Equal(3, method3Ret.Rank);
+                Assert.Same(classA, method3Ret.ElementType);
 
-                    Assert.True(classA.IsAbstract);
-                    Assert.Equal(Accessibility.Public, classA.DeclaredAccessibility);
+                Assert.True(classA.IsAbstract);
+                Assert.Equal(Accessibility.Public, classA.DeclaredAccessibility);
 
-                    var parameter1 = m1.Parameters.Single();
-                    var parameter1Type = parameter1.Type;
+                var parameter1 = m1.Parameters.Single();
+                var parameter1Type = parameter1.Type;
 
-                    Assert.Equal(RefKind.Ref, parameter1.RefKind);
-                    Assert.Same(module.GetCorLibType(SpecialType.System_Array), parameter1Type);
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_Boolean),
-                        m2.Parameters.Single().Type
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_Char),
-                        m3.Parameters.Single().Type
-                    );
+                Assert.Equal(RefKind.Ref, parameter1.RefKind);
+                Assert.Same(module.GetCorLibType(SpecialType.System_Array), parameter1Type);
+                Assert.Same(
+                    module.GetCorLibType(SpecialType.System_Boolean),
+                    m2.Parameters.Single().Type
+                );
+                Assert.Same(
+                    module.GetCorLibType(SpecialType.System_Char),
+                    m3.Parameters.Single().Type
+                );
 
-                    var method4ParamTypes = m4.Parameters.Select(p => p.Type).ToArray();
+                var method4ParamTypes = m4.Parameters.Select(p => p.Type).ToArray();
 
-                    Assert.Same(module.GetCorLibType(SpecialType.System_Void), m4.ReturnType);
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_SByte),
-                        method4ParamTypes[0]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_Single),
-                        method4ParamTypes[1]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_Double),
-                        method4ParamTypes[2]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_Int16),
-                        method4ParamTypes[3]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_Int32),
-                        method4ParamTypes[4]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_Int64),
-                        method4ParamTypes[5]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_IntPtr),
-                        method4ParamTypes[6]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_String),
-                        method4ParamTypes[7]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_Byte),
-                        method4ParamTypes[8]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_UInt16),
-                        method4ParamTypes[9]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_UInt32),
-                        method4ParamTypes[10]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_UInt64),
-                        method4ParamTypes[11]
-                    );
-                    Assert.Same(
-                        module.GetCorLibType(SpecialType.System_UIntPtr),
-                        method4ParamTypes[12]
-                    );
+                Assert.Same(module.GetCorLibType(SpecialType.System_Void), m4.ReturnType);
+                Assert.Same(module.GetCorLibType(SpecialType.System_SByte), method4ParamTypes[0]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_Single), method4ParamTypes[1]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_Double), method4ParamTypes[2]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_Int16), method4ParamTypes[3]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_Int32), method4ParamTypes[4]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_Int64), method4ParamTypes[5]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_IntPtr), method4ParamTypes[6]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_String), method4ParamTypes[7]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_Byte), method4ParamTypes[8]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_UInt16), method4ParamTypes[9]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_UInt32), method4ParamTypes[10]);
+                Assert.Same(module.GetCorLibType(SpecialType.System_UInt64), method4ParamTypes[11]);
+                Assert.Same(
+                    module.GetCorLibType(SpecialType.System_UIntPtr),
+                    method4ParamTypes[12]
+                );
 
-                    Assert.True(m5.IsGenericMethod);
-                    Assert.Same(m5.TypeParameters[0], m5.Parameters[0].Type);
-                    Assert.Same(m5.TypeParameters[1], m5.Parameters[1].Type);
+                Assert.True(m5.IsGenericMethod);
+                Assert.Same(m5.TypeParameters[0], m5.Parameters[0].Type);
+                Assert.Same(m5.TypeParameters[1], m5.Parameters[1].Type);
 
-                    Assert.Equal(
-                        10,
-                        ((PEModuleSymbol)module).Module.GetMetadataReader().TypeReferences.Count
-                    );
-                }
-            );
+                Assert.Equal(
+                    10,
+                    ((PEModuleSymbol)module).Module.GetMetadataReader().TypeReferences.Count
+                );
+            });
         }
 
         [Fact]
@@ -2481,19 +2433,16 @@ public abstract class C
 }
 ";
 
-            CompileAndVerify(
-                source,
-                symbolValidator: module =>
-                {
-                    var global = module.GlobalNamespace;
+            CompileAndVerify(source, symbolValidator: module =>
+            {
+                var global = module.GlobalNamespace;
 
-                    var c = global.GetTypeMembers("C", 0).Single() as NamedTypeSymbol;
-                    var m = c.GetMembers("M").Single() as MethodSymbol;
-                    Assert.Equal(RefKind.None, m.Parameters[0].RefKind);
-                    Assert.Equal(RefKind.Ref, m.Parameters[1].RefKind);
-                    Assert.Equal(RefKind.Out, m.Parameters[2].RefKind);
-                }
-            );
+                var c = global.GetTypeMembers("C", 0).Single() as NamedTypeSymbol;
+                var m = c.GetMembers("M").Single() as MethodSymbol;
+                Assert.Equal(RefKind.None, m.Parameters[0].RefKind);
+                Assert.Equal(RefKind.Ref, m.Parameters[1].RefKind);
+                Assert.Equal(RefKind.Out, m.Parameters[2].RefKind);
+            });
         }
 
         [Fact]
@@ -2532,68 +2481,57 @@ class C
                 // out int z, // commented out until 4264 is fixed.
                 int w);";
 
-            CompileAndVerify(
-                source,
-                symbolValidator: module =>
+            CompileAndVerify(source, symbolValidator: module =>
+            {
+                var global = module.GlobalNamespace;
+
+                var myDel = global.GetTypeMembers("MyDel", 0).Single() as NamedTypeSymbol;
+
+                var invoke = myDel.DelegateInvokeMethod;
+
+                var beginInvoke = myDel.GetMembers("BeginInvoke").Single() as MethodSymbol;
+                Assert.Equal(invoke.Parameters.Length + 2, beginInvoke.Parameters.Length);
+                Assert.Equal(TypeKind.Interface, beginInvoke.ReturnType.TypeKind);
+                Assert.Equal("System.IAsyncResult", beginInvoke.ReturnType.ToTestDisplayString());
+                for (int i = 0; i < invoke.Parameters.Length; i++)
                 {
-                    var global = module.GlobalNamespace;
+                    Assert.Equal(invoke.Parameters[i].Type, beginInvoke.Parameters[i].Type);
+                    Assert.Equal(invoke.Parameters[i].RefKind, beginInvoke.Parameters[i].RefKind);
+                }
+                Assert.Equal(
+                    "System.AsyncCallback",
+                    beginInvoke.Parameters[invoke.Parameters.Length].Type.ToTestDisplayString()
+                );
+                Assert.Equal(
+                    "System.Object",
+                    beginInvoke.Parameters[invoke.Parameters.Length + 1].Type.ToTestDisplayString()
+                );
 
-                    var myDel = global.GetTypeMembers("MyDel", 0).Single() as NamedTypeSymbol;
-
-                    var invoke = myDel.DelegateInvokeMethod;
-
-                    var beginInvoke = myDel.GetMembers("BeginInvoke").Single() as MethodSymbol;
-                    Assert.Equal(invoke.Parameters.Length + 2, beginInvoke.Parameters.Length);
-                    Assert.Equal(TypeKind.Interface, beginInvoke.ReturnType.TypeKind);
-                    Assert.Equal(
-                        "System.IAsyncResult",
-                        beginInvoke.ReturnType.ToTestDisplayString()
-                    );
-                    for (int i = 0; i < invoke.Parameters.Length; i++)
+                var invokeReturn = invoke.ReturnType;
+                var endInvoke = myDel.GetMembers("EndInvoke").Single() as MethodSymbol;
+                var endInvokeReturn = endInvoke.ReturnType;
+                Assert.Equal(invokeReturn, endInvokeReturn);
+                int k = 0;
+                for (int i = 0; i < invoke.Parameters.Length; i++)
+                {
+                    if (invoke.Parameters[i].RefKind != RefKind.None)
                     {
-                        Assert.Equal(invoke.Parameters[i].Type, beginInvoke.Parameters[i].Type);
+                        Assert.Equal(
+                            invoke.Parameters[i].TypeWithAnnotations,
+                            endInvoke.Parameters[k].TypeWithAnnotations
+                        );
                         Assert.Equal(
                             invoke.Parameters[i].RefKind,
-                            beginInvoke.Parameters[i].RefKind
+                            endInvoke.Parameters[k++].RefKind
                         );
                     }
-                    Assert.Equal(
-                        "System.AsyncCallback",
-                        beginInvoke.Parameters[invoke.Parameters.Length].Type.ToTestDisplayString()
-                    );
-                    Assert.Equal(
-                        "System.Object",
-                        beginInvoke
-                            .Parameters[invoke.Parameters.Length + 1]
-                            .Type.ToTestDisplayString()
-                    );
-
-                    var invokeReturn = invoke.ReturnType;
-                    var endInvoke = myDel.GetMembers("EndInvoke").Single() as MethodSymbol;
-                    var endInvokeReturn = endInvoke.ReturnType;
-                    Assert.Equal(invokeReturn, endInvokeReturn);
-                    int k = 0;
-                    for (int i = 0; i < invoke.Parameters.Length; i++)
-                    {
-                        if (invoke.Parameters[i].RefKind != RefKind.None)
-                        {
-                            Assert.Equal(
-                                invoke.Parameters[i].TypeWithAnnotations,
-                                endInvoke.Parameters[k].TypeWithAnnotations
-                            );
-                            Assert.Equal(
-                                invoke.Parameters[i].RefKind,
-                                endInvoke.Parameters[k++].RefKind
-                            );
-                        }
-                    }
-                    Assert.Equal(
-                        "System.IAsyncResult",
-                        endInvoke.Parameters[k++].Type.ToTestDisplayString()
-                    );
-                    Assert.Equal(k, endInvoke.Parameters.Length);
                 }
-            );
+                Assert.Equal(
+                    "System.IAsyncResult",
+                    endInvoke.Parameters[k++].Type.ToTestDisplayString()
+                );
+                Assert.Equal(k, endInvoke.Parameters.Length);
+            });
         }
 
         [Fact]
@@ -2617,25 +2555,22 @@ public static class C
 }
 ";
 
-            CompileAndVerify(
-                source,
-                symbolValidator: module =>
-                {
-                    var global = module.GlobalNamespace;
-                    var classC = global.GetMember<NamedTypeSymbol>("C");
-                    Assert.True(classC.IsStatic, "Expected C to be static");
-                    Assert.False(classC.IsAbstract, "Expected C to be non-abstract"); //even though it is abstract in metadata
-                    Assert.False(classC.IsSealed, "Expected C to be non-sealed"); //even though it is sealed in metadata
-                    Assert.Equal(
-                        0,
-                        classC.GetMembers(WellKnownMemberNames.InstanceConstructorName).Length
-                    ); //since C is static
-                    Assert.Equal(
-                        0,
-                        classC.GetMembers(WellKnownMemberNames.StaticConstructorName).Length
-                    ); //since we don't import private members
-                }
-            );
+            CompileAndVerify(source, symbolValidator: module =>
+            {
+                var global = module.GlobalNamespace;
+                var classC = global.GetMember<NamedTypeSymbol>("C");
+                Assert.True(classC.IsStatic, "Expected C to be static");
+                Assert.False(classC.IsAbstract, "Expected C to be non-abstract"); //even though it is abstract in metadata
+                Assert.False(classC.IsSealed, "Expected C to be non-sealed"); //even though it is sealed in metadata
+                Assert.Equal(
+                    0,
+                    classC.GetMembers(WellKnownMemberNames.InstanceConstructorName).Length
+                ); //since C is static
+                Assert.Equal(
+                    0,
+                    classC.GetMembers(WellKnownMemberNames.StaticConstructorName).Length
+                ); //since we don't import private members
+            });
         }
 
         [Fact]
@@ -3378,22 +3313,19 @@ public interface T
 }"
             );
 
-            CompileAndVerify(
-                comAssembly,
-                symbolValidator: module =>
-                {
-                    var parameters = module
-                        .GlobalNamespace.GetTypeMember("T")
-                        .GetMethod("M")
-                        .GetParameters();
-                    Assert.Equal(4, parameters.Length);
+            CompileAndVerify(comAssembly, symbolValidator: module =>
+            {
+                var parameters = module
+                    .GlobalNamespace.GetTypeMember("T")
+                    .GetMethod("M")
+                    .GetParameters();
+                Assert.Equal(4, parameters.Length);
 
-                    Assert.True(parameters[0].IsMetadataIn);
-                    Assert.True(parameters[1].IsMetadataIn);
-                    Assert.True(parameters[2].IsMetadataIn);
-                    Assert.False(parameters[3].IsMetadataIn);
-                }
-            );
+                Assert.True(parameters[0].IsMetadataIn);
+                Assert.True(parameters[1].IsMetadataIn);
+                Assert.True(parameters[2].IsMetadataIn);
+                Assert.False(parameters[3].IsMetadataIn);
+            });
 
             var code =
                 @"
@@ -3529,23 +3461,19 @@ public static class Program
                 @"Parent called
 Child called";
 
-            CompileAndVerify(
-                comp,
-                expectedOutput: expectedOutput,
-                symbolValidator: module =>
-                {
-                    var childParameters = module
-                        .ContainingAssembly.GetTypeByMetadataName("Child")
-                        .GetMethod("M")
-                        .GetParameters();
-                    Assert.Equal(4, childParameters.Length);
+            CompileAndVerify(comp, expectedOutput: expectedOutput, symbolValidator: module =>
+            {
+                var childParameters = module
+                    .ContainingAssembly.GetTypeByMetadataName("Child")
+                    .GetMethod("M")
+                    .GetParameters();
+                Assert.Equal(4, childParameters.Length);
 
-                    Assert.True(childParameters[0].IsMetadataIn);
-                    Assert.True(childParameters[1].IsMetadataIn);
-                    Assert.True(childParameters[2].IsMetadataIn);
-                    Assert.False(childParameters[3].IsMetadataIn);
-                }
-            );
+                Assert.True(childParameters[0].IsMetadataIn);
+                Assert.True(childParameters[1].IsMetadataIn);
+                Assert.True(childParameters[2].IsMetadataIn);
+                Assert.False(childParameters[3].IsMetadataIn);
+            });
         }
 
         [Fact]
@@ -3561,20 +3489,17 @@ public class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var sourceParentParameters = module
-                        .GlobalNamespace.GetTypeMember("Parent")
-                        .GetMethod("M")
-                        .GetParameters();
-                    Assert.Equal(2, sourceParentParameters.Length);
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var sourceParentParameters = module
+                    .GlobalNamespace.GetTypeMember("Parent")
+                    .GetMethod("M")
+                    .GetParameters();
+                Assert.Equal(2, sourceParentParameters.Length);
 
-                    Assert.True(sourceParentParameters[0].IsMetadataOut);
-                    Assert.True(sourceParentParameters[1].IsMetadataOut);
-                }
-            );
+                Assert.True(sourceParentParameters[0].IsMetadataOut);
+                Assert.True(sourceParentParameters[1].IsMetadataOut);
+            });
 
             var source =
                 @"
@@ -3631,20 +3556,17 @@ public class Parent
 }"
             );
 
-            CompileAndVerify(
-                reference,
-                symbolValidator: module =>
-                {
-                    var sourceParentParameters = module
-                        .GlobalNamespace.GetTypeMember("Parent")
-                        .GetMethod("M")
-                        .GetParameters();
-                    Assert.Equal(2, sourceParentParameters.Length);
+            CompileAndVerify(reference, symbolValidator: module =>
+            {
+                var sourceParentParameters = module
+                    .GlobalNamespace.GetTypeMember("Parent")
+                    .GetMethod("M")
+                    .GetParameters();
+                Assert.Equal(2, sourceParentParameters.Length);
 
-                    Assert.True(sourceParentParameters[0].IsMetadataIn);
-                    Assert.True(sourceParentParameters[1].IsMetadataIn);
-                }
-            );
+                Assert.True(sourceParentParameters[0].IsMetadataIn);
+                Assert.True(sourceParentParameters[1].IsMetadataIn);
+            });
 
             var source =
                 @"

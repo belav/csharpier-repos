@@ -657,52 +657,49 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 // is appropriate placed before/after an existing field/property.  We'll try
                 // to preserve the same order for fields/properties that we have for the constructor
                 // parameters.
-                editor.ReplaceNode(
-                    typeDeclaration,
-                    (currentTypeDecl, _) =>
+                editor.ReplaceNode(typeDeclaration, (currentTypeDecl, _) =>
+                {
+                    if (fieldOrProperty is IPropertySymbol property)
                     {
-                        if (fieldOrProperty is IPropertySymbol property)
-                        {
-                            return codeGenerator.AddProperty(
-                                currentTypeDecl,
-                                property,
-                                codeGenerator.GetInfo(
-                                    GetAddContext<IPropertySymbol>(
-                                        parameter,
-                                        blockStatement,
-                                        typeDeclaration,
-                                        cancellationToken
-                                    ),
-                                    options,
-                                    root.SyntaxTree.Options
+                        return codeGenerator.AddProperty(
+                            currentTypeDecl,
+                            property,
+                            codeGenerator.GetInfo(
+                                GetAddContext<IPropertySymbol>(
+                                    parameter,
+                                    blockStatement,
+                                    typeDeclaration,
+                                    cancellationToken
                                 ),
-                                cancellationToken
-                            );
-                        }
-                        else if (fieldOrProperty is IFieldSymbol field)
-                        {
-                            return codeGenerator.AddField(
-                                currentTypeDecl,
-                                field,
-                                codeGenerator.GetInfo(
-                                    GetAddContext<IFieldSymbol>(
-                                        parameter,
-                                        blockStatement,
-                                        typeDeclaration,
-                                        cancellationToken
-                                    ),
-                                    options,
-                                    root.SyntaxTree.Options
-                                ),
-                                cancellationToken
-                            );
-                        }
-                        else
-                        {
-                            throw ExceptionUtilities.Unreachable();
-                        }
+                                options,
+                                root.SyntaxTree.Options
+                            ),
+                            cancellationToken
+                        );
                     }
-                );
+                    else if (fieldOrProperty is IFieldSymbol field)
+                    {
+                        return codeGenerator.AddField(
+                            currentTypeDecl,
+                            field,
+                            codeGenerator.GetInfo(
+                                GetAddContext<IFieldSymbol>(
+                                    parameter,
+                                    blockStatement,
+                                    typeDeclaration,
+                                    cancellationToken
+                                ),
+                                options,
+                                root.SyntaxTree.Options
+                            ),
+                            cancellationToken
+                        );
+                    }
+                    else
+                    {
+                        throw ExceptionUtilities.Unreachable();
+                    }
+                });
             }
 
             AddAssignment(

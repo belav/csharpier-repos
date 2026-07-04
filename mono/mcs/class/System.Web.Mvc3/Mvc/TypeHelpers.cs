@@ -58,9 +58,8 @@
             ParameterInfo[] delegateParameters = typeof(TDelegate)
                 .GetMethod("Invoke")
                 .GetParameters();
-            Type[] argumentTypes = Array.ConvertAll(
-                delegateParameters,
-                pInfo => pInfo.ParameterType
+            Type[] argumentTypes = Array.ConvertAll(delegateParameters, pInfo =>
+                pInfo.ParameterType
             );
             MethodInfo targetMethod = targetType.GetMethod(methodName, argumentTypes);
             if (targetMethod == null)

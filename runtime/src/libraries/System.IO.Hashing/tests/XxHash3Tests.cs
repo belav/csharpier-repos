@@ -17,9 +17,8 @@ namespace System.IO.Hashing.Tests
             AssertExtensions.Throws<ArgumentNullException>("source", () => XxHash3.Hash(null));
             AssertExtensions.Throws<ArgumentNullException>("source", () => XxHash3.Hash(null, 42));
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => XxHash3.Hash(new byte[] { 1, 2, 3 }, new byte[7])
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                XxHash3.Hash(new byte[] { 1, 2, 3 }, new byte[7])
             );
         }
 

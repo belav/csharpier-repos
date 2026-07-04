@@ -829,121 +829,86 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Join_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outer",
-                () =>
-                    ((ParallelQuery<int>)null).Join(
-                        ParallelEnumerable.Range(0, 1),
-                        i => i,
-                        i => i,
-                        (i, j) => i
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("outer", () =>
+                ((ParallelQuery<int>)null).Join(
+                    ParallelEnumerable.Range(0, 1),
+                    i => i,
+                    i => i,
+                    (i, j) => i
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inner",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Join((ParallelQuery<int>)null, i => i, i => i, (i, j) => i)
+            AssertExtensions.Throws<ArgumentNullException>("inner", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Join((ParallelQuery<int>)null, i => i, i => i, (i, j) => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outerKeySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Join(
-                            ParallelEnumerable.Range(0, 1),
-                            (Func<int, int>)null,
-                            i => i,
-                            (i, j) => i
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Join(ParallelEnumerable.Range(0, 1), (Func<int, int>)null, i => i, (i, j) => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "innerKeySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Join(
-                            ParallelEnumerable.Range(0, 1),
-                            i => i,
-                            (Func<int, int>)null,
-                            (i, j) => i
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Join(ParallelEnumerable.Range(0, 1), i => i, (Func<int, int>)null, (i, j) => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Join(
-                            ParallelEnumerable.Range(0, 1),
-                            i => i,
-                            i => i,
-                            (Func<int, int, int>)null
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Join(ParallelEnumerable.Range(0, 1), i => i, i => i, (Func<int, int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outer",
-                () =>
-                    ((ParallelQuery<int>)null).Join(
-                        ParallelEnumerable.Range(0, 1),
+            AssertExtensions.Throws<ArgumentNullException>("outer", () =>
+                ((ParallelQuery<int>)null).Join(
+                    ParallelEnumerable.Range(0, 1),
+                    i => i,
+                    i => i,
+                    (i, j) => i,
+                    EqualityComparer<int>.Default
+                )
+            );
+            AssertExtensions.Throws<ArgumentNullException>("inner", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Join(
+                        (ParallelQuery<int>)null,
                         i => i,
                         i => i,
                         (i, j) => i,
                         EqualityComparer<int>.Default
                     )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inner",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Join(
-                            (ParallelQuery<int>)null,
-                            i => i,
-                            i => i,
-                            (i, j) => i,
-                            EqualityComparer<int>.Default
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Join(
+                        ParallelEnumerable.Range(0, 1),
+                        (Func<int, int>)null,
+                        i => i,
+                        (i, j) => i,
+                        EqualityComparer<int>.Default
+                    )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outerKeySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Join(
-                            ParallelEnumerable.Range(0, 1),
-                            (Func<int, int>)null,
-                            i => i,
-                            (i, j) => i,
-                            EqualityComparer<int>.Default
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Join(
+                        ParallelEnumerable.Range(0, 1),
+                        i => i,
+                        (Func<int, int>)null,
+                        (i, j) => i,
+                        EqualityComparer<int>.Default
+                    )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "innerKeySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Join(
-                            ParallelEnumerable.Range(0, 1),
-                            i => i,
-                            (Func<int, int>)null,
-                            (i, j) => i,
-                            EqualityComparer<int>.Default
-                        )
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Join(
-                            ParallelEnumerable.Range(0, 1),
-                            i => i,
-                            i => i,
-                            (Func<int, int, int>)null,
-                            EqualityComparer<int>.Default
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Join(
+                        ParallelEnumerable.Range(0, 1),
+                        i => i,
+                        i => i,
+                        (Func<int, int, int>)null,
+                        EqualityComparer<int>.Default
+                    )
             );
         }
 
@@ -974,72 +939,66 @@ namespace System.Linq.Parallel.Tests
                 int currentLeft = -1;
                 bool seenOdd = false;
 
-                Assert.All(
-                    Join(left, right),
-                    p =>
+                Assert.All(Join(left, right), p =>
+                {
+                    try
                     {
-                        try
+                        if (currentLeft != p.Key)
                         {
-                            if (currentLeft != p.Key)
+                            try
                             {
-                                try
+                                if (p.Key % 2 == 1)
                                 {
-                                    if (p.Key % 2 == 1)
-                                    {
-                                        seenOdd = true;
-                                    }
-                                    else
-                                    {
-                                        Assert.False(
-                                            seenOdd,
-                                            "Key out of order! " + p.Key.ToString()
-                                        );
-                                    }
-                                    Assert.True(
-                                        seenLeft.Add(p.Key),
-                                        "Key already seen! " + p.Key.ToString()
-                                    );
-                                    if (currentLeft != -1)
-                                    {
-                                        Assert.Equal(
-                                            (rightCount / KeyFactor)
-                                                + (
-                                                    (
-                                                        (rightCount % KeyFactor)
-                                                        > (currentLeft % KeyFactor)
-                                                    )
-                                                        ? 1
-                                                        : 0
-                                                ),
-                                            seenRight.Count
-                                        );
-                                    }
+                                    seenOdd = true;
                                 }
-                                finally
+                                else
                                 {
-                                    currentLeft = p.Key;
-                                    seenRight.Clear();
+                                    Assert.False(seenOdd, "Key out of order! " + p.Key.ToString());
+                                }
+                                Assert.True(
+                                    seenLeft.Add(p.Key),
+                                    "Key already seen! " + p.Key.ToString()
+                                );
+                                if (currentLeft != -1)
+                                {
+                                    Assert.Equal(
+                                        (rightCount / KeyFactor)
+                                            + (
+                                                (
+                                                    (rightCount % KeyFactor)
+                                                    > (currentLeft % KeyFactor)
+                                                )
+                                                    ? 1
+                                                    : 0
+                                            ),
+                                        seenRight.Count
+                                    );
                                 }
                             }
-                            ValidateRightValue(p.Key, p.Value, seenRight.Count);
-                            Assert.True(
-                                seenRight.Add(p.Value),
-                                "Value already seen! " + p.Value.ToString()
-                            );
+                            finally
+                            {
+                                currentLeft = p.Key;
+                                seenRight.Clear();
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            throw new Exception(
-                                string.Format("Key: {0}, Value: {1}", p.Key, p.Value),
-                                ex
-                            );
-                        }
-                        finally
-                        {
-                            seenRight.Add(p.Value);
-                        }
+                        ValidateRightValue(p.Key, p.Value, seenRight.Count);
+                        Assert.True(
+                            seenRight.Add(p.Value),
+                            "Value already seen! " + p.Value.ToString()
+                        );
                     }
-                );
+                    catch (Exception ex)
+                    {
+                        throw new Exception(
+                            string.Format("Key: {0}, Value: {1}", p.Key, p.Value),
+                            ex
+                        );
+                    }
+                    finally
+                    {
+                        seenRight.Add(p.Value);
+                    }
+                });
                 Assert.Equal(
                     (rightCount / KeyFactor)
                         + (((rightCount % KeyFactor) > (currentLeft % KeyFactor)) ? 1 : 0),

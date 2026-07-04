@@ -74,9 +74,8 @@ namespace System.Composition.Hosting.Tests
         public void WithProvider_NullProvider_ThrowsArgumentNullException()
         {
             var configuration = new ContainerConfiguration();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "exportDescriptorProvider",
-                () => configuration.WithProvider(null)
+            AssertExtensions.Throws<ArgumentNullException>("exportDescriptorProvider", () =>
+                configuration.WithProvider(null)
             );
         }
 
@@ -146,9 +145,8 @@ namespace System.Composition.Hosting.Tests
         public void WithDefaultConventions_NullConventions_ThrowsArgumentNullException()
         {
             var configuration = new ContainerConfiguration();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "conventions",
-                () => configuration.WithDefaultConventions(null)
+            AssertExtensions.Throws<ArgumentNullException>("conventions", () =>
+                configuration.WithDefaultConventions(null)
             );
         }
 
@@ -195,13 +193,11 @@ namespace System.Composition.Hosting.Tests
         public void WithPart_NullPartType_ThrowsArgumentNullException()
         {
             var configuration = new ContainerConfiguration();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partType",
-                () => configuration.WithPart(null)
+            AssertExtensions.Throws<ArgumentNullException>("partType", () =>
+                configuration.WithPart(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partType",
-                () => configuration.WithPart(null, new ConventionBuilder())
+            AssertExtensions.Throws<ArgumentNullException>("partType", () =>
+                configuration.WithPart(null, new ConventionBuilder())
             );
         }
 
@@ -225,17 +221,14 @@ namespace System.Composition.Hosting.Tests
         public void WithParts_NullPartTypes_ThrowsArgumentNullException()
         {
             var configuration = new ContainerConfiguration();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partTypes",
-                () => configuration.WithParts(null)
+            AssertExtensions.Throws<ArgumentNullException>("partTypes", () =>
+                configuration.WithParts(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partTypes",
-                () => configuration.WithParts((IEnumerable<Type>)null)
+            AssertExtensions.Throws<ArgumentNullException>("partTypes", () =>
+                configuration.WithParts((IEnumerable<Type>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partTypes",
-                () => configuration.WithParts(null, new ConventionBuilder())
+            AssertExtensions.Throws<ArgumentNullException>("partTypes", () =>
+                configuration.WithParts(null, new ConventionBuilder())
             );
         }
 
@@ -245,9 +238,8 @@ namespace System.Composition.Hosting.Tests
             ContainerConfiguration configuration = new ContainerConfiguration().WithParts(
                 new Type[] { null }
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => configuration.CreateContainer()
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                configuration.CreateContainer()
             );
         }
 
@@ -308,13 +300,11 @@ namespace System.Composition.Hosting.Tests
         public void WithAssemblies_NullAssemblies_ThrowsArgumentNullException()
         {
             var configuration = new ContainerConfiguration();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "assemblies",
-                () => configuration.WithAssemblies(null)
+            AssertExtensions.Throws<ArgumentNullException>("assemblies", () =>
+                configuration.WithAssemblies(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "assemblies",
-                () => configuration.WithAssemblies(null, new ConventionBuilder())
+            AssertExtensions.Throws<ArgumentNullException>("assemblies", () =>
+                configuration.WithAssemblies(null, new ConventionBuilder())
             );
         }
 

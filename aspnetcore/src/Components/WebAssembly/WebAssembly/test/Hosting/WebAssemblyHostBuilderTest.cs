@@ -76,13 +76,10 @@ public class WebAssemblyHostBuilderTest
         builder.Services.AddScoped<StringBuilder>();
 
         var factory = new MyFakeServiceProviderFactory();
-        builder.ConfigureContainer(
-            factory,
-            builder =>
-            {
-                builder.ServiceCollection.AddScoped<List<string>>();
-            }
-        );
+        builder.ConfigureContainer(factory, builder =>
+        {
+            builder.ServiceCollection.AddScoped<List<string>>();
+        });
 
         // Act
         var host = builder.Build();

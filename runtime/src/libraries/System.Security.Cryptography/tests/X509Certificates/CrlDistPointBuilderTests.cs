@@ -11,38 +11,28 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void NullEnumerable()
         {
-            Assert.Throws<ArgumentNullException>(
-                "uris",
-                () => CertificateRevocationListBuilder.BuildCrlDistributionPointExtension(null)
+            Assert.Throws<ArgumentNullException>("uris", () =>
+                CertificateRevocationListBuilder.BuildCrlDistributionPointExtension(null)
             );
         }
 
         [Fact]
         public static void NullUriInEnumerable()
         {
-            Assert.Throws<ArgumentException>(
-                "uris",
-                () =>
-                    CertificateRevocationListBuilder.BuildCrlDistributionPointExtension(
-                        new[]
-                        {
-                            "http://cert.example/ca1.crl",
-                            null,
-                            "http://cdn.cert.example/ca1.crl",
-                        }
-                    )
+            Assert.Throws<ArgumentException>("uris", () =>
+                CertificateRevocationListBuilder.BuildCrlDistributionPointExtension(
+                    new[] { "http://cert.example/ca1.crl", null, "http://cdn.cert.example/ca1.crl" }
+                )
             );
         }
 
         [Fact]
         public static void BuildEmpty()
         {
-            Assert.Throws<ArgumentException>(
-                "uris",
-                () =>
-                    CertificateRevocationListBuilder.BuildCrlDistributionPointExtension(
-                        System.Linq.Enumerable.Empty<string>()
-                    )
+            Assert.Throws<ArgumentException>("uris", () =>
+                CertificateRevocationListBuilder.BuildCrlDistributionPointExtension(
+                    System.Linq.Enumerable.Empty<string>()
+                )
             );
         }
 

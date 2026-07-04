@@ -77,10 +77,8 @@ class C
             );
             var compilation1 = compilation0.WithSource(src2);
             var md1 = AssemblyMetadata.CreateFromStream(compilation0.EmitToStream());
-            var baseline = CreateInitialBaseline(
-                compilation0,
-                md1.GetModules()[0],
-                handle => default(EditAndContinueMethodDebugInformation)
+            var baseline = CreateInitialBaseline(compilation0, md1.GetModules()[0], handle =>
+                default(EditAndContinueMethodDebugInformation)
             );
 
             var mdStream = new MemoryStream();
@@ -172,10 +170,8 @@ class C
                 references: new[] { MscorlibRef }
             );
             var compilation1 = compilation0.WithSource(src2);
-            var baseline = CreateInitialBaseline(
-                compilation0,
-                md1.GetModules()[0],
-                handle => default(EditAndContinueMethodDebugInformation)
+            var baseline = CreateInitialBaseline(compilation0, md1.GetModules()[0], handle =>
+                default(EditAndContinueMethodDebugInformation)
             );
 
             var mdStream = new MemoryStream();

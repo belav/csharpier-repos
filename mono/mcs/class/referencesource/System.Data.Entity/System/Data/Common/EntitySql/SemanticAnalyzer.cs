@@ -1235,10 +1235,8 @@ namespace System.Data.Common.EntitySql
             //
             // Convert untyped NULLs in arguments to typed nulls inferred from formals.
             //
-            ConvertUntypedNullsInArguments(
-                args,
-                overload.Parameters,
-                (formal) => formal.ResultType
+            ConvertUntypedNullsInArguments(args, overload.Parameters, (formal) =>
+                formal.ResultType
             );
 
             inlineFunctionCall = new ValueExpression(
@@ -1603,10 +1601,8 @@ namespace System.Data.Common.EntitySql
                 //
                 // Convert untyped NULLs in arguments to typed nulls inferred from function parameters.
                 //
-                ConvertUntypedNullsInArguments(
-                    args,
-                    functionType.Parameters,
-                    (parameter) => parameter.TypeUsage
+                ConvertUntypedNullsInArguments(args, functionType.Parameters, (parameter) =>
+                    parameter.TypeUsage
                 );
                 converted = functionType.Invoke(args);
                 return true;
@@ -1701,10 +1697,8 @@ namespace System.Data.Common.EntitySql
             //
             // Convert untyped NULLs in arguments to typed nulls inferred from function parameters.
             //
-            ConvertUntypedNullsInArguments(
-                args,
-                functionType.Parameters,
-                (parameter) => TypeHelpers.GetElementTypeUsage(parameter.TypeUsage)
+            ConvertUntypedNullsInArguments(args, functionType.Parameters, (parameter) =>
+                TypeHelpers.GetElementTypeUsage(parameter.TypeUsage)
             );
 
             //
@@ -1961,10 +1955,8 @@ namespace System.Data.Common.EntitySql
             //
             // Convert untyped NULLs in arguments to typed nulls inferred from function parameters.
             //
-            ConvertUntypedNullsInArguments(
-                args,
-                functionType.Parameters,
-                (parameter) => parameter.TypeUsage
+            ConvertUntypedNullsInArguments(args, functionType.Parameters, (parameter) =>
+                parameter.TypeUsage
             );
 
             //
@@ -5846,9 +5838,8 @@ namespace System.Data.Common.EntitySql
 
             var predicates = rightColl.Arguments.Select(arg => left.Equal(arg));
             List<DbExpression> args = new List<DbExpression>(predicates);
-            DbExpression orExpr = Utils.Helpers.BuildBalancedTreeInPlace(
-                args,
-                (prev, next) => prev.Or(next)
+            DbExpression orExpr = Utils.Helpers.BuildBalancedTreeInPlace(args, (prev, next) =>
+                prev.Or(next)
             );
 
             return orExpr;

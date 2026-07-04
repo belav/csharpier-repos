@@ -121,12 +121,10 @@ WHERE "o"."OrderID" = 11077 AND acos(CAST("o"."Discount" AS REAL)) > 1.0
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_math_acosh(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Acosh(od.Discount + 1) > 0)
+        await AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Acosh(od.Discount + 1) > 0)
         );
 
         AssertSql(
@@ -155,12 +153,10 @@ WHERE "o"."OrderID" = 11077 AND asin(CAST("o"."Discount" AS REAL)) > 0.0
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_math_asinh(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Asinh(od.Discount) > 0)
+        await AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Asinh(od.Discount) > 0)
         );
 
         AssertSql(
@@ -202,12 +198,10 @@ WHERE "o"."OrderID" = 11077 AND atan2(CAST("o"."Discount" AS REAL), 1.0) > 0.0
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_math_atanh(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Atanh(od.Discount) > 0)
+        await AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Atanh(od.Discount) > 0)
         );
 
         AssertSql(
@@ -252,12 +246,10 @@ WHERE "o"."OrderID" = 11077 AND cos(CAST("o"."Discount" AS REAL)) > 0.0
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_math_cosh(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Cosh(od.Discount) > 0)
+        await AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Cosh(od.Discount) > 0)
         );
 
         AssertSql(
@@ -315,12 +307,10 @@ WHERE "o"."OrderID" = 11077 AND "o"."Discount" > 0 AND log(7.0, CAST("o"."Discou
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_math_log2(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077 && od.Discount > 0)
-                    .Where(od => Math.Log2(od.Discount) < 0)
+        await AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077 && od.Discount > 0)
+                .Where(od => Math.Log2(od.Discount) < 0)
         );
 
         AssertSql(
@@ -421,12 +411,10 @@ WHERE "o"."OrderID" = 11077 AND sin(CAST("o"."Discount" AS REAL)) > 0.0
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_math_sinh(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Sinh(od.Discount) > 0)
+        await AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Sinh(od.Discount) > 0)
         );
 
         AssertSql(
@@ -468,12 +456,10 @@ WHERE "o"."OrderID" = 11077 AND tan(CAST("o"."Discount" AS REAL)) > 0.0
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Where_math_tanh(bool async)
     {
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<OrderDetail>()
-                    .Where(od => od.OrderID == 11077)
-                    .Where(od => Math.Tanh(od.Discount) > 0)
+        await AssertQuery(async, ss =>
+            ss.Set<OrderDetail>()
+                .Where(od => od.OrderID == 11077)
+                .Where(od => Math.Tanh(od.Discount) > 0)
         );
 
         AssertSql(
@@ -1554,9 +1540,8 @@ WHERE 'ALFKI' REGEXP "c"."CustomerID"
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Regex_IsMatch_MethodCall_negated(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(o => !Regex.IsMatch(o.CustomerID, "^[^T]"))
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(o => !Regex.IsMatch(o.CustomerID, "^[^T]"))
         );
 
         AssertSql(

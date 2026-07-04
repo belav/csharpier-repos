@@ -46,13 +46,11 @@ namespace System.Linq.Expressions.Tests
                 typeof(List<int>).GetMethod(nameof(List<int>.Add)),
                 Expression.Constant(0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyAccessor",
-                () => Expression.ListBind(default(MethodInfo), elInit)
+            AssertExtensions.Throws<ArgumentNullException>("propertyAccessor", () =>
+                Expression.ListBind(default(MethodInfo), elInit)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyAccessor",
-                () => Expression.ListBind(default(MethodInfo), Enumerable.Repeat(elInit, 1))
+            AssertExtensions.Throws<ArgumentNullException>("propertyAccessor", () =>
+                Expression.ListBind(default(MethodInfo), Enumerable.Repeat(elInit, 1))
             );
         }
 
@@ -63,13 +61,11 @@ namespace System.Linq.Expressions.Tests
                 typeof(List<int>).GetMethod(nameof(List<int>.Add)),
                 Expression.Constant(0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "member",
-                () => Expression.ListBind(default(MemberInfo), elInit)
+            AssertExtensions.Throws<ArgumentNullException>("member", () =>
+                Expression.ListBind(default(MemberInfo), elInit)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "member",
-                () => Expression.ListBind(default(MemberInfo), Enumerable.Repeat(elInit, 1))
+            AssertExtensions.Throws<ArgumentNullException>("member", () =>
+                Expression.ListBind(default(MemberInfo), Enumerable.Repeat(elInit, 1))
             );
         }
 
@@ -82,21 +78,17 @@ namespace System.Linq.Expressions.Tests
             MemberInfo member = typeof(ListWrapper<int>).GetMember(
                 nameof(ListWrapper<int>.ListProperty)
             )[0];
-            AssertExtensions.Throws<ArgumentNullException>(
-                "initializers",
-                () => Expression.ListBind(property, default(ElementInit[]))
+            AssertExtensions.Throws<ArgumentNullException>("initializers", () =>
+                Expression.ListBind(property, default(ElementInit[]))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "initializers",
-                () => Expression.ListBind(property, default(IEnumerable<ElementInit>))
+            AssertExtensions.Throws<ArgumentNullException>("initializers", () =>
+                Expression.ListBind(property, default(IEnumerable<ElementInit>))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "initializers",
-                () => Expression.ListBind(member, default(ElementInit[]))
+            AssertExtensions.Throws<ArgumentNullException>("initializers", () =>
+                Expression.ListBind(member, default(ElementInit[]))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "initializers",
-                () => Expression.ListBind(member, default(IEnumerable<ElementInit>))
+            AssertExtensions.Throws<ArgumentNullException>("initializers", () =>
+                Expression.ListBind(member, default(IEnumerable<ElementInit>))
             );
         }
 
@@ -113,21 +105,17 @@ namespace System.Linq.Expressions.Tests
                 typeof(List<int>).GetMethod("Add"),
                 Expression.Constant(0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyAccessor",
-                () => Expression.ListBind(method, elInit)
+            AssertExtensions.Throws<ArgumentException>("propertyAccessor", () =>
+                Expression.ListBind(method, elInit)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyAccessor",
-                () => Expression.ListBind(method, Enumerable.Repeat(elInit, 1))
+            AssertExtensions.Throws<ArgumentException>("propertyAccessor", () =>
+                Expression.ListBind(method, Enumerable.Repeat(elInit, 1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(member, elInit)
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(member, elInit)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(member, Enumerable.Repeat(elInit, 1))
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(member, Enumerable.Repeat(elInit, 1))
             );
         }
 
@@ -136,18 +124,15 @@ namespace System.Linq.Expressions.Tests
         {
             PropertyInfo property = typeof(string).GetProperty(nameof(string.Length));
             MemberInfo member = typeof(string).GetMember(nameof(string.Length))[0];
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(property)
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(property)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(property, Enumerable.Empty<ElementInit>())
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(property, Enumerable.Empty<ElementInit>())
             );
             AssertExtensions.Throws<ArgumentException>("member", () => Expression.ListBind(member));
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(member, Enumerable.Empty<ElementInit>())
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(member, Enumerable.Empty<ElementInit>())
             );
         }
 
@@ -185,29 +170,25 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullElement()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "initializers",
-                () =>
-                    Expression.ListBind(
-                        typeof(ListWrapper<int>).GetMethod(nameof(ListWrapper<int>.GetList)),
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("initializers", () =>
+                Expression.ListBind(
+                    typeof(ListWrapper<int>).GetMethod(nameof(ListWrapper<int>.GetList)),
+                    null
+                )
             );
         }
 
         [Fact]
         public void MismatchingElement()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyAccessor",
-                () =>
-                    Expression.ListBind(
-                        typeof(ListWrapper<int>).GetMethod(nameof(ListWrapper<int>.GetList)),
-                        Expression.ElementInit(
-                            typeof(HashSet<int>).GetMethod("Add"),
-                            Expression.Constant(1)
-                        )
+            AssertExtensions.Throws<ArgumentException>("propertyAccessor", () =>
+                Expression.ListBind(
+                    typeof(ListWrapper<int>).GetMethod(nameof(ListWrapper<int>.GetList)),
+                    Expression.ElementInit(
+                        typeof(HashSet<int>).GetMethod("Add"),
+                        Expression.Constant(1)
                     )
+                )
             );
         }
 
@@ -216,21 +197,17 @@ namespace System.Linq.Expressions.Tests
         {
             MemberInfo toString = typeof(object).GetMember(nameof(ToString))[0];
             MethodInfo toStringMeth = typeof(object).GetMethod(nameof(ToString));
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(toString)
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(toString)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(toString, Enumerable.Empty<ElementInit>())
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(toString, Enumerable.Empty<ElementInit>())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyAccessor",
-                () => Expression.ListBind(toStringMeth)
+            AssertExtensions.Throws<ArgumentException>("propertyAccessor", () =>
+                Expression.ListBind(toStringMeth)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyAccessor",
-                () => Expression.ListBind(toStringMeth, Enumerable.Empty<ElementInit>())
+            AssertExtensions.Throws<ArgumentException>("propertyAccessor", () =>
+                Expression.ListBind(toStringMeth, Enumerable.Empty<ElementInit>())
             );
         }
 
@@ -283,21 +260,17 @@ namespace System.Linq.Expressions.Tests
             MemberInfo member = typeof(ListWrapper<int>).GetMember(
                 nameof(ListWrapper<int>.WriteOnlyList)
             )[0];
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(property, new ElementInit[0])
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(property, new ElementInit[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(property, Enumerable.Empty<ElementInit>())
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(property, Enumerable.Empty<ElementInit>())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(member, new ElementInit[0])
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(member, new ElementInit[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "member",
-                () => Expression.ListBind(member, Enumerable.Empty<ElementInit>())
+            AssertExtensions.Throws<ArgumentException>("member", () =>
+                Expression.ListBind(member, Enumerable.Empty<ElementInit>())
             );
         }
 
@@ -435,9 +408,8 @@ namespace System.Linq.Expressions.Tests
                         )
                     )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "initializers",
-                () => binding.Update(null)
+            AssertExtensions.Throws<ArgumentNullException>("initializers", () =>
+                binding.Update(null)
             );
         }
 
@@ -471,24 +443,20 @@ namespace System.Linq.Expressions.Tests
             );
             FieldInfo field = typeof(ListWrapper<>).GetField(nameof(ListWrapper<int>.ListField));
             MethodInfo method = property.GetMethod;
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.ListBind(member, Enumerable.Empty<ElementInit>())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.ListBind(member, Enumerable.Empty<ElementInit>())
             );
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.ListBind(member));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.ListBind(property, Enumerable.Empty<ElementInit>())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.ListBind(property, Enumerable.Empty<ElementInit>())
             );
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.ListBind(property));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.ListBind(field, Enumerable.Empty<ElementInit>())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.ListBind(field, Enumerable.Empty<ElementInit>())
             );
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.ListBind(field));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.ListBind(method, Enumerable.Empty<ElementInit>())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.ListBind(method, Enumerable.Empty<ElementInit>())
             );
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.ListBind(method));
         }
@@ -514,9 +482,8 @@ namespace System.Linq.Expressions.Tests
             globalMethod.GetILGenerator().Emit(OpCodes.Ret);
             module.CreateGlobalFunctions();
             MethodInfo globalMethodInfo = module.GetMethod(globalMethod.Name);
-            AssertExtensions.Throws<ArgumentException>(
-                "propertyAccessor",
-                () => Expression.ListBind(globalMethodInfo)
+            AssertExtensions.Throws<ArgumentException>("propertyAccessor", () =>
+                Expression.ListBind(globalMethodInfo)
             );
         }
     }

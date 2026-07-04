@@ -76,9 +76,8 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(
-                query.Select(x => (object)x).Cast<int>().ToList(),
-                x => Assert.Equal(seen++, x)
+            Assert.All(query.Select(x => (object)x).Cast<int>().ToList(), x =>
+                Assert.Equal(seen++, x)
             );
             Assert.Equal(count, seen);
         }
@@ -198,9 +197,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Cast_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<object>)null).Cast<int>()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<object>)null).Cast<int>()
             );
         }
 

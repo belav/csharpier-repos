@@ -159,10 +159,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                     // 2 different workspaces (ex, PreviewWorkspaces) can return same Args.Id, we need to
                     // distinguish them. so we separate diagnostics per workspace map.
-                    var workspaceMap = _map.GetOrAdd(
-                        source,
-                        _ => new Dictionary<Workspace, Dictionary<object, Data>>()
-                    );
+                    var workspaceMap = _map.GetOrAdd(source, _ => new Dictionary<
+                        Workspace,
+                        Dictionary<object, Data>
+                    >());
 
                     if (diagnostics.Length == 0 && !workspaceMap.ContainsKey(args.Workspace))
                     {

@@ -143,13 +143,10 @@ namespace Microsoft.Extensions.Primitives
         {
             var provider = new ResettableChangeTokenProvider();
             var count = 0;
-            var reg = ChangeToken.OnChange(
-                provider.GetChangeToken,
-                () =>
-                {
-                    count++;
-                }
-            );
+            var reg = ChangeToken.OnChange(provider.GetChangeToken, () =>
+            {
+                count++;
+            });
 
             for (int i = 0; i < 5; i++)
             {

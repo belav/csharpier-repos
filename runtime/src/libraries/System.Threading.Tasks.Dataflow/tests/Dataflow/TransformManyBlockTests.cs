@@ -617,9 +617,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             await Assert.ThrowsAsync<FormatException>(() => tb4.Completion);
             await Assert.ThrowsAsync<FormatException>(() => tb5.Completion);
 
-            Assert.All(
-                new[] { tb1, tb2, tb3 },
-                tb => Assert.True(tb.InputCount == 0 && tb.OutputCount == 0)
+            Assert.All(new[] { tb1, tb2, tb3 }, tb =>
+                Assert.True(tb.InputCount == 0 && tb.OutputCount == 0)
             );
         }
 

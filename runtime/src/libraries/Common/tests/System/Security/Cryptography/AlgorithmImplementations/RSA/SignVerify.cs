@@ -48,59 +48,49 @@ namespace System.Security.Cryptography.Rsa.Tests
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => SignData(rsa, null, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    SignData(rsa, null, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hash",
-                    () => SignHash(rsa, null, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1)
+                AssertExtensions.Throws<ArgumentNullException>("hash", () =>
+                    SignHash(rsa, null, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () =>
-                        VerifyData(
-                            rsa,
-                            null,
-                            new byte[1],
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pkcs1
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    VerifyData(
+                        rsa,
+                        null,
+                        new byte[1],
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hash",
-                    () =>
-                        VerifyHash(
-                            rsa,
-                            null,
-                            new byte[1],
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pkcs1
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("hash", () =>
+                    VerifyHash(
+                        rsa,
+                        null,
+                        new byte[1],
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "signature",
-                    () =>
-                        VerifyData(
-                            rsa,
-                            new byte[1],
-                            null,
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pkcs1
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("signature", () =>
+                    VerifyData(
+                        rsa,
+                        new byte[1],
+                        null,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "signature",
-                    () =>
-                        VerifyHash(
-                            rsa,
-                            new byte[1],
-                            null,
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pkcs1
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("signature", () =>
+                    VerifyHash(
+                        rsa,
+                        new byte[1],
+                        null,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
             }
         }
@@ -144,67 +134,55 @@ namespace System.Security.Cryptography.Rsa.Tests
             using (RSA rsa = RSAFactory.Create())
             {
                 var invalidName = new HashAlgorithmName(null);
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hashAlgorithm",
-                    () => SignData(rsa, new byte[1], invalidName, RSASignaturePadding.Pkcs1)
+                AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                    SignData(rsa, new byte[1], invalidName, RSASignaturePadding.Pkcs1)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hashAlgorithm",
-                    () => SignHash(rsa, new byte[1], invalidName, RSASignaturePadding.Pkcs1)
+                AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                    SignHash(rsa, new byte[1], invalidName, RSASignaturePadding.Pkcs1)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hashAlgorithm",
-                    () =>
-                        VerifyData(
-                            rsa,
-                            new byte[1],
-                            new byte[1],
-                            invalidName,
-                            RSASignaturePadding.Pkcs1
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                    VerifyData(
+                        rsa,
+                        new byte[1],
+                        new byte[1],
+                        invalidName,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hashAlgorithm",
-                    () =>
-                        VerifyHash(
-                            rsa,
-                            new byte[1],
-                            new byte[1],
-                            invalidName,
-                            RSASignaturePadding.Pkcs1
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                    VerifyHash(
+                        rsa,
+                        new byte[1],
+                        new byte[1],
+                        invalidName,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
 
                 invalidName = new HashAlgorithmName("");
-                AssertExtensions.Throws<ArgumentException>(
-                    "hashAlgorithm",
-                    () => SignData(rsa, new byte[1], invalidName, RSASignaturePadding.Pkcs1)
+                AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                    SignData(rsa, new byte[1], invalidName, RSASignaturePadding.Pkcs1)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "hashAlgorithm",
-                    () => SignHash(rsa, new byte[1], invalidName, RSASignaturePadding.Pkcs1)
+                AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                    SignHash(rsa, new byte[1], invalidName, RSASignaturePadding.Pkcs1)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "hashAlgorithm",
-                    () =>
-                        VerifyData(
-                            rsa,
-                            new byte[1],
-                            new byte[1],
-                            invalidName,
-                            RSASignaturePadding.Pkcs1
-                        )
+                AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                    VerifyData(
+                        rsa,
+                        new byte[1],
+                        new byte[1],
+                        invalidName,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "hashAlgorithm",
-                    () =>
-                        VerifyHash(
-                            rsa,
-                            new byte[1],
-                            new byte[1],
-                            invalidName,
-                            RSASignaturePadding.Pkcs1
-                        )
+                AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                    VerifyHash(
+                        rsa,
+                        new byte[1],
+                        new byte[1],
+                        invalidName,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
             }
         }
@@ -214,21 +192,17 @@ namespace System.Security.Cryptography.Rsa.Tests
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "padding",
-                    () => SignData(rsa, new byte[1], HashAlgorithmName.SHA256, null)
+                AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                    SignData(rsa, new byte[1], HashAlgorithmName.SHA256, null)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "padding",
-                    () => SignHash(rsa, new byte[1], HashAlgorithmName.SHA256, null)
+                AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                    SignHash(rsa, new byte[1], HashAlgorithmName.SHA256, null)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "padding",
-                    () => VerifyData(rsa, new byte[1], new byte[1], HashAlgorithmName.SHA256, null)
+                AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                    VerifyData(rsa, new byte[1], new byte[1], HashAlgorithmName.SHA256, null)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "padding",
-                    () => VerifyHash(rsa, new byte[1], new byte[1], HashAlgorithmName.SHA256, null)
+                AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                    VerifyHash(rsa, new byte[1], new byte[1], HashAlgorithmName.SHA256, null)
                 );
             }
         }
@@ -5877,9 +5851,8 @@ namespace System.Security.Cryptography.Rsa.Tests
             {
                 byte[] hash = RandomNumberGenerator.GetBytes(SHA256.HashSizeInBytes);
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "destination",
-                    () => rsa.SignHash(hash, (Span<byte>)null, HashAlgorithmName.SHA256, padding)
+                AssertExtensions.Throws<ArgumentException>("destination", () =>
+                    rsa.SignHash(hash, (Span<byte>)null, HashAlgorithmName.SHA256, padding)
                 );
 
                 bool result = rsa.TrySignHash(
@@ -5911,10 +5884,8 @@ namespace System.Security.Cryptography.Rsa.Tests
 
             using (RSA rsa = RSA.Create())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "destination",
-                    () =>
-                        rsa.SignData("hello"u8, (Span<byte>)null, HashAlgorithmName.SHA256, padding)
+                AssertExtensions.Throws<ArgumentException>("destination", () =>
+                    rsa.SignData("hello"u8, (Span<byte>)null, HashAlgorithmName.SHA256, padding)
                 );
 
                 bool result = rsa.TrySignData(

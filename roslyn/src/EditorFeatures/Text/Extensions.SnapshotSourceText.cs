@@ -135,15 +135,12 @@ namespace Microsoft.CodeAnalysis.Text
                 }
 
                 Contract.ThrowIfFalse(editorSnapshot.TextBuffer == container.GetTextBuffer());
-                return s_textSnapshotMap.GetValue(
-                    editorSnapshot,
-                    s => new SnapshotSourceText(
-                        textBufferCloneService,
-                        s,
-                        SourceHashAlgorithms.OpenDocumentChecksumAlgorithm,
-                        container
-                    )
-                );
+                return s_textSnapshotMap.GetValue(editorSnapshot, s => new SnapshotSourceText(
+                    textBufferCloneService,
+                    s,
+                    SourceHashAlgorithms.OpenDocumentChecksumAlgorithm,
+                    container
+                ));
             }
 
             public override Encoding? Encoding

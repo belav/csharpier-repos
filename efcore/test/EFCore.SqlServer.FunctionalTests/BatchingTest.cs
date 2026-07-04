@@ -219,13 +219,10 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
 
         for (var i = 0; i < 10; i++)
         {
-            Parallel.ForEach(
-                blogs,
-                blog =>
-                {
-                    RemoveAndAddPosts(blog);
-                }
-            );
+            Parallel.ForEach(blogs, blog =>
+            {
+                RemoveAndAddPosts(blog);
+            });
         }
 
         void RemoveAndAddPosts(Blog blog)
@@ -278,18 +275,14 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
             context.SaveChanges();
         }
 
-        Parallel.ForEach(
-            owners,
-            owner =>
-            {
-                using var context = (BloggingContext)
-                    Fixture.CreateContext(useConnectionString: true);
+        Parallel.ForEach(owners, owner =>
+        {
+            using var context = (BloggingContext)Fixture.CreateContext(useConnectionString: true);
 
-                context.RemoveRange(context.Blogs.Where(b => b.OwnerId == owner.Id));
+            context.RemoveRange(context.Blogs.Where(b => b.OwnerId == owner.Id));
 
-                context.SaveChanges();
-            }
-        );
+            context.SaveChanges();
+        });
 
         using (var context = CreateContext())
         {

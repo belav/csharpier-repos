@@ -245,9 +245,8 @@ namespace Microsoft.CodeAnalysis
             RSAParameters privateKey
         )
         {
-            peBuilder.Sign(
-                peBlob,
-                content => SigningUtilities.CalculateRsaSignature(content, privateKey)
+            peBuilder.Sign(peBlob, content =>
+                SigningUtilities.CalculateRsaSignature(content, privateKey)
             );
         }
 

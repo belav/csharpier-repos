@@ -92,10 +92,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(65536)]
         public void Chr_CharCodeOutOfRange_ThrowsArgumentException(int charCode)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "CharCode",
-                null,
-                () => Strings.Chr(charCode)
+            AssertExtensions.Throws<ArgumentException>("CharCode", null, () =>
+                Strings.Chr(charCode)
             );
         }
 
@@ -114,10 +112,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(65536)]
         public void ChrW_CharCodeOutOfRange_ThrowsArgumentException(int charCode)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "CharCode",
-                null,
-                () => Strings.ChrW(charCode)
+            AssertExtensions.Throws<ArgumentException>("CharCode", null, () =>
+                Strings.ChrW(charCode)
             );
         }
 
@@ -267,10 +263,8 @@ namespace Microsoft.VisualBasic.Tests
             object[] source = new object[] { typeof(object) };
             string match = "a";
 
-            AssertExtensions.Throws<ArgumentException>(
-                "Source",
-                null,
-                () => Strings.Filter(source, match)
+            AssertExtensions.Throws<ArgumentException>("Source", null, () =>
+                Strings.Filter(source, match)
             );
         }
 
@@ -877,10 +871,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(-1)]
         public void InStr_WhenStartZeroOrLess_ThrowsArgumentException(int start)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "Start",
-                null,
-                () => Strings.InStr(start, "a", "a")
+            AssertExtensions.Throws<ArgumentException>("Start", null, () =>
+                Strings.InStr(start, "a", "a")
             );
         }
 
@@ -956,10 +948,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(-3)]
         public void InStrRev_WhenStartZeroOrMinusTwoOrLess_ThrowsArgumentException(int start)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "Start",
-                null,
-                () => Strings.InStrRev("a", "a", start)
+            AssertExtensions.Throws<ArgumentException>("Start", null, () =>
+                Strings.InStrRev("a", "a", start)
             );
         }
 
@@ -1050,10 +1040,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("a", -1)]
         public void Left_Invalid(string str, int length)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "Length",
-                null,
-                () => Strings.Left(str, length)
+            AssertExtensions.Throws<ArgumentException>("Length", null, () =>
+                Strings.Left(str, length)
             );
         }
 
@@ -1106,10 +1094,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("a", -1)]
         public void Right_Invalid(string str, int length)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "Length",
-                null,
-                () => Strings.Right(str, length)
+            AssertExtensions.Throws<ArgumentException>("Length", null, () =>
+                Strings.Right(str, length)
             );
         }
 
@@ -1128,10 +1114,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("a", -1)]
         public void Mid2_Invalid(string str, int start)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "Start",
-                null,
-                () => Strings.Mid(str, start)
+            AssertExtensions.Throws<ArgumentException>("Start", null, () =>
+                Strings.Mid(str, start)
             );
         }
 
@@ -1153,10 +1137,8 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("a", -1, 1)]
         public void Mid3_Invalid(string str, int start, int length)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                start < 1 ? "Start" : "Length",
-                null,
-                () => Strings.Mid(str, start, length)
+            AssertExtensions.Throws<ArgumentException>(start < 1 ? "Start" : "Length", null, () =>
+                Strings.Mid(str, start, length)
             );
         }
 

@@ -483,14 +483,11 @@ public class AnchorTagHelperTest
                 ) =>
                 {
                     var rvd = Assert.IsType<RouteValueDictionary>(routeValues);
-                    Assert.Collection(
-                        rvd.OrderBy(item => item.Key),
-                        item =>
-                        {
-                            Assert.Equal("area", item.Key);
-                            Assert.Equal("test-area", item.Value);
-                        }
-                    );
+                    Assert.Collection(rvd.OrderBy(item => item.Key), item =>
+                    {
+                        Assert.Equal("area", item.Key);
+                        Assert.Equal("test-area", item.Value);
+                    });
                 }
             )
             .Returns(new TagBuilder("a"))

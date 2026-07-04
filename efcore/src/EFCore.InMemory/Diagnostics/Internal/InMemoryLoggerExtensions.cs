@@ -38,9 +38,8 @@ public static class InMemoryLoggerExtensions
             )
         )
         {
-            var eventData = new EventData(
-                definition,
-                (d, _) => ((EventDefinition)d).GenerateMessage()
+            var eventData = new EventData(definition, (d, _) =>
+                ((EventDefinition)d).GenerateMessage()
             );
 
             diagnostics.DispatchEventData(

@@ -53,35 +53,30 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullTypeName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
-                "typeName",
-                () => new EditorAttribute(null, "baseTypeName")
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("typeName", () =>
+                new EditorAttribute(null, "baseTypeName")
             );
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
-                "typeName",
-                () => new EditorAttribute((string)null, typeof(int))
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("typeName", () =>
+                new EditorAttribute((string)null, typeof(int))
             );
         }
 
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
-                "type",
-                () => new EditorAttribute((Type)null, typeof(int))
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("type", () =>
+                new EditorAttribute((Type)null, typeof(int))
             );
         }
 
         [Fact]
         public void Ctor_NullBaseType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
-                "baseType",
-                () => new EditorAttribute("typeName", (Type)null)
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("baseType", () =>
+                new EditorAttribute("typeName", (Type)null)
             );
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
-                "baseType",
-                () => new EditorAttribute(typeof(int), null)
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("baseType", () =>
+                new EditorAttribute(typeof(int), null)
             );
         }
 

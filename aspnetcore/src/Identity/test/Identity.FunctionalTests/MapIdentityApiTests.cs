@@ -195,13 +195,10 @@ public class MapIdentityApiTests : LoggedTest
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services
                 .AddAuthentication()
-                .AddBearerToken(
-                    IdentityConstants.BearerScheme,
-                    options =>
-                    {
-                        options.BearerTokenExpiration = expireTimeSpan;
-                    }
-                );
+                .AddBearerToken(IdentityConstants.BearerScheme, options =>
+                {
+                    options.BearerTokenExpiration = expireTimeSpan;
+                });
         });
 
         using var client = app.GetTestClient();
@@ -291,17 +288,14 @@ public class MapIdentityApiTests : LoggedTest
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services
                 .AddAuthentication()
-                .AddBearerToken(
-                    IdentityConstants.BearerScheme,
-                    options =>
+                .AddBearerToken(IdentityConstants.BearerScheme, options =>
+                {
+                    options.Events.OnMessageReceived = context =>
                     {
-                        options.Events.OnMessageReceived = context =>
-                        {
-                            context.Token = (string?)context.Request.Query["accessToken"];
-                            return Task.CompletedTask;
-                        };
-                    }
-                );
+                        context.Token = (string?)context.Request.Query["accessToken"];
+                        return Task.CompletedTask;
+                    };
+                });
         });
 
         using var client = app.GetTestClient();
@@ -402,13 +396,10 @@ public class MapIdentityApiTests : LoggedTest
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services
                 .AddAuthentication()
-                .AddBearerToken(
-                    IdentityConstants.BearerScheme,
-                    options =>
-                    {
-                        options.RefreshTokenExpiration = expireTimeSpan;
-                    }
-                );
+                .AddBearerToken(IdentityConstants.BearerScheme, options =>
+                {
+                    options.RefreshTokenExpiration = expireTimeSpan;
+                });
         });
 
         using var client = app.GetTestClient();
@@ -534,11 +525,9 @@ public class MapIdentityApiTests : LoggedTest
             "LockedOut"
         );
 
-        Assert.Single(
-            TestSink.Writes,
-            w =>
-                w.LoggerName == "Microsoft.AspNetCore.Identity.SignInManager"
-                && w.EventId == new EventId(3, "UserLockedOut")
+        Assert.Single(TestSink.Writes, w =>
+            w.LoggerName == "Microsoft.AspNetCore.Identity.SignInManager"
+            && w.EventId == new EventId(3, "UserLockedOut")
         );
 
         await AssertProblemAsync(
@@ -568,11 +557,9 @@ public class MapIdentityApiTests : LoggedTest
             "Failed"
         );
 
-        Assert.DoesNotContain(
-            TestSink.Writes,
-            w =>
-                w.LoggerName == "Microsoft.AspNetCore.Identity.SignInManager"
-                && w.EventId == new EventId(3, "UserLockedOut")
+        Assert.DoesNotContain(TestSink.Writes, w =>
+            w.LoggerName == "Microsoft.AspNetCore.Identity.SignInManager"
+            && w.EventId == new EventId(3, "UserLockedOut")
         );
 
         AssertOk(await client.PostAsJsonAsync("/identity/login", new { Email, Password }));
@@ -598,11 +585,9 @@ public class MapIdentityApiTests : LoggedTest
         await LoginWithEmailConfirmationAsync(client, emailSender);
 
         Assert.Single(emailSender.Emails);
-        Assert.Single(
-            TestSink.Writes,
-            w =>
-                w.LoggerName == "Microsoft.AspNetCore.Identity.SignInManager"
-                && w.EventId == new EventId(4, "UserCannotSignInWithoutConfirmedAccount")
+        Assert.Single(TestSink.Writes, w =>
+            w.LoggerName == "Microsoft.AspNetCore.Identity.SignInManager"
+            && w.EventId == new EventId(4, "UserCannotSignInWithoutConfirmedAccount")
         );
     }
 
@@ -626,11 +611,9 @@ public class MapIdentityApiTests : LoggedTest
         await LoginWithEmailConfirmationAsync(client, emailSender);
 
         Assert.Single(emailSender.Emails);
-        Assert.Single(
-            TestSink.Writes,
-            w =>
-                w.LoggerName == "Microsoft.AspNetCore.Identity.SignInManager"
-                && w.EventId == new EventId(0, "UserCannotSignInWithoutConfirmedEmail")
+        Assert.Single(TestSink.Writes, w =>
+            w.LoggerName == "Microsoft.AspNetCore.Identity.SignInManager"
+            && w.EventId == new EventId(0, "UserCannotSignInWithoutConfirmedEmail")
         );
     }
 
@@ -1845,9 +1828,8 @@ public class MapIdentityApiTests : LoggedTest
         var authGroup = app.MapGroup("/auth").RequireAuthorization();
         authGroup.MapGet("/hello", (ClaimsPrincipal user) => $"Hello, {user.Identity?.Name}!");
 
-        authGroup.MapGet(
-            "/claims",
-            (ClaimsPrincipal user) => user.Claims.Select(c => new { c.Type, c.Value })
+        authGroup.MapGet("/claims", (ClaimsPrincipal user) =>
+            user.Claims.Select(c => new { c.Type, c.Value })
         );
 
         await dbConnection.OpenAsync();

@@ -232,14 +232,11 @@ public class DynamicPageEndpointMatcherPolicyTest
 
         // Assert
         Assert.Same(LoadedEndpoints[0], candidates[0].Endpoint);
-        Assert.Collection(
-            candidates[0].Values.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("page", kvp.Key);
-                Assert.Equal("/Index", kvp.Value);
-            }
-        );
+        Assert.Collection(candidates[0].Values.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("page", kvp.Key);
+            Assert.Equal("/Index", kvp.Value);
+        });
         Assert.True(candidates.IsValidCandidate(0));
     }
 

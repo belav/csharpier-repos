@@ -26,16 +26,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Create_table() =>
         Test(
             builder => { },
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.Property<string>("Name");
-                        e.HasKey("Id");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.Property<string>("Name");
+                    e.HasKey("Id");
+                }),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -60,46 +56,34 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             .StoreType;
 
         await Test(
-            builder =>
-                builder.Entity(
-                    "Employers",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                    }
-                ),
+            builder => builder.Entity("Employers", e =>
+                {
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                }),
             builder => { },
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
+            builder => builder.Entity("People", e =>
+                {
+                    e.ToTable("People", "dbo2", tb =>
                     {
-                        e.ToTable(
-                            "People",
-                            "dbo2",
-                            tb =>
-                            {
-                                tb.HasCheckConstraint(
-                                    "CK_People_EmployerId",
-                                    $"{DelimitIdentifier("EmployerId")} > 0"
-                                );
-                                tb.HasComment("Table comment");
-                            }
+                        tb.HasCheckConstraint(
+                            "CK_People_EmployerId",
+                            $"{DelimitIdentifier("EmployerId")} > 0"
                         );
+                        tb.HasComment("Table comment");
+                    });
 
-                        e.Property<int>("CustomId");
-                        e.Property<int>("EmployerId").HasComment("Employer ID comment");
-                        e.Property<string>("SSN")
-                            .HasColumnType(char11StoreType)
-                            .UseCollation(NonDefaultCollation)
-                            .IsRequired(false);
+                    e.Property<int>("CustomId");
+                    e.Property<int>("EmployerId").HasComment("Employer ID comment");
+                    e.Property<string>("SSN")
+                        .HasColumnType(char11StoreType)
+                        .UseCollation(NonDefaultCollation)
+                        .IsRequired(false);
 
-                        e.HasKey("CustomId");
-                        e.HasAlternateKey("SSN");
-                        e.HasOne("Employers").WithMany("People").HasForeignKey("EmployerId");
-                    }
-                ),
+                    e.HasKey("CustomId");
+                    e.HasAlternateKey("SSN");
+                    e.HasOne("Employers").WithMany("People").HasForeignKey("EmployerId");
+                }),
             model =>
             {
                 var employersTable = Assert.Single(model.Tables, t => t.Name == "Employers");
@@ -185,16 +169,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Create_table_with_comments() =>
         Test(
             builder => { },
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("Name").HasComment("Column comment");
-                        e.ToTable(tb => tb.HasComment("Table comment"));
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("Name").HasComment("Column comment");
+                    e.ToTable(tb => tb.HasComment("Table comment"));
+                }),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -217,16 +197,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
 
         return Test(
             builder => { },
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("Name").HasComment(columnComment);
-                        e.ToTable(tb => tb.HasComment(tableComment));
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("Name").HasComment(columnComment);
+                    e.ToTable(tb => tb.HasComment(tableComment));
+                }),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -247,21 +223,17 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Create_table_with_computed_column(bool? stored) =>
         Test(
             builder => { },
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                        e.Property<int>("Y");
-                        e.Property<string>("Sum")
-                            .HasComputedColumnSql(
-                                $"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}",
-                                stored
-                            );
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                    e.Property<int>("Y");
+                    e.Property<string>("Sum")
+                        .HasComputedColumnSql(
+                            $"{DelimitIdentifier("X")} + {DelimitIdentifier("Y")}",
+                            stored
+                        );
+                }),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -284,78 +256,47 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             builder => { },
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    }
-                                );
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            }
-                        );
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
 
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    }
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            }
-                        );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedRequiredReference",
-                            o =>
-                            {
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            }
-                        );
+                    e.OwnsOne("Owned", "OwnedRequiredReference", o =>
+                    {
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
 
-                        e.Navigation("OwnedRequiredReference").IsRequired();
-                    }
-                );
+                    e.Navigation("OwnedRequiredReference").IsRequired();
+                });
             },
             model =>
             {
@@ -391,54 +332,27 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             builder => { },
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.OwnsOne("Owned", "json_reference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.OwnsOne(
-                            "Owned",
-                            "json_reference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "json_reference",
-                                    n => n.Property<int>("Number")
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n => n.Property<int>("Number2")
-                                );
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            }
-                        );
+                        o.OwnsOne("Nested", "json_reference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
 
-                        e.OwnsMany(
-                            "Owned2",
-                            "json_collection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n => n.Property<int>("Number3")
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n => n.Property<int>("Number4")
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "json_collection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
+                        o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             model =>
             {
@@ -543,25 +457,17 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Rename_table_with_primary_key() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                    }
-                ),
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.ToTable("Persons");
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                }),
+            builder => builder.Entity("People", e =>
+                {
+                    e.ToTable("Persons");
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                }),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -574,121 +480,67 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable("Entities");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.ToTable("Entities");
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    }
-                                );
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            }
-                        );
-
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    }
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.ToTable("NewEntities");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.ToTable("NewEntities");
+                        o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n => n.Property<int>("Number")
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n => n.Property<int>("Number2")
-                                );
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            }
-                        );
-
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n => n.Property<int>("Number3")
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n => n.Property<int>("Number4")
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
+                        o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             model =>
             {
@@ -836,91 +688,56 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual async Task Add_json_columns_to_existing_table() =>
         await Test(
-            builder =>
-                builder.Entity(
-                    "Entity",
-                    e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    }
-                ),
+            builder => builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                }),
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    }
-                                );
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            }
-                        );
+                    e.OwnsOne("Owned", "OwnedRequiredReference", o =>
+                    {
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedRequiredReference",
-                            o =>
-                            {
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            }
-                        );
+                    e.Navigation("OwnedRequiredReference").IsRequired();
 
-                        e.Navigation("OwnedRequiredReference").IsRequired();
-
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    }
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             model =>
             {
@@ -956,16 +773,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(null)]
     public virtual Task Add_column_with_computedSql(bool? stored) =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                        e.Property<int>("Y");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                    e.Property<int>("Y");
+                }),
             builder => { },
             builder =>
                 builder
@@ -1084,14 +897,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
             builder =>
             {
                 builder.Entity("Person");
-                builder.Entity(
-                    "SpecialPerson",
-                    e =>
-                    {
-                        e.HasBaseType("Person");
-                        e.Property<string>("Name").HasMaxLength(30);
-                    }
-                );
+                builder.Entity("SpecialPerson", e =>
+                {
+                    e.HasBaseType("Person");
+                    e.Property<string>("Name").HasMaxLength(30);
+                });
 
                 builder.Entity("MoreSpecialPerson").HasBaseType("SpecialPerson");
             },
@@ -1226,20 +1036,16 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("DriverLicense");
-                        e.ToTable(tb =>
-                            tb.HasCheckConstraint(
-                                "CK_People_Foo",
-                                $"{DelimitIdentifier("DriverLicense")} > 0"
-                            )
-                        );
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("DriverLicense");
+                    e.ToTable(tb =>
+                        tb.HasCheckConstraint(
+                            "CK_People_Foo",
+                            $"{DelimitIdentifier("DriverLicense")} > 0"
+                        )
+                    );
+                }),
             model =>
             {
                 // TODO: no scaffolding support for check constraints, https://github.com/aspnet/EntityFrameworkCore/issues/15408
@@ -1266,15 +1072,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_column_make_required() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("SomeColumn");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("SomeColumn");
+                }),
             builder => { },
             builder => builder.Entity("People").Property<string>("SomeColumn").IsRequired(),
             model =>
@@ -1288,18 +1090,14 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_column_make_required_with_null_data() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("SomeColumn");
-                        e.HasData(
-                            new Dictionary<string, object> { { "Id", 1 }, { "SomeColumn", null } }
-                        );
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("SomeColumn");
+                    e.HasData(
+                        new Dictionary<string, object> { { "Id", 1 }, { "SomeColumn", null } }
+                    );
+                }),
             builder => { },
             builder => builder.Entity("People").Property<string>("SomeColumn").IsRequired(),
             model =>
@@ -1313,16 +1111,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_column_make_required_with_index() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("SomeColumn");
-                        e.HasIndex("SomeColumn");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("SomeColumn");
+                    e.HasIndex("SomeColumn");
+                }),
             builder => { },
             builder => builder.Entity("People").Property<string>("SomeColumn").IsRequired(),
             model =>
@@ -1338,17 +1132,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_column_make_required_with_composite_index() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("FirstName");
-                        e.Property<string>("LastName");
-                        e.HasIndex("FirstName", "LastName");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("FirstName");
+                    e.Property<string>("LastName");
+                    e.HasIndex("FirstName", "LastName");
+                }),
             builder => { },
             builder => builder.Entity("People").Property<string>("FirstName").IsRequired(),
             model =>
@@ -1369,16 +1159,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(null)]
     public virtual Task Alter_column_make_computed(bool? stored) =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                        e.Property<int>("Y");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                    e.Property<int>("Y");
+                }),
             builder => builder.Entity("People").Property<int>("Sum"),
             builder =>
                 builder
@@ -1408,17 +1194,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_column_change_computed() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                        e.Property<int>("Y");
-                        e.Property<int>("Sum");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                    e.Property<int>("Y");
+                    e.Property<int>("Sum");
+                }),
             builder =>
                 builder
                     .Entity("People")
@@ -1445,19 +1227,15 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_column_change_computed_recreates_indexes() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                        e.Property<int>("Y");
-                        e.Property<int>("Sum");
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                    e.Property<int>("Y");
+                    e.Property<int>("Sum");
 
-                        e.HasIndex("Sum");
-                    }
-                ),
+                    e.HasIndex("Sum");
+                }),
             builder =>
                 builder
                     .Entity("People")
@@ -1487,17 +1265,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_column_change_computed_type() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                        e.Property<int>("Y");
-                        e.Property<int>("Sum");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                    e.Property<int>("Y");
+                    e.Property<int>("Sum");
+                }),
             builder =>
                 builder
                     .Entity("People")
@@ -1528,16 +1302,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_column_make_non_computed() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                        e.Property<int>("Y");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                    e.Property<int>("Y");
+                }),
             builder =>
                 builder
                     .Entity("People")
@@ -1572,15 +1342,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_computed_column_add_comment() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<int>("SomeColumn").HasComputedColumnSql("42");
-                    }
-                ),
+            builder => builder.Entity("People", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<int>("SomeColumn").HasComputedColumnSql("42");
+                }),
             builder => { },
             builder =>
                 builder.Entity("People").Property<int>("SomeColumn").HasComment("Some comment"),
@@ -1660,129 +1426,75 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    }
-                                );
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            }
-                        );
-
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    }
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    }
-                                );
-                                o.Property<DateTime>("Date");
-                            }
-                        );
-
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    }
-                                );
-                                o.Property<DateTime>("Date2");
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                    });
+                });
             },
             model =>
             {
@@ -1795,117 +1507,63 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    }
-                                );
-                                o.Property<DateTime>("Date");
-                            }
-                        );
-
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    }
-                                );
-                                o.Property<DateTime>("Date2");
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                    });
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
+                        o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n => n.Property<int>("Number")
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n => n.Property<int>("Number2")
-                                );
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            }
-                        );
-
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n => n.Property<int>("Number3")
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n => n.Property<int>("Number4")
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
+                        o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
             },
             model =>
             {
@@ -1932,46 +1590,28 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    }
-                );
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.ToJson("Name");
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n => n.Property<int>("Number")
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n => n.Property<int>("Number2")
-                                );
-                                o.Property<DateTime>("Date");
-                            }
-                        );
-                    }
-                );
+                    e.OwnsOne("Owned", "OwnedReference", o =>
+                    {
+                        o.ToJson("Name");
+                        o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
+                    });
+                });
             },
             model =>
             {
@@ -1992,48 +1632,30 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    }
-                );
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
+                        o.ToJson("Name");
+                        o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.ToJson("Name");
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n => n.Property<int>("Number")
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n => n.Property<int>("Number2")
-                                );
-                                o.Property<DateTime>("Date");
-                            }
-                        );
-
-                        e.Navigation("OwnedReference").IsRequired();
-                    }
-                );
+                    e.Navigation("OwnedReference").IsRequired();
+                });
             },
             model =>
             {
@@ -2052,46 +1674,28 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    }
-                );
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
-                    {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
 
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n => n.Property<int>("Number3")
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n => n.Property<int>("Number4")
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson("Name");
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
+                        o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
+                        o.Property<DateTime>("Date2");
+                        o.ToJson("Name");
+                    });
+                });
             },
             model =>
             {
@@ -2124,15 +1728,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Drop_column_primary_key() =>
         Test(
             builder => builder.Entity("People").Property<int>("SomeColumn"),
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                }),
             builder => { },
             model =>
             {
@@ -2145,15 +1745,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     public virtual Task Drop_column_computed_and_non_computed_with_dependency() =>
         Test(
             builder => builder.Entity("People").Property<int>("Id"),
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("X");
-                        e.Property<int>("Y").HasComputedColumnSql($"{DelimitIdentifier("X")} + 1");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("X");
+                    e.Property<int>("Y").HasComputedColumnSql($"{DelimitIdentifier("X")} + 1");
+                }),
             builder => { },
             model =>
             {
@@ -2167,77 +1763,46 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    }
-                                );
-                                o.Property<DateTime>("Date");
-                                o.ToJson();
-                            }
-                        );
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson();
+                    });
 
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    }
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson();
-                            }
-                        );
-                    }
-                );
-            },
-            builder =>
-                builder.Entity(
-                    "Entity",
-                    e =>
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
-                    }
-                ),
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson();
+                    });
+                });
+            },
+            builder => builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+                }),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2278,119 +1843,65 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         await Test(
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
+                        o.OwnsOne("Nested", "NestedReference", n =>
+                        {
+                            n.Property<int>("Number");
+                        });
+                        o.OwnsMany("Nested2", "NestedCollection", n =>
+                        {
+                            n.Property<int>("Number2");
+                        });
+                        o.Property<DateTime>("Date");
+                        o.ToJson("json_reference");
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number2");
-                                    }
-                                );
-                                o.Property<DateTime>("Date");
-                                o.ToJson("json_reference");
-                            }
-                        );
-
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number3");
-                                    }
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n =>
-                                    {
-                                        n.Property<int>("Number4");
-                                    }
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson("json_collection");
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n =>
+                        {
+                            n.Property<int>("Number3");
+                        });
+                        o.OwnsMany("Nested4", "NestedCollection2", n =>
+                        {
+                            n.Property<int>("Number4");
+                        });
+                        o.Property<DateTime>("Date2");
+                        o.ToJson("json_collection");
+                    });
+                });
             },
             builder =>
             {
-                builder.Entity(
-                    "Entity",
-                    e =>
+                builder.Entity("Entity", e =>
+                {
+                    e.Property<int>("Id").ValueGeneratedOnAdd();
+                    e.HasKey("Id");
+                    e.Property<string>("Name");
+
+                    e.OwnsOne("Owned", "OwnedReference", o =>
                     {
-                        e.Property<int>("Id").ValueGeneratedOnAdd();
-                        e.HasKey("Id");
-                        e.Property<string>("Name");
+                        o.OwnsOne("Nested", "NestedReference", n => n.Property<int>("Number"));
+                        o.OwnsMany("Nested2", "NestedCollection", n => n.Property<int>("Number2"));
+                        o.Property<DateTime>("Date");
+                        o.ToJson("new_json_reference");
+                    });
 
-                        e.OwnsOne(
-                            "Owned",
-                            "OwnedReference",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested",
-                                    "NestedReference",
-                                    n => n.Property<int>("Number")
-                                );
-                                o.OwnsMany(
-                                    "Nested2",
-                                    "NestedCollection",
-                                    n => n.Property<int>("Number2")
-                                );
-                                o.Property<DateTime>("Date");
-                                o.ToJson("new_json_reference");
-                            }
-                        );
-
-                        e.OwnsMany(
-                            "Owned2",
-                            "OwnedCollection",
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Nested3",
-                                    "NestedReference2",
-                                    n => n.Property<int>("Number3")
-                                );
-                                o.OwnsMany(
-                                    "Nested4",
-                                    "NestedCollection2",
-                                    n => n.Property<int>("Number4")
-                                );
-                                o.Property<DateTime>("Date2");
-                                o.ToJson("new_json_collection");
-                            }
-                        );
-                    }
-                );
+                    e.OwnsMany("Owned2", "OwnedCollection", o =>
+                    {
+                        o.OwnsOne("Nested3", "NestedReference2", n => n.Property<int>("Number3"));
+                        o.OwnsMany("Nested4", "NestedCollection2", n => n.Property<int>("Number4"));
+                        o.Property<DateTime>("Date2");
+                        o.ToJson("new_json_collection");
+                    });
+                });
             },
             model =>
             {
@@ -2414,15 +1925,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_index() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("FirstName");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("FirstName");
+                }),
             builder => { },
             builder => builder.Entity("People").HasIndex("FirstName"),
             model =>
@@ -2449,16 +1956,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_index_unique() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("FirstName");
-                        e.Property<string>("LastName");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("FirstName");
+                    e.Property<string>("LastName");
+                }),
             builder => { },
             builder => builder.Entity("People").HasIndex("FirstName", "LastName").IsUnique(),
             model =>
@@ -2472,15 +1975,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_index_descending() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                }),
             builder => { },
             builder => builder.Entity("People").HasIndex("X").IsDescending(),
             model =>
@@ -2494,17 +1993,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_index_descending_mixed() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                        e.Property<int>("Y");
-                        e.Property<int>("Z");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                    e.Property<int>("Y");
+                    e.Property<int>("Z");
+                }),
             builder => { },
             builder =>
                 builder.Entity("People").HasIndex("X", "Y", "Z").IsDescending(false, true, false),
@@ -2519,15 +2014,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_index_make_unique() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                }),
             builder => builder.Entity("People").HasIndex("X"),
             builder => builder.Entity("People").HasIndex("X").IsUnique(),
             model =>
@@ -2541,17 +2032,13 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_index_change_sort_order() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("X");
-                        e.Property<int>("Y");
-                        e.Property<int>("Z");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("X");
+                    e.Property<int>("Y");
+                    e.Property<int>("Z");
+                }),
             builder =>
                 builder.Entity("People").HasIndex("X", "Y", "Z").IsDescending(true, false, true),
             builder =>
@@ -2567,15 +2054,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_index_with_filter() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("Name");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("Name");
+                }),
             builder => { },
             builder =>
                 builder
@@ -2600,15 +2083,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Create_unique_index_with_filter() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("Name");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("Name");
+                }),
             builder => { },
             builder =>
                 builder
@@ -2630,34 +2109,20 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         );
 
     [ConditionalFact]
-    public virtual Task Drop_index() =>
-        Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("SomeField");
-                    }
-                ),
-            builder => builder.Entity("People").HasIndex("SomeField"),
-            builder => { },
-            model => Assert.Empty(Assert.Single(model.Tables).Indexes)
-        );
+    public virtual Task Drop_index() => Test(builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("SomeField");
+                }), builder => builder.Entity("People").HasIndex("SomeField"), builder => { }, model => Assert.Empty(Assert.Single(model.Tables).Indexes));
 
     [ConditionalFact]
     public virtual Task Rename_index() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("FirstName");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("FirstName");
+                }),
             builder => builder.Entity("People").HasIndex(new[] { "FirstName" }, "Foo"),
             builder => builder.Entity("People").HasIndex(new[] { "FirstName" }, "foo"),
             model =>
@@ -2731,15 +2196,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Add_primary_key_composite_with_name() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("SomeField1");
-                        e.Property<int>("SomeField2");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("SomeField1");
+                    e.Property<int>("SomeField2");
+                }),
             builder => { },
             builder =>
                 builder.Entity("People").HasKey("SomeField1", "SomeField2").HasName("PK_Foo"),
@@ -2784,22 +2245,16 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Test(
             builder =>
             {
-                builder.Entity(
-                    "Customers",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                    }
-                );
-                builder.Entity(
-                    "Orders",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("CustomerId");
-                    }
-                );
+                builder.Entity("Customers", e =>
+                {
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                });
+                builder.Entity("Orders", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("CustomerId");
+                });
             },
             builder => { },
             builder =>
@@ -2829,22 +2284,16 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Test(
             builder =>
             {
-                builder.Entity(
-                    "Customers",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                    }
-                );
-                builder.Entity(
-                    "Orders",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("CustomerId");
-                    }
-                );
+                builder.Entity("Customers", e =>
+                {
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                });
+                builder.Entity("Orders", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("CustomerId");
+                });
             },
             builder => { },
             builder =>
@@ -2870,22 +2319,16 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Test(
             builder =>
             {
-                builder.Entity(
-                    "Customers",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                    }
-                );
-                builder.Entity(
-                    "Orders",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("CustomerId");
-                    }
-                );
+                builder.Entity("Customers", e =>
+                {
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                });
+                builder.Entity("Orders", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("CustomerId");
+                });
             },
             builder =>
                 builder.Entity("Orders").HasOne("Customers").WithMany().HasForeignKey("CustomerId"),
@@ -2900,15 +2343,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Add_unique_constraint() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("AlternateKeyColumn");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("AlternateKeyColumn");
+                }),
             builder => { },
             builder => builder.Entity("People").HasAlternateKey("AlternateKeyColumn"),
             model =>
@@ -2930,16 +2369,12 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Add_unique_constraint_composite_with_name() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("AlternateKeyColumn1");
-                        e.Property<int>("AlternateKeyColumn2");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("AlternateKeyColumn1");
+                    e.Property<int>("AlternateKeyColumn2");
+                }),
             builder => { },
             builder =>
                 builder
@@ -2966,15 +2401,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Drop_unique_constraint() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("AlternateKeyColumn");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("AlternateKeyColumn");
+                }),
             builder => builder.Entity("People").HasAlternateKey("AlternateKeyColumn"),
             builder => { },
             model =>
@@ -2986,15 +2417,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Add_check_constraint_with_name() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("DriverLicense");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("DriverLicense");
+                }),
             builder => { },
             builder =>
                 builder
@@ -3014,15 +2441,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Alter_check_constraint() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("DriverLicense");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("DriverLicense");
+                }),
             builder =>
                 builder
                     .Entity("People")
@@ -3050,15 +2473,11 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task Drop_check_constraint() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "People",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("DriverLicense");
-                    }
-                ),
+            builder => builder.Entity("People", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("DriverLicense");
+                }),
             builder =>
                 builder
                     .Entity("People")
@@ -3220,73 +2639,41 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         );
 
     [ConditionalFact]
-    public virtual Task InsertDataOperation() =>
-        Test(
-            builder =>
-                builder.Entity(
-                    "Person",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("Name");
-                        e.HasKey("Id");
-                    }
-                ),
-            builder => { },
-            builder =>
-                builder
-                    .Entity("Person")
-                    .HasData(
-                        new Person { Id = 1, Name = "Daenerys Targaryen" },
-                        new Person { Id = 2, Name = "John Snow" },
-                        new Person { Id = 3, Name = "Arya Stark" },
-                        new Person { Id = 4, Name = "Harry Strickland" },
-                        new Person { Id = 5, Name = null }
-                    ),
-            model => { }
-        );
+    public virtual Task InsertDataOperation() => Test(builder => builder.Entity("Person", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("Name");
+                    e.HasKey("Id");
+                }), builder => { }, builder => builder.Entity("Person").HasData(new Person { Id = 1, Name = "Daenerys Targaryen" }, new Person { Id = 2, Name = "John Snow" }, new Person { Id = 3, Name = "Arya Stark" }, new Person { Id = 4, Name = "Harry Strickland" }, new Person { Id = 5, Name = null }), model => { });
 
     [ConditionalFact]
     public virtual Task DeleteDataOperation_simple_key() =>
-        Test(
-            builder =>
-                builder.Entity(
-                    "Person",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("Name");
-                        e.HasKey("Id");
-                        e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
-                    }
-                ),
-            builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
-            builder => { },
-            model => { }
-        );
+        Test(builder => builder.Entity("Person", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("Name");
+                    e.HasKey("Id");
+                    e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
+                }), builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }), builder => { }, model => { });
 
     [ConditionalFact]
     public virtual Task DeleteDataOperation_composite_key() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "Person",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("AnotherId");
-                        e.HasKey("Id", "AnotherId");
-                        e.Property<string>("Name");
-                        e.HasData(
-                            new Person
-                            {
-                                Id = 1,
-                                AnotherId = 11,
-                                Name = "Daenerys Targaryen",
-                            }
-                        );
-                    }
-                ),
+            builder => builder.Entity("Person", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("AnotherId");
+                    e.HasKey("Id", "AnotherId");
+                    e.Property<string>("Name");
+                    e.HasData(
+                        new Person
+                        {
+                            Id = 1,
+                            AnotherId = 11,
+                            Name = "Daenerys Targaryen",
+                        }
+                    );
+                }),
             builder =>
                 builder
                     .Entity("Person")
@@ -3304,46 +2691,32 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
 
     [ConditionalFact]
     public virtual Task UpdateDataOperation_simple_key() =>
-        Test(
-            builder =>
-                builder.Entity(
-                    "Person",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("Name");
-                        e.HasKey("Id");
-                        e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
-                    }
-                ),
-            builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
-            builder =>
-                builder.Entity("Person").HasData(new Person { Id = 2, Name = "Another John Snow" }),
-            model => { }
-        );
+        Test(builder => builder.Entity("Person", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("Name");
+                    e.HasKey("Id");
+                    e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
+                }), builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }), builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "Another John Snow" }), model => { });
 
     [ConditionalFact]
     public virtual Task UpdateDataOperation_composite_key() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "Person",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<int>("AnotherId");
-                        e.HasKey("Id", "AnotherId");
-                        e.Property<string>("Name");
-                        e.HasData(
-                            new Person
-                            {
-                                Id = 1,
-                                AnotherId = 11,
-                                Name = "Daenerys Targaryen",
-                            }
-                        );
-                    }
-                ),
+            builder => builder.Entity("Person", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<int>("AnotherId");
+                    e.HasKey("Id", "AnotherId");
+                    e.Property<string>("Name");
+                    e.HasData(
+                        new Person
+                        {
+                            Id = 1,
+                            AnotherId = 11,
+                            Name = "Daenerys Targaryen",
+                        }
+                    );
+                }),
             builder =>
                 builder
                     .Entity("Person")
@@ -3372,25 +2745,21 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalFact]
     public virtual Task UpdateDataOperation_multiple_columns() =>
         Test(
-            builder =>
-                builder.Entity(
-                    "Person",
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.Property<string>("Name");
-                        e.Property<int>("Age");
-                        e.HasKey("Id");
-                        e.HasData(
-                            new Person
-                            {
-                                Id = 1,
-                                Name = "Daenerys Targaryen",
-                                Age = 18,
-                            }
-                        );
-                    }
-                ),
+            builder => builder.Entity("Person", e =>
+                {
+                    e.Property<int>("Id");
+                    e.Property<string>("Name");
+                    e.Property<int>("Age");
+                    e.HasKey("Id");
+                    e.HasData(
+                        new Person
+                        {
+                            Id = 1,
+                            Name = "Daenerys Targaryen",
+                            Age = 18,
+                        }
+                    );
+                }),
             builder =>
                 builder
                     .Entity("Person")

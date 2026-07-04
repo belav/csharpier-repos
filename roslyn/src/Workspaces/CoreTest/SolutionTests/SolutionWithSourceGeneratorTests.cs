@@ -265,17 +265,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 ],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            )
+                    Assert.Collection(step.Inputs, source =>
+                        Assert.Equal(
+                            IncrementalStepRunReason.New,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        )
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.New, output.Reason)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.New, output.Reason)
                     );
                 }
             );
@@ -344,17 +341,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 ],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            )
+                    Assert.Collection(step.Inputs, source =>
+                        Assert.Equal(
+                            IncrementalStepRunReason.Cached,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        )
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Cached, output.Reason)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason)
                     );
                 }
             );

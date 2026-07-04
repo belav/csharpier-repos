@@ -110,9 +110,8 @@ namespace System.Threading.Tests
             Assert.False(lockTaken);
 
             lockTaken = true;
-            AssertExtensions.Throws<ArgumentException>(
-                "lockTaken",
-                () => Monitor.Enter(obj, ref lockTaken)
+            AssertExtensions.Throws<ArgumentException>("lockTaken", () =>
+                Monitor.Enter(obj, ref lockTaken)
             );
             Assert.True(lockTaken);
         }
@@ -203,42 +202,34 @@ namespace System.Threading.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Monitor.TryEnter(obj, -2, ref lockTaken)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () => Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(-2))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(-2))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () => Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(-2), ref lockTaken)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(-2), ref lockTaken)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () => Monitor.TryEnter(obj, TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                Monitor.TryEnter(obj, TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                    Monitor.TryEnter(
-                        obj,
-                        TimeSpan.FromMilliseconds((double)int.MaxValue + 1),
-                        ref lockTaken
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                Monitor.TryEnter(
+                    obj,
+                    TimeSpan.FromMilliseconds((double)int.MaxValue + 1),
+                    ref lockTaken
+                )
             );
 
             lockTaken = true;
-            AssertExtensions.Throws<ArgumentException>(
-                "lockTaken",
-                () => Monitor.TryEnter(obj, ref lockTaken)
+            AssertExtensions.Throws<ArgumentException>("lockTaken", () =>
+                Monitor.TryEnter(obj, ref lockTaken)
             );
             Assert.True(lockTaken);
-            AssertExtensions.Throws<ArgumentException>(
-                "lockTaken",
-                () => Monitor.TryEnter(obj, 0, ref lockTaken)
+            AssertExtensions.Throws<ArgumentException>("lockTaken", () =>
+                Monitor.TryEnter(obj, 0, ref lockTaken)
             );
             Assert.True(lockTaken);
-            AssertExtensions.Throws<ArgumentException>(
-                "lockTaken",
-                () => Monitor.TryEnter(obj, TimeSpan.Zero, ref lockTaken)
+            AssertExtensions.Throws<ArgumentException>("lockTaken", () =>
+                Monitor.TryEnter(obj, TimeSpan.Zero, ref lockTaken)
             );
         }
 
@@ -251,15 +242,10 @@ namespace System.Threading.Tests
             // Actually transition the aware lock to an aware lock by having a background thread wait for a lock
             {
                 Action waitForThread;
-                Thread t = ThreadTestHelpers.CreateGuardedThread(
-                    out waitForThread,
-                    () =>
-                        Assert.False(
-                            Monitor.TryEnter(
-                                awareLock,
-                                ThreadTestHelpers.ExpectedTimeoutMilliseconds
-                            )
-                        )
+                Thread t = ThreadTestHelpers.CreateGuardedThread(out waitForThread, () =>
+                    Assert.False(
+                        Monitor.TryEnter(awareLock, ThreadTestHelpers.ExpectedTimeoutMilliseconds)
+                    )
                 );
                 t.IsBackground = true;
                 lock (awareLock)
@@ -467,13 +453,11 @@ namespace System.Threading.Tests
             Assert.Throws<ArgumentNullException>(() => Monitor.Wait(null, 1));
             Assert.Throws<ArgumentNullException>(() => Monitor.Wait(null, TimeSpan.Zero));
             Assert.Throws<ArgumentOutOfRangeException>(() => Monitor.Wait(obj, -2));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () => Monitor.Wait(obj, TimeSpan.FromMilliseconds(-2))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                Monitor.Wait(obj, TimeSpan.FromMilliseconds(-2))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () => Monitor.Wait(obj, TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                Monitor.Wait(obj, TimeSpan.FromMilliseconds((double)int.MaxValue + 1))
             );
         }
 
@@ -525,15 +509,12 @@ namespace System.Threading.Tests
             var threadStarted = new AutoResetEvent(false);
             var startTest = new AutoResetEvent(false);
             var obj = new object();
-            var t = ThreadTestHelpers.CreateGuardedThread(
-                out _,
-                () =>
-                {
-                    threadStarted.Set();
-                    startTest.CheckedWait();
-                    Monitor.TryEnter(obj, 100); // likely to perform a full wait, which may involve some sort of transition
-                }
-            );
+            var t = ThreadTestHelpers.CreateGuardedThread(out _, () =>
+            {
+                threadStarted.Set();
+                startTest.CheckedWait();
+                Monitor.TryEnter(obj, 100); // likely to perform a full wait, which may involve some sort of transition
+            });
             t.IsBackground = true;
             t.Start();
             threadStarted.CheckedWait();
@@ -571,14 +552,11 @@ namespace System.Threading.Tests
             lock (obj)
             {
                 var threadReady = new AutoResetEvent(false);
-                var t = ThreadTestHelpers.CreateGuardedThread(
-                    out Action waitForThread,
-                    () =>
-                    {
-                        threadReady.Set();
-                        Assert.Throws<ThreadInterruptedException>(() => Monitor.Enter(obj));
-                    }
-                );
+                var t = ThreadTestHelpers.CreateGuardedThread(out Action waitForThread, () =>
+                {
+                    threadReady.Set();
+                    Assert.Throws<ThreadInterruptedException>(() => Monitor.Enter(obj));
+                });
                 t.IsBackground = true;
                 t.Start();
                 threadReady.CheckedWait();

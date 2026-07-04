@@ -533,14 +533,10 @@ public static partial class DataContractJsonSerializerTests
             @"[{""P1"":""abc"",""P2"":11},{""P1"":""def"",""P2"":12}]"
         );
 
-        Utils.Equal(
-            x,
-            y,
-            (a, b) =>
-            {
-                return SimpleType.AreEqual(a, b);
-            }
-        );
+        Utils.Equal(x, y, (a, b) =>
+        {
+            return SimpleType.AreEqual(a, b);
+        });
     }
 
     [Fact]
@@ -567,23 +563,15 @@ public static partial class DataContractJsonSerializerTests
         );
 
         Assert.NotNull(y);
-        Utils.Equal(
-            x.F1,
-            y.F1,
-            (a, b) =>
-            {
-                return SimpleType.AreEqual(a, b);
-            }
-        );
+        Utils.Equal(x.F1, y.F1, (a, b) =>
+        {
+            return SimpleType.AreEqual(a, b);
+        });
         Assert.Equal(x.F2, y.F2);
-        Utils.Equal(
-            x.P1,
-            y.P1,
-            (a, b) =>
-            {
-                return SimpleType.AreEqual(a, b);
-            }
-        );
+        Utils.Equal(x.P1, y.P1, (a, b) =>
+        {
+            return SimpleType.AreEqual(a, b);
+        });
         Assert.Equal(x.P2, y.P2);
     }
 
@@ -602,14 +590,10 @@ public static partial class DataContractJsonSerializerTests
         );
 
         Assert.NotNull(y);
-        Utils.Equal(
-            x.P1,
-            y.P1,
-            (a, b) =>
-            {
-                return SimpleType.AreEqual(a, b);
-            }
-        );
+        Utils.Equal(x.P1, y.P1, (a, b) =>
+        {
+            return SimpleType.AreEqual(a, b);
+        });
         Assert.Equal(x.P2, y.P2);
     }
 
@@ -3331,9 +3315,8 @@ public static partial class DataContractJsonSerializerTests
                 },
             };
             var original = DateTime.Now;
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () => SerializeAndDeserialize(original, null, dcjsSettings, null, true)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                SerializeAndDeserialize(original, null, dcjsSettings, null, true)
             );
         }
     }

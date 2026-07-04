@@ -35,18 +35,16 @@ namespace System.Globalization.Tests
         {
             Assert.Throws<ArgumentException>(() => "\uFB01".IsNormalized((NormalizationForm)10));
             AssertExtensions.Throws<ArgumentException>("strInput", () => "\uFFFE".IsNormalized()); // Invalid codepoint
-            AssertExtensions.Throws<ArgumentException>(
-                "strInput",
-                () => "\uD800\uD800".IsNormalized()
+            AssertExtensions.Throws<ArgumentException>("strInput", () =>
+                "\uD800\uD800".IsNormalized()
             ); // Invalid surrogate pair
         }
 
         [Fact]
         public void IsNormalized_Null()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "strInput",
-                () => StringNormalizationExtensions.IsNormalized(null)
+            AssertExtensions.Throws<ArgumentNullException>("strInput", () =>
+                StringNormalizationExtensions.IsNormalized(null)
             );
         }
 
@@ -100,18 +98,16 @@ namespace System.Globalization.Tests
             Assert.Throws<ArgumentException>(() => "\uFB01".Normalize((NormalizationForm)7));
 
             AssertExtensions.Throws<ArgumentException>("strInput", () => "\uFFFE".Normalize()); // Invalid codepoint
-            AssertExtensions.Throws<ArgumentException>(
-                "strInput",
-                () => "\uD800\uD800".Normalize()
+            AssertExtensions.Throws<ArgumentException>("strInput", () =>
+                "\uD800\uD800".Normalize()
             ); // Invalid surrogate pair
         }
 
         [Fact]
         public void Normalize_Null()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "strInput",
-                () => StringNormalizationExtensions.Normalize(null)
+            AssertExtensions.Throws<ArgumentNullException>("strInput", () =>
+                StringNormalizationExtensions.Normalize(null)
             );
         }
     }

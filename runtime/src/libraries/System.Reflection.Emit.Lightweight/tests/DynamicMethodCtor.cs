@@ -239,126 +239,106 @@ namespace System.Reflection.Emit.Tests
         {
             Module module = typeof(TestClass).GetTypeInfo().Module;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        typeof(void),
-                        new Type[] { null, typeof(string) },
-                        module
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    typeof(void),
+                    new Type[] { null, typeof(string) },
+                    module
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        typeof(void),
-                        new Type[] { null, typeof(string) },
-                        module,
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    typeof(void),
+                    new Type[] { null, typeof(string) },
+                    module,
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        typeof(void),
-                        new Type[] { null, typeof(string) },
-                        module,
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    typeof(void),
+                    new Type[] { null, typeof(string) },
+                    module,
+                    false
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[] { null, typeof(string) },
-                        module,
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[] { null, typeof(string) },
+                    module,
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[] { null, typeof(string) },
-                        module,
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[] { null, typeof(string) },
+                    module,
+                    false
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        typeof(void),
-                        new Type[] { null, typeof(string) },
-                        typeof(TestClass)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    typeof(void),
+                    new Type[] { null, typeof(string) },
+                    typeof(TestClass)
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        typeof(void),
-                        new Type[] { null, typeof(string) },
-                        typeof(TestClass),
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    typeof(void),
+                    new Type[] { null, typeof(string) },
+                    typeof(TestClass),
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        typeof(void),
-                        new Type[] { null, typeof(string) },
-                        typeof(TestClass),
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    typeof(void),
+                    new Type[] { null, typeof(string) },
+                    typeof(TestClass),
+                    false
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[] { null, typeof(string) },
-                        typeof(TestClass),
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[] { null, typeof(string) },
+                    typeof(TestClass),
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[] { null, typeof(string) },
-                        typeof(TestClass),
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[] { null, typeof(string) },
+                    typeof(TestClass),
+                    false
+                )
             );
         }
 
@@ -367,86 +347,72 @@ namespace System.Reflection.Emit.Tests
         {
             Module module = typeof(TestClass).GetTypeInfo().Module;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new DynamicMethod(null, typeof(void), new Type[0], module)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DynamicMethod(null, typeof(void), new Type[0], module)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new DynamicMethod(null, typeof(void), new Type[0], module, true)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DynamicMethod(null, typeof(void), new Type[0], module, true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new DynamicMethod(null, typeof(void), new Type[0], module, false)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DynamicMethod(null, typeof(void), new Type[0], module, false)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    new DynamicMethod(
-                        null,
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0],
-                        module,
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DynamicMethod(
+                    null,
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0],
+                    module,
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    new DynamicMethod(
-                        null,
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0],
-                        module,
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DynamicMethod(
+                    null,
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0],
+                    module,
+                    false
+                )
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new DynamicMethod(null, typeof(void), new Type[0], typeof(TestClass))
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DynamicMethod(null, typeof(void), new Type[0], typeof(TestClass))
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new DynamicMethod(null, typeof(void), new Type[0], typeof(TestClass), true)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DynamicMethod(null, typeof(void), new Type[0], typeof(TestClass), true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new DynamicMethod(null, typeof(void), new Type[0], typeof(TestClass), false)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DynamicMethod(null, typeof(void), new Type[0], typeof(TestClass), false)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    new DynamicMethod(
-                        null,
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0],
-                        typeof(TestClass),
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DynamicMethod(
+                    null,
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0],
+                    typeof(TestClass),
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                    new DynamicMethod(
-                        null,
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0],
-                        typeof(TestClass),
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new DynamicMethod(
+                    null,
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0],
+                    typeof(TestClass),
+                    false
+                )
             );
         }
 
@@ -479,90 +445,76 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void NullModule_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "m",
-                () => new DynamicMethod("Method", typeof(void), new Type[0], (Module)null)
+            AssertExtensions.Throws<ArgumentNullException>("m", () =>
+                new DynamicMethod("Method", typeof(void), new Type[0], (Module)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "m",
-                () => new DynamicMethod("Method", typeof(void), new Type[0], (Module)null, true)
+            AssertExtensions.Throws<ArgumentNullException>("m", () =>
+                new DynamicMethod("Method", typeof(void), new Type[0], (Module)null, true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "m",
-                () => new DynamicMethod("Method", typeof(void), new Type[0], (Module)null, false)
+            AssertExtensions.Throws<ArgumentNullException>("m", () =>
+                new DynamicMethod("Method", typeof(void), new Type[0], (Module)null, false)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "m",
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0],
-                        (Module)null,
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("m", () =>
+                new DynamicMethod(
+                    "Method",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0],
+                    (Module)null,
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "m",
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0],
-                        (Module)null,
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("m", () =>
+                new DynamicMethod(
+                    "Method",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0],
+                    (Module)null,
+                    false
+                )
             );
         }
 
         [Fact]
         public void NullOwner_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "owner",
-                () => new DynamicMethod("Method", typeof(void), new Type[0], (Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("owner", () =>
+                new DynamicMethod("Method", typeof(void), new Type[0], (Type)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "owner",
-                () => new DynamicMethod("Method", typeof(void), new Type[0], (Type)null, true)
+            AssertExtensions.Throws<ArgumentNullException>("owner", () =>
+                new DynamicMethod("Method", typeof(void), new Type[0], (Type)null, true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "owner",
-                () => new DynamicMethod("Method", typeof(void), new Type[0], (Type)null, false)
+            AssertExtensions.Throws<ArgumentNullException>("owner", () =>
+                new DynamicMethod("Method", typeof(void), new Type[0], (Type)null, false)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "owner",
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0],
-                        (Type)null,
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("owner", () =>
+                new DynamicMethod(
+                    "Method",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0],
+                    (Type)null,
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "owner",
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0],
-                        (Type)null,
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("owner", () =>
+                new DynamicMethod(
+                    "Method",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0],
+                    (Type)null,
+                    false
+                )
             );
         }
 
@@ -573,45 +525,38 @@ namespace System.Reflection.Emit.Tests
         [InlineData(typeof(int*))]
         public void InvalidOwner_ThrowsArgumentException(Type owner)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DynamicMethod("Method", typeof(void), new Type[0], owner)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod("Method", typeof(void), new Type[0], owner)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DynamicMethod("Method", typeof(void), new Type[0], owner, true)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod("Method", typeof(void), new Type[0], owner, true)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new DynamicMethod("Method", typeof(void), new Type[0], owner, false)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod("Method", typeof(void), new Type[0], owner, false)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0],
-                        owner,
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0],
+                    owner,
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new DynamicMethod(
-                        "Method",
-                        MethodAttributes.Public | MethodAttributes.Static,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0],
-                        owner,
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new DynamicMethod(
+                    "Method",
+                    MethodAttributes.Public | MethodAttributes.Static,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0],
+                    owner,
+                    false
+                )
             );
         }
 

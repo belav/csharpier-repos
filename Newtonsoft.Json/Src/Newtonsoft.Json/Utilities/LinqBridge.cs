@@ -2069,10 +2069,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         {
             CheckNotNull(source, "source");
 
-            return MinMaxImpl(
-                source.Where(x => x != null),
-                null,
-                (max, x) => x == null || (max != null && x.Value < max.Value)
+            return MinMaxImpl(source.Where(x => x != null), null, (max, x) =>
+                x == null || (max != null && x.Value < max.Value)
             );
         }
 
@@ -2245,10 +2243,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         {
             CheckNotNull(source, "source");
 
-            return MinMaxImpl(
-                source.Where(x => x != null),
-                null,
-                (max, x) => x == null || (max != null && x.Value < max.Value)
+            return MinMaxImpl(source.Where(x => x != null), null, (max, x) =>
+                x == null || (max != null && x.Value < max.Value)
             );
         }
 
@@ -2421,10 +2417,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         {
             CheckNotNull(source, "source");
 
-            return MinMaxImpl(
-                source.Where(x => x != null),
-                null,
-                (max, x) => x == null || (max != null && x.Value < max.Value)
+            return MinMaxImpl(source.Where(x => x != null), null, (max, x) =>
+                x == null || (max != null && x.Value < max.Value)
             );
         }
 
@@ -2597,10 +2591,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         {
             CheckNotNull(source, "source");
 
-            return MinMaxImpl(
-                source.Where(x => x != null),
-                null,
-                (max, x) => x == null || (max != null && x.Value < max.Value)
+            return MinMaxImpl(source.Where(x => x != null), null, (max, x) =>
+                x == null || (max != null && x.Value < max.Value)
             );
         }
 
@@ -2782,10 +2774,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         {
             CheckNotNull(source, "source");
 
-            return MinMaxImpl(
-                source.Where(x => x != null),
-                null,
-                (max, x) => x == null || (max != null && x.Value < max.Value)
+            return MinMaxImpl(source.Where(x => x != null), null, (max, x) =>
+                x == null || (max != null && x.Value < max.Value)
             );
         }
 

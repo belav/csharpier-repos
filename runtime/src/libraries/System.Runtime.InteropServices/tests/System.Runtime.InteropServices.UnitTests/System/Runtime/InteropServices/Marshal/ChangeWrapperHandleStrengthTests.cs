@@ -56,13 +56,11 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void ChangeWrapperHandleStrength_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "otp",
-                () => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: true)
+            AssertExtensions.Throws<ArgumentNullException>("otp", () =>
+                Marshal.ChangeWrapperHandleStrength(null, fIsWeak: true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "otp",
-                () => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: false)
+            AssertExtensions.Throws<ArgumentNullException>("otp", () =>
+                Marshal.ChangeWrapperHandleStrength(null, fIsWeak: false)
             );
         }
 

@@ -316,9 +316,8 @@ namespace Microsoft.Interop.Analyzers
         {
             for (SyntaxNode? node = syntax.Parent; node is not null; node = node.Parent)
             {
-                editor.ReplaceNode(
-                    node,
-                    (node, gen) => gen.WithModifiers(node, gen.GetModifiers(node).WithPartial(true))
+                editor.ReplaceNode(node, (node, gen) =>
+                    gen.WithModifiers(node, gen.GetModifiers(node).WithPartial(true))
                 );
             }
         }

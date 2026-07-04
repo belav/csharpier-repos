@@ -37,76 +37,56 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void InvalidOptionsThrows()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new FixedWindowRateLimiter(
-                        new FixedWindowRateLimiterOptions
-                        {
-                            PermitLimit = -1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                            Window = TimeSpan.FromMinutes(2),
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new FixedWindowRateLimiter(
-                        new FixedWindowRateLimiterOptions
-                        {
-                            PermitLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = -1,
-                            Window = TimeSpan.FromMinutes(2),
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new FixedWindowRateLimiter(
-                        new FixedWindowRateLimiterOptions
-                        {
-                            PermitLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                            Window = TimeSpan.MinValue,
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new FixedWindowRateLimiter(
-                        new FixedWindowRateLimiterOptions
-                        {
-                            PermitLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                            Window = TimeSpan.FromMinutes(-2),
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new FixedWindowRateLimiter(
-                        new FixedWindowRateLimiterOptions
-                        {
-                            PermitLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                            Window = TimeSpan.Zero,
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
+            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                    new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = -1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        Window = TimeSpan.FromMinutes(2),
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                    new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = -1,
+                        Window = TimeSpan.FromMinutes(2),
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                    new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        Window = TimeSpan.MinValue,
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                    new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        Window = TimeSpan.FromMinutes(-2),
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                    new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        Window = TimeSpan.Zero,
+                        AutoReplenishment = false,
+                    }
+                ));
         }
 
         [Fact]
@@ -721,9 +701,8 @@ namespace System.Threading.RateLimiting.Test
                 }
             );
             using var lease = limiter.AttemptAcquire(1);
-            Assert.Collection(
-                lease.MetadataNames,
-                metadataName => Assert.Equal(metadataName, MetadataName.RetryAfter.Name)
+            Assert.Collection(lease.MetadataNames, metadataName =>
+                Assert.Equal(metadataName, MetadataName.RetryAfter.Name)
             );
         }
 
@@ -824,9 +803,8 @@ namespace System.Threading.RateLimiting.Test
 
             Assert.True(failedLease.TryGetMetadata(MetadataName.RetryAfter, out var typedMetadata));
             Assert.Equal(options.Window.Ticks, typedMetadata.Ticks);
-            Assert.Collection(
-                failedLease.MetadataNames,
-                item => item.Equals(MetadataName.RetryAfter.Name)
+            Assert.Collection(failedLease.MetadataNames, item =>
+                item.Equals(MetadataName.RetryAfter.Name)
             );
         }
 

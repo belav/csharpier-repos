@@ -750,21 +750,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             // C# interface implementations are implicit/not-specified -- so they are just named the name as the interface member
-            return PreserveTrivia(
-                declaration,
-                d =>
+            return PreserveTrivia(declaration, d =>
+            {
+                d = WithInterfaceSpecifier(d, specifier: null);
+                d = this.AsImplementation(d, Accessibility.Public);
+
+                if (interfaceMemberName != null)
                 {
-                    d = WithInterfaceSpecifier(d, specifier: null);
-                    d = this.AsImplementation(d, Accessibility.Public);
-
-                    if (interfaceMemberName != null)
-                    {
-                        d = this.WithName(d, interfaceMemberName);
-                    }
-
-                    return d;
+                    d = this.WithName(d, interfaceMemberName);
                 }
-            );
+
+                return d;
+            });
         }
 
         public override SyntaxNode? AsPrivateInterfaceImplementation(
@@ -773,24 +770,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             string? interfaceMemberName
         )
         {
-            return PreserveTrivia(
-                declaration,
-                d =>
+            return PreserveTrivia(declaration, d =>
+            {
+                d = this.AsImplementation(d, Accessibility.NotApplicable);
+                d = this.WithoutConstraints(d);
+
+                if (interfaceMemberName != null)
                 {
-                    d = this.AsImplementation(d, Accessibility.NotApplicable);
-                    d = this.WithoutConstraints(d);
-
-                    if (interfaceMemberName != null)
-                    {
-                        d = this.WithName(d, interfaceMemberName);
-                    }
-
-                    return WithInterfaceSpecifier(
-                        d,
-                        SyntaxFactory.ExplicitInterfaceSpecifier((NameSyntax)interfaceTypeName)
-                    );
+                    d = this.WithName(d, interfaceMemberName);
                 }
-            );
+
+                return WithInterfaceSpecifier(
+                    d,
+                    SyntaxFactory.ExplicitInterfaceSpecifier((NameSyntax)interfaceTypeName)
+                );
+            });
         }
 
         private SyntaxNode WithoutConstraints(SyntaxNode declaration)
@@ -1083,80 +1077,72 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
         internal override SyntaxNode AsInterfaceMember(SyntaxNode m)
         {
-            return Isolate(
-                m,
-                member =>
+            return Isolate(m, member =>
+            {
+                Accessibility acc;
+                DeclarationModifiers modifiers;
+
+                // return any nested member "as is" without any additional changes
+                if (member is BaseTypeDeclarationSyntax)
+                    return member;
+
+                switch (member.Kind())
                 {
-                    Accessibility acc;
-                    DeclarationModifiers modifiers;
+                    case SyntaxKind.MethodDeclaration:
+                        return ((MethodDeclarationSyntax)member)
+                            .WithModifiers(default)
+                            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                            .WithBody(null);
 
-                    // return any nested member "as is" without any additional changes
-                    if (member is BaseTypeDeclarationSyntax)
-                        return member;
+                    case SyntaxKind.PropertyDeclaration:
+                        var property = (PropertyDeclarationSyntax)member;
+                        return property
+                            .WithModifiers(default)
+                            .WithAccessorList(WithoutBodies(property.AccessorList));
 
-                    switch (member.Kind())
-                    {
-                        case SyntaxKind.MethodDeclaration:
-                            return ((MethodDeclarationSyntax)member)
-                                .WithModifiers(default)
-                                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                                .WithBody(null);
+                    case SyntaxKind.IndexerDeclaration:
+                        var indexer = (IndexerDeclarationSyntax)member;
+                        return indexer
+                            .WithModifiers(default)
+                            .WithAccessorList(WithoutBodies(indexer.AccessorList));
 
-                        case SyntaxKind.PropertyDeclaration:
-                            var property = (PropertyDeclarationSyntax)member;
-                            return property
-                                .WithModifiers(default)
-                                .WithAccessorList(WithoutBodies(property.AccessorList));
+                    // convert event into field event
+                    case SyntaxKind.EventDeclaration:
+                        var ev = (EventDeclarationSyntax)member;
+                        return this.EventDeclaration(
+                            ev.Identifier.ValueText,
+                            ev.Type,
+                            Accessibility.NotApplicable,
+                            DeclarationModifiers.None
+                        );
 
-                        case SyntaxKind.IndexerDeclaration:
-                            var indexer = (IndexerDeclarationSyntax)member;
-                            return indexer
-                                .WithModifiers(default)
-                                .WithAccessorList(WithoutBodies(indexer.AccessorList));
+                    case SyntaxKind.EventFieldDeclaration:
+                        var ef = (EventFieldDeclarationSyntax)member;
+                        return ef.WithModifiers(default);
 
-                        // convert event into field event
-                        case SyntaxKind.EventDeclaration:
-                            var ev = (EventDeclarationSyntax)member;
-                            return this.EventDeclaration(
-                                ev.Identifier.ValueText,
-                                ev.Type,
-                                Accessibility.NotApplicable,
-                                DeclarationModifiers.None
-                            );
+                    // convert field into property
+                    case SyntaxKind.FieldDeclaration:
+                        var f = (FieldDeclarationSyntax)member;
+                        GetAccessibilityAndModifiers(f.Modifiers, out acc, out modifiers, out _);
 
-                        case SyntaxKind.EventFieldDeclaration:
-                            var ef = (EventFieldDeclarationSyntax)member;
-                            return ef.WithModifiers(default);
+                        var type = GetType(f);
+                        Contract.ThrowIfNull(type);
 
-                        // convert field into property
-                        case SyntaxKind.FieldDeclaration:
-                            var f = (FieldDeclarationSyntax)member;
-                            GetAccessibilityAndModifiers(
-                                f.Modifiers,
-                                out acc,
-                                out modifiers,
-                                out _
-                            );
+                        return AsInterfaceMember(
+                            PropertyDeclaration(
+                                GetName(f),
+                                ClearTrivia(type),
+                                acc,
+                                modifiers,
+                                getAccessorStatements: null,
+                                setAccessorStatements: null
+                            )
+                        );
 
-                            var type = GetType(f);
-                            Contract.ThrowIfNull(type);
-
-                            return AsInterfaceMember(
-                                PropertyDeclaration(
-                                    GetName(f),
-                                    ClearTrivia(type),
-                                    acc,
-                                    modifiers,
-                                    getAccessorStatements: null,
-                                    setAccessorStatements: null
-                                )
-                            );
-
-                        default:
-                            throw ExceptionUtilities.UnexpectedValue(member.Kind());
-                    }
+                    default:
+                        throw ExceptionUtilities.UnexpectedValue(member.Kind());
                 }
-            );
+            });
         }
 
         public override SyntaxNode EnumDeclaration(
@@ -1358,10 +1344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             if (!s_declAttributes.TryGetValue(declaration, out var attrs))
             {
-                attrs = s_declAttributes.GetValue(
-                    declaration,
-                    declaration =>
-                        Flatten(declaration.GetAttributeLists().Where(al => !IsReturnAttribute(al)))
+                attrs = s_declAttributes.GetValue(declaration, declaration =>
+                    Flatten(declaration.GetAttributeLists().Where(al => !IsReturnAttribute(al)))
                 );
             }
 
@@ -1377,10 +1361,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             if (!s_declReturnAttributes.TryGetValue(declaration, out var attrs))
             {
-                attrs = s_declReturnAttributes.GetValue(
-                    declaration,
-                    declaration =>
-                        Flatten(declaration.GetAttributeLists().Where(al => IsReturnAttribute(al)))
+                attrs = s_declReturnAttributes.GetValue(declaration, declaration =>
+                    Flatten(declaration.GetAttributeLists().Where(al => IsReturnAttribute(al)))
                 );
             }
 
@@ -1441,9 +1423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 case SyntaxKind.OperatorDeclaration:
                 case SyntaxKind.ConversionOperatorDeclaration:
                 case SyntaxKind.DelegateDeclaration:
-                    return this.Isolate(
-                        declaration,
-                        d => this.InsertReturnAttributesInternal(d, index, attributes)
+                    return this.Isolate(declaration, d =>
+                        this.InsertReturnAttributesInternal(d, index, attributes)
                     );
                 default:
                     return declaration;
@@ -1553,9 +1534,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             int index,
             IEnumerable<SyntaxNode> attributeArguments
         ) =>
-            this.Isolate(
-                declaration,
-                d => InsertAttributeArgumentsInternal(d, index, attributeArguments)
+            this.Isolate(declaration, d =>
+                InsertAttributeArgumentsInternal(d, index, attributeArguments)
             );
 
         private static SyntaxNode InsertAttributeArgumentsInternal(
@@ -1686,9 +1666,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<SyntaxNode> imports
         )
         {
-            var result = PreserveTrivia(
-                declaration,
-                d => InsertNamespaceImportsInternal(d, index, imports)
+            var result = PreserveTrivia(declaration, d =>
+                InsertNamespaceImportsInternal(d, index, imports)
             );
             Contract.ThrowIfNull(result);
             return result;
@@ -1950,34 +1929,31 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return declaration;
             }
 
-            return this.Isolate(
-                declaration,
-                d =>
+            return this.Isolate(declaration, d =>
+            {
+                var tokens = GetModifierTokens(d);
+                GetAccessibilityAndModifiers(tokens, out _, out var modifiers, out _);
+                if (modifiers.IsFile && accessibility != Accessibility.NotApplicable)
                 {
-                    var tokens = GetModifierTokens(d);
-                    GetAccessibilityAndModifiers(tokens, out _, out var modifiers, out _);
-                    if (modifiers.IsFile && accessibility != Accessibility.NotApplicable)
-                    {
-                        // If user wants to set accessibility for a file-local declaration, we remove file.
-                        // Otherwise, code will be in error:
-                        // error CS9052: File-local type '{0}' cannot use accessibility modifiers.
-                        modifiers = modifiers.WithIsFile(false);
-                    }
-
-                    if (
-                        modifiers.IsStatic
-                        && declaration.IsKind(SyntaxKind.ConstructorDeclaration)
-                        && accessibility != Accessibility.NotApplicable
-                    )
-                    {
-                        // If user wants to add accessibility for a static constructor, we remove static modifier
-                        modifiers = modifiers.WithIsStatic(false);
-                    }
-
-                    var newTokens = Merge(tokens, AsModifierList(accessibility, modifiers));
-                    return SetModifierTokens(d, newTokens);
+                    // If user wants to set accessibility for a file-local declaration, we remove file.
+                    // Otherwise, code will be in error:
+                    // error CS9052: File-local type '{0}' cannot use accessibility modifiers.
+                    modifiers = modifiers.WithIsFile(false);
                 }
-            );
+
+                if (
+                    modifiers.IsStatic
+                    && declaration.IsKind(SyntaxKind.ConstructorDeclaration)
+                    && accessibility != Accessibility.NotApplicable
+                )
+                {
+                    // If user wants to add accessibility for a static constructor, we remove static modifier
+                    modifiers = modifiers.WithIsStatic(false);
+                }
+
+                var newTokens = Merge(tokens, AsModifierList(accessibility, modifiers));
+                return SetModifierTokens(d, newTokens);
+            });
         }
 
         private static readonly DeclarationModifiers s_fieldModifiers =
@@ -2193,36 +2169,28 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             if (modifiers != existingModifiers)
             {
-                return this.Isolate(
-                    declaration,
-                    d =>
+                return this.Isolate(declaration, d =>
+                {
+                    var tokens = GetModifierTokens(d);
+                    GetAccessibilityAndModifiers(tokens, out var accessibility, out var tmp, out _);
+                    if (accessibility != Accessibility.NotApplicable)
                     {
-                        var tokens = GetModifierTokens(d);
-                        GetAccessibilityAndModifiers(
-                            tokens,
-                            out var accessibility,
-                            out var tmp,
-                            out _
-                        );
-                        if (accessibility != Accessibility.NotApplicable)
-                        {
-                            if (
-                                modifiers.IsFile
-                                || (
-                                    modifiers.IsStatic
-                                    && declaration.IsKind(SyntaxKind.ConstructorDeclaration)
-                                )
+                        if (
+                            modifiers.IsFile
+                            || (
+                                modifiers.IsStatic
+                                && declaration.IsKind(SyntaxKind.ConstructorDeclaration)
                             )
-                            {
-                                // We remove the accessibility if the modifiers don't allow it.
-                                accessibility = Accessibility.NotApplicable;
-                            }
+                        )
+                        {
+                            // We remove the accessibility if the modifiers don't allow it.
+                            accessibility = Accessibility.NotApplicable;
                         }
-
-                        var newTokens = Merge(tokens, AsModifierList(accessibility, modifiers));
-                        return SetModifierTokens(d, newTokens);
                     }
-                );
+
+                    var newTokens = Merge(tokens, AsModifierList(accessibility, modifiers));
+                    return SetModifierTokens(d, newTokens);
+                });
             }
             else
             {
@@ -2396,9 +2364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 {
                     MethodDeclarationSyntax method => WithoutConstraints(
                         method
-                            .ReplaceNodes(
-                                method.ParameterList.Parameters,
-                                (_, p) => RemoveDefaultValue(p, removeDefaults)
+                            .ReplaceNodes(method.ParameterList.Parameters, (_, p) =>
+                                RemoveDefaultValue(p, removeDefaults)
                             )
                             .WithExplicitInterfaceSpecifier(
                                 CreateExplicitInterfaceSpecifier(explicitInterfaceImplementations)
@@ -3916,14 +3883,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             if (root.Span.Contains(declaration.Span))
             {
-                return this.Isolate(
-                    root.TrackNodes(declaration),
-                    r =>
-                        this.InsertNodesBeforeInternal(
-                            r,
-                            r.GetCurrentNode(declaration)!,
-                            newDeclarations
-                        )
+                return this.Isolate(root.TrackNodes(declaration), r =>
+                    this.InsertNodesBeforeInternal(
+                        r,
+                        r.GetCurrentNode(declaration)!,
+                        newDeclarations
+                    )
                 );
             }
             else
@@ -3979,14 +3944,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             if (root.Span.Contains(declaration.Span))
             {
-                return this.Isolate(
-                    root.TrackNodes(declaration),
-                    r =>
-                        this.InsertNodesAfterInternal(
-                            r,
-                            r.GetCurrentNode(declaration)!,
-                            newDeclarations
-                        )
+                return this.Isolate(root.TrackNodes(declaration), r =>
+                    this.InsertNodesAfterInternal(
+                        r,
+                        r.GetCurrentNode(declaration)!,
+                        newDeclarations
+                    )
                 );
             }
             else
@@ -4091,9 +4054,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (root.Span.Contains(node.Span))
             {
                 // node exists within normal span of the root (not in trivia)
-                return Isolate(
-                    root.TrackNodes(node),
-                    r => RemoveNodeInternal(r, r.GetCurrentNode(node)!, options)
+                return Isolate(root.TrackNodes(node), r =>
+                    RemoveNodeInternal(r, r.GetCurrentNode(node)!, options)
                 );
             }
             else

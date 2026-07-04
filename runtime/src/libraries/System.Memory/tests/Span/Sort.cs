@@ -12,18 +12,11 @@ namespace System.SpanTests
         [Fact]
         public static void Sort_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "comparison",
-                () => MemoryExtensions.Sort(Span<byte>.Empty, (Comparison<byte>)null)
+            AssertExtensions.Throws<ArgumentNullException>("comparison", () =>
+                MemoryExtensions.Sort(Span<byte>.Empty, (Comparison<byte>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "comparison",
-                () =>
-                    MemoryExtensions.Sort(
-                        Span<byte>.Empty,
-                        Span<byte>.Empty,
-                        (Comparison<byte>)null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("comparison", () =>
+                MemoryExtensions.Sort(Span<byte>.Empty, Span<byte>.Empty, (Comparison<byte>)null)
             );
 
             Assert.Throws<ArgumentException>(() =>

@@ -132,19 +132,16 @@ namespace Castle.Components.DictionaryAdapter
                     nameof(type)
                 );
 
-            return interfaceToMeta.GetOrAdd(
-                type,
-                t =>
+            return interfaceToMeta.GetOrAdd(type, t =>
+            {
+                if (descriptor == null && other != null)
                 {
-                    if (descriptor == null && other != null)
-                    {
-                        descriptor = other.CreateDescriptor();
-                    }
-
-                    var typeBuilder = CreateTypeBuilder(type);
-                    return CreateAdapterMeta(type, typeBuilder, descriptor);
+                    descriptor = other.CreateDescriptor();
                 }
-            );
+
+                var typeBuilder = CreateTypeBuilder(type);
+                return CreateAdapterMeta(type, typeBuilder, descriptor);
+            });
         }
 
         private object InternalGetAdapter(
@@ -516,64 +513,57 @@ namespace Castle.Components.DictionaryAdapter
                 .AddBehaviors(typeBehaviors.OfType<IDictionaryMetaInitializer>())
                 .AddBehaviors(typeBehaviors.OfType<IDictionaryInitializer>());
 
-            CollectProperties(
-                type,
-                (property, reflectedType) =>
-                {
-                    var propertyBehaviors = ExpandBehaviors(property.GetCustomAttributes(false))
-                        .ToArray();
-                    var propertyDescriptor = new PropertyDescriptor(property, propertyBehaviors)
-                        .AddBehaviors(propertyBehaviors.OfType<IDictionaryBehavior>())
-                        .AddBehaviors(
-                            interfaceBehaviors
-                                .OfType<IDictionaryBehavior>()
-                                .Where(b => b is IDictionaryKeyBuilder == false)
-                        );
-                    var expandedBehaviors = ExpandBehaviors(
-                            InterfaceAttributeUtil.GetAttributes(reflectedType, true)
-                        )
-                        .OfType<IDictionaryKeyBuilder>();
-                    propertyDescriptor = propertyDescriptor.AddBehaviors(expandedBehaviors);
-
-                    AddDefaultGetter(propertyDescriptor);
-
-                    var propertyFetch = propertyBehaviors
-                        .OfType<FetchAttribute>()
-                        .Select(b => (bool?)b.Fetch)
-                        .FirstOrDefault();
-                    propertyDescriptor.IfExists = propertyBehaviors
-                        .OfType<IfExistsAttribute>()
-                        .Any();
-                    propertyDescriptor.Fetch = propertyFetch.GetValueOrDefault(defaultFetch);
-
-                    foreach (
-                        var descriptorInitializer in propertyDescriptor.Behaviors.OfType<IPropertyDescriptorInitializer>()
-                    )
-                    {
-                        descriptorInitializer.Initialize(propertyDescriptor, propertyBehaviors);
-                    }
-
-                    initializers.AddBehaviors(
-                        propertyBehaviors.OfType<IDictionaryMetaInitializer>()
+            CollectProperties(type, (property, reflectedType) =>
+            {
+                var propertyBehaviors = ExpandBehaviors(property.GetCustomAttributes(false))
+                    .ToArray();
+                var propertyDescriptor = new PropertyDescriptor(property, propertyBehaviors)
+                    .AddBehaviors(propertyBehaviors.OfType<IDictionaryBehavior>())
+                    .AddBehaviors(
+                        interfaceBehaviors
+                            .OfType<IDictionaryBehavior>()
+                            .Where(b => b is IDictionaryKeyBuilder == false)
                     );
+                var expandedBehaviors = ExpandBehaviors(
+                        InterfaceAttributeUtil.GetAttributes(reflectedType, true)
+                    )
+                    .OfType<IDictionaryKeyBuilder>();
+                propertyDescriptor = propertyDescriptor.AddBehaviors(expandedBehaviors);
 
-                    PropertyDescriptor existingDescriptor;
-                    if (propertyMap.TryGetValue(property.Name, out existingDescriptor))
-                    {
-                        var existingProperty = existingDescriptor.Property;
-                        if (existingProperty.PropertyType == property.PropertyType)
-                        {
-                            if (property.CanRead && property.CanWrite)
-                            {
-                                propertyMap[property.Name] = propertyDescriptor;
-                            }
-                            return;
-                        }
-                    }
+                AddDefaultGetter(propertyDescriptor);
 
-                    propertyMap.Add(property.Name, propertyDescriptor);
+                var propertyFetch = propertyBehaviors
+                    .OfType<FetchAttribute>()
+                    .Select(b => (bool?)b.Fetch)
+                    .FirstOrDefault();
+                propertyDescriptor.IfExists = propertyBehaviors.OfType<IfExistsAttribute>().Any();
+                propertyDescriptor.Fetch = propertyFetch.GetValueOrDefault(defaultFetch);
+
+                foreach (
+                    var descriptorInitializer in propertyDescriptor.Behaviors.OfType<IPropertyDescriptorInitializer>()
+                )
+                {
+                    descriptorInitializer.Initialize(propertyDescriptor, propertyBehaviors);
                 }
-            );
+
+                initializers.AddBehaviors(propertyBehaviors.OfType<IDictionaryMetaInitializer>());
+
+                PropertyDescriptor existingDescriptor;
+                if (propertyMap.TryGetValue(property.Name, out existingDescriptor))
+                {
+                    var existingProperty = existingDescriptor.Property;
+                    if (existingProperty.PropertyType == property.PropertyType)
+                    {
+                        if (property.CanRead && property.CanWrite)
+                        {
+                            propertyMap[property.Name] = propertyDescriptor;
+                        }
+                        return;
+                    }
+                }
+
+                propertyMap.Add(property.Name, propertyDescriptor);
+            });
 
             return propertyMap;
         }

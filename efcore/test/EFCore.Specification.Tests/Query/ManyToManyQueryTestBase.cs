@@ -14,9 +14,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_all(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<EntityOne>().Where(e => e.TwoSkip.All(e => e.Name.Contains("B")))
+        AssertQuery(async, ss =>
+            ss.Set<EntityOne>().Where(e => e.TwoSkip.All(e => e.Name.Contains("B")))
         );
 
     [ConditionalTheory]
@@ -91,41 +90,36 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_select_many_average(bool async) =>
-        AssertAverage(
-            async,
-            ss => ss.Set<EntityTwo>().SelectMany(e => e.CompositeKeySkipShared.Select(e => e.Key1))
+        AssertAverage(async, ss =>
+            ss.Set<EntityTwo>().SelectMany(e => e.CompositeKeySkipShared.Select(e => e.Key1))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_select_many_max(bool async) =>
-        AssertMax(
-            async,
-            ss => ss.Set<EntityThree>().SelectMany(e => e.CompositeKeySkipFull.Select(e => e.Key1))
+        AssertMax(async, ss =>
+            ss.Set<EntityThree>().SelectMany(e => e.CompositeKeySkipFull.Select(e => e.Key1))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_select_many_min(bool async) =>
-        AssertMin(
-            async,
-            ss => ss.Set<EntityThree>().SelectMany(e => e.RootSkipShared.Select(e => e.Id))
+        AssertMin(async, ss =>
+            ss.Set<EntityThree>().SelectMany(e => e.RootSkipShared.Select(e => e.Id))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_select_many_sum(bool async) =>
-        AssertSum(
-            async,
-            ss => ss.Set<EntityRoot>().SelectMany(e => e.CompositeKeySkipShared.Select(e => e.Key1))
+        AssertSum(async, ss =>
+            ss.Set<EntityRoot>().SelectMany(e => e.CompositeKeySkipShared.Select(e => e.Key1))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_select_subquery_average(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss => ss.Set<EntityLeaf>().Select(e => e.CompositeKeySkipFull.Average(e => e.Key1))
+        AssertQueryScalar(async, ss =>
+            ss.Set<EntityLeaf>().Select(e => e.CompositeKeySkipFull.Average(e => e.Key1))
         );
 
     [ConditionalTheory]
@@ -136,57 +130,46 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_select_subquery_min(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss => ss.Set<EntityThree>().Select(e => e.OneSkipPayloadFull.Min(e => e.Id))
+        AssertQueryScalar(async, ss =>
+            ss.Set<EntityThree>().Select(e => e.OneSkipPayloadFull.Min(e => e.Id))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_select_subquery_sum(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss => ss.Set<EntityTwo>().Select(e => e.OneSkipShared.Sum(e => e.Id))
+        AssertQueryScalar(async, ss =>
+            ss.Set<EntityTwo>().Select(e => e.OneSkipShared.Sum(e => e.Id))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_order_by_first_or_default(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<EntityThree>()
-                    .Select(e => e.OneSkipPayloadFullShared.OrderBy(i => i.Id).FirstOrDefault())
+        AssertQuery(async, ss =>
+            ss.Set<EntityThree>()
+                .Select(e => e.OneSkipPayloadFullShared.OrderBy(i => i.Id).FirstOrDefault())
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_order_by_single_or_default(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<EntityOne>()
-                    .Select(e =>
-                        e.SelfSkipPayloadRight.OrderBy(i => i.Id).Take(1).SingleOrDefault()
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<EntityOne>()
+                .Select(e => e.SelfSkipPayloadRight.OrderBy(i => i.Id).Take(1).SingleOrDefault())
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_order_by_last_or_default(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<EntityBranch>().Select(e => e.OneSkip.OrderBy(i => i.Id).LastOrDefault())
+        AssertQuery(async, ss =>
+            ss.Set<EntityBranch>().Select(e => e.OneSkip.OrderBy(i => i.Id).LastOrDefault())
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_order_by_reverse_first_or_default(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<EntityThree>()
-                    .Select(e => e.TwoSkipFull.OrderBy(i => i.Id).Reverse().FirstOrDefault())
+        AssertQuery(async, ss =>
+            ss.Set<EntityThree>()
+                .Select(e => e.TwoSkipFull.OrderBy(i => i.Id).Reverse().FirstOrDefault())
         );
 
     [ConditionalTheory]
@@ -274,69 +257,64 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation(bool async) =>
-        AssertQuery(
-            async,
-            ss => from r in ss.Set<EntityRoot>() from t in r.ThreeSkipShared select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<EntityRoot>()
+            from t in r.ThreeSkipShared
+            select t
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_where(bool async) =>
-        AssertQuery(
-            async,
-            ss => from r in ss.Set<EntityOne>() from t in r.TwoSkip.DefaultIfEmpty() select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<EntityOne>()
+            from t in r.TwoSkip.DefaultIfEmpty()
+            select t
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_order_by_skip(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from r in ss.Set<EntityOne>()
-                from t in r.ThreeSkipPayloadFull.OrderBy(e => e.Id).Skip(2)
-                select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<EntityOne>()
+            from t in r.ThreeSkipPayloadFull.OrderBy(e => e.Id).Skip(2)
+            select t
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_order_by_take(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from r in ss.Set<EntityOne>()
-                from t in r.TwoSkipShared.OrderBy(e => e.Id).Take(2)
-                select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<EntityOne>()
+            from t in r.TwoSkipShared.OrderBy(e => e.Id).Take(2)
+            select t
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_order_by_skip_take(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from r in ss.Set<EntityOne>()
-                from t in r.ThreeSkipPayloadFullShared.OrderBy(e => e.Id).Skip(2).Take(3)
-                select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<EntityOne>()
+            from t in r.ThreeSkipPayloadFullShared.OrderBy(e => e.Id).Skip(2).Take(3)
+            select t
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_of_type(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from r in ss.Set<EntityThree>()
-                from t in r.RootSkipShared.OfType<EntityBranch>()
-                select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<EntityThree>()
+            from t in r.RootSkipShared.OfType<EntityBranch>()
+            select t
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_cast(bool async) =>
-        AssertQuery(
-            async,
-            ss => from r in ss.Set<EntityOne>() from t in r.BranchSkip.Cast<EntityRoot>() select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<EntityOne>()
+            from t in r.BranchSkip.Cast<EntityRoot>()
+            select t
         );
 
     [ConditionalTheory]
@@ -843,14 +821,12 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                 .Replace("\n", ""),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<EntityTwo>()
-                                .Include(e => e.OneSkip.Where(i => i.Id < 10))
-                                    .ThenInclude(e => e.BranchSkip)
-                                .Include(e => e.OneSkip.Where(i => i.Id < 20))
-                                    .ThenInclude(e => e.ThreeSkipPayloadFull)
+                    AssertQuery(async, ss =>
+                        ss.Set<EntityTwo>()
+                            .Include(e => e.OneSkip.Where(i => i.Id < 10))
+                                .ThenInclude(e => e.BranchSkip)
+                            .Include(e => e.OneSkip.Where(i => i.Id < 20))
+                                .ThenInclude(e => e.ThreeSkipPayloadFull)
                     )
                 )
             )
@@ -871,16 +847,14 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                 .Replace("\n", ""),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<EntityCompositeKey>()
-                                .Include(e => e.TwoSkipShared)
-                                    .ThenInclude(e => e.OneSkip.Where(i => i.Id < 10))
-                                        .ThenInclude(e => e.BranchSkip)
-                                .Include(e => e.TwoSkipShared)
-                                    .ThenInclude(e => e.OneSkip.Where(i => i.Id < 20))
-                                        .ThenInclude(e => e.ThreeSkipPayloadFull)
+                    AssertQuery(async, ss =>
+                        ss.Set<EntityCompositeKey>()
+                            .Include(e => e.TwoSkipShared)
+                                .ThenInclude(e => e.OneSkip.Where(i => i.Id < 10))
+                                    .ThenInclude(e => e.BranchSkip)
+                            .Include(e => e.TwoSkipShared)
+                                .ThenInclude(e => e.OneSkip.Where(i => i.Id < 20))
+                                    .ThenInclude(e => e.ThreeSkipPayloadFull)
                     )
                 )
             )
@@ -1042,15 +1016,13 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                 .Replace("\n", ""),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<EntityThree>()
-                                .Include(e => e.OneSkipPayloadFull)
-                                    .ThenInclude(e => e.Collection.Where(i => i.Id < 20))
-                                .Include(e => e.JoinOnePayloadFull)
-                                    .ThenInclude(e => e.One)
-                                        .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
+                    AssertQuery(async, ss =>
+                        ss.Set<EntityThree>()
+                            .Include(e => e.OneSkipPayloadFull)
+                                .ThenInclude(e => e.Collection.Where(i => i.Id < 20))
+                            .Include(e => e.JoinOnePayloadFull)
+                                .ThenInclude(e => e.One)
+                                    .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
                     )
                 )
             )
@@ -1061,12 +1033,10 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_where_non_equality(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from r in ss.Set<EntityOne>()
-                from t in r.TwoSkip.Where(x => x.Id != r.Id).DefaultIfEmpty()
-                select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<EntityOne>()
+            from t in r.TwoSkip.Where(x => x.Id != r.Id).DefaultIfEmpty()
+            select t
         );
 
     [ConditionalTheory]
@@ -1085,25 +1055,22 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GetType_in_hierarchy_in_base_type(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<EntityRoot>().Where(e => e.GetType() == typeof(EntityRoot))
+        AssertQuery(async, ss =>
+            ss.Set<EntityRoot>().Where(e => e.GetType() == typeof(EntityRoot))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GetType_in_hierarchy_in_intermediate_type(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<EntityRoot>().Where(e => e.GetType() == typeof(EntityBranch))
+        AssertQuery(async, ss =>
+            ss.Set<EntityRoot>().Where(e => e.GetType() == typeof(EntityBranch))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GetType_in_hierarchy_in_leaf_type(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<EntityRoot>().Where(e => e.GetType() == typeof(EntityLeaf))
+        AssertQuery(async, ss =>
+            ss.Set<EntityRoot>().Where(e => e.GetType() == typeof(EntityLeaf))
         );
 
     [ConditionalTheory]
@@ -1118,11 +1085,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_all_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityOne>()
-                    .Where(e => e.TwoSkip.All(e => e.Name.Contains("B")))
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityOne>().Where(e => e.TwoSkip.All(e => e.Name.Contains("B")))
         );
 
     [ConditionalTheory]
@@ -1156,9 +1120,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_count_without_predicate_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<UnidirectionalEntityOne>().Where(e => e.SelfSkipPayloadLeft.Count > 0)
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityOne>().Where(e => e.SelfSkipPayloadLeft.Count > 0)
         );
 
     [ConditionalTheory]
@@ -1176,11 +1139,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_navigation_select_subquery_average_unidirectional(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityLeaf>()
-                    .Select(e => e.CompositeKeySkipFull.Average(e => e.Key1))
+        AssertQueryScalar(async, ss =>
+            ss.Set<UnidirectionalEntityLeaf>()
+                .Select(e => e.CompositeKeySkipFull.Average(e => e.Key1))
         );
 
     [ConditionalTheory]
@@ -1188,11 +1149,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     public virtual Task Skip_navigation_order_by_reverse_first_or_default_unidirectional(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityThree>()
-                    .Select(e => e.TwoSkipFull.OrderBy(i => i.Id).Reverse().FirstOrDefault())
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityThree>()
+                .Select(e => e.TwoSkipFull.OrderBy(i => i.Id).Reverse().FirstOrDefault())
         );
 
     [ConditionalTheory]
@@ -1267,31 +1226,28 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss => from r in ss.Set<UnidirectionalEntityRoot>() from t in r.ThreeSkipShared select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<UnidirectionalEntityRoot>()
+            from t in r.ThreeSkipShared
+            select t
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_where_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from r in ss.Set<UnidirectionalEntityOne>()
-                from t in r.TwoSkip.DefaultIfEmpty()
-                select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<UnidirectionalEntityOne>()
+            from t in r.TwoSkip.DefaultIfEmpty()
+            select t
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_order_by_take_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from r in ss.Set<UnidirectionalEntityOne>()
-                from t in r.TwoSkipShared.OrderBy(e => e.Id).Take(2)
-                select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<UnidirectionalEntityOne>()
+            from t in r.TwoSkipShared.OrderBy(e => e.Id).Take(2)
+            select t
         );
 
     [ConditionalTheory]
@@ -1299,23 +1255,19 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     public virtual Task Select_many_over_skip_navigation_order_by_skip_take_unidirectional(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                from r in ss.Set<UnidirectionalEntityOne>()
-                from t in r.ThreeSkipPayloadFullShared.OrderBy(e => e.Id).Skip(2).Take(3)
-                select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<UnidirectionalEntityOne>()
+            from t in r.ThreeSkipPayloadFullShared.OrderBy(e => e.Id).Skip(2).Take(3)
+            select t
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_many_over_skip_navigation_cast_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from r in ss.Set<UnidirectionalEntityOne>()
-                from t in r.BranchSkip.Cast<UnidirectionalEntityRoot>()
-                select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<UnidirectionalEntityOne>()
+            from t in r.BranchSkip.Cast<UnidirectionalEntityRoot>()
+            select t
         );
 
     [ConditionalTheory]
@@ -1348,9 +1300,8 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Include_skip_navigation_then_reference_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<UnidirectionalEntityTwo>().Include("UnidirectionalEntityOne1.Reference")
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityTwo>().Include("UnidirectionalEntityOne1.Reference")
         );
 
     [ConditionalTheory]
@@ -1358,11 +1309,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     public virtual Task Include_skip_navigation_then_include_skip_navigation_unidirectional(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityCompositeKey>()
-                    .Include("UnidirectionalEntityLeaf.UnidirectionalEntityOne")
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityCompositeKey>()
+                .Include("UnidirectionalEntityLeaf.UnidirectionalEntityOne")
         );
 
     [ConditionalTheory]
@@ -1370,23 +1319,19 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     public virtual Task Include_skip_navigation_then_include_reference_and_skip_navigation_unidirectional(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityThree>()
-                    .Include("UnidirectionalEntityOne.Reference")
-                    .Include("UnidirectionalEntityOne.UnidirectionalEntityOne")
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityThree>()
+                .Include("UnidirectionalEntityOne.Reference")
+                .Include("UnidirectionalEntityOne.UnidirectionalEntityOne")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Include_skip_navigation_and_reference_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityTwo>()
-                    .Include("UnidirectionalEntityOne")
-                    .Include(e => e.Reference)
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityTwo>()
+                .Include("UnidirectionalEntityOne")
+                .Include(e => e.Reference)
         );
 
     [ConditionalTheory]
@@ -1394,11 +1339,9 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     public virtual Task Include_skip_navigation_then_include_inverse_works_for_tracking_query_unidirectional(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityThree>()
-                    .Include("UnidirectionalEntityOne1.ThreeSkipPayloadFullShared")
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityThree>()
+                .Include("UnidirectionalEntityOne1.ThreeSkipPayloadFullShared")
         );
 
     [ConditionalTheory]
@@ -1529,14 +1472,12 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Filter_include_on_skip_navigation_combined_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<EntityTwo>()
-                    .Include(e => e.OneSkip.Where(i => i.Id < 10))
-                        .ThenInclude(e => e.Reference)
-                    .Include(e => e.OneSkip)
-                        .ThenInclude(e => e.Collection)
+        AssertQuery(async, ss =>
+            ss.Set<EntityTwo>()
+                .Include(e => e.OneSkip.Where(i => i.Id < 10))
+                    .ThenInclude(e => e.Reference)
+                .Include(e => e.OneSkip)
+                    .ThenInclude(e => e.Collection)
         );
 
     [ConditionalTheory]
@@ -1552,35 +1493,33 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                 .Replace("\n", ""),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<UnidirectionalEntityTwo>()
-                                .Include(e =>
-                                    EF.Property<IEnumerable<UnidirectionalEntityOne>>(
-                                            e,
-                                            "UnidirectionalEntityOne"
-                                        )
-                                        .Where(i => i.Id < 10)
-                                )
-                                    .ThenInclude(e => e.BranchSkip)
-                                .Include(e =>
-                                    EF.Property<IEnumerable<UnidirectionalEntityOne>>(
-                                            e,
-                                            "UnidirectionalEntityOne"
-                                        )
-                                        .Where(i => i.Id < 20)
-                                )
-                                .ThenInclude<
-                                    UnidirectionalEntityTwo,
-                                    UnidirectionalEntityOne,
-                                    ICollection<UnidirectionalEntityThree>
-                                >(e =>
-                                    EF.Property<ICollection<UnidirectionalEntityThree>>(
+                    AssertQuery(async, ss =>
+                        ss.Set<UnidirectionalEntityTwo>()
+                            .Include(e =>
+                                EF.Property<IEnumerable<UnidirectionalEntityOne>>(
                                         e,
-                                        "UnidirectionalEntityThree"
+                                        "UnidirectionalEntityOne"
                                     )
+                                    .Where(i => i.Id < 10)
+                            )
+                                .ThenInclude(e => e.BranchSkip)
+                            .Include(e =>
+                                EF.Property<IEnumerable<UnidirectionalEntityOne>>(
+                                        e,
+                                        "UnidirectionalEntityOne"
+                                    )
+                                    .Where(i => i.Id < 20)
+                            )
+                            .ThenInclude<
+                                UnidirectionalEntityTwo,
+                                UnidirectionalEntityOne,
+                                ICollection<UnidirectionalEntityThree>
+                            >(e =>
+                                EF.Property<ICollection<UnidirectionalEntityThree>>(
+                                    e,
+                                    "UnidirectionalEntityThree"
                                 )
+                            )
                     )
                 )
             )
@@ -1593,14 +1532,12 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     public virtual Task Includes_accessed_via_different_path_are_merged_unidirectional(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityOne>()
-                    .Include("ThreeSkipPayloadFull.CollectionInverse")
-                    .Include(e => e.JoinThreePayloadFull)
-                        .ThenInclude(e => e.Three)
-                            .ThenInclude(e => e.ReferenceInverse)
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityOne>()
+                .Include("ThreeSkipPayloadFull.CollectionInverse")
+                .Include(e => e.JoinThreePayloadFull)
+                    .ThenInclude(e => e.Three)
+                        .ThenInclude(e => e.ReferenceInverse)
         );
 
     [ConditionalTheory]
@@ -1608,12 +1545,10 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     public virtual Task Select_many_over_skip_navigation_where_non_equality_unidirectional(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                from r in ss.Set<UnidirectionalEntityOne>()
-                from t in r.TwoSkip.Where(x => x.Id != r.Id).DefaultIfEmpty()
-                select t
+        AssertQuery(async, ss =>
+            from r in ss.Set<UnidirectionalEntityOne>()
+            from t in r.TwoSkip.Where(x => x.Id != r.Id).DefaultIfEmpty()
+            select t
         );
 
     [ConditionalTheory]
@@ -1634,31 +1569,25 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GetType_in_hierarchy_in_base_type_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityRoot>()
-                    .Where(e => e.GetType() == typeof(UnidirectionalEntityRoot))
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityRoot>()
+                .Where(e => e.GetType() == typeof(UnidirectionalEntityRoot))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GetType_in_hierarchy_in_intermediate_type_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityRoot>()
-                    .Where(e => e.GetType() == typeof(UnidirectionalEntityBranch))
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityRoot>()
+                .Where(e => e.GetType() == typeof(UnidirectionalEntityBranch))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GetType_in_hierarchy_in_leaf_type_unidirectional(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<UnidirectionalEntityRoot>()
-                    .Where(e => e.GetType() == typeof(UnidirectionalEntityLeaf))
+        AssertQuery(async, ss =>
+            ss.Set<UnidirectionalEntityRoot>()
+                .Where(e => e.GetType() == typeof(UnidirectionalEntityLeaf))
         );
 
     [ConditionalTheory]

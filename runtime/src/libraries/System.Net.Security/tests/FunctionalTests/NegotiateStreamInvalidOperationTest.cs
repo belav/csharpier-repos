@@ -93,9 +93,8 @@ namespace System.Net.Security.Tests
                             );
 
                             IAsyncResult result = new MyAsyncResult();
-                            AssertExtensions.Throws<ArgumentException>(
-                                nameof(asyncResult),
-                                () => authStream.EndWrite(result)
+                            AssertExtensions.Throws<ArgumentException>(nameof(asyncResult), () =>
+                                authStream.EndWrite(result)
                             );
                         },
                         s_sampleMsg,
@@ -114,9 +113,8 @@ namespace System.Net.Security.Tests
                             );
 
                             IAsyncResult result = new MyAsyncResult();
-                            AssertExtensions.Throws<ArgumentException>(
-                                nameof(asyncResult),
-                                () => authStream.EndRead(result)
+                            AssertExtensions.Throws<ArgumentException>(nameof(asyncResult), () =>
+                                authStream.EndRead(result)
                             );
                         },
                         recvBuf,
@@ -137,9 +135,8 @@ namespace System.Net.Security.Tests
             using (var server = new NegotiateStream(stream2))
             {
                 // If ExtendedProtection is on, either CustomChannelBinding or CustomServiceNames must be set.
-                AssertExtensions.Throws<ArgumentException>(
-                    nameof(policy),
-                    () => server.AuthenticateAsServer(policy)
+                AssertExtensions.Throws<ArgumentException>(nameof(policy), () =>
+                    server.AuthenticateAsServer(policy)
                 );
             }
         }
@@ -242,9 +239,8 @@ namespace System.Net.Security.Tests
             using (var client = new NegotiateStream(stream1))
             using (var server = new NegotiateStream(stream2))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "credential",
-                    () => client.AuthenticateAsClient(null, TargetName)
+                AssertExtensions.Throws<ArgumentNullException>("credential", () =>
+                    client.AuthenticateAsClient(null, TargetName)
                 );
             }
         }
@@ -256,10 +252,8 @@ namespace System.Net.Security.Tests
             using (var client = new NegotiateStream(stream1))
             using (var server = new NegotiateStream(stream2))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "servicePrincipalName",
-                    () =>
-                        client.AuthenticateAsClient(CredentialCache.DefaultNetworkCredentials, null)
+                AssertExtensions.Throws<ArgumentNullException>("servicePrincipalName", () =>
+                    client.AuthenticateAsClient(CredentialCache.DefaultNetworkCredentials, null)
                 );
             }
         }
@@ -315,9 +309,8 @@ namespace System.Net.Security.Tests
                             );
 
                             IAsyncResult result = new MyAsyncResult();
-                            AssertExtensions.Throws<ArgumentException>(
-                                nameof(asyncResult),
-                                () => authStream.EndAuthenticateAsClient(result)
+                            AssertExtensions.Throws<ArgumentException>(nameof(asyncResult), () =>
+                                authStream.EndAuthenticateAsClient(result)
                             );
 
                             authStream.EndAuthenticateAsClient(asyncResult);
@@ -337,9 +330,8 @@ namespace System.Net.Security.Tests
                             );
 
                             IAsyncResult result = new MyAsyncResult();
-                            AssertExtensions.Throws<ArgumentException>(
-                                nameof(asyncResult),
-                                () => authStream.EndAuthenticateAsServer(result)
+                            AssertExtensions.Throws<ArgumentException>(nameof(asyncResult), () =>
+                                authStream.EndAuthenticateAsServer(result)
                             );
 
                             authStream.EndAuthenticateAsServer(asyncResult);
@@ -372,51 +364,43 @@ namespace System.Net.Security.Tests
                 );
 
                 // Null buffer.
-                AssertExtensions.Throws<ArgumentNullException>(
-                    nameof(buffer),
-                    () => client.Write(null, offset, count)
+                AssertExtensions.Throws<ArgumentNullException>(nameof(buffer), () =>
+                    client.Write(null, offset, count)
                 );
 
                 // Negative offset.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    nameof(offset),
-                    () => client.Write(buffer, -1, count)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(offset), () =>
+                    client.Write(buffer, -1, count)
                 );
 
                 // Negative count.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    nameof(count),
-                    () => client.Write(buffer, offset, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(count), () =>
+                    client.Write(buffer, offset, -1)
                 );
 
                 // Invalid offset and count combination.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    nameof(count),
-                    () => client.Write(buffer, offset, count + count)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(count), () =>
+                    client.Write(buffer, offset, count + count)
                 );
 
                 // Null buffer.
-                AssertExtensions.Throws<ArgumentNullException>(
-                    nameof(buffer),
-                    () => server.Read(null, offset, count)
+                AssertExtensions.Throws<ArgumentNullException>(nameof(buffer), () =>
+                    server.Read(null, offset, count)
                 );
 
                 // Negative offset.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    nameof(offset),
-                    () => server.Read(buffer, -1, count)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(offset), () =>
+                    server.Read(buffer, -1, count)
                 );
 
                 // Negative count.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    nameof(count),
-                    () => server.Read(buffer, offset, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(count), () =>
+                    server.Read(buffer, offset, -1)
                 );
 
                 // Invalid offset and count combination.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    nameof(count),
-                    () => server.Read(buffer, offset, count + count)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(count), () =>
+                    server.Read(buffer, offset, count + count)
                 );
             }
         }

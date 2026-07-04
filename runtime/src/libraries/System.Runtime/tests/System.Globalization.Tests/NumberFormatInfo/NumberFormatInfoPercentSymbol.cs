@@ -36,10 +36,8 @@ namespace System.Globalization.Tests
         public void PercentSymbol_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "PercentSymbol",
-                () => format.PercentSymbol = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "PercentSymbol", () =>
+                format.PercentSymbol = null
             );
         }
 

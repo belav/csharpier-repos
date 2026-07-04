@@ -48,17 +48,14 @@ namespace System.Tests
         [Fact]
         public static void Ctor_InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "platform",
-                () => new OperatingSystem((PlatformID)(-1), new Version(1, 2))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("platform", () =>
+                new OperatingSystem((PlatformID)(-1), new Version(1, 2))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "platform",
-                () => new OperatingSystem((PlatformID)42, new Version(1, 2))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("platform", () =>
+                new OperatingSystem((PlatformID)42, new Version(1, 2))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "version",
-                () => new OperatingSystem(PlatformID.Unix, null)
+            AssertExtensions.Throws<ArgumentNullException>("version", () =>
+                new OperatingSystem(PlatformID.Unix, null)
             );
         }
 
@@ -76,18 +73,16 @@ namespace System.Tests
         [Fact]
         public static void IsOSPlatform_InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "platform",
-                () => OperatingSystem.IsOSPlatform(null)
+            AssertExtensions.Throws<ArgumentNullException>("platform", () =>
+                OperatingSystem.IsOSPlatform(null)
             );
         }
 
         [Fact]
         public static void IsOSPlatformVersionAtLeast_InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "platform",
-                () => OperatingSystem.IsOSPlatformVersionAtLeast(null, 1)
+            AssertExtensions.Throws<ArgumentNullException>("platform", () =>
+                OperatingSystem.IsOSPlatformVersionAtLeast(null, 1)
             );
         }
 
@@ -150,25 +145,17 @@ namespace System.Tests
 
             Assert.True(OperatingSystem.IsOSPlatform("OSX"));
 
-            AssertVersionChecks(
-                true,
-                (major, minor, build, revision) =>
-                    OperatingSystem.IsOSPlatformVersionAtLeast("OSX", major, minor, build, revision)
+            AssertVersionChecks(true, (major, minor, build, revision) =>
+                OperatingSystem.IsOSPlatformVersionAtLeast("OSX", major, minor, build, revision)
             );
-            AssertVersionChecks(
-                true,
-                (major, minor, build, revision) =>
-                    OperatingSystem.IsOSPlatformVersionAtLeast("osx", major, minor, build, revision)
+            AssertVersionChecks(true, (major, minor, build, revision) =>
+                OperatingSystem.IsOSPlatformVersionAtLeast("osx", major, minor, build, revision)
             );
-            AssertVersionChecks(
-                true,
-                (major, minor, build) =>
-                    OperatingSystem.IsOSPlatformVersionAtLeast("OSX", major, minor, build)
+            AssertVersionChecks(true, (major, minor, build) =>
+                OperatingSystem.IsOSPlatformVersionAtLeast("OSX", major, minor, build)
             );
-            AssertVersionChecks(
-                true,
-                (major, minor, build) =>
-                    OperatingSystem.IsOSPlatformVersionAtLeast("osx", major, minor, build)
+            AssertVersionChecks(true, (major, minor, build) =>
+                OperatingSystem.IsOSPlatformVersionAtLeast("osx", major, minor, build)
             );
         }
 
@@ -186,15 +173,11 @@ namespace System.Tests
             Assert.True(OperatingSystem.IsOSPlatform("IOS"));
             Assert.True(OperatingSystem.IsIOS());
 
-            AssertVersionChecks(
-                true,
-                (major, minor, build, revision) =>
-                    OperatingSystem.IsOSPlatformVersionAtLeast("IOS", major, minor, build, revision)
+            AssertVersionChecks(true, (major, minor, build, revision) =>
+                OperatingSystem.IsOSPlatformVersionAtLeast("IOS", major, minor, build, revision)
             );
-            AssertVersionChecks(
-                true,
-                (major, minor, build) =>
-                    OperatingSystem.IsOSPlatformVersionAtLeast("IOS", major, minor, build)
+            AssertVersionChecks(true, (major, minor, build) =>
+                OperatingSystem.IsOSPlatformVersionAtLeast("IOS", major, minor, build)
             );
         }
 
@@ -292,38 +275,32 @@ namespace System.Tests
                     isCurrentOS = true;
                 }
 
-                AssertVersionChecks(
-                    isCurrentOS,
-                    (major, minor, build, revision) =>
-                        OperatingSystem.IsOSPlatformVersionAtLeast(
-                            platformName,
-                            major,
-                            minor,
-                            build,
-                            revision
-                        )
+                AssertVersionChecks(isCurrentOS, (major, minor, build, revision) =>
+                    OperatingSystem.IsOSPlatformVersionAtLeast(
+                        platformName,
+                        major,
+                        minor,
+                        build,
+                        revision
+                    )
                 );
-                AssertVersionChecks(
-                    isCurrentOS,
-                    (major, minor, build, revision) =>
-                        OperatingSystem.IsOSPlatformVersionAtLeast(
-                            platformName.ToLower(),
-                            major,
-                            minor,
-                            build,
-                            revision
-                        )
+                AssertVersionChecks(isCurrentOS, (major, minor, build, revision) =>
+                    OperatingSystem.IsOSPlatformVersionAtLeast(
+                        platformName.ToLower(),
+                        major,
+                        minor,
+                        build,
+                        revision
+                    )
                 );
-                AssertVersionChecks(
-                    isCurrentOS,
-                    (major, minor, build, revision) =>
-                        OperatingSystem.IsOSPlatformVersionAtLeast(
-                            platformName.ToUpper(),
-                            major,
-                            minor,
-                            build,
-                            revision
-                        )
+                AssertVersionChecks(isCurrentOS, (major, minor, build, revision) =>
+                    OperatingSystem.IsOSPlatformVersionAtLeast(
+                        platformName.ToUpper(),
+                        major,
+                        minor,
+                        build,
+                        revision
+                    )
                 );
             }
 

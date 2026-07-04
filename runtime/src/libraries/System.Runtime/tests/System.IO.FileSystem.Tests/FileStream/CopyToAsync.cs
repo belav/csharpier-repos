@@ -268,10 +268,8 @@ namespace System.IO.Tests
 
             bool readAsyncInvoked = false;
             using (
-                var fs = new FileStreamThatOverridesReadAsync(
-                    srcPath,
-                    useAsync,
-                    () => readAsyncInvoked = true
+                var fs = new FileStreamThatOverridesReadAsync(srcPath, useAsync, () =>
+                    readAsyncInvoked = true
                 )
             )
             {

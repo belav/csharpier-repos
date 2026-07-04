@@ -860,9 +860,8 @@ namespace System.Tests
                 Attribute.GetCustomAttribute(element, attributeType)
             );
             attributeType = typeof(myClass);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Attribute.GetCustomAttribute(element, attributeType)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Attribute.GetCustomAttribute(element, attributeType)
             );
             attributeType = typeof(Attribute);
             Assert.Throws<AmbiguousMatchException>(() =>
@@ -914,9 +913,8 @@ namespace System.Tests
                 Attribute.GetCustomAttribute(element, attributeType, false)
             );
             attributeType = typeof(myClass);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Attribute.GetCustomAttribute(element, attributeType, true)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Attribute.GetCustomAttribute(element, attributeType, true)
             );
             attributeType = typeof(Attribute);
             Assert.Throws<AmbiguousMatchException>(() =>
@@ -961,9 +959,8 @@ namespace System.Tests
                 (ObsoleteAttribute)Attribute.GetCustomAttribute(element, attributeType)
             );
             attributeType = typeof(object);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Attribute.GetCustomAttribute(element, attributeType)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Attribute.GetCustomAttribute(element, attributeType)
             );
 
             Assert.Throws<AmbiguousMatchException>(() =>
@@ -1011,9 +1008,8 @@ namespace System.Tests
                 (ObsoleteAttribute)Attribute.GetCustomAttribute(element, attributeType, false)
             );
             attributeType = typeof(object);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Attribute.GetCustomAttribute(element, attributeType, false)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Attribute.GetCustomAttribute(element, attributeType, false)
             );
 
             Assert.Throws<AmbiguousMatchException>(() =>
@@ -1061,10 +1057,8 @@ namespace System.Tests
                 (DebuggableAttribute)Attribute.GetCustomAttribute(clsType.Module, attributeType)
             );
             attributeType = typeof(object);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    (DebuggableAttribute)Attribute.GetCustomAttribute(clsType.Module, attributeType)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                (DebuggableAttribute)Attribute.GetCustomAttribute(clsType.Module, attributeType)
             );
         }
 
@@ -1105,11 +1099,9 @@ namespace System.Tests
                     Attribute.GetCustomAttribute(clsType.Module, attributeType, false)
             );
             attributeType = typeof(object);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    (DebuggableAttribute)
-                        Attribute.GetCustomAttribute(clsType.Module, attributeType, false)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                (DebuggableAttribute)
+                    Attribute.GetCustomAttribute(clsType.Module, attributeType, false)
             );
         }
 
@@ -1152,11 +1144,8 @@ namespace System.Tests
                 (ArgumentUsageAttribute)Attribute.GetCustomAttribute(paramInfos[0], attributeType)
             );
             attributeType = typeof(object);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    (ArgumentUsageAttribute)
-                        Attribute.GetCustomAttribute(paramInfos[0], attributeType)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                (ArgumentUsageAttribute)Attribute.GetCustomAttribute(paramInfos[0], attributeType)
             );
         }
 
@@ -1210,11 +1199,9 @@ namespace System.Tests
                     Attribute.GetCustomAttribute(paramInfos[0], attributeType, false)
             );
             attributeType = typeof(object);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    (ArgumentUsageAttribute)
-                        Attribute.GetCustomAttribute(paramInfos[0], attributeType, false)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                (ArgumentUsageAttribute)
+                    Attribute.GetCustomAttribute(paramInfos[0], attributeType, false)
             );
         }
     }

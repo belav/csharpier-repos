@@ -20,9 +20,8 @@ namespace System.Xml.XmlDocumentTests
             XmlDocument doc = CreateDocumentWithElement();
             XmlAttribute anotherDocumentAttr = new XmlDocument().CreateAttribute("attr");
             XmlAttributeCollection target = doc.DocumentElement.Attributes;
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => target.Append(anotherDocumentAttr)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                target.Append(anotherDocumentAttr)
             );
         }
 

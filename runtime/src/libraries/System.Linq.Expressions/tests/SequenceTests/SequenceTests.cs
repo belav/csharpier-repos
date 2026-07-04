@@ -41,9 +41,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo mi1 = typeof(Expression_Tests).GetMethod("Add");
             ConstantExpression ce1 = Expression.Constant(4, typeof(int));
 
-            AssertExtensions.Throws<ArgumentException>(
-                "addMethod",
-                () => Expression.ElementInit(mi1, new Expression[] { ce1 })
+            AssertExtensions.Throws<ArgumentException>("addMethod", () =>
+                Expression.ElementInit(mi1, new Expression[] { ce1 })
             );
         }
 
@@ -203,9 +202,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ConstantNullWithValueTypeIsInvalid()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Constant(null, typeof(int))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Constant(null, typeof(int))
             );
         }
 
@@ -591,41 +589,38 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void TestGetFuncTypeWithNullFails()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "typeArgs",
-                () => Expression.GetFuncType(null)
+            AssertExtensions.Throws<ArgumentNullException>("typeArgs", () =>
+                Expression.GetFuncType(null)
             );
         }
 
         [Fact]
         public static void TestGetFuncTypeWithTooManyArgsFails()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "typeArgs",
-                () =>
-                    Expression.GetFuncType(
-                        new Type[]
-                        {
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                            typeof(int),
-                        }
-                    )
+            AssertExtensions.Throws<ArgumentException>("typeArgs", () =>
+                Expression.GetFuncType(
+                    new Type[]
+                    {
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                    }
+                )
             );
         }
 
@@ -1262,9 +1257,8 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("lhs", f2().Value.Name);
 
             ConstantExpression constant = Expression.Constant(1.0, typeof(double));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Lambda<Func<double?>>(constant, null)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Lambda<Func<double?>>(constant, null)
             );
         }
 
@@ -2532,9 +2526,8 @@ namespace System.Linq.Expressions.Tests
                 ),
                 new Expression[] { }
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.Invoke(call, null)
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.Invoke(call, null)
             );
         }
 
@@ -2554,9 +2547,8 @@ namespace System.Linq.Expressions.Tests
                 ),
                 new Expression[] { }
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.Invoke(call, null)
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.Invoke(call, null)
             );
         }
 

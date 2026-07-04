@@ -180,180 +180,90 @@ unsafe class Program
             );
         }
 
-        Check(
-            "Sse",
-            ExpectedSse,
-            &SseIsSupported,
-            Sse.IsSupported,
-            () =>
-                Sse.Subtract(Vector128<float>.Zero, Vector128<float>.Zero)
-                    .Equals(Vector128<float>.Zero)
+        Check("Sse", ExpectedSse, &SseIsSupported, Sse.IsSupported, () =>
+            Sse.Subtract(Vector128<float>.Zero, Vector128<float>.Zero).Equals(Vector128<float>.Zero)
         );
-        Check(
-            "Sse.X64",
-            ExpectedSse,
-            &SseX64IsSupported,
-            Sse.X64.IsSupported,
-            () => Sse.X64.ConvertToInt64WithTruncation(Vector128<float>.Zero) == 0
+        Check("Sse.X64", ExpectedSse, &SseX64IsSupported, Sse.X64.IsSupported, () =>
+            Sse.X64.ConvertToInt64WithTruncation(Vector128<float>.Zero) == 0
         );
 
-        Check(
-            "Sse2",
-            ExpectedSse2,
-            &Sse2IsSupported,
-            Sse2.IsSupported,
-            () => Sse2.Extract(Vector128<ushort>.Zero, 0) == 0
+        Check("Sse2", ExpectedSse2, &Sse2IsSupported, Sse2.IsSupported, () =>
+            Sse2.Extract(Vector128<ushort>.Zero, 0) == 0
         );
-        Check(
-            "Sse2.X64",
-            ExpectedSse2,
-            &Sse2X64IsSupported,
-            Sse2.X64.IsSupported,
-            () => Sse2.X64.ConvertToInt64(Vector128<double>.Zero) == 0
+        Check("Sse2.X64", ExpectedSse2, &Sse2X64IsSupported, Sse2.X64.IsSupported, () =>
+            Sse2.X64.ConvertToInt64(Vector128<double>.Zero) == 0
         );
 
-        Check(
-            "Sse3",
-            ExpectedSse3,
-            &Sse3IsSupported,
-            Sse3.IsSupported,
-            () => Sse3.MoveHighAndDuplicate(Vector128<float>.Zero).Equals(Vector128<float>.Zero)
+        Check("Sse3", ExpectedSse3, &Sse3IsSupported, Sse3.IsSupported, () =>
+            Sse3.MoveHighAndDuplicate(Vector128<float>.Zero).Equals(Vector128<float>.Zero)
         );
         Check("Sse3.X64", ExpectedSse3, &Sse3X64IsSupported, Sse3.X64.IsSupported, null);
 
-        Check(
-            "Ssse3",
-            ExpectedSsse3,
-            &Ssse3IsSupported,
-            Ssse3.IsSupported,
-            () => Ssse3.Abs(Vector128<short>.Zero).Equals(Vector128<ushort>.Zero)
+        Check("Ssse3", ExpectedSsse3, &Ssse3IsSupported, Ssse3.IsSupported, () =>
+            Ssse3.Abs(Vector128<short>.Zero).Equals(Vector128<ushort>.Zero)
         );
         Check("Ssse3.X64", ExpectedSsse3, &Ssse3X64IsSupported, Ssse3.X64.IsSupported, null);
 
-        Check(
-            "Sse41",
-            ExpectedSse41,
-            &Sse41IsSupported,
-            Sse41.IsSupported,
-            () => Sse41.Max(Vector128<int>.Zero, Vector128<int>.Zero).Equals(Vector128<int>.Zero)
+        Check("Sse41", ExpectedSse41, &Sse41IsSupported, Sse41.IsSupported, () =>
+            Sse41.Max(Vector128<int>.Zero, Vector128<int>.Zero).Equals(Vector128<int>.Zero)
         );
-        Check(
-            "Sse41.X64",
-            ExpectedSse41,
-            &Sse41X64IsSupported,
-            Sse41.X64.IsSupported,
-            () => Sse41.X64.Extract(Vector128<long>.Zero, 0) == 0
+        Check("Sse41.X64", ExpectedSse41, &Sse41X64IsSupported, Sse41.X64.IsSupported, () =>
+            Sse41.X64.Extract(Vector128<long>.Zero, 0) == 0
         );
 
-        Check(
-            "Sse42",
-            ExpectedSse42,
-            &Sse42IsSupported,
-            Sse42.IsSupported,
-            () => Sse42.Crc32(0, 0) == 0
+        Check("Sse42", ExpectedSse42, &Sse42IsSupported, Sse42.IsSupported, () =>
+            Sse42.Crc32(0, 0) == 0
         );
-        Check(
-            "Sse42.X64",
-            ExpectedSse42,
-            &Sse42X64IsSupported,
-            Sse42.X64.IsSupported,
-            () => Sse42.X64.Crc32(0, 0) == 0
+        Check("Sse42.X64", ExpectedSse42, &Sse42X64IsSupported, Sse42.X64.IsSupported, () =>
+            Sse42.X64.Crc32(0, 0) == 0
         );
 
-        Check(
-            "Aes",
-            ExpectedAes,
-            &AesIsSupported,
-            Aes.IsSupported,
-            () => Aes.KeygenAssist(Vector128<byte>.Zero, 0).Equals(Vector128.Create((byte)99))
+        Check("Aes", ExpectedAes, &AesIsSupported, Aes.IsSupported, () =>
+            Aes.KeygenAssist(Vector128<byte>.Zero, 0).Equals(Vector128.Create((byte)99))
         );
         Check("Aes.X64", ExpectedAes, &AesX64IsSupported, Aes.X64.IsSupported, null);
 
-        Check(
-            "Avx",
-            ExpectedAvx,
-            &AvxIsSupported,
-            Avx.IsSupported,
-            () =>
-                Avx.Add(Vector256<double>.Zero, Vector256<double>.Zero)
-                    .Equals(Vector256<double>.Zero)
+        Check("Avx", ExpectedAvx, &AvxIsSupported, Avx.IsSupported, () =>
+            Avx.Add(Vector256<double>.Zero, Vector256<double>.Zero).Equals(Vector256<double>.Zero)
         );
         Check("Avx.X64", ExpectedAvx, &AvxX64IsSupported, Avx.X64.IsSupported, null);
 
-        Check(
-            "Avx2",
-            ExpectedAvx2,
-            &Avx2IsSupported,
-            Avx2.IsSupported,
-            () => Avx2.Abs(Vector256<int>.Zero).Equals(Vector256<uint>.Zero)
+        Check("Avx2", ExpectedAvx2, &Avx2IsSupported, Avx2.IsSupported, () =>
+            Avx2.Abs(Vector256<int>.Zero).Equals(Vector256<uint>.Zero)
         );
         Check("Avx2.X64", ExpectedAvx2, &Avx2X64IsSupported, Avx2.X64.IsSupported, null);
 
-        Check(
-            "Bmi1",
-            ExpectedBmi1,
-            &Bmi1IsSupported,
-            Bmi1.IsSupported,
-            () => Bmi1.AndNot(0, 0) == 0
+        Check("Bmi1", ExpectedBmi1, &Bmi1IsSupported, Bmi1.IsSupported, () =>
+            Bmi1.AndNot(0, 0) == 0
         );
-        Check(
-            "Bmi1.X64",
-            ExpectedBmi1,
-            &Bmi1X64IsSupported,
-            Bmi1.X64.IsSupported,
-            () => Bmi1.X64.AndNot(0, 0) == 0
+        Check("Bmi1.X64", ExpectedBmi1, &Bmi1X64IsSupported, Bmi1.X64.IsSupported, () =>
+            Bmi1.X64.AndNot(0, 0) == 0
         );
 
-        Check(
-            "Bmi2",
-            ExpectedBmi2,
-            &Bmi2IsSupported,
-            Bmi2.IsSupported,
-            () => Bmi2.MultiplyNoFlags(0, 0) == 0
+        Check("Bmi2", ExpectedBmi2, &Bmi2IsSupported, Bmi2.IsSupported, () =>
+            Bmi2.MultiplyNoFlags(0, 0) == 0
         );
-        Check(
-            "Bmi2.X64",
-            ExpectedBmi2,
-            &Bmi2X64IsSupported,
-            Bmi2.X64.IsSupported,
-            () => Bmi2.X64.MultiplyNoFlags(0, 0) == 0
+        Check("Bmi2.X64", ExpectedBmi2, &Bmi2X64IsSupported, Bmi2.X64.IsSupported, () =>
+            Bmi2.X64.MultiplyNoFlags(0, 0) == 0
         );
 
-        Check(
-            "Fma",
-            ExpectedFma,
-            &FmaIsSupported,
-            Fma.IsSupported,
-            () =>
-                Fma.MultiplyAdd(Vector128<float>.Zero, Vector128<float>.Zero, Vector128<float>.Zero)
-                    .Equals(Vector128<float>.Zero)
+        Check("Fma", ExpectedFma, &FmaIsSupported, Fma.IsSupported, () =>
+            Fma.MultiplyAdd(Vector128<float>.Zero, Vector128<float>.Zero, Vector128<float>.Zero)
+                .Equals(Vector128<float>.Zero)
         );
         Check("Fma.X64", ExpectedFma, &FmaX64IsSupported, Fma.X64.IsSupported, null);
 
-        Check(
-            "Lzcnt",
-            ExpectedLzcnt,
-            &LzcntIsSupported,
-            Lzcnt.IsSupported,
-            () => Lzcnt.LeadingZeroCount(0) == 32
+        Check("Lzcnt", ExpectedLzcnt, &LzcntIsSupported, Lzcnt.IsSupported, () =>
+            Lzcnt.LeadingZeroCount(0) == 32
         );
-        Check(
-            "Lzcnt.X64",
-            ExpectedLzcnt,
-            &LzcntX64IsSupported,
-            Lzcnt.X64.IsSupported,
-            () => Lzcnt.X64.LeadingZeroCount(0) == 64
+        Check("Lzcnt.X64", ExpectedLzcnt, &LzcntX64IsSupported, Lzcnt.X64.IsSupported, () =>
+            Lzcnt.X64.LeadingZeroCount(0) == 64
         );
 
-        Check(
-            "Pclmulqdq",
-            ExpectedPclmulqdq,
-            &PclmulqdqIsSupported,
-            Pclmulqdq.IsSupported,
-            () =>
-                Pclmulqdq
-                    .CarrylessMultiply(Vector128<long>.Zero, Vector128<long>.Zero, 0)
-                    .Equals(Vector128<long>.Zero)
+        Check("Pclmulqdq", ExpectedPclmulqdq, &PclmulqdqIsSupported, Pclmulqdq.IsSupported, () =>
+            Pclmulqdq
+                .CarrylessMultiply(Vector128<long>.Zero, Vector128<long>.Zero, 0)
+                .Equals(Vector128<long>.Zero)
         );
         Check(
             "Pclmulqdq.X64",
@@ -363,34 +273,21 @@ unsafe class Program
             null
         );
 
-        Check(
-            "Popcnt",
-            ExpectedPopcnt,
-            &PopcntIsSupported,
-            Popcnt.IsSupported,
-            () => Popcnt.PopCount(0) == 0
+        Check("Popcnt", ExpectedPopcnt, &PopcntIsSupported, Popcnt.IsSupported, () =>
+            Popcnt.PopCount(0) == 0
         );
-        Check(
-            "Popcnt.X64",
-            ExpectedPopcnt,
-            &PopcntX64IsSupported,
-            Popcnt.X64.IsSupported,
-            () => Popcnt.X64.PopCount(0) == 0
+        Check("Popcnt.X64", ExpectedPopcnt, &PopcntX64IsSupported, Popcnt.X64.IsSupported, () =>
+            Popcnt.X64.PopCount(0) == 0
         );
 
-        Check(
-            "AvxVnni",
-            ExpectedAvxVnni,
-            &AvxVnniIsSupported,
-            AvxVnni.IsSupported,
-            () =>
-                AvxVnni
-                    .MultiplyWideningAndAdd(
-                        Vector128<int>.Zero,
-                        Vector128<byte>.Zero,
-                        Vector128<sbyte>.Zero
-                    )
-                    .Equals(Vector128<int>.Zero)
+        Check("AvxVnni", ExpectedAvxVnni, &AvxVnniIsSupported, AvxVnni.IsSupported, () =>
+            AvxVnni
+                .MultiplyWideningAndAdd(
+                    Vector128<int>.Zero,
+                    Vector128<byte>.Zero,
+                    Vector128<sbyte>.Zero
+                )
+                .Equals(Vector128<int>.Zero)
         );
         Check(
             "AvxVnni.X64",
@@ -400,12 +297,8 @@ unsafe class Program
             null
         );
 
-        Check(
-            "Avx512F",
-            ExpectedAvx512F,
-            &Avx512FIsSupported,
-            Avx512F.IsSupported,
-            () => Avx512F.Abs(Vector512<int>.Zero).Equals(Vector512<uint>.Zero)
+        Check("Avx512F", ExpectedAvx512F, &Avx512FIsSupported, Avx512F.IsSupported, () =>
+            Avx512F.Abs(Vector512<int>.Zero).Equals(Vector512<uint>.Zero)
         );
         Check("Avx512F.VL", ExpectedAvx512F, &Avx512FVLIsSupported, Avx512F.VL.IsSupported, null);
         Check(
@@ -416,12 +309,8 @@ unsafe class Program
             null
         );
 
-        Check(
-            "Avx512BW",
-            ExpectedAvx512BW,
-            &Avx512BWIsSupported,
-            Avx512BW.IsSupported,
-            () => Avx512BW.Abs(Vector512<sbyte>.Zero).Equals(Vector512<byte>.Zero)
+        Check("Avx512BW", ExpectedAvx512BW, &Avx512BWIsSupported, Avx512BW.IsSupported, () =>
+            Avx512BW.Abs(Vector512<sbyte>.Zero).Equals(Vector512<byte>.Zero)
         );
         Check(
             "Avx512BW.VL",
@@ -438,12 +327,8 @@ unsafe class Program
             null
         );
 
-        Check(
-            "Avx512CD",
-            ExpectedAvx512CD,
-            &Avx512CDIsSupported,
-            Avx512CD.IsSupported,
-            () => Avx512CD.LeadingZeroCount(Vector512<uint>.AllBitsSet) == Vector512<uint>.Zero
+        Check("Avx512CD", ExpectedAvx512CD, &Avx512CDIsSupported, Avx512CD.IsSupported, () =>
+            Avx512CD.LeadingZeroCount(Vector512<uint>.AllBitsSet) == Vector512<uint>.Zero
         );
         Check(
             "Avx512CD.VL",
@@ -460,15 +345,8 @@ unsafe class Program
             null
         );
 
-        Check(
-            "Avx512DQ",
-            ExpectedAvx512DQ,
-            &Avx512DQIsSupported,
-            Avx512DQ.IsSupported,
-            () =>
-                Avx512DQ
-                    .And(Vector512<float>.Zero, Vector512<float>.Zero)
-                    .Equals(Vector512<float>.Zero)
+        Check("Avx512DQ", ExpectedAvx512DQ, &Avx512DQIsSupported, Avx512DQ.IsSupported, () =>
+            Avx512DQ.And(Vector512<float>.Zero, Vector512<float>.Zero).Equals(Vector512<float>.Zero)
         );
         Check(
             "Avx512DQ.VL",

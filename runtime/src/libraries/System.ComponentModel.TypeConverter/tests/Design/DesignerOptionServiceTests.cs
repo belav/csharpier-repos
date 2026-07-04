@@ -43,9 +43,8 @@ namespace System.ComponentModel.Design.Tests
         public void CreateOptionCollection_NullParent_ThrowsArgumentNullException()
         {
             var service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "parent",
-                () => service.DoCreateOptionCollection(null, "name", "value")
+            AssertExtensions.Throws<ArgumentNullException>("parent", () =>
+                service.DoCreateOptionCollection(null, "name", "value")
             );
         }
 
@@ -53,9 +52,8 @@ namespace System.ComponentModel.Design.Tests
         public void CreateOptionCollection_NullName_ThrowsArgumentNullException()
         {
             var service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => service.DoCreateOptionCollection(service.Options, null, "value")
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                service.DoCreateOptionCollection(service.Options, null, "value")
             );
         }
 
@@ -63,9 +61,8 @@ namespace System.ComponentModel.Design.Tests
         public void CreateOptionCollection_EmptyName_ThrowsArgumentException()
         {
             var service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => service.DoCreateOptionCollection(service.Options, string.Empty, "value")
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                service.DoCreateOptionCollection(service.Options, string.Empty, "value")
             );
         }
 
@@ -417,9 +414,8 @@ namespace System.ComponentModel.Design.Tests
         public void GetOptionValue_NullPageName_ThrowsArgumentNullException()
         {
             IDesignerOptionService service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pageName",
-                () => service.GetOptionValue(null, "ValueName")
+            AssertExtensions.Throws<ArgumentNullException>("pageName", () =>
+                service.GetOptionValue(null, "ValueName")
             );
         }
 
@@ -427,9 +423,8 @@ namespace System.ComponentModel.Design.Tests
         public void GetOptionValue_NullValueName_ThrowsArgumentNullException()
         {
             IDesignerOptionService service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "valueName",
-                () => service.GetOptionValue("PageName", null)
+            AssertExtensions.Throws<ArgumentNullException>("valueName", () =>
+                service.GetOptionValue("PageName", null)
             );
         }
 
@@ -482,9 +477,8 @@ namespace System.ComponentModel.Design.Tests
         public void SetOptionValue_NullPageName_ThrowsArgumentNullException()
         {
             IDesignerOptionService service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pageName",
-                () => service.SetOptionValue(null, "ValueName", "value")
+            AssertExtensions.Throws<ArgumentNullException>("pageName", () =>
+                service.SetOptionValue(null, "ValueName", "value")
             );
         }
 
@@ -492,9 +486,8 @@ namespace System.ComponentModel.Design.Tests
         public void SetOptionValue_NullValueName_ThrowsArgumentNullException()
         {
             IDesignerOptionService service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "valueName",
-                () => service.SetOptionValue("PageName", null, "value")
+            AssertExtensions.Throws<ArgumentNullException>("valueName", () =>
+                service.SetOptionValue("PageName", null, "value")
             );
         }
 

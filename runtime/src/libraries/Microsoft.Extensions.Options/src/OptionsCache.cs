@@ -73,9 +73,8 @@ namespace Microsoft.Extensions.Options
                 string? localName = name;
                 Func<string, TArg, TOptions> localCreateOptions = createOptions;
                 TArg localFactoryArgument = factoryArgument;
-                return GetOrAdd(
-                    name,
-                    () => localCreateOptions(localName ?? Options.DefaultName, localFactoryArgument)
+                return GetOrAdd(name, () =>
+                    localCreateOptions(localName ?? Options.DefaultName, localFactoryArgument)
                 );
             }
 

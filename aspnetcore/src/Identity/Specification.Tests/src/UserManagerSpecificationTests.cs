@@ -1712,15 +1712,12 @@ public abstract class UserManagerSpecificationTestBase<TUser, TKey>
     [Fact]
     public async Task CanChangeEmailWithDifferentTokenProvider()
     {
-        var manager = CreateManager(
-            context: null,
-            services: null,
-            configureServices: s =>
-                s.Configure<IdentityOptions>(o =>
-                    o.Tokens.ProviderMap["NewProvider2"] = new TokenProviderDescriptor(
-                        typeof(EmailTokenProvider<TUser>)
-                    )
+        var manager = CreateManager(context: null, services: null, configureServices: s =>
+            s.Configure<IdentityOptions>(o =>
+                o.Tokens.ProviderMap["NewProvider2"] = new TokenProviderDescriptor(
+                    typeof(EmailTokenProvider<TUser>)
                 )
+            )
         );
         manager.Options.Tokens.ChangeEmailTokenProvider = "NewProvider2";
         var user = CreateTestUser("foouser");

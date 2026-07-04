@@ -32,13 +32,10 @@ namespace System.Xml.XmlWriterTests
                     (char)(SurLowStart - 1),
                 };
 
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () =>
-                    {
-                        writer.WriteRaw(invalidSurrogatePair, 0, invalidSurrogatePair.Length);
-                    }
-                );
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                {
+                    writer.WriteRaw(invalidSurrogatePair, 0, invalidSurrogatePair.Length);
+                });
             }
         }
 
@@ -58,13 +55,10 @@ namespace System.Xml.XmlWriterTests
                     (char)(SurLowEnd + 1),
                 };
 
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () =>
-                    {
-                        writer.WriteRaw(invalidSurrogatePair, 0, invalidSurrogatePair.Length);
-                    }
-                );
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                {
+                    writer.WriteRaw(invalidSurrogatePair, 0, invalidSurrogatePair.Length);
+                });
             }
         }
 

@@ -40,18 +40,11 @@ namespace System.IO.Pipes.Tests
         [InlineData((PipeOptions)int.MaxValue)]
         public void Create_InvalidOptions(PipeOptions options)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                {
-                    CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            options: options
-                        )
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>("options", () =>
+            {
+                CreateAndVerifyNamedPipe(GetRandomName(), GetBasicPipeSecurity(), options: options)
+                    .Dispose();
+            });
         }
 
         [Theory]
@@ -85,17 +78,14 @@ namespace System.IO.Pipes.Tests
         [Fact]
         public void Create_ValidSecurity_PipeOptionsCurrentUserOnly()
         {
-            Assert.Throws<ArgumentException>(
-                "pipeSecurity",
-                () =>
-                {
-                    CreateNamedPipe(
-                        GetRandomName(),
-                        GetBasicPipeSecurity(),
-                        options: PipeOptions.CurrentUserOnly
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>("pipeSecurity", () =>
+            {
+                CreateNamedPipe(
+                    GetRandomName(),
+                    GetBasicPipeSecurity(),
+                    options: PipeOptions.CurrentUserOnly
+                );
+            });
         }
 
         [Fact]
@@ -106,21 +96,15 @@ namespace System.IO.Pipes.Tests
                 CreateNamedPipe(pipeName: "", GetBasicPipeSecurity());
             });
 
-            Assert.Throws<ArgumentNullException>(
-                "pipeName",
-                () =>
-                {
-                    CreateNamedPipe(pipeName: null, GetBasicPipeSecurity());
-                }
-            );
+            Assert.Throws<ArgumentNullException>("pipeName", () =>
+            {
+                CreateNamedPipe(pipeName: null, GetBasicPipeSecurity());
+            });
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "pipeName",
-                () =>
-                {
-                    CreateNamedPipe(pipeName: "anonymous", GetBasicPipeSecurity());
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>("pipeName", () =>
+            {
+                CreateNamedPipe(pipeName: "anonymous", GetBasicPipeSecurity());
+            });
         }
 
         [Theory]
@@ -145,18 +129,15 @@ namespace System.IO.Pipes.Tests
         [InlineData(int.MaxValue)]
         public void Create_InvalidMaxNumberOfServerInstances(int maxNumberOfServerInstances)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "maxNumberOfServerInstances",
-                () =>
-                {
-                    CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            maxNumberOfServerInstances: maxNumberOfServerInstances
-                        )
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>("maxNumberOfServerInstances", () =>
+            {
+                CreateAndVerifyNamedPipe(
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        maxNumberOfServerInstances: maxNumberOfServerInstances
+                    )
+                    .Dispose();
+            });
         }
 
         [Theory]
@@ -179,18 +160,15 @@ namespace System.IO.Pipes.Tests
         [InlineData((PipeTransmissionMode)2)]
         public void Create_InvalidTransmissionMode(PipeTransmissionMode transmissionMode)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "transmissionMode",
-                () =>
-                {
-                    CreateAndVerifyNamedPipe(
-                            GetRandomName(),
-                            GetBasicPipeSecurity(),
-                            transmissionMode: transmissionMode
-                        )
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>("transmissionMode", () =>
+            {
+                CreateAndVerifyNamedPipe(
+                        GetRandomName(),
+                        GetBasicPipeSecurity(),
+                        transmissionMode: transmissionMode
+                    )
+                    .Dispose();
+            });
         }
 
         [Theory]

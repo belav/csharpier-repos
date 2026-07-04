@@ -1151,15 +1151,11 @@ namespace Moq.Tests
         public void DoesNotThrowCollectionModifiedWhenMoreInvocationsInterceptedDuringVerfication()
         {
             var mock = new Mock<IFoo>();
-            Parallel.For(
-                0,
-                100,
-                (i) =>
-                {
-                    mock.Object.Submit();
-                    mock.Verify(foo => foo.Submit());
-                }
-            );
+            Parallel.For(0, 100, (i) =>
+            {
+                mock.Object.Submit();
+                mock.Verify(foo => foo.Submit());
+            });
         }
 
         [Fact]

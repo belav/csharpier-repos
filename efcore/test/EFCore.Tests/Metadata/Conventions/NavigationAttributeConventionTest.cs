@@ -34,35 +34,29 @@ public class NavigationAttributeConventionTest
             ConfigurationSource.Convention
         );
 
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Blog.BlogDetails)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Blog.BlogDetails)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(BlogDetails.Blog)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(BlogDetails.Blog)
         );
 
         RunEntityTypeConventions(principalEntityTypeBuilder);
 
-        Assert.DoesNotContain(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Blog.BlogDetails)
+        Assert.DoesNotContain(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Blog.BlogDetails)
         );
-        Assert.DoesNotContain(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(BlogDetails.Blog)
+        Assert.DoesNotContain(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(BlogDetails.Blog)
         );
 
         RunEntityTypeConventions(dependentEntityTypeBuilder);
 
-        Assert.DoesNotContain(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Blog.BlogDetails)
+        Assert.DoesNotContain(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Blog.BlogDetails)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(BlogDetails.Blog)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(BlogDetails.Blog)
         );
     }
 
@@ -82,24 +76,20 @@ public class NavigationAttributeConventionTest
             ConfigurationSource.Explicit
         );
 
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Blog.BlogDetails)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Blog.BlogDetails)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(BlogDetails.Blog)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(BlogDetails.Blog)
         );
 
         RunEntityTypeConventions(principalEntityTypeBuilder);
 
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Blog.BlogDetails)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Blog.BlogDetails)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(BlogDetails.Blog)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(BlogDetails.Blog)
         );
     }
 
@@ -110,13 +100,11 @@ public class NavigationAttributeConventionTest
         var model = modelBuilder.Model;
         modelBuilder.Entity<BlogDetails>();
 
-        Assert.DoesNotContain(
-            model.FindEntityType(typeof(Blog)).GetNavigations(),
-            nav => nav.Name == nameof(Blog.BlogDetails)
+        Assert.DoesNotContain(model.FindEntityType(typeof(Blog)).GetNavigations(), nav =>
+            nav.Name == nameof(Blog.BlogDetails)
         );
-        Assert.Contains(
-            model.FindEntityType(typeof(BlogDetails)).GetNavigations(),
-            nav => nav.Name == nameof(BlogDetails.Blog)
+        Assert.Contains(model.FindEntityType(typeof(BlogDetails)).GetNavigations(), nav =>
+            nav.Name == nameof(BlogDetails.Blog)
         );
     }
 
@@ -150,13 +138,11 @@ public class NavigationAttributeConventionTest
         RunRequiredNavigationAttributeConvention(relationshipBuilder, navigation);
 
         Assert.True(relationshipBuilder.Metadata.IsRequired);
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Blog.Posts)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Blog.Posts)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Post.Blog)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Post.Blog)
         );
     }
 
@@ -187,13 +173,11 @@ public class NavigationAttributeConventionTest
         RunRequiredNavigationAttributeConvention(relationshipBuilder, navigation);
 
         Assert.False(relationshipBuilder.Metadata.IsRequired);
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Blog.Posts)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Blog.Posts)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Post.Blog)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Post.Blog)
         );
     }
 
@@ -345,32 +329,26 @@ public class NavigationAttributeConventionTest
             ConfigurationSource.Convention
         );
 
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependents)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependents)
         );
-        Assert.DoesNotContain(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependent)
+        Assert.DoesNotContain(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependent)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Dependent.Principal)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Dependent.Principal)
         );
 
         RunEntityTypeConventions(dependentEntityTypeBuilder);
 
-        Assert.DoesNotContain(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependents)
+        Assert.DoesNotContain(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependents)
         );
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependent)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependent)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Dependent.Principal)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Dependent.Principal)
         );
 
         Validate(dependentEntityTypeBuilder);
@@ -392,32 +370,26 @@ public class NavigationAttributeConventionTest
             ConfigurationSource.Explicit
         );
 
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependents)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependents)
         );
-        Assert.DoesNotContain(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependent)
+        Assert.DoesNotContain(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependent)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Dependent.Principal)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Dependent.Principal)
         );
 
         RunEntityTypeConventions(dependentEntityTypeBuilder);
 
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependents)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependents)
         );
-        Assert.DoesNotContain(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependent)
+        Assert.DoesNotContain(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependent)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Dependent.Principal)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Dependent.Principal)
         );
 
         Validate(dependentEntityTypeBuilder);
@@ -439,17 +411,14 @@ public class NavigationAttributeConventionTest
             ConfigurationSource.Convention
         );
 
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(AmbiguousPrincipal.Dependent)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(AmbiguousPrincipal.Dependent)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(AmbiguousDependent.AmbiguousPrincipal)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(AmbiguousDependent.AmbiguousPrincipal)
         );
-        Assert.DoesNotContain(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(AmbiguousDependent.AnotherAmbiguousPrincipal)
+        Assert.DoesNotContain(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(AmbiguousDependent.AnotherAmbiguousPrincipal)
         );
 
         var convention = new InversePropertyAttributeConvention(CreateDependencies());
@@ -460,17 +429,14 @@ public class NavigationAttributeConventionTest
             )
         );
 
-        Assert.DoesNotContain(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(AmbiguousPrincipal.Dependent)
+        Assert.DoesNotContain(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(AmbiguousPrincipal.Dependent)
         );
-        Assert.DoesNotContain(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(AmbiguousDependent.AnotherAmbiguousPrincipal)
+        Assert.DoesNotContain(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(AmbiguousDependent.AnotherAmbiguousPrincipal)
         );
-        Assert.DoesNotContain(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(AmbiguousDependent.AmbiguousPrincipal)
+        Assert.DoesNotContain(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(AmbiguousDependent.AmbiguousPrincipal)
         );
 
         Validate(dependentEntityTypeBuilder);
@@ -501,17 +467,14 @@ public class NavigationAttributeConventionTest
             )
             .Metadata.DeclaringEntityType.Builder;
 
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependents)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependents)
         );
-        Assert.DoesNotContain(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependent)
+        Assert.DoesNotContain(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependent)
         );
-        Assert.DoesNotContain(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Dependent.Principal)
+        Assert.DoesNotContain(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Dependent.Principal)
         );
 
         var convention = new InversePropertyAttributeConvention(CreateDependencies());
@@ -522,17 +485,14 @@ public class NavigationAttributeConventionTest
             )
         );
 
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependents)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependents)
         );
-        Assert.DoesNotContain(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Principal.Dependent)
+        Assert.DoesNotContain(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Principal.Dependent)
         );
-        Assert.DoesNotContain(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Dependent.Principal)
+        Assert.DoesNotContain(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Dependent.Principal)
         );
 
         convention.ProcessModelFinalizing(

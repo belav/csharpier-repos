@@ -471,14 +471,11 @@ namespace System.Data.Tests
         [Fact]
         public void Find_1()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    /* since the sort key is not specified. Must raise a ArgumentException */
-                    int sIndex = _dataView.Find("abc");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                /* since the sort key is not specified. Must raise a ArgumentException */
+                int sIndex = _dataView.Find("abc");
+            });
         }
 
         [Fact]
@@ -509,15 +506,12 @@ namespace System.Data.Tests
         [Fact]
         public void Find_3()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    _dataView.Sort = "itemID, itemName";
-                    /* expecting order key count mismatch */
-                    _dataView.Find("itemValue");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                _dataView.Sort = "itemID, itemName";
+                /* expecting order key count mismatch */
+                _dataView.Find("itemValue");
+            });
         }
 
         [Fact]
@@ -589,45 +583,39 @@ namespace System.Data.Tests
         [Fact]
         public void FindRowsWithoutSort()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTable dt = new DataTable("table");
-                    dt.Columns.Add("col1");
-                    dt.Columns.Add("col2");
-                    dt.Columns.Add("col3");
-                    dt.Rows.Add(new object[] { 1, 2, 3 });
-                    dt.Rows.Add(new object[] { 4, 5, 6 });
-                    dt.Rows.Add(new object[] { 4, 7, 8 });
-                    dt.Rows.Add(new object[] { 5, 7, 8 });
-                    dt.Rows.Add(new object[] { 4, 8, 9 });
-                    DataView dv = new DataView(dt);
-                    dv.Find(1);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable dt = new DataTable("table");
+                dt.Columns.Add("col1");
+                dt.Columns.Add("col2");
+                dt.Columns.Add("col3");
+                dt.Rows.Add(new object[] { 1, 2, 3 });
+                dt.Rows.Add(new object[] { 4, 5, 6 });
+                dt.Rows.Add(new object[] { 4, 7, 8 });
+                dt.Rows.Add(new object[] { 5, 7, 8 });
+                dt.Rows.Add(new object[] { 4, 8, 9 });
+                DataView dv = new DataView(dt);
+                dv.Find(1);
+            });
         }
 
         [Fact]
         public void FindRowsInconsistentKeyLength()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTable dt = new DataTable("table");
-                    dt.Columns.Add("col1");
-                    dt.Columns.Add("col2");
-                    dt.Columns.Add("col3");
-                    dt.Rows.Add(new object[] { 1, 2, 3 });
-                    dt.Rows.Add(new object[] { 4, 5, 6 });
-                    dt.Rows.Add(new object[] { 4, 7, 8 });
-                    dt.Rows.Add(new object[] { 5, 7, 8 });
-                    dt.Rows.Add(new object[] { 4, 8, 9 });
-                    DataView dv = new DataView(dt, null, "col1", DataViewRowState.CurrentRows);
-                    dv.FindRows(new object[] { 1, 2, 3 });
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable dt = new DataTable("table");
+                dt.Columns.Add("col1");
+                dt.Columns.Add("col2");
+                dt.Columns.Add("col3");
+                dt.Rows.Add(new object[] { 1, 2, 3 });
+                dt.Rows.Add(new object[] { 4, 5, 6 });
+                dt.Rows.Add(new object[] { 4, 7, 8 });
+                dt.Rows.Add(new object[] { 5, 7, 8 });
+                dt.Rows.Add(new object[] { 4, 8, 9 });
+                DataView dv = new DataView(dt, null, "col1", DataViewRowState.CurrentRows);
+                dv.FindRows(new object[] { 1, 2, 3 });
+            });
         }
 
         [Fact]

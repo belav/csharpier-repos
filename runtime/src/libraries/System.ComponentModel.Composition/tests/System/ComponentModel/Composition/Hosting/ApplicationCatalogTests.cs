@@ -39,49 +39,37 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor1_NullReflectionContextArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "reflectionContext",
-                () =>
-                {
-                    new ApplicationCatalog((ReflectionContext)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("reflectionContext", () =>
+            {
+                new ApplicationCatalog((ReflectionContext)null);
+            });
         }
 
         [Fact]
         public void Constructor3_NullBothArguments_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "reflectionContext",
-                () =>
-                {
-                    new ApplicationCatalog((ReflectionContext)null, (ICompositionElement)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("reflectionContext", () =>
+            {
+                new ApplicationCatalog((ReflectionContext)null, (ICompositionElement)null);
+            });
         }
 
         [Fact]
         public void Constructor2_NullDefinitionOriginArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "definitionOrigin",
-                () =>
-                {
-                    new ApplicationCatalog((ICompositionElement)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definitionOrigin", () =>
+            {
+                new ApplicationCatalog((ICompositionElement)null);
+            });
         }
 
         [Fact]
         public void Constructor3_NullDefinitionOriginArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "definitionOrigin",
-                () =>
-                {
-                    new ApplicationCatalog((ICompositionElement)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definitionOrigin", () =>
+            {
+                new ApplicationCatalog((ICompositionElement)null);
+            });
         }
 
         [Fact]

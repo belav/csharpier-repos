@@ -890,83 +890,59 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static IEnumerable<object[]> GetLambdaTestData()
         {
             yield return getData("[A] x => x", tests => tests.LambdaExpression_01());
-            yield return getData(
-                "[A] async x => x",
-                tests => tests.LambdaExpression_01(SyntaxKind.AsyncKeyword)
+            yield return getData("[A] async x => x", tests =>
+                tests.LambdaExpression_01(SyntaxKind.AsyncKeyword)
             );
-            yield return getData(
-                "[A] static x => x",
-                tests => tests.LambdaExpression_01(SyntaxKind.StaticKeyword)
+            yield return getData("[A] static x => x", tests =>
+                tests.LambdaExpression_01(SyntaxKind.StaticKeyword)
             );
-            yield return getData(
-                "[A] async static x => x",
-                tests =>
-                    tests.LambdaExpression_01(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
+            yield return getData("[A] async static x => x", tests =>
+                tests.LambdaExpression_01(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
             );
-            yield return getData(
-                "[A] static async x => x",
-                tests =>
-                    tests.LambdaExpression_01(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
+            yield return getData("[A] static async x => x", tests =>
+                tests.LambdaExpression_01(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
             );
 
             yield return getData("[A]() => { }", tests => tests.LambdaExpression_02());
-            yield return getData(
-                "[A]async () => { }",
-                tests => tests.LambdaExpression_02(SyntaxKind.AsyncKeyword)
+            yield return getData("[A]async () => { }", tests =>
+                tests.LambdaExpression_02(SyntaxKind.AsyncKeyword)
             );
-            yield return getData(
-                "[A]static () => { }",
-                tests => tests.LambdaExpression_02(SyntaxKind.StaticKeyword)
+            yield return getData("[A]static () => { }", tests =>
+                tests.LambdaExpression_02(SyntaxKind.StaticKeyword)
             );
-            yield return getData(
-                "[A]async static () => { }",
-                tests =>
-                    tests.LambdaExpression_02(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
+            yield return getData("[A]async static () => { }", tests =>
+                tests.LambdaExpression_02(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
             );
-            yield return getData(
-                "[A]static async () => { }",
-                tests =>
-                    tests.LambdaExpression_02(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
+            yield return getData("[A]static async () => { }", tests =>
+                tests.LambdaExpression_02(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
             );
 
             yield return getData("[A] (x) => { }", tests => tests.LambdaExpression_03());
-            yield return getData(
-                "[A] async (x) => { }",
-                tests => tests.LambdaExpression_03(SyntaxKind.AsyncKeyword)
+            yield return getData("[A] async (x) => { }", tests =>
+                tests.LambdaExpression_03(SyntaxKind.AsyncKeyword)
             );
-            yield return getData(
-                "[A] static (x) => { }",
-                tests => tests.LambdaExpression_03(SyntaxKind.StaticKeyword)
+            yield return getData("[A] static (x) => { }", tests =>
+                tests.LambdaExpression_03(SyntaxKind.StaticKeyword)
             );
-            yield return getData(
-                "[A] async static (x) => { }",
-                tests =>
-                    tests.LambdaExpression_03(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
+            yield return getData("[A] async static (x) => { }", tests =>
+                tests.LambdaExpression_03(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
             );
-            yield return getData(
-                "[A] static async (x) => { }",
-                tests =>
-                    tests.LambdaExpression_03(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
+            yield return getData("[A] static async (x) => { }", tests =>
+                tests.LambdaExpression_03(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
             );
 
             yield return getData("[A] (object x) => { }", tests => tests.LambdaExpression_04());
-            yield return getData(
-                "[A] async (object x) => { }",
-                tests => tests.LambdaExpression_04(SyntaxKind.AsyncKeyword)
+            yield return getData("[A] async (object x) => { }", tests =>
+                tests.LambdaExpression_04(SyntaxKind.AsyncKeyword)
             );
-            yield return getData(
-                "[A] static (object x) => { }",
-                tests => tests.LambdaExpression_04(SyntaxKind.StaticKeyword)
+            yield return getData("[A] static (object x) => { }", tests =>
+                tests.LambdaExpression_04(SyntaxKind.StaticKeyword)
             );
-            yield return getData(
-                "[A] async static (object x) => { }",
-                tests =>
-                    tests.LambdaExpression_04(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
+            yield return getData("[A] async static (object x) => { }", tests =>
+                tests.LambdaExpression_04(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
             );
-            yield return getData(
-                "[A] static async (object x) => { }",
-                tests =>
-                    tests.LambdaExpression_04(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
+            yield return getData("[A] static async (object x) => { }", tests =>
+                tests.LambdaExpression_04(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
             );
 
             yield return getData("[A(B)]() => { }", tests => tests.LambdaExpression_05());

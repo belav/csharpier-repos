@@ -117,14 +117,12 @@ public partial class ApkBuilder
 
         if (
             !string.IsNullOrEmpty(DiagnosticPorts)
-            && !Array.Exists(
-                RuntimeComponents,
-                runtimeComponent =>
-                    string.Equals(
-                        runtimeComponent,
-                        "diagnostics_tracing",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+            && !Array.Exists(RuntimeComponents, runtimeComponent =>
+                string.Equals(
+                    runtimeComponent,
+                    "diagnostics_tracing",
+                    StringComparison.OrdinalIgnoreCase
+                )
             )
         )
         {
@@ -229,28 +227,24 @@ public partial class ApkBuilder
         // these files then will be zipped and copied to apk/assets/assets.zip
         var assetsToZipDirectory = Path.Combine(OutputDir, "assets-tozip");
 
-        Utils.DirectoryCopy(
-            AppDir,
-            assetsToZipDirectory,
-            file =>
-            {
-                string fileName = Path.GetFileName(file);
-                string extension = Path.GetExtension(file);
+        Utils.DirectoryCopy(AppDir, assetsToZipDirectory, file =>
+        {
+            string fileName = Path.GetFileName(file);
+            string extension = Path.GetExtension(file);
 
-                if (extensionsToIgnore.Contains(extension))
-                {
-                    // ignore native files, those go to lib/%abi%
-                    // also, aapt is not happy about zip files
-                    return false;
-                }
-                if (fileName.StartsWith("."))
-                {
-                    // aapt complains on such files
-                    return false;
-                }
-                return true;
+            if (extensionsToIgnore.Contains(extension))
+            {
+                // ignore native files, those go to lib/%abi%
+                // also, aapt is not happy about zip files
+                return false;
             }
-        );
+            if (fileName.StartsWith("."))
+            {
+                // aapt complains on such files
+                return false;
+            }
+            return true;
+        });
 
         // add AOT .so libraries
         foreach (var aotlib in aotLibraryFiles)

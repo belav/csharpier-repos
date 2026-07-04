@@ -12,9 +12,8 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void NullToCtor()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "transformFlags",
-                () => new DynamicAttribute(null)
+            AssertExtensions.Throws<ArgumentNullException>("transformFlags", () =>
+                new DynamicAttribute(null)
             );
         }
 

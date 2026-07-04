@@ -255,15 +255,12 @@ public class CompiledPageActionDescriptorBuilderTest
         );
 
         // Assert
-        Assert.Collection(
-            handlerDescriptors,
-            d =>
-            {
-                Assert.Equal(handlerModel.MethodInfo, d.MethodInfo);
-                Assert.Equal(handlerModel.HttpMethod, d.HttpMethod);
-                Assert.Equal(handlerModel.HandlerName, d.Name);
-            }
-        );
+        Assert.Collection(handlerDescriptors, d =>
+        {
+            Assert.Equal(handlerModel.MethodInfo, d.MethodInfo);
+            Assert.Equal(handlerModel.HttpMethod, d.HttpMethod);
+            Assert.Equal(handlerModel.HandlerName, d.Name);
+        });
     }
 
     private class ModelWithHandler
@@ -357,16 +354,13 @@ public class CompiledPageActionDescriptorBuilderTest
         );
 
         // Assert
-        Assert.Collection(
-            propertyDescriptors,
-            p =>
-            {
-                Assert.Same(propertyModel.PropertyName, p.Name);
-                Assert.Same(typeof(int), p.ParameterType);
-                Assert.Same(propertyModel.PropertyInfo, p.Property);
-                Assert.Same(propertyModel.BindingInfo, p.BindingInfo);
-            }
-        );
+        Assert.Collection(propertyDescriptors, p =>
+        {
+            Assert.Same(propertyModel.PropertyName, p.Name);
+            Assert.Same(typeof(int), p.ParameterType);
+            Assert.Same(propertyModel.PropertyInfo, p.Property);
+            Assert.Same(propertyModel.BindingInfo, p.BindingInfo);
+        });
     }
 
     private class HandlerWithProperty
@@ -411,16 +405,13 @@ public class CompiledPageActionDescriptorBuilderTest
         );
 
         // Assert
-        Assert.Collection(
-            propertyDescriptors,
-            p =>
-            {
-                Assert.Same(propertyModel1.PropertyName, p.Name);
-                Assert.Same(typeof(int), p.ParameterType);
-                Assert.Same(propertyModel1.PropertyInfo, p.Property);
-                Assert.Same(propertyModel1.BindingInfo, p.BindingInfo);
-            }
-        );
+        Assert.Collection(propertyDescriptors, p =>
+        {
+            Assert.Same(propertyModel1.PropertyName, p.Name);
+            Assert.Same(typeof(int), p.ParameterType);
+            Assert.Same(propertyModel1.PropertyInfo, p.Property);
+            Assert.Same(propertyModel1.BindingInfo, p.BindingInfo);
+        });
     }
 
     [Fact]

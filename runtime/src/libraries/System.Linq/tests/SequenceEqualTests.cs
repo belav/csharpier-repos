@@ -224,9 +224,8 @@ namespace System.Linq.Tests
             int[] first = null;
             int[] second = { };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => first.SequenceEqual(second)
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                first.SequenceEqual(second)
             );
         }
 
@@ -236,22 +235,19 @@ namespace System.Linq.Tests
             int[] first = { };
             int[] second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.SequenceEqual(second)
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.SequenceEqual(second)
             );
         }
 
         [Fact]
         public void ByteArrays_SpecialCasedButExpectedBehavior()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => ((byte[])null).SequenceEqual(new byte[1])
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                ((byte[])null).SequenceEqual(new byte[1])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => new byte[1].SequenceEqual(null)
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                new byte[1].SequenceEqual(null)
             );
 
             Assert.False(new byte[1].SequenceEqual(new byte[0]));

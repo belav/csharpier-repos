@@ -152,16 +152,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
 
             // Should throw the same exception as the simpler API (which follows a different code path).
-            Assert.Throws(
-                exceptionType,
-                () =>
-                    SyntaxFactory.Token(
-                        default(SyntaxTriviaList),
-                        SyntaxKind.IdentifierName,
-                        "text",
-                        "valueText",
-                        default(SyntaxTriviaList)
-                    )
+            Assert.Throws(exceptionType, () =>
+                SyntaxFactory.Token(
+                    default(SyntaxTriviaList),
+                    SyntaxKind.IdentifierName,
+                    "text",
+                    "valueText",
+                    default(SyntaxTriviaList)
+                )
             );
         }
 

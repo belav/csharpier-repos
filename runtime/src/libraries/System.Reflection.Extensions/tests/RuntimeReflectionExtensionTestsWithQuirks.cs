@@ -45,9 +45,8 @@ namespace System.Reflection.Tests
                         type.GetDeclaredField("InheritedPropertyNames").GetValue(null)
                 );
 
-                Assert.All(
-                    type.AsType().GetRuntimeProperties(),
-                    p => Assert.True(properties.Remove(p.Name))
+                Assert.All(type.AsType().GetRuntimeProperties(), p =>
+                    Assert.True(properties.Remove(p.Name))
                 );
                 Assert.Empty(properties);
             }
@@ -81,9 +80,8 @@ namespace System.Reflection.Tests
                     (IEnumerable<string>)type.GetDeclaredField("InheritedEvents").GetValue(null)
                 );
 
-                Assert.All(
-                    type.AsType().GetRuntimeEvents(),
-                    e => Assert.True(events.Remove(e.Name))
+                Assert.All(type.AsType().GetRuntimeEvents(), e =>
+                    Assert.True(events.Remove(e.Name))
                 );
                 Assert.Empty(events);
             }

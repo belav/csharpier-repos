@@ -48,10 +48,8 @@ internal sealed class RemoteOptionsProviderCache<TOptions>
         CancellationToken cancellationToken
     )
     {
-        var lazyOptions = ImmutableInterlocked.GetOrAdd(
-            ref _cache,
-            languageServices.Language,
-            _ => AsyncLazy.Create(GetRemoteOptionsAsync)
+        var lazyOptions = ImmutableInterlocked.GetOrAdd(ref _cache, languageServices.Language, _ =>
+            AsyncLazy.Create(GetRemoteOptionsAsync)
         );
         return await lazyOptions.GetValueAsync(cancellationToken).ConfigureAwait(false);
 

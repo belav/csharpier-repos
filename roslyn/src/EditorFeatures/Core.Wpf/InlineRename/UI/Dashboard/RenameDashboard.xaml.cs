@@ -186,15 +186,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         }
 
         internal void FocusNextElement() =>
-            FocusElement(
-                _tabNavigableChildren.First(),
-                i => i == _tabNavigableChildren.Count - 1 ? 0 : i + 1
+            FocusElement(_tabNavigableChildren.First(), i =>
+                i == _tabNavigableChildren.Count - 1 ? 0 : i + 1
             );
 
         internal void FocusPreviousElement() =>
-            FocusElement(
-                _tabNavigableChildren.Last(),
-                i => i == 0 ? _tabNavigableChildren.Count - 1 : i - 1
+            FocusElement(_tabNavigableChildren.Last(), i =>
+                i == 0 ? _tabNavigableChildren.Count - 1 : i - 1
             );
 
         private void OnPresentationSourceChanged(object sender, SourceChangedEventArgs args)

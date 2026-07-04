@@ -29,9 +29,8 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Ctor_NullKeyword_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keyword",
-                () => new HelpKeywordAttribute((string)null)
+            AssertExtensions.Throws<ArgumentNullException>("keyword", () =>
+                new HelpKeywordAttribute((string)null)
             );
         }
 
@@ -48,9 +47,8 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "t",
-                () => new HelpKeywordAttribute((Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("t", () =>
+                new HelpKeywordAttribute((Type)null)
             );
         }
 

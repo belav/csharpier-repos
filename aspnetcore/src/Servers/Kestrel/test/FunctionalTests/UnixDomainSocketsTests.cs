@@ -95,13 +95,10 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
                     webHostBuilder
                         .UseKestrel(o =>
                         {
-                            o.ListenUnixSocket(
-                                path,
-                                builder =>
-                                {
-                                    builder.Run(EchoServer);
-                                }
-                            );
+                            o.ListenUnixSocket(path, builder =>
+                            {
+                                builder.Run(EchoServer);
+                            });
                         })
                         .Configure(c => { });
                 })

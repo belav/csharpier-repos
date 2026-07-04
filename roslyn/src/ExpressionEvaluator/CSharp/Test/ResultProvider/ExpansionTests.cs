@@ -3955,24 +3955,16 @@ class D : C
 
             // GetChildren
             var getChildrenResult = default(DkmGetChildrenAsyncResult);
-            resultProvider.GetChildren(
-                evalResult,
-                workList,
-                n,
-                DefaultInspectionContext,
-                r => getChildrenResult = r
+            resultProvider.GetChildren(evalResult, workList, n, DefaultInspectionContext, r =>
+                getChildrenResult = r
             );
             Assert.Equal(0, workList.Length);
             Assert.Equal(n, getChildrenResult.InitialChildren.Length);
 
             // GetItems
             var getItemsResult = default(DkmEvaluationEnumAsyncResult);
-            resultProvider.GetItems(
-                getChildrenResult.EnumContext,
-                workList,
-                0,
-                n,
-                r => getItemsResult = r
+            resultProvider.GetItems(getChildrenResult.EnumContext, workList, 0, n, r =>
+                getItemsResult = r
             );
             Assert.Equal(0, workList.Length);
             Assert.Equal(n, getItemsResult.Items.Length);
@@ -4012,12 +4004,8 @@ class C
 
                 // GetChildren
                 var getChildrenResult = default(DkmGetChildrenAsyncResult);
-                resultProvider.GetChildren(
-                    evalResult,
-                    workList,
-                    n,
-                    DefaultInspectionContext,
-                    r => getChildrenResult = r
+                resultProvider.GetChildren(evalResult, workList, n, DefaultInspectionContext, r =>
+                    getChildrenResult = r
                 );
                 Assert.Equal(1, workList.Length);
                 workList.Execute();
@@ -4025,12 +4013,8 @@ class C
 
                 // GetItems
                 var getItemsResult = default(DkmEvaluationEnumAsyncResult);
-                resultProvider.GetItems(
-                    getChildrenResult.EnumContext,
-                    workList,
-                    0,
-                    n,
-                    r => getItemsResult = r
+                resultProvider.GetItems(getChildrenResult.EnumContext, workList, 0, n, r =>
+                    getItemsResult = r
                 );
                 Assert.Equal(1, workList.Length);
                 workList.Execute();
@@ -4075,12 +4059,8 @@ class C
 
                 // GetChildren
                 var getChildrenResult = default(DkmGetChildrenAsyncResult);
-                resultProvider.GetChildren(
-                    evalResult,
-                    workList,
-                    n,
-                    DefaultInspectionContext,
-                    r => getChildrenResult = r
+                resultProvider.GetChildren(evalResult, workList, n, DefaultInspectionContext, r =>
+                    getChildrenResult = r
                 );
                 Assert.Equal(1, workList.Length);
                 workList.Execute();
@@ -4090,12 +4070,8 @@ class C
 
                 // GetItems
                 var getItemsResult = default(DkmEvaluationEnumAsyncResult);
-                resultProvider.GetItems(
-                    getChildrenResult.EnumContext,
-                    workList,
-                    0,
-                    n,
-                    r => getItemsResult = r
+                resultProvider.GetItems(getChildrenResult.EnumContext, workList, 0, n, r =>
+                    getItemsResult = r
                 );
                 Assert.Equal(1, workList.Length);
                 workList.Execute();

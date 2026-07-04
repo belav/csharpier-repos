@@ -5524,40 +5524,36 @@ class C
     }
 }
 ";
-            CompileAndVerify(
-                source,
-                expectedOutput: "23",
-                sourceSymbolValidator: m =>
-                {
-                    var compilation = m.DeclaringCompilation;
-                    compilation.VerifyDiagnostics();
-                    var tree = compilation.SyntaxTrees[0];
-                    var model = compilation.GetSemanticModel(tree);
-                    var descendents = tree.GetRoot().DescendantNodes();
+            CompileAndVerify(source, expectedOutput: "23", sourceSymbolValidator: m =>
+            {
+                var compilation = m.DeclaringCompilation;
+                compilation.VerifyDiagnostics();
+                var tree = compilation.SyntaxTrees[0];
+                var model = compilation.GetSemanticModel(tree);
+                var descendents = tree.GetRoot().DescendantNodes();
 
-                    var parameter = descendents.OfType<ParameterSyntax>().Single();
-                    Assert.Equal("int n = N", parameter.ToString());
-                    Assert.Equal(
-                        "[System.Int32 n = 2]",
-                        model.GetDeclaredSymbol(parameter).ToTestDisplayString()
-                    );
+                var parameter = descendents.OfType<ParameterSyntax>().Single();
+                Assert.Equal("int n = N", parameter.ToString());
+                Assert.Equal(
+                    "[System.Int32 n = 2]",
+                    model.GetDeclaredSymbol(parameter).ToTestDisplayString()
+                );
 
-                    var name = "N";
-                    var declarator = descendents
-                        .OfType<VariableDeclaratorSyntax>()
-                        .Where(d => d.Identifier.ValueText == name)
-                        .Single();
-                    var symbol = (ILocalSymbol)model.GetDeclaredSymbol(declarator);
-                    Assert.NotNull(symbol);
-                    Assert.Equal("System.Int32 N", symbol.ToTestDisplayString());
-                    var refs = descendents
-                        .OfType<IdentifierNameSyntax>()
-                        .Where(n => n.Identifier.ValueText == name)
-                        .ToArray();
-                    Assert.Equal(1, refs.Length);
-                    Assert.Same(symbol, model.GetSymbolInfo(refs[0]).Symbol);
-                }
-            );
+                var name = "N";
+                var declarator = descendents
+                    .OfType<VariableDeclaratorSyntax>()
+                    .Where(d => d.Identifier.ValueText == name)
+                    .Single();
+                var symbol = (ILocalSymbol)model.GetDeclaredSymbol(declarator);
+                Assert.NotNull(symbol);
+                Assert.Equal("System.Int32 N", symbol.ToTestDisplayString());
+                var refs = descendents
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(n => n.Identifier.ValueText == name)
+                    .ToArray();
+                Assert.Equal(1, refs.Length);
+                Assert.Same(symbol, model.GetSymbolInfo(refs[0]).Symbol);
+            });
         }
 
         [Fact, WorkItem(16821, "https://github.com/dotnet/roslyn/issues/16821")]

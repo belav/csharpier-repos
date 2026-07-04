@@ -161,26 +161,22 @@ public class ExecutionStrategyTest : IDisposable
     {
         var executed = false;
 
-        var executionStrategyMock = new TestExecutionStrategy(
-            Context,
-            shouldRetryOn: e => e is ArgumentOutOfRangeException
+        var executionStrategyMock = new TestExecutionStrategy(Context, shouldRetryOn: e =>
+            e is ArgumentOutOfRangeException
         );
 
         for (var i = 0; i < 2; i++)
         {
-            execute(
-                executionStrategyMock,
-                () =>
+            execute(executionStrategyMock, () =>
+            {
+                if (!executed)
                 {
-                    if (!executed)
-                    {
-                        executed = true;
-                        throw new ArgumentOutOfRangeException();
-                    }
-
-                    return 0;
+                    executed = true;
+                    throw new ArgumentOutOfRangeException();
                 }
-            );
+
+                return 0;
+            });
 
             Assert.True(executed);
             executed = false;
@@ -215,23 +211,17 @@ public class ExecutionStrategyTest : IDisposable
         var executed1 = false;
         var executed2 = false;
 
-        execute(
-            mockExecutionStrategy1,
-            () =>
-            {
-                executed1 = true;
-                return 0;
-            }
-        );
+        execute(mockExecutionStrategy1, () =>
+        {
+            executed1 = true;
+            return 0;
+        });
 
-        execute(
-            mockExecutionStrategy2,
-            () =>
-            {
-                executed2 = true;
-                return 0;
-            }
-        );
+        execute(mockExecutionStrategy2, () =>
+        {
+            executed2 = true;
+            return 0;
+        });
 
         tran1.Commit();
         tran2.Commit();
@@ -274,18 +264,15 @@ public class ExecutionStrategyTest : IDisposable
 
         var executionCount = 0;
 
-        execute(
-            executionStrategyMock,
-            () =>
+        execute(executionStrategyMock, () =>
+        {
+            if (executionCount++ < 3)
             {
-                if (executionCount++ < 3)
-                {
-                    throw new DbUpdateException("", new ArgumentOutOfRangeException());
-                }
-
-                return executionCount;
+                throw new DbUpdateException("", new ArgumentOutOfRangeException());
             }
-        );
+
+            return executionCount;
+        });
 
         Assert.Equal(4, executionCount);
     }
@@ -310,20 +297,15 @@ public class ExecutionStrategyTest : IDisposable
 
         var executionCount = 0;
 
-        Assert.Throws<ArgumentNullException>(() =>
-            execute(
-                executionStrategyMock,
-                () =>
+        Assert.Throws<ArgumentNullException>(() => execute(executionStrategyMock, () =>
+            {
+                if (executionCount++ < 3)
                 {
-                    if (executionCount++ < 3)
-                    {
-                        throw new ArgumentOutOfRangeException();
-                    }
-
-                    throw new ArgumentNullException();
+                    throw new ArgumentOutOfRangeException();
                 }
-            )
-        );
+
+                throw new ArgumentNullException();
+            }));
 
         Assert.Equal(4, executionCount);
     }
@@ -351,21 +333,16 @@ public class ExecutionStrategyTest : IDisposable
 
         Assert.IsType<ArgumentOutOfRangeException>(
             Assert
-                .Throws<RetryLimitExceededException>(() =>
-                    execute(
-                        executionStrategyMock,
-                        () =>
+                .Throws<RetryLimitExceededException>(() => execute(executionStrategyMock, () =>
+                    {
+                        if (executionCount++ < 3)
                         {
-                            if (executionCount++ < 3)
-                            {
-                                throw new ArgumentOutOfRangeException();
-                            }
-
-                            Assert.True(false);
-                            return 0;
+                            throw new ArgumentOutOfRangeException();
                         }
-                    )
-                )
+
+                        Assert.True(false);
+                        return 0;
+                    }))
                 .InnerException
         );
 
@@ -489,26 +466,22 @@ public class ExecutionStrategyTest : IDisposable
     {
         var executed = false;
 
-        var executionStrategyMock = new TestExecutionStrategy(
-            Context,
-            shouldRetryOn: e => e is ArgumentOutOfRangeException
+        var executionStrategyMock = new TestExecutionStrategy(Context, shouldRetryOn: e =>
+            e is ArgumentOutOfRangeException
         );
 
         for (var i = 0; i < 2; i++)
         {
-            await executeAsync(
-                executionStrategyMock,
-                ct =>
+            await executeAsync(executionStrategyMock, ct =>
+            {
+                if (!executed)
                 {
-                    if (!executed)
-                    {
-                        executed = true;
-                        throw new ArgumentOutOfRangeException();
-                    }
-
-                    return Task.FromResult(0);
+                    executed = true;
+                    throw new ArgumentOutOfRangeException();
                 }
-            );
+
+                return Task.FromResult(0);
+            });
 
             Assert.True(executed);
             executed = false;
@@ -543,23 +516,17 @@ public class ExecutionStrategyTest : IDisposable
         var executed1 = false;
         var executed2 = false;
 
-        await executeAsync(
-            mockExecutionStrategy1,
-            ct =>
-            {
-                executed1 = true;
-                return Task.FromResult(0);
-            }
-        );
+        await executeAsync(mockExecutionStrategy1, ct =>
+        {
+            executed1 = true;
+            return Task.FromResult(0);
+        });
 
-        await executeAsync(
-            mockExecutionStrategy2,
-            ct =>
-            {
-                executed2 = true;
-                return Task.FromResult(0);
-            }
-        );
+        await executeAsync(mockExecutionStrategy2, ct =>
+        {
+            executed2 = true;
+            return Task.FromResult(0);
+        });
 
         await tran1.CommitAsync();
         await tran2.CommitAsync();
@@ -612,18 +579,15 @@ public class ExecutionStrategyTest : IDisposable
 
         var executionCount = 0;
 
-        await executeAsync(
-            executionStrategyMock,
-            ct =>
+        await executeAsync(executionStrategyMock, ct =>
+        {
+            if (executionCount++ < 3)
             {
-                if (executionCount++ < 3)
-                {
-                    throw new DbUpdateException("", new ArgumentOutOfRangeException());
-                }
-
-                return Task.FromResult(executionCount);
+                throw new DbUpdateException("", new ArgumentOutOfRangeException());
             }
-        );
+
+            return Task.FromResult(executionCount);
+        });
 
         Assert.Equal(4, executionCount);
     }
@@ -653,18 +617,15 @@ public class ExecutionStrategyTest : IDisposable
         var executionCount = 0;
 
         await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            executeAsync(
-                executionStrategyMock,
-                ct =>
+            executeAsync(executionStrategyMock, ct =>
+            {
+                if (executionCount++ < 3)
                 {
-                    if (executionCount++ < 3)
-                    {
-                        throw new ArgumentOutOfRangeException();
-                    }
-
-                    throw new ArgumentNullException();
+                    throw new ArgumentOutOfRangeException();
                 }
-            )
+
+                throw new ArgumentNullException();
+            })
         );
 
         Assert.Equal(4, executionCount);
@@ -696,23 +657,24 @@ public class ExecutionStrategyTest : IDisposable
         );
 
         // ReSharper disable once PossibleNullReferenceException
-        Assert.IsType<ArgumentOutOfRangeException>((
+        Assert.IsType<ArgumentOutOfRangeException>(
+            (
                 await Assert.ThrowsAsync<RetryLimitExceededException>(() =>
-                    executeAsync(
-                        executionStrategyMock,
-                        ct =>
+                    executeAsync(executionStrategyMock, ct =>
+                    {
+                        if (executionCount++ < 3)
                         {
-                            if (executionCount++ < 3)
-                            {
-                                throw new DbUpdateException("", new ArgumentOutOfRangeException());
-                            }
-
-                            Assert.True(false);
-                            return Task.FromResult(0);
+                            throw new DbUpdateException("", new ArgumentOutOfRangeException());
                         }
-                    )
+
+                        Assert.True(false);
+                        return Task.FromResult(0);
+                    })
                 )
-            ).InnerException.InnerException);
+            )
+                .InnerException
+                .InnerException
+        );
 
         Assert.Equal(3, executionCount);
     }
@@ -746,9 +708,8 @@ public class ExecutionStrategyTest : IDisposable
     [ConditionalFact]
     public async Task ExecuteAsync_preserves_synchronization_context_across_retries()
     {
-        var mockExecutionStrategy = new TestExecutionStrategy(
-            Context,
-            shouldRetryOn: e => e is DbUpdateConcurrencyException
+        var mockExecutionStrategy = new TestExecutionStrategy(Context, shouldRetryOn: e =>
+            e is DbUpdateConcurrencyException
         );
 
         var origSyncContext = SynchronizationContext.Current;

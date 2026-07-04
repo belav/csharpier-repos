@@ -39,9 +39,8 @@ namespace Microsoft.Extensions.Options.Generators
                 typeDeclarations.Collect()
             );
 
-            context.RegisterSourceOutput(
-                compilationAndTypes,
-                static (spc, source) => HandleAnnotatedTypes(source.Item1, source.Item2, spc)
+            context.RegisterSourceOutput(compilationAndTypes, static (spc, source) =>
+                HandleAnnotatedTypes(source.Item1, source.Item2, spc)
             );
         }
 

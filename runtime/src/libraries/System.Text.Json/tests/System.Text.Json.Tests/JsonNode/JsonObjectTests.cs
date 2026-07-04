@@ -968,15 +968,11 @@ namespace System.Text.Json.Nodes.Tests
         {
             string arrayText = "{\"prop0\":0,\"prop1\":1}";
             JsonObject jObj = Assert.IsType<JsonObject>(JsonNode.Parse(arrayText));
-            Parallel.For(
-                0,
-                128,
-                i =>
-                {
-                    Assert.Equal(0, (int)jObj["prop0"]);
-                    Assert.Equal(1, (int)jObj["prop1"]);
-                }
-            );
+            Parallel.For(0, 128, i =>
+            {
+                Assert.Equal(0, (int)jObj["prop0"]);
+                Assert.Equal(1, (int)jObj["prop1"]);
+            });
         }
 
         [Fact]

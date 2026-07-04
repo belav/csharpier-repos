@@ -548,71 +548,67 @@ class C : I1, I2
 }
 ";
 
-            CompileWithCustomILSource(
-                csharp,
-                il,
-                compilation =>
-                {
-                    var interface1 = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I1");
-                    var interface1Indexer = interface1.Indexers.Single();
+            CompileWithCustomILSource(csharp, il, compilation =>
+            {
+                var interface1 = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I1");
+                var interface1Indexer = interface1.Indexers.Single();
 
-                    var interface2 = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I2");
-                    var interface2Indexer = interface2.Indexers.Single();
+                var interface2 = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I2");
+                var interface2Indexer = interface2.Indexers.Single();
 
-                    var @class = compilation.GlobalNamespace.GetMember<SourceNamedTypeSymbol>("C");
-                    var classIndexer = @class.Indexers.Single();
+                var @class = compilation.GlobalNamespace.GetMember<SourceNamedTypeSymbol>("C");
+                var classIndexer = @class.Indexers.Single();
 
-                    // All of the indexers have the same Name
-                    Assert.Equal(WellKnownMemberNames.Indexer, classIndexer.Name);
-                    Assert.Equal(WellKnownMemberNames.Indexer, interface1Indexer.Name);
-                    Assert.Equal(WellKnownMemberNames.Indexer, interface2Indexer.Name);
+                // All of the indexers have the same Name
+                Assert.Equal(WellKnownMemberNames.Indexer, classIndexer.Name);
+                Assert.Equal(WellKnownMemberNames.Indexer, interface1Indexer.Name);
+                Assert.Equal(WellKnownMemberNames.Indexer, interface2Indexer.Name);
 
-                    // All of the indexers have different MetadataNames
-                    Assert.NotEqual(interface1Indexer.MetadataName, interface2Indexer.MetadataName);
-                    Assert.NotEqual(interface1Indexer.MetadataName, classIndexer.MetadataName);
-                    Assert.NotEqual(interface2Indexer.MetadataName, classIndexer.MetadataName);
+                // All of the indexers have different MetadataNames
+                Assert.NotEqual(interface1Indexer.MetadataName, interface2Indexer.MetadataName);
+                Assert.NotEqual(interface1Indexer.MetadataName, classIndexer.MetadataName);
+                Assert.NotEqual(interface2Indexer.MetadataName, classIndexer.MetadataName);
 
-                    // classIndexer implements both
-                    Assert.Equal(
-                        classIndexer,
-                        @class.FindImplementationForInterfaceMember(interface1Indexer)
-                    );
-                    Assert.Equal(
-                        classIndexer,
-                        @class.FindImplementationForInterfaceMember(interface2Indexer)
-                    );
+                // classIndexer implements both
+                Assert.Equal(
+                    classIndexer,
+                    @class.FindImplementationForInterfaceMember(interface1Indexer)
+                );
+                Assert.Equal(
+                    classIndexer,
+                    @class.FindImplementationForInterfaceMember(interface2Indexer)
+                );
 
-                    var synthesizedExplicitImplementations = @class
-                        .GetSynthesizedExplicitImplementations(default(CancellationToken))
-                        .ForwardingMethods;
-                    Assert.Equal(2, synthesizedExplicitImplementations.Length);
+                var synthesizedExplicitImplementations = @class
+                    .GetSynthesizedExplicitImplementations(default(CancellationToken))
+                    .ForwardingMethods;
+                Assert.Equal(2, synthesizedExplicitImplementations.Length);
 
-                    Assert.Equal(
-                        classIndexer.GetMethod,
-                        synthesizedExplicitImplementations[0].ImplementingMethod
-                    );
-                    Assert.Equal(
-                        classIndexer.GetMethod,
-                        synthesizedExplicitImplementations[1].ImplementingMethod
-                    );
+                Assert.Equal(
+                    classIndexer.GetMethod,
+                    synthesizedExplicitImplementations[0].ImplementingMethod
+                );
+                Assert.Equal(
+                    classIndexer.GetMethod,
+                    synthesizedExplicitImplementations[1].ImplementingMethod
+                );
 
-                    var interface1Getter = interface1Indexer.GetMethod;
-                    var interface2Getter = interface2Indexer.GetMethod;
-                    var interface1GetterImpl = synthesizedExplicitImplementations[0]
-                        .ExplicitInterfaceImplementations.Single();
-                    var interface2GetterImpl = synthesizedExplicitImplementations[1]
-                        .ExplicitInterfaceImplementations.Single();
+                var interface1Getter = interface1Indexer.GetMethod;
+                var interface2Getter = interface2Indexer.GetMethod;
+                var interface1GetterImpl = synthesizedExplicitImplementations[0]
+                    .ExplicitInterfaceImplementations.Single();
+                var interface2GetterImpl = synthesizedExplicitImplementations[1]
+                    .ExplicitInterfaceImplementations.Single();
 
-                    Assert.True(
-                        interface1Getter == interface1GetterImpl
-                            ^ interface1Getter == interface2GetterImpl
-                    );
-                    Assert.True(
-                        interface2Getter == interface1GetterImpl
-                            ^ interface2Getter == interface2GetterImpl
-                    );
-                }
-            );
+                Assert.True(
+                    interface1Getter == interface1GetterImpl
+                        ^ interface1Getter == interface2GetterImpl
+                );
+                Assert.True(
+                    interface2Getter == interface1GetterImpl
+                        ^ interface2Getter == interface2GetterImpl
+                );
+            });
         }
 
         /// <summary>
@@ -653,52 +649,48 @@ class C : I1
 }
 ";
 
-            CompileWithCustomILSource(
-                csharp,
-                il,
-                compilation =>
-                {
-                    var @interface = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I1");
-                    var interfaceIndexers = @interface.Indexers;
+            CompileWithCustomILSource(csharp, il, compilation =>
+            {
+                var @interface = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("I1");
+                var interfaceIndexers = @interface.Indexers;
 
-                    Assert.Equal(2, interfaceIndexers.Length);
-                    Assert.Equal(
-                        interfaceIndexers[0].ToTestDisplayString(),
-                        interfaceIndexers[1].ToTestDisplayString()
-                    );
+                Assert.Equal(2, interfaceIndexers.Length);
+                Assert.Equal(
+                    interfaceIndexers[0].ToTestDisplayString(),
+                    interfaceIndexers[1].ToTestDisplayString()
+                );
 
-                    var @class = compilation.GlobalNamespace.GetMember<SourceNamedTypeSymbol>("C");
-                    var classIndexer = @class.Indexers.Single();
+                var @class = compilation.GlobalNamespace.GetMember<SourceNamedTypeSymbol>("C");
+                var classIndexer = @class.Indexers.Single();
 
-                    // classIndexer implements both
-                    Assert.Equal(
-                        classIndexer,
-                        @class.FindImplementationForInterfaceMember(interfaceIndexers[0])
-                    );
-                    Assert.Equal(
-                        classIndexer,
-                        @class.FindImplementationForInterfaceMember(interfaceIndexers[1])
-                    );
+                // classIndexer implements both
+                Assert.Equal(
+                    classIndexer,
+                    @class.FindImplementationForInterfaceMember(interfaceIndexers[0])
+                );
+                Assert.Equal(
+                    classIndexer,
+                    @class.FindImplementationForInterfaceMember(interfaceIndexers[1])
+                );
 
-                    var synthesizedExplicitImplementation = @class
-                        .GetSynthesizedExplicitImplementations(default(CancellationToken))
-                        .ForwardingMethods.Single();
+                var synthesizedExplicitImplementation = @class
+                    .GetSynthesizedExplicitImplementations(default(CancellationToken))
+                    .ForwardingMethods.Single();
 
-                    Assert.Equal(
-                        classIndexer.GetMethod,
-                        synthesizedExplicitImplementation.ImplementingMethod
-                    );
+                Assert.Equal(
+                    classIndexer.GetMethod,
+                    synthesizedExplicitImplementation.ImplementingMethod
+                );
 
-                    Assert.Equal(
-                        interfaceIndexers[0].GetMethod,
-                        synthesizedExplicitImplementation.ExplicitInterfaceImplementations.Single()
-                    );
-                    Assert.Equal(
-                        interfaceIndexers[1].GetMethod,
-                        synthesizedExplicitImplementation.ExplicitInterfaceImplementations.Single()
-                    );
-                }
-            );
+                Assert.Equal(
+                    interfaceIndexers[0].GetMethod,
+                    synthesizedExplicitImplementation.ExplicitInterfaceImplementations.Single()
+                );
+                Assert.Equal(
+                    interfaceIndexers[1].GetMethod,
+                    synthesizedExplicitImplementation.ExplicitInterfaceImplementations.Single()
+                );
+            });
         }
 
         /// <summary>
@@ -889,29 +881,25 @@ class Derived : Base
 }
 ";
 
-            CompileWithCustomILSource(
-                csharp,
-                il,
-                compilation =>
-                {
-                    var baseClass = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("Base");
-                    var baseIndexer = baseClass.Indexers.Single();
+            CompileWithCustomILSource(csharp, il, compilation =>
+            {
+                var baseClass = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("Base");
+                var baseIndexer = baseClass.Indexers.Single();
 
-                    var derivedClass = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "Derived"
-                    );
-                    var derivedIndexer = derivedClass.Indexers.Single();
+                var derivedClass = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                    "Derived"
+                );
+                var derivedIndexer = derivedClass.Indexers.Single();
 
-                    // Rhe indexers have the same Name
-                    Assert.Equal(WellKnownMemberNames.Indexer, derivedIndexer.Name);
-                    Assert.Equal(WellKnownMemberNames.Indexer, baseIndexer.Name);
+                // Rhe indexers have the same Name
+                Assert.Equal(WellKnownMemberNames.Indexer, derivedIndexer.Name);
+                Assert.Equal(WellKnownMemberNames.Indexer, baseIndexer.Name);
 
-                    // The indexers have different MetadataNames
-                    Assert.NotEqual(baseIndexer.MetadataName, derivedIndexer.MetadataName);
+                // The indexers have different MetadataNames
+                Assert.NotEqual(baseIndexer.MetadataName, derivedIndexer.MetadataName);
 
-                    Assert.Equal(baseIndexer, derivedIndexer.OverriddenProperty);
-                }
-            );
+                Assert.Equal(baseIndexer, derivedIndexer.OverriddenProperty);
+            });
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
@@ -2598,20 +2586,17 @@ class Program
                     .IsTargetAttribute(AttributeDescription.IndexerNameAttribute)
             );
 
-            CompileAndVerify(
-                compilation,
-                symbolValidator: module =>
-                {
-                    var peIndexer = (PEPropertySymbol)
-                        module.GlobalNamespace.GetTypeMember("Program").Indexers.Single();
-                    Assert.True(peIndexer.IsIndexer);
-                    Assert.Equal("A", peIndexer.MetadataName);
-                    Assert.Empty(peIndexer.GetAttributes());
-                    Assert.Empty(
-                        ((PEModuleSymbol)module).GetCustomAttributesForToken(peIndexer.Handle)
-                    );
-                }
-            );
+            CompileAndVerify(compilation, symbolValidator: module =>
+            {
+                var peIndexer = (PEPropertySymbol)
+                    module.GlobalNamespace.GetTypeMember("Program").Indexers.Single();
+                Assert.True(peIndexer.IsIndexer);
+                Assert.Equal("A", peIndexer.MetadataName);
+                Assert.Empty(peIndexer.GetAttributes());
+                Assert.Empty(
+                    ((PEModuleSymbol)module).GetCustomAttributesForToken(peIndexer.Handle)
+                );
+            });
         }
 
         [WorkItem(545884, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545884")]
@@ -2638,9 +2623,8 @@ class B
 ";
             var compilation = CreateCompilation(source);
 
-            var loopResult = Parallel.ForEach(
-                compilation.GlobalNamespace.GetTypeMembers(),
-                type => type.ForceComplete(null, default(CancellationToken))
+            var loopResult = Parallel.ForEach(compilation.GlobalNamespace.GetTypeMembers(), type =>
+                type.ForceComplete(null, default(CancellationToken))
             );
 
             Assert.True(loopResult.IsCompleted);
@@ -2672,9 +2656,8 @@ class B
 ";
             var compilation = CreateCompilation(source);
 
-            var loopResult = Parallel.ForEach(
-                compilation.GlobalNamespace.GetTypeMembers(),
-                type => type.ForceComplete(null, default(CancellationToken))
+            var loopResult = Parallel.ForEach(compilation.GlobalNamespace.GetTypeMembers(), type =>
+                type.ForceComplete(null, default(CancellationToken))
             );
 
             Assert.True(loopResult.IsCompleted);

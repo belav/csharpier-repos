@@ -25488,17 +25488,14 @@ public class C
                 parseOptions: TestOptions.Regular9
             );
 
-            CompileAndVerify(
-                c,
-                symbolValidator: module =>
-                {
-                    var c = module.ContainingAssembly.GetTypeByMetadataName("C");
-                    var init = c.GetMember<MethodSymbol>("Init");
-                    Assert.Empty(init.NotNullMembers);
-                    Assert.Empty(init.NotNullWhenFalseMembers);
-                    Assert.Empty(init.NotNullWhenTrueMembers);
-                }
-            );
+            CompileAndVerify(c, symbolValidator: module =>
+            {
+                var c = module.ContainingAssembly.GetTypeByMetadataName("C");
+                var init = c.GetMember<MethodSymbol>("Init");
+                Assert.Empty(init.NotNullMembers);
+                Assert.Empty(init.NotNullWhenFalseMembers);
+                Assert.Empty(init.NotNullWhenTrueMembers);
+            });
         }
 
         [Fact, WorkItem(58598, "https://github.com/dotnet/roslyn/issues/58598")]
@@ -25520,17 +25517,14 @@ public class C
                 parseOptions: TestOptions.Regular9
             );
 
-            CompileAndVerify(
-                c,
-                symbolValidator: module =>
-                {
-                    var c = module.ContainingAssembly.GetTypeByMetadataName("C");
-                    var init = c.GetMember<MethodSymbol>("Init");
-                    Assert.Empty(init.NotNullMembers);
-                    Assert.Empty(init.NotNullWhenFalseMembers);
-                    Assert.Empty(init.NotNullWhenTrueMembers);
-                }
-            );
+            CompileAndVerify(c, symbolValidator: module =>
+            {
+                var c = module.ContainingAssembly.GetTypeByMetadataName("C");
+                var init = c.GetMember<MethodSymbol>("Init");
+                Assert.Empty(init.NotNullMembers);
+                Assert.Empty(init.NotNullWhenFalseMembers);
+                Assert.Empty(init.NotNullWhenTrueMembers);
+            });
         }
 
         [Fact]
@@ -72612,21 +72606,18 @@ class Program
                 .OfType<AnonymousObjectMemberDeclaratorSyntax>()
                 .ToImmutableArray();
             Assert.Equal(2, declarators.Length);
-            Assert.All(
-                declarators,
-                declarator =>
-                {
-                    var typeInfo = model.GetTypeInfo(declarator.Expression);
-                    Assert.Equal(
-                        CodeAnalysis.NullableFlowState.NotNull,
-                        typeInfo.Nullability.FlowState
-                    );
-                    Assert.Equal(
-                        CodeAnalysis.NullableAnnotation.Annotated,
-                        typeInfo.Nullability.Annotation
-                    );
-                }
-            );
+            Assert.All(declarators, declarator =>
+            {
+                var typeInfo = model.GetTypeInfo(declarator.Expression);
+                Assert.Equal(
+                    CodeAnalysis.NullableFlowState.NotNull,
+                    typeInfo.Nullability.FlowState
+                );
+                Assert.Equal(
+                    CodeAnalysis.NullableAnnotation.Annotated,
+                    typeInfo.Nullability.Annotation
+                );
+            });
         }
 
         [Fact]
@@ -88876,64 +88867,55 @@ public class F : C<F?>, I1<C<B?>>, I2<C<B>?>
                     .WithLocation(5, 33)
             );
 
-            CompileAndVerify(
-                compilation,
-                symbolValidator: m =>
-                {
-                    var b = ((PEModuleSymbol)m).GlobalNamespace.GetTypeMember("B");
-                    Assert.Equal("System.String? B.F1", b.GetMember("F1").ToTestDisplayString());
-                    Assert.Equal(
-                        "event System.Action? B.E1",
-                        b.GetMember("E1").ToTestDisplayString()
-                    );
-                    Assert.Equal(
-                        "System.String? B.P1 { get; set; }",
-                        b.GetMember("P1").ToTestDisplayString()
-                    );
-                    Assert.Equal(
-                        "System.String?[][,] B.P2 { get; set; }",
-                        b.GetMember("P2").ToTestDisplayString()
-                    );
-                    Assert.Equal(
-                        "System.Action<System.String?> B.M1(System.String? x)",
-                        b.GetMember("M1").ToTestDisplayString()
-                    );
-                    Assert.Equal(
-                        "System.String[]?[,] B.M2(System.String[][,]? x)",
-                        b.GetMember("M2").ToTestDisplayString()
-                    );
-                    Assert.Equal(
-                        "System.String? B.this[System.Action? x] { get; set; }",
-                        b.GetMember("this[]").ToTestDisplayString()
-                    );
-                    Assert.Equal(
-                        "B.implicit operator B?(int)",
-                        b.GetMember("op_Implicit").ToDisplayString()
-                    );
-                    Assert.Equal(
-                        "event System.Action? B.E2",
-                        b.GetMember("E2").ToTestDisplayString()
-                    );
+            CompileAndVerify(compilation, symbolValidator: m =>
+            {
+                var b = ((PEModuleSymbol)m).GlobalNamespace.GetTypeMember("B");
+                Assert.Equal("System.String? B.F1", b.GetMember("F1").ToTestDisplayString());
+                Assert.Equal("event System.Action? B.E1", b.GetMember("E1").ToTestDisplayString());
+                Assert.Equal(
+                    "System.String? B.P1 { get; set; }",
+                    b.GetMember("P1").ToTestDisplayString()
+                );
+                Assert.Equal(
+                    "System.String?[][,] B.P2 { get; set; }",
+                    b.GetMember("P2").ToTestDisplayString()
+                );
+                Assert.Equal(
+                    "System.Action<System.String?> B.M1(System.String? x)",
+                    b.GetMember("M1").ToTestDisplayString()
+                );
+                Assert.Equal(
+                    "System.String[]?[,] B.M2(System.String[][,]? x)",
+                    b.GetMember("M2").ToTestDisplayString()
+                );
+                Assert.Equal(
+                    "System.String? B.this[System.Action? x] { get; set; }",
+                    b.GetMember("this[]").ToTestDisplayString()
+                );
+                Assert.Equal(
+                    "B.implicit operator B?(int)",
+                    b.GetMember("op_Implicit").ToDisplayString()
+                );
+                Assert.Equal("event System.Action? B.E2", b.GetMember("E2").ToTestDisplayString());
 
-                    Assert.Equal(
-                        "String? D1()",
-                        compilation
-                            .GetTypeByMetadataName("D1")
-                            .ToDisplayString(
-                                new SymbolDisplayFormat(
-                                    delegateStyle: SymbolDisplayDelegateStyle.NameAndSignature,
-                                    miscellaneousOptions: SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                                )
+                Assert.Equal(
+                    "String? D1()",
+                    compilation
+                        .GetTypeByMetadataName("D1")
+                        .ToDisplayString(
+                            new SymbolDisplayFormat(
+                                delegateStyle: SymbolDisplayDelegateStyle.NameAndSignature,
+                                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                             )
-                    );
+                        )
+                );
 
-                    var f = ((PEModuleSymbol)m).GlobalNamespace.GetTypeMember("F");
-                    Assert.Equal("C<F?>", f.BaseType().ToTestDisplayString());
+                var f = ((PEModuleSymbol)m).GlobalNamespace.GetTypeMember("F");
+                Assert.Equal("C<F?>", f.BaseType().ToTestDisplayString());
 
-                    Assert.Equal("I1<C<B?>>", f.Interfaces()[0].ToTestDisplayString());
-                    Assert.Equal("I2<C<B>?>", f.Interfaces()[1].ToTestDisplayString());
-                }
-            );
+                Assert.Equal("I1<C<B?>>", f.Interfaces()[0].ToTestDisplayString());
+                Assert.Equal("I2<C<B>?>", f.Interfaces()[1].ToTestDisplayString());
+            });
         }
 
         [Fact]
@@ -186823,21 +186805,18 @@ class UsesNonNullableTypeAndDoesNullCheck
             Assert.Equal("s", identifiers[0].ToString());
             Assert.Equal("Length", identifiers[1].ToString());
             Assert.Equal("s", identifiers[2].ToString());
-            Assert.All(
-                identifiers,
-                identifier =>
-                {
-                    var typeInfo = model.GetTypeInfo(identifier);
-                    Assert.Equal(
-                        CodeAnalysis.NullableFlowState.NotNull,
-                        typeInfo.Nullability.FlowState
-                    );
-                    Assert.Equal(
-                        CodeAnalysis.NullableAnnotation.NotAnnotated,
-                        typeInfo.Nullability.Annotation
-                    );
-                }
-            );
+            Assert.All(identifiers, identifier =>
+            {
+                var typeInfo = model.GetTypeInfo(identifier);
+                Assert.Equal(
+                    CodeAnalysis.NullableFlowState.NotNull,
+                    typeInfo.Nullability.FlowState
+                );
+                Assert.Equal(
+                    CodeAnalysis.NullableAnnotation.NotAnnotated,
+                    typeInfo.Nullability.Annotation
+                );
+            });
         }
 
         [Fact, WorkItem(65050, "https://github.com/dotnet/roslyn/issues/65050")]
@@ -186887,21 +186866,18 @@ class UsesNonNullableTypeAndDoesNullCheck
             Assert.Equal("s", identifiers[0].ToString());
             Assert.Equal("Length", identifiers[1].ToString());
             Assert.Equal("s", identifiers[2].ToString());
-            Assert.All(
-                identifiers,
-                identifier =>
-                {
-                    var typeInfo = model.GetTypeInfo(identifier);
-                    Assert.Equal(
-                        CodeAnalysis.NullableFlowState.NotNull,
-                        typeInfo.Nullability.FlowState
-                    );
-                    Assert.Equal(
-                        CodeAnalysis.NullableAnnotation.NotAnnotated,
-                        typeInfo.Nullability.Annotation
-                    );
-                }
-            );
+            Assert.All(identifiers, identifier =>
+            {
+                var typeInfo = model.GetTypeInfo(identifier);
+                Assert.Equal(
+                    CodeAnalysis.NullableFlowState.NotNull,
+                    typeInfo.Nullability.FlowState
+                );
+                Assert.Equal(
+                    CodeAnalysis.NullableAnnotation.NotAnnotated,
+                    typeInfo.Nullability.Annotation
+                );
+            });
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/66960")]

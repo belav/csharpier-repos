@@ -521,19 +521,16 @@ public class QueryableExtensionsTest
         await ArgumentNullTest("predicate", () => Source().AllAsync(null, new CancellationToken()));
         await ArgumentNullTest("predicate", () => Source().CountAsync(null));
         await ArgumentNullTest("predicate", () => Source().LongCountAsync(null));
-        await ArgumentNullTest(
-            "predicate",
-            () => Source().LongCountAsync(null, new CancellationToken())
+        await ArgumentNullTest("predicate", () =>
+            Source().LongCountAsync(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source().MinAsync<int, bool>(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source().MinAsync<int, bool>(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source().MinAsync<int, bool>(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source().MaxAsync<int, bool>(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source().MaxAsync<int, bool>(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source().MaxAsync<int, bool>(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source<int>().SumAsync(null));
         await ArgumentNullTest("selector", () => Source<int?>().SumAsync(null));
@@ -546,54 +543,44 @@ public class QueryableExtensionsTest
         await ArgumentNullTest("selector", () => Source<decimal>().SumAsync(null));
         await ArgumentNullTest("selector", () => Source<decimal?>().SumAsync(null));
         await ArgumentNullTest("selector", () => Source<int>().AverageAsync(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source<int>().AverageAsync(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source<int>().AverageAsync(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source<int?>().AverageAsync(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source<int?>().AverageAsync(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source<int?>().AverageAsync(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source<long>().AverageAsync(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source<long>().AverageAsync(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source<long>().AverageAsync(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source<long?>().AverageAsync(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source<long?>().AverageAsync(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source<long?>().AverageAsync(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source<float>().AverageAsync(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source<float>().AverageAsync(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source<float>().AverageAsync(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source<float?>().AverageAsync(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source<float?>().AverageAsync(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source<float?>().AverageAsync(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source<double>().AverageAsync(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source<double>().AverageAsync(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source<double>().AverageAsync(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source<double?>().AverageAsync(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source<double?>().AverageAsync(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source<double?>().AverageAsync(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source<decimal>().AverageAsync(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source<decimal>().AverageAsync(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source<decimal>().AverageAsync(null, new CancellationToken())
         );
         await ArgumentNullTest("selector", () => Source<decimal?>().AverageAsync(null));
-        await ArgumentNullTest(
-            "selector",
-            () => Source<decimal?>().AverageAsync(null, new CancellationToken())
+        await ArgumentNullTest("selector", () =>
+            Source<decimal?>().AverageAsync(null, new CancellationToken())
         );
 
         // ReSharper restore AssignNullToNotNullAttribute

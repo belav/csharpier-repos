@@ -950,13 +950,10 @@ namespace System.Reflection.Internal
             }
 
             ReadColumn(unsortedReferences, rowSize, referenceOffset, isReferenceSmall);
-            Array.Sort(
-                ptrTable,
-                (int a, int b) =>
-                {
-                    return unsortedReferences[a - 1].CompareTo(unsortedReferences[b - 1]);
-                }
-            );
+            Array.Sort(ptrTable, (int a, int b) =>
+            {
+                return unsortedReferences[a - 1].CompareTo(unsortedReferences[b - 1]);
+            });
             return ptrTable;
         }
 

@@ -53,9 +53,8 @@ public class SqlServerConnectionTest
     public void Master_connection_string_none_default_command_timeout()
     {
         var options = new DbContextOptionsBuilder()
-            .UseSqlServer(
-                @"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest",
-                b => b.CommandTimeout(55)
+            .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=SqlServerConnectionTest", b =>
+                b.CommandTimeout(55)
             )
             .Options;
 

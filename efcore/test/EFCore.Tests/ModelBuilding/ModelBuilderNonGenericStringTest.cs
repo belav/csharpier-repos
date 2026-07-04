@@ -94,9 +94,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
             Action<TestEntityTypeBuilder<TEntity>> buildAction
         )
         {
-            ModelBuilder.Entity(
-                typeof(TEntity),
-                e => buildAction(new NonGenericStringTestEntityTypeBuilder<TEntity>(e))
+            ModelBuilder.Entity(typeof(TEntity), e =>
+                buildAction(new NonGenericStringTestEntityTypeBuilder<TEntity>(e))
             );
             return this;
         }
@@ -106,10 +105,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
             Action<TestEntityTypeBuilder<TEntity>> buildAction
         )
         {
-            ModelBuilder.SharedTypeEntity(
-                name,
-                typeof(TEntity),
-                e => buildAction(new NonGenericStringTestEntityTypeBuilder<TEntity>(e))
+            ModelBuilder.SharedTypeEntity(name, typeof(TEntity), e =>
+                buildAction(new NonGenericStringTestEntityTypeBuilder<TEntity>(e))
             );
             return this;
         }

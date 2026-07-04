@@ -155,9 +155,8 @@ namespace System.MemoryTests
         )]
         public static unsafe void AsMemory_2Arg_OutOfRange(string text, int start)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "start",
-                () => text.AsMemory(start)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("start", () =>
+                text.AsMemory(start)
             );
         }
 
@@ -168,9 +167,8 @@ namespace System.MemoryTests
         )]
         public static unsafe void AsMemory_3Arg_OutOfRange(string text, int start, int length)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "start",
-                () => text.AsMemory(start, length)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("start", () =>
+                text.AsMemory(start, length)
             );
         }
 

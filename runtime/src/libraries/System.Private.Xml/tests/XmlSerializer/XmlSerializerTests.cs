@@ -186,23 +186,15 @@ public static partial class XmlSerializerTests
         );
 
         Assert.NotNull(y);
-        Utils.Equal<SimpleType>(
-            x.F1,
-            y.F1,
-            (a, b) =>
-            {
-                return SimpleType.AreEqual(a, b);
-            }
-        );
+        Utils.Equal<SimpleType>(x.F1, y.F1, (a, b) =>
+        {
+            return SimpleType.AreEqual(a, b);
+        });
         Assert.Equal(x.F2, y.F2);
-        Utils.Equal<SimpleType>(
-            x.P1,
-            y.P1,
-            (a, b) =>
-            {
-                return SimpleType.AreEqual(a, b);
-            }
-        );
+        Utils.Equal<SimpleType>(x.P1, y.P1, (a, b) =>
+        {
+            return SimpleType.AreEqual(a, b);
+        });
         Assert.Equal(x.P2, y.P2);
     }
 
@@ -304,9 +296,8 @@ public static partial class XmlSerializerTests
         serializer = new XmlSerializer(type);
         if (createException != null)
         {
-            var ex = Assert.Throws(
-                createException,
-                () => Serialize(collection, expectedXml, () => serializer)
+            var ex = Assert.Throws(createException, () =>
+                Serialize(collection, expectedXml, () => serializer)
             );
             if (exMsg != null)
                 Assert.Contains(exMsg, $"{ex.Message} : {ex.InnerException?.Message}");
@@ -2140,10 +2131,8 @@ public static partial class XmlSerializerTests
   <TotalCost>28.20</TotalCost>
 </PurchaseOrder>";
 
-        var actual = SerializeAndDeserialize(
-            value,
-            baseline,
-            () => new XmlSerializer(value.GetType(), null, null, null, defaultNamespace)
+        var actual = SerializeAndDeserialize(value, baseline, () =>
+            new XmlSerializer(value.GetType(), null, null, null, defaultNamespace)
         );
         Assert.NotNull(actual);
         Assert.Equal(value.OrderDate, actual.OrderDate);
@@ -2180,10 +2169,8 @@ public static partial class XmlSerializerTests
             );
         }
 
-        actual = SerializeAndDeserialize(
-            value,
-            baseline,
-            () => new XmlSerializer(value.GetType(), null, null, null, defaultNamespace, null)
+        actual = SerializeAndDeserialize(value, baseline, () =>
+            new XmlSerializer(value.GetType(), null, null, null, defaultNamespace, null)
         );
         Assert.NotNull(actual);
         Assert.Equal(value.OrderDate, actual.OrderDate);

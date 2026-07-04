@@ -69,10 +69,8 @@ namespace System.Media.Test
         [InlineData("")]
         public void Ctor_NullOrEmptyString_ThrowsArgumentException(string soundLocation)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                null,
-                () => new SoundPlayer(soundLocation)
+            AssertExtensions.Throws<ArgumentException>("path", null, () =>
+                new SoundPlayer(soundLocation)
             );
         }
 
@@ -385,9 +383,8 @@ namespace System.Media.Test
         public void LoadTimeout_SetNegative_ThrowsArgumentOutOfRangeException()
         {
             var player = new SoundPlayer();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "LoadTimeout",
-                () => player.LoadTimeout = -1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("LoadTimeout", () =>
+                player.LoadTimeout = -1
             );
         }
 
@@ -433,10 +430,8 @@ namespace System.Media.Test
             Assert.Equal("", player.SoundLocation);
 
             player = new SoundPlayer("location");
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                null,
-                () => player.SoundLocation = soundLocation
+            AssertExtensions.Throws<ArgumentException>("path", null, () =>
+                player.SoundLocation = soundLocation
             );
 
             using (var stream = new MemoryStream())

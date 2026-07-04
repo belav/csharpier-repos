@@ -206,16 +206,14 @@ namespace System.Reflection.Emit.Tests
         public void GetArrayMethod_ArrayClassNotArray_ThrowsArgumentException(Type arrayClass)
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    module.GetArrayMethod(
-                        arrayClass,
-                        "TestMethod",
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                module.GetArrayMethod(
+                    arrayClass,
+                    "TestMethod",
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0]
+                )
             );
         }
 
@@ -225,51 +223,43 @@ namespace System.Reflection.Emit.Tests
         {
             ModuleBuilder module = Helpers.DynamicModule();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "arrayClass",
-                () =>
-                    module.GetArrayMethod(
-                        null,
-                        "TestMethod",
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("arrayClass", () =>
+                module.GetArrayMethod(
+                    null,
+                    "TestMethod",
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0]
+                )
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "methodName",
-                () =>
-                    module.GetArrayMethod(
-                        typeof(string[]),
-                        null,
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("methodName", () =>
+                module.GetArrayMethod(
+                    typeof(string[]),
+                    null,
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0]
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "methodName",
-                () =>
-                    module.GetArrayMethod(
-                        typeof(string[]),
-                        "",
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>("methodName", () =>
+                module.GetArrayMethod(
+                    typeof(string[]),
+                    "",
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[0]
+                )
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "argument",
-                () =>
-                    module.GetArrayMethod(
-                        typeof(string[]),
-                        "TestMethod",
-                        CallingConventions.Standard,
-                        typeof(void),
-                        new Type[] { null }
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("argument", () =>
+                module.GetArrayMethod(
+                    typeof(string[]),
+                    "TestMethod",
+                    CallingConventions.Standard,
+                    typeof(void),
+                    new Type[] { null }
+                )
             );
         }
 

@@ -493,15 +493,11 @@ namespace System.Text.Json.Nodes.Tests
         {
             string arrayText = "[\"elem0\",\"elem1\"]";
             JsonArray node = Assert.IsType<JsonArray>(JsonNode.Parse(arrayText));
-            Parallel.For(
-                0,
-                128,
-                i =>
-                {
-                    Assert.Equal("elem0", (string)node[0]);
-                    Assert.Equal("elem1", (string)node[1]);
-                }
-            );
+            Parallel.For(0, 128, i =>
+            {
+                Assert.Equal("elem0", (string)node[0]);
+                Assert.Equal("elem1", (string)node[1]);
+            });
         }
 
         [Fact]

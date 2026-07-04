@@ -132,19 +132,16 @@ public class AttributeRouteTest
         route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
 
         // Assert
-        Assert.Collection(
-            builder.OutboundEntries,
-            e =>
-            {
-                Assert.Empty(e.Constraints);
-                Assert.Empty(e.Defaults);
-                Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
-                Assert.Equal("BLOG_INDEX", e.RouteName);
-                Assert.Equal(17, e.Order);
-                Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
-                Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
-            }
-        );
+        Assert.Collection(builder.OutboundEntries, e =>
+        {
+            Assert.Empty(e.Constraints);
+            Assert.Empty(e.Defaults);
+            Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
+            Assert.Equal("BLOG_INDEX", e.RouteName);
+            Assert.Equal(17, e.Order);
+            Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
+            Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
+        });
     }
 
     [Fact]
@@ -177,19 +174,16 @@ public class AttributeRouteTest
         route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
 
         // Assert
-        Assert.Collection(
-            builder.OutboundEntries,
-            e =>
-            {
-                Assert.Single(e.Constraints, kvp => kvp.Key == "id");
-                Assert.Empty(e.Defaults);
-                Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
-                Assert.Equal("BLOG_INDEX", e.RouteName);
-                Assert.Equal(17, e.Order);
-                Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
-                Assert.Equal("api/Blog/{id:int}", e.RouteTemplate.TemplateText);
-            }
-        );
+        Assert.Collection(builder.OutboundEntries, e =>
+        {
+            Assert.Single(e.Constraints, kvp => kvp.Key == "id");
+            Assert.Empty(e.Defaults);
+            Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
+            Assert.Equal("BLOG_INDEX", e.RouteName);
+            Assert.Equal(17, e.Order);
+            Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
+            Assert.Equal("api/Blog/{id:int}", e.RouteTemplate.TemplateText);
+        });
     }
 
     [Fact]
@@ -222,19 +216,16 @@ public class AttributeRouteTest
         route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
 
         // Assert
-        Assert.Collection(
-            builder.OutboundEntries,
-            e =>
-            {
-                Assert.Empty(e.Constraints);
-                Assert.Equal(new RouteValueDictionary(new { slug = "hello" }), e.Defaults);
-                Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
-                Assert.Equal("BLOG_INDEX", e.RouteName);
-                Assert.Equal(17, e.Order);
-                Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
-                Assert.Equal("api/Blog/{*slug=hello}", e.RouteTemplate.TemplateText);
-            }
-        );
+        Assert.Collection(builder.OutboundEntries, e =>
+        {
+            Assert.Empty(e.Constraints);
+            Assert.Equal(new RouteValueDictionary(new { slug = "hello" }), e.Defaults);
+            Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
+            Assert.Equal("BLOG_INDEX", e.RouteName);
+            Assert.Equal(17, e.Order);
+            Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
+            Assert.Equal("api/Blog/{*slug=hello}", e.RouteTemplate.TemplateText);
+        });
     }
 
     // These actions seem like duplicates, but this is a real case that can happen where two different
@@ -339,18 +330,15 @@ public class AttributeRouteTest
         route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
 
         // Assert
-        Assert.Collection(
-            builder.InboundEntries,
-            e =>
-            {
-                Assert.Empty(e.Constraints);
-                Assert.Equal(17, e.Order);
-                Assert.Equal(RoutePrecedence.ComputeInbound(e.RouteTemplate), e.Precedence);
-                Assert.Equal("BLOG_INDEX", e.RouteName);
-                Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
-                Assert.Empty(e.Defaults);
-            }
-        );
+        Assert.Collection(builder.InboundEntries, e =>
+        {
+            Assert.Empty(e.Constraints);
+            Assert.Equal(17, e.Order);
+            Assert.Equal(RoutePrecedence.ComputeInbound(e.RouteTemplate), e.Precedence);
+            Assert.Equal("BLOG_INDEX", e.RouteName);
+            Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
+            Assert.Empty(e.Defaults);
+        });
     }
 
     [Fact]
@@ -383,18 +371,15 @@ public class AttributeRouteTest
         route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
 
         // Assert
-        Assert.Collection(
-            builder.InboundEntries,
-            e =>
-            {
-                Assert.Single(e.Constraints, kvp => kvp.Key == "id");
-                Assert.Equal(17, e.Order);
-                Assert.Equal(RoutePrecedence.ComputeInbound(e.RouteTemplate), e.Precedence);
-                Assert.Equal("BLOG_INDEX", e.RouteName);
-                Assert.Equal("api/Blog/{id:int}", e.RouteTemplate.TemplateText);
-                Assert.Empty(e.Defaults);
-            }
-        );
+        Assert.Collection(builder.InboundEntries, e =>
+        {
+            Assert.Single(e.Constraints, kvp => kvp.Key == "id");
+            Assert.Equal(17, e.Order);
+            Assert.Equal(RoutePrecedence.ComputeInbound(e.RouteTemplate), e.Precedence);
+            Assert.Equal("BLOG_INDEX", e.RouteName);
+            Assert.Equal("api/Blog/{id:int}", e.RouteTemplate.TemplateText);
+            Assert.Empty(e.Defaults);
+        });
     }
 
     [Fact]
@@ -427,21 +412,17 @@ public class AttributeRouteTest
         route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
 
         // Assert
-        Assert.Collection(
-            builder.InboundEntries,
-            e =>
-            {
-                Assert.Empty(e.Constraints);
-                Assert.Equal(17, e.Order);
-                Assert.Equal(RoutePrecedence.ComputeInbound(e.RouteTemplate), e.Precedence);
-                Assert.Equal("BLOG_INDEX", e.RouteName);
-                Assert.Equal("api/Blog/{*slug=hello}", e.RouteTemplate.TemplateText);
-                Assert.Collection(
-                    e.Defaults.OrderBy(kvp => kvp.Key),
-                    kvp => Assert.Equal(new KeyValuePair<string, object>("slug", "hello"), kvp)
-                );
-            }
-        );
+        Assert.Collection(builder.InboundEntries, e =>
+        {
+            Assert.Empty(e.Constraints);
+            Assert.Equal(17, e.Order);
+            Assert.Equal(RoutePrecedence.ComputeInbound(e.RouteTemplate), e.Precedence);
+            Assert.Equal("BLOG_INDEX", e.RouteName);
+            Assert.Equal("api/Blog/{*slug=hello}", e.RouteTemplate.TemplateText);
+            Assert.Collection(e.Defaults.OrderBy(kvp => kvp.Key), kvp =>
+                Assert.Equal(new KeyValuePair<string, object>("slug", "hello"), kvp)
+            );
+        });
     }
 
     // These actions seem like duplicates, but this is a real case that can happen where two different
@@ -491,18 +472,15 @@ public class AttributeRouteTest
         route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
 
         // Assert
-        Assert.Collection(
-            builder.InboundEntries,
-            e =>
-            {
-                Assert.Empty(e.Constraints);
-                Assert.Equal(17, e.Order);
-                Assert.Equal(RoutePrecedence.ComputeInbound(e.RouteTemplate), e.Precedence);
-                Assert.Equal("BLOG_INDEX", e.RouteName);
-                Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
-                Assert.Empty(e.Defaults);
-            }
-        );
+        Assert.Collection(builder.InboundEntries, e =>
+        {
+            Assert.Empty(e.Constraints);
+            Assert.Equal(17, e.Order);
+            Assert.Equal(RoutePrecedence.ComputeInbound(e.RouteTemplate), e.Precedence);
+            Assert.Equal("BLOG_INDEX", e.RouteName);
+            Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
+            Assert.Empty(e.Defaults);
+        });
     }
 
     [Theory]

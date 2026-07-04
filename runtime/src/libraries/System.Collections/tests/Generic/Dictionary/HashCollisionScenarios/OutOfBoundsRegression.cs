@@ -374,25 +374,21 @@ namespace System.Collections.Tests
             // Caller must check OrdinalIgnoreCase hash code to ensure correctness.
             static string GenerateCollidingStringCandidate(int seed)
             {
-                return string.Create(
-                    8,
-                    seed,
-                    (span, seed) =>
-                    {
-                        Span<byte> asBytes = MemoryMarshal.AsBytes(span);
+                return string.Create(8, seed, (span, seed) =>
+                {
+                    Span<byte> asBytes = MemoryMarshal.AsBytes(span);
 
-                        uint hash1 = (5381 << 16) + 5381;
-                        uint hash2 = BitOperations.RotateLeft(hash1, 5) + hash1;
+                    uint hash1 = (5381 << 16) + 5381;
+                    uint hash2 = BitOperations.RotateLeft(hash1, 5) + hash1;
 
-                        MemoryMarshal.Write(asBytes, in seed);
-                        MemoryMarshal.Write(asBytes.Slice(4), in hash2); // set hash2 := 0 (for Ordinal)
+                    MemoryMarshal.Write(asBytes, in seed);
+                    MemoryMarshal.Write(asBytes.Slice(4), in hash2); // set hash2 := 0 (for Ordinal)
 
-                        hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1) ^ (uint)seed;
-                        hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1);
+                    hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1) ^ (uint)seed;
+                    hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1);
 
-                        MemoryMarshal.Write(asBytes.Slice(8), in hash1); // set hash1 := 0 (for Ordinal)
-                    }
-                );
+                    MemoryMarshal.Write(asBytes.Slice(8), in hash1); // set hash1 := 0 (for Ordinal)
+                });
             }
         }
 

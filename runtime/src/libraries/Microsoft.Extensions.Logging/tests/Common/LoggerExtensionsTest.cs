@@ -861,16 +861,13 @@ namespace Microsoft.Extensions.Logging.Test
             var scopeState = (FormattedLogValues)sinkScope.Scope;
             Assert.Equal(expectedStringMessage, scopeState.ToString());
             Assert.True(scopeState.Count > 0);
-            Assert.Contains(
-                scopeState,
-                (kvp) =>
-                {
-                    return (
-                        string.Equals(kvp.Key, "ActionName")
-                        && string.Equals(kvp.Value?.ToString(), actionName)
-                    );
-                }
-            );
+            Assert.Contains(scopeState, (kvp) =>
+            {
+                return (
+                    string.Equals(kvp.Key, "ActionName")
+                    && string.Equals(kvp.Value?.ToString(), actionName)
+                );
+            });
         }
 
         private class TestLogValues : IReadOnlyList<KeyValuePair<string, object>>

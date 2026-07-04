@@ -17,14 +17,11 @@ public class PropertyActivatorTest
         var typeInfo = instance.GetType().GetTypeInfo();
         var property = typeInfo.GetDeclaredProperty("IntProperty");
         var invokedWith = -1;
-        var activator = new PropertyActivator<int>(
-            property,
-            valueAccessor: (val) =>
-            {
-                invokedWith = val;
-                return val;
-            }
-        );
+        var activator = new PropertyActivator<int>(property, valueAccessor: (val) =>
+        {
+            invokedWith = val;
+            return val;
+        });
 
         // Act
         activator.Activate(instance, 123);
@@ -66,13 +63,10 @@ public class PropertyActivatorTest
         );
 
         // Assert
-        Assert.Collection(
-            propertiesToActivate,
-            (activator) =>
-            {
-                Assert.Equal(expectedPropertyInfo, activator.PropertyInfo);
-            }
-        );
+        Assert.Collection(propertiesToActivate, (activator) =>
+        {
+            Assert.Equal(expectedPropertyInfo, activator.PropertyInfo);
+        });
     }
 
     [Fact]
@@ -92,13 +86,10 @@ public class PropertyActivatorTest
         );
 
         // Assert
-        Assert.Collection(
-            propertiesToActivate,
-            (activator) =>
-            {
-                Assert.Equal(expectedPropertyInfo, activator.PropertyInfo);
-            }
-        );
+        Assert.Collection(propertiesToActivate, (activator) =>
+        {
+            Assert.Equal(expectedPropertyInfo, activator.PropertyInfo);
+        });
     }
 
     [Fact]

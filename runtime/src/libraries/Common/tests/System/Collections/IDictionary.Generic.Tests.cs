@@ -832,13 +832,10 @@ namespace System.Collections.Tests
             if (!IsReadOnly)
             {
                 IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
-                Assert.All(
-                    dictionary.Keys.ToList(),
-                    key =>
-                    {
-                        Assert.True(dictionary.Remove(key));
-                    }
-                );
+                Assert.All(dictionary.Keys.ToList(), key =>
+                {
+                    Assert.True(dictionary.Remove(key));
+                });
                 Assert.Empty(dictionary);
             }
         }

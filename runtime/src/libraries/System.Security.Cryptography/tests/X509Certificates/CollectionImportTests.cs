@@ -470,14 +470,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509Certificate2Collection coll = new X509Certificate2Collection();
             byte[] nonEmptyBytes = new byte[1];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => coll.Import(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                coll.Import(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => coll.Import(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                coll.Import(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF)
             );
 
             // No test is performed here for the ephemeral flag failing downlevel, because the live
@@ -493,14 +491,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             byte[] nonEmptyBytes = new byte[1];
             X509Certificate2Collection coll = new X509Certificate2Collection();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => coll.Import(nonEmptyBytes, string.Empty, PersistedEphemeral)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                coll.Import(nonEmptyBytes, string.Empty, PersistedEphemeral)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => coll.Import(string.Empty, string.Empty, PersistedEphemeral)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                coll.Import(string.Empty, string.Empty, PersistedEphemeral)
             );
         }
 #endif

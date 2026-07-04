@@ -118,9 +118,8 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetTypedObjectForIUnknown_ZeroUnknown_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pUnk",
-                () => Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int))
+            AssertExtensions.Throws<ArgumentNullException>("pUnk", () =>
+                Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int))
             );
         }
 
@@ -130,9 +129,8 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr iUnknown = Marshal.GetIUnknownForObject(new object());
             try
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "t",
-                    () => Marshal.GetTypedObjectForIUnknown(iUnknown, null)
+                AssertExtensions.Throws<ArgumentNullException>("t", () =>
+                    Marshal.GetTypedObjectForIUnknown(iUnknown, null)
                 );
             }
             finally
@@ -168,9 +166,8 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.GetIUnknownForObject(new object());
             try
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "t",
-                    () => Marshal.GetTypedObjectForIUnknown(ptr, type)
+                AssertExtensions.Throws<ArgumentException>("t", () =>
+                    Marshal.GetTypedObjectForIUnknown(ptr, type)
                 );
             }
             finally

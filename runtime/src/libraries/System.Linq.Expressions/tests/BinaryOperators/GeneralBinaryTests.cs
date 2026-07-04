@@ -155,32 +155,27 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(NonBinaryTypesIncludingInvalidData))]
         public void MakeBinaryInvalidType(ExpressionType type)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "binaryType",
-                () => Expression.MakeBinary(type, Expression.Constant(0), Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>("binaryType", () =>
+                Expression.MakeBinary(type, Expression.Constant(0), Expression.Constant(0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "binaryType",
-                () =>
-                    Expression.MakeBinary(
-                        type,
-                        Expression.Constant(0),
-                        Expression.Constant(0),
-                        false,
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentException>("binaryType", () =>
+                Expression.MakeBinary(
+                    type,
+                    Expression.Constant(0),
+                    Expression.Constant(0),
+                    false,
+                    null
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "binaryType",
-                () =>
-                    Expression.MakeBinary(
-                        type,
-                        Expression.Constant(0),
-                        Expression.Constant(0),
-                        false,
-                        null,
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentException>("binaryType", () =>
+                Expression.MakeBinary(
+                    type,
+                    Expression.Constant(0),
+                    Expression.Constant(0),
+                    false,
+                    null,
+                    null
+                )
             );
         }
 
@@ -378,16 +373,14 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = genType.GetMethod(
                 nameof(GenericClassWithNonGenericMethod<int>.DoIntStuff)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.MakeBinary(type, left, right, false, method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.MakeBinary(type, left, right, false, method)
             );
             method = genType
                 .MakeGenericType(genType)
                 .GetMethod(nameof(GenericClassWithNonGenericMethod<int>.DoIntStuff));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.MakeBinary(type, left, right, false, method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.MakeBinary(type, left, right, false, method)
             );
 
             // Confirm does work when closed.
@@ -411,16 +404,14 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = genType.GetMethod(
                 nameof(GenericClassWithNonGenericMethod<bool>.DoBooleanStuff)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.MakeBinary(type, left, right, false, method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.MakeBinary(type, left, right, false, method)
             );
             method = genType
                 .MakeGenericType(genType)
                 .GetMethod(nameof(GenericClassWithNonGenericMethod<int>.DoIntStuff));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.MakeBinary(type, left, right, false, method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.MakeBinary(type, left, right, false, method)
             );
 
             // Confirm does work when closed.

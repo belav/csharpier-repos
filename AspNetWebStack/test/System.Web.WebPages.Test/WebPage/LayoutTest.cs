@@ -250,29 +250,23 @@ namespace System.Web.WebPages.Test
                 p =>
                 {
                     p.Layout = "Layout2.cshtml";
-                    p.DefineSection(
-                        "header2",
-                        () =>
-                        {
-                            p.WriteLiteral("<layout1 header>");
-                            p.Write(p.RenderSection("header1"));
-                            p.WriteLiteral("</layout1 header>");
-                        }
-                    );
+                    p.DefineSection("header2", () =>
+                    {
+                        p.WriteLiteral("<layout1 header>");
+                        p.Write(p.RenderSection("header1"));
+                        p.WriteLiteral("</layout1 header>");
+                    });
 
                     p.WriteLiteral("<layout1>");
                     p.Write(p.RenderBody());
                     p.WriteLiteral("</layout1>");
 
-                    p.DefineSection(
-                        "footer2",
-                        () =>
-                        {
-                            p.WriteLiteral("<layout1 footer>");
-                            p.Write(p.RenderSection("footer1"));
-                            p.WriteLiteral("</layout1 footer>");
-                        }
-                    );
+                    p.DefineSection("footer2", () =>
+                    {
+                        p.WriteLiteral("<layout1 footer>");
+                        p.Write(p.RenderSection("footer1"));
+                        p.WriteLiteral("</layout1 footer>");
+                    });
                 },
                 layout1Path
             );
@@ -281,21 +275,15 @@ namespace System.Web.WebPages.Test
             {
                 p.PageData["Title"] = "MyPage";
                 p.Layout = "Layout1.cshtml";
-                p.DefineSection(
-                    "header1",
-                    () =>
-                    {
-                        p.WriteLiteral("index header");
-                    }
-                );
+                p.DefineSection("header1", () =>
+                {
+                    p.WriteLiteral("index header");
+                });
                 p.WriteLiteral("hello world");
-                p.DefineSection(
-                    "footer1",
-                    () =>
-                    {
-                        p.WriteLiteral("index footer");
-                    }
-                );
+                p.DefineSection("footer1", () =>
+                {
+                    p.WriteLiteral("index footer");
+                });
             });
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layout1, layout2);
@@ -350,14 +338,11 @@ namespace System.Web.WebPages.Test
                 p =>
                 {
                     p.Layout = "Layout2.cshtml";
-                    p.DefineSection(
-                        "body",
-                        () =>
-                        {
-                            p.WriteLiteral("body in layout1 ");
-                            p.Write(p.RenderSection("body"));
-                        }
-                    );
+                    p.DefineSection("body", () =>
+                    {
+                        p.WriteLiteral("body in layout1 ");
+                        p.Write(p.RenderSection("body"));
+                    });
                 },
                 layout1Path
             );
@@ -365,13 +350,10 @@ namespace System.Web.WebPages.Test
             var page = Utils.CreatePage(p =>
             {
                 p.Layout = "Layout1.cshtml";
-                p.DefineSection(
-                    "body",
-                    () =>
-                    {
-                        p.WriteLiteral("body in index");
-                    }
-                );
+                p.DefineSection("body", () =>
+                {
+                    p.WriteLiteral("body in index");
+                });
             });
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layout1, layout2);
@@ -388,20 +370,14 @@ namespace System.Web.WebPages.Test
                 p =>
                 {
                     p.Write("123");
-                    p.DefineSection(
-                        "abc",
-                        () =>
-                        {
-                            p.Write("abc");
-                        }
-                    );
-                    p.DefineSection(
-                        "XYZ",
-                        () =>
-                        {
-                            p.Write("xyz");
-                        }
-                    );
+                    p.DefineSection("abc", () =>
+                    {
+                        p.Write("abc");
+                    });
+                    p.DefineSection("XYZ", () =>
+                    {
+                        p.Write("xyz");
+                    });
                     p.Write("456");
                 },
                 p =>
@@ -781,20 +757,14 @@ namespace System.Web.WebPages.Test
             var page = CreatePageWithLayout(
                 p =>
                 {
-                    p.DefineSection(
-                        "section1",
-                        () =>
-                        {
-                            p.Write("section1 ");
-                        }
-                    );
-                    p.DefineSection(
-                        "section3",
-                        () =>
-                        {
-                            p.Write("section3");
-                        }
-                    );
+                    p.DefineSection("section1", () =>
+                    {
+                        p.Write("section1 ");
+                    });
+                    p.DefineSection("section3", () =>
+                    {
+                        p.Write("section3");
+                    });
                 },
                 p =>
                 {
@@ -838,13 +808,10 @@ namespace System.Web.WebPages.Test
             var layoutPagePath = "~/layout.cshtml";
             var page = Utils.CreatePage(p =>
             {
-                p.DefineSection(
-                    "foo",
-                    () =>
-                    {
-                        p.Write("This is foo");
-                    }
-                );
+                p.DefineSection("foo", () =>
+                {
+                    p.Write("This is foo");
+                });
                 p.Write(p.RenderPage("bar.cshtml"));
                 p.Layout = layoutPagePath;
             });

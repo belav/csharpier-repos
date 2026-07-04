@@ -63,25 +63,22 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
                     .AdditionalLocations[0]
                     .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
-                editor.ReplaceNode(
-                    anonymousFunction,
-                    (current, generator) =>
-                    {
-                        if (
-                            current is AnonymousFunctionExpressionSyntax anonymousFunction
-                            && TryGetAnonymousFunctionInvocation(
-                                anonymousFunction,
-                                out var invocation,
-                                out _
-                            )
+                editor.ReplaceNode(anonymousFunction, (current, generator) =>
+                {
+                    if (
+                        current is AnonymousFunctionExpressionSyntax anonymousFunction
+                        && TryGetAnonymousFunctionInvocation(
+                            anonymousFunction,
+                            out var invocation,
+                            out _
                         )
-                        {
-                            return invocation.Expression.WithTriviaFrom(current).Parenthesize();
-                        }
-
-                        return current;
+                    )
+                    {
+                        return invocation.Expression.WithTriviaFrom(current).Parenthesize();
                     }
-                );
+
+                    return current;
+                });
             }
 
             return Task.CompletedTask;

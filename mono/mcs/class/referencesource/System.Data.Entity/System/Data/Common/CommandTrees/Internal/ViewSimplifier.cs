@@ -513,9 +513,8 @@ namespace System.Data.Common.CommandTrees.Internal
                 new Dictionary<object, DbComparisonExpression>();
             if (
                 !TypeSemantics.IsEntityType(discriminatorFilter.Input.VariableType)
-                || !TryMatchDiscriminatorPredicate(
-                    discriminatorFilter,
-                    (compEx, discValue) => discriminatorPredicates.Add(discValue, compEx)
+                || !TryMatchDiscriminatorPredicate(discriminatorFilter, (compEx, discValue) =>
+                    discriminatorPredicates.Add(discValue, compEx)
                 )
             )
             {

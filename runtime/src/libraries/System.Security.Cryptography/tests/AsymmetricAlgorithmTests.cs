@@ -144,9 +144,8 @@ namespace System.Security.Cryptography.Tests
 
             using (StubAsymmetricAlgorithm alg = new StubAsymmetricAlgorithm())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => alg.ImportFromPem(pemText)
+                AssertExtensions.Throws<ArgumentException>("input", () =>
+                    alg.ImportFromPem(pemText)
                 );
             }
         }
@@ -166,9 +165,8 @@ namespace System.Security.Cryptography.Tests
 
             using (StubAsymmetricAlgorithm alg = new StubAsymmetricAlgorithm())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => alg.ImportFromEncryptedPem(pemText, pemPassword)
+                AssertExtensions.Throws<ArgumentException>("input", () =>
+                    alg.ImportFromEncryptedPem(pemText, pemPassword)
                 );
             }
         }
@@ -184,9 +182,8 @@ namespace System.Security.Cryptography.Tests
 
             using (StubAsymmetricAlgorithm alg = new StubAsymmetricAlgorithm())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => alg.ImportFromPem(pemText)
+                AssertExtensions.Throws<ArgumentException>("input", () =>
+                    alg.ImportFromPem(pemText)
                 );
             }
         }
@@ -203,9 +200,8 @@ namespace System.Security.Cryptography.Tests
 
             using (StubAsymmetricAlgorithm alg = new StubAsymmetricAlgorithm())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => alg.ImportFromEncryptedPem(pemText, pemPassword)
+                AssertExtensions.Throws<ArgumentException>("input", () =>
+                    alg.ImportFromEncryptedPem(pemText, pemPassword)
                 );
             }
         }
@@ -221,9 +217,8 @@ namespace System.Security.Cryptography.Tests
 
             using (StubAsymmetricAlgorithm alg = new StubAsymmetricAlgorithm())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => alg.ImportFromPem(pemText)
+                AssertExtensions.Throws<ArgumentException>("input", () =>
+                    alg.ImportFromPem(pemText)
                 );
             }
         }
@@ -240,9 +235,8 @@ namespace System.Security.Cryptography.Tests
 
             using (StubAsymmetricAlgorithm alg = new StubAsymmetricAlgorithm())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => alg.ImportFromEncryptedPem(pemText, pemPassword)
+                AssertExtensions.Throws<ArgumentException>("input", () =>
+                    alg.ImportFromEncryptedPem(pemText, pemPassword)
                 );
             }
         }

@@ -1591,10 +1591,8 @@ namespace System.Data.SqlClient
                     );
                     if (execNQ != null)
                     {
-                        AsyncHelper.ContinueTask(
-                            execNQ,
-                            localCompletion,
-                            () => BeginExecuteNonQueryInternalReadStage(localCompletion)
+                        AsyncHelper.ContinueTask(execNQ, localCompletion, () =>
+                            BeginExecuteNonQueryInternalReadStage(localCompletion)
                         );
                     }
                     else
@@ -2164,9 +2162,8 @@ namespace System.Data.SqlClient
                         {
                             if (task != null)
                             {
-                                task = AsyncHelper.CreateContinuationTask(
-                                    task,
-                                    () => reader.Close()
+                                task = AsyncHelper.CreateContinuationTask(task, () =>
+                                    reader.Close()
                                 );
                             }
                             else
@@ -2356,10 +2353,8 @@ namespace System.Data.SqlClient
 
                 if (writeTask != null)
                 {
-                    AsyncHelper.ContinueTask(
-                        writeTask,
-                        localCompletion,
-                        () => BeginExecuteXmlReaderInternalReadStage(localCompletion)
+                    AsyncHelper.ContinueTask(writeTask, localCompletion, () =>
+                        BeginExecuteXmlReaderInternalReadStage(localCompletion)
                     );
                 }
                 else
@@ -2958,10 +2953,8 @@ namespace System.Data.SqlClient
 
                 if (writeTask != null)
                 {
-                    AsyncHelper.ContinueTask(
-                        writeTask,
-                        localCompletion,
-                        () => BeginExecuteReaderInternalReadStage(localCompletion)
+                    AsyncHelper.ContinueTask(writeTask, localCompletion, () =>
+                        BeginExecuteReaderInternalReadStage(localCompletion)
                     );
                 }
                 else
@@ -4239,10 +4232,8 @@ namespace System.Data.SqlClient
                                 }
                                 else
                                 {
-                                    AsyncHelper.ContinueTask(
-                                        subTask,
-                                        completion,
-                                        () => completion.SetResult(null)
+                                    AsyncHelper.ContinueTask(subTask, completion, () =>
+                                        completion.SetResult(null)
                                     );
                                 }
                             },
@@ -4252,14 +4243,10 @@ namespace System.Data.SqlClient
                     }
                     else
                     {
-                        AsyncHelper.WaitForCompletion(
-                            reconnectTask,
-                            timeout,
-                            () =>
-                            {
-                                throw SQL.CR_ReconnectTimeout();
-                            }
-                        );
+                        AsyncHelper.WaitForCompletion(reconnectTask, timeout, () =>
+                        {
+                            throw SQL.CR_ReconnectTimeout();
+                        });
                         timeout = TdsParserStaticMethods.GetRemainingTimeout(
                             timeout,
                             reconnectionStart
@@ -5869,10 +5856,8 @@ namespace System.Data.SqlClient
                         }
                         else
                         {
-                            AsyncHelper.ContinueTask(
-                                subTask,
-                                completion,
-                                () => completion.SetResult(null)
+                            AsyncHelper.ContinueTask(subTask, completion, () =>
+                                completion.SetResult(null)
                             );
                         }
                     },
@@ -5994,10 +5979,8 @@ namespace System.Data.SqlClient
                             }
                             else
                             {
-                                AsyncHelper.ContinueTask(
-                                    subTask,
-                                    completion,
-                                    () => completion.SetResult(null)
+                                AsyncHelper.ContinueTask(subTask, completion, () =>
+                                    completion.SetResult(null)
                                 );
                             }
                         },
@@ -6008,14 +5991,10 @@ namespace System.Data.SqlClient
                 }
                 else
                 {
-                    AsyncHelper.WaitForCompletion(
-                        reconnectTask,
-                        timeout,
-                        () =>
-                        {
-                            throw SQL.CR_ReconnectTimeout();
-                        }
-                    );
+                    AsyncHelper.WaitForCompletion(reconnectTask, timeout, () =>
+                    {
+                        throw SQL.CR_ReconnectTimeout();
+                    });
                     timeout = TdsParserStaticMethods.GetRemainingTimeout(
                         timeout,
                         reconnectionStart

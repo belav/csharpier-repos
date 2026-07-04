@@ -1286,9 +1286,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 // Add c1Clone back
                 // End state: { c1, c2 } => { c2, c1Clone }
                 cc = new X509Certificate2Collection(array);
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => cc.RemoveRange(new X509Certificate2[] { c1Clone, c1, c2 })
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    cc.RemoveRange(new X509Certificate2[] { c1Clone, c1, c2 })
                 );
                 Assert.Equal(2, cc.Count);
                 Assert.Same(c2, cc[0]);
@@ -1782,9 +1781,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             X509Certificate2Collection cc = new X509Certificate2Collection();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "certPemFilePath",
-                () => cc.ImportFromPemFile(null)
+            AssertExtensions.Throws<ArgumentNullException>("certPemFilePath", () =>
+                cc.ImportFromPemFile(null)
             );
         }
 

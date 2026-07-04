@@ -215,14 +215,11 @@ namespace System.IO
             if (handle == null)
                 return;
 
-            Operation(
-                handle: handle,
-                cancel_op: (internal_fsw, fsw) =>
-                {
-                    if (internal_fsw != null)
-                        internal_fsw.EnableRaisingEvents = false;
-                }
-            );
+            Operation(handle: handle, cancel_op: (internal_fsw, fsw) =>
+            {
+                if (internal_fsw != null)
+                    internal_fsw.EnableRaisingEvents = false;
+            });
         }
 
         public void Dispose(object handle)
@@ -230,19 +227,16 @@ namespace System.IO
             if (handle == null)
                 return;
 
-            Operation(
-                handle: handle,
-                cancel_op: (internal_fsw, fsw) =>
-                {
-                    if (internal_fsw != null)
-                        internal_fsw.Dispose();
-                    var inner_key = internal_map[handle];
-                    internal_map.Remove(handle);
-                    external_map.Remove(handle);
-                    event_map.Remove(inner_key);
-                    handle = null;
-                }
-            );
+            Operation(handle: handle, cancel_op: (internal_fsw, fsw) =>
+            {
+                if (internal_fsw != null)
+                    internal_fsw.Dispose();
+                var inner_key = internal_map[handle];
+                internal_map.Remove(handle);
+                external_map.Remove(handle);
+                event_map.Remove(inner_key);
+                handle = null;
+            });
         }
 
         public static bool GetInstance(out IFileWatcher watcher)

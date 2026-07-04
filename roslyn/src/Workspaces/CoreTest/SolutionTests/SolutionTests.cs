@@ -1541,13 +1541,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             Assert.Same(newSolution, newSolution.WithProjectAssemblyName(projectId, assemblyName));
 
-            Assert.Throws<ArgumentNullException>(
-                "assemblyName",
-                () => solution.WithProjectAssemblyName(projectId, null!)
+            Assert.Throws<ArgumentNullException>("assemblyName", () =>
+                solution.WithProjectAssemblyName(projectId, null!)
             );
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectAssemblyName(null!, "x.dll")
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectAssemblyName(null!, "x.dll")
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectAssemblyName(ProjectId.CreateNewId(), "x.dll")
@@ -1578,9 +1576,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 defaultThrows: false
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectOutputFilePath(null!, "x.dll")
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectOutputFilePath(null!, "x.dll")
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectOutputFilePath(ProjectId.CreateNewId(), "x.dll")
@@ -1611,9 +1608,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 defaultThrows: false
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectOutputRefFilePath(null!, "x.dll")
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectOutputRefFilePath(null!, "x.dll")
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectOutputRefFilePath(ProjectId.CreateNewId(), "x.dll")
@@ -1644,13 +1640,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 defaultThrows: false
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () =>
-                    solution.WithProjectCompilationOutputInfo(
-                        null!,
-                        new CompilationOutputInfo("x.dll")
-                    )
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectCompilationOutputInfo(null!, new CompilationOutputInfo("x.dll"))
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectCompilationOutputInfo(
@@ -1684,9 +1675,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 defaultThrows: false
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectDefaultNamespace(null!, "x")
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectDefaultNamespace(null!, "x")
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectDefaultNamespace(ProjectId.CreateNewId(), "x")
@@ -1859,9 +1849,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 defaultThrows: true
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectName(null!, "x")
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectName(null!, "x")
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectName(ProjectId.CreateNewId(), "x")
@@ -1892,9 +1881,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 defaultThrows: false
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectFilePath(null!, "x")
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectFilePath(null!, "x")
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectFilePath(ProjectId.CreateNewId(), "x")
@@ -1916,9 +1904,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var options = new CSharpCompilationOptions(OutputKind.NetModule);
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectCompilationOptions(null!, options)
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectCompilationOptions(null!, options)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectCompilationOptions(ProjectId.CreateNewId(), options)
@@ -1989,9 +1976,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 defaultThrows: true
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectParseOptions(null!, options)
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectParseOptions(null!, options)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectParseOptions(ProjectId.CreateNewId(), options)
@@ -2112,9 +2098,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution2 = solution.WithProjectReferences(projectId, projectRefs);
             Assert.Same(projectRefs, solution2.GetProject(projectId)!.AllProjectReferences);
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectReferences(null!, new[] { projectRef })
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectReferences(null!, new[] { projectRef })
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectReferences(ProjectId.CreateNewId(), new[] { projectRef })
@@ -2186,29 +2171,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 solution3.GetProject(projectId)!.AllProjectReferences
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.AddProjectReferences(null!, new[] { projectRef2 })
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.AddProjectReferences(null!, new[] { projectRef2 })
             );
-            Assert.Throws<ArgumentNullException>(
-                "projectReferences",
-                () => solution.AddProjectReferences(projectId, null!)
+            Assert.Throws<ArgumentNullException>("projectReferences", () =>
+                solution.AddProjectReferences(projectId, null!)
             );
-            Assert.Throws<ArgumentNullException>(
-                "projectReferences[0]",
-                () => solution.AddProjectReferences(projectId, new ProjectReference[] { null! })
+            Assert.Throws<ArgumentNullException>("projectReferences[0]", () =>
+                solution.AddProjectReferences(projectId, new ProjectReference[] { null! })
             );
-            Assert.Throws<ArgumentException>(
-                "projectReferences[1]",
-                () => solution.AddProjectReferences(projectId, new[] { projectRef2, projectRef2 })
+            Assert.Throws<ArgumentException>("projectReferences[1]", () =>
+                solution.AddProjectReferences(projectId, new[] { projectRef2, projectRef2 })
             );
-            Assert.Throws<ArgumentException>(
-                "projectReferences[1]",
-                () =>
-                    solution.AddProjectReferences(
-                        projectId,
-                        new[] { new ProjectReference(projectId2), new ProjectReference(projectId2) }
-                    )
+            Assert.Throws<ArgumentException>("projectReferences[1]", () =>
+                solution.AddProjectReferences(
+                    projectId,
+                    new[] { new ProjectReference(projectId2), new ProjectReference(projectId2) }
+                )
             );
 
             // dup:
@@ -2259,23 +2238,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution4 = solution3.RemoveProjectReference(projectId, externalProjectRef);
             Assert.Empty(solution4.GetProject(projectId)!.AllProjectReferences);
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.RemoveProjectReference(null!, projectRef2)
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.RemoveProjectReference(null!, projectRef2)
             );
-            Assert.Throws<ArgumentNullException>(
-                "projectReference",
-                () => solution.RemoveProjectReference(projectId, null!)
+            Assert.Throws<ArgumentNullException>("projectReference", () =>
+                solution.RemoveProjectReference(projectId, null!)
             );
 
             // removing a reference that's not in the list:
-            Assert.Throws<ArgumentException>(
-                "projectReference",
-                () =>
-                    solution.RemoveProjectReference(
-                        projectId,
-                        new ProjectReference(ProjectId.CreateNewId())
-                    )
+            Assert.Throws<ArgumentException>("projectReference", () =>
+                solution.RemoveProjectReference(
+                    projectId,
+                    new ProjectReference(ProjectId.CreateNewId())
+                )
             );
 
             // project not in solution:
@@ -2407,9 +2382,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 allowDuplicates: false
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectMetadataReferences(null!, new[] { metadataRef })
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectMetadataReferences(null!, new[] { metadataRef })
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectMetadataReferences(
@@ -2444,22 +2418,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 solution3.GetProject(projectId)!.MetadataReferences
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.AddMetadataReferences(null!, new[] { metadataRef1 })
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.AddMetadataReferences(null!, new[] { metadataRef1 })
             );
-            Assert.Throws<ArgumentNullException>(
-                "metadataReferences",
-                () => solution.AddMetadataReferences(projectId, null!)
+            Assert.Throws<ArgumentNullException>("metadataReferences", () =>
+                solution.AddMetadataReferences(projectId, null!)
             );
-            Assert.Throws<ArgumentNullException>(
-                "metadataReferences[0]",
-                () => solution.AddMetadataReferences(projectId, new MetadataReference[] { null! })
+            Assert.Throws<ArgumentNullException>("metadataReferences[0]", () =>
+                solution.AddMetadataReferences(projectId, new MetadataReference[] { null! })
             );
-            Assert.Throws<ArgumentException>(
-                "metadataReferences[1]",
-                () =>
-                    solution.AddMetadataReferences(projectId, new[] { metadataRef1, metadataRef1 })
+            Assert.Throws<ArgumentException>("metadataReferences[1]", () =>
+                solution.AddMetadataReferences(projectId, new[] { metadataRef1, metadataRef1 })
             );
 
             // dup:
@@ -2491,13 +2460,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution3 = solution2.RemoveMetadataReference(projectId, metadataRef2);
             Assert.Empty(solution3.GetProject(projectId)!.MetadataReferences);
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.RemoveMetadataReference(null!, metadataRef1)
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.RemoveMetadataReference(null!, metadataRef1)
             );
-            Assert.Throws<ArgumentNullException>(
-                "metadataReference",
-                () => solution.RemoveMetadataReference(projectId, null!)
+            Assert.Throws<ArgumentNullException>("metadataReference", () =>
+                solution.RemoveMetadataReference(projectId, null!)
             );
 
             // removing a reference that's not in the list:
@@ -2527,9 +2494,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 allowDuplicates: false
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.WithProjectAnalyzerReferences(null!, new[] { analyzerRef })
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.WithProjectAnalyzerReferences(null!, new[] { analyzerRef })
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithProjectAnalyzerReferences(
@@ -2567,22 +2533,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution4 = solution3.AddAnalyzerReferences(projectId, new AnalyzerReference[0]);
 
             Assert.Same(solution, solution2);
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.AddAnalyzerReferences(null!, new[] { analyzerRef1 })
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.AddAnalyzerReferences(null!, new[] { analyzerRef1 })
             );
-            Assert.Throws<ArgumentNullException>(
-                "analyzerReferences",
-                () => solution.AddAnalyzerReferences(projectId, null!)
+            Assert.Throws<ArgumentNullException>("analyzerReferences", () =>
+                solution.AddAnalyzerReferences(projectId, null!)
             );
-            Assert.Throws<ArgumentNullException>(
-                "analyzerReferences[0]",
-                () => solution.AddAnalyzerReferences(projectId, new AnalyzerReference[] { null! })
+            Assert.Throws<ArgumentNullException>("analyzerReferences[0]", () =>
+                solution.AddAnalyzerReferences(projectId, new AnalyzerReference[] { null! })
             );
-            Assert.Throws<ArgumentException>(
-                "analyzerReferences[1]",
-                () =>
-                    solution.AddAnalyzerReferences(projectId, new[] { analyzerRef1, analyzerRef1 })
+            Assert.Throws<ArgumentException>("analyzerReferences[1]", () =>
+                solution.AddAnalyzerReferences(projectId, new[] { analyzerRef1, analyzerRef1 })
             );
 
             // dup:
@@ -2614,13 +2575,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution3 = solution2.RemoveAnalyzerReference(projectId, analyzerRef2);
             Assert.Empty(solution3.GetProject(projectId)!.AnalyzerReferences);
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () => solution.RemoveAnalyzerReference(null!, analyzerRef1)
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution.RemoveAnalyzerReference(null!, analyzerRef1)
             );
-            Assert.Throws<ArgumentNullException>(
-                "analyzerReference",
-                () => solution.RemoveAnalyzerReference(projectId, null!)
+            Assert.Throws<ArgumentNullException>("analyzerReference", () =>
+                solution.RemoveAnalyzerReference(projectId, null!)
             );
 
             // removing a reference that's not in the list:
@@ -2670,17 +2629,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution4 = solution3.AddAnalyzerReferences(new AnalyzerReference[0]);
 
             Assert.Same(solution, solution2);
-            Assert.Throws<ArgumentNullException>(
-                "analyzerReferences",
-                () => solution.AddAnalyzerReferences(null!)
+            Assert.Throws<ArgumentNullException>("analyzerReferences", () =>
+                solution.AddAnalyzerReferences(null!)
             );
-            Assert.Throws<ArgumentNullException>(
-                "analyzerReferences[0]",
-                () => solution.AddAnalyzerReferences(new AnalyzerReference[] { null! })
+            Assert.Throws<ArgumentNullException>("analyzerReferences[0]", () =>
+                solution.AddAnalyzerReferences(new AnalyzerReference[] { null! })
             );
-            Assert.Throws<ArgumentException>(
-                "analyzerReferences[1]",
-                () => solution.AddAnalyzerReferences(new[] { analyzerRef1, analyzerRef1 })
+            Assert.Throws<ArgumentException>("analyzerReferences[1]", () =>
+                solution.AddAnalyzerReferences(new[] { analyzerRef1, analyzerRef1 })
             );
 
             // dup:
@@ -2705,9 +2661,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var solution3 = solution2.RemoveAnalyzerReference(analyzerRef2);
             Assert.Empty(solution3.AnalyzerReferences);
 
-            Assert.Throws<ArgumentNullException>(
-                "analyzerReference",
-                () => solution.RemoveAnalyzerReference(null!)
+            Assert.Throws<ArgumentNullException>("analyzerReference", () =>
+                solution.RemoveAnalyzerReference(null!)
             );
 
             // removing a reference that's not in the list:
@@ -2742,17 +2697,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 document.GetTextSynchronously(default).ChecksumAlgorithm
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "documentId",
-                () => solution.AddDocument(documentId: null!, "name", loader)
+            Assert.Throws<ArgumentNullException>("documentId", () =>
+                solution.AddDocument(documentId: null!, "name", loader)
             );
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () => solution.AddDocument(documentId, name: null!, loader)
+            Assert.Throws<ArgumentNullException>("name", () =>
+                solution.AddDocument(documentId, name: null!, loader)
             );
-            Assert.Throws<ArgumentNullException>(
-                "loader",
-                () => solution.AddDocument(documentId, "name", loader: null!)
+            Assert.Throws<ArgumentNullException>("loader", () =>
+                solution.AddDocument(documentId, "name", loader: null!)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.AddDocument(
@@ -2792,17 +2744,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.False(document.State.Attributes.IsGenerated);
             Assert.Equal(SourceCodeKind.Script, document.SourceCodeKind);
 
-            Assert.Throws<ArgumentNullException>(
-                "documentId",
-                () => solution.AddDocument(documentId: null!, "name", "text")
+            Assert.Throws<ArgumentNullException>("documentId", () =>
+                solution.AddDocument(documentId: null!, "name", "text")
             );
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () => solution.AddDocument(documentId, name: null!, "text")
+            Assert.Throws<ArgumentNullException>("name", () =>
+                solution.AddDocument(documentId, name: null!, "text")
             );
-            Assert.Throws<ArgumentNullException>(
-                "text",
-                () => solution.AddDocument(documentId, "name", text: (string)null!)
+            Assert.Throws<ArgumentNullException>("text", () =>
+                solution.AddDocument(documentId, "name", text: (string)null!)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.AddDocument(
@@ -2849,17 +2798,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.True(document.State.Attributes.IsGenerated);
             Assert.Equal(SourceCodeKind.Script, document.SourceCodeKind);
 
-            Assert.Throws<ArgumentNullException>(
-                "documentId",
-                () => solution.AddDocument(documentId: null!, "name", sourceText)
+            Assert.Throws<ArgumentNullException>("documentId", () =>
+                solution.AddDocument(documentId: null!, "name", sourceText)
             );
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () => solution.AddDocument(documentId, name: null!, sourceText)
+            Assert.Throws<ArgumentNullException>("name", () =>
+                solution.AddDocument(documentId, name: null!, sourceText)
             );
-            Assert.Throws<ArgumentNullException>(
-                "text",
-                () => solution.AddDocument(documentId, "name", text: (SourceText)null!)
+            Assert.Throws<ArgumentNullException>("text", () =>
+                solution.AddDocument(documentId, "name", text: (SourceText)null!)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.AddDocument(
@@ -2897,17 +2843,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.False(document2.State.Attributes.IsGenerated);
             Assert.Equal(SourceCodeKind.Script, document2.SourceCodeKind);
 
-            Assert.Throws<ArgumentNullException>(
-                "documentId",
-                () => solution.AddDocument(documentId: null!, "name", root)
+            Assert.Throws<ArgumentNullException>("documentId", () =>
+                solution.AddDocument(documentId: null!, "name", root)
             );
-            Assert.Throws<ArgumentNullException>(
-                "name",
-                () => solution.AddDocument(documentId, name: null!, root)
+            Assert.Throws<ArgumentNullException>("name", () =>
+                solution.AddDocument(documentId, name: null!, root)
             );
-            Assert.Throws<ArgumentNullException>(
-                "syntaxRoot",
-                () => solution.AddDocument(documentId, "name", syntaxRoot: null!)
+            Assert.Throws<ArgumentNullException>("syntaxRoot", () =>
+                solution.AddDocument(documentId, "name", syntaxRoot: null!)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.AddDocument(

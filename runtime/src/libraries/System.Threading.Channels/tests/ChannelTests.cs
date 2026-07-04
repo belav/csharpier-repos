@@ -57,13 +57,11 @@ namespace System.Threading.Channels.Tests
         [Fact]
         public void Create_NullOptions_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => Channel.CreateUnbounded<int>(null)
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                Channel.CreateUnbounded<int>(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => Channel.CreateBounded<int>(null)
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                Channel.CreateBounded<int>(null)
             );
         }
 
@@ -72,13 +70,11 @@ namespace System.Threading.Channels.Tests
         [InlineData(-2)]
         public void CreateBounded_InvalidBufferSizes_ThrowArgumentExceptions(int capacity)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => Channel.CreateBounded<int>(capacity)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                Channel.CreateBounded<int>(capacity)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new BoundedChannelOptions(capacity)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new BoundedChannelOptions(capacity)
             );
         }
 
@@ -88,18 +84,16 @@ namespace System.Threading.Channels.Tests
         public void BoundedChannelOptions_InvalidModes_ThrowArgumentExceptions(
             BoundedChannelFullMode mode
         ) =>
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => new BoundedChannelOptions(1) { FullMode = mode }
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                new BoundedChannelOptions(1) { FullMode = mode }
             );
 
         [Theory]
         [InlineData(0)]
         [InlineData(-2)]
         public void BoundedChannelOptions_InvalidCapacity_ThrowArgumentExceptions(int capacity) =>
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => new BoundedChannelOptions(1) { Capacity = capacity }
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                new BoundedChannelOptions(1) { Capacity = capacity }
             );
 
         [Theory]

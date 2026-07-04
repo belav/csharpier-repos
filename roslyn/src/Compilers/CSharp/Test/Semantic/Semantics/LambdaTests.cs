@@ -3053,10 +3053,8 @@ class C
             AppendLines(builder, n, i => $"    void F<T>(T t, Action<T, A, C{i}> a) {{ }}");
             AppendLines(builder, n, i => $"    object this[Action<A, C{i}> a] => {i}");
             // Type inference failure.
-            AppendLines(
-                builder,
-                n,
-                i => $"    void F<T, U>(T t, Action<T, U, C{i}> a) where U : T {{ }}"
+            AppendLines(builder, n, i =>
+                $"    void F<T, U>(T t, Action<T, U, C{i}> a) where U : T {{ }}"
             );
             // Too many parameters.
             AppendLines(builder, n, i => $"    void F<T>(T t, Action<T, A, B, C, C{i}> a) {{ }}");

@@ -40,12 +40,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
             Action<TestEntityTypeBuilder<TEntity>> buildAction
         )
         {
-            ModelBuilder.Entity(
-                typeof(TEntity),
-                entityTypeBuilder =>
-                    buildAction(
-                        new NonGenericStringTestEntityTypeBuilder<TEntity>(entityTypeBuilder)
-                    )
+            ModelBuilder.Entity(typeof(TEntity), entityTypeBuilder =>
+                buildAction(new NonGenericStringTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
             );
             return this;
         }
@@ -55,13 +51,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
             Action<TestEntityTypeBuilder<TEntity>> buildAction
         )
         {
-            ModelBuilder.SharedTypeEntity(
-                name,
-                typeof(TEntity),
-                entityTypeBuilder =>
-                    buildAction(
-                        new NonGenericStringTestEntityTypeBuilder<TEntity>(entityTypeBuilder)
-                    )
+            ModelBuilder.SharedTypeEntity(name, typeof(TEntity), entityTypeBuilder =>
+                buildAction(new NonGenericStringTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
             );
             return this;
         }

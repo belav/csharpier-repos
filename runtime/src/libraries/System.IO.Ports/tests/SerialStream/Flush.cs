@@ -483,13 +483,10 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyException(Stream serialStream, Type expectedException)
         {
-            Assert.Throws(
-                expectedException,
-                () =>
-                {
-                    serialStream.Flush();
-                }
-            );
+            Assert.Throws(expectedException, () =>
+            {
+                serialStream.Flush();
+            });
         }
 
         private void VerifyFlush(SerialPort com)

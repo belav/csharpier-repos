@@ -190,13 +190,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             _synthesizedFieldNameIdDispenser = 1;
 
             var allCapturedVars = ImmutableHashSet.CreateBuilder<Symbol>();
-            Analysis.VisitNestedFunctions(
-                analysis.ScopeTree,
-                (scope, function) =>
-                {
-                    allCapturedVars.UnionWith(function.CapturedVariables);
-                }
-            );
+            Analysis.VisitNestedFunctions(analysis.ScopeTree, (scope, function) =>
+            {
+                allCapturedVars.UnionWith(function.CapturedVariables);
+            });
             _allCapturedVariables = allCapturedVars.ToImmutable();
         }
 
@@ -360,40 +357,37 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private void SynthesizeClosureEnvironments(ArrayBuilder<ClosureDebugInfo> closureDebugInfo)
         {
-            Analysis.VisitScopeTree(
-                _analysis.ScopeTree,
-                scope =>
+            Analysis.VisitScopeTree(_analysis.ScopeTree, scope =>
+            {
+                if (scope.DeclaredEnvironment is { } env)
                 {
-                    if (scope.DeclaredEnvironment is { } env)
+                    Debug.Assert(!_frames.ContainsKey(scope.BoundNode));
+
+                    var frame = MakeFrame(scope, env);
+                    env.SynthesizedEnvironment = frame;
+
+                    CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
+                        ContainingType,
+                        frame.GetCciAdapter()
+                    );
+                    if (frame.Constructor != null)
                     {
-                        Debug.Assert(!_frames.ContainsKey(scope.BoundNode));
-
-                        var frame = MakeFrame(scope, env);
-                        env.SynthesizedEnvironment = frame;
-
-                        CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
-                            ContainingType,
-                            frame.GetCciAdapter()
+                        AddSynthesizedMethod(
+                            frame.Constructor,
+                            FlowAnalysisPass.AppendImplicitReturn(
+                                MethodCompiler.BindSynthesizedMethodBody(
+                                    frame.Constructor,
+                                    CompilationState,
+                                    Diagnostics
+                                ),
+                                frame.Constructor
+                            )
                         );
-                        if (frame.Constructor != null)
-                        {
-                            AddSynthesizedMethod(
-                                frame.Constructor,
-                                FlowAnalysisPass.AppendImplicitReturn(
-                                    MethodCompiler.BindSynthesizedMethodBody(
-                                        frame.Constructor,
-                                        CompilationState,
-                                        Diagnostics
-                                    ),
-                                    frame.Constructor
-                                )
-                            );
-                        }
-
-                        _frames.Add(scope.BoundNode, env);
                     }
+
+                    _frames.Add(scope.BoundNode, env);
                 }
-            );
+            });
 
             SynthesizedClosureEnvironment MakeFrame(
                 Analysis.Scope scope,
@@ -453,91 +447,88 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private void SynthesizeClosureMethods()
         {
-            Analysis.VisitNestedFunctions(
-                _analysis.ScopeTree,
-                (scope, nestedFunction) =>
+            Analysis.VisitNestedFunctions(_analysis.ScopeTree, (scope, nestedFunction) =>
+            {
+                var originalMethod = nestedFunction.OriginalMethodSymbol;
+                var syntax = originalMethod.DeclaringSyntaxReferences[0].GetSyntax();
+
+                int closureOrdinal;
+                ClosureKind closureKind;
+                NamedTypeSymbol translatedLambdaContainer;
+                SynthesizedClosureEnvironment containerAsFrame;
+                DebugId topLevelMethodId;
+                DebugId lambdaId;
+
+                if (nestedFunction.ContainingEnvironmentOpt != null)
                 {
-                    var originalMethod = nestedFunction.OriginalMethodSymbol;
-                    var syntax = originalMethod.DeclaringSyntaxReferences[0].GetSyntax();
+                    containerAsFrame = nestedFunction
+                        .ContainingEnvironmentOpt
+                        .SynthesizedEnvironment;
 
-                    int closureOrdinal;
-                    ClosureKind closureKind;
-                    NamedTypeSymbol translatedLambdaContainer;
-                    SynthesizedClosureEnvironment containerAsFrame;
-                    DebugId topLevelMethodId;
-                    DebugId lambdaId;
-
-                    if (nestedFunction.ContainingEnvironmentOpt != null)
-                    {
-                        containerAsFrame = nestedFunction
-                            .ContainingEnvironmentOpt
-                            .SynthesizedEnvironment;
-
-                        closureKind = ClosureKind.General;
-                        translatedLambdaContainer = containerAsFrame;
-                        closureOrdinal = containerAsFrame.ClosureOrdinal;
-                    }
-                    else if (nestedFunction.CapturesThis)
-                    {
-                        containerAsFrame = null;
-                        translatedLambdaContainer = _topLevelMethod.ContainingType;
-                        closureKind = ClosureKind.ThisOnly;
-                        closureOrdinal = LambdaDebugInfo.ThisOnlyClosureOrdinal;
-                    }
-                    else if (
-                        (
-                            nestedFunction.CapturedEnvironments.Count == 0
-                            && originalMethod.MethodKind == MethodKind.LambdaMethod
-                            && _analysis.MethodsConvertedToDelegates.Contains(originalMethod)
-                        )
-                        ||
-                        // If we are in a variant interface, runtime might not consider the
-                        // method synthesized directly within the interface as variant safe.
-                        // For simplicity we do not perform precise analysis whether this would
-                        // definitely be the case. If we are in a variant interface, we always force
-                        // creation of a display class.
-                        VarianceSafety.GetEnclosingVariantInterface(_topLevelMethod) is object
-                    )
-                    {
-                        translatedLambdaContainer = containerAsFrame = GetStaticFrame(
-                            Diagnostics,
-                            syntax
-                        );
-                        closureKind = ClosureKind.Singleton;
-                        closureOrdinal = LambdaDebugInfo.StaticClosureOrdinal;
-                    }
-                    else
-                    {
-                        // Lower directly onto the containing type
-                        translatedLambdaContainer = _topLevelMethod.ContainingType;
-                        containerAsFrame = null;
-                        closureKind = ClosureKind.Static;
-                        closureOrdinal = LambdaDebugInfo.StaticClosureOrdinal;
-                    }
-
-                    Debug.Assert(
-                        (object)translatedLambdaContainer != _topLevelMethod.ContainingType
-                            || VarianceSafety.GetEnclosingVariantInterface(_topLevelMethod) is null
-                    );
-
-                    // Move the body of the lambda to a freshly generated synthetic method on its frame.
-                    topLevelMethodId = _analysis.GetTopLevelMethodId();
-                    lambdaId = GetLambdaId(syntax, closureKind, closureOrdinal);
-
-                    var synthesizedMethod = new SynthesizedClosureMethod(
-                        translatedLambdaContainer,
-                        getStructEnvironments(nestedFunction),
-                        closureKind,
-                        _topLevelMethod,
-                        topLevelMethodId,
-                        originalMethod,
-                        nestedFunction.BlockSyntax,
-                        lambdaId,
-                        CompilationState
-                    );
-                    nestedFunction.SynthesizedLoweredMethod = synthesizedMethod;
+                    closureKind = ClosureKind.General;
+                    translatedLambdaContainer = containerAsFrame;
+                    closureOrdinal = containerAsFrame.ClosureOrdinal;
                 }
-            );
+                else if (nestedFunction.CapturesThis)
+                {
+                    containerAsFrame = null;
+                    translatedLambdaContainer = _topLevelMethod.ContainingType;
+                    closureKind = ClosureKind.ThisOnly;
+                    closureOrdinal = LambdaDebugInfo.ThisOnlyClosureOrdinal;
+                }
+                else if (
+                    (
+                        nestedFunction.CapturedEnvironments.Count == 0
+                        && originalMethod.MethodKind == MethodKind.LambdaMethod
+                        && _analysis.MethodsConvertedToDelegates.Contains(originalMethod)
+                    )
+                    ||
+                    // If we are in a variant interface, runtime might not consider the
+                    // method synthesized directly within the interface as variant safe.
+                    // For simplicity we do not perform precise analysis whether this would
+                    // definitely be the case. If we are in a variant interface, we always force
+                    // creation of a display class.
+                    VarianceSafety.GetEnclosingVariantInterface(_topLevelMethod) is object
+                )
+                {
+                    translatedLambdaContainer = containerAsFrame = GetStaticFrame(
+                        Diagnostics,
+                        syntax
+                    );
+                    closureKind = ClosureKind.Singleton;
+                    closureOrdinal = LambdaDebugInfo.StaticClosureOrdinal;
+                }
+                else
+                {
+                    // Lower directly onto the containing type
+                    translatedLambdaContainer = _topLevelMethod.ContainingType;
+                    containerAsFrame = null;
+                    closureKind = ClosureKind.Static;
+                    closureOrdinal = LambdaDebugInfo.StaticClosureOrdinal;
+                }
+
+                Debug.Assert(
+                    (object)translatedLambdaContainer != _topLevelMethod.ContainingType
+                        || VarianceSafety.GetEnclosingVariantInterface(_topLevelMethod) is null
+                );
+
+                // Move the body of the lambda to a freshly generated synthetic method on its frame.
+                topLevelMethodId = _analysis.GetTopLevelMethodId();
+                lambdaId = GetLambdaId(syntax, closureKind, closureOrdinal);
+
+                var synthesizedMethod = new SynthesizedClosureMethod(
+                    translatedLambdaContainer,
+                    getStructEnvironments(nestedFunction),
+                    closureKind,
+                    _topLevelMethod,
+                    topLevelMethodId,
+                    originalMethod,
+                    nestedFunction.BlockSyntax,
+                    lambdaId,
+                    CompilationState
+                );
+                nestedFunction.SynthesizedLoweredMethod = synthesizedMethod;
+            });
 
             static ImmutableArray<SynthesizedClosureEnvironment> getStructEnvironments(
                 Analysis.NestedFunction function
@@ -939,10 +930,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         throw ExceptionUtilities.UnexpectedValue(symbol.Kind);
                 }
 
-                var left = proxy.Replacement(
+                var left = proxy.Replacement(syntax, frameType1 => new BoundLocal(
                     syntax,
-                    frameType1 => new BoundLocal(syntax, framePointer, null, framePointer.Type)
-                );
+                    framePointer,
+                    null,
+                    framePointer.Type
+                ));
                 var assignToProxy = new BoundAssignmentOperator(syntax, left, value, value.Type);
                 if (
                     _currentMethod.MethodKind == MethodKind.Constructor
@@ -1844,16 +1837,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Find the scope of the containing environment
                 BoundNode tmpScope = null;
-                Analysis.VisitScopeTree(
-                    _analysis.ScopeTree,
-                    scope =>
+                Analysis.VisitScopeTree(_analysis.ScopeTree, scope =>
+                {
+                    if (scope.DeclaredEnvironment == function.ContainingEnvironmentOpt)
                     {
-                        if (scope.DeclaredEnvironment == function.ContainingEnvironmentOpt)
-                        {
-                            tmpScope = scope.BoundNode;
-                        }
+                        tmpScope = scope.BoundNode;
                     }
-                );
+                });
                 Debug.Assert(tmpScope != null);
                 lambdaScope = tmpScope;
             }

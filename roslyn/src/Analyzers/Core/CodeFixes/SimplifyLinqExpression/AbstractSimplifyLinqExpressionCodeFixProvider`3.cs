@@ -53,18 +53,15 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
                 .OrderByDescending(i => i.SpanStart);
             foreach (var original in expressionsToReWrite)
             {
-                editor.ReplaceNode(
-                    original,
-                    (current, generator) =>
-                    {
-                        var invocation = (TInvocationExpressionSyntax)current;
-                        var (expression, name, arguments) = FindNodes(invocation);
-                        return generator.InvocationExpression(
-                            generator.MemberAccessExpression(expression, name),
-                            arguments
-                        );
-                    }
-                );
+                editor.ReplaceNode(original, (current, generator) =>
+                {
+                    var invocation = (TInvocationExpressionSyntax)current;
+                    var (expression, name, arguments) = FindNodes(invocation);
+                    return generator.InvocationExpression(
+                        generator.MemberAccessExpression(expression, name),
+                        arguments
+                    );
+                });
             }
 
             return Task.CompletedTask;

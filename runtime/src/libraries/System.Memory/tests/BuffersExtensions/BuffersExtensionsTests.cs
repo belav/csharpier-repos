@@ -60,9 +60,8 @@ namespace System.Buffers.Tests
                 new byte[][] { new byte[destinationSize] }
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                paramName: "writer",
-                testCode: () => bufferWriter.Write(new byte[inputSize])
+            Assert.Throws<ArgumentOutOfRangeException>(paramName: "writer", testCode: () =>
+                bufferWriter.Write(new byte[inputSize])
             );
         }
 
@@ -79,9 +78,8 @@ namespace System.Buffers.Tests
                 new byte[][] { new byte[firstSegmentSize], new byte[secondSegmentSize] }
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                paramName: "writer",
-                testCode: () => bufferWriter.Write(new byte[inputSize])
+            Assert.Throws<ArgumentOutOfRangeException>(paramName: "writer", testCode: () =>
+                bufferWriter.Write(new byte[inputSize])
             );
         }
 

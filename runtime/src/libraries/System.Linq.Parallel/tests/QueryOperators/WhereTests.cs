@@ -66,9 +66,8 @@ namespace System.Linq.Parallel.Tests
         public static void Where_Unordered_NotPipelined(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, (count + 1) / 2);
-            Assert.All(
-                UnorderedSources.Default(count).Where(x => x % 2 == 0).ToList(),
-                x => seen.Add(x / 2)
+            Assert.All(UnorderedSources.Default(count).Where(x => x % 2 == 0).ToList(), x =>
+                seen.Add(x / 2)
             );
             seen.AssertComplete();
         }
@@ -90,14 +89,11 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(
-                query.Where(x => x % 2 == 0).ToList(),
-                x =>
-                {
-                    Assert.Equal(seen, x);
-                    seen += 2;
-                }
-            );
+            Assert.All(query.Where(x => x % 2 == 0).ToList(), x =>
+            {
+                Assert.Equal(seen, x);
+                seen += 2;
+            });
             Assert.Equal(count + (count % 2), seen);
         }
 
@@ -200,9 +196,8 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(
-                query.Where((x, index) => x == index).ToList(),
-                x => Assert.Equal(seen++, x)
+            Assert.All(query.Where((x, index) => x == index).ToList(), x =>
+                Assert.Equal(seen++, x)
             );
             Assert.Equal(count, seen);
         }
@@ -221,21 +216,17 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Where_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).Where(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).Where(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).Where((x, index) => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).Where((x, index) => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ParallelEnumerable.Empty<bool>().Where((Func<bool, bool>)null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ParallelEnumerable.Empty<bool>().Where((Func<bool, bool>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ParallelEnumerable.Empty<bool>().Where((Func<bool, int, bool>)null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ParallelEnumerable.Empty<bool>().Where((Func<bool, int, bool>)null)
             );
         }
     }

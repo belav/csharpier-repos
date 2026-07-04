@@ -283,37 +283,32 @@ namespace System.Threading.Tasks.Tests
                         {
                             bool expectedSync = i == 1 && !runContinuationsAsynchronously;
 
-                            tasks.Add(
-                                ThenAsync(
-                                    tcs.Task,
-                                    () =>
-                                    {
-                                        Assert.Equal(expectedSync ? 42 : 0, tl.Value);
+                            tasks.Add(ThenAsync(tcs.Task, () =>
+                                {
+                                    Assert.Equal(expectedSync ? 42 : 0, tl.Value);
 
-                                        switch (scheduler)
-                                        {
-                                            case null:
-                                                Assert.Same(
-                                                    TaskScheduler.Default,
-                                                    TaskScheduler.Current
-                                                );
-                                                Assert.Null(SynchronizationContext.Current);
-                                                break;
-                                            case TaskScheduler ts:
-                                                Assert.Same(ts, TaskScheduler.Current);
-                                                Assert.Null(SynchronizationContext.Current);
-                                                break;
-                                            case SynchronizationContext sc:
-                                                Assert.Same(sc, SynchronizationContext.Current);
-                                                Assert.Same(
-                                                    TaskScheduler.Default,
-                                                    TaskScheduler.Current
-                                                );
-                                                break;
-                                        }
+                                    switch (scheduler)
+                                    {
+                                        case null:
+                                            Assert.Same(
+                                                TaskScheduler.Default,
+                                                TaskScheduler.Current
+                                            );
+                                            Assert.Null(SynchronizationContext.Current);
+                                            break;
+                                        case TaskScheduler ts:
+                                            Assert.Same(ts, TaskScheduler.Current);
+                                            Assert.Null(SynchronizationContext.Current);
+                                            break;
+                                        case SynchronizationContext sc:
+                                            Assert.Same(sc, SynchronizationContext.Current);
+                                            Assert.Same(
+                                                TaskScheduler.Default,
+                                                TaskScheduler.Current
+                                            );
+                                            break;
                                     }
-                                )
-                            );
+                                }));
 
                             async Task ThenAsync(Task task, Action action)
                             {
@@ -329,9 +324,8 @@ namespace System.Threading.Tasks.Tests
                             }
                         }
 
-                        Assert.All(
-                            tasks,
-                            t => Assert.Equal(TaskStatus.WaitingForActivation, t.Status)
+                        Assert.All(tasks, t =>
+                            Assert.Equal(TaskStatus.WaitingForActivation, t.Status)
                         );
 
                         tl.Value = 42;
@@ -424,46 +418,40 @@ namespace System.Threading.Tasks.Tests
             // Task.GetAwaiter and Task<T>.GetAwaiter
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => ((Task)task).GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    ((Task)task).GetAwaiter().GetResult()
                 )
             );
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => task.GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    task.GetAwaiter().GetResult()
                 )
             );
 
             // w/ ConfigureAwait false and true
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => ((Task)task).ConfigureAwait(false).GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    ((Task)task).ConfigureAwait(false).GetAwaiter().GetResult()
                 )
             );
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => ((Task)task).ConfigureAwait(true).GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    ((Task)task).ConfigureAwait(true).GetAwaiter().GetResult()
                 )
             );
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => task.ConfigureAwait(false).GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    task.ConfigureAwait(false).GetAwaiter().GetResult()
                 )
             );
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => task.ConfigureAwait(true).GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    task.ConfigureAwait(true).GetAwaiter().GetResult()
                 )
             );
         }
@@ -479,46 +467,40 @@ namespace System.Threading.Tasks.Tests
             // Task.GetAwaiter and Task<T>.GetAwaiter
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => ((Task)task).GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    ((Task)task).GetAwaiter().GetResult()
                 )
             );
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => task.GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    task.GetAwaiter().GetResult()
                 )
             );
 
             // w/ ConfigureAwait false and true
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => ((Task)task).ConfigureAwait(false).GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    ((Task)task).ConfigureAwait(false).GetAwaiter().GetResult()
                 )
             );
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => ((Task)task).ConfigureAwait(true).GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    ((Task)task).ConfigureAwait(true).GetAwaiter().GetResult()
                 )
             );
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => task.ConfigureAwait(false).GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    task.ConfigureAwait(false).GetAwaiter().GetResult()
                 )
             );
             Assert.Same(
                 exception,
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => task.ConfigureAwait(true).GetAwaiter().GetResult()
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    task.ConfigureAwait(true).GetAwaiter().GetResult()
                 )
             );
         }
@@ -535,136 +517,95 @@ namespace System.Threading.Tasks.Tests
                 }
             )
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => new TaskCompletionSource().Task.WaitAsync(timeout)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    new TaskCompletionSource().Task.WaitAsync(timeout)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => new TaskCompletionSource().Task.WaitAsync(timeout, CancellationToken.None)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    new TaskCompletionSource().Task.WaitAsync(timeout, CancellationToken.None)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        new TaskCompletionSource().Task.WaitAsync(
-                            timeout,
-                            new CancellationToken(true)
-                        )
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    new TaskCompletionSource().Task.WaitAsync(timeout, new CancellationToken(true))
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => new TaskCompletionSource<int>().Task.WaitAsync(timeout)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    new TaskCompletionSource<int>().Task.WaitAsync(timeout)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        new TaskCompletionSource<int>().Task.WaitAsync(
-                            timeout,
-                            CancellationToken.None
-                        )
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    new TaskCompletionSource<int>().Task.WaitAsync(timeout, CancellationToken.None)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        new TaskCompletionSource<int>().Task.WaitAsync(
-                            timeout,
-                            new CancellationToken(true)
-                        )
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    new TaskCompletionSource<int>().Task.WaitAsync(
+                        timeout,
+                        new CancellationToken(true)
+                    )
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => Task.CompletedTask.WaitAsync(timeout)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.CompletedTask.WaitAsync(timeout)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => Task.CompletedTask.WaitAsync(timeout, CancellationToken.None)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.CompletedTask.WaitAsync(timeout, CancellationToken.None)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => Task.CompletedTask.WaitAsync(timeout, new CancellationToken(true))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.CompletedTask.WaitAsync(timeout, new CancellationToken(true))
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => Task.FromResult(42).WaitAsync(timeout)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromResult(42).WaitAsync(timeout)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => Task.FromResult(42).WaitAsync(timeout, CancellationToken.None)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromResult(42).WaitAsync(timeout, CancellationToken.None)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => Task.FromResult(42).WaitAsync(timeout, new CancellationToken(true))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromResult(42).WaitAsync(timeout, new CancellationToken(true))
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => Task.FromCanceled(new CancellationToken(true)).WaitAsync(timeout)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromCanceled(new CancellationToken(true)).WaitAsync(timeout)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        Task.FromCanceled(new CancellationToken(true))
-                            .WaitAsync(timeout, CancellationToken.None)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromCanceled(new CancellationToken(true))
+                        .WaitAsync(timeout, CancellationToken.None)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        Task.FromCanceled(new CancellationToken(true))
-                            .WaitAsync(timeout, new CancellationToken(true))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromCanceled(new CancellationToken(true))
+                        .WaitAsync(timeout, new CancellationToken(true))
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => Task.FromCanceled<int>(new CancellationToken(true)).WaitAsync(timeout)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromCanceled<int>(new CancellationToken(true)).WaitAsync(timeout)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        Task.FromCanceled<int>(new CancellationToken(true))
-                            .WaitAsync(timeout, CancellationToken.None)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromCanceled<int>(new CancellationToken(true))
+                        .WaitAsync(timeout, CancellationToken.None)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        Task.FromCanceled<int>(new CancellationToken(true))
-                            .WaitAsync(timeout, new CancellationToken(true))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromCanceled<int>(new CancellationToken(true))
+                        .WaitAsync(timeout, new CancellationToken(true))
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => Task.FromException(new FormatException()).WaitAsync(timeout)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromException(new FormatException()).WaitAsync(timeout)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        Task.FromException(new FormatException())
-                            .WaitAsync(timeout, CancellationToken.None)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromException(new FormatException())
+                        .WaitAsync(timeout, CancellationToken.None)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        Task.FromException(new FormatException())
-                            .WaitAsync(timeout, new CancellationToken(true))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromException(new FormatException())
+                        .WaitAsync(timeout, new CancellationToken(true))
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => Task.FromException<int>(new FormatException()).WaitAsync(timeout)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromException<int>(new FormatException()).WaitAsync(timeout)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        Task.FromException<int>(new FormatException())
-                            .WaitAsync(timeout, CancellationToken.None)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromException<int>(new FormatException())
+                        .WaitAsync(timeout, CancellationToken.None)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                        Task.FromException<int>(new FormatException())
-                            .WaitAsync(timeout, new CancellationToken(true))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    Task.FromException<int>(new FormatException())
+                        .WaitAsync(timeout, new CancellationToken(true))
                 );
             }
         }
@@ -1003,31 +944,25 @@ namespace System.Threading.Tasks.Tests
         [InlineData((ConfigureAwaitOptions)0x8)]
         public void ConfigureAwaitOptions_Invalid(ConfigureAwaitOptions options)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => Task.CompletedTask.ConfigureAwait(options)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                Task.CompletedTask.ConfigureAwait(options)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => Task.FromResult(true).ConfigureAwait(options)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                Task.FromResult(true).ConfigureAwait(options)
             );
         }
 
         [Fact]
         public void ConfigureAwaitOptions_SuppressThrowingUnsupportedOnGenericTask()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => Task.FromResult(true).ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                Task.FromResult(true).ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    Task.FromResult(true)
-                        .ConfigureAwait(
-                            ConfigureAwaitOptions.SuppressThrowing
-                                | ConfigureAwaitOptions.ForceYielding
-                        )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                Task.FromResult(true)
+                    .ConfigureAwait(
+                        ConfigureAwaitOptions.SuppressThrowing | ConfigureAwaitOptions.ForceYielding
+                    )
             );
         }
 

@@ -198,9 +198,8 @@ public static partial class OverlappedTests
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPool.UnsafeQueueNativeOverlapped is not supported on Unix
     public static unsafe void UnsafeQueueNativeOverlappedNegTest()
     {
-        AssertExtensions.Throws<ArgumentNullException>(
-            "overlapped",
-            () => ThreadPool.UnsafeQueueNativeOverlapped(null)
+        AssertExtensions.Throws<ArgumentNullException>("overlapped", () =>
+            ThreadPool.UnsafeQueueNativeOverlapped(null)
         );
     }
 

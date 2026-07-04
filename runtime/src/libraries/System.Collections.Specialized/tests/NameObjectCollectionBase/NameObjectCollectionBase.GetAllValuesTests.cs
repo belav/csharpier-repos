@@ -40,9 +40,8 @@ namespace System.Collections.Specialized.Tests
         public static void GetAllValues_Invalid()
         {
             MyNameObjectCollection nameObjectCollection = new MyNameObjectCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => nameObjectCollection.GetAllValues(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                nameObjectCollection.GetAllValues(null)
             );
 
             nameObjectCollection.Add("name", new Foo("value"));

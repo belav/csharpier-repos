@@ -37,9 +37,8 @@ public abstract class FiltersInheritanceQueryTestBase<TFixture> : FilteredQueryT
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_use_is_kiwi_with_other_predicate(bool async)
     {
-        return AssertFilteredQuery(
-            async,
-            ss => ss.Set<Animal>().Where(a => a is Kiwi && a.CountryId == 1)
+        return AssertFilteredQuery(async, ss =>
+            ss.Set<Animal>().Where(a => a is Kiwi && a.CountryId == 1)
         );
     }
 

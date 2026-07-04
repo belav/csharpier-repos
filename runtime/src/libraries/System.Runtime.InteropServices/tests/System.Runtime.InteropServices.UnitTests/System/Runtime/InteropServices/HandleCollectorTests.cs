@@ -44,32 +44,27 @@ namespace System.Runtime.InteropServices
         [Fact]
         public void Ctor_NegativeInitialThreshold_ThrowsArgumentOufORangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialThreshold",
-                () => new HandleCollector("NegativeInitial", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialThreshold", () =>
+                new HandleCollector("NegativeInitial", -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialThreshold",
-                () => new HandleCollector("NegativeInitial", -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialThreshold", () =>
+                new HandleCollector("NegativeInitial", -1, 0)
             );
         }
 
         [Fact]
         public static void Ctor_NegativeMaximumThreshold_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maximumThreshold",
-                () => new HandleCollector("NegativeMax", 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maximumThreshold", () =>
+                new HandleCollector("NegativeMax", 0, -1)
             );
         }
 
         [Fact]
         public static void Ctor_InitialThresholdGreaterThanMaximumThreshold_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "initialThreshold",
-                null,
-                () => new HandleCollector("InitialGreaterThanMax", 100, 1)
+            AssertExtensions.Throws<ArgumentException>("initialThreshold", null, () =>
+                new HandleCollector("InitialGreaterThanMax", 100, 1)
             );
         }
 

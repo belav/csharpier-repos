@@ -79,12 +79,10 @@ public abstract class ReaderColumn
             GetConstructor(type).Invoke(new[] { nullable, columnName, property, readFunc });
 
     private static ConstructorInfo GetConstructor(Type type) =>
-        Constructors.GetOrAdd(
-            type,
-            t =>
-                typeof(ReaderColumn<>)
-                    .MakeGenericType(t)
-                    .GetConstructors()
-                    .First(ci => ci.GetParameters().Length == 4)
+        Constructors.GetOrAdd(type, t =>
+            typeof(ReaderColumn<>)
+                .MakeGenericType(t)
+                .GetConstructors()
+                .First(ci => ci.GetParameters().Length == 4)
         );
 }

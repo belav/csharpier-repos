@@ -37,26 +37,20 @@ namespace System.ComponentModel.Composition
             Func<ReflectionContext, DirectoryCatalog> catalogCreator
         )
         {
-            Assert.Throws<ArgumentNullException>(
-                "reflectionContext",
-                () =>
-                {
-                    var catalog = catalogCreator(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("reflectionContext", () =>
+            {
+                var catalog = catalogCreator(null);
+            });
         }
 
         private static void Constructor_NullDefinitionOriginArgument_ShouldThrowArgumentNull(
             Func<ICompositionElement, DirectoryCatalog> catalogCreator
         )
         {
-            Assert.Throws<ArgumentNullException>(
-                "definitionOrigin",
-                () =>
-                {
-                    var catalog = catalogCreator(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definitionOrigin", () =>
+            {
+                var catalog = catalogCreator(null);
+            });
         }
 
         [Fact]
@@ -188,13 +182,10 @@ namespace System.ComponentModel.Composition
             var catalog = CreateDirectoryCatalog();
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    var parts = catalog.Parts;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                var parts = catalog.Parts;
+            });
         }
 
         [Fact]
@@ -204,13 +195,10 @@ namespace System.ComponentModel.Composition
             catalog.Dispose();
             var definition = ImportDefinitionFactory.Create();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    catalog.GetExports(definition);
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                catalog.GetExports(definition);
+            });
         }
 
         [Fact]
@@ -219,13 +207,10 @@ namespace System.ComponentModel.Composition
             var catalog = CreateDirectoryCatalog();
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    catalog.Refresh();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                catalog.Refresh();
+            });
         }
 
         [Fact]
@@ -242,13 +227,10 @@ namespace System.ComponentModel.Composition
         {
             var catalog = CreateDirectoryCatalog();
 
-            Assert.Throws<ArgumentNullException>(
-                "definition",
-                () =>
-                {
-                    catalog.GetExports((ImportDefinition)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definition", () =>
+            {
+                catalog.GetExports((ImportDefinition)null);
+            });
         }
 
         [Fact]
@@ -554,9 +536,8 @@ namespace System.ComponentModel.Composition
             DirectoryCatalog cat;
             cat = new DirectoryCatalog(TemporaryFileCopier.GetNewTemporaryDirectory());
 
-            ExceptionAssert.Throws<DirectoryNotFoundException>(
-                RetryMode.DoNotRetry,
-                () => cat.Refresh()
+            ExceptionAssert.Throws<DirectoryNotFoundException>(RetryMode.DoNotRetry, () =>
+                cat.Refresh()
             );
         }
 

@@ -20,14 +20,11 @@ internal sealed class AuthorizationPolicyCache : IDisposable
         // that cache if the endpoints change so that we don't allow unbounded memory growth.
         _policyCache = new DataSourceDependentCache<
             ConcurrentDictionary<Endpoint, AuthorizationPolicy>
-        >(
-            dataSource,
-            (_) =>
-            {
-                // We don't eagerly fill this cache because there's no real reason to.
-                return new ConcurrentDictionary<Endpoint, AuthorizationPolicy>();
-            }
-        );
+        >(dataSource, (_) =>
+        {
+            // We don't eagerly fill this cache because there's no real reason to.
+            return new ConcurrentDictionary<Endpoint, AuthorizationPolicy>();
+        });
         _policyCache.EnsureInitialized();
     }
 

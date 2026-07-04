@@ -990,45 +990,39 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
                 context.Courses.Add(courses[i]);
             }
 
-            Assert.All(
-                context.Enrollments.Local,
-                e =>
-                {
-                    var entry = context.Entry(e);
-                    var student = e.Student;
-                    var course = e.Course;
-                    Assert.Equal(student.Id, e.StudentId);
-                    Assert.Equal(course.Id, e.CourseId);
-                    Assert.Equal(
-                        context.Entry(student).Property(e => e.Id).CurrentValue,
-                        entry.Property(e => e.StudentId).CurrentValue
-                    );
-                    Assert.Equal(
-                        context.Entry(course).Property(e => e.Id).CurrentValue,
-                        entry.Property(e => e.CourseId).CurrentValue
-                    );
-                    Assert.True(entry.Property(e => e.StudentId).IsTemporary);
-                    Assert.True(entry.Property(e => e.CourseId).IsTemporary);
-                    Assert.True(context.Entry(student).Property(e => e.Id).IsTemporary);
-                    Assert.True(context.Entry(course).Property(e => e.Id).IsTemporary);
-                }
-            );
+            Assert.All(context.Enrollments.Local, e =>
+            {
+                var entry = context.Entry(e);
+                var student = e.Student;
+                var course = e.Course;
+                Assert.Equal(student.Id, e.StudentId);
+                Assert.Equal(course.Id, e.CourseId);
+                Assert.Equal(
+                    context.Entry(student).Property(e => e.Id).CurrentValue,
+                    entry.Property(e => e.StudentId).CurrentValue
+                );
+                Assert.Equal(
+                    context.Entry(course).Property(e => e.Id).CurrentValue,
+                    entry.Property(e => e.CourseId).CurrentValue
+                );
+                Assert.True(entry.Property(e => e.StudentId).IsTemporary);
+                Assert.True(entry.Property(e => e.CourseId).IsTemporary);
+                Assert.True(context.Entry(student).Property(e => e.Id).IsTemporary);
+                Assert.True(context.Entry(course).Property(e => e.Id).IsTemporary);
+            });
 
             context.SaveChanges();
 
-            Assert.All(
-                context.Enrollments.Local,
-                e =>
-                {
-                    var entry = context.Entry(e);
-                    var student = e.Student;
-                    var course = e.Course;
-                    Assert.Equal(student.Id, e.StudentId);
-                    Assert.Equal(course.Id, e.CourseId);
-                    Assert.False(entry.Property(e => e.StudentId).IsTemporary);
-                    Assert.False(entry.Property(e => e.CourseId).IsTemporary);
-                }
-            );
+            Assert.All(context.Enrollments.Local, e =>
+            {
+                var entry = context.Entry(e);
+                var student = e.Student;
+                var course = e.Course;
+                Assert.Equal(student.Id, e.StudentId);
+                Assert.Equal(course.Id, e.CourseId);
+                Assert.False(entry.Property(e => e.StudentId).IsTemporary);
+                Assert.False(entry.Property(e => e.CourseId).IsTemporary);
+            });
         }
 
         using (var context = new UniversityContext(options))
@@ -1040,16 +1034,13 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
                 .Enrollments.Include(e => e.Course)
                 .Include(e => e.Student)
                 .ToList();
-            Assert.All(
-                enrollments,
-                e =>
-                {
-                    var student = e.Student;
-                    var course = e.Course;
-                    Assert.Equal(student.Id, e.StudentId);
-                    Assert.Equal(course.Id, e.CourseId);
-                }
-            );
+            Assert.All(enrollments, e =>
+            {
+                var student = e.Student;
+                var course = e.Course;
+                Assert.Equal(student.Id, e.StudentId);
+                Assert.Equal(course.Id, e.CourseId);
+            });
         }
     }
 

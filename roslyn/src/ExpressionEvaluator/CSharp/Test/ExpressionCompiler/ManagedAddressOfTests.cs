@@ -26,20 +26,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
     }
 }";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
-                    var testData = new CompilationTestData();
-                    string error;
-                    context.CompileExpression("&s", out error, testData);
-                    Assert.Null(error);
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
+                var testData = new CompilationTestData();
+                string error;
+                context.CompileExpression("&s", out error, testData);
+                Assert.Null(error);
 
-                    var methodData = testData.GetMethodData("<>x.<>m0");
-                    AssertIsStringPointer(((MethodSymbol)methodData.Method).ReturnType);
-                    methodData.VerifyIL(
-                        @"
+                var methodData = testData.GetMethodData("<>x.<>m0");
+                AssertIsStringPointer(((MethodSymbol)methodData.Method).ReturnType);
+                methodData.VerifyIL(
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  1
@@ -48,9 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0003:  ret
 }
 "
-                    );
-                }
-            );
+                );
+            });
         }
 
         [Fact]
@@ -65,20 +62,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
     }
 }";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
-                    var testData = new CompilationTestData();
-                    string error;
-                    context.CompileExpression("&s", out error, testData);
-                    Assert.Null(error);
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
+                var testData = new CompilationTestData();
+                string error;
+                context.CompileExpression("&s", out error, testData);
+                Assert.Null(error);
 
-                    var methodData = testData.GetMethodData("<>x.<>m0");
-                    AssertIsStringPointer(((MethodSymbol)methodData.Method).ReturnType);
-                    methodData.VerifyIL(
-                        @"
+                var methodData = testData.GetMethodData("<>x.<>m0");
+                AssertIsStringPointer(((MethodSymbol)methodData.Method).ReturnType);
+                methodData.VerifyIL(
+                    @"
 {
   // Code size        4 (0x4)
   .maxstack  1
@@ -88,9 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0003:  ret
 }
 "
-                    );
-                }
-            );
+                );
+            });
         }
 
         [Fact]
@@ -106,20 +100,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
     }
 }";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
-                    var testData = new CompilationTestData();
-                    string error;
-                    context.CompileExpression("&s", out error, testData);
-                    Assert.Null(error);
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
+                var testData = new CompilationTestData();
+                string error;
+                context.CompileExpression("&s", out error, testData);
+                Assert.Null(error);
 
-                    var methodData = testData.GetMethodData("<>x.<>m0");
-                    AssertIsStringPointer(((MethodSymbol)methodData.Method).ReturnType);
-                    methodData.VerifyIL(
-                        @"
+                var methodData = testData.GetMethodData("<>x.<>m0");
+                AssertIsStringPointer(((MethodSymbol)methodData.Method).ReturnType);
+                methodData.VerifyIL(
+                    @"
 {
   // Code size        8 (0x8)
   .maxstack  1
@@ -129,9 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
   IL_0007:  ret
 }
 "
-                    );
-                }
-            );
+                );
+            });
         }
 
         [Fact]
@@ -158,42 +149,40 @@ enum E
 }
 ";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
 
-                    var types = new[]
+                var types = new[]
+                {
+                    "C", // class
+                    "D", // delegate
+                    "I", // interface
+                    "T", // type parameter
+                    "int[]",
+                    "dynamic",
+                };
+
+                foreach (var type in types)
+                {
+                    CompilationTestData testData = new CompilationTestData();
+                    context.CompileExpression(
+                        string.Format("sizeof({0})", type),
+                        out var error,
+                        testData
+                    );
+                    Assert.Null(error);
+
+                    var expectedType = type switch
                     {
-                        "C", // class
-                        "D", // delegate
-                        "I", // interface
-                        "T", // type parameter
-                        "int[]",
-                        "dynamic",
+                        "dynamic" => "object",
+                        _ => type,
                     };
 
-                    foreach (var type in types)
-                    {
-                        CompilationTestData testData = new CompilationTestData();
-                        context.CompileExpression(
-                            string.Format("sizeof({0})", type),
-                            out var error,
-                            testData
-                        );
-                        Assert.Null(error);
-
-                        var expectedType = type switch
-                        {
-                            "dynamic" => "object",
-                            _ => type,
-                        };
-
-                        testData
-                            .GetMethodData("<>x.<>m0<T>")
-                            .VerifyIL(
-                                $$"""
+                    testData
+                        .GetMethodData("<>x.<>m0<T>")
+                        .VerifyIL(
+                            $$"""
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -201,10 +190,9 @@ enum E
   IL_0006:  ret
 }
 """
-                            );
-                    }
+                        );
                 }
-            );
+            });
         }
 
         [Fact]
@@ -219,24 +207,21 @@ enum E
     }
 }";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
-                    var testData = new CompilationTestData();
-                    context.CompileAssignment(
-                        "a",
-                        "() => { var s = stackalloc string[1]; }",
-                        out var error,
-                        testData
-                    );
-                    Assert.Equal(
-                        "error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('string')",
-                        error
-                    );
-                }
-            );
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
+                var testData = new CompilationTestData();
+                context.CompileAssignment(
+                    "a",
+                    "() => { var s = stackalloc string[1]; }",
+                    out var error,
+                    testData
+                );
+                Assert.Equal(
+                    "error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('string')",
+                    error
+                );
+            });
         }
 
         [Fact]
@@ -250,20 +235,18 @@ enum E
     }
 }";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
-                    var testData = new CompilationTestData();
-                    string error;
-                    context.CompileExpression("(string*)null", out error, testData);
-                    Assert.Null(error);
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
+                var testData = new CompilationTestData();
+                string error;
+                context.CompileExpression("(string*)null", out error, testData);
+                Assert.Null(error);
 
-                    var methodData = testData.GetMethodData("<>x.<>m0");
-                    AssertIsStringPointer(((MethodSymbol)methodData.Method).ReturnType);
-                    methodData.VerifyIL(
-                        @"
+                var methodData = testData.GetMethodData("<>x.<>m0");
+                AssertIsStringPointer(((MethodSymbol)methodData.Method).ReturnType);
+                methodData.VerifyIL(
+                    @"
 {
   // Code size        3 (0x3)
   .maxstack  1
@@ -272,9 +255,8 @@ enum E
   IL_0002:  ret
 }
 "
-                    );
-                }
-            );
+                );
+            });
         }
 
         [Fact]
@@ -289,24 +271,22 @@ enum E
     }
 }";
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
-                    var testData = new CompilationTestData();
-                    context.CompileAssignment(
-                        "a",
-                        "() => { fixed (void* p = args) { } }",
-                        out var error,
-                        testData
-                    );
-                    Assert.Null(error);
-
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
+                var testData = new CompilationTestData();
+                context.CompileAssignment(
+                    "a",
+                    "() => { fixed (void* p = args) { } }",
+                    out var error,
                     testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"
+                );
+                Assert.Null(error);
+
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       25 (0x19)
   .maxstack  3
@@ -321,12 +301,12 @@ enum E
   IL_0018:  ret
 }
 "
-                        );
+                    );
 
-                    testData
-                        .GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0")
-                        .VerifyIL(
-                            @"
+                testData
+                    .GetMethodData("<>x.<>c__DisplayClass0_0.<<>m0>b__0")
+                    .VerifyIL(
+                        @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -356,9 +336,8 @@ enum E
   IL_0021:  ret
 }
 "
-                        );
-                }
-            );
+                    );
+            });
         }
 
         private static void AssertIsStringPointer(TypeSymbol returnType)

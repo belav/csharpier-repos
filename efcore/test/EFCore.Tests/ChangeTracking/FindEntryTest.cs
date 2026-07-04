@@ -3406,22 +3406,16 @@ public class FindEntryTest
                 .Property<int>("Id")
                 .ValueGeneratedNever();
 
-            modelBuilder.SharedTypeEntity<ShadowAlternateIntKey>(
-                "ShadowAlternateIntKeyA",
-                b =>
-                {
-                    b.Property<int>("AlternateId");
-                    b.HasAlternateKey("AlternateId");
-                }
-            );
-            modelBuilder.SharedTypeEntity<ShadowAlternateIntKey>(
-                "ShadowAlternateIntKeyB",
-                b =>
-                {
-                    b.Property<int>("AlternateId");
-                    b.HasAlternateKey("AlternateId");
-                }
-            );
+            modelBuilder.SharedTypeEntity<ShadowAlternateIntKey>("ShadowAlternateIntKeyA", b =>
+            {
+                b.Property<int>("AlternateId");
+                b.HasAlternateKey("AlternateId");
+            });
+            modelBuilder.SharedTypeEntity<ShadowAlternateIntKey>("ShadowAlternateIntKeyB", b =>
+            {
+                b.Property<int>("AlternateId");
+                b.HasAlternateKey("AlternateId");
+            });
 
             modelBuilder
                 .SharedTypeEntity<ShadowForeignIntKey>("ShadowForeignIntKeyA")
@@ -3609,26 +3603,20 @@ public class FindEntryTest
             modelBuilder.SharedTypeEntity<CompositeNonKey>("CompositeNonKeyA");
             modelBuilder.SharedTypeEntity<CompositeNonKey>("CompositeNonKeyB");
 
-            modelBuilder.SharedTypeEntity<ShadowCompositeKey>(
-                "ShadowCompositeKeyA",
-                b =>
-                {
-                    b.Property<int>("Id1");
-                    b.Property<string>("Id2");
-                    b.Property<string>("Foo");
-                    b.HasKey("Id1", "Id2", "Foo");
-                }
-            );
-            modelBuilder.SharedTypeEntity<ShadowCompositeKey>(
-                "ShadowCompositeKeyB",
-                b =>
-                {
-                    b.Property<int>("Id1");
-                    b.Property<string>("Id2");
-                    b.Property<string>("Foo");
-                    b.HasKey("Id1", "Id2", "Foo");
-                }
-            );
+            modelBuilder.SharedTypeEntity<ShadowCompositeKey>("ShadowCompositeKeyA", b =>
+            {
+                b.Property<int>("Id1");
+                b.Property<string>("Id2");
+                b.Property<string>("Foo");
+                b.HasKey("Id1", "Id2", "Foo");
+            });
+            modelBuilder.SharedTypeEntity<ShadowCompositeKey>("ShadowCompositeKeyB", b =>
+            {
+                b.Property<int>("Id1");
+                b.Property<string>("Id2");
+                b.Property<string>("Foo");
+                b.HasKey("Id1", "Id2", "Foo");
+            });
 
             modelBuilder.SharedTypeEntity<ShadowAlternateCompositeKey>(
                 "ShadowAlternateCompositeKeyA",
@@ -3669,24 +3657,18 @@ public class FindEntryTest
                 .SharedTypeEntity<ShadowCompositeNonKey>("ShadowCompositeNonKeyB")
                 .Property<string>("String");
 
-            modelBuilder.SharedTypeEntity<ShadowCompositeNonKey>(
-                "ShadowCompositeNonKeyA",
-                b =>
-                {
-                    b.Property<int?>("Int");
-                    b.Property<string?>("String");
-                    b.Property<string?>("Foo");
-                }
-            );
-            modelBuilder.SharedTypeEntity<ShadowCompositeNonKey>(
-                "ShadowCompositeNonKeyB",
-                b =>
-                {
-                    b.Property<int?>("Int");
-                    b.Property<string?>("String");
-                    b.Property<string?>("Foo");
-                }
-            );
+            modelBuilder.SharedTypeEntity<ShadowCompositeNonKey>("ShadowCompositeNonKeyA", b =>
+            {
+                b.Property<int?>("Int");
+                b.Property<string?>("String");
+                b.Property<string?>("Foo");
+            });
+            modelBuilder.SharedTypeEntity<ShadowCompositeNonKey>("ShadowCompositeNonKeyB", b =>
+            {
+                b.Property<int?>("Int");
+                b.Property<string?>("String");
+                b.Property<string?>("Foo");
+            });
         }
 
         protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>

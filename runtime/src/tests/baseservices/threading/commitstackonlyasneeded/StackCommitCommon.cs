@@ -259,17 +259,11 @@ namespace StackCommitTest
         {
             if (
                 RunTestItem("Main", shouldBePreCommitted, -1, action => action())
-                & RunTestItem(
-                    "ThreadPool",
-                    shouldBePreCommitted,
-                    -1,
-                    action => ThreadPool.QueueUserWorkItem(state => action())
+                & RunTestItem("ThreadPool", shouldBePreCommitted, -1, action =>
+                    ThreadPool.QueueUserWorkItem(state => action())
                 )
-                & RunTestItem(
-                    "new Thread()",
-                    shouldBePreCommitted,
-                    -1,
-                    action => new Thread(() => action()).Start()
+                & RunTestItem("new Thread()", shouldBePreCommitted, -1, action =>
+                    new Thread(() => action()).Start()
                 )
                 &
                 //RunTestItem("new Thread(512kb)", true, 512 * 1024, action => new Thread(() => action(), 512 * 1024).Start()) &

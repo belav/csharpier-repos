@@ -95,9 +95,8 @@ public class SequentialGuidEndToEndTest : IDisposable
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder
-                .UseSqlServer(
-                    SqlServerTestStore.CreateConnectionString(_databaseName),
-                    b => b.ApplyConfiguration()
+                .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b =>
+                    b.ApplyConfiguration()
                 )
                 .UseInternalServiceProvider(_serviceProvider);
     }

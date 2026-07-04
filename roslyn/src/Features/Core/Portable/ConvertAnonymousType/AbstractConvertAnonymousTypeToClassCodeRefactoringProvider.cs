@@ -192,15 +192,13 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
 
             // Then, actually insert the new class in the appropriate container.
             var container = anonymousObject.GetAncestor<TNamespaceDeclarationSyntax>() ?? root;
-            editor.ReplaceNode(
-                container,
-                (currentContainer, _) =>
-                    info.Service.AddNamedType(
-                        currentContainer,
-                        namedTypeSymbol,
-                        info,
-                        cancellationToken
-                    )
+            editor.ReplaceNode(container, (currentContainer, _) =>
+                info.Service.AddNamedType(
+                    currentContainer,
+                    namedTypeSymbol,
+                    info,
+                    cancellationToken
+                )
             );
 
             var updatedDocument = document.WithSyntaxRoot(editor.GetChangedRoot());
@@ -246,9 +244,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
 
                 if (propertyMap.TryGetValue(symbol, out var newName))
                 {
-                    editor.ReplaceNode(
-                        identifier,
-                        (currentId, g) => g.IdentifierName(newName).WithTriviaFrom(currentId)
+                    editor.ReplaceNode(identifier, (currentId, g) =>
+                        g.IdentifierName(newName).WithTriviaFrom(currentId)
                     );
                 }
             }
@@ -309,36 +306,30 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
         {
             // Use the callback form as anonymous types may be nested, and we want to
             // properly replace them even in that case.
-            editor.ReplaceNode(
-                childCreation,
-                (currentNode, g) =>
-                {
-                    var currentAnonymousObject =
-                        (TAnonymousObjectCreationExpressionSyntax)currentNode;
+            editor.ReplaceNode(childCreation, (currentNode, g) =>
+            {
+                var currentAnonymousObject = (TAnonymousObjectCreationExpressionSyntax)currentNode;
 
-                    // If we hit the node the user started on, then add the rename annotation here.
-                    var className = classSymbol.Name;
-                    var classNameToken =
-                        startingCreationNode == childCreation
-                            ? g.Identifier(className)
-                                .WithAdditionalAnnotations(RenameAnnotation.Create())
-                            : g.Identifier(className);
+                // If we hit the node the user started on, then add the rename annotation here.
+                var className = classSymbol.Name;
+                var classNameToken =
+                    startingCreationNode == childCreation
+                        ? g.Identifier(className)
+                            .WithAdditionalAnnotations(RenameAnnotation.Create())
+                        : g.Identifier(className);
 
-                    var classNameNode =
-                        classSymbol.TypeParameters.Length == 0
-                            ? (TNameSyntax)g.IdentifierName(classNameToken)
-                            : (TNameSyntax)
-                                g.GenericName(
-                                    classNameToken,
-                                    classSymbol.TypeParameters.Select(tp =>
-                                        g.IdentifierName(tp.Name)
-                                    )
-                                );
+                var classNameNode =
+                    classSymbol.TypeParameters.Length == 0
+                        ? (TNameSyntax)g.IdentifierName(classNameToken)
+                        : (TNameSyntax)
+                            g.GenericName(
+                                classNameToken,
+                                classSymbol.TypeParameters.Select(tp => g.IdentifierName(tp.Name))
+                            );
 
-                    return CreateObjectCreationExpression(classNameNode, currentAnonymousObject)
-                        .WithAdditionalAnnotations(Formatter.Annotation);
-                }
-            );
+                return CreateObjectCreationExpression(classNameNode, currentAnonymousObject)
+                    .WithAdditionalAnnotations(Formatter.Annotation);
+            });
         }
 
         private static async Task<INamedTypeSymbol> GenerateFinalNamedTypeAsync(

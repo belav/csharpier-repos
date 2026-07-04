@@ -45,14 +45,12 @@ namespace System.Reflection.Emit.Tests
         {
             ModuleBuilder module = Helpers.DynamicModule();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "argument",
-                () =>
-                    SignatureHelper.GetPropertySigHelper(
-                        module,
-                        typeof(string),
-                        new Type[] { null, typeof(int) }
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("argument", () =>
+                SignatureHelper.GetPropertySigHelper(
+                    module,
+                    typeof(string),
+                    new Type[] { null, typeof(int) }
+                )
             );
         }
 
@@ -114,18 +112,16 @@ namespace System.Reflection.Emit.Tests
 
             ModuleBuilder module = Helpers.DynamicModule();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "optionalCustomModifiers",
-                () =>
-                    SignatureHelper.GetPropertySigHelper(
-                        module,
-                        typeof(string),
-                        types,
-                        types,
-                        types,
-                        customModifiers,
-                        customModifiers
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("optionalCustomModifiers", () =>
+                SignatureHelper.GetPropertySigHelper(
+                    module,
+                    typeof(string),
+                    types,
+                    types,
+                    types,
+                    customModifiers,
+                    customModifiers
+                )
             );
         }
     }

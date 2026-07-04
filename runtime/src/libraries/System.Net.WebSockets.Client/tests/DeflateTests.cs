@@ -172,15 +172,13 @@ namespace System.Net.WebSockets.Client.Tests
                         WebSocketMessageFlags.DisableCompression,
                         default
                     );
-                    Assert.Throws<ArgumentException>(
-                        "messageFlags",
-                        () =>
-                            cws.SendAsync(
-                                Memory<byte>.Empty,
-                                WebSocketMessageType.Binary,
-                                WebSocketMessageFlags.EndOfMessage,
-                                default
-                            )
+                    Assert.Throws<ArgumentException>("messageFlags", () =>
+                        cws.SendAsync(
+                            Memory<byte>.Empty,
+                            WebSocketMessageType.Binary,
+                            WebSocketMessageFlags.EndOfMessage,
+                            default
+                        )
                     );
                 },
                 server =>

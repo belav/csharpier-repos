@@ -256,15 +256,12 @@ namespace System.Linq.Parallel.Tests
         {
             int prev = 0;
             int seen = 0;
-            Assert.All(
-                labeled.Item.OrderBy(x => x).ToList(),
-                x =>
-                {
-                    Assert.InRange(x, prev, count - 1);
-                    prev = x;
-                    seen++;
-                }
-            );
+            Assert.All(labeled.Item.OrderBy(x => x).ToList(), x =>
+            {
+                Assert.InRange(x, prev, count - 1);
+                prev = x;
+                seen++;
+            });
             Assert.Equal(count, seen);
         }
 
@@ -304,15 +301,12 @@ namespace System.Linq.Parallel.Tests
         {
             int prev = count - 1;
             int seen = 0;
-            Assert.All(
-                labeled.Item.OrderBy(x => -x).ToList(),
-                x =>
-                {
-                    Assert.InRange(x, 0, prev);
-                    prev = x;
-                    seen++;
-                }
-            );
+            Assert.All(labeled.Item.OrderBy(x => -x).ToList(), x =>
+            {
+                Assert.InRange(x, 0, prev);
+                prev = x;
+                seen++;
+            });
             Assert.Equal(count, seen);
         }
 
@@ -352,15 +346,12 @@ namespace System.Linq.Parallel.Tests
         {
             int prev = count - 1;
             int seen = 0;
-            Assert.All(
-                labeled.Item.OrderByDescending(x => x).ToList(),
-                x =>
-                {
-                    Assert.InRange(x, 0, prev);
-                    prev = x;
-                    seen++;
-                }
-            );
+            Assert.All(labeled.Item.OrderByDescending(x => x).ToList(), x =>
+            {
+                Assert.InRange(x, 0, prev);
+                prev = x;
+                seen++;
+            });
             Assert.Equal(count, seen);
         }
 
@@ -400,15 +391,12 @@ namespace System.Linq.Parallel.Tests
         {
             int prev = 0;
             int seen = 0;
-            Assert.All(
-                labeled.Item.OrderByDescending(x => -x).ToList(),
-                x =>
-                {
-                    Assert.InRange(x, prev, count - 1);
-                    prev = x;
-                    seen++;
-                }
-            );
+            Assert.All(labeled.Item.OrderByDescending(x => -x).ToList(), x =>
+            {
+                Assert.InRange(x, prev, count - 1);
+                prev = x;
+                seen++;
+            });
             Assert.Equal(count, seen);
         }
 
@@ -535,15 +523,12 @@ namespace System.Linq.Parallel.Tests
         {
             int prev = count - 1;
             int seen = 0;
-            Assert.All(
-                labeled.Item.OrderBy(x => x, ReverseComparer.Instance).ToList(),
-                x =>
-                {
-                    Assert.InRange(x, 0, prev);
-                    prev = x;
-                    seen++;
-                }
-            );
+            Assert.All(labeled.Item.OrderBy(x => x, ReverseComparer.Instance).ToList(), x =>
+            {
+                Assert.InRange(x, 0, prev);
+                prev = x;
+                seen++;
+            });
             Assert.Equal(count, seen);
         }
 
@@ -671,14 +656,11 @@ namespace System.Linq.Parallel.Tests
         )
         {
             int prev = 0;
-            Assert.All(
-                labeled.Item.OrderBy(x => x, new ExtremeComparer<int>()).ToList(),
-                x =>
-                {
-                    Assert.InRange(x, prev, count - 1);
-                    prev = x;
-                }
-            );
+            Assert.All(labeled.Item.OrderBy(x => x, new ExtremeComparer<int>()).ToList(), x =>
+            {
+                Assert.InRange(x, prev, count - 1);
+                prev = x;
+            });
         }
 
         [Theory]
@@ -766,14 +748,11 @@ namespace System.Linq.Parallel.Tests
             var comparer = Comparer<NotComparable>.Create(
                 (x, y) => ReverseComparer.Instance.Compare(x.Value, y.Value)
             );
-            Assert.All(
-                labeled.Item.OrderBy(x => new NotComparable(-x), comparer).ToList(),
-                x =>
-                {
-                    Assert.InRange(x, prev, count - 1);
-                    prev = x;
-                }
-            );
+            Assert.All(labeled.Item.OrderBy(x => new NotComparable(-x), comparer).ToList(), x =>
+            {
+                Assert.InRange(x, prev, count - 1);
+                prev = x;
+            });
         }
 
         [Theory]
@@ -853,48 +832,36 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void OrderBy_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).OrderBy(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).OrderBy(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => ParallelEnumerable.Range(0, 1).OrderBy((Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable.Range(0, 1).OrderBy((Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).OrderBy(x => x, Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).OrderBy(x => x, Comparer<int>.Default)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .OrderBy((Func<int, int>)null, Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable.Range(0, 1).OrderBy((Func<int, int>)null, Comparer<int>.Default)
             );
         }
 
         [Fact]
         public static void OrderByDescending_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).OrderByDescending(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).OrderByDescending(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => ParallelEnumerable.Range(0, 1).OrderByDescending((Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable.Range(0, 1).OrderByDescending((Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).OrderByDescending(x => x, Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).OrderByDescending(x => x, Comparer<int>.Default)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .OrderByDescending((Func<int, int>)null, Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .OrderByDescending((Func<int, int>)null, Comparer<int>.Default)
             );
         }
 
@@ -1204,21 +1171,18 @@ namespace System.Linq.Parallel.Tests
             int prevPrimary = 0;
             int prevSecondary = count - 1;
             int seen = 0;
-            Assert.All(
-                labeled.Item.OrderBy(x => x % GroupFactor).ThenBy(x => -x).ToList(),
-                x =>
+            Assert.All(labeled.Item.OrderBy(x => x % GroupFactor).ThenBy(x => -x).ToList(), x =>
+            {
+                Assert.InRange(x % GroupFactor, prevPrimary, count - 1);
+                if (x % GroupFactor != prevPrimary)
                 {
-                    Assert.InRange(x % GroupFactor, prevPrimary, count - 1);
-                    if (x % GroupFactor != prevPrimary)
-                    {
-                        prevPrimary = x % GroupFactor;
-                        prevSecondary = count - 1;
-                    }
-                    Assert.InRange(x, 0, prevSecondary);
-                    prevSecondary = x;
-                    seen++;
+                    prevPrimary = x % GroupFactor;
+                    prevSecondary = count - 1;
                 }
-            );
+                Assert.InRange(x, 0, prevSecondary);
+                prevSecondary = x;
+                seen++;
+            });
             Assert.Equal(count, seen);
         }
 
@@ -1263,21 +1227,18 @@ namespace System.Linq.Parallel.Tests
             int prevPrimary = GroupFactor - 1;
             int prevSecondary = 0;
             int seen = 0;
-            Assert.All(
-                labeled.Item.OrderBy(x => -x % GroupFactor).ThenBy(x => x).ToList(),
-                x =>
+            Assert.All(labeled.Item.OrderBy(x => -x % GroupFactor).ThenBy(x => x).ToList(), x =>
+            {
+                Assert.InRange(x % GroupFactor, 0, prevPrimary);
+                if (x % GroupFactor != prevPrimary)
                 {
-                    Assert.InRange(x % GroupFactor, 0, prevPrimary);
-                    if (x % GroupFactor != prevPrimary)
-                    {
-                        prevPrimary = x % GroupFactor;
-                        prevSecondary = 0;
-                    }
-                    Assert.InRange(x, prevSecondary, count - 1);
-                    prevSecondary = x;
-                    seen++;
+                    prevPrimary = x % GroupFactor;
+                    prevSecondary = 0;
                 }
-            );
+                Assert.InRange(x, prevSecondary, count - 1);
+                prevSecondary = x;
+                seen++;
+            });
             Assert.Equal(count, seen);
         }
 
@@ -2156,58 +2117,43 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void ThenBy_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((OrderedParallelQuery<int>)null).ThenBy(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((OrderedParallelQuery<int>)null).ThenBy(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => ParallelEnumerable.Range(0, 1).OrderBy(x => 0).ThenBy((Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable.Range(0, 1).OrderBy(x => 0).ThenBy((Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((OrderedParallelQuery<int>)null).ThenBy(x => x, Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((OrderedParallelQuery<int>)null).ThenBy(x => x, Comparer<int>.Default)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .OrderBy(x => 0)
-                        .ThenBy((Func<int, int>)null, Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .OrderBy(x => 0)
+                    .ThenBy((Func<int, int>)null, Comparer<int>.Default)
             );
         }
 
         [Fact]
         public static void ThenByDescending_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((OrderedParallelQuery<int>)null).ThenByDescending(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((OrderedParallelQuery<int>)null).ThenByDescending(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .OrderBy(x => 0)
-                        .ThenByDescending((Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .OrderBy(x => 0)
+                    .ThenByDescending((Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    ((OrderedParallelQuery<int>)null).ThenByDescending(
-                        x => x,
-                        Comparer<int>.Default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((OrderedParallelQuery<int>)null).ThenByDescending(x => x, Comparer<int>.Default)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .OrderBy(x => 0)
-                        .ThenByDescending((Func<int, int>)null, Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .OrderBy(x => 0)
+                    .ThenByDescending((Func<int, int>)null, Comparer<int>.Default)
             );
         }
 

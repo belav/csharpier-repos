@@ -105,13 +105,10 @@ public class MapToAttributeTest : AutoMapperSpecBase
                 .MemberConfiguration.NameToMemberMappers.Add(
                     new SourceToDestinationNameMapperAttributesMember()
                 );
-            cfg.CreateProfile(
-                "New Profile",
-                profile =>
-                {
-                    profile.CreateMap<Category, CategoryDto>();
-                }
-            );
+            cfg.CreateProfile("New Profile", profile =>
+            {
+                profile.CreateMap<Category, CategoryDto>();
+            });
         });
 
     [Fact]

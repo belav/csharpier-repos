@@ -235,27 +235,24 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                 """
             );
 
-            Assert.Collection(
-                items,
-                item =>
-                {
-                    Assert.Equal(Glyph.EnumInternal, item.Data.Glyph);
-                    Assert.Equal("Test", item.Data.Name);
-                    Assert.Collection(
-                        item.Children,
-                        item =>
-                        {
-                            Assert.Equal(Glyph.EnumMemberPublic, item.Data.Glyph);
-                            Assert.Equal("a", item.Data.Name);
-                        },
-                        item =>
-                        {
-                            Assert.Equal(Glyph.EnumMemberPublic, item.Data.Glyph);
-                            Assert.Equal("b", item.Data.Name);
-                        }
-                    );
-                }
-            );
+            Assert.Collection(items, item =>
+            {
+                Assert.Equal(Glyph.EnumInternal, item.Data.Glyph);
+                Assert.Equal("Test", item.Data.Name);
+                Assert.Collection(
+                    item.Children,
+                    item =>
+                    {
+                        Assert.Equal(Glyph.EnumMemberPublic, item.Data.Glyph);
+                        Assert.Equal("a", item.Data.Name);
+                    },
+                    item =>
+                    {
+                        Assert.Equal(Glyph.EnumMemberPublic, item.Data.Glyph);
+                        Assert.Equal("b", item.Data.Name);
+                    }
+                );
+            });
         }
 
         [WpfFact]
@@ -268,22 +265,16 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                 """
             );
 
-            Assert.Collection(
-                items,
-                item =>
+            Assert.Collection(items, item =>
+            {
+                Assert.Equal(Glyph.ClassInternal, item.Data.Glyph);
+                Assert.Equal("TypeName", item.Data.Name);
+                Assert.Collection(item.Children, item =>
                 {
-                    Assert.Equal(Glyph.ClassInternal, item.Data.Glyph);
-                    Assert.Equal("TypeName", item.Data.Name);
-                    Assert.Collection(
-                        item.Children,
-                        item =>
-                        {
-                            Assert.Equal(Glyph.PropertyPublic, item.Data.Glyph);
-                            Assert.Equal("PropertyName", item.Data.Name);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal(Glyph.PropertyPublic, item.Data.Glyph);
+                    Assert.Equal("PropertyName", item.Data.Name);
+                });
+            });
         }
     }
 }

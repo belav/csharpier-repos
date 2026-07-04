@@ -18,13 +18,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void GetContractName_NullAsTypeArgument_ThrowsArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "type",
-                () =>
-                {
-                    AttributedModelServices.GetContractName((Type)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("type", () =>
+            {
+                AttributedModelServices.GetContractName((Type)null);
+            });
         }
 
         [Fact]

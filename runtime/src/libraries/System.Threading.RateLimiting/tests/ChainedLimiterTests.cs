@@ -810,13 +810,10 @@ namespace System.Threading.RateLimiting.Tests
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                });
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -847,13 +844,10 @@ namespace System.Threading.RateLimiting.Tests
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                });
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -884,23 +878,17 @@ namespace System.Threading.RateLimiting.Tests
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                });
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                });
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -933,25 +921,19 @@ namespace System.Threading.RateLimiting.Tests
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AcquireAsyncCoreImpl = (_, _) =>
-                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AcquireAsyncCoreImpl = (_, _) =>
+                        new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
+                });
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AcquireAsyncCoreImpl = (_, _) =>
-                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AcquireAsyncCoreImpl = (_, _) =>
+                        new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
+                });
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -986,23 +968,17 @@ namespace System.Threading.RateLimiting.Tests
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                });
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                });
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -1036,25 +1012,19 @@ namespace System.Threading.RateLimiting.Tests
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AcquireAsyncCoreImpl = (_, _) =>
-                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AcquireAsyncCoreImpl = (_, _) =>
+                        new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
+                });
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AcquireAsyncCoreImpl = (_, _) =>
-                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AcquireAsyncCoreImpl = (_, _) =>
+                        new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
+                });
             });
             using var limiter3 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -1090,13 +1060,10 @@ namespace System.Threading.RateLimiting.Tests
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
+                });
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -1130,14 +1097,11 @@ namespace System.Threading.RateLimiting.Tests
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    key => new CustomizableLimiter()
-                    {
-                        AcquireAsyncCoreImpl = (_, _) =>
-                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
-                    }
-                );
+                return RateLimitPartition.Get(1, key => new CustomizableLimiter()
+                {
+                    AcquireAsyncCoreImpl = (_, _) =>
+                        new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
+                });
             });
             using var limiter2 = PartitionedRateLimiter.Create<string, int>(resource =>
             {

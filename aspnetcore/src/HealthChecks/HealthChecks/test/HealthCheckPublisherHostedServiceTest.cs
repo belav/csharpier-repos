@@ -139,13 +139,10 @@ public class HealthCheckPublisherHostedServiceTest
             new TestPublisher() { Wait = unblock2.Task },
         };
 
-        var service = CreateService(
-            publishers,
-            configurePublisherOptions: (options) =>
-            {
-                options.Delay = TimeSpan.FromMilliseconds(0);
-            }
-        );
+        var service = CreateService(publishers, configurePublisherOptions: (options) =>
+        {
+            options.Delay = TimeSpan.FromMilliseconds(0);
+        });
 
         try
         {
@@ -337,152 +334,149 @@ public class HealthCheckPublisherHostedServiceTest
 
         var publisher = new TestPublisher() { Wait = unblock.Task };
 
-        var service = CreateService(
-            new[] { publisher },
-            configureBuilder: b =>
-            {
-                b.Add(
-                    new HealthCheckRegistration(
-                        name: "CheckDefault",
-                        instance: new DelegateHealthCheck(_ =>
-                            Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
-                        ),
-                        failureStatus: null,
-                        tags: null
-                    )
-                );
+        var service = CreateService(new[] { publisher }, configureBuilder: b =>
+        {
+            b.Add(
+                new HealthCheckRegistration(
+                    name: "CheckDefault",
+                    instance: new DelegateHealthCheck(_ =>
+                        Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
+                    ),
+                    failureStatus: null,
+                    tags: null
+                )
+            );
 
-                b.Add(
-                    new HealthCheckRegistration(
-                        name: "CheckDelay1Period9",
-                        instance: new DelegateHealthCheck(_ =>
-                            Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
-                        ),
-                        failureStatus: null,
-                        tags: null,
-                        timeout: default
-                    )
-                    {
-                        Delay = TimeSpan.FromSeconds(1),
-                        Period = TimeSpan.FromSeconds(9),
-                    }
-                );
+            b.Add(
+                new HealthCheckRegistration(
+                    name: "CheckDelay1Period9",
+                    instance: new DelegateHealthCheck(_ =>
+                        Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
+                    ),
+                    failureStatus: null,
+                    tags: null,
+                    timeout: default
+                )
+                {
+                    Delay = TimeSpan.FromSeconds(1),
+                    Period = TimeSpan.FromSeconds(9),
+                }
+            );
 
-                b.Add(
-                    new HealthCheckRegistration(
-                        name: "CheckDelay1Period9_1",
-                        instance: new DelegateHealthCheck(_ =>
-                            Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
-                        ),
-                        failureStatus: null,
-                        tags: null,
-                        timeout: default
-                    )
-                    {
-                        Delay = TimeSpan.FromSeconds(1),
-                        Period = TimeSpan.FromSeconds(9),
-                    }
-                );
+            b.Add(
+                new HealthCheckRegistration(
+                    name: "CheckDelay1Period9_1",
+                    instance: new DelegateHealthCheck(_ =>
+                        Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
+                    ),
+                    failureStatus: null,
+                    tags: null,
+                    timeout: default
+                )
+                {
+                    Delay = TimeSpan.FromSeconds(1),
+                    Period = TimeSpan.FromSeconds(9),
+                }
+            );
 
-                b.Add(
-                    new HealthCheckRegistration(
-                        name: "CheckDelay1Period18",
-                        instance: new DelegateHealthCheck(_ =>
-                            Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
-                        ),
-                        failureStatus: null,
-                        tags: null,
-                        timeout: default
-                    )
-                    {
-                        Delay = TimeSpan.FromSeconds(1),
-                        Period = TimeSpan.FromSeconds(18),
-                    }
-                );
+            b.Add(
+                new HealthCheckRegistration(
+                    name: "CheckDelay1Period18",
+                    instance: new DelegateHealthCheck(_ =>
+                        Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
+                    ),
+                    failureStatus: null,
+                    tags: null,
+                    timeout: default
+                )
+                {
+                    Delay = TimeSpan.FromSeconds(1),
+                    Period = TimeSpan.FromSeconds(18),
+                }
+            );
 
-                b.Add(
-                    new HealthCheckRegistration(
-                        name: "CheckDelay2Period18",
-                        instance: new DelegateHealthCheck(_ =>
-                        {
-                            unblockDelayedCheck.TrySetResult(null); // Unblock 2s delayed check
-                            return Task.FromResult(HealthCheckResult.Healthy(HealthyMessage));
-                        }),
-                        failureStatus: null,
-                        tags: null,
-                        timeout: default
-                    )
+            b.Add(
+                new HealthCheckRegistration(
+                    name: "CheckDelay2Period18",
+                    instance: new DelegateHealthCheck(_ =>
                     {
-                        Delay = TimeSpan.FromSeconds(2),
-                        Period = TimeSpan.FromSeconds(18),
-                    }
-                );
+                        unblockDelayedCheck.TrySetResult(null); // Unblock 2s delayed check
+                        return Task.FromResult(HealthCheckResult.Healthy(HealthyMessage));
+                    }),
+                    failureStatus: null,
+                    tags: null,
+                    timeout: default
+                )
+                {
+                    Delay = TimeSpan.FromSeconds(2),
+                    Period = TimeSpan.FromSeconds(18),
+                }
+            );
 
-                b.Add(
-                    new HealthCheckRegistration(
-                        name: "CheckDelay7Period11",
-                        instance: new DelegateHealthCheck(_ =>
-                            Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
-                        ),
-                        failureStatus: null,
-                        tags: null,
-                        timeout: default
-                    )
-                    {
-                        Delay = TimeSpan.FromSeconds(7),
-                        Period = TimeSpan.FromSeconds(11),
-                    }
-                );
+            b.Add(
+                new HealthCheckRegistration(
+                    name: "CheckDelay7Period11",
+                    instance: new DelegateHealthCheck(_ =>
+                        Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
+                    ),
+                    failureStatus: null,
+                    tags: null,
+                    timeout: default
+                )
+                {
+                    Delay = TimeSpan.FromSeconds(7),
+                    Period = TimeSpan.FromSeconds(11),
+                }
+            );
 
-                b.Add(
-                    new HealthCheckRegistration(
-                        name: "CheckDelay9Period5",
-                        instance: new DelegateHealthCheck(_ =>
-                            Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
-                        ),
-                        failureStatus: null,
-                        tags: null,
-                        timeout: default
-                    )
-                    {
-                        Delay = TimeSpan.FromSeconds(9),
-                        Period = TimeSpan.FromSeconds(5),
-                    }
-                );
+            b.Add(
+                new HealthCheckRegistration(
+                    name: "CheckDelay9Period5",
+                    instance: new DelegateHealthCheck(_ =>
+                        Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
+                    ),
+                    failureStatus: null,
+                    tags: null,
+                    timeout: default
+                )
+                {
+                    Delay = TimeSpan.FromSeconds(9),
+                    Period = TimeSpan.FromSeconds(5),
+                }
+            );
 
-                b.Add(
-                    new HealthCheckRegistration(
-                        name: "CheckDelay10Period8",
-                        instance: new DelegateHealthCheck(_ =>
-                            Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
-                        ),
-                        failureStatus: null,
-                        tags: null,
-                        timeout: default
-                    )
-                    {
-                        Delay = TimeSpan.FromSeconds(10),
-                        Period = TimeSpan.FromSeconds(8),
-                    }
-                );
+            b.Add(
+                new HealthCheckRegistration(
+                    name: "CheckDelay10Period8",
+                    instance: new DelegateHealthCheck(_ =>
+                        Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
+                    ),
+                    failureStatus: null,
+                    tags: null,
+                    timeout: default
+                )
+                {
+                    Delay = TimeSpan.FromSeconds(10),
+                    Period = TimeSpan.FromSeconds(8),
+                }
+            );
 
-                b.Add(
-                    new HealthCheckRegistration(
-                        name: "CheckDelay10Period9",
-                        instance: new DelegateHealthCheck(_ =>
-                            Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
-                        ),
-                        failureStatus: null,
-                        tags: null,
-                        timeout: default
-                    )
-                    {
-                        Delay = TimeSpan.FromSeconds(10),
-                        Period = TimeSpan.FromSeconds(9),
-                    }
-                );
-            }
-        );
+            b.Add(
+                new HealthCheckRegistration(
+                    name: "CheckDelay10Period9",
+                    instance: new DelegateHealthCheck(_ =>
+                        Task.FromResult(HealthCheckResult.Healthy(HealthyMessage))
+                    ),
+                    failureStatus: null,
+                    tags: null,
+                    timeout: default
+                )
+                {
+                    Delay = TimeSpan.FromSeconds(10),
+                    Period = TimeSpan.FromSeconds(9),
+                }
+            );
+        });
 
         try
         {
@@ -1034,20 +1028,14 @@ public class HealthCheckPublisherHostedServiceTest
         if (configureBuilder == null)
         {
             builder
-                .AddCheck(
-                    "one",
-                    () =>
-                    {
-                        return HealthCheckResult.Healthy();
-                    }
-                )
-                .AddCheck(
-                    "two",
-                    () =>
-                    {
-                        return HealthCheckResult.Healthy();
-                    }
-                );
+                .AddCheck("one", () =>
+                {
+                    return HealthCheckResult.Healthy();
+                })
+                .AddCheck("two", () =>
+                {
+                    return HealthCheckResult.Healthy();
+                });
         }
         else
         {

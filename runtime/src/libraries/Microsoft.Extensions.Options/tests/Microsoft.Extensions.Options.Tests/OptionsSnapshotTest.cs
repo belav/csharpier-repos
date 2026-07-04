@@ -244,16 +244,11 @@ namespace Microsoft.Extensions.Options.Tests
                     DefaultOidcOptionsConfiguration
                 >()
             );
-            services.Replace(
-                ServiceDescriptor.Scoped(
-                    typeof(NavigationManager),
-                    _ =>
-                    {
-                        calls++;
-                        return new NavigationManager();
-                    }
-                )
-            );
+            services.Replace(ServiceDescriptor.Scoped(typeof(NavigationManager), _ =>
+                {
+                    calls++;
+                    return new NavigationManager();
+                }));
 
             using ServiceProvider provider = services.BuildServiceProvider();
 

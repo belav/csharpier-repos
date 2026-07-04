@@ -483,17 +483,13 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     {
         using (CreateScratch<MyContext5456>(Seed5456, "5456"))
         {
-            Parallel.For(
-                0,
-                10,
-                i =>
-                {
-                    using var ctx = new MyContext5456();
-                    var result = ctx.Posts.Where(x => x.Blog.Id > 1).Include(x => x.Blog).ToList();
+            Parallel.For(0, 10, i =>
+            {
+                using var ctx = new MyContext5456();
+                var result = ctx.Posts.Where(x => x.Blog.Id > 1).Include(x => x.Blog).ToList();
 
-                    Assert.Equal(198, result.Count);
-                }
-            );
+                Assert.Equal(198, result.Count);
+            });
         }
     }
 
@@ -502,20 +498,16 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     {
         using (CreateScratch<MyContext5456>(Seed5456, "5456"))
         {
-            Parallel.For(
-                0,
-                10,
-                async i =>
-                {
-                    using var ctx = new MyContext5456();
-                    var result = await ctx
-                        .Posts.Where(x => x.Blog.Id > 1)
-                        .Include(x => x.Blog)
-                        .ToListAsync();
+            Parallel.For(0, 10, async i =>
+            {
+                using var ctx = new MyContext5456();
+                var result = await ctx
+                    .Posts.Where(x => x.Blog.Id > 1)
+                    .Include(x => x.Blog)
+                    .ToListAsync();
 
-                    Assert.Equal(198, result.Count);
-                }
-            );
+                Assert.Equal(198, result.Count);
+            });
         }
     }
 
@@ -524,21 +516,17 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     {
         using (CreateScratch<MyContext5456>(Seed5456, "5456"))
         {
-            Parallel.For(
-                0,
-                10,
-                i =>
-                {
-                    using var ctx = new MyContext5456();
-                    var result = ctx
-                        .Posts.Where(x => x.Blog.Id > 1)
-                        .Include(x => x.Blog)
-                        .Include(x => x.Comments)
-                        .ToList();
+            Parallel.For(0, 10, i =>
+            {
+                using var ctx = new MyContext5456();
+                var result = ctx
+                    .Posts.Where(x => x.Blog.Id > 1)
+                    .Include(x => x.Blog)
+                    .Include(x => x.Comments)
+                    .ToList();
 
-                    Assert.Equal(198, result.Count);
-                }
-            );
+                Assert.Equal(198, result.Count);
+            });
         }
     }
 
@@ -547,21 +535,17 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     {
         using (CreateScratch<MyContext5456>(Seed5456, "5456"))
         {
-            Parallel.For(
-                0,
-                10,
-                async i =>
-                {
-                    using var ctx = new MyContext5456();
-                    var result = await ctx
-                        .Posts.Where(x => x.Blog.Id > 1)
-                        .Include(x => x.Blog)
-                        .Include(x => x.Comments)
-                        .ToListAsync();
+            Parallel.For(0, 10, async i =>
+            {
+                using var ctx = new MyContext5456();
+                var result = await ctx
+                    .Posts.Where(x => x.Blog.Id > 1)
+                    .Include(x => x.Blog)
+                    .Include(x => x.Comments)
+                    .ToListAsync();
 
-                    Assert.Equal(198, result.Count);
-                }
-            );
+                Assert.Equal(198, result.Count);
+            });
         }
     }
 
@@ -570,21 +554,17 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     {
         using (CreateScratch<MyContext5456>(Seed5456, "5456"))
         {
-            Parallel.For(
-                0,
-                10,
-                i =>
-                {
-                    using var ctx = new MyContext5456();
-                    var result = ctx
-                        .Posts.Where(x => x.Blog.Id > 1)
-                        .Include(x => x.Blog)
-                            .ThenInclude(b => b.Author)
-                        .ToList();
+            Parallel.For(0, 10, i =>
+            {
+                using var ctx = new MyContext5456();
+                var result = ctx
+                    .Posts.Where(x => x.Blog.Id > 1)
+                    .Include(x => x.Blog)
+                        .ThenInclude(b => b.Author)
+                    .ToList();
 
-                    Assert.Equal(198, result.Count);
-                }
-            );
+                Assert.Equal(198, result.Count);
+            });
         }
     }
 
@@ -593,21 +573,17 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     {
         using (CreateScratch<MyContext5456>(Seed5456, "5456"))
         {
-            Parallel.For(
-                0,
-                10,
-                async i =>
-                {
-                    using var ctx = new MyContext5456();
-                    var result = await ctx
-                        .Posts.Where(x => x.Blog.Id > 1)
-                        .Include(x => x.Blog)
-                            .ThenInclude(b => b.Author)
-                        .ToListAsync();
+            Parallel.For(0, 10, async i =>
+            {
+                using var ctx = new MyContext5456();
+                var result = await ctx
+                    .Posts.Where(x => x.Blog.Id > 1)
+                    .Include(x => x.Blog)
+                        .ThenInclude(b => b.Author)
+                    .ToListAsync();
 
-                    Assert.Equal(198, result.Count);
-                }
-            );
+                Assert.Equal(198, result.Count);
+            });
         }
     }
 
@@ -1122,11 +1098,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
             var query = context
-                .A.GroupJoin(
-                    context.B,
-                    leftKeySelector,
-                    rightKeySelector,
-                    (left, rightg) => new { left, rightg }
+                .A.GroupJoin(context.B, leftKeySelector, rightKeySelector, (left, rightg) =>
+                    new { left, rightg }
                 )
                 .SelectMany(
                     r => r.rightg.DefaultIfEmpty(),
@@ -1134,11 +1107,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 )
                 .Concat(
                     context
-                        .B.GroupJoin(
-                            context.A,
-                            rightKeySelector,
-                            leftKeySelector,
-                            (right, leftg) => new { leftg, right }
+                        .B.GroupJoin(context.A, rightKeySelector, leftKeySelector, (right, leftg) =>
+                            new { leftg, right }
                         )
                         .SelectMany(
                             l => l.leftg.DefaultIfEmpty(),
@@ -1164,11 +1134,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
             var query = context
-                .A.GroupJoin(
-                    context.B,
-                    leftKeySelector,
-                    rightKeySelector,
-                    (left, rightg) => new { left, rightg }
+                .A.GroupJoin(context.B, leftKeySelector, rightKeySelector, (left, rightg) =>
+                    new { left, rightg }
                 )
                 .SelectMany(
                     r => r.rightg.DefaultIfEmpty(),
@@ -1176,11 +1143,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 )
                 .Union(
                     context
-                        .B.GroupJoin(
-                            context.A,
-                            rightKeySelector,
-                            leftKeySelector,
-                            (right, leftg) => new { leftg, right }
+                        .B.GroupJoin(context.A, rightKeySelector, leftKeySelector, (right, leftg) =>
+                            new { leftg, right }
                         )
                         .SelectMany(
                             l => l.leftg.DefaultIfEmpty(),
@@ -1206,11 +1170,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
             var query = context
-                .A.GroupJoin(
-                    context.B,
-                    leftKeySelector,
-                    rightKeySelector,
-                    (left, rightg) => new { left, rightg }
+                .A.GroupJoin(context.B, leftKeySelector, rightKeySelector, (left, rightg) =>
+                    new { left, rightg }
                 )
                 .SelectMany(
                     r => r.rightg.DefaultIfEmpty(),
@@ -1218,11 +1179,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 )
                 .Except(
                     context
-                        .B.GroupJoin(
-                            context.A,
-                            rightKeySelector,
-                            leftKeySelector,
-                            (right, leftg) => new { leftg, right }
+                        .B.GroupJoin(context.A, rightKeySelector, leftKeySelector, (right, leftg) =>
+                            new { leftg, right }
                         )
                         .SelectMany(
                             l => l.leftg.DefaultIfEmpty(),
@@ -1247,11 +1205,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             Expression<Func<B19253, string>> rightKeySelector = y => y.forkey;
 
             var query = context
-                .A.GroupJoin(
-                    context.B,
-                    leftKeySelector,
-                    rightKeySelector,
-                    (left, rightg) => new { left, rightg }
+                .A.GroupJoin(context.B, leftKeySelector, rightKeySelector, (left, rightg) =>
+                    new { left, rightg }
                 )
                 .SelectMany(
                     r => r.rightg.DefaultIfEmpty(),
@@ -1259,11 +1214,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 )
                 .Intersect(
                     context
-                        .B.GroupJoin(
-                            context.A,
-                            rightKeySelector,
-                            leftKeySelector,
-                            (right, leftg) => new { leftg, right }
+                        .B.GroupJoin(context.A, rightKeySelector, leftKeySelector, (right, leftg) =>
+                            new { leftg, right }
                         )
                         .SelectMany(
                             l => l.leftg.DefaultIfEmpty(),

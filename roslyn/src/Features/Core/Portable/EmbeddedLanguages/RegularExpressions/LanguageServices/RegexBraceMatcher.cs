@@ -107,24 +107,18 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
         }
 
         private static RegexGroupingNode? FindGroupingNode(RegexNode node, VirtualChar ch) =>
-            FindNode<RegexGroupingNode>(
-                node,
-                ch,
-                (grouping, c) =>
-                    grouping.OpenParenToken.VirtualChars.Contains(c)
-                    || grouping.CloseParenToken.VirtualChars.Contains(c)
+            FindNode<RegexGroupingNode>(node, ch, (grouping, c) =>
+                grouping.OpenParenToken.VirtualChars.Contains(c)
+                || grouping.CloseParenToken.VirtualChars.Contains(c)
             );
 
         private static RegexBaseCharacterClassNode? FindCharacterClassNode(
             RegexNode node,
             VirtualChar ch
         ) =>
-            FindNode<RegexBaseCharacterClassNode>(
-                node,
-                ch,
-                (grouping, c) =>
-                    grouping.OpenBracketToken.VirtualChars.Contains(c)
-                    || grouping.CloseBracketToken.VirtualChars.Contains(c)
+            FindNode<RegexBaseCharacterClassNode>(node, ch, (grouping, c) =>
+                grouping.OpenBracketToken.VirtualChars.Contains(c)
+                || grouping.CloseBracketToken.VirtualChars.Contains(c)
             );
 
         private static TNode? FindNode<TNode>(

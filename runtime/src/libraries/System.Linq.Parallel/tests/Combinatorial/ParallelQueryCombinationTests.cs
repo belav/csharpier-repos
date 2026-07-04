@@ -1935,9 +1935,8 @@ namespace System.Linq.Parallel.Tests
         public static void ToArray(Labeled<Operation> source, Labeled<Operation> operation)
         {
             int seen = DefaultStart;
-            Assert.All(
-                operation.Item(DefaultStart, DefaultSize, source.Item).ToArray(),
-                x => Assert.Equal(seen++, x)
+            Assert.All(operation.Item(DefaultStart, DefaultSize, source.Item).ToArray(), x =>
+                Assert.Equal(seen++, x)
             );
             Assert.Equal(DefaultStart + DefaultSize, seen);
         }
@@ -1984,9 +1983,8 @@ namespace System.Linq.Parallel.Tests
         public static void ToList(Labeled<Operation> source, Labeled<Operation> operation)
         {
             int seen = DefaultStart;
-            Assert.All(
-                operation.Item(DefaultStart, DefaultSize, source.Item).ToList(),
-                x => Assert.Equal(seen++, x)
+            Assert.All(operation.Item(DefaultStart, DefaultSize, source.Item).ToList(), x =>
+                Assert.Equal(seen++, x)
             );
             Assert.Equal(DefaultStart + DefaultSize, seen);
         }
@@ -2002,26 +2000,20 @@ namespace System.Linq.Parallel.Tests
             ILookup<int, int> lookup = operation
                 .Item(DefaultStart, DefaultSize, source.Item)
                 .ToLookup(x => x % 2);
-            Assert.All(
-                lookup,
-                group =>
+            Assert.All(lookup, group =>
+            {
+                seenOuter.Add(group.Key);
+                IntegerRangeSet seenInner = new IntegerRangeSet(
+                    DefaultStart / 2,
+                    (DefaultSize + ((1 + group.Key) % 2)) / 2
+                );
+                Assert.All(group, y =>
                 {
-                    seenOuter.Add(group.Key);
-                    IntegerRangeSet seenInner = new IntegerRangeSet(
-                        DefaultStart / 2,
-                        (DefaultSize + ((1 + group.Key) % 2)) / 2
-                    );
-                    Assert.All(
-                        group,
-                        y =>
-                        {
-                            Assert.Equal(group.Key, y % 2);
-                            seenInner.Add(y / 2);
-                        }
-                    );
-                    seenInner.AssertComplete();
-                }
-            );
+                    Assert.Equal(group.Key, y % 2);
+                    seenInner.Add(y / 2);
+                });
+                seenInner.AssertComplete();
+            });
             seenOuter.AssertComplete();
             Assert.Empty(lookup[-1]);
         }
@@ -2040,26 +2032,20 @@ namespace System.Linq.Parallel.Tests
             ILookup<int, int> lookup = operation
                 .Item(DefaultStart, DefaultSize, source.Item)
                 .ToLookup(x => x % 2, y => -y);
-            Assert.All(
-                lookup,
-                group =>
+            Assert.All(lookup, group =>
+            {
+                seenOuter.Add(group.Key);
+                IntegerRangeSet seenInner = new IntegerRangeSet(
+                    DefaultStart / 2,
+                    (DefaultSize + ((1 + group.Key) % 2)) / 2
+                );
+                Assert.All(group, y =>
                 {
-                    seenOuter.Add(group.Key);
-                    IntegerRangeSet seenInner = new IntegerRangeSet(
-                        DefaultStart / 2,
-                        (DefaultSize + ((1 + group.Key) % 2)) / 2
-                    );
-                    Assert.All(
-                        group,
-                        y =>
-                        {
-                            Assert.Equal(group.Key, -y % 2);
-                            seenInner.Add(-y / 2);
-                        }
-                    );
-                    seenInner.AssertComplete();
-                }
-            );
+                    Assert.Equal(group.Key, -y % 2);
+                    seenInner.Add(-y / 2);
+                });
+                seenInner.AssertComplete();
+            });
             seenOuter.AssertComplete();
             Assert.Empty(lookup[-1]);
         }

@@ -30,14 +30,11 @@ public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthentication
                 {
                     s.Configure<AuthenticationOptions>(o => o.DefaultScheme = DefaultScheme);
                 }
-                RegisterAuth(
-                    builder,
-                    o =>
-                    {
-                        o.TimeProvider = TimeProvider;
-                        configureOptions(o);
-                    }
-                );
+                RegisterAuth(builder, o =>
+                {
+                    o.TimeProvider = TimeProvider;
+                    configureOptions(o);
+                });
             },
             testpath
         );

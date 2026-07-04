@@ -11,14 +11,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void ReceiveAllAsync_ArgumentValidation()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IReceivableSourceBlock<int>)null).ReceiveAllAsync()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IReceivableSourceBlock<int>)null).ReceiveAllAsync()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    ((IReceivableSourceBlock<int>)null).ReceiveAllAsync(new CancellationToken(true))
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IReceivableSourceBlock<int>)null).ReceiveAllAsync(new CancellationToken(true))
             );
         }
 

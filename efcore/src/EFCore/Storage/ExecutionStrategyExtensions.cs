@@ -27,14 +27,11 @@ public static class ExecutionStrategyExtensions
     {
         Check.NotNull(operation, nameof(operation));
 
-        strategy.Execute(
-            operation,
-            operationScoped =>
-            {
-                operationScoped();
-                return true;
-            }
-        );
+        strategy.Execute(operation, operationScoped =>
+        {
+            operationScoped();
+            return true;
+        });
     }
 
     /// <summary>
@@ -79,14 +76,11 @@ public static class ExecutionStrategyExtensions
     {
         Check.NotNull(operation, nameof(operation));
 
-        strategy.Execute(
-            new { operation, state },
-            s =>
-            {
-                s.operation(s.state);
-                return true;
-            }
-        );
+        strategy.Execute(new { operation, state }, s =>
+        {
+            s.operation(s.state);
+            return true;
+        });
     }
 
     /// <summary>
@@ -755,12 +749,8 @@ public static class ExecutionStrategyExtensions
         Func<TState, TResult> operation,
         Func<TState, bool> verifySucceeded
     ) =>
-        ExecuteInTransaction(
-            strategy,
-            state,
-            operation,
-            verifySucceeded,
-            c => c.Database.BeginTransaction()
+        ExecuteInTransaction(strategy, state, operation, verifySucceeded, c =>
+            c.Database.BeginTransaction()
         );
 
     /// <summary>

@@ -79,81 +79,63 @@ namespace System.Linq.Tests
         [Fact]
         public void ToDictionary_WorkWithEmptyCollection()
         {
-            RunToDictionaryOnAllCollectionTypes(
-                new int[0],
-                resultDictionary =>
-                {
-                    Assert.NotNull(resultDictionary);
-                    Assert.Equal(0, resultDictionary.Count);
-                }
-            );
+            RunToDictionaryOnAllCollectionTypes(new int[0], resultDictionary =>
+            {
+                Assert.NotNull(resultDictionary);
+                Assert.Equal(0, resultDictionary.Count);
+            });
         }
 
         [Fact]
         public void ToDictionaryFromKv_WorkWithEmptyCollection()
         {
-            RunToDictionaryFromKvOnAllCollectionTypes(
-                Array.Empty<int>(),
-                resultDictionary =>
-                {
-                    Assert.NotNull(resultDictionary);
-                    Assert.Empty(resultDictionary);
-                }
-            );
+            RunToDictionaryFromKvOnAllCollectionTypes(Array.Empty<int>(), resultDictionary =>
+            {
+                Assert.NotNull(resultDictionary);
+                Assert.Empty(resultDictionary);
+            });
         }
 
         [Fact]
         public void ToDictionary_ProduceCorrectDictionary()
         {
             int[] sourceArray = new int[] { 1, 2, 3, 4, 5, 6, 7 };
-            RunToDictionaryOnAllCollectionTypes(
-                sourceArray,
-                resultDictionary =>
-                {
-                    Assert.Equal(sourceArray.Length, resultDictionary.Count);
-                    Assert.Equal(sourceArray, resultDictionary.Keys);
-                    Assert.Equal(sourceArray, resultDictionary.Values);
-                }
-            );
+            RunToDictionaryOnAllCollectionTypes(sourceArray, resultDictionary =>
+            {
+                Assert.Equal(sourceArray.Length, resultDictionary.Count);
+                Assert.Equal(sourceArray, resultDictionary.Keys);
+                Assert.Equal(sourceArray, resultDictionary.Values);
+            });
 
             string[] sourceStringArray = new string[] { "1", "2", "3", "4", "5", "6", "7", "8" };
-            RunToDictionaryOnAllCollectionTypes(
-                sourceStringArray,
-                resultDictionary =>
-                {
-                    Assert.Equal(sourceStringArray.Length, resultDictionary.Count);
-                    for (int i = 0; i < sourceStringArray.Length; i++)
-                        Assert.Same(sourceStringArray[i], resultDictionary[sourceStringArray[i]]);
-                }
-            );
+            RunToDictionaryOnAllCollectionTypes(sourceStringArray, resultDictionary =>
+            {
+                Assert.Equal(sourceStringArray.Length, resultDictionary.Count);
+                for (int i = 0; i < sourceStringArray.Length; i++)
+                    Assert.Same(sourceStringArray[i], resultDictionary[sourceStringArray[i]]);
+            });
         }
 
         [Fact]
         public void ToDictionaryFromKv_ProduceCorrectDictionary()
         {
             int[] sourceArray = new[] { 1, 2, 3, 4, 5, 6, 7 };
-            RunToDictionaryFromKvOnAllCollectionTypes(
-                sourceArray,
-                resultDictionary =>
-                {
-                    Assert.Equal(sourceArray.Length, resultDictionary.Count);
-                    Assert.Equal(sourceArray, resultDictionary.Keys);
-                    Assert.Equal(sourceArray, resultDictionary.Values);
-                }
-            );
+            RunToDictionaryFromKvOnAllCollectionTypes(sourceArray, resultDictionary =>
+            {
+                Assert.Equal(sourceArray.Length, resultDictionary.Count);
+                Assert.Equal(sourceArray, resultDictionary.Keys);
+                Assert.Equal(sourceArray, resultDictionary.Values);
+            });
 
             string[] sourceStringArray = new[] { "1", "2", "3", "4", "5", "6", "7", "8" };
-            RunToDictionaryFromKvOnAllCollectionTypes(
-                sourceStringArray,
-                resultDictionary =>
+            RunToDictionaryFromKvOnAllCollectionTypes(sourceStringArray, resultDictionary =>
+            {
+                Assert.Equal(sourceStringArray.Length, resultDictionary.Count);
+                foreach (string item in sourceStringArray)
                 {
-                    Assert.Equal(sourceStringArray.Length, resultDictionary.Count);
-                    foreach (string item in sourceStringArray)
-                    {
-                        Assert.Same(item, resultDictionary[item]);
-                    }
+                    Assert.Same(item, resultDictionary[item]);
                 }
-            );
+            });
         }
 
         [Fact]
@@ -281,17 +263,14 @@ namespace System.Linq.Tests
         [Fact]
         public void ToDictionary_ThrowArgumentNullExceptionWhenSourceIsNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).ToDictionary(key => key)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).ToDictionary(key => key)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<KeyValuePair<int, int>>)null).ToDictionary()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<KeyValuePair<int, int>>)null).ToDictionary()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<(int, int)>)null).ToDictionary()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<(int, int)>)null).ToDictionary()
             );
         }
 
@@ -300,9 +279,8 @@ namespace System.Linq.Tests
         {
             int[] source = new int[0];
             Func<int, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.ToDictionary(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.ToDictionary(keySelector)
             );
         }
 
@@ -312,9 +290,8 @@ namespace System.Linq.Tests
             int[] source = new int[0];
             Func<int, int> keySelector = key => key;
             Func<int, int> valueSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () => source.ToDictionary(keySelector, valueSelector)
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                source.ToDictionary(keySelector, valueSelector)
             );
         }
 
@@ -322,9 +299,8 @@ namespace System.Linq.Tests
         public void ToDictionary_ThrowArgumentNullExceptionWhenSourceIsNullElementSelector()
         {
             int[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.ToDictionary(key => key, e => e)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.ToDictionary(key => key, e => e)
             );
         }
 
@@ -333,9 +309,8 @@ namespace System.Linq.Tests
         {
             int[] source = new int[0];
             Func<int, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.ToDictionary(keySelector, e => e)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.ToDictionary(keySelector, e => e)
             );
         }
 
@@ -359,9 +334,8 @@ namespace System.Linq.Tests
             int[] source = new int[] { 1, 2, 3 };
             Func<int, string> keySelector = key => null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => source.ToDictionary(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                source.ToDictionary(keySelector)
             );
         }
 
@@ -371,9 +345,8 @@ namespace System.Linq.Tests
             int[] source = new int[] { 1, 2, 3 };
             Func<int, int> keySelector = key => 1;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => source.ToDictionary(keySelector)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                source.ToDictionary(keySelector)
             );
         }
 
@@ -413,9 +386,8 @@ namespace System.Linq.Tests
                 new { Name = default(string), Score = 55 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => source.ToDictionary(e => e.Name)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                source.ToDictionary(e => e.Name)
             );
 
             var source2 = new KeyValuePair<string?, int>[]
@@ -451,9 +423,8 @@ namespace System.Linq.Tests
                 new { Name = default(string), Score = 55 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => source.ToDictionary(e => e.Name, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                source.ToDictionary(e => e.Name, new AnagramEqualityComparer())
             );
         }
 
@@ -476,9 +447,8 @@ namespace System.Linq.Tests
                 new { Name = default(string), Score = 55 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => source.ToDictionary(e => e.Name, e => e)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                source.ToDictionary(e => e.Name, e => e)
             );
         }
 
@@ -501,9 +471,8 @@ namespace System.Linq.Tests
                 new { Name = default(string), Score = 55 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => source.ToDictionary(e => e.Name, e => e, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                source.ToDictionary(e => e.Name, e => e, new AnagramEqualityComparer())
             );
         }
 
@@ -517,9 +486,8 @@ namespace System.Linq.Tests
                 new { Name = "Bob", Score = 55 },
             };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => source.ToDictionary(e => e.Name, e => e, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                source.ToDictionary(e => e.Name, e => e, new AnagramEqualityComparer())
             );
 
             var source2 = new KeyValuePair<string, int>[]
@@ -529,16 +497,14 @@ namespace System.Linq.Tests
                 new("Bob", 55),
             };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => source2.ToDictionary(new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                source2.ToDictionary(new AnagramEqualityComparer())
             );
 
             var source3 = new[] { ("Chris", 50), ("Bob", 95), ("Bob", 55) };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => source3.ToDictionary(new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                source3.ToDictionary(new AnagramEqualityComparer())
             );
         }
 

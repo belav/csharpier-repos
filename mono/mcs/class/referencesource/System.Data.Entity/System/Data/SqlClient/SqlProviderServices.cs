@@ -300,27 +300,21 @@ namespace System.Data.SqlClient
             // That failing, try using connection to master database (in case the database doesn't exist yet)
             try
             {
-                UsingConnection(
-                    sqlConnection,
-                    conn =>
-                    {
-                        providerManifestToken = SqlVersionUtils.GetVersionHint(
-                            SqlVersionUtils.GetSqlVersion(conn)
-                        );
-                    }
-                );
+                UsingConnection(sqlConnection, conn =>
+                {
+                    providerManifestToken = SqlVersionUtils.GetVersionHint(
+                        SqlVersionUtils.GetSqlVersion(conn)
+                    );
+                });
             }
             catch
             {
-                UsingMasterConnection(
-                    sqlConnection,
-                    conn =>
-                    {
-                        providerManifestToken = SqlVersionUtils.GetVersionHint(
-                            SqlVersionUtils.GetSqlVersion(conn)
-                        );
-                    }
-                );
+                UsingMasterConnection(sqlConnection, conn =>
+                {
+                    providerManifestToken = SqlVersionUtils.GetVersionHint(
+                        SqlVersionUtils.GetSqlVersion(conn)
+                    );
+                });
             }
             return providerManifestToken;
         }
@@ -914,14 +908,11 @@ namespace System.Data.SqlClient
 
             string createObjectsScript = CreateObjectsScript(sqlVersion, storeItemCollection);
 
-            UsingMasterConnection(
-                sqlConnection,
-                conn =>
-                {
-                    // create database
-                    CreateCommand(conn, createDatabaseScript, commandTimeout).ExecuteNonQuery();
-                }
-            );
+            UsingMasterConnection(sqlConnection, conn =>
+            {
+                // create database
+                CreateCommand(conn, createDatabaseScript, commandTimeout).ExecuteNonQuery();
+            });
 
             // Create database already succeeded. If there is a failure from this point on, the user should be informed.
             try
@@ -930,14 +921,11 @@ namespace System.Data.SqlClient
                 // invalid connection may now be valid.
                 SqlConnection.ClearPool(sqlConnection);
 
-                UsingConnection(
-                    sqlConnection,
-                    conn =>
-                    {
-                        // create database objects
-                        CreateCommand(conn, createObjectsScript, commandTimeout).ExecuteNonQuery();
-                    }
-                );
+                UsingConnection(sqlConnection, conn =>
+                {
+                    // create database objects
+                    CreateCommand(conn, createObjectsScript, commandTimeout).ExecuteNonQuery();
+                });
             }
             catch (Exception e)
             {
@@ -1169,22 +1157,19 @@ namespace System.Data.SqlClient
                     // Initial catalog not specified
                     string fileName = GetMdfFileName(connectionBuilder.AttachDBFilename);
                     bool databaseDoesNotExistInSysTables = false;
-                    UsingMasterConnection(
-                        sqlConnection,
-                        conn =>
-                        {
-                            SqlVersion sqlVersion = SqlVersionUtils.GetSqlVersion(conn);
-                            string databaseExistsScript =
-                                SqlDdlBuilder.CreateCountDatabasesBasedOnFileNameScript(
-                                    fileName,
-                                    useDeprecatedSystemTable: sqlVersion == SqlVersion.Sql8
-                                );
-                            int result = (int)
-                                CreateCommand(conn, databaseExistsScript, commandTimeout)
-                                    .ExecuteScalar();
-                            databaseDoesNotExistInSysTables = (result == 0);
-                        }
-                    );
+                    UsingMasterConnection(sqlConnection, conn =>
+                    {
+                        SqlVersion sqlVersion = SqlVersionUtils.GetSqlVersion(conn);
+                        string databaseExistsScript =
+                            SqlDdlBuilder.CreateCountDatabasesBasedOnFileNameScript(
+                                fileName,
+                                useDeprecatedSystemTable: sqlVersion == SqlVersion.Sql8
+                            );
+                        int result = (int)
+                            CreateCommand(conn, databaseExistsScript, commandTimeout)
+                                .ExecuteScalar();
+                        databaseDoesNotExistInSysTables = (result == 0);
+                    });
                     if (databaseDoesNotExistInSysTables)
                     {
                         return false;
@@ -1207,20 +1192,17 @@ namespace System.Data.SqlClient
         )
         {
             bool databaseExistsInSysTables = false;
-            UsingMasterConnection(
-                sqlConnection,
-                conn =>
-                {
-                    SqlVersion sqlVersion = SqlVersionUtils.GetSqlVersion(conn);
-                    string databaseExistsScript = SqlDdlBuilder.CreateDatabaseExistsScript(
-                        databaseName,
-                        useDeprecatedSystemTable: sqlVersion == SqlVersion.Sql8
-                    );
-                    int result = (int)
-                        CreateCommand(conn, databaseExistsScript, commandTimeout).ExecuteScalar();
-                    databaseExistsInSysTables = (result > 0);
-                }
-            );
+            UsingMasterConnection(sqlConnection, conn =>
+            {
+                SqlVersion sqlVersion = SqlVersionUtils.GetSqlVersion(conn);
+                string databaseExistsScript = SqlDdlBuilder.CreateDatabaseExistsScript(
+                    databaseName,
+                    useDeprecatedSystemTable: sqlVersion == SqlVersion.Sql8
+                );
+                int result = (int)
+                    CreateCommand(conn, databaseExistsScript, commandTimeout).ExecuteScalar();
+                databaseExistsInSysTables = (result > 0);
+            });
             return databaseExistsInSysTables;
         }
 
@@ -1262,26 +1244,23 @@ namespace System.Data.SqlClient
                 string fullFileName = GetMdfFileName(attachDBFile);
 
                 List<string> databaseNames = new List<string>();
-                UsingMasterConnection(
-                    sqlConnection,
-                    conn =>
+                UsingMasterConnection(sqlConnection, conn =>
+                {
+                    SqlVersion sqlVersion = SqlVersionUtils.GetSqlVersion(conn);
+                    string getDatabaseNamesScript =
+                        SqlDdlBuilder.CreateGetDatabaseNamesBasedOnFileNameScript(
+                            fullFileName,
+                            sqlVersion == SqlVersion.Sql8
+                        );
+                    var command = CreateCommand(conn, getDatabaseNamesScript, commandTimeout);
+                    using (var reader = command.ExecuteReader())
                     {
-                        SqlVersion sqlVersion = SqlVersionUtils.GetSqlVersion(conn);
-                        string getDatabaseNamesScript =
-                            SqlDdlBuilder.CreateGetDatabaseNamesBasedOnFileNameScript(
-                                fullFileName,
-                                sqlVersion == SqlVersion.Sql8
-                            );
-                        var command = CreateCommand(conn, getDatabaseNamesScript, commandTimeout);
-                        using (var reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                databaseNames.Add(reader.GetString(0));
-                            }
+                            databaseNames.Add(reader.GetString(0));
                         }
                     }
-                );
+                });
                 if (databaseNames.Count > 0)
                 {
                     foreach (var databaseName in databaseNames)
@@ -1315,13 +1294,10 @@ namespace System.Data.SqlClient
             SqlConnection.ClearPool(sqlConnection);
 
             string dropDatabaseScript = SqlDdlBuilder.DropDatabaseScript(databaseName);
-            UsingMasterConnection(
-                sqlConnection,
-                (conn) =>
-                {
-                    CreateCommand(conn, dropDatabaseScript, commandTimeout).ExecuteNonQuery();
-                }
-            );
+            UsingMasterConnection(sqlConnection, (conn) =>
+            {
+                CreateCommand(conn, dropDatabaseScript, commandTimeout).ExecuteNonQuery();
+            });
         }
 
         private static string CreateObjectsScript(

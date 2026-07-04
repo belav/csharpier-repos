@@ -272,10 +272,8 @@
                 // need to reverse the filter list because the continuations are built up backward
                 Func<Func<ActionExecutedContext>> thunk = filters
                     .Reverse()
-                    .Aggregate(
-                        beginContinuation,
-                        (next, filter) =>
-                            () => InvokeActionMethodFilterAsynchronously(filter, preContext, next)
+                    .Aggregate(beginContinuation, (next, filter) =>
+                        () => InvokeActionMethodFilterAsynchronously(filter, preContext, next)
                     );
                 endContinuation = thunk();
 

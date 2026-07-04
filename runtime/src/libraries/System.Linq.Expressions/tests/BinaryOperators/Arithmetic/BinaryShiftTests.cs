@@ -1021,36 +1021,32 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void LeftThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "left",
-                () => Expression.LeftShift(null, Expression.Constant(""))
+            AssertExtensions.Throws<ArgumentNullException>("left", () =>
+                Expression.LeftShift(null, Expression.Constant(""))
             );
         }
 
         [Fact]
         public static void LeftThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "right",
-                () => Expression.LeftShift(Expression.Constant(""), null)
+            AssertExtensions.Throws<ArgumentNullException>("right", () =>
+                Expression.LeftShift(Expression.Constant(""), null)
             );
         }
 
         [Fact]
         public static void RightThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "left",
-                () => Expression.RightShift(null, Expression.Constant(""))
+            AssertExtensions.Throws<ArgumentNullException>("left", () =>
+                Expression.RightShift(null, Expression.Constant(""))
             );
         }
 
         [Fact]
         public static void RightThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "right",
-                () => Expression.RightShift(Expression.Constant(""), null)
+            AssertExtensions.Throws<ArgumentNullException>("right", () =>
+                Expression.RightShift(Expression.Constant(""), null)
             );
         }
 
@@ -1066,9 +1062,8 @@ namespace System.Linq.Expressions.Tests
         public static void LeftThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "left",
-                () => Expression.LeftShift(value, Expression.Constant(1))
+            AssertExtensions.Throws<ArgumentException>("left", () =>
+                Expression.LeftShift(value, Expression.Constant(1))
             );
         }
 
@@ -1076,9 +1071,8 @@ namespace System.Linq.Expressions.Tests
         public static void LeftThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "right",
-                () => Expression.LeftShift(Expression.Constant(1), value)
+            AssertExtensions.Throws<ArgumentException>("right", () =>
+                Expression.LeftShift(Expression.Constant(1), value)
             );
         }
 
@@ -1086,9 +1080,8 @@ namespace System.Linq.Expressions.Tests
         public static void RightThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "left",
-                () => Expression.RightShift(value, Expression.Constant(1))
+            AssertExtensions.Throws<ArgumentException>("left", () =>
+                Expression.RightShift(value, Expression.Constant(1))
             );
         }
 
@@ -1096,9 +1089,8 @@ namespace System.Linq.Expressions.Tests
         public static void RightThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "right",
-                () => Expression.RightShift(Expression.Constant(1), value)
+            AssertExtensions.Throws<ArgumentException>("right", () =>
+                Expression.RightShift(Expression.Constant(1), value)
             );
         }
 

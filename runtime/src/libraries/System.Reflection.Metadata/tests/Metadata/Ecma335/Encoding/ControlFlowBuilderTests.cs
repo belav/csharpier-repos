@@ -223,13 +223,11 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             il.OpCode(ILOpCode.Nop);
             il.MarkLabel(l5);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "catchType",
-                () => flow.AddCatchRegion(l1, l2, l3, l4, default(TypeDefinitionHandle))
+            AssertExtensions.Throws<ArgumentException>("catchType", () =>
+                flow.AddCatchRegion(l1, l2, l3, l4, default(TypeDefinitionHandle))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "catchType",
-                () => flow.AddCatchRegion(l1, l2, l3, l4, MetadataTokens.MethodDefinitionHandle(1))
+            AssertExtensions.Throws<ArgumentException>("catchType", () =>
+                flow.AddCatchRegion(l1, l2, l3, l4, MetadataTokens.MethodDefinitionHandle(1))
             );
 
             Assert.Throws<ArgumentNullException>(() =>
@@ -269,21 +267,17 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                 )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tryStart",
-                () => flow.AddCatchRegion(lx, l2, l3, l4, MetadataTokens.TypeReferenceHandle(1))
+            AssertExtensions.Throws<ArgumentException>("tryStart", () =>
+                flow.AddCatchRegion(lx, l2, l3, l4, MetadataTokens.TypeReferenceHandle(1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "tryEnd",
-                () => flow.AddCatchRegion(l1, lx, l3, l4, MetadataTokens.TypeReferenceHandle(1))
+            AssertExtensions.Throws<ArgumentException>("tryEnd", () =>
+                flow.AddCatchRegion(l1, lx, l3, l4, MetadataTokens.TypeReferenceHandle(1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "handlerStart",
-                () => flow.AddCatchRegion(l1, l2, lx, l4, MetadataTokens.TypeReferenceHandle(1))
+            AssertExtensions.Throws<ArgumentException>("handlerStart", () =>
+                flow.AddCatchRegion(l1, l2, lx, l4, MetadataTokens.TypeReferenceHandle(1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "handlerEnd",
-                () => flow.AddCatchRegion(l1, l2, l3, lx, MetadataTokens.TypeReferenceHandle(1))
+            AssertExtensions.Throws<ArgumentException>("handlerEnd", () =>
+                flow.AddCatchRegion(l1, l2, l3, lx, MetadataTokens.TypeReferenceHandle(1))
             );
         }
 

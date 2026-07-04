@@ -805,17 +805,14 @@ static "
             Assert.False(ctor.IsImplicitInstanceConstructor);
             Assert.False(ctor.IsDefaultValueTypeConstructor());
 
-            var verifier = CompileAndVerify(
-                    comp,
-                    symbolValidator: (m) =>
-                    {
-                        Assert.False(
-                            m.GlobalNamespace.GetTypeMember("C")
-                                .InstanceConstructors.Single()
-                                .IsDefaultValueTypeConstructor()
-                        );
-                    }
-                )
+            var verifier = CompileAndVerify(comp, symbolValidator: (m) =>
+                {
+                    Assert.False(
+                        m.GlobalNamespace.GetTypeMember("C")
+                            .InstanceConstructors.Single()
+                            .IsDefaultValueTypeConstructor()
+                    );
+                })
                 .VerifyDiagnostics();
 
             if (c.TypeKind == TypeKind.Struct)
@@ -1060,9 +1057,8 @@ C(int x, int y);
 
             var c = comp.GlobalNamespace.GetTypeMember("C");
 
-            Assert.All(
-                c.GetMembers(),
-                m => Assert.True(m is MethodSymbol { MethodKind: MethodKind.Constructor })
+            Assert.All(c.GetMembers(), m =>
+                Assert.True(m is MethodSymbol { MethodKind: MethodKind.Constructor })
             );
             Assert.IsType<SynthesizedPrimaryConstructor>(c.InstanceConstructors[0]);
 
@@ -21969,27 +21965,24 @@ class C1 (int p1)
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
 
-            CompileAndVerify(
-                    comp,
-                    symbolValidator: (m) =>
-                    {
-                        var attr = m
-                            .GlobalNamespace.GetTypeMember("C1")
-                            .GetMembers()
-                            .OfType<FieldSymbol>()
-                            .Single()
-                            .GetAttributes();
-                        Assert.Equal(2, attr.Length);
-                        Assert.Equal(
-                            "System.Runtime.CompilerServices.CompilerGeneratedAttribute",
-                            attr[0].ToString()
-                        );
-                        Assert.Equal(
-                            "System.Diagnostics.DebuggerBrowsableAttribute(System.Diagnostics.DebuggerBrowsableState.Never)",
-                            attr[1].ToString()
-                        );
-                    }
-                )
+            CompileAndVerify(comp, symbolValidator: (m) =>
+                {
+                    var attr = m
+                        .GlobalNamespace.GetTypeMember("C1")
+                        .GetMembers()
+                        .OfType<FieldSymbol>()
+                        .Single()
+                        .GetAttributes();
+                    Assert.Equal(2, attr.Length);
+                    Assert.Equal(
+                        "System.Runtime.CompilerServices.CompilerGeneratedAttribute",
+                        attr[0].ToString()
+                    );
+                    Assert.Equal(
+                        "System.Diagnostics.DebuggerBrowsableAttribute(System.Diagnostics.DebuggerBrowsableState.Never)",
+                        attr[1].ToString()
+                    );
+                })
                 .VerifyDiagnostics();
         }
 
@@ -22008,23 +22001,20 @@ class C1 (nint p1)
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
 
-            CompileAndVerify(
-                    comp,
-                    symbolValidator: (m) =>
-                    {
-                        var attr = m
-                            .GlobalNamespace.GetTypeMember("C1")
-                            .GetMembers()
-                            .OfType<FieldSymbol>()
-                            .Single()
-                            .GetAttributes();
-                        Assert.Equal(3, attr.Length);
-                        Assert.Equal(
-                            "System.Runtime.CompilerServices.NativeIntegerAttribute",
-                            attr[0].ToString()
-                        );
-                    }
-                )
+            CompileAndVerify(comp, symbolValidator: (m) =>
+                {
+                    var attr = m
+                        .GlobalNamespace.GetTypeMember("C1")
+                        .GetMembers()
+                        .OfType<FieldSymbol>()
+                        .Single()
+                        .GetAttributes();
+                    Assert.Equal(3, attr.Length);
+                    Assert.Equal(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute",
+                        attr[0].ToString()
+                    );
+                })
                 .VerifyDiagnostics();
         }
 
@@ -22043,23 +22033,20 @@ class C1 ((int i1, int i2) p1)
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
 
-            CompileAndVerify(
-                    comp,
-                    symbolValidator: (m) =>
-                    {
-                        var attr = m
-                            .GlobalNamespace.GetTypeMember("C1")
-                            .GetMembers()
-                            .OfType<FieldSymbol>()
-                            .Single()
-                            .GetAttributes();
-                        Assert.Equal(3, attr.Length);
-                        Assert.Equal(
-                            "System.Runtime.CompilerServices.TupleElementNamesAttribute({\"i1\", \"i2\"})",
-                            attr[0].ToString()
-                        );
-                    }
-                )
+            CompileAndVerify(comp, symbolValidator: (m) =>
+                {
+                    var attr = m
+                        .GlobalNamespace.GetTypeMember("C1")
+                        .GetMembers()
+                        .OfType<FieldSymbol>()
+                        .Single()
+                        .GetAttributes();
+                    Assert.Equal(3, attr.Length);
+                    Assert.Equal(
+                        "System.Runtime.CompilerServices.TupleElementNamesAttribute({\"i1\", \"i2\"})",
+                        attr[0].ToString()
+                    );
+                })
                 .VerifyDiagnostics();
         }
 
@@ -22078,23 +22065,20 @@ class C1 (dynamic p1)
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
 
-            CompileAndVerify(
-                    comp,
-                    symbolValidator: (m) =>
-                    {
-                        var attr = m
-                            .GlobalNamespace.GetTypeMember("C1")
-                            .GetMembers()
-                            .OfType<FieldSymbol>()
-                            .Single()
-                            .GetAttributes();
-                        Assert.Equal(3, attr.Length);
-                        Assert.Equal(
-                            "System.Runtime.CompilerServices.DynamicAttribute",
-                            attr[0].ToString()
-                        );
-                    }
-                )
+            CompileAndVerify(comp, symbolValidator: (m) =>
+                {
+                    var attr = m
+                        .GlobalNamespace.GetTypeMember("C1")
+                        .GetMembers()
+                        .OfType<FieldSymbol>()
+                        .Single()
+                        .GetAttributes();
+                    Assert.Equal(3, attr.Length);
+                    Assert.Equal(
+                        "System.Runtime.CompilerServices.DynamicAttribute",
+                        attr[0].ToString()
+                    );
+                })
                 .VerifyDiagnostics();
         }
 
@@ -28792,17 +28776,14 @@ class C1(int x, int y)
                 source,
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: (m) =>
-                {
-                    var c1 = m.GlobalNamespace.GetTypeMember("C1");
-                    AssertEx.Equal(
-                        new[] { "<x>P", "<y>P" },
-                        c1.GetMembers().OfType<FieldSymbol>().Select(f => f.Name)
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: (m) =>
+            {
+                var c1 = m.GlobalNamespace.GetTypeMember("C1");
+                AssertEx.Equal(
+                    new[] { "<x>P", "<y>P" },
+                    c1.GetMembers().OfType<FieldSymbol>().Select(f => f.Name)
+                );
+            });
         }
 
         [Fact]
@@ -28821,17 +28802,14 @@ class C1(int x, int y)
                 source,
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: (m) =>
-                {
-                    var c1 = m.GlobalNamespace.GetTypeMember("C1");
-                    AssertEx.Equal(
-                        new[] { "<x>P", "<y>P", "a" },
-                        c1.GetMembers().OfType<FieldSymbol>().Select(f => f.Name)
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: (m) =>
+            {
+                var c1 = m.GlobalNamespace.GetTypeMember("C1");
+                AssertEx.Equal(
+                    new[] { "<x>P", "<y>P", "a" },
+                    c1.GetMembers().OfType<FieldSymbol>().Select(f => f.Name)
+                );
+            });
         }
 
         [Fact]
@@ -28855,17 +28833,14 @@ partial class C1(int x, int y)
                 source,
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: (m) =>
-                {
-                    var c1 = m.GlobalNamespace.GetTypeMember("C1");
-                    AssertEx.Equal(
-                        new[] { "b", "<x>P", "<y>P", "a" },
-                        c1.GetMembers().OfType<FieldSymbol>().Select(f => f.Name)
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: (m) =>
+            {
+                var c1 = m.GlobalNamespace.GetTypeMember("C1");
+                AssertEx.Equal(
+                    new[] { "b", "<x>P", "<y>P", "a" },
+                    c1.GetMembers().OfType<FieldSymbol>().Select(f => f.Name)
+                );
+            });
         }
 
         [Fact]
@@ -28889,17 +28864,14 @@ partial class C1
                 source,
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: (m) =>
-                {
-                    var c1 = m.GlobalNamespace.GetTypeMember("C1");
-                    AssertEx.Equal(
-                        new[] { "<x>P", "<y>P", "a", "b" },
-                        c1.GetMembers().OfType<FieldSymbol>().Select(f => f.Name)
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: (m) =>
+            {
+                var c1 = m.GlobalNamespace.GetTypeMember("C1");
+                AssertEx.Equal(
+                    new[] { "<x>P", "<y>P", "a", "b" },
+                    c1.GetMembers().OfType<FieldSymbol>().Select(f => f.Name)
+                );
+            });
         }
 
         [Fact]
@@ -28928,17 +28900,14 @@ partial class C1
                 source,
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: (m) =>
-                {
-                    var c1 = m.GlobalNamespace.GetTypeMember("C1");
-                    AssertEx.Equal(
-                        new[] { "b", "<x>P", "<y>P", "a", "c" },
-                        c1.GetMembers().OfType<FieldSymbol>().Select(f => f.Name)
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: (m) =>
+            {
+                var c1 = m.GlobalNamespace.GetTypeMember("C1");
+                AssertEx.Equal(
+                    new[] { "b", "<x>P", "<y>P", "a", "c" },
+                    c1.GetMembers().OfType<FieldSymbol>().Select(f => f.Name)
+                );
+            });
         }
 
         [Fact]

@@ -2007,25 +2007,21 @@ public class CF1
             Assert.True(token.IsNil); //could the type ref be located? If not then the attribute's not there.
 
             // Exported types in .NET module cause PEVerify to fail.
-            CompileAndVerify(
-                    appCompilation,
-                    verify: Verification.Fails,
-                    symbolValidator: m =>
-                    {
-                        var peReader1 = ((PEModuleSymbol)m).Module.GetMetadataReader();
-                        Assert.Equal(1, peReader1.GetTableRowCount(TableIndex.ExportedType));
-                        ValidateExportedTypeRow(peReader1.ExportedTypes.First(), peReader1, "CF1");
+            CompileAndVerify(appCompilation, verify: Verification.Fails, symbolValidator: m =>
+                {
+                    var peReader1 = ((PEModuleSymbol)m).Module.GetMetadataReader();
+                    Assert.Equal(1, peReader1.GetTableRowCount(TableIndex.ExportedType));
+                    ValidateExportedTypeRow(peReader1.ExportedTypes.First(), peReader1, "CF1");
 
-                        // Attributes should not actually be emitted.
-                        Assert.Equal(
-                            0,
-                            m.ContainingAssembly.GetAttributes(
-                                    AttributeDescription.TypeForwardedToAttribute
-                                )
-                                .Count()
-                        );
-                    }
-                )
+                    // Attributes should not actually be emitted.
+                    Assert.Equal(
+                        0,
+                        m.ContainingAssembly.GetAttributes(
+                                AttributeDescription.TypeForwardedToAttribute
+                            )
+                            .Count()
+                    );
+                })
                 .VerifyDiagnostics();
 
             var ilSource =
@@ -2083,23 +2079,20 @@ public class CF1
             Assert.False(token.IsNil); //could the type ref be located? If not then the attribute's not there.
             Assert.Equal(1, peReader.CustomAttributes.Count);
 
-            CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: m =>
-                    {
-                        var peReader1 = ((PEModuleSymbol)m).Module.GetMetadataReader();
-                        Assert.Equal(0, peReader1.GetTableRowCount(TableIndex.ExportedType));
+            CompileAndVerify(appCompilation, symbolValidator: m =>
+                {
+                    var peReader1 = ((PEModuleSymbol)m).Module.GetMetadataReader();
+                    Assert.Equal(0, peReader1.GetTableRowCount(TableIndex.ExportedType));
 
-                        // Attributes should not actually be emitted.
-                        Assert.Equal(
-                            0,
-                            m.ContainingAssembly.GetAttributes(
-                                    AttributeDescription.TypeForwardedToAttribute
-                                )
-                                .Count()
-                        );
-                    }
-                )
+                    // Attributes should not actually be emitted.
+                    Assert.Equal(
+                        0,
+                        m.ContainingAssembly.GetAttributes(
+                                AttributeDescription.TypeForwardedToAttribute
+                            )
+                            .Count()
+                    );
+                })
                 .VerifyDiagnostics();
 
             appCompilation = CreateCompilation(

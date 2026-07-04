@@ -997,9 +997,8 @@ namespace System.Globalization.Tests
         public void LongDatePattern_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.LongDatePattern = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.LongDatePattern = null
             );
         }
 

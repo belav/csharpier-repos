@@ -143,13 +143,8 @@ bar",
         [Fact]
         public void EofFunctionsBlock()
         {
-            EofBlockCore(
-                "Functions",
-                "End Functions",
-                true,
-                BlockType.Functions,
-                true,
-                c => c.AsFunctionsBody()
+            EofBlockCore("Functions", "End Functions", true, BlockType.Functions, true, c =>
+                c.AsFunctionsBody()
             );
         }
 
@@ -244,12 +239,8 @@ bar",
         [Fact]
         public void UnterminatedFunctionsBlock()
         {
-            UnterminatedBlockCore(
-                "Functions",
-                "End Functions",
-                BlockType.Functions,
-                true,
-                c => c.AsFunctionsBody()
+            UnterminatedBlockCore("Functions", "End Functions", BlockType.Functions, true, c =>
+                c.AsFunctionsBody()
             );
         }
 

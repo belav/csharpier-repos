@@ -142,9 +142,8 @@ internal class SemanticTokensRefreshQueue : IOnInitialized, ILspService, IDispos
                     _projectIdToEventSource.Add(project.Id, eventSource);
                 }
 
-                eventSource.EnsureCompilationAvailability(
-                    project,
-                    () => OnCompilationAvailable(project, projectChecksum)
+                eventSource.EnsureCompilationAvailability(project, () =>
+                    OnCompilationAvailable(project, projectChecksum)
                 );
             }
         }

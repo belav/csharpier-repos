@@ -52,16 +52,13 @@ namespace System.Net.WebSockets.Client.Tests
         {
             for (int i = 0; i < 3; i++) // Connect and disconnect multiple times to exercise shared handler on netcoreapp
             {
-                var ws = await WebSocketHelper.Retry(
-                    _output,
-                    async () =>
-                    {
-                        var cws = new ClientWebSocket();
-                        cws.Options.Proxy = null;
-                        await cws.ConnectAsync(server, default);
-                        return cws;
-                    }
-                );
+                var ws = await WebSocketHelper.Retry(_output, async () =>
+                {
+                    var cws = new ClientWebSocket();
+                    cws.Options.Proxy = null;
+                    await cws.ConnectAsync(server, default);
+                    return cws;
+                });
                 await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, default);
                 ws.Dispose();
             }
@@ -119,53 +116,37 @@ namespace System.Net.WebSockets.Client.Tests
 
             var cws = new ClientWebSocket();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "receiveBufferSize",
-                () => cws.Options.SetBuffer(0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () =>
+                cws.Options.SetBuffer(0, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "receiveBufferSize",
-                () => cws.Options.SetBuffer(0, minSendBufferSize)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () =>
+                cws.Options.SetBuffer(0, minSendBufferSize)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sendBufferSize",
-                () => cws.Options.SetBuffer(minReceiveBufferSize, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sendBufferSize", () =>
+                cws.Options.SetBuffer(minReceiveBufferSize, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "receiveBufferSize",
-                () => cws.Options.SetBuffer(0, 0, new ArraySegment<byte>(new byte[1]))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () =>
+                cws.Options.SetBuffer(0, 0, new ArraySegment<byte>(new byte[1]))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "receiveBufferSize",
-                () =>
-                    cws.Options.SetBuffer(0, minSendBufferSize, new ArraySegment<byte>(new byte[1]))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () =>
+                cws.Options.SetBuffer(0, minSendBufferSize, new ArraySegment<byte>(new byte[1]))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sendBufferSize",
-                () =>
-                    cws.Options.SetBuffer(
-                        minReceiveBufferSize,
-                        0,
-                        new ArraySegment<byte>(new byte[1])
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sendBufferSize", () =>
+                cws.Options.SetBuffer(minReceiveBufferSize, 0, new ArraySegment<byte>(new byte[1]))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "buffer.Array",
-                () =>
-                    cws.Options.SetBuffer(
-                        minReceiveBufferSize,
-                        minSendBufferSize,
-                        default(ArraySegment<byte>)
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("buffer.Array", () =>
+                cws.Options.SetBuffer(
+                    minReceiveBufferSize,
+                    minSendBufferSize,
+                    default(ArraySegment<byte>)
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                bufferName,
-                () =>
-                    cws.Options.SetBuffer(
-                        minReceiveBufferSize,
-                        minSendBufferSize,
-                        new ArraySegment<byte>(new byte[0])
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(bufferName, () =>
+                cws.Options.SetBuffer(
+                    minReceiveBufferSize,
+                    minSendBufferSize,
+                    new ArraySegment<byte>(new byte[0])
+                )
             );
         }
 
@@ -185,9 +166,8 @@ namespace System.Net.WebSockets.Client.Tests
             cws.Options.KeepAliveInterval = Timeout.InfiniteTimeSpan;
             Assert.Equal(Timeout.InfiniteTimeSpan, cws.Options.KeepAliveInterval);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => cws.Options.KeepAliveInterval = TimeSpan.MinValue
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                cws.Options.KeepAliveInterval = TimeSpan.MinValue
             );
         }
 

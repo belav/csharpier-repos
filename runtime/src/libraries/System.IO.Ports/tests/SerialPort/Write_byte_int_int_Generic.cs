@@ -387,9 +387,8 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private static void VerifyWriteException(SerialPort com, Type expectedException)
         {
-            Assert.Throws(
-                expectedException,
-                () => com.Write(new byte[BYTE_SIZE_EXCEPTION], 0, BYTE_SIZE_EXCEPTION)
+            Assert.Throws(expectedException, () =>
+                com.Write(new byte[BYTE_SIZE_EXCEPTION], 0, BYTE_SIZE_EXCEPTION)
             );
         }
 

@@ -61,11 +61,9 @@ namespace System.ComponentModel.Composition
 
         private ComposablePartCatalog ScopeCatalog(ComposablePartCatalog catalog, string scope)
         {
-            return CatalogFactory.CreateFiltered(
-                catalog,
-                partDef =>
-                    partDef.Metadata.ContainsKey("Scope")
-                    && partDef.Metadata["Scope"].ToString() == scope
+            return CatalogFactory.CreateFiltered(catalog, partDef =>
+                partDef.Metadata.ContainsKey("Scope")
+                && partDef.Metadata["Scope"].ToString() == scope
             );
         }
 

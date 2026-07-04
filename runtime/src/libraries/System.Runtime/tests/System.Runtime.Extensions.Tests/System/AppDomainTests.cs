@@ -269,21 +269,14 @@ namespace System.Tests
         [Fact]
         public void ApplyPolicy()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "assemblyName",
-                () =>
-                {
-                    AppDomain.CurrentDomain.ApplyPolicy(null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "assemblyName",
-                null,
-                () =>
-                {
-                    AppDomain.CurrentDomain.ApplyPolicy("");
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("assemblyName", () =>
+            {
+                AppDomain.CurrentDomain.ApplyPolicy(null);
+            });
+            AssertExtensions.Throws<ArgumentException>("assemblyName", null, () =>
+            {
+                AppDomain.CurrentDomain.ApplyPolicy("");
+            });
             string entryAssembly =
                 Assembly.GetEntryAssembly()?.FullName ?? Assembly.GetExecutingAssembly().FullName;
             Assert.Equal(AppDomain.CurrentDomain.ApplyPolicy(entryAssembly), entryAssembly);
@@ -293,13 +286,10 @@ namespace System.Tests
         [Fact]
         public void CreateDomainNonNetfx()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "friendlyName",
-                () =>
-                {
-                    AppDomain.CreateDomain(null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("friendlyName", () =>
+            {
+                AppDomain.CreateDomain(null);
+            });
             Assert.Throws<PlatformNotSupportedException>(() =>
             {
                 AppDomain.CreateDomain("test");
@@ -355,9 +345,8 @@ namespace System.Tests
             CopyTestAssemblies();
 
             string name = Path.Combine(Environment.CurrentDirectory, "TestAppOutsideOfTPA.exe");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "assemblyFile",
-                () => AppDomain.CurrentDomain.ExecuteAssembly(null)
+            AssertExtensions.Throws<ArgumentNullException>("assemblyFile", () =>
+                AppDomain.CurrentDomain.ExecuteAssembly(null)
             );
             Assert.Throws<FileNotFoundException>(() =>
                 AppDomain.CurrentDomain.ExecuteAssembly("NonExistentFile.exe")
@@ -387,13 +376,10 @@ namespace System.Tests
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    AssertExtensions.Throws<ArgumentNullException>(
-                        "name",
-                        () =>
-                        {
-                            AppDomain.CurrentDomain.SetData(null, null);
-                        }
-                    );
+                    AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                    {
+                        AppDomain.CurrentDomain.SetData(null, null);
+                    });
                     AppDomain.CurrentDomain.SetData("", null);
                     Assert.Null(AppDomain.CurrentDomain.GetData(""));
                     AppDomain.CurrentDomain.SetData("randomkey", 4);
@@ -426,13 +412,10 @@ namespace System.Tests
             {
                 AppDomain.CurrentDomain.IsCompatibilitySwitchSet(null);
             });
-            AssertExtensions.Throws<ArgumentException>(
-                "switchName",
-                () =>
-                {
-                    AppDomain.CurrentDomain.IsCompatibilitySwitchSet("");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("switchName", () =>
+            {
+                AppDomain.CurrentDomain.IsCompatibilitySwitchSet("");
+            });
             Assert.Null(AppDomain.CurrentDomain.IsCompatibilitySwitchSet("randomSwitch"));
         }
 
@@ -482,13 +465,10 @@ namespace System.Tests
             RemoteExecutor
                 .Invoke(() =>
                 {
-                    AssertExtensions.Throws<ArgumentNullException>(
-                        "domain",
-                        () =>
-                        {
-                            AppDomain.Unload(null);
-                        }
-                    );
+                    AssertExtensions.Throws<ArgumentNullException>("domain", () =>
+                    {
+                        AppDomain.Unload(null);
+                    });
                     Assert.Throws<CannotUnloadAppDomainException>(() =>
                     {
                         AppDomain.Unload(AppDomain.CurrentDomain);
@@ -1090,21 +1070,17 @@ namespace System.Tests
 
             if (exceptionType != null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        AppDomain.CurrentDomain.CreateInstanceFrom(
-                            assemblyFile: assemblyFile,
-                            typeName: type
-                        )
+                Assert.Throws(exceptionType, () =>
+                    AppDomain.CurrentDomain.CreateInstanceFrom(
+                        assemblyFile: assemblyFile,
+                        typeName: type
+                    )
                 );
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        AppDomain.CurrentDomain.CreateInstanceFromAndUnwrap(
-                            assemblyFile: assemblyFile,
-                            typeName: type
-                        )
+                Assert.Throws(exceptionType, () =>
+                    AppDomain.CurrentDomain.CreateInstanceFromAndUnwrap(
+                        assemblyFile: assemblyFile,
+                        typeName: type
+                    )
                 );
             }
             else
@@ -1124,23 +1100,19 @@ namespace System.Tests
 
             if (exceptionType != null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        AppDomain.CurrentDomain.CreateInstanceFrom(
-                            assemblyFile: assemblyFile,
-                            typeName: type,
-                            null
-                        )
+                Assert.Throws(exceptionType, () =>
+                    AppDomain.CurrentDomain.CreateInstanceFrom(
+                        assemblyFile: assemblyFile,
+                        typeName: type,
+                        null
+                    )
                 );
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        AppDomain.CurrentDomain.CreateInstanceFromAndUnwrap(
-                            assemblyFile: assemblyFile,
-                            typeName: type,
-                            null
-                        )
+                Assert.Throws(exceptionType, () =>
+                    AppDomain.CurrentDomain.CreateInstanceFromAndUnwrap(
+                        assemblyFile: assemblyFile,
+                        typeName: type,
+                        null
+                    )
                 );
             }
             else
@@ -1245,21 +1217,17 @@ namespace System.Tests
 
             if (exceptionType != null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        AppDomain.CurrentDomain.CreateInstance(
-                            assemblyName: assemblyName,
-                            typeName: type
-                        )
+                Assert.Throws(exceptionType, () =>
+                    AppDomain.CurrentDomain.CreateInstance(
+                        assemblyName: assemblyName,
+                        typeName: type
+                    )
                 );
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        AppDomain.CurrentDomain.CreateInstanceAndUnwrap(
-                            assemblyName: assemblyName,
-                            typeName: type
-                        )
+                Assert.Throws(exceptionType, () =>
+                    AppDomain.CurrentDomain.CreateInstanceAndUnwrap(
+                        assemblyName: assemblyName,
+                        typeName: type
+                    )
                 );
             }
             else
@@ -1279,23 +1247,19 @@ namespace System.Tests
 
             if (exceptionType != null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        AppDomain.CurrentDomain.CreateInstance(
-                            assemblyName: assemblyName,
-                            typeName: type,
-                            null
-                        )
+                Assert.Throws(exceptionType, () =>
+                    AppDomain.CurrentDomain.CreateInstance(
+                        assemblyName: assemblyName,
+                        typeName: type,
+                        null
+                    )
                 );
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        AppDomain.CurrentDomain.CreateInstanceAndUnwrap(
-                            assemblyName: assemblyName,
-                            typeName: type,
-                            null
-                        )
+                Assert.Throws(exceptionType, () =>
+                    AppDomain.CurrentDomain.CreateInstanceAndUnwrap(
+                        assemblyName: assemblyName,
+                        typeName: type,
+                        null
+                    )
                 );
             }
             else

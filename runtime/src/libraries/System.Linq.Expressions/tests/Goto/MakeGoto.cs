@@ -17,10 +17,8 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(GotoTypes))]
         public void OpenGenericType(GotoExpressionKind kind)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.MakeGoto(kind, Expression.Label(typeof(void)), null, typeof(List<>))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.MakeGoto(kind, Expression.Label(typeof(void)), null, typeof(List<>))
             );
         }
 
@@ -28,25 +26,21 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(GotoTypes))]
         public static void TypeContainsGenericParameters(GotoExpressionKind kind)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.MakeGoto(
-                        kind,
-                        Expression.Label(typeof(void)),
-                        null,
-                        typeof(List<>.Enumerator)
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.MakeGoto(
+                    kind,
+                    Expression.Label(typeof(void)),
+                    null,
+                    typeof(List<>.Enumerator)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.MakeGoto(
-                        kind,
-                        Expression.Label(typeof(void)),
-                        null,
-                        typeof(List<>).MakeGenericType(typeof(List<>))
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.MakeGoto(
+                    kind,
+                    Expression.Label(typeof(void)),
+                    null,
+                    typeof(List<>).MakeGenericType(typeof(List<>))
+                )
             );
         }
 
@@ -54,15 +48,13 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(GotoTypes))]
         public void PointerType(GotoExpressionKind kind)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.MakeGoto(
-                        kind,
-                        Expression.Label(typeof(void)),
-                        null,
-                        typeof(int).MakePointerType()
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.MakeGoto(
+                    kind,
+                    Expression.Label(typeof(void)),
+                    null,
+                    typeof(int).MakePointerType()
+                )
             );
         }
 
@@ -70,15 +62,13 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(GotoTypes))]
         public void ByRefType(GotoExpressionKind kind)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.MakeGoto(
-                        kind,
-                        Expression.Label(typeof(void)),
-                        null,
-                        typeof(int).MakeByRefType()
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.MakeGoto(
+                    kind,
+                    Expression.Label(typeof(void)),
+                    null,
+                    typeof(int).MakeByRefType()
+                )
             );
         }
     }

@@ -84,203 +84,173 @@ public class SyncTextReader
     public void ReadToEnd()
     {
         var expected = string.Join(Environment.NewLine, s_testLines);
-        Test(
-            expected,
-            () =>
-            {
-                // Given, When
-                var result = Console.In.ReadToEnd();
+        Test(expected, () =>
+        {
+            // Given, When
+            var result = Console.In.ReadToEnd();
 
-                // Then
-                Assert.Equal(expected, result);
-                Assert.Equal(-1, Console.Read()); // We should be at EOF now.
-            }
-        );
+            // Then
+            Assert.Equal(expected, result);
+            Assert.Equal(-1, Console.Read()); // We should be at EOF now.
+        });
     }
 
     [Fact]
     public void ReadBlock()
     {
         var expected = new[] { 'H', 'e', 'l', 'l', 'o' };
-        Test(
-            new string(expected),
-            () =>
-            {
-                // Given
-                var buffer = new char[expected.Length];
+        Test(new string(expected), () =>
+        {
+            // Given
+            var buffer = new char[expected.Length];
 
-                // When
-                var result = Console.In.ReadBlock(buffer, 0, 5);
+            // When
+            var result = Console.In.ReadBlock(buffer, 0, 5);
 
-                // Then
-                Assert.Equal(5, result);
-                Assert.Equal(expected, buffer);
-                Assert.Equal(-1, Console.Read()); // We should be at EOF now.
-            }
-        );
+            // Then
+            Assert.Equal(5, result);
+            Assert.Equal(expected, buffer);
+            Assert.Equal(-1, Console.Read()); // We should be at EOF now.
+        });
     }
 
     [Fact]
     public void Read()
     {
         var expected = new[] { 'H', 'e', 'l', 'l', 'o' };
-        Test(
-            new string(expected),
-            () =>
-            {
-                // Given
-                var buffer = new char[expected.Length];
+        Test(new string(expected), () =>
+        {
+            // Given
+            var buffer = new char[expected.Length];
 
-                // When
-                var result = Console.In.Read(buffer, 0, 5);
+            // When
+            var result = Console.In.Read(buffer, 0, 5);
 
-                // Then
-                Assert.Equal(5, result);
-                Assert.Equal(expected, buffer);
-                Assert.Equal(-1, Console.Read()); // We should be at EOF now.
-            }
-        );
+            // Then
+            Assert.Equal(5, result);
+            Assert.Equal(expected, buffer);
+            Assert.Equal(-1, Console.Read()); // We should be at EOF now.
+        });
     }
 
     [Fact]
     public void Peek()
     {
         const string expected = "ABC";
-        Test(
-            expected,
-            () =>
+        Test(expected, () =>
+        {
+            foreach (char expectedChar in expected)
             {
-                foreach (char expectedChar in expected)
-                {
-                    Assert.Equal(expectedChar, Console.In.Peek());
-                    Assert.Equal(expectedChar, Console.In.Read());
-                }
+                Assert.Equal(expectedChar, Console.In.Peek());
+                Assert.Equal(expectedChar, Console.In.Read());
             }
-        );
+        });
     }
 
     [Fact]
     public void ReadToEndAsync()
     {
         var expected = string.Join(Environment.NewLine, s_testLines);
-        Test(
-            expected,
-            () =>
-            {
-                // Given, When
-                var result = Console.In.ReadToEndAsync().Result;
+        Test(expected, () =>
+        {
+            // Given, When
+            var result = Console.In.ReadToEndAsync().Result;
 
-                // Then
-                Assert.Equal(expected, result);
-                Assert.Equal(-1, Console.Read()); // We should be at EOF now.
-            }
-        );
+            // Then
+            Assert.Equal(expected, result);
+            Assert.Equal(-1, Console.Read()); // We should be at EOF now.
+        });
     }
 
     [Fact]
     public void ReadBlockAsync()
     {
         var expected = new[] { 'H', 'e', 'l', 'l', 'o' };
-        Test(
-            new string(expected),
-            () =>
+        Test(new string(expected), () =>
+        {
+            // Given
+            var buffer = new char[expected.Length];
+
+            // When
+            var result = Console.In.ReadBlockAsync(buffer, 0, 5).Result;
+
+            // Then
+            Assert.Equal(5, result);
+            Assert.Equal(expected, buffer);
+            Assert.Equal(-1, Console.Read()); // We should be at EOF now.
+
+            // Invalid args
+            Assert.Throws<ArgumentNullException>(() =>
             {
-                // Given
-                var buffer = new char[expected.Length];
-
-                // When
-                var result = Console.In.ReadBlockAsync(buffer, 0, 5).Result;
-
-                // Then
-                Assert.Equal(5, result);
-                Assert.Equal(expected, buffer);
-                Assert.Equal(-1, Console.Read()); // We should be at EOF now.
-
-                // Invalid args
-                Assert.Throws<ArgumentNullException>(() =>
-                {
-                    Console.In.ReadBlockAsync(null, 0, 0);
-                });
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                {
-                    Console.In.ReadBlockAsync(new char[1], -1, 0);
-                });
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                {
-                    Console.In.ReadBlockAsync(new char[1], 0, -1);
-                });
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () =>
-                    {
-                        Console.In.ReadBlockAsync(new char[1], 1, 1);
-                    }
-                );
-            }
-        );
+                Console.In.ReadBlockAsync(null, 0, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Console.In.ReadBlockAsync(new char[1], -1, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Console.In.ReadBlockAsync(new char[1], 0, -1);
+            });
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Console.In.ReadBlockAsync(new char[1], 1, 1);
+            });
+        });
     }
 
     [Fact]
     public void ReadAsync()
     {
         var expected = new[] { 'H', 'e', 'l', 'l', 'o' };
-        Test(
-            new string(expected),
-            () =>
+        Test(new string(expected), () =>
+        {
+            // Given
+            var buffer = new char[expected.Length];
+
+            // When
+            var result = Console.In.ReadAsync(buffer, 0, 5).Result;
+
+            // Then
+            Assert.Equal(5, result);
+            Assert.Equal(expected, buffer);
+            Assert.Equal(-1, Console.Read()); // We should be at EOF now.
+
+            // Invalid args
+            Assert.Throws<ArgumentNullException>(() =>
             {
-                // Given
-                var buffer = new char[expected.Length];
-
-                // When
-                var result = Console.In.ReadAsync(buffer, 0, 5).Result;
-
-                // Then
-                Assert.Equal(5, result);
-                Assert.Equal(expected, buffer);
-                Assert.Equal(-1, Console.Read()); // We should be at EOF now.
-
-                // Invalid args
-                Assert.Throws<ArgumentNullException>(() =>
-                {
-                    Console.In.ReadAsync(null, 0, 0);
-                });
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                {
-                    Console.In.ReadAsync(new char[1], -1, 0);
-                });
-                Assert.Throws<ArgumentOutOfRangeException>(() =>
-                {
-                    Console.In.ReadAsync(new char[1], 0, -1);
-                });
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () =>
-                    {
-                        Console.In.ReadAsync(new char[1], 1, 1);
-                    }
-                );
-            }
-        );
+                Console.In.ReadAsync(null, 0, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Console.In.ReadAsync(new char[1], -1, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Console.In.ReadAsync(new char[1], 0, -1);
+            });
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                Console.In.ReadAsync(new char[1], 1, 1);
+            });
+        });
     }
 
     [Fact]
     public void ReadLineAsync()
     {
         var expected = string.Join(Environment.NewLine, s_testLines);
-        Test(
-            expected,
-            () =>
+        Test(expected, () =>
+        {
+            for (int i = 0; i < s_testLines.Length; i++)
             {
-                for (int i = 0; i < s_testLines.Length; i++)
-                {
-                    // Given, When
-                    var result = Console.In.ReadLineAsync().Result;
+                // Given, When
+                var result = Console.In.ReadLineAsync().Result;
 
-                    // Then
-                    Assert.Equal(s_testLines[i], result);
-                }
-                Assert.Equal(-1, Console.Read());
+                // Then
+                Assert.Equal(s_testLines[i], result);
             }
-        );
+            Assert.Equal(-1, Console.Read());
+        });
     }
 }

@@ -2388,20 +2388,17 @@ IL_0005:  ret
                 options: TestOptions.DebugDll
             );
 
-            WithRuntimeInstance(
-                compilation,
-                runtimeReferences,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.Main");
-                    string errorMessage;
+            WithRuntimeInstance(compilation, runtimeReferences, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.Main");
+                string errorMessage;
 
-                    // { System.Console, mscorlib }
-                    var testData = new CompilationTestData();
-                    context.CompileExpression("typeof(System.Console)", out errorMessage, testData);
-                    var methodData = testData.GetMethodData("<>x.<>m0");
-                    methodData.VerifyIL(
-                        @"
+                // { System.Console, mscorlib }
+                var testData = new CompilationTestData();
+                context.CompileExpression("typeof(System.Console)", out errorMessage, testData);
+                var methodData = testData.GetMethodData("<>x.<>m0");
+                methodData.VerifyIL(
+                    @"
 {
   // Code size       11 (0xb)
   .maxstack  1
@@ -2411,18 +2408,18 @@ IL_0005:  ret
   IL_0005:  call       ""System.Type System.Type.GetTypeFromHandle(System.RuntimeTypeHandle)""
   IL_000a:  ret
 }"
-                    );
+                );
 
-                    // { mscorlib, System.ObjectModel }
-                    testData = new CompilationTestData();
-                    context.CompileExpression(
-                        "(System.Collections.ObjectModel.ReadOnlyDictionary<object, object>)null",
-                        out errorMessage,
-                        testData
-                    );
-                    methodData = testData.GetMethodData("<>x.<>m0");
-                    methodData.VerifyIL(
-                        @"
+                // { mscorlib, System.ObjectModel }
+                testData = new CompilationTestData();
+                context.CompileExpression(
+                    "(System.Collections.ObjectModel.ReadOnlyDictionary<object, object>)null",
+                    out errorMessage,
+                    testData
+                );
+                methodData = testData.GetMethodData("<>x.<>m0");
+                methodData.VerifyIL(
+                    @"
 {
   // Code size        2 (0x2)
   .maxstack  1
@@ -2431,15 +2428,14 @@ IL_0005:  ret
   IL_0000:  ldnull
   IL_0001:  ret
 }"
-                    );
-                    Assert.Equal(
-                        (
-                            (MethodSymbol)methodData.Method
-                        ).ReturnType.ContainingAssembly.ToDisplayString(),
-                        identityObjectModel.GetDisplayName()
-                    );
-                }
-            );
+                );
+                Assert.Equal(
+                    (
+                        (MethodSymbol)methodData.Method
+                    ).ReturnType.ContainingAssembly.ToDisplayString(),
+                    identityObjectModel.GetDisplayName()
+                );
+            });
         }
 
         /// <summary>

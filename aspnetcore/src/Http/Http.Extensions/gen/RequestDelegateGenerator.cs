@@ -56,16 +56,13 @@ public sealed class RequestDelegateGenerator : IIncrementalGenerator
             )
             .WithTrackingName(GeneratorSteps.EndpointModelStep);
 
-        context.RegisterSourceOutput(
-            endpointsWithDiagnostics,
-            (context, endpoint) =>
+        context.RegisterSourceOutput(endpointsWithDiagnostics, (context, endpoint) =>
+        {
+            foreach (var diagnostic in endpoint.Diagnostics)
             {
-                foreach (var diagnostic in endpoint.Diagnostics)
-                {
-                    context.ReportDiagnostic(diagnostic);
-                }
+                context.ReportDiagnostic(diagnostic);
             }
-        );
+        });
 
         var endpoints = endpointsWithDiagnostics
             .Where(endpoint => endpoint.Diagnostics.Count == 0)
@@ -391,30 +388,27 @@ public sealed class RequestDelegateGenerator : IIncrementalGenerator
             .Combine(httpVerbs)
             .Combine(helperTypes);
 
-        context.RegisterSourceOutput(
-            endpointsAndHelpers,
-            (context, sources) =>
+        context.RegisterSourceOutput(endpointsAndHelpers, (context, sources) =>
+        {
+            var (((endpointsCode, helperMethods), httpVerbs), helperTypes) = sources;
+            if (endpointsCode.IsDefaultOrEmpty)
             {
-                var (((endpointsCode, helperMethods), httpVerbs), helperTypes) = sources;
-                if (endpointsCode.IsDefaultOrEmpty)
-                {
-                    return;
-                }
-                using var stringWriter = new StringWriter(CultureInfo.InvariantCulture);
-                using var codeWriter = new CodeWriter(stringWriter, baseIndent: 2);
-                foreach (var endpoint in endpointsCode)
-                {
-                    codeWriter.WriteLine(endpoint);
-                }
-                var code = RequestDelegateGeneratorSources.GetGeneratedRouteBuilderExtensionsSource(
-                    endpoints: stringWriter.ToString(),
-                    helperMethods: helperMethods ?? string.Empty,
-                    helperTypes: helperTypes ?? string.Empty,
-                    verbs: httpVerbs
-                );
-
-                context.AddSource("GeneratedRouteBuilderExtensions.g.cs", code);
+                return;
             }
-        );
+            using var stringWriter = new StringWriter(CultureInfo.InvariantCulture);
+            using var codeWriter = new CodeWriter(stringWriter, baseIndent: 2);
+            foreach (var endpoint in endpointsCode)
+            {
+                codeWriter.WriteLine(endpoint);
+            }
+            var code = RequestDelegateGeneratorSources.GetGeneratedRouteBuilderExtensionsSource(
+                endpoints: stringWriter.ToString(),
+                helperMethods: helperMethods ?? string.Empty,
+                helperTypes: helperTypes ?? string.Empty,
+                verbs: httpVerbs
+            );
+
+            context.AddSource("GeneratedRouteBuilderExtensions.g.cs", code);
+        });
     }
 }

@@ -347,16 +347,13 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(
-                            endPoint,
-                            listenOptions =>
+                        options.Listen(endPoint, listenOptions =>
+                        {
+                            if (testUrl.StartsWith("https", StringComparison.Ordinal))
                             {
-                                if (testUrl.StartsWith("https", StringComparison.Ordinal))
-                                {
-                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                }
+                                listenOptions.UseHttps(TestResources.GetTestCertificate());
                             }
-                        );
+                        });
                     })
                     .Configure(ConfigureEchoAddress);
             })
@@ -602,15 +599,13 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
 
             Assert.Equal(5000, host.GetPort());
 
-            Assert.Single(
-                LogMessages,
-                log =>
-                    log.LogLevel == LogLevel.Debug
-                    && string.Equals(
-                        CoreStrings.FormatBindingToDefaultAddress(Constants.DefaultServerAddress),
-                        log.Message,
-                        StringComparison.Ordinal
-                    )
+            Assert.Single(LogMessages, log =>
+                log.LogLevel == LogLevel.Debug
+                && string.Equals(
+                    CoreStrings.FormatBindingToDefaultAddress(Constants.DefaultServerAddress),
+                    log.Message,
+                    StringComparison.Ordinal
+                )
             );
 
             foreach (var address in addresses)
@@ -730,13 +725,10 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(
-                            new IPEndPoint(IPAddress.Loopback, 0),
-                            listenOptions =>
-                            {
-                                listenOptions.UseHttps(TestResources.GetTestCertificate());
-                            }
-                        );
+                        options.Listen(new IPEndPoint(IPAddress.Loopback, 0), listenOptions =>
+                        {
+                            listenOptions.UseHttps(TestResources.GetTestCertificate());
+                        });
                     })
                     .UseUrls(useUrlsAddress)
                     .PreferHostingUrls(true)
@@ -760,18 +752,16 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
             var useUrlsAddressWithPort = $"http://127.0.0.1:{port}";
             Assert.Equal(serverAddresses.First(), useUrlsAddressWithPort);
 
-            Assert.Single(
-                LogMessages,
-                log =>
-                    log.LogLevel == LogLevel.Information
-                    && string.Equals(
-                        CoreStrings.FormatOverridingWithPreferHostingUrls(
-                            nameof(IServerAddressesFeature.PreferHostingUrls),
-                            useUrlsAddress
-                        ),
-                        log.Message,
-                        StringComparison.Ordinal
-                    )
+            Assert.Single(LogMessages, log =>
+                log.LogLevel == LogLevel.Information
+                && string.Equals(
+                    CoreStrings.FormatOverridingWithPreferHostingUrls(
+                        nameof(IServerAddressesFeature.PreferHostingUrls),
+                        useUrlsAddress
+                    ),
+                    log.Message,
+                    StringComparison.Ordinal
+                )
             );
 
             Assert.Equal(
@@ -795,16 +785,13 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(
-                            new IPEndPoint(IPAddress.Loopback, 0),
-                            listenOptions =>
-                            {
-                                listenOptions.UseHttps(
-                                    TestResources.TestCertificatePath,
-                                    "testPassword"
-                                );
-                            }
-                        );
+                        options.Listen(new IPEndPoint(IPAddress.Loopback, 0), listenOptions =>
+                        {
+                            listenOptions.UseHttps(
+                                TestResources.TestCertificatePath,
+                                "testPassword"
+                            );
+                        });
                     })
                     .UseUrls($"http://127.0.0.1:0")
                     .PreferHostingUrls(false)
@@ -828,15 +815,13 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
             var endPointAddress = $"https://127.0.0.1:{port}";
             Assert.Equal(serverAddresses.First(), endPointAddress);
 
-            Assert.Single(
-                LogMessages,
-                log =>
-                    log.LogLevel == LogLevel.Warning
-                    && string.Equals(
-                        CoreStrings.FormatOverridingWithKestrelOptions(useUrlsAddress),
-                        log.Message,
-                        StringComparison.Ordinal
-                    )
+            Assert.Single(LogMessages, log =>
+                log.LogLevel == LogLevel.Warning
+                && string.Equals(
+                    CoreStrings.FormatOverridingWithKestrelOptions(useUrlsAddress),
+                    log.Message,
+                    StringComparison.Ordinal
+                )
             );
 
             Assert.Equal(
@@ -857,13 +842,10 @@ public class AddressRegistrationTests : TestApplicationErrorLoggerLoggedTest
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(
-                            new IPEndPoint(IPAddress.Loopback, 0),
-                            listenOptions =>
-                            {
-                                listenOptions.UseHttps(TestResources.GetTestCertificate());
-                            }
-                        );
+                        options.Listen(new IPEndPoint(IPAddress.Loopback, 0), listenOptions =>
+                        {
+                            listenOptions.UseHttps(TestResources.GetTestCertificate());
+                        });
                     })
                     .PreferHostingUrls(true)
                     .Configure(ConfigureEchoAddress);

@@ -25,36 +25,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
     {
         private static async Task TestAsync(string markup, string expectedText = null)
         {
-            await TestSpanGetterAsync(
-                markup,
-                async (document, position, expectedSpan) =>
-                {
-                    var result = await DataTipInfoGetter.GetInfoAsync(
-                        document,
-                        position,
-                        CancellationToken.None
-                    );
+            await TestSpanGetterAsync(markup, async (document, position, expectedSpan) =>
+            {
+                var result = await DataTipInfoGetter.GetInfoAsync(
+                    document,
+                    position,
+                    CancellationToken.None
+                );
 
-                    Assert.Equal(expectedSpan, result.Span);
-                    Assert.Equal(expectedText, result.Text);
-                }
-            );
+                Assert.Equal(expectedSpan, result.Span);
+                Assert.Equal(expectedText, result.Text);
+            });
         }
 
         private static async Task TestNoDataTipAsync(string markup)
         {
-            await TestSpanGetterAsync(
-                markup,
-                async (document, position, expectedSpan) =>
-                {
-                    var result = await DataTipInfoGetter.GetInfoAsync(
-                        document,
-                        position,
-                        CancellationToken.None
-                    );
-                    Assert.True(result.IsDefault);
-                }
-            );
+            await TestSpanGetterAsync(markup, async (document, position, expectedSpan) =>
+            {
+                var result = await DataTipInfoGetter.GetInfoAsync(
+                    document,
+                    position,
+                    CancellationToken.None
+                );
+                Assert.True(result.IsDefault);
+            });
         }
 
         private static async Task TestSpanGetterAsync(

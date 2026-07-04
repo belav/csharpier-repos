@@ -281,9 +281,8 @@ public class TestServerTests
             {
                 var serverAddressesFeature =
                     applicationBuilder.ServerFeatures.Get<IServerAddressesFeature>();
-                Assert.Contains(
-                    serverAddressesFeature.Addresses,
-                    s => string.Equals(s, url, StringComparison.Ordinal)
+                Assert.Contains(serverAddressesFeature.Addresses, s =>
+                    string.Equals(s, url, StringComparison.Ordinal)
                 );
             });
 

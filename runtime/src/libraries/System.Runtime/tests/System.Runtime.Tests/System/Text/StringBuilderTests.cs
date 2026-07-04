@@ -44,9 +44,8 @@ namespace System.Text.Tests
         [Fact]
         public static void Ctor_Int_NegativeCapacity_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new StringBuilder(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new StringBuilder(-1)
             ); // Capacity < 0
         }
 
@@ -65,18 +64,15 @@ namespace System.Text.Tests
         [Fact]
         public static void Ctor_Int_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new StringBuilder(-1, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new StringBuilder(-1, 1)
             ); // Capacity < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maxCapacity",
-                () => new StringBuilder(0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxCapacity", () =>
+                new StringBuilder(0, 0)
             ); // MaxCapacity < 1
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new StringBuilder(2, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new StringBuilder(2, 1)
             ); // Capacity > maxCapacity
         }
 
@@ -111,9 +107,8 @@ namespace System.Text.Tests
         [Fact]
         public static void Ctor_String_Int_NegativeCapacity_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new StringBuilder("", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new StringBuilder("", -1)
             ); // Capacity < 0
         }
 
@@ -137,26 +132,21 @@ namespace System.Text.Tests
         [Fact]
         public static void Ctor_String_Int_Int_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => new StringBuilder("foo", -1, 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                new StringBuilder("foo", -1, 0, 0)
             ); // Start index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => new StringBuilder("foo", 0, -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                new StringBuilder("foo", 0, -1, 0)
             ); // Length < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new StringBuilder("foo", 0, 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new StringBuilder("foo", 0, 0, -1)
             ); // Capacity < 0
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => new StringBuilder("foo", 4, 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                new StringBuilder("foo", 4, 0, 0)
             ); // Start index + length > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => new StringBuilder("foo", 3, 1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                new StringBuilder("foo", 3, 1, 0)
             ); // Start index + length > builder.Length
         }
 
@@ -212,17 +202,14 @@ namespace System.Text.Tests
         {
             var builder = new StringBuilder(10, 10);
             builder.Append("Hello");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => builder.Capacity = -1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                builder.Capacity = -1
             ); // Capacity < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => builder.Capacity = builder.MaxCapacity + 1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                builder.Capacity = builder.MaxCapacity + 1
             ); // Capacity > builder.MaxCapacity
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => builder.Capacity = builder.Length - 1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                builder.Capacity = builder.Length - 1
             ); // Capacity < builder.Length
         }
 
@@ -246,13 +233,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(10, 10);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => builder.Length = -1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                builder.Length = -1
             ); // Value < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => builder.Length = builder.MaxCapacity + 1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                builder.Length = builder.MaxCapacity + 1
             ); // Value > builder.MaxCapacity
         }
 
@@ -273,9 +258,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append((ushort)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append((ushort)1)
             );
         }
 
@@ -296,9 +280,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append(true)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append(true)
             );
         }
 
@@ -334,9 +317,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append((decimal)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append((decimal)1)
             );
         }
 
@@ -372,9 +354,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append((double)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append((double)1)
             );
         }
 
@@ -395,9 +376,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append((short)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append((short)1)
             );
         }
 
@@ -418,9 +398,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append(1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append(1)
             );
         }
 
@@ -441,9 +420,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append((long)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append((long)1)
             );
         }
 
@@ -466,9 +444,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append(new object())
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append(new object())
             );
         }
 
@@ -489,9 +466,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append((sbyte)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append((sbyte)1)
             );
         }
 
@@ -527,9 +503,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append((float)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append((float)1)
             );
         }
 
@@ -550,9 +525,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append((byte)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append((byte)1)
             );
         }
 
@@ -573,9 +547,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append((uint)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append((uint)1)
             );
         }
 
@@ -596,9 +569,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append((ulong)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append((ulong)1)
             );
         }
 
@@ -633,9 +605,8 @@ namespace System.Text.Tests
         public static void Append_Char_NegativeRepeatCount_ThrowsArgumentOutOfRangeException()
         {
             var builder = new StringBuilder(0, 5);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "repeatCount",
-                () => builder.Append('a', -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("repeatCount", () =>
+                builder.Append('a', -1)
             );
         }
 
@@ -645,9 +616,8 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "requiredLength",
-                () => builder.Append('a')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("requiredLength", () =>
+                builder.Append('a')
             );
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "repeatCount",
@@ -693,16 +663,13 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "valueCount",
-                () =>
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("valueCount", () =>
+            {
+                fixed (char* value = new char[0])
                 {
-                    fixed (char* value = new char[0])
-                    {
-                        builder.Append(value, -1);
-                    }
+                    builder.Append(value, -1);
                 }
-            );
+            });
         }
 
         [Fact]
@@ -711,16 +678,13 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () =>
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+            {
+                fixed (char* value = new char[] { 'a' })
                 {
-                    fixed (char* value = new char[] { 'a' })
-                    {
-                        builder.Append(value, 1);
-                    }
+                    builder.Append(value, 1);
                 }
-            );
+            });
         }
 
         [Theory]
@@ -758,9 +722,8 @@ namespace System.Text.Tests
         public static void Append_String_NullValueNonZeroStartIndexCount_ThrowsArgumentNullException()
         {
             var builder = new StringBuilder();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => builder.Append((string)null, 1, 1)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                builder.Append((string)null, 1, 1)
             );
         }
 
@@ -775,9 +738,8 @@ namespace System.Text.Tests
         )
         {
             var builder = new StringBuilder();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.Append(value, startIndex, count)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.Append(value, startIndex, count)
             );
         }
 
@@ -785,9 +747,8 @@ namespace System.Text.Tests
         public static void Append_String_NegativeCount_ThrowsArgumentOutOfRangeException()
         {
             var builder = new StringBuilder();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => builder.Append("", 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                builder.Append("", 0, -1)
             );
         }
 
@@ -797,13 +758,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append("a")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append("a")
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.Append("a", 0, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.Append("a", 0, 1)
             );
         }
 
@@ -845,36 +804,29 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => builder.Append((char[])null, 1, 1)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                builder.Append((char[])null, 1, 1)
             ); // Value is null, startIndex > 0 and count > 0
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.Append(new char[0], -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.Append(new char[0], -1, 0)
             ); // Start index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "charCount",
-                () => builder.Append(new char[0], 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("charCount", () =>
+                builder.Append(new char[0], 0, -1)
             ); // Count < 0
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "charCount",
-                () => builder.Append(new char[5], 6, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("charCount", () =>
+                builder.Append(new char[5], 6, 0)
             ); // Start index + count > value.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "charCount",
-                () => builder.Append(new char[5], 5, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("charCount", () =>
+                builder.Append(new char[5], 5, 1)
             ); // Start index + count > value.Length
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "valueCount",
-                () => builder.Append(new char[] { 'a' })
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("valueCount", () =>
+                builder.Append(new char[] { 'a' })
             ); // New length > builder.MaxCapacity
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "valueCount",
-                () => builder.Append(new char[] { 'a' }, 0, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("valueCount", () =>
+                builder.Append(new char[] { 'a' }, 0, 1)
             ); // New length > builder.MaxCapacity
         }
 
@@ -1391,53 +1343,41 @@ namespace System.Text.Tests
             var obj3 = new object();
             var obj4 = new object();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => builder.AppendFormat(null, obj1)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                builder.AppendFormat(null, obj1)
             ); // Format is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => builder.AppendFormat(null, obj1, obj2, obj3)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                builder.AppendFormat(null, obj1, obj2, obj3)
             ); // Format is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => builder.AppendFormat(null, obj1, obj2, obj3)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                builder.AppendFormat(null, obj1, obj2, obj3)
             ); // Format is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => builder.AppendFormat(null, obj1, obj2, obj3, obj4)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                builder.AppendFormat(null, obj1, obj2, obj3, obj4)
             ); // Format is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "args",
-                () => builder.AppendFormat("", null)
+            AssertExtensions.Throws<ArgumentNullException>("args", () =>
+                builder.AppendFormat("", null)
             ); // Args is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => builder.AppendFormat(null, (object[])null)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                builder.AppendFormat(null, (object[])null)
             ); // Both format and args are null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => builder.AppendFormat(formatter, (string)null, obj1)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                builder.AppendFormat(formatter, (string)null, obj1)
             ); // Format is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => builder.AppendFormat(formatter, (string)null, obj1, obj2)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                builder.AppendFormat(formatter, (string)null, obj1, obj2)
             ); // Format is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => builder.AppendFormat(formatter, (string)null, obj1, obj2, obj3)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                builder.AppendFormat(formatter, (string)null, obj1, obj2, obj3)
             ); // Format is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => builder.AppendFormat(formatter, (string)null, obj1, obj2, obj3, obj4)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                builder.AppendFormat(formatter, (string)null, obj1, obj2, obj3, obj4)
             ); // Format is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "args",
-                () => builder.AppendFormat(formatter, "", null)
+            AssertExtensions.Throws<ArgumentNullException>("args", () =>
+                builder.AppendFormat(formatter, "", null)
             ); // Args is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => builder.AppendFormat(formatter, (string)null, null)
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                builder.AppendFormat(formatter, (string)null, null)
             ); // Both format and args are null
 
             Assert.Throws<FormatException>(() => builder.AppendFormat("{-1}", obj1)); // Format has value < 0
@@ -1554,37 +1494,29 @@ namespace System.Text.Tests
             IFormatProvider formatter = null;
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.AppendFormat("{0}", "a")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.AppendFormat("{0}", "a")
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.AppendFormat("{0}", "a", "")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.AppendFormat("{0}", "a", "")
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.AppendFormat("{0}", "a", "", "")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.AppendFormat("{0}", "a", "", "")
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.AppendFormat("{0}", "a", "", "", "")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.AppendFormat("{0}", "a", "", "", "")
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.AppendFormat(formatter, "{0}", "a")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.AppendFormat(formatter, "{0}", "a")
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.AppendFormat(formatter, "{0}", "a", "")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.AppendFormat(formatter, "{0}", "a", "")
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.AppendFormat(formatter, "{0}", "a", "", "")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.AppendFormat(formatter, "{0}", "a", "", "")
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.AppendFormat(formatter, "{0}", "a", "", "", "")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.AppendFormat(formatter, "{0}", "a", "", "", "")
             );
         }
 
@@ -1619,13 +1551,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.AppendLine()
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.AppendLine()
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => builder.AppendLine("a")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                builder.AppendLine("a")
             );
         }
 
@@ -1732,45 +1662,36 @@ namespace System.Text.Tests
         public static void CopyTo_Invalid()
         {
             var builder = new StringBuilder("Hello");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destination",
-                () => builder.CopyTo(0, null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("destination", () =>
+                builder.CopyTo(0, null, 0, 0)
             ); // Destination is null
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sourceIndex",
-                () => builder.CopyTo(-1, new char[10], 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceIndex", () =>
+                builder.CopyTo(-1, new char[10], 0, 0)
             ); // Source index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sourceIndex",
-                () => builder.CopyTo(6, new char[10], 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceIndex", () =>
+                builder.CopyTo(6, new char[10], 0, 0)
             ); // Source index > builder.Length
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "destinationIndex",
-                () => builder.CopyTo(0, new char[10], -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("destinationIndex", () =>
+                builder.CopyTo(0, new char[10], -1, 0)
             ); // Destination index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => builder.CopyTo(0, new char[10], 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                builder.CopyTo(0, new char[10], 0, -1)
             ); // Count < 0
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.CopyTo(5, new char[10], 0, 1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.CopyTo(5, new char[10], 0, 1)
             ); // Source index + count > builder.Length
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.CopyTo(4, new char[10], 0, 2)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.CopyTo(4, new char[10], 0, 2)
             ); // Source index + count > builder.Length
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.CopyTo(0, new char[10], 10, 1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.CopyTo(0, new char[10], 10, 1)
             ); // Destination index + count > destinationArray.Length
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.CopyTo(0, new char[10], 9, 2)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.CopyTo(0, new char[10], 9, 2)
             ); // Destination index + count > destinationArray.Length
         }
 
@@ -1795,13 +1716,11 @@ namespace System.Text.Tests
         public static void EnsureCapacity_InvalidCapacity_ThrowsArgumentOutOfRangeException()
         {
             var builder = new StringBuilder("Hello", 10);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => builder.EnsureCapacity(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                builder.EnsureCapacity(-1)
             ); // Capacity < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => builder.EnsureCapacity(unchecked(builder.MaxCapacity + 1))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                builder.EnsureCapacity(unchecked(builder.MaxCapacity + 1))
             ); // Capacity > builder.MaxCapacity
         }
 
@@ -1873,13 +1792,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, (uint)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, (uint)1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, (uint)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, (uint)1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, (uint)1)); // New length > builder.MaxCapacity
         }
@@ -1901,13 +1818,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, true)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, true)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, true)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, true)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, true)); // New length > builder.MaxCapacity
         }
@@ -1929,13 +1844,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, (byte)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, (byte)1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, (byte)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, (byte)1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, (byte)1)); // New length > builder.MaxCapacity
         }
@@ -1957,13 +1870,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, (ulong)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, (ulong)1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, (ulong)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, (ulong)1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, (ulong)1)); // New length > builder.MaxCapacity
         }
@@ -1985,13 +1896,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, (ushort)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, (ushort)1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, (ushort)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, (ushort)1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, (ushort)1)); // New length > builder.MaxCapacity
         }
@@ -2013,17 +1922,14 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, '\0')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, '\0')
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, '\0')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, '\0')
             ); // Index > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "requiredLength",
-                () => builder.Insert(builder.Length, '\0')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("requiredLength", () =>
+                builder.Insert(builder.Length, '\0')
             ); // New length > builder.MaxCapacity
         }
 
@@ -2064,13 +1970,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, (float)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, (float)1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, (float)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, (float)1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, (float)1)); // New length > builder.MaxCapacity
         }
@@ -2094,13 +1998,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, new object())
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, new object())
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, new object())
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, new object())
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, new object())); // New length > builder.MaxCapacity
         }
@@ -2122,13 +2024,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, (long)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, (long)1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, (long)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, (long)1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, (long)1)); // New length > builder.MaxCapacity
         }
@@ -2150,13 +2050,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, 1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, 1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, 1)); // New length > builder.MaxCapacity
         }
@@ -2178,13 +2076,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, (short)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, (short)1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, (short)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, (short)1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, (short)1)); // New length > builder.MaxCapacity
         }
@@ -2226,13 +2122,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, (double)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, (double)1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, (double)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, (double)1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, (double)1)); // New length > builder.MaxCapacity
         }
@@ -2279,13 +2173,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, (decimal)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, (decimal)1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, (decimal)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, (decimal)1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, (decimal)1)); // New length > builder.MaxCapacity
         }
@@ -2307,13 +2199,11 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, (sbyte)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, (sbyte)1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, (sbyte)1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, (sbyte)1)
             ); // Index > builder.Length
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, (sbyte)1)); // New length > builder.MaxCapacity
         }
@@ -2355,32 +2245,26 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 6);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, "")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, "")
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, "", 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, "", 0)
             ); // Index < 0
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, "")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, "")
             ); // Index > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, "", 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, "", 0)
             ); // Index > builder.Length
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => builder.Insert(0, "", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                builder.Insert(0, "", -1)
             ); // Count < 0
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "requiredLength",
-                () => builder.Insert(builder.Length, "aa")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("requiredLength", () =>
+                builder.Insert(builder.Length, "aa")
             ); // New length > builder.MaxCapacity
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, "aa", 1)); // New length > builder.MaxCapacity
             Assert.Throws<OutOfMemoryException>(() => builder.Insert(builder.Length, "a", 2)); // New length > builder.MaxCapacity
@@ -2426,50 +2310,40 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, new char[1])
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, new char[1])
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, new char[0], 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, new char[0], 0, 0)
             ); // Index < 0
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, new char[1])
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, new char[1])
             ); // Index > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, new char[0], 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, new char[0], 0, 0)
             ); // Index > builder.Length
 
             Assert.Throws<ArgumentNullException>(() => builder.Insert(0, null, 1, 1)); // Value is null (startIndex and count are not zero)
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.Insert(0, new char[0], -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.Insert(0, new char[0], -1, 0)
             ); // Start index < 0
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.Insert(0, new char[3], 4, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.Insert(0, new char[3], 4, 0)
             ); // Start index + char count > value.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.Insert(0, new char[3], 3, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.Insert(0, new char[3], 3, 1)
             ); // Start index + char count > value.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.Insert(0, new char[3], 2, 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.Insert(0, new char[3], 2, 2)
             ); // Start index + char count > value.Length
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "requiredLength",
-                () => builder.Insert(builder.Length, new char[1])
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("requiredLength", () =>
+                builder.Insert(builder.Length, new char[1])
             ); // New length > builder.MaxCapacity
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "requiredLength",
-                () => builder.Insert(builder.Length, new char[] { 'a' }, 0, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("requiredLength", () =>
+                builder.Insert(builder.Length, new char[] { 'a' }, 0, 1)
             ); // New length > builder.MaxCapacity
         }
 
@@ -2478,9 +2352,8 @@ namespace System.Text.Tests
         {
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "charCount",
-                () => builder.Insert(0, new char[0], 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("charCount", () =>
+                builder.Insert(0, new char[0], 0, -1)
             ); // Char count < 0
         }
 
@@ -2489,9 +2362,8 @@ namespace System.Text.Tests
         {
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "charCount",
-                () => builder.Insert(0, new char[0], 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("charCount", () =>
+                builder.Insert(0, new char[0], 0, -1)
             ); // Char count < 0
         }
 
@@ -2529,25 +2401,20 @@ namespace System.Text.Tests
         public static void Remove_Invalid()
         {
             var builder = new StringBuilder("Hello");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.Remove(-1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.Remove(-1, 0)
             ); // Start index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => builder.Remove(0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                builder.Remove(0, -1)
             ); // Length < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => builder.Remove(6, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                builder.Remove(6, 0)
             ); // Start index + length > 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => builder.Remove(5, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                builder.Remove(5, 1)
             ); // Start index + length > 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => builder.Remove(4, 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                builder.Remove(4, 2)
             ); // Start index + length > 0
         }
 
@@ -2595,26 +2462,21 @@ namespace System.Text.Tests
         public static void Replace_Char_Invalid()
         {
             var builder = new StringBuilder("Hello");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.Replace('a', 'b', -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.Replace('a', 'b', -1, 0)
             ); // Start index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => builder.Replace('a', 'b', 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                builder.Replace('a', 'b', 0, -1)
             ); // Count < 0
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.Replace('a', 'b', 6, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.Replace('a', 'b', 6, 0)
             ); // Count + start index > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => builder.Replace('a', 'b', 5, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                builder.Replace('a', 'b', 5, 1)
             ); // Count + start index > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => builder.Replace('a', 'b', 4, 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                builder.Replace('a', 'b', 4, 2)
             ); // Count + start index > builder.Length
         }
 
@@ -2650,26 +2512,21 @@ namespace System.Text.Tests
         public static void ToString_Invalid()
         {
             var builder = new StringBuilder("Hello");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.ToString(-1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.ToString(-1, 0)
             ); // Start index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => builder.ToString(0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                builder.ToString(0, -1)
             ); // Length < 0
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => builder.ToString(6, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                builder.ToString(6, 0)
             ); // Length + start index > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => builder.ToString(5, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                builder.ToString(5, 1)
             ); // Length + start index > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => builder.ToString(4, 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                builder.ToString(4, 2)
             ); // Length + start index > builder.Length
         }
 
@@ -2684,29 +2541,23 @@ namespace System.Text.Tests
         [Fact]
         public static void AppendJoin_NullValues_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => new StringBuilder().AppendJoin('|', (object[])null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                new StringBuilder().AppendJoin('|', (object[])null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => new StringBuilder().AppendJoin('|', (IEnumerable<object>)null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                new StringBuilder().AppendJoin('|', (IEnumerable<object>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => new StringBuilder().AppendJoin('|', (string[])null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                new StringBuilder().AppendJoin('|', (string[])null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => new StringBuilder().AppendJoin("|", (object[])null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                new StringBuilder().AppendJoin("|", (object[])null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => new StringBuilder().AppendJoin("|", (IEnumerable<object>)null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                new StringBuilder().AppendJoin("|", (IEnumerable<object>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => new StringBuilder().AppendJoin("|", (string[])null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                new StringBuilder().AppendJoin("|", (string[])null)
             );
         }
 
@@ -2824,30 +2675,24 @@ namespace System.Text.Tests
 
             if (separator?.Length == 1)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    s_noCapacityParamName,
-                    () => CreateBuilderWithNoSpareCapacity().AppendJoin(separator[0], values)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                    CreateBuilderWithNoSpareCapacity().AppendJoin(separator[0], values)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    s_noCapacityParamName,
-                    () => CreateBuilderWithNoSpareCapacity().AppendJoin(separator[0], enumerable)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                    CreateBuilderWithNoSpareCapacity().AppendJoin(separator[0], enumerable)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    s_noCapacityParamName,
-                    () => CreateBuilderWithNoSpareCapacity().AppendJoin(separator[0], stringValues)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                    CreateBuilderWithNoSpareCapacity().AppendJoin(separator[0], stringValues)
                 );
             }
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => CreateBuilderWithNoSpareCapacity().AppendJoin(separator, values)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                CreateBuilderWithNoSpareCapacity().AppendJoin(separator, values)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => CreateBuilderWithNoSpareCapacity().AppendJoin(separator, enumerable)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                CreateBuilderWithNoSpareCapacity().AppendJoin(separator, enumerable)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                s_noCapacityParamName,
-                () => CreateBuilderWithNoSpareCapacity().AppendJoin(separator, stringValues)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(s_noCapacityParamName, () =>
+                CreateBuilderWithNoSpareCapacity().AppendJoin(separator, stringValues)
             );
         }
 
@@ -2989,32 +2834,26 @@ namespace System.Text.Tests
         {
             var builder = new StringBuilder("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sourceIndex",
-                () => builder.CopyTo(-1, new Span<char>(new char[10]), 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceIndex", () =>
+                builder.CopyTo(-1, new Span<char>(new char[10]), 0)
             ); // Source index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sourceIndex",
-                () => builder.CopyTo(6, new Span<char>(new char[10]), 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceIndex", () =>
+                builder.CopyTo(6, new Span<char>(new char[10]), 0)
             ); // Source index > builder.Length
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => builder.CopyTo(0, new Span<char>(new char[10]), -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                builder.CopyTo(0, new Span<char>(new char[10]), -1)
             ); // Count < 0
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.CopyTo(5, new Span<char>(new char[10]), 1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.CopyTo(5, new Span<char>(new char[10]), 1)
             ); // Source index + count > builder.Length
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.CopyTo(4, new Span<char>(new char[10]), 2)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.CopyTo(4, new Span<char>(new char[10]), 2)
             ); // Source index + count > builder.Length
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.CopyTo(0, new Span<char>(new char[10]), 11)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.CopyTo(0, new Span<char>(new char[10]), 11)
             ); // count > destinationArray.Length
         }
 
@@ -3041,17 +2880,14 @@ namespace System.Text.Tests
             var builder = new StringBuilder(0, 5);
             builder.Append("Hello");
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(-1, new ReadOnlySpan<char>(new char[0]))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(-1, new ReadOnlySpan<char>(new char[0]))
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => builder.Insert(builder.Length + 1, new ReadOnlySpan<char>(new char[0]))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                builder.Insert(builder.Length + 1, new ReadOnlySpan<char>(new char[0]))
             ); // Index > builder.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "requiredLength",
-                () => builder.Insert(builder.Length, new ReadOnlySpan<char>(new char[1]))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("requiredLength", () =>
+                builder.Insert(builder.Length, new ReadOnlySpan<char>(new char[1]))
             ); // New length > builder.MaxCapacity
         }
 

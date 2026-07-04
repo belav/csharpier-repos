@@ -421,17 +421,12 @@ namespace System
             bool wasResized = false;
 
             using (ManualResetEvent manualResetEvent = new(false))
-            using (
-                PosixSignalRegistration.Create(
-                    PosixSignal.SIGWINCH,
-                    ctx =>
-                    {
-                        wasResized = true;
-                        Assert.Equal(PosixSignal.SIGWINCH, ctx.Signal);
-                        manualResetEvent.Set();
-                    }
-                )
-            )
+            using (PosixSignalRegistration.Create(PosixSignal.SIGWINCH, ctx =>
+                {
+                    wasResized = true;
+                    Assert.Equal(PosixSignal.SIGWINCH, ctx.Signal);
+                    manualResetEvent.Set();
+                }))
             {
                 int widthBefore = Console.WindowWidth;
                 int heightBefore = Console.WindowHeight;

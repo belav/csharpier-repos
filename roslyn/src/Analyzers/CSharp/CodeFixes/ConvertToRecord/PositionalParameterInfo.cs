@@ -65,30 +65,28 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 
             resultBuilder.AddRange(
                 properties
-                    .Zip(
-                        symbols,
-                        (syntax, symbol) =>
-                            ShouldConvertProperty(syntax, symbol, type) switch
-                            {
-                                ConvertStatus.DoNotConvert => null,
-                                ConvertStatus.Override => new PositionalParameterInfo(
+                    .Zip(symbols, (syntax, symbol) =>
+                        ShouldConvertProperty(syntax, symbol, type) switch
+                        {
+                            ConvertStatus.DoNotConvert => null,
+                            ConvertStatus.Override => new PositionalParameterInfo(
+                                syntax,
+                                symbol,
+                                KeepAsOverride: true
+                            ),
+                            ConvertStatus.OverrideIfConvertingSetToInit =>
+                                new PositionalParameterInfo(
                                     syntax,
                                     symbol,
-                                    KeepAsOverride: true
+                                    !allowSetToInitConversion
                                 ),
-                                ConvertStatus.OverrideIfConvertingSetToInit =>
-                                    new PositionalParameterInfo(
-                                        syntax,
-                                        symbol,
-                                        !allowSetToInitConversion
-                                    ),
-                                ConvertStatus.AlwaysConvert => new PositionalParameterInfo(
-                                    syntax,
-                                    symbol,
-                                    KeepAsOverride: false
-                                ),
-                                _ => throw ExceptionUtilities.Unreachable(),
-                            }
+                            ConvertStatus.AlwaysConvert => new PositionalParameterInfo(
+                                syntax,
+                                symbol,
+                                KeepAsOverride: false
+                            ),
+                            _ => throw ExceptionUtilities.Unreachable(),
+                        }
                     )
                     .WhereNotNull()
             );

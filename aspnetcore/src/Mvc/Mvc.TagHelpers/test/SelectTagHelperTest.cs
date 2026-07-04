@@ -697,9 +697,8 @@ public class SelectTagHelperTest
         // Assert
         htmlGenerator.Verify();
 
-        var keyValuePair = Assert.Single(
-            tagHelperContext.Items,
-            entry => (Type)entry.Key == typeof(SelectTagHelper)
+        var keyValuePair = Assert.Single(tagHelperContext.Items, entry =>
+            (Type)entry.Key == typeof(SelectTagHelper)
         );
         var actualCurrentValues = Assert.IsType<CurrentValues>(keyValuePair.Value);
         Assert.Same(currentValues, actualCurrentValues.Values);
@@ -786,9 +785,8 @@ public class SelectTagHelperTest
         // Assert
         htmlGenerator.Verify();
 
-        var keyValuePair = Assert.Single(
-            tagHelperContext.Items,
-            entry => (Type)entry.Key == typeof(SelectTagHelper)
+        var keyValuePair = Assert.Single(tagHelperContext.Items, entry =>
+            (Type)entry.Key == typeof(SelectTagHelper)
         );
         var actualCurrentValues = Assert.IsType<CurrentValues>(keyValuePair.Value);
         Assert.Same(currentValues, actualCurrentValues.Values);
@@ -825,10 +823,8 @@ public class SelectTagHelperTest
             new Dictionary<object, object>(),
             "test"
         );
-        var output = new TagHelperOutput(
-            expectedTagName,
-            new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        var output = new TagHelperOutput(expectedTagName, new TagHelperAttributeList(), (_, __) =>
+            Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
         // Act & Assert
@@ -866,10 +862,8 @@ public class SelectTagHelperTest
         var attributes = new TagHelperAttributeList { { "name", expectedAttributeValue } };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
-        var output = new TagHelperOutput(
-            expectedTagName,
-            new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        var output = new TagHelperOutput(expectedTagName, new TagHelperAttributeList(), (_, __) =>
+            Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
         // Act
@@ -924,10 +918,8 @@ public class SelectTagHelperTest
             new Dictionary<object, object>(),
             "test"
         );
-        var output = new TagHelperOutput(
-            expectedTagName,
-            new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        var output = new TagHelperOutput(expectedTagName, new TagHelperAttributeList(), (_, __) =>
+            Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
         // Act

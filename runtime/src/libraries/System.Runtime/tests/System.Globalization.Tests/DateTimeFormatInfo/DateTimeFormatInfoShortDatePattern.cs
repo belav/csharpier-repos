@@ -260,9 +260,8 @@ namespace System.Globalization.Tests
         public void ShortDatePattern_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.ShortDatePattern = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.ShortDatePattern = null
             );
         }
 

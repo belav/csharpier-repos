@@ -69,15 +69,11 @@ namespace Microsoft.Extensions.Hosting.Systemd
             // Support abstract socket paths.
             if (socketPath[0] == '@')
             {
-                socketPath = string.Create(
-                    socketPath.Length,
-                    socketPath,
-                    (buffer, state) =>
-                    {
-                        buffer[0] = '\0';
-                        state.AsSpan(1).CopyTo(buffer.Slice(1));
-                    }
-                );
+                socketPath = string.Create(socketPath.Length, socketPath, (buffer, state) =>
+                {
+                    buffer[0] = '\0';
+                    state.AsSpan(1).CopyTo(buffer.Slice(1));
+                });
             }
 
             return socketPath;

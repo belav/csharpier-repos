@@ -698,14 +698,12 @@ namespace System.Reflection.Metadata.Decoding.Tests
         [Fact]
         public void ProviderCannotBeNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "provider",
-                () =>
-                    new SignatureDecoder<int, object>(
-                        provider: null,
-                        metadataReader: null,
-                        genericContext: null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("provider", () =>
+                new SignatureDecoder<int, object>(
+                    provider: null,
+                    metadataReader: null,
+                    genericContext: null
+                )
             );
         }
     }

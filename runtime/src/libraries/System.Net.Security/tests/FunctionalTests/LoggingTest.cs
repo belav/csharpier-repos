@@ -50,15 +50,12 @@ namespace System.Net.Security.Tests
                             EventLevel.Verbose
                         );
                         var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                        await listener.RunWithCallbackAsync(
-                            events.Enqueue,
-                            async () =>
-                            {
-                                // Invoke tests that'll cause some events to be generated
-                                var test = new SslStreamStreamToStreamTest_Async();
-                                await test.SslStream_StreamToStream_Authentication_Success();
-                            }
-                        );
+                        await listener.RunWithCallbackAsync(events.Enqueue, async () =>
+                        {
+                            // Invoke tests that'll cause some events to be generated
+                            var test = new SslStreamStreamToStreamTest_Async();
+                            await test.SslStream_StreamToStream_Authentication_Success();
+                        });
                         Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
                         Assert.InRange(events.Count, 1, int.MaxValue);
                     }

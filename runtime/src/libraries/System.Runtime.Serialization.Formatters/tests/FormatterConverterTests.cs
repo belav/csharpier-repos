@@ -13,13 +13,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public void InvalidArguments_ThrowExceptions()
         {
             var f = new FormatterConverter();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => f.Convert(null, typeof(int))
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                f.Convert(null, typeof(int))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => f.Convert(null, TypeCode.Char)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                f.Convert(null, TypeCode.Char)
             );
             AssertExtensions.Throws<ArgumentNullException>("value", () => f.ToBoolean(null));
             AssertExtensions.Throws<ArgumentNullException>("value", () => f.ToByte(null));

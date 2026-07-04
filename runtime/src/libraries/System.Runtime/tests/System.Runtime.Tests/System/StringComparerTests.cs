@@ -13,9 +13,8 @@ namespace System.Tests
         [Fact]
         public void Create_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "culture",
-                () => StringComparer.Create(null, ignoreCase: true)
+            AssertExtensions.Throws<ArgumentNullException>("culture", () =>
+                StringComparer.Create(null, ignoreCase: true)
             );
         }
 
@@ -71,9 +70,8 @@ namespace System.Tests
                 ignoreCase: true
             );
             AssertExtensions.Throws<ArgumentNullException>("obj", () => c.GetHashCode(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "obj",
-                () => c.GetHashCode((object)null)
+            AssertExtensions.Throws<ArgumentNullException>("obj", () =>
+                c.GetHashCode((object)null)
             );
         }
 

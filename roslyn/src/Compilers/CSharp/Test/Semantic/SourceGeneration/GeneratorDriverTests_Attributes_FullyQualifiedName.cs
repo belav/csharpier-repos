@@ -104,13 +104,10 @@ namespace N2
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
+            )
         );
     }
 
@@ -219,13 +216,10 @@ namespace N2
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
+            )
         );
     }
 
@@ -271,13 +265,11 @@ using System;
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value is CompilationUnitSyntax c
-                        && c.SyntaxTree == compilation.SyntaxTrees.Single()
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is CompilationUnitSyntax c
+                    && c.SyntaxTree == compilation.SyntaxTrees.Single()
+            )
         );
     }
 
@@ -323,13 +315,11 @@ using System;
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value is CompilationUnitSyntax c
-                        && c.SyntaxTree == compilation.SyntaxTrees.Single()
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is CompilationUnitSyntax c
+                    && c.SyntaxTree == compilation.SyntaxTrees.Single()
+            )
         );
     }
 
@@ -372,13 +362,11 @@ using System;
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value is CompilationUnitSyntax c
-                        && c.SyntaxTree == compilation.SyntaxTrees.First()
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is CompilationUnitSyntax c
+                    && c.SyntaxTree == compilation.SyntaxTrees.First()
+            )
         );
     }
 
@@ -421,13 +409,11 @@ using System;
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value is CompilationUnitSyntax c
-                        && c.SyntaxTree == compilation.SyntaxTrees.Last()
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is CompilationUnitSyntax c
+                    && c.SyntaxTree == compilation.SyntaxTrees.Last()
+            )
         );
     }
 
@@ -529,13 +515,11 @@ void LocalFunc()
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value
+                    is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }
+            )
         );
     }
 
@@ -587,13 +571,11 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value
+                    is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }
+            )
         );
     }
 
@@ -648,13 +630,11 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value
+                    is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }
+            )
         );
     }
 
@@ -699,12 +679,10 @@ class C<[CLSCompliant(true)] T>
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value is TypeParameterSyntax { Identifier.ValueText: "T" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is TypeParameterSyntax { Identifier.ValueText: "T" }
+            )
         );
     }
 
@@ -753,13 +731,10 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is MethodDeclarationSyntax { Identifier.ValueText: "M" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is MethodDeclarationSyntax { Identifier.ValueText: "M" }
+            )
         );
     }
 
@@ -808,13 +783,10 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is MethodDeclarationSyntax { Identifier.ValueText: "M" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is MethodDeclarationSyntax { Identifier.ValueText: "M" }
+            )
         );
     }
 
@@ -862,18 +834,16 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is MethodDeclarationSyntax
-                        {
-                            Identifier.ValueText: "M",
-                            Body: null,
-                            ExpressionBody: null
-                        }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value
+                    is MethodDeclarationSyntax
+                    {
+                        Identifier.ValueText: "M",
+                        Body: null,
+                        ExpressionBody: null
+                    }
+            )
         );
     }
 
@@ -921,13 +891,11 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is MethodDeclarationSyntax { Identifier.ValueText: "M", Body: not null }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value
+                    is MethodDeclarationSyntax { Identifier.ValueText: "M", Body: not null }
+            )
         );
     }
 
@@ -974,13 +942,11 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is VariableDeclaratorSyntax { Identifier.ValueText: "m" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value
+                    is VariableDeclaratorSyntax { Identifier.ValueText: "m" }
+            )
         );
     }
 
@@ -1027,20 +993,12 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.Collection(
-                    step.Outputs,
-                    v =>
-                        Assert.True(
-                            v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "m" }
-                        ),
-                    v =>
-                        Assert.True(
-                            v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "n" }
-                        )
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.Collection(
+                step.Outputs,
+                v => Assert.True(v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "m" }),
+                v => Assert.True(v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "n" })
+            )
         );
     }
 
@@ -1087,13 +1045,11 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is VariableDeclaratorSyntax { Identifier.ValueText: "m" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value
+                    is VariableDeclaratorSyntax { Identifier.ValueText: "m" }
+            )
         );
     }
 
@@ -1140,20 +1096,12 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.Collection(
-                    step.Outputs,
-                    v =>
-                        Assert.True(
-                            v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "m" }
-                        ),
-                    v =>
-                        Assert.True(
-                            v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "n" }
-                        )
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.Collection(
+                step.Outputs,
+                v => Assert.True(v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "m" }),
+                v => Assert.True(v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "n" })
+            )
         );
     }
 
@@ -1196,9 +1144,8 @@ Func<int, int> v = [CLSCompliant(true)] (int i) => i;
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is LambdaExpressionSyntax)
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(step.Outputs.Single().Value is LambdaExpressionSyntax)
         );
     }
 
@@ -1248,16 +1195,11 @@ class C
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is AccessorDeclarationSyntax
-                        {
-                            RawKind: (int)SyntaxKind.GetAccessorDeclaration
-                        }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value
+                    is AccessorDeclarationSyntax { RawKind: (int)SyntaxKind.GetAccessorDeclaration }
+            )
         );
     }
 
@@ -1302,12 +1244,10 @@ class C<[CLSCompliant(true)]T>
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value is TypeParameterSyntax { Identifier.ValueText: "T" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is TypeParameterSyntax { Identifier.ValueText: "T" }
+            )
         );
     }
 
@@ -1360,13 +1300,10 @@ class Outer2
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
+            )
         );
     }
 
@@ -1419,13 +1356,10 @@ class Outer2
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
+            )
         );
     }
 
@@ -1478,13 +1412,10 @@ class Outer2
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
+            )
         );
     }
 
@@ -1537,13 +1468,10 @@ class Outer2
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
+            )
         );
     }
 
@@ -1683,13 +1611,10 @@ class XAttribute : System.Attribute { }
                         return (ClassDeclarationSyntax)ctx.TargetNode;
                     }
                 );
-                ctx.RegisterSourceOutput(
-                    input,
-                    (spc, node) =>
-                    {
-                        counter++;
-                    }
-                );
+                ctx.RegisterSourceOutput(input, (spc, node) =>
+                {
+                    counter++;
+                });
             })
         );
 
@@ -1704,13 +1629,10 @@ class XAttribute : System.Attribute { }
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
         Assert.Equal(1, counter);
     }
@@ -1747,13 +1669,10 @@ class XAttribute : System.Attribute { }
                         return (ClassDeclarationSyntax)ctx.TargetNode;
                     }
                 );
-                ctx.RegisterSourceOutput(
-                    input,
-                    (spc, node) =>
-                    {
-                        counter++;
-                    }
-                );
+                ctx.RegisterSourceOutput(input, (spc, node) =>
+                {
+                    counter++;
+                });
             })
         );
 
@@ -1768,13 +1687,10 @@ class XAttribute : System.Attribute { }
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
         Assert.Equal(1, counter);
     }
@@ -1812,13 +1728,10 @@ class YAttribute : System.Attribute { }
                         return (ClassDeclarationSyntax)ctx.TargetNode;
                     }
                 );
-                ctx.RegisterSourceOutput(
-                    input,
-                    (spc, node) =>
-                    {
-                        counter++;
-                    }
-                );
+                ctx.RegisterSourceOutput(input, (spc, node) =>
+                {
+                    counter++;
+                });
             })
         );
 
@@ -1833,13 +1746,10 @@ class YAttribute : System.Attribute { }
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
         Assert.Equal(1, counter);
     }
@@ -1877,13 +1787,10 @@ class YAttribute : System.Attribute { }
                         return (ClassDeclarationSyntax)ctx.TargetNode;
                     }
                 );
-                ctx.RegisterSourceOutput(
-                    input,
-                    (spc, node) =>
-                    {
-                        counter++;
-                    }
-                );
+                ctx.RegisterSourceOutput(input, (spc, node) =>
+                {
+                    counter++;
+                });
             })
         );
 
@@ -1898,13 +1805,10 @@ class YAttribute : System.Attribute { }
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
         Assert.Equal(1, counter);
     }
@@ -1942,13 +1846,10 @@ class YAttribute : System.Attribute { }
                         return (ClassDeclarationSyntax)ctx.TargetNode;
                     }
                 );
-                ctx.RegisterSourceOutput(
-                    input,
-                    (spc, node) =>
-                    {
-                        counter++;
-                    }
-                );
+                ctx.RegisterSourceOutput(input, (spc, node) =>
+                {
+                    counter++;
+                });
             })
         );
 
@@ -1963,13 +1864,10 @@ class YAttribute : System.Attribute { }
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
         Assert.Equal(1, counter);
     }
@@ -2007,13 +1905,10 @@ class YAttribute : System.Attribute { }
                         return (ClassDeclarationSyntax)ctx.TargetNode;
                     }
                 );
-                ctx.RegisterSourceOutput(
-                    input,
-                    (spc, node) =>
-                    {
-                        counter++;
-                    }
-                );
+                ctx.RegisterSourceOutput(input, (spc, node) =>
+                {
+                    counter++;
+                });
             })
         );
 
@@ -2028,13 +1923,10 @@ class YAttribute : System.Attribute { }
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
         Assert.Equal(1, counter);
     }
@@ -2051,13 +1943,11 @@ class YAttribute : System.Attribute { }
                 var provider = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
                     "GenerateAttribute"
                 );
-                ctx.RegisterSourceOutput(
-                    provider,
-                    static (spc, syntax) =>
-                        spc.AddSource(
-                            $"{syntax.Identifier.Text}.g",
-                            $"partial class {syntax.Identifier.Text} {{ /* generated */ }}"
-                        )
+                ctx.RegisterSourceOutput(provider, static (spc, syntax) =>
+                    spc.AddSource(
+                        $"{syntax.Identifier.Text}.g",
+                        $"partial class {syntax.Identifier.Text} {{ /* generated */ }}"
+                    )
                 );
             })
         );
@@ -2214,26 +2104,20 @@ class XAttribute : System.Attribute
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
 
         // re-run without changes
         driver = driver.RunGenerators(compilation);
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
 
         Assert.False(
@@ -2337,26 +2221,20 @@ class XAttribute : System.Attribute
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
 
         // re-run without changes
         driver = driver.RunGenerators(compilation.RemoveAllReferences());
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
 
         Assert.False(
@@ -2460,13 +2338,10 @@ class XAttribute : System.Attribute
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
 
         driver = driver.RunGenerators(
@@ -2476,13 +2351,10 @@ class XAttribute : System.Attribute
         );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
 
         Assert.False(
@@ -2600,13 +2472,10 @@ class XAttribute : System.Attribute
         );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
 
         Assert.False(
@@ -2726,20 +2595,12 @@ class XAttribute : System.Attribute
         );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.Collection(
-                    step.Outputs,
-                    t =>
-                        Assert.True(
-                            t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
-                        ),
-                    t =>
-                        Assert.True(
-                            t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
-                        )
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.Collection(
+                step.Outputs,
+                t => Assert.True(t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }),
+                t => Assert.True(t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" })
+            )
         );
 
         Assert.False(
@@ -2860,20 +2721,12 @@ class XAttribute : System.Attribute
         Assert.Collection(
             runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
             step =>
-                Assert.Collection(
-                    step.Outputs,
-                    t =>
-                        Assert.True(
-                            t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
-                        )
+                Assert.Collection(step.Outputs, t =>
+                    Assert.True(t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" })
                 ),
             step =>
-                Assert.Collection(
-                    step.Outputs,
-                    t =>
-                        Assert.True(
-                            t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
-                        )
+                Assert.Collection(step.Outputs, t =>
+                    Assert.True(t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" })
                 )
         );
 
@@ -2993,13 +2846,10 @@ class XAttribute : System.Attribute
         );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
 
         Assert.False(
@@ -3121,13 +2971,10 @@ class C { }
         );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(
-            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step =>
-                Assert.True(
-                    step.Outputs.Single().Value
-                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
-                )
+        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"], step =>
+            Assert.True(
+                step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+            )
         );
 
         Assert.False(

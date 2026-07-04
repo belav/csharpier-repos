@@ -16,34 +16,27 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void NullQuery()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).AsParallel()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).AsParallel()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable)null).AsParallel()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable)null).AsParallel()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((Partitioner<int>)null).AsParallel()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((Partitioner<int>)null).AsParallel()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((int[])null).AsParallel()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((int[])null).AsParallel()
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ParallelEnumerable.AsOrdered((ParallelQuery<int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ParallelEnumerable.AsOrdered((ParallelQuery<int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ParallelEnumerable.AsOrdered((ParallelQuery)null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ParallelEnumerable.AsOrdered((ParallelQuery)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ParallelEnumerable.AsUnordered<int>((ParallelQuery<int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ParallelEnumerable.AsUnordered<int>((ParallelQuery<int>)null)
             );
         }
 
@@ -218,14 +211,11 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<T> query = ParallelEnumerable.Repeat(element, count);
 
             int counted = 0;
-            Assert.All(
-                query,
-                e =>
-                {
-                    counted++;
-                    Assert.Equal(element, e);
-                }
-            );
+            Assert.All(query, e =>
+            {
+                counted++;
+                Assert.Equal(element, e);
+            });
             Assert.Equal(count, counted);
         }
 
@@ -236,14 +226,11 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<T> query = ParallelEnumerable.Repeat(element, count).Select(i => i);
 
             int counted = 0;
-            Assert.All(
-                query,
-                e =>
-                {
-                    counted++;
-                    Assert.Equal(element, e);
-                }
-            );
+            Assert.All(query, e =>
+            {
+                counted++;
+                Assert.Equal(element, e);
+            });
             Assert.Equal(count, counted);
         }
 

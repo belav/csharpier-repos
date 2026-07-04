@@ -14,26 +14,21 @@ namespace System.Threading.Tests
         {
             using (var t = new Timer(new TimerCallback(EmptyTimerTarget), null, 1, 1))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "dueTime",
-                    () => t.Change(-2, 1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("dueTime", () =>
+                    t.Change(-2, 1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "dueTime",
-                    () => t.Change(-2L, 1L)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("dueTime", () =>
+                    t.Change(-2L, 1L)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "dueTime",
-                    () => t.Change(TimeSpan.FromMilliseconds(-2), TimeSpan.FromSeconds(1))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("dueTime", () =>
+                    t.Change(TimeSpan.FromMilliseconds(-2), TimeSpan.FromSeconds(1))
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "dueTime",
-                    () => t.Change(0xFFFFFFFFL, 1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("dueTime", () =>
+                    t.Change(0xFFFFFFFFL, 1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "dueTime",
-                    () => t.Change(TimeSpan.FromMilliseconds(0xFFFFFFFFL), TimeSpan.FromSeconds(1))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("dueTime", () =>
+                    t.Change(TimeSpan.FromMilliseconds(0xFFFFFFFFL), TimeSpan.FromSeconds(1))
                 );
             }
         }
@@ -43,26 +38,21 @@ namespace System.Threading.Tests
         {
             using (var t = new Timer(new TimerCallback(EmptyTimerTarget), null, 1, 1))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "period",
-                    () => t.Change(1, -2)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () =>
+                    t.Change(1, -2)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "period",
-                    () => t.Change(1L, -2L)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () =>
+                    t.Change(1L, -2L)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "period",
-                    () => t.Change(TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(-2))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () =>
+                    t.Change(TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(-2))
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "period",
-                    () => t.Change(1, 0xFFFFFFFFL)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () =>
+                    t.Change(1, 0xFFFFFFFFL)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "period",
-                    () => t.Change(TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(0xFFFFFFFFL))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("period", () =>
+                    t.Change(TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(0xFFFFFFFFL))
                 );
             }
         }

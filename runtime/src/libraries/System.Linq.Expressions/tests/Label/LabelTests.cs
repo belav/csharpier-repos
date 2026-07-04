@@ -24,13 +24,11 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullTarget()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "target",
-                () => Expression.Label(default(LabelTarget))
+            AssertExtensions.Throws<ArgumentNullException>("target", () =>
+                Expression.Label(default(LabelTarget))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "target",
-                () => Expression.Label(null, Expression.Default(typeof(int)))
+            AssertExtensions.Throws<ArgumentNullException>("target", () =>
+                Expression.Label(null, Expression.Default(typeof(int)))
             );
         }
 
@@ -44,18 +42,16 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullDefaultValueNotAllowedWithTypedTarget()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "target",
-                () => Expression.Label(Expression.Label(typeof(int)), null)
+            AssertExtensions.Throws<ArgumentException>("target", () =>
+                Expression.Label(Expression.Label(typeof(int)), null)
             );
         }
 
         [Fact]
         public void DefaultMustMatchLabelType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Label(Expression.Label(typeof(int)), Expression.Constant("hello"))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Label(Expression.Label(typeof(int)), Expression.Constant("hello"))
             );
         }
 
@@ -73,9 +69,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void AssignableOnlyReferenceAssignableNotImplicitConversion()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Label(Expression.Label(typeof(long)), Expression.Constant(0))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Label(Expression.Label(typeof(long)), Expression.Constant(0))
             );
         }
 

@@ -46,9 +46,8 @@ namespace System.Security.Claims
 
             Assert.NotNull(cp.Claims);
             Assert.Equal(1, cp.Claims.Count());
-            Assert.Contains(
-                cp.Claims,
-                claim => claim.Type == "claim_type" && claim.Value == "claim_value"
+            Assert.Contains(cp.Claims, claim =>
+                claim.Type == "claim_type" && claim.Value == "claim_value"
             );
         }
 
@@ -67,11 +66,9 @@ namespace System.Security.Claims
 
             Assert.NotNull(cp.Claims);
             Assert.Equal(1, cp.Claims.Count());
-            Assert.Contains(
-                cp.Claims,
-                claim =>
-                    claim.Type == ClaimsIdentity.DefaultNameClaimType
-                    && claim.Value == "NonClaimsIdentity_Name"
+            Assert.Contains(cp.Claims, claim =>
+                claim.Type == ClaimsIdentity.DefaultNameClaimType
+                && claim.Value == "NonClaimsIdentity_Name"
             );
         }
 
@@ -96,9 +93,8 @@ namespace System.Security.Claims
 
             Assert.NotNull(cp.Claims);
             Assert.Equal(1, cp.Claims.Count());
-            Assert.Contains(
-                cp.Claims,
-                claim => claim.Type == "claim_type" && claim.Value == "claim_value"
+            Assert.Contains(cp.Claims, claim =>
+                claim.Type == "claim_type" && claim.Value == "claim_value"
             );
         }
 
@@ -118,11 +114,9 @@ namespace System.Security.Claims
 
             Assert.NotNull(cp.Claims);
             Assert.Equal(1, cp.Claims.Count());
-            Assert.Contains(
-                cp.Claims,
-                claim =>
-                    claim.Type == ClaimsIdentity.DefaultNameClaimType
-                    && claim.Value == "NonClaimsIdentity_Name"
+            Assert.Contains(cp.Claims, claim =>
+                claim.Type == ClaimsIdentity.DefaultNameClaimType
+                && claim.Value == "NonClaimsIdentity_Name"
             );
         }
 
@@ -173,11 +167,8 @@ namespace System.Security.Claims
 
             Assert.Equal(baseId1, cp.Identity);
 
-            Assert.Contains(
-                cp.Claims,
-                claim =>
-                    claim.Type == ClaimsIdentity.DefaultNameClaimType
-                    && claim.Value == "generic_name"
+            Assert.Contains(cp.Claims, claim =>
+                claim.Type == ClaimsIdentity.DefaultNameClaimType && claim.Value == "generic_name"
             );
 
             Assert.Equal(baseId2.Claims.First(), cp.Claims.First());
@@ -210,17 +201,11 @@ namespace System.Security.Claims
 
             Assert.Equal(baseId1, cp.Identity);
 
-            Assert.Contains(
-                cp.Claims,
-                claim =>
-                    claim.Type == ClaimsIdentity.DefaultNameClaimType
-                    && claim.Value == "generic_name2"
+            Assert.Contains(cp.Claims, claim =>
+                claim.Type == ClaimsIdentity.DefaultNameClaimType && claim.Value == "generic_name2"
             );
-            Assert.Contains(
-                cp.Claims,
-                claim =>
-                    claim.Type == ClaimsIdentity.DefaultNameClaimType
-                    && claim.Value == "generic_name3"
+            Assert.Contains(cp.Claims, claim =>
+                claim.Type == ClaimsIdentity.DefaultNameClaimType && claim.Value == "generic_name3"
             );
 
             Assert.Equal(baseId2.Claims.First(), cp.Claims.First());
@@ -230,21 +215,17 @@ namespace System.Security.Claims
         [Fact]
         public void Ctor_ArgumentValidation()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "identities",
-                () => new ClaimsPrincipal((IEnumerable<ClaimsIdentity>)null)
+            AssertExtensions.Throws<ArgumentNullException>("identities", () =>
+                new ClaimsPrincipal((IEnumerable<ClaimsIdentity>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "identity",
-                () => new ClaimsPrincipal((IIdentity)null)
+            AssertExtensions.Throws<ArgumentNullException>("identity", () =>
+                new ClaimsPrincipal((IIdentity)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "principal",
-                () => new ClaimsPrincipal((IPrincipal)null)
+            AssertExtensions.Throws<ArgumentNullException>("principal", () =>
+                new ClaimsPrincipal((IPrincipal)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "reader",
-                () => new ClaimsPrincipal((BinaryReader)null)
+            AssertExtensions.Throws<ArgumentNullException>("reader", () =>
+                new ClaimsPrincipal((BinaryReader)null)
             );
         }
 

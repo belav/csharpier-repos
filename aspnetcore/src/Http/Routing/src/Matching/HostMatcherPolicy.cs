@@ -324,9 +324,8 @@ public sealed class HostMatcherPolicy
             PolicyJumpTableEdge e = edges[i];
             ordered[i] = (host: (EdgeKey)e.State, destination: e.Destination);
         }
-        Array.Sort(
-            ordered,
-            static (left, right) => GetScore(left.host).CompareTo(GetScore(right.host))
+        Array.Sort(ordered, static (left, right) =>
+            GetScore(left.host).CompareTo(GetScore(right.host))
         );
 
         return new HostPolicyJumpTable(exitDestination, ordered);

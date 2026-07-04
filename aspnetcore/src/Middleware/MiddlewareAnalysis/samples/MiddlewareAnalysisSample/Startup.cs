@@ -37,16 +37,13 @@ public class Startup
             }
         );
 
-        app.Map(
-            "/map",
-            subApp =>
+        app.Map("/map", subApp =>
+        {
+            subApp.Run(context =>
             {
-                subApp.Run(context =>
-                {
-                    return context.Response.WriteAsync("Hello World");
-                });
-            }
-        );
+                return context.Response.WriteAsync("Hello World");
+            });
+        });
 
         // Low level anonymous method inline middleware, named Diagnostics.Middleware.Analysis.Startup+<>c by default
         app.Use(next =>
@@ -57,16 +54,13 @@ public class Startup
             };
         });
 
-        app.Map(
-            "/throw",
-            throwApp =>
+        app.Map("/throw", throwApp =>
+        {
+            throwApp.Run(context =>
             {
-                throwApp.Run(context =>
-                {
-                    throw new Exception("Application Exception");
-                });
-            }
-        );
+                throw new Exception("Application Exception");
+            });
+        });
 
         // The home page.
         app.Properties["analysis.NextMiddlewareName"] = "HomePage";

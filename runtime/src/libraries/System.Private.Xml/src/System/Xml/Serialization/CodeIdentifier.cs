@@ -32,15 +32,11 @@ namespace System.Xml.Serialization
             }
             else if (char.IsLower(identifier[0]))
             {
-                return string.Create(
-                    identifier.Length,
-                    identifier,
-                    static (buffer, identifier) =>
-                    {
-                        identifier.CopyTo(buffer);
-                        buffer[0] = char.ToUpperInvariant(buffer[0]); // convert only first char to uppercase; leave all else as-is
-                    }
-                );
+                return string.Create(identifier.Length, identifier, static (buffer, identifier) =>
+                {
+                    identifier.CopyTo(buffer);
+                    buffer[0] = char.ToUpperInvariant(buffer[0]); // convert only first char to uppercase; leave all else as-is
+                });
             }
             else
             {
@@ -61,15 +57,11 @@ namespace System.Xml.Serialization
             }
             else if (char.IsUpper(identifier[0]))
             {
-                return string.Create(
-                    identifier.Length,
-                    identifier,
-                    static (buffer, identifier) =>
-                    {
-                        identifier.CopyTo(buffer);
-                        buffer[0] = char.ToLowerInvariant(buffer[0]); // convert only first char to lowercase; leave all else as-is
-                    }
-                );
+                return string.Create(identifier.Length, identifier, static (buffer, identifier) =>
+                {
+                    identifier.CopyTo(buffer);
+                    buffer[0] = char.ToLowerInvariant(buffer[0]); // convert only first char to lowercase; leave all else as-is
+                });
             }
             else
             {

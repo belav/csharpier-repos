@@ -106,9 +106,8 @@ public class QueryHelperTests
     [Fact]
     public void AddQueryStringWithNullValueThrows()
     {
-        Assert.Throws<ArgumentNullException>(
-            "value",
-            () => QueryHelpers.AddQueryString("http://contoso.com/", "hello", null!)
+        Assert.Throws<ArgumentNullException>("value", () =>
+            QueryHelpers.AddQueryString("http://contoso.com/", "hello", null!)
         );
     }
 

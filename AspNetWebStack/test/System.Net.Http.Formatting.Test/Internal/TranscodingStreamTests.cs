@@ -1398,17 +1398,13 @@ namespace System.Text.Tests
         private static string GetVeryLongAsciiString(int length)
         {
 #if NETCOREAPP || NETSTANDARD2_1
-            return string.Create(
-                length,
-                (object)null,
-                (buffer, _) =>
+            return string.Create(length, (object)null, (buffer, _) =>
+            {
+                for (int i = 0; i < buffer.Length; i++)
                 {
-                    for (int i = 0; i < buffer.Length; i++)
-                    {
-                        buffer[i] = (char)('a' + (i % 26));
-                    }
+                    buffer[i] = (char)('a' + (i % 26));
                 }
-            );
+            });
 #else
             // Somewhat minor that the string just repeats a single character.
             return new string('z', length);

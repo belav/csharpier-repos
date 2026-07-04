@@ -238,10 +238,8 @@ namespace System.Web.Security.AntiXss.CodeCharts
         /// <returns>The safe characters for the code table.</returns>
         public static IEnumerable CyrillicExtendedB()
         {
-            return CodeChartHelper.GetRange(
-                0xA640,
-                0xA697,
-                i => (i == 0xA660 || i == 0xA661 || (i >= 0xA674 && i <= 0xA67b))
+            return CodeChartHelper.GetRange(0xA640, 0xA697, i =>
+                (i == 0xA660 || i == 0xA661 || (i >= 0xA674 && i <= 0xA67b))
             );
         }
 

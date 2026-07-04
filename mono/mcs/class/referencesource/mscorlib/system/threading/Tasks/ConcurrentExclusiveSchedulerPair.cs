@@ -196,9 +196,8 @@ namespace System.Threading.Tasks
         private CompletionState EnsureCompletionStateInitialized()
         {
             // ValueLock not needed, but it's ok if it's held
-            return LazyInitializer.EnsureInitialized(
-                ref m_completionState,
-                () => new CompletionState()
+            return LazyInitializer.EnsureInitialized(ref m_completionState, () =>
+                new CompletionState()
             );
         }
 

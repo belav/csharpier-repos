@@ -28,72 +28,63 @@ public class UseEndpointRoutingStartup
         {
             endpoints.MapHello("/helloworld", "World");
 
-            endpoints.MapGet(
-                "/",
-                (httpContext) =>
-                {
-                    var dataSource =
-                        httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
+            endpoints.MapGet("/", (httpContext) =>
+            {
+                var dataSource =
+                    httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
 
-                    var sb = new StringBuilder();
-                    sb.AppendLine("Endpoints:");
-                    foreach (
-                        var endpoint in dataSource
-                            .Endpoints.OfType<RouteEndpoint>()
-                            .OrderBy(e => e.RoutePattern.RawText, StringComparer.OrdinalIgnoreCase)
+                var sb = new StringBuilder();
+                sb.AppendLine("Endpoints:");
+                foreach (
+                    var endpoint in dataSource
+                        .Endpoints.OfType<RouteEndpoint>()
+                        .OrderBy(e => e.RoutePattern.RawText, StringComparer.OrdinalIgnoreCase)
+                )
+                {
+                    sb.AppendLine(
+                        FormattableString.Invariant($"- {endpoint.RoutePattern.RawText}")
+                    );
+                    foreach (var metadata in endpoint.Metadata)
+                    {
+                        sb.AppendLine("    " + metadata);
+                    }
+                }
+
+                var response = httpContext.Response;
+                response.StatusCode = 200;
+                response.ContentType = "text/plain";
+                return response.WriteAsync(sb.ToString());
+            });
+            endpoints.MapGet("/plaintext", (httpContext) =>
+            {
+                var response = httpContext.Response;
+                var payloadLength = _plainTextPayload.Length;
+                response.StatusCode = 200;
+                response.ContentType = "text/plain";
+                response.ContentLength = payloadLength;
+                return response.Body.WriteAsync(_plainTextPayload, 0, payloadLength);
+            });
+            endpoints
+                .MapGet("/graph", (httpContext) =>
+                {
+                    using (
+                        var writer = new StreamWriter(
+                            httpContext.Response.Body,
+                            Encoding.UTF8,
+                            1024,
+                            leaveOpen: true
+                        )
                     )
                     {
-                        sb.AppendLine(
-                            FormattableString.Invariant($"- {endpoint.RoutePattern.RawText}")
-                        );
-                        foreach (var metadata in endpoint.Metadata)
-                        {
-                            sb.AppendLine("    " + metadata);
-                        }
+                        var graphWriter =
+                            httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
+                        var dataSource =
+                            httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
+                        graphWriter.Write(dataSource, writer);
                     }
 
-                    var response = httpContext.Response;
-                    response.StatusCode = 200;
-                    response.ContentType = "text/plain";
-                    return response.WriteAsync(sb.ToString());
-                }
-            );
-            endpoints.MapGet(
-                "/plaintext",
-                (httpContext) =>
-                {
-                    var response = httpContext.Response;
-                    var payloadLength = _plainTextPayload.Length;
-                    response.StatusCode = 200;
-                    response.ContentType = "text/plain";
-                    response.ContentLength = payloadLength;
-                    return response.Body.WriteAsync(_plainTextPayload, 0, payloadLength);
-                }
-            );
-            endpoints
-                .MapGet(
-                    "/graph",
-                    (httpContext) =>
-                    {
-                        using (
-                            var writer = new StreamWriter(
-                                httpContext.Response.Body,
-                                Encoding.UTF8,
-                                1024,
-                                leaveOpen: true
-                            )
-                        )
-                        {
-                            var graphWriter =
-                                httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
-                            var dataSource =
-                                httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
-                            graphWriter.Write(dataSource, writer);
-                        }
-
-                        return Task.CompletedTask;
-                    }
-                )
+                    return Task.CompletedTask;
+                })
                 .WithDisplayName("DFA Graph");
 
             endpoints.MapGet("/attributes", HandlerWithAttributes);
@@ -107,20 +98,14 @@ public class UseEndpointRoutingStartup
                 );
                 frameworkBuilder.AddPattern("/{hub}/{method=TestMethod}");
 
-                frameworkBuilder.AddHubMethod(
-                    "TestHub",
-                    "TestMethod",
-                    context => context.Response.WriteAsync("TestMethod!")
+                frameworkBuilder.AddHubMethod("TestHub", "TestMethod", context =>
+                    context.Response.WriteAsync("TestMethod!")
                 );
-                frameworkBuilder.AddHubMethod(
-                    "Login",
-                    "Authenticate",
-                    context => context.Response.WriteAsync("Authenticate!")
+                frameworkBuilder.AddHubMethod("Login", "Authenticate", context =>
+                    context.Response.WriteAsync("Authenticate!")
                 );
-                frameworkBuilder.AddHubMethod(
-                    "Login",
-                    "Logout",
-                    context => context.Response.WriteAsync("Logout!")
+                frameworkBuilder.AddHubMethod("Login", "Logout", context =>
+                    context.Response.WriteAsync("Logout!")
                 );
             });
         });

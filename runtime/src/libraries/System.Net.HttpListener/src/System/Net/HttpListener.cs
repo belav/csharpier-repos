@@ -207,49 +207,43 @@ namespace System.Net
                     length += i == 7 ? ":80".Length : ":443".Length;
                 }
 
-                return string.Create(
-                    length,
-                    (uriPrefix, j, i),
-                    static (destination, state) =>
+                return string.Create(length, (uriPrefix, j, i), static (destination, state) =>
+                {
+                    if (state.uriPrefix[state.j] == ':')
                     {
-                        if (state.uriPrefix[state.j] == ':')
+                        state.uriPrefix.CopyTo(destination);
+                    }
+                    else
+                    {
+                        int indexOfNextCopy = state.j;
+                        state.uriPrefix.AsSpan(0, indexOfNextCopy).CopyTo(destination);
+
+                        if (state.i == 7)
                         {
-                            state.uriPrefix.CopyTo(destination);
+                            ":80".CopyTo(destination.Slice(indexOfNextCopy));
+                            indexOfNextCopy += 3;
                         }
                         else
                         {
-                            int indexOfNextCopy = state.j;
-                            state.uriPrefix.AsSpan(0, indexOfNextCopy).CopyTo(destination);
-
-                            if (state.i == 7)
-                            {
-                                ":80".CopyTo(destination.Slice(indexOfNextCopy));
-                                indexOfNextCopy += 3;
-                            }
-                            else
-                            {
-                                ":443".CopyTo(destination.Slice(indexOfNextCopy));
-                                indexOfNextCopy += 4;
-                            }
-
-                            state
-                                .uriPrefix.AsSpan(state.j)
-                                .CopyTo(destination.Slice(indexOfNextCopy));
+                            ":443".CopyTo(destination.Slice(indexOfNextCopy));
+                            indexOfNextCopy += 4;
                         }
 
-                        int toLowerLength = destination.IndexOf(':');
-                        if (toLowerLength < 0)
-                        {
-                            toLowerLength = destination.Length;
-                        }
-
-                        OperationStatus operationStatus = Ascii.ToLowerInPlace(
-                            destination.Slice(0, toLowerLength),
-                            out _
-                        );
-                        Debug.Assert(operationStatus == OperationStatus.Done);
+                        state.uriPrefix.AsSpan(state.j).CopyTo(destination.Slice(indexOfNextCopy));
                     }
-                );
+
+                    int toLowerLength = destination.IndexOf(':');
+                    if (toLowerLength < 0)
+                    {
+                        toLowerLength = destination.Length;
+                    }
+
+                    OperationStatus operationStatus = Ascii.ToLowerInPlace(
+                        destination.Slice(0, toLowerLength),
+                        out _
+                    );
+                    Debug.Assert(operationStatus == OperationStatus.Done);
+                });
             }
         }
 

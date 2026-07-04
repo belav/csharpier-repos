@@ -309,9 +309,8 @@ namespace System.Tests
         [Fact]
         public static void FromByteInvalidBase()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Convert.ToString(byte.MaxValue, 13)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Convert.ToString(byte.MaxValue, 13)
             );
         }
 
@@ -366,9 +365,8 @@ namespace System.Tests
         [Fact]
         public static void FromInt16InvalidBase()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Convert.ToString(short.MaxValue, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Convert.ToString(short.MaxValue, 0)
             );
         }
 
@@ -428,9 +426,8 @@ namespace System.Tests
         [Fact]
         public static void FromInt32InvalidBase()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Convert.ToString(int.MaxValue, 9)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Convert.ToString(int.MaxValue, 9)
             );
         }
 
@@ -490,9 +487,8 @@ namespace System.Tests
         [Fact]
         public static void FromInt64InvalidBase()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Convert.ToString(long.MaxValue, 1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Convert.ToString(long.MaxValue, 1)
             );
         }
 

@@ -47,10 +47,9 @@ namespace SslStress.Utils
 
             (Type, string, string)[] key = ClassifyFailure(exception);
 
-            ErrorType failureType = _failureTypes.GetOrAdd(
-                key,
-                _ => new ErrorType(exception.ToString())
-            );
+            ErrorType failureType = _failureTypes.GetOrAdd(key, _ => new ErrorType(
+                exception.ToString()
+            ));
             failureType.OccurrencesQueue.Enqueue((timestamp.Value, metadata));
 
             // classify exception according to type, message and callsite of itself and any inner exceptions

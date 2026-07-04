@@ -25,28 +25,24 @@ namespace System.Security.Cryptography
 
             int length = (sArray.Length * 3) - 1; // two chars per byte, plus 1 space between each
 
-            return string.Create(
-                length,
-                sArray,
-                (hexOrder, sArray) =>
+            return string.Create(length, sArray, (hexOrder, sArray) =>
+            {
+                int j = 0;
+
+                for (int i = 0; i < sArray.Length; i++)
                 {
-                    int j = 0;
-
-                    for (int i = 0; i < sArray.Length; i++)
+                    if (i != 0)
                     {
-                        if (i != 0)
-                        {
-                            hexOrder[j++] = ' ';
-                        }
-
-                        int digit = sArray[i];
-                        hexOrder[j++] = HexConverter.ToCharUpper(digit >> 4);
-                        hexOrder[j++] = HexConverter.ToCharUpper(digit);
+                        hexOrder[j++] = ' ';
                     }
 
-                    Debug.Assert(j == hexOrder.Length);
+                    int digit = sArray[i];
+                    hexOrder[j++] = HexConverter.ToCharUpper(digit >> 4);
+                    hexOrder[j++] = HexConverter.ToCharUpper(digit);
                 }
-            );
+
+                Debug.Assert(j == hexOrder.Length);
+            });
         }
     }
 }

@@ -1743,9 +1743,8 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             FooModel model = new FooModel { foo = "Bravo" };
             ViewDataDictionary<FooModel> viewData = new ViewDataDictionary<FooModel>(model);
-            ViewDataDictionary<string> nestedViewData = MvcHelper.GetNestedViewData(
-                viewData,
-                m => m.foo
+            ViewDataDictionary<string> nestedViewData = MvcHelper.GetNestedViewData(viewData, m =>
+                m.foo
             );
             HtmlHelper<string> helper = MvcHelper.GetHtmlHelper(nestedViewData);
             SelectList selectList = new SelectList(MultiSelectListTest.GetSampleStrings());
@@ -1835,9 +1834,8 @@ namespace System.Web.Mvc.Html.Test
                 { "foo", new SelectList(MultiSelectListTest.GetSampleStrings()) },
             };
 
-            ViewDataDictionary<FooModel> nestedViewData = MvcHelper.GetNestedViewData(
-                vdd,
-                m => m.inner
+            ViewDataDictionary<FooModel> nestedViewData = MvcHelper.GetNestedViewData(vdd, m =>
+                m.inner
             );
 
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(nestedViewData);

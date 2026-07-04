@@ -232,13 +232,11 @@ namespace MonoTests.System.Configuration
             ExeConfigurationFileMap map = new ExeConfigurationFileMap();
             map.RoamingUserConfigFilename = "roaminguser";
 
-            AssertExtensions.Throws<ArgumentException>(
-                "fileMap.ExeConfigFilename",
-                () =>
-                    ConfigurationManager.OpenMappedExeConfiguration(
-                        map,
-                        ConfigurationUserLevel.PerUserRoaming
-                    )
+            AssertExtensions.Throws<ArgumentException>("fileMap.ExeConfigFilename", () =>
+                ConfigurationManager.OpenMappedExeConfiguration(
+                    map,
+                    ConfigurationUserLevel.PerUserRoaming
+                )
             );
         }
 
@@ -267,13 +265,11 @@ namespace MonoTests.System.Configuration
             map.RoamingUserConfigFilename = "roaminguser";
             map.LocalUserConfigFilename = "localuser";
 
-            AssertExtensions.Throws<ArgumentException>(
-                "fileMap.ExeConfigFilename",
-                () =>
-                    ConfigurationManager.OpenMappedExeConfiguration(
-                        map,
-                        ConfigurationUserLevel.PerUserRoamingAndLocal
-                    )
+            AssertExtensions.Throws<ArgumentException>("fileMap.ExeConfigFilename", () =>
+                ConfigurationManager.OpenMappedExeConfiguration(
+                    map,
+                    ConfigurationUserLevel.PerUserRoamingAndLocal
+                )
             );
         }
 
@@ -286,13 +282,11 @@ namespace MonoTests.System.Configuration
             map.ExeConfigFilename = "execonfig";
             map.LocalUserConfigFilename = "localuser";
 
-            AssertExtensions.Throws<ArgumentException>(
-                "fileMap.RoamingUserConfigFilename",
-                () =>
-                    ConfigurationManager.OpenMappedExeConfiguration(
-                        map,
-                        ConfigurationUserLevel.PerUserRoamingAndLocal
-                    )
+            AssertExtensions.Throws<ArgumentException>("fileMap.RoamingUserConfigFilename", () =>
+                ConfigurationManager.OpenMappedExeConfiguration(
+                    map,
+                    ConfigurationUserLevel.PerUserRoamingAndLocal
+                )
             );
         }
 

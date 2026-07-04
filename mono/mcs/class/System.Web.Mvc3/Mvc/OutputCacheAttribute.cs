@@ -264,28 +264,25 @@
                 filterContext.HttpContext.Response.Output = cachingWriter;
 
                 // Set a finish callback to clean up
-                SetChildActionFilterFinishCallback(
-                    filterContext,
-                    wasException =>
+                SetChildActionFilterFinishCallback(filterContext, wasException =>
+                {
+                    // Restore original writer
+                    filterContext.HttpContext.Response.Output = originalWriter;
+
+                    // Grab output and write it
+                    string capturedText = cachingWriter.ToString();
+                    filterContext.HttpContext.Response.Write(capturedText);
+
+                    // Only cache output if this wasn't an error
+                    if (!wasException)
                     {
-                        // Restore original writer
-                        filterContext.HttpContext.Response.Output = originalWriter;
-
-                        // Grab output and write it
-                        string capturedText = cachingWriter.ToString();
-                        filterContext.HttpContext.Response.Write(capturedText);
-
-                        // Only cache output if this wasn't an error
-                        if (!wasException)
-                        {
-                            ChildActionCacheInternal.Add(
-                                uniqueId,
-                                capturedText,
-                                DateTimeOffset.UtcNow.AddSeconds(Duration)
-                            );
-                        }
+                        ChildActionCacheInternal.Add(
+                            uniqueId,
+                            capturedText,
+                            DateTimeOffset.UtcNow.AddSeconds(Duration)
+                        );
                     }
-                );
+                });
             }
         }
 

@@ -540,9 +540,8 @@ public class SqliteConnectionTest
     {
         using var connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();
-        connection.CreateCollation(
-            "MY_NOCASE",
-            (s1, s2) => string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase)
+        connection.CreateCollation("MY_NOCASE", (s1, s2) =>
+            string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase)
         );
 
         Assert.Equal(
@@ -556,9 +555,8 @@ public class SqliteConnectionTest
     {
         using var connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();
-        connection.CreateCollation(
-            "MY_NOCASE",
-            (s1, s2) => string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase)
+        connection.CreateCollation("MY_NOCASE", (s1, s2) =>
+            string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase)
         );
         connection.CreateCollation("MY_NOCASE", null);
 
@@ -576,9 +574,8 @@ public class SqliteConnectionTest
     public void CreateCollation_works_when_closed()
     {
         using var connection = new SqliteConnection("Data Source=:memory:");
-        connection.CreateCollation(
-            "MY_NOCASE",
-            (s1, s2) => string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase)
+        connection.CreateCollation("MY_NOCASE", (s1, s2) =>
+            string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase)
         );
         connection.Open();
 
@@ -606,15 +603,11 @@ public class SqliteConnectionTest
         using var connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();
         var list = new List<string>();
-        connection.CreateCollation(
-            "MY_NOCASE",
-            list,
-            (l, s1, s2) =>
-            {
-                l.Add("Invoked");
-                return string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase);
-            }
-        );
+        connection.CreateCollation("MY_NOCASE", list, (l, s1, s2) =>
+        {
+            l.Add("Invoked");
+            return string.Compare(s1, s2, StringComparison.OrdinalIgnoreCase);
+        });
 
         Assert.Equal(
             1L,
@@ -665,9 +658,8 @@ public class SqliteConnectionTest
     {
         using var connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();
-        connection.CreateFunction(
-            "test",
-            args => string.Join(", ", args.Select(a => a?.GetType().FullName ?? "(null)"))
+        connection.CreateFunction("test", args =>
+            string.Join(", ", args.Select(a => a?.GetType().FullName ?? "(null)"))
         );
 
         var result = connection.ExecuteScalar<string>("SELECT test(1, 3.1, 'A', X'7E57', NULL);");
@@ -999,9 +991,8 @@ public class SqliteConnectionTest
         connection.ExecuteNonQuery(
             "CREATE TABLE dual (dummy); INSERT INTO dual (dummy) VALUES ('X');"
         );
-        connection.CreateAggregate(
-            "test",
-            (string? a, object?[] args) => a + string.Join(", ", args) + "; "
+        connection.CreateAggregate("test", (string? a, object?[] args) =>
+            a + string.Join(", ", args) + "; "
         );
 
         var result = connection.ExecuteScalar<string>("SELECT test(dummy) FROM dual;");
@@ -1393,9 +1384,8 @@ public class SqliteConnectionTest
 
         Assert.Equal(DbMetaDataCollectionNames.ReservedWords, dataTable.TableName);
         Assert.Single(dataTable.Columns);
-        Assert.Contains(
-            dataTable.Rows.Cast<DataRow>(),
-            r => (string)r[DbMetaDataColumnNames.ReservedWord] == "SELECT"
+        Assert.Contains(dataTable.Rows.Cast<DataRow>(), r =>
+            (string)r[DbMetaDataColumnNames.ReservedWord] == "SELECT"
         );
     }
 }

@@ -147,9 +147,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void VTVariantNotSupported()
         {
-            Assert.Throws<ArgumentException>(
-                "vt",
-                () => ComVariant.CreateRaw(VarEnum.VT_VARIANT, 1)
+            Assert.Throws<ArgumentException>("vt", () =>
+                ComVariant.CreateRaw(VarEnum.VT_VARIANT, 1)
             );
         }
 

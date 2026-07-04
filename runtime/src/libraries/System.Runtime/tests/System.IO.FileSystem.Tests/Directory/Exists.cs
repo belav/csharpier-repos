@@ -101,13 +101,10 @@ namespace System.IO.Tests
         [Fact]
         public void DirectoryLongerThanMaxLongPath_DoesntThrow()
         {
-            Assert.All(
-                (IOInputs.GetPathsLongerThanMaxLongPath(GetTestFilePath())),
-                (path) =>
-                {
-                    Assert.False(Exists(path), path);
-                }
-            );
+            Assert.All((IOInputs.GetPathsLongerThanMaxLongPath(GetTestFilePath())), (path) =>
+            {
+                Assert.False(Exists(path), path);
+            });
         }
 
         [ConditionalFact(typeof(MountHelper), nameof(MountHelper.CanCreateSymbolicLinks))]
@@ -216,13 +213,10 @@ namespace System.IO.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // Long directory path doesn't throw on Exists
         public void DirectoryLongerThanMaxDirectoryAsPath_DoesntThrow()
         {
-            Assert.All(
-                (IOInputs.GetPathsLongerThanMaxDirectory(GetTestFilePath())),
-                (path) =>
-                {
-                    Assert.False(Exists(path));
-                }
-            );
+            Assert.All((IOInputs.GetPathsLongerThanMaxDirectory(GetTestFilePath())), (path) =>
+            {
+                Assert.False(Exists(path));
+            });
         }
 
         [Theory, MemberData(nameof(WhiteSpace))]
@@ -389,9 +383,8 @@ namespace System.IO.Tests
             Assert.False(Exists(IOInputs.ExtendedPrefix + IOServices.GetNonExistentDrive()));
 
             if (PlatformDetection.IsNotInAppContainer)
-                Assert.Contains(
-                    IOServices.GetReadyDrives(),
-                    drive => Exists(IOInputs.ExtendedPrefix + drive)
+                Assert.Contains(IOServices.GetReadyDrives(), drive =>
+                    Exists(IOInputs.ExtendedPrefix + drive)
                 );
         }
 

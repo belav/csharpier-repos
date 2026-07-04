@@ -45,22 +45,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             list.AddRange(enumerable);
 
             // Check that the first section of the List is unchanged
-            Assert.All(
-                Enumerable.Range(0, listLength),
-                index =>
-                {
-                    Assert.Equal(listBeforeAdd[index], list[index]);
-                }
-            );
+            Assert.All(Enumerable.Range(0, listLength), index =>
+            {
+                Assert.Equal(listBeforeAdd[index], list[index]);
+            });
 
             // Check that the added elements are correct
-            Assert.All(
-                Enumerable.Range(0, enumerableLength),
-                index =>
-                {
-                    Assert.Equal(enumerable.ElementAt(index), list[index + listLength]);
-                }
-            );
+            Assert.All(Enumerable.Range(0, enumerableLength), index =>
+            {
+                Assert.Equal(enumerable.ElementAt(index), list[index + listLength]);
+            });
         }
 
         [Theory]

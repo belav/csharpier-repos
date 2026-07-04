@@ -452,16 +452,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             SimpleNameSyntax,
             SimpleNameSyntax
         > s_replaceGetReferenceInvocation = (editor, invocation, nameNode, newName) =>
-            editor.ReplaceNode(
-                invocation,
-                (i, g) =>
-                {
-                    var currentInvocation = (InvocationExpressionSyntax)i;
+            editor.ReplaceNode(invocation, (i, g) =>
+            {
+                var currentInvocation = (InvocationExpressionSyntax)i;
 
-                    var currentName = currentInvocation.Expression.GetRightmostName();
-                    return currentInvocation.Expression.ReplaceNode(currentName, newName);
-                }
-            );
+                var currentName = currentInvocation.Expression.GetRightmostName();
+                return currentInvocation.Expression.ReplaceNode(currentName, newName);
+            });
 
         private static readonly Action<
             SyntaxEditor,
@@ -489,31 +486,28 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             // We use the callback form if "ReplaceNode" here because we want to see the
             // invocation expression after any rewrites we already did when rewriting the
             // 'get' references.
-            editor.ReplaceNode(
-                invocation,
-                (i, g) =>
-                {
-                    var currentInvocation = (InvocationExpressionSyntax)i;
-                    // looks like   a.b.Goo(arg)   =>     a.b.NewName = arg
-                    nameNode = currentInvocation.Expression.GetRightmostName();
-                    currentInvocation = (InvocationExpressionSyntax)
-                        g.ReplaceNode(currentInvocation, nameNode, newName);
+            editor.ReplaceNode(invocation, (i, g) =>
+            {
+                var currentInvocation = (InvocationExpressionSyntax)i;
+                // looks like   a.b.Goo(arg)   =>     a.b.NewName = arg
+                nameNode = currentInvocation.Expression.GetRightmostName();
+                currentInvocation = (InvocationExpressionSyntax)
+                    g.ReplaceNode(currentInvocation, nameNode, newName);
 
-                    // Wrap the argument in parentheses (in order to not introduce any precedence problems).
-                    // But also add a simplification annotation so we can remove the parens if possible.
-                    var argumentExpression = currentInvocation
-                        .ArgumentList.Arguments[0]
-                        .Expression.Parenthesize();
+                // Wrap the argument in parentheses (in order to not introduce any precedence problems).
+                // But also add a simplification annotation so we can remove the parens if possible.
+                var argumentExpression = currentInvocation
+                    .ArgumentList.Arguments[0]
+                    .Expression.Parenthesize();
 
-                    var expression = SyntaxFactory.AssignmentExpression(
-                        SyntaxKind.SimpleAssignmentExpression,
-                        currentInvocation.Expression,
-                        argumentExpression
-                    );
+                var expression = SyntaxFactory.AssignmentExpression(
+                    SyntaxKind.SimpleAssignmentExpression,
+                    currentInvocation.Expression,
+                    argumentExpression
+                );
 
-                    return expression.Parenthesize();
-                }
-            );
+                return expression.Parenthesize();
+            });
         };
 
         public void ReplaceGetReference(

@@ -102,9 +102,8 @@ namespace System.ComponentModel.Composition
 
                 ExportsAssert.AreEqual(CollectionPlain, untypedExpectedValues);
                 ExportsAssert.AreEqual(CollectionPlainRawMetadata, untypedExpectedValues);
-                EqualityExtensions.IsTrueForAll(
-                    CollectionPlainRawMetadata,
-                    i => true.Equals(i.Metadata["PropertyName"])
+                EqualityExtensions.IsTrueForAll(CollectionPlainRawMetadata, i =>
+                    true.Equals(i.Metadata["PropertyName"])
                 );
                 Assert.Empty(CollectionPlainEmpty);
                 Assert.Empty(CollectionPlainEmptyRawMetadata);
@@ -116,16 +115,14 @@ namespace System.ComponentModel.Composition
 
                 ExportsAssert.AreEqual(CollectionTyped, expectedValues);
                 ExportsAssert.AreEqual(CollectionTypedRawMetadata, expectedValues);
-                EqualityExtensions.IsTrueForAll(
-                    CollectionTypedRawMetadata,
-                    i => true.Equals(i.Metadata["PropertyName"])
+                EqualityExtensions.IsTrueForAll(CollectionTypedRawMetadata, i =>
+                    true.Equals(i.Metadata["PropertyName"])
                 );
                 Assert.Empty(CollectionTypedEmpty);
 
                 ExportsAssert.AreEqual(CollectionTypedMetadata, expectedValues);
-                EqualityExtensions.IsTrueForAll(
-                    CollectionTypedMetadata,
-                    i => true == i.Metadata.PropertyName
+                EqualityExtensions.IsTrueForAll(CollectionTypedMetadata, i =>
+                    true == i.Metadata.PropertyName
                 );
                 Assert.Empty(CollectionTypedMetadataEmpty);
 
@@ -134,25 +131,22 @@ namespace System.ComponentModel.Composition
 
                 ExportsAssert.AreEqual(MetadataUntypedEnumerable, untypedExpectedValues);
                 ExportsAssert.AreEqual(MetadataUntypedEnumerableRawMetadata, untypedExpectedValues);
-                EqualityExtensions.IsTrueForAll(
-                    MetadataUntypedEnumerableRawMetadata,
-                    i => true.Equals(i.Metadata["PropertyName"])
+                EqualityExtensions.IsTrueForAll(MetadataUntypedEnumerableRawMetadata, i =>
+                    true.Equals(i.Metadata["PropertyName"])
                 );
                 Assert.Empty(MetadataUntypedEnumerableEmpty);
                 Assert.Empty(MetadataUntypedEnumerableEmptyRawMetadata);
 
                 ExportsAssert.AreEqual(MetadataTypedEnumerable, expectedValues);
                 ExportsAssert.AreEqual(MetadataTypedEnumerableRawMetadata, expectedValues);
-                EqualityExtensions.IsTrueForAll(
-                    MetadataTypedEnumerableRawMetadata,
-                    i => true.Equals(i.Metadata["PropertyName"])
+                EqualityExtensions.IsTrueForAll(MetadataTypedEnumerableRawMetadata, i =>
+                    true.Equals(i.Metadata["PropertyName"])
                 );
                 Assert.Empty(MetadataTypedEnumerableEmpty);
 
                 ExportsAssert.AreEqual(MetadataFullyTypedEnumerable, expectedValues);
-                EqualityExtensions.IsTrueForAll(
-                    MetadataFullyTypedEnumerable,
-                    i => true == i.Metadata.PropertyName
+                EqualityExtensions.IsTrueForAll(MetadataFullyTypedEnumerable, i =>
+                    true == i.Metadata.PropertyName
                 );
                 Assert.Empty(MetadataFullyTypedEnumerableEmpty);
             }

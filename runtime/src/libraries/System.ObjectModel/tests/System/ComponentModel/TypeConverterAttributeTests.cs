@@ -27,9 +27,8 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullStringNetCore_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "typeName",
-                () => new TypeConverterAttribute((string)null)
+            AssertExtensions.Throws<ArgumentNullException>("typeName", () =>
+                new TypeConverterAttribute((string)null)
             );
         }
 
@@ -44,9 +43,8 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullTypeNetCore_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new TypeConverterAttribute((Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new TypeConverterAttribute((Type)null)
             );
         }
 

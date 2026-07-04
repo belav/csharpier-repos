@@ -101,14 +101,11 @@ namespace System.ComponentModel.Composition
 
         public new void AddExport(string contractName, object value)
         {
-            var export = ExportFactory.Create(
-                contractName,
-                () =>
-                {
-                    this.OnGetExport(contractName);
-                    return value;
-                }
-            );
+            var export = ExportFactory.Create(contractName, () =>
+            {
+                this.OnGetExport(contractName);
+                return value;
+            });
 
             base.AddExport(export);
         }

@@ -49,17 +49,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     [NativeInteger] System.IntPtr F1
     [NativeInteger] System.UIntPtr[] F2
 ";
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
-                    );
-                    Assert.NotNull(attributeType);
-                    AssertNativeIntegerAttributes(module, expected);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                    "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                );
+                Assert.NotNull(attributeType);
+                AssertNativeIntegerAttributes(module, expected);
+            });
         }
 
         [Fact]
@@ -85,17 +82,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     [NativeInteger] System.IntPtr F1
     [NativeInteger] System.UIntPtr[] F2
 ";
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
-                    );
-                    Assert.Null(attributeType);
-                    AssertNativeIntegerAttributes(module, expected);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                    "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                );
+                Assert.Null(attributeType);
+                AssertNativeIntegerAttributes(module, expected);
+            });
         }
 
         [Fact]
@@ -995,22 +989,19 @@ public class A : I<(nint, nuint[])>
 {
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
-            CompileAndVerify(
-                comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "A");
-                    var interfaceImpl = reader.GetInterfaceImplementation(
-                        typeDef.GetInterfaceImplementations().Single()
-                    );
-                    AssertAttributes(
-                        reader,
-                        interfaceImpl.GetCustomAttributes(),
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])"
-                    );
-                }
-            );
+            CompileAndVerify(comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "A");
+                var interfaceImpl = reader.GetInterfaceImplementation(
+                    typeDef.GetInterfaceImplementations().Single()
+                );
+                AssertAttributes(
+                    reader,
+                    interfaceImpl.GetCustomAttributes(),
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])"
+                );
+            });
         }
 
         [Fact]
@@ -1578,18 +1569,15 @@ class Program
     }
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    Assert.NotNull(
-                        assembly.GetTypeByMetadataName(
-                            "System.Runtime.CompilerServices.NativeIntegerAttribute"
-                        )
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                Assert.NotNull(
+                    assembly.GetTypeByMetadataName(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                    )
+                );
+            });
         }
 
         [Fact]
@@ -1681,32 +1669,29 @@ public class C : IA, IB<(nint, object, nuint[], object, nint, object, (System.In
 {
 }";
             var comp = CreateCompilation(source1, parseOptions: TestOptions.Regular9);
-            CompileAndVerify(
-                comp,
-                validator: assembly =>
-                {
-                    var reader = assembly.GetMetadataReader();
-                    var typeDef = GetTypeDefinitionByName(reader, "C");
-                    var interfaceImpl = reader.GetInterfaceImplementation(
-                        typeDef.GetInterfaceImplementations().ElementAt(1)
-                    );
-                    var customAttributes = interfaceImpl.GetCustomAttributes();
-                    AssertAttributes(
-                        reader,
-                        customAttributes,
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])"
-                    );
-                    var customAttribute = GetAttributeByConstructorName(
-                        reader,
-                        customAttributes,
-                        "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])"
-                    );
-                    AssertEx.Equal(
-                        ImmutableArray.Create(true, true, true, false, true, true),
-                        reader.ReadBoolArray(customAttribute.Value)
-                    );
-                }
-            );
+            CompileAndVerify(comp, validator: assembly =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var typeDef = GetTypeDefinitionByName(reader, "C");
+                var interfaceImpl = reader.GetInterfaceImplementation(
+                    typeDef.GetInterfaceImplementations().ElementAt(1)
+                );
+                var customAttributes = interfaceImpl.GetCustomAttributes();
+                AssertAttributes(
+                    reader,
+                    customAttributes,
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])"
+                );
+                var customAttribute = GetAttributeByConstructorName(
+                    reader,
+                    customAttributes,
+                    "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])"
+                );
+                AssertEx.Equal(
+                    ImmutableArray.Create(true, true, true, false, true, true),
+                    reader.ReadBoolArray(customAttribute.Value)
+                );
+            });
             var ref1 = comp.EmitToImageReference();
 
             var source2 =
@@ -1808,28 +1793,25 @@ class B : A<System.UIntPtr, nint>
                 parseOptions: TestOptions.Regular9,
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
-                    );
-                    AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
-                    Assert.False(attributeUsage.Inherited);
-                    Assert.False(attributeUsage.AllowMultiple);
-                    Assert.True(attributeUsage.HasValidAttributeTargets);
-                    var expectedTargets =
-                        AttributeTargets.Class
-                        | AttributeTargets.Event
-                        | AttributeTargets.Field
-                        | AttributeTargets.GenericParameter
-                        | AttributeTargets.Parameter
-                        | AttributeTargets.Property
-                        | AttributeTargets.ReturnValue;
-                    Assert.Equal(expectedTargets, attributeUsage.ValidTargets);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                    "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                );
+                AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
+                Assert.False(attributeUsage.Inherited);
+                Assert.False(attributeUsage.AllowMultiple);
+                Assert.True(attributeUsage.HasValidAttributeTargets);
+                var expectedTargets =
+                    AttributeTargets.Class
+                    | AttributeTargets.Event
+                    | AttributeTargets.Field
+                    | AttributeTargets.GenericParameter
+                    | AttributeTargets.Parameter
+                    | AttributeTargets.Property
+                    | AttributeTargets.ReturnValue;
+                Assert.Equal(expectedTargets, attributeUsage.ValidTargets);
+            });
         }
 
         [Fact]
@@ -1841,22 +1823,16 @@ class B : A<System.UIntPtr, nint>
     public nint F;
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Program");
-                    var member = type.GetMembers("F").Single();
-                    var attributes = member.GetAttributes();
-                    AssertNativeIntegerAttribute(attributes);
-                    var attribute = GetNativeIntegerAttribute(attributes);
-                    var field = attribute.AttributeClass.GetField("TransformFlags");
-                    Assert.Equal(
-                        "System.Boolean[]",
-                        field.TypeWithAnnotations.ToTestDisplayString()
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Program");
+                var member = type.GetMembers("F").Single();
+                var attributes = member.GetAttributes();
+                AssertNativeIntegerAttribute(attributes);
+                var attribute = GetNativeIntegerAttribute(attributes);
+                var field = attribute.AttributeClass.GetField("TransformFlags");
+                Assert.Equal("System.Boolean[]", field.TypeWithAnnotations.ToTestDisplayString());
+            });
         }
 
         [Fact]
@@ -2039,9 +2015,8 @@ C
 
         private void AssertNativeIntegerAttributes(CSharpCompilation comp, string expected)
         {
-            CompileAndVerify(
-                comp,
-                symbolValidator: module => AssertNativeIntegerAttributes(module, expected)
+            CompileAndVerify(comp, symbolValidator: module =>
+                AssertNativeIntegerAttributes(module, expected)
             );
         }
 

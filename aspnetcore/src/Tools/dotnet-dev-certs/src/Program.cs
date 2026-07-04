@@ -59,182 +59,179 @@ internal sealed class Program
         {
             var app = new CommandLineApplication { Name = "dotnet dev-certs" };
 
-            app.Command(
-                "https",
-                c =>
+            app.Command("https", c =>
+            {
+                var exportPath = c.Option(
+                    "-ep|--export-path",
+                    "Full path to the exported certificate",
+                    CommandOptionType.SingleValue
+                );
+
+                var password = c.Option(
+                    "-p|--password",
+                    "Password to use when exporting the certificate with the private key into a pfx file or to encrypt the Pem exported key",
+                    CommandOptionType.SingleValue
+                );
+
+                // We want to force generating a key without a password to not be an accident.
+                var noPassword = c.Option(
+                    "-np|--no-password",
+                    "Explicitly request that you don't use a password for the key when exporting a certificate to a PEM format",
+                    CommandOptionType.NoValue
+                );
+
+                var check = c.Option(
+                    "-c|--check",
+                    "Check for the existence of the certificate but do not perform any action",
+                    CommandOptionType.NoValue
+                );
+
+                var clean = c.Option(
+                    "--clean",
+                    "Cleans all HTTPS development certificates from the machine.",
+                    CommandOptionType.NoValue
+                );
+
+                var import = c.Option(
+                    "-i|--import",
+                    "Imports the provided HTTPS development certificate into the machine. All other HTTPS developer certificates will be cleared out",
+                    CommandOptionType.SingleValue
+                );
+
+                var format = c.Option(
+                    "--format",
+                    "Export the certificate in the given format. Valid values are Pfx and Pem. Pfx is the default.",
+                    CommandOptionType.SingleValue
+                );
+
+                CommandOption trust = null;
+                trust = c.Option(
+                    "-t|--trust",
+                    "Trust the certificate on the current platform. When combined with the --check option, validates that the certificate is trusted.",
+                    CommandOptionType.NoValue
+                );
+
+                var verbose = c.Option(
+                    "-v|--verbose",
+                    "Display more debug information.",
+                    CommandOptionType.NoValue
+                );
+
+                var quiet = c.Option(
+                    "-q|--quiet",
+                    "Display warnings and errors only.",
+                    CommandOptionType.NoValue
+                );
+
+                c.HelpOption("-h|--help");
+
+                c.OnExecute(() =>
                 {
-                    var exportPath = c.Option(
-                        "-ep|--export-path",
-                        "Full path to the exported certificate",
-                        CommandOptionType.SingleValue
+                    var reporter = new ConsoleReporter(
+                        PhysicalConsole.Singleton,
+                        verbose.HasValue(),
+                        quiet.HasValue()
                     );
 
-                    var password = c.Option(
-                        "-p|--password",
-                        "Password to use when exporting the certificate with the private key into a pfx file or to encrypt the Pem exported key",
-                        CommandOptionType.SingleValue
-                    );
-
-                    // We want to force generating a key without a password to not be an accident.
-                    var noPassword = c.Option(
-                        "-np|--no-password",
-                        "Explicitly request that you don't use a password for the key when exporting a certificate to a PEM format",
-                        CommandOptionType.NoValue
-                    );
-
-                    var check = c.Option(
-                        "-c|--check",
-                        "Check for the existence of the certificate but do not perform any action",
-                        CommandOptionType.NoValue
-                    );
-
-                    var clean = c.Option(
-                        "--clean",
-                        "Cleans all HTTPS development certificates from the machine.",
-                        CommandOptionType.NoValue
-                    );
-
-                    var import = c.Option(
-                        "-i|--import",
-                        "Imports the provided HTTPS development certificate into the machine. All other HTTPS developer certificates will be cleared out",
-                        CommandOptionType.SingleValue
-                    );
-
-                    var format = c.Option(
-                        "--format",
-                        "Export the certificate in the given format. Valid values are Pfx and Pem. Pfx is the default.",
-                        CommandOptionType.SingleValue
-                    );
-
-                    CommandOption trust = null;
-                    trust = c.Option(
-                        "-t|--trust",
-                        "Trust the certificate on the current platform. When combined with the --check option, validates that the certificate is trusted.",
-                        CommandOptionType.NoValue
-                    );
-
-                    var verbose = c.Option(
-                        "-v|--verbose",
-                        "Display more debug information.",
-                        CommandOptionType.NoValue
-                    );
-
-                    var quiet = c.Option(
-                        "-q|--quiet",
-                        "Display warnings and errors only.",
-                        CommandOptionType.NoValue
-                    );
-
-                    c.HelpOption("-h|--help");
-
-                    c.OnExecute(() =>
+                    if (verbose.HasValue())
                     {
-                        var reporter = new ConsoleReporter(
-                            PhysicalConsole.Singleton,
-                            verbose.HasValue(),
-                            quiet.HasValue()
+                        var listener = new ReporterEventListener(reporter);
+                        listener.EnableEvents(
+                            CertificateManager.Log,
+                            System.Diagnostics.Tracing.EventLevel.Verbose
                         );
+                    }
 
-                        if (verbose.HasValue())
+                    if (clean.HasValue())
+                    {
+                        if (
+                            exportPath.HasValue()
+                            || trust?.HasValue() == true
+                            || format.HasValue()
+                            || noPassword.HasValue()
+                            || check.HasValue()
+                            || (!import.HasValue() && password.HasValue())
+                            || (import.HasValue() && !password.HasValue())
+                        )
                         {
-                            var listener = new ReporterEventListener(reporter);
-                            listener.EnableEvents(
-                                CertificateManager.Log,
-                                System.Diagnostics.Tracing.EventLevel.Verbose
-                            );
+                            reporter.Error(InvalidUsageErrorMessage);
+                            return CriticalError;
+                        }
+                    }
+
+                    if (check.HasValue())
+                    {
+                        if (
+                            exportPath.HasValue()
+                            || password.HasValue()
+                            || noPassword.HasValue()
+                            || clean.HasValue()
+                            || format.HasValue()
+                            || import.HasValue()
+                        )
+                        {
+                            reporter.Error(InvalidUsageErrorMessage);
+                            return CriticalError;
+                        }
+                    }
+
+                    if (!clean.HasValue() && !check.HasValue())
+                    {
+                        if (password.HasValue() && noPassword.HasValue())
+                        {
+                            reporter.Error(InvalidUsageErrorMessage);
+                            return CriticalError;
                         }
 
-                        if (clean.HasValue())
-                        {
-                            if (
-                                exportPath.HasValue()
-                                || trust?.HasValue() == true
-                                || format.HasValue()
-                                || noPassword.HasValue()
-                                || check.HasValue()
-                                || (!import.HasValue() && password.HasValue())
-                                || (import.HasValue() && !password.HasValue())
-                            )
-                            {
-                                reporter.Error(InvalidUsageErrorMessage);
-                                return CriticalError;
-                            }
-                        }
-
-                        if (check.HasValue())
-                        {
-                            if (
-                                exportPath.HasValue()
-                                || password.HasValue()
-                                || noPassword.HasValue()
-                                || clean.HasValue()
-                                || format.HasValue()
-                                || import.HasValue()
-                            )
-                            {
-                                reporter.Error(InvalidUsageErrorMessage);
-                                return CriticalError;
-                            }
-                        }
-
-                        if (!clean.HasValue() && !check.HasValue())
-                        {
-                            if (password.HasValue() && noPassword.HasValue())
-                            {
-                                reporter.Error(InvalidUsageErrorMessage);
-                                return CriticalError;
-                            }
-
-                            if (
-                                noPassword.HasValue()
-                                && !(
-                                    format.HasValue()
-                                    && string.Equals(
-                                        format.Value(),
-                                        "PEM",
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                        if (
+                            noPassword.HasValue()
+                            && !(
+                                format.HasValue()
+                                && string.Equals(
+                                    format.Value(),
+                                    "PEM",
+                                    StringComparison.OrdinalIgnoreCase
                                 )
                             )
-                            {
-                                reporter.Error(InvalidUsageErrorMessage);
-                                return CriticalError;
-                            }
-
-                            if (import.HasValue())
-                            {
-                                reporter.Error(InvalidUsageErrorMessage);
-                                return CriticalError;
-                            }
-                        }
-
-                        if (check.HasValue())
+                        )
                         {
-                            return CheckHttpsCertificate(trust, reporter);
+                            reporter.Error(InvalidUsageErrorMessage);
+                            return CriticalError;
                         }
 
-                        if (clean.HasValue())
+                        if (import.HasValue())
                         {
-                            var cleanResult = CleanHttpsCertificates(reporter);
-                            if (cleanResult != Success || !import.HasValue())
-                            {
-                                return cleanResult;
-                            }
+                            reporter.Error(InvalidUsageErrorMessage);
+                            return CriticalError;
+                        }
+                    }
 
-                            return ImportCertificate(import, password, reporter);
+                    if (check.HasValue())
+                    {
+                        return CheckHttpsCertificate(trust, reporter);
+                    }
+
+                    if (clean.HasValue())
+                    {
+                        var cleanResult = CleanHttpsCertificates(reporter);
+                        if (cleanResult != Success || !import.HasValue())
+                        {
+                            return cleanResult;
                         }
 
-                        return EnsureHttpsCertificate(
-                            exportPath,
-                            password,
-                            noPassword,
-                            trust,
-                            format,
-                            reporter
-                        );
-                    });
-                }
-            );
+                        return ImportCertificate(import, password, reporter);
+                    }
+
+                    return EnsureHttpsCertificate(
+                        exportPath,
+                        password,
+                        noPassword,
+                        trust,
+                        format,
+                        reporter
+                    );
+                });
+            });
 
             app.HelpOption("-h|--help");
 

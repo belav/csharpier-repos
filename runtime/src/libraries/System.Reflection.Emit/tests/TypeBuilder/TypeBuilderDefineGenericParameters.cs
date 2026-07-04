@@ -56,9 +56,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineGenericParameters_NullNames_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "names",
-                () => type.DefineGenericParameters(null)
+            AssertExtensions.Throws<ArgumentNullException>("names", () =>
+                type.DefineGenericParameters(null)
             );
         }
 
@@ -66,9 +65,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineGenericParameters_EmptyNames_ThrowsArgumentException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentException>(
-                "names",
-                () => type.DefineGenericParameters(new string[0])
+            AssertExtensions.Throws<ArgumentException>("names", () =>
+                type.DefineGenericParameters(new string[0])
             );
         }
 
@@ -76,9 +74,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineGenericParameters_NullName_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "names",
-                () => type.DefineGenericParameters(new string[] { null })
+            AssertExtensions.Throws<ArgumentNullException>("names", () =>
+                type.DefineGenericParameters(new string[] { null })
             );
         }
 

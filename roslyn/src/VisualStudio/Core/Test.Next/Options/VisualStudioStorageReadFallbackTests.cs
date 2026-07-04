@@ -40,12 +40,10 @@ public class VisualStudioStorageReadFallbackTests
         // one flag present in storage (false), defaults used for others:
         Assert.Equal(
             fallback
-                .TryRead(
-                    language,
-                    (storageKey, _, _) =>
-                        storageKey == "TextEditor.CSharp.Specific.SpaceWithinExpressionParentheses"
-                            ? false
-                            : default(Optional<object?>)
+                .TryRead(language, (storageKey, _, _) =>
+                    storageKey == "TextEditor.CSharp.Specific.SpaceWithinExpressionParentheses"
+                        ? false
+                        : default(Optional<object?>)
                 )
                 .Value,
             CSharpFormattingOptions2.SpaceBetweenParentheses.DefaultValue
@@ -55,12 +53,10 @@ public class VisualStudioStorageReadFallbackTests
         // one flag present in storage (true), defaults used for others:
         Assert.Equal(
             fallback
-                .TryRead(
-                    language,
-                    (storageKey, _, _) =>
-                        storageKey == "TextEditor.CSharp.Specific.SpaceWithinExpressionParentheses"
-                            ? true
-                            : default(Optional<object?>)
+                .TryRead(language, (storageKey, _, _) =>
+                    storageKey == "TextEditor.CSharp.Specific.SpaceWithinExpressionParentheses"
+                        ? true
+                        : default(Optional<object?>)
                 )
                 .Value,
             CSharpFormattingOptions2.SpaceBetweenParentheses.DefaultValue
@@ -94,13 +90,11 @@ public class VisualStudioStorageReadFallbackTests
         // one flag present in storage (false), defaults used for others:
         Assert.Equal(
             fallback
-                .TryRead(
-                    language,
-                    (storageKey, _, _) =>
-                        storageKey
-                        == "TextEditor.CSharp.Specific.NewLinesForBracesInObjectCollectionArrayInitializers"
-                            ? false
-                            : default(Optional<object?>)
+                .TryRead(language, (storageKey, _, _) =>
+                    storageKey
+                    == "TextEditor.CSharp.Specific.NewLinesForBracesInObjectCollectionArrayInitializers"
+                        ? false
+                        : default(Optional<object?>)
                 )
                 .Value,
             CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue
@@ -110,13 +104,11 @@ public class VisualStudioStorageReadFallbackTests
         // one flag present in storage (true), defaults used for others:
         Assert.Equal(
             fallback
-                .TryRead(
-                    language,
-                    (storageKey, _, _) =>
-                        storageKey
-                        == "TextEditor.CSharp.Specific.NewLinesForBracesInObjectCollectionArrayInitializers"
-                            ? true
-                            : default(Optional<object?>)
+                .TryRead(language, (storageKey, _, _) =>
+                    storageKey
+                    == "TextEditor.CSharp.Specific.NewLinesForBracesInObjectCollectionArrayInitializers"
+                        ? true
+                        : default(Optional<object?>)
                 )
                 .Value,
             CSharpFormattingOptions2.NewLineBeforeOpenBrace.DefaultValue

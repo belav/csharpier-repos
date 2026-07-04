@@ -64,35 +64,29 @@ namespace System.Security.Cryptography.EcDsa.Tests
         [MemberData(nameof(RealImplementations))]
         public void SignData_InvalidArguments_Throws(ECDsa ecdsa)
         {
-            Assert.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () =>
-                    ecdsa.SignData(
-                        ReadOnlySpan<byte>.Empty,
-                        Span<byte>.Empty,
-                        new HashAlgorithmName(null)
-                    )
+            Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                ecdsa.SignData(
+                    ReadOnlySpan<byte>.Empty,
+                    Span<byte>.Empty,
+                    new HashAlgorithmName(null)
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    ecdsa.SignData(
-                        ReadOnlySpan<byte>.Empty,
-                        Span<byte>.Empty,
-                        new HashAlgorithmName("")
-                    )
+            Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                ecdsa.SignData(
+                    ReadOnlySpan<byte>.Empty,
+                    Span<byte>.Empty,
+                    new HashAlgorithmName("")
+                )
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "signatureFormat",
-                () =>
-                    ecdsa.SignData(
-                        ReadOnlySpan<byte>.Empty,
-                        Span<byte>.Empty,
-                        HashAlgorithmName.SHA256,
-                        (DSASignatureFormat)42
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("signatureFormat", () =>
+                ecdsa.SignData(
+                    ReadOnlySpan<byte>.Empty,
+                    Span<byte>.Empty,
+                    HashAlgorithmName.SHA256,
+                    (DSASignatureFormat)42
+                )
             );
 
             Assert.ThrowsAny<CryptographicException>(() =>
@@ -175,22 +169,18 @@ namespace System.Security.Cryptography.EcDsa.Tests
         [MemberData(nameof(RealImplementations))]
         public void SignData_InvalidArguments_Throws(ECDsa ecdsa)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () => ecdsa.SignData(ReadOnlySpan<byte>.Empty, new HashAlgorithmName(null))
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                ecdsa.SignData(ReadOnlySpan<byte>.Empty, new HashAlgorithmName(null))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () => ecdsa.SignData(ReadOnlySpan<byte>.Empty, new HashAlgorithmName(""))
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                ecdsa.SignData(ReadOnlySpan<byte>.Empty, new HashAlgorithmName(""))
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "signatureFormat",
-                () =>
-                    ecdsa.SignData(
-                        ReadOnlySpan<byte>.Empty,
-                        HashAlgorithmName.SHA256,
-                        (DSASignatureFormat)42
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("signatureFormat", () =>
+                ecdsa.SignData(
+                    ReadOnlySpan<byte>.Empty,
+                    HashAlgorithmName.SHA256,
+                    (DSASignatureFormat)42
+                )
             );
             Assert.ThrowsAny<CryptographicException>(() =>
                 ecdsa.SignData(
@@ -266,25 +256,21 @@ namespace System.Security.Cryptography.EcDsa.Tests
         [Theory, MemberData(nameof(RealImplementations))]
         public void SignData_InvalidArguments_Throws(ECDsa ecdsa)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () =>
-                    ecdsa.TrySignData(
-                        ReadOnlySpan<byte>.Empty,
-                        Span<byte>.Empty,
-                        new HashAlgorithmName(null),
-                        out int bytesWritten
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                ecdsa.TrySignData(
+                    ReadOnlySpan<byte>.Empty,
+                    Span<byte>.Empty,
+                    new HashAlgorithmName(null),
+                    out int bytesWritten
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    ecdsa.TrySignData(
-                        ReadOnlySpan<byte>.Empty,
-                        Span<byte>.Empty,
-                        new HashAlgorithmName(""),
-                        out int bytesWritten
-                    )
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                ecdsa.TrySignData(
+                    ReadOnlySpan<byte>.Empty,
+                    Span<byte>.Empty,
+                    new HashAlgorithmName(""),
+                    out int bytesWritten
+                )
             );
             Assert.ThrowsAny<CryptographicException>(() =>
                 ecdsa.TrySignData(
@@ -299,23 +285,19 @@ namespace System.Security.Cryptography.EcDsa.Tests
         [Theory, MemberData(nameof(RealImplementations))]
         public void VerifyData_InvalidArguments_Throws(ECDsa ecdsa)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () =>
-                    ecdsa.VerifyData(
-                        ReadOnlySpan<byte>.Empty,
-                        ReadOnlySpan<byte>.Empty,
-                        new HashAlgorithmName(null)
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                ecdsa.VerifyData(
+                    ReadOnlySpan<byte>.Empty,
+                    ReadOnlySpan<byte>.Empty,
+                    new HashAlgorithmName(null)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    ecdsa.VerifyData(
-                        ReadOnlySpan<byte>.Empty,
-                        ReadOnlySpan<byte>.Empty,
-                        new HashAlgorithmName("")
-                    )
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                ecdsa.VerifyData(
+                    ReadOnlySpan<byte>.Empty,
+                    ReadOnlySpan<byte>.Empty,
+                    new HashAlgorithmName("")
+                )
             );
             Assert.ThrowsAny<CryptographicException>(() =>
                 ecdsa.VerifyData(

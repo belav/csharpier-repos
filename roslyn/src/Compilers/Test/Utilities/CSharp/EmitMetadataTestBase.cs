@@ -138,18 +138,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 i++;
             }
 
-            AssertEx.SetEqual(
-                expectedEntries,
-                actualEntries,
-                itemInspector: entry =>
-                    $@"
+            AssertEx.SetEqual(expectedEntries, actualEntries, itemInspector: entry => $@"
 {{
     ActionFlags = {entry.ActionFlags},
     ParentNameOpt = {entry.ParentNameOpt},
     PermissionSet = {entry.PermissionSet},
     ParentKind = {entry.ParentKind}
-}}"
-            );
+}}");
         }
 
         private static void GetAttributeParentNameAndKind(

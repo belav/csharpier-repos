@@ -517,13 +517,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
         public void SerializeDeserialize_InvalidArguments_ThrowsException()
         {
             var f = new BinaryFormatter();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serializationStream",
-                () => f.Serialize(null, new object())
+            AssertExtensions.Throws<ArgumentNullException>("serializationStream", () =>
+                f.Serialize(null, new object())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serializationStream",
-                () => f.Deserialize(null)
+            AssertExtensions.Throws<ArgumentNullException>("serializationStream", () =>
+                f.Deserialize(null)
             );
             Assert.Throws<SerializationException>(() => f.Deserialize(new MemoryStream())); // seekable, 0-length
         }

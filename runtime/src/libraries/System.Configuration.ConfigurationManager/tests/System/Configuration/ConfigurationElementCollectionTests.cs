@@ -55,9 +55,8 @@ namespace System.ConfigurationTests
         [Fact]
         public void NullComparerThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "comparer",
-                () => new SimpleCollection(null)
+            AssertExtensions.Throws<ArgumentNullException>("comparer", () =>
+                new SimpleCollection(null)
             );
         }
 

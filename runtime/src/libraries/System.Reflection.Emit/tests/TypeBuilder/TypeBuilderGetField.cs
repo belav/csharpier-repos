@@ -41,9 +41,8 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void GetField_TypeNotTypeBuilder_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => TypeBuilder.GetField(typeof(int), typeof(int).GetField("MaxValue"))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                TypeBuilder.GetField(typeof(int), typeof(int).GetField("MaxValue"))
             );
         }
 
@@ -75,9 +74,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             Type genericInt = type1.MakeGenericType(typeof(int));
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => TypeBuilder.GetField(genericInt, field2)
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                TypeBuilder.GetField(genericInt, field2)
             );
         }
 
@@ -87,9 +85,8 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
             FieldBuilder field = type.DefineField("Field", typeof(int), FieldAttributes.Public);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "field",
-                () => TypeBuilder.GetField(type.AsType(), field)
+            AssertExtensions.Throws<ArgumentException>("field", () =>
+                TypeBuilder.GetField(type.AsType(), field)
             );
         }
     }

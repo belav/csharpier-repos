@@ -1006,23 +1006,20 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         var requestProcessingTask = _http1Connection.ProcessRequestsAsync<object>(null);
 
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes("GET / HTTP/1.0\r\n"));
-        await WaitForCondition(
-            TestConstants.DefaultTimeout,
-            () => _http1Connection.RequestHeaders != null
+        await WaitForCondition(TestConstants.DefaultTimeout, () =>
+            _http1Connection.RequestHeaders != null
         );
         Assert.Equal(0, _http1Connection.RequestHeaders.Count);
 
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes(headers0));
-        await WaitForCondition(
-            TestConstants.DefaultTimeout,
-            () => _http1Connection.RequestHeaders.Count >= header0Count
+        await WaitForCondition(TestConstants.DefaultTimeout, () =>
+            _http1Connection.RequestHeaders.Count >= header0Count
         );
         Assert.Equal(header0Count, _http1Connection.RequestHeaders.Count);
 
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes(headers1));
-        await WaitForCondition(
-            TestConstants.DefaultTimeout,
-            () => _http1Connection.RequestHeaders.Count >= header0Count + header1Count
+        await WaitForCondition(TestConstants.DefaultTimeout, () =>
+            _http1Connection.RequestHeaders.Count >= header0Count + header1Count
         );
         Assert.Equal(header0Count + header1Count, _http1Connection.RequestHeaders.Count);
 
@@ -1047,9 +1044,8 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         var requestProcessingTask = _http1Connection.ProcessRequestsAsync<object>(null);
 
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes("GET / HTTP/1.0\r\n"));
-        await WaitForCondition(
-            TestConstants.DefaultTimeout,
-            () => _http1Connection.RequestHeaders != null
+        await WaitForCondition(TestConstants.DefaultTimeout, () =>
+            _http1Connection.RequestHeaders != null
         );
         Assert.Equal(0, _http1Connection.RequestHeaders.Count);
 
@@ -1058,17 +1054,15 @@ public class Http1ConnectionTests : Http1ConnectionTestsBase
         Assert.Same(newRequestHeaders, _http1Connection.RequestHeaders);
 
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes(headers0));
-        await WaitForCondition(
-            TestConstants.DefaultTimeout,
-            () => _http1Connection.RequestHeaders.Count >= header0Count
+        await WaitForCondition(TestConstants.DefaultTimeout, () =>
+            _http1Connection.RequestHeaders.Count >= header0Count
         );
         Assert.Same(newRequestHeaders, _http1Connection.RequestHeaders);
         Assert.Equal(header0Count, _http1Connection.RequestHeaders.Count);
 
         await _application.Output.WriteAsync(Encoding.ASCII.GetBytes(headers1));
-        await WaitForCondition(
-            TestConstants.DefaultTimeout,
-            () => _http1Connection.RequestHeaders.Count >= header0Count + header1Count
+        await WaitForCondition(TestConstants.DefaultTimeout, () =>
+            _http1Connection.RequestHeaders.Count >= header0Count + header1Count
         );
         Assert.Same(newRequestHeaders, _http1Connection.RequestHeaders);
         Assert.Equal(header0Count + header1Count, _http1Connection.RequestHeaders.Count);

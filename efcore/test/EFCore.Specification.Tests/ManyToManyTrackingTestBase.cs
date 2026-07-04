@@ -504,20 +504,18 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
 
                 ValidateJoinNavigations(context);
 
-                Assert.All(
-                    context.ChangeTracker.Entries<JoinCompositeKeyToLeaf>(),
-                    e =>
-                        Assert.Equal(
-                            (
-                                e.Entity.CompositeId1 == key1
-                                && e.Entity.CompositeId2 == key2
-                                && e.Entity.CompositeId3 == key3
-                            )
-                            || e.Entity.LeafId == id
-                                ? EntityState.Deleted
-                                : EntityState.Unchanged,
-                            e.State
+                Assert.All(context.ChangeTracker.Entries<JoinCompositeKeyToLeaf>(), e =>
+                    Assert.Equal(
+                        (
+                            e.Entity.CompositeId1 == key1
+                            && e.Entity.CompositeId2 == key2
+                            && e.Entity.CompositeId3 == key3
                         )
+                        || e.Entity.LeafId == id
+                            ? EntityState.Deleted
+                            : EntityState.Unchanged,
+                        e.State
+                    )
                 );
 
                 context.SaveChanges();
@@ -545,15 +543,13 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ones.SelectMany(e => e.RootSkipShared).Count(e => e == toRemoveThree)
                 );
 
-                Assert.DoesNotContain(
-                    context.ChangeTracker.Entries<JoinCompositeKeyToLeaf>(),
-                    e =>
-                        (
-                            e.Entity.CompositeId1 == key1
-                            && e.Entity.CompositeId2 == key2
-                            && e.Entity.CompositeId3 == key3
-                        )
-                        || e.Entity.LeafId == id
+                Assert.DoesNotContain(context.ChangeTracker.Entries<JoinCompositeKeyToLeaf>(), e =>
+                    (
+                        e.Entity.CompositeId1 == key1
+                        && e.Entity.CompositeId2 == key2
+                        && e.Entity.CompositeId3 == key3
+                    )
+                    || e.Entity.LeafId == id
                 );
             },
             context =>
@@ -571,15 +567,13 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
 
                 ValidateNavigations(ones, threes);
 
-                Assert.DoesNotContain(
-                    context.ChangeTracker.Entries<JoinCompositeKeyToLeaf>(),
-                    e =>
-                        (
-                            e.Entity.CompositeId1 == key1
-                            && e.Entity.CompositeId2 == key2
-                            && e.Entity.CompositeId3 == key3
-                        )
-                        || e.Entity.LeafId == id
+                Assert.DoesNotContain(context.ChangeTracker.Entries<JoinCompositeKeyToLeaf>(), e =>
+                    (
+                        e.Entity.CompositeId1 == key1
+                        && e.Entity.CompositeId2 == key2
+                        && e.Entity.CompositeId3 == key3
+                    )
+                    || e.Entity.LeafId == id
                 );
             }
         );
@@ -595,12 +589,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
 
                 if (one.JoinLeafFull != null)
                 {
-                    Assert.DoesNotContain(
-                        one.JoinLeafFull,
-                        e =>
-                            e.CompositeId1 == key1
-                            && e.CompositeId2 == key2
-                            && e.CompositeId3 == key3
+                    Assert.DoesNotContain(one.JoinLeafFull, e =>
+                        e.CompositeId1 == key1 && e.CompositeId2 == key2 && e.CompositeId3 == key3
                     );
 
                     Assert.DoesNotContain(one.JoinLeafFull, e => e.LeafId == id);
@@ -611,20 +601,15 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
             {
                 if (three.CompositeKeySkipFull != null)
                 {
-                    Assert.DoesNotContain(
-                        three.CompositeKeySkipFull,
-                        e => e.Key1 == key1 && e.Key2 == key2 && e.Key3 == key3
+                    Assert.DoesNotContain(three.CompositeKeySkipFull, e =>
+                        e.Key1 == key1 && e.Key2 == key2 && e.Key3 == key3
                     );
                 }
 
                 if (three.JoinCompositeKeyFull != null)
                 {
-                    Assert.DoesNotContain(
-                        three.JoinCompositeKeyFull,
-                        e =>
-                            e.CompositeId1 == key1
-                            && e.CompositeId2 == key2
-                            && e.CompositeId3 == key3
+                    Assert.DoesNotContain(three.JoinCompositeKeyFull, e =>
+                        e.CompositeId1 == key1 && e.CompositeId2 == key2 && e.CompositeId3 == key3
                     );
 
                     Assert.DoesNotContain(three.JoinCompositeKeyFull, e => e.LeafId == id);
@@ -976,17 +961,14 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                 context.ChangeTracker.Entries().Count()
             );
 
-            Assert.Contains(
-                leftEntities[0].RootSkipShared,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == rootKeys[0]
+            Assert.Contains(leftEntities[0].RootSkipShared, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == rootKeys[0]
             );
-            Assert.Contains(
-                leftEntities[0].RootSkipShared,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == rootKeys[1]
+            Assert.Contains(leftEntities[0].RootSkipShared, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == rootKeys[1]
             );
-            Assert.Contains(
-                leftEntities[0].RootSkipShared,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == rootKeys[2]
+            Assert.Contains(leftEntities[0].RootSkipShared, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == rootKeys[2]
             );
 
             Assert.Contains(rightEntities[0].CompositeKeySkipShared, e => e.Key2 == "Z7711");
@@ -997,9 +979,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
             Assert.DoesNotContain(rightEntities[1].CompositeKeySkipShared, e => e.Key2 == "8_2");
 
             Assert.DoesNotContain(leftEntities[2].RootSkipShared, e => e.Name == "Branch 6");
-            Assert.Contains(
-                leftEntities[2].RootSkipShared,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == rootKeys[3]
+            Assert.Contains(leftEntities[2].RootSkipShared, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == rootKeys[3]
             );
 
             Assert.DoesNotContain(rightEntities[3].CompositeKeySkipShared, e => e.Key2 == "8_5");
@@ -1109,20 +1090,18 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ones.SelectMany(e => e.RootSkipShared).Count(e => e == toRemoveThree)
                 );
 
-                Assert.All(
-                    context.ChangeTracker.Entries<Dictionary<string, object>>(),
-                    e =>
-                        Assert.Equal(
-                            (
-                                (int)e.Entity["CompositeKeySkipSharedKey1"] == key1
-                                && (string)e.Entity["CompositeKeySkipSharedKey2"] == key2
-                                && (DateTime)e.Entity["CompositeKeySkipSharedKey3"] == key3
-                            )
-                            || (int)e.Entity["RootSkipSharedId"] == id
-                                ? EntityState.Deleted
-                                : EntityState.Unchanged,
-                            e.State
+                Assert.All(context.ChangeTracker.Entries<Dictionary<string, object>>(), e =>
+                    Assert.Equal(
+                        (
+                            (int)e.Entity["CompositeKeySkipSharedKey1"] == key1
+                            && (string)e.Entity["CompositeKeySkipSharedKey2"] == key2
+                            && (DateTime)e.Entity["CompositeKeySkipSharedKey3"] == key3
                         )
+                        || (int)e.Entity["RootSkipSharedId"] == id
+                            ? EntityState.Deleted
+                            : EntityState.Unchanged,
+                        e.State
+                    )
                 );
 
                 context.SaveChanges();
@@ -1201,9 +1180,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
             {
                 if (three.CompositeKeySkipShared != null)
                 {
-                    Assert.DoesNotContain(
-                        three.CompositeKeySkipShared,
-                        e => e.Key1 == key1 && e.Key2 == key2 && e.Key3 == key3
+                    Assert.DoesNotContain(three.CompositeKeySkipShared, e =>
+                        e.Key1 == key1 && e.Key2 == key2 && e.Key3 == key3
                     );
                 }
             }
@@ -1570,17 +1548,14 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                 context.ChangeTracker.Entries().Count()
             );
 
-            Assert.Contains(
-                leftEntities[0].ThreeSkipFull,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == threeIds[0]
+            Assert.Contains(leftEntities[0].ThreeSkipFull, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == threeIds[0]
             );
-            Assert.Contains(
-                leftEntities[0].ThreeSkipFull,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == threeIds[1]
+            Assert.Contains(leftEntities[0].ThreeSkipFull, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == threeIds[1]
             );
-            Assert.Contains(
-                leftEntities[0].ThreeSkipFull,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == threeIds[2]
+            Assert.Contains(leftEntities[0].ThreeSkipFull, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == threeIds[2]
             );
 
             Assert.Contains(rightEntities[0].CompositeKeySkipFull, e => e.Key2 == "Z7711");
@@ -1591,9 +1566,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
             Assert.DoesNotContain(rightEntities[1].CompositeKeySkipFull, e => e.Key2 == "9_2");
 
             Assert.DoesNotContain(leftEntities[3].ThreeSkipFull, e => e.Name == "EntityThree 23");
-            Assert.Contains(
-                leftEntities[3].ThreeSkipFull,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == threeIds[3]
+            Assert.Contains(leftEntities[3].ThreeSkipFull, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == threeIds[3]
             );
 
             Assert.DoesNotContain(rightEntities[2].CompositeKeySkipFull, e => e.Key2 == "6_1");
@@ -1731,19 +1705,17 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
 
                 ValidateJoinNavigations(context);
 
-                Assert.All(
-                    context.ChangeTracker.Entries<JoinThreeToCompositeKeyFull>(),
-                    e =>
-                        Assert.Equal(
-                            (
-                                e.Entity.CompositeId2 == "6_1"
-                                && e.Entity.CompositeId3 == new DateTime(2006, 1, 1)
-                            )
-                            || e.Entity.ThreeId == threeId
-                                ? EntityState.Deleted
-                                : EntityState.Unchanged,
-                            e.State
+                Assert.All(context.ChangeTracker.Entries<JoinThreeToCompositeKeyFull>(), e =>
+                    Assert.Equal(
+                        (
+                            e.Entity.CompositeId2 == "6_1"
+                            && e.Entity.CompositeId3 == new DateTime(2006, 1, 1)
                         )
+                        || e.Entity.ThreeId == threeId
+                            ? EntityState.Deleted
+                            : EntityState.Unchanged,
+                        e.State
+                    )
                 );
 
                 context.SaveChanges();
@@ -1819,9 +1791,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
 
                 if (one.JoinThreeFull != null)
                 {
-                    Assert.DoesNotContain(
-                        one.JoinThreeFull,
-                        e => e.CompositeId2 == "6_1" && e.CompositeId3 == new DateTime(2006, 1, 1)
+                    Assert.DoesNotContain(one.JoinThreeFull, e =>
+                        e.CompositeId2 == "6_1" && e.CompositeId3 == new DateTime(2006, 1, 1)
                     );
 
                     Assert.DoesNotContain(one.JoinThreeFull, e => e.ThreeId == threeId);
@@ -1832,17 +1803,15 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
             {
                 if (three.CompositeKeySkipFull != null)
                 {
-                    Assert.DoesNotContain(
-                        three.CompositeKeySkipFull,
-                        e => e.Key2 == "6_1" && e.Key3 == new DateTime(2006, 1, 1)
+                    Assert.DoesNotContain(three.CompositeKeySkipFull, e =>
+                        e.Key2 == "6_1" && e.Key3 == new DateTime(2006, 1, 1)
                     );
                 }
 
                 if (three.JoinCompositeKeyFull != null)
                 {
-                    Assert.DoesNotContain(
-                        three.JoinCompositeKeyFull,
-                        e => e.CompositeId2 == "6_1" && e.CompositeId3 == new DateTime(2006, 1, 1)
+                    Assert.DoesNotContain(three.JoinCompositeKeyFull, e =>
+                        e.CompositeId2 == "6_1" && e.CompositeId3 == new DateTime(2006, 1, 1)
                     );
 
                     Assert.DoesNotContain(three.JoinCompositeKeyFull, e => e.ThreeId == threeId);
@@ -2155,57 +2124,45 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
             );
             Assert.Equal(count + joinCount, context.ChangeTracker.Entries().Count());
 
-            Assert.Contains(
-                leftEntities[0].SelfSkipSharedRight,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == ids[0]
+            Assert.Contains(leftEntities[0].SelfSkipSharedRight, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == ids[0]
             );
-            Assert.Contains(
-                leftEntities[0].SelfSkipSharedRight,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == ids[1]
+            Assert.Contains(leftEntities[0].SelfSkipSharedRight, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == ids[1]
             );
-            Assert.Contains(
-                leftEntities[0].SelfSkipSharedRight,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == ids[2]
+            Assert.Contains(leftEntities[0].SelfSkipSharedRight, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == ids[2]
             );
 
-            Assert.Contains(
-                rightEntities[0].SelfSkipSharedLeft,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == ids[4]
+            Assert.Contains(rightEntities[0].SelfSkipSharedLeft, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == ids[4]
             );
-            Assert.Contains(
-                rightEntities[0].SelfSkipSharedLeft,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == ids[5]
+            Assert.Contains(rightEntities[0].SelfSkipSharedLeft, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == ids[5]
             );
-            Assert.Contains(
-                rightEntities[0].SelfSkipSharedLeft,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == ids[6]
+            Assert.Contains(rightEntities[0].SelfSkipSharedLeft, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == ids[6]
             );
 
-            Assert.DoesNotContain(
-                leftEntities[0].SelfSkipSharedRight,
-                e => e.Name == "EntityTwo 9"
+            Assert.DoesNotContain(leftEntities[0].SelfSkipSharedRight, e =>
+                e.Name == "EntityTwo 9"
             );
-            Assert.DoesNotContain(
-                rightEntities[1].SelfSkipSharedLeft,
-                e => e.Name == "EntityTwo 1"
+            Assert.DoesNotContain(rightEntities[1].SelfSkipSharedLeft, e =>
+                e.Name == "EntityTwo 1"
             );
 
-            Assert.DoesNotContain(
-                leftEntities[4].SelfSkipSharedRight,
-                e => e.Name == "EntityTwo 18"
+            Assert.DoesNotContain(leftEntities[4].SelfSkipSharedRight, e =>
+                e.Name == "EntityTwo 18"
             );
-            Assert.Contains(
-                leftEntities[4].SelfSkipSharedRight,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == ids[3]
+            Assert.Contains(leftEntities[4].SelfSkipSharedRight, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == ids[3]
             );
 
-            Assert.DoesNotContain(
-                rightEntities[5].SelfSkipSharedLeft,
-                e => e.Name == "EntityTwo 12"
+            Assert.DoesNotContain(rightEntities[5].SelfSkipSharedLeft, e =>
+                e.Name == "EntityTwo 12"
             );
-            Assert.Contains(
-                rightEntities[5].SelfSkipSharedLeft,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == ids[7]
+            Assert.Contains(rightEntities[5].SelfSkipSharedLeft, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == ids[7]
             );
 
             var allLeft = context
@@ -3295,57 +3252,45 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
             Assert.Equal(joinCount, context.ChangeTracker.Entries<JoinOneSelfPayload>().Count());
             Assert.Equal(count + joinCount, context.ChangeTracker.Entries().Count());
 
-            Assert.Contains(
-                leftEntities[0].SelfSkipPayloadRight,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == keys[0]
+            Assert.Contains(leftEntities[0].SelfSkipPayloadRight, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == keys[0]
             );
-            Assert.Contains(
-                leftEntities[0].SelfSkipPayloadRight,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == keys[1]
+            Assert.Contains(leftEntities[0].SelfSkipPayloadRight, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == keys[1]
             );
-            Assert.Contains(
-                leftEntities[0].SelfSkipPayloadRight,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == keys[2]
+            Assert.Contains(leftEntities[0].SelfSkipPayloadRight, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == keys[2]
             );
 
-            Assert.Contains(
-                rightEntities[0].SelfSkipPayloadLeft,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == keys[4]
+            Assert.Contains(rightEntities[0].SelfSkipPayloadLeft, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == keys[4]
             );
-            Assert.Contains(
-                rightEntities[0].SelfSkipPayloadLeft,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == keys[5]
+            Assert.Contains(rightEntities[0].SelfSkipPayloadLeft, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == keys[5]
             );
-            Assert.Contains(
-                rightEntities[0].SelfSkipPayloadLeft,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == keys[6]
+            Assert.Contains(rightEntities[0].SelfSkipPayloadLeft, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == keys[6]
             );
 
-            Assert.DoesNotContain(
-                leftEntities[7].SelfSkipPayloadRight,
-                e => e.Name == "EntityOne 6"
+            Assert.DoesNotContain(leftEntities[7].SelfSkipPayloadRight, e =>
+                e.Name == "EntityOne 6"
             );
-            Assert.DoesNotContain(
-                rightEntities[11].SelfSkipPayloadLeft,
-                e => e.Name == "EntityOne 13"
+            Assert.DoesNotContain(rightEntities[11].SelfSkipPayloadLeft, e =>
+                e.Name == "EntityOne 13"
             );
 
-            Assert.DoesNotContain(
-                leftEntities[4].SelfSkipPayloadRight,
-                e => e.Name == "EntityOne 2"
+            Assert.DoesNotContain(leftEntities[4].SelfSkipPayloadRight, e =>
+                e.Name == "EntityOne 2"
             );
-            Assert.Contains(
-                leftEntities[4].SelfSkipPayloadRight,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == keys[3]
+            Assert.Contains(leftEntities[4].SelfSkipPayloadRight, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == keys[3]
             );
 
-            Assert.DoesNotContain(
-                rightEntities[4].SelfSkipPayloadLeft,
-                e => e.Name == "EntityOne 6"
+            Assert.DoesNotContain(rightEntities[4].SelfSkipPayloadLeft, e =>
+                e.Name == "EntityOne 6"
             );
-            Assert.Contains(
-                rightEntities[4].SelfSkipPayloadLeft,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == keys[7]
+            Assert.Contains(rightEntities[4].SelfSkipPayloadLeft, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == keys[7]
             );
 
             var joinEntries = context.ChangeTracker.Entries<JoinOneSelfPayload>().ToList();
@@ -3759,24 +3704,20 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
             Assert.Contains(rightEntities[0].OneSkipPayloadFullShared, e => e.Name == "Z7712");
             Assert.Contains(rightEntities[0].OneSkipPayloadFullShared, e => e.Name == "Z7713");
 
-            Assert.DoesNotContain(
-                leftEntities[2].ThreeSkipPayloadFullShared,
-                e => e.Name == "EntityThree 10"
+            Assert.DoesNotContain(leftEntities[2].ThreeSkipPayloadFullShared, e =>
+                e.Name == "EntityThree 10"
             );
-            Assert.DoesNotContain(
-                rightEntities[4].OneSkipPayloadFullShared,
-                e => e.Name == "EntityOne 6"
+            Assert.DoesNotContain(rightEntities[4].OneSkipPayloadFullShared, e =>
+                e.Name == "EntityOne 6"
             );
 
-            Assert.DoesNotContain(
-                leftEntities[3].ThreeSkipPayloadFullShared,
-                e => e.Name == "EntityThree 17"
+            Assert.DoesNotContain(leftEntities[3].ThreeSkipPayloadFullShared, e =>
+                e.Name == "EntityThree 17"
             );
             Assert.Contains(leftEntities[3].ThreeSkipPayloadFullShared, e => e.Name == "Z7724");
 
-            Assert.DoesNotContain(
-                rightEntities[2].OneSkipPayloadFullShared,
-                e => e.Name == "EntityOne 12"
+            Assert.DoesNotContain(rightEntities[2].OneSkipPayloadFullShared, e =>
+                e.Name == "EntityOne 12"
             );
             Assert.Contains(rightEntities[2].OneSkipPayloadFullShared, e => e.Name == "Z7714");
 
@@ -4562,24 +4503,20 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
             Assert.Contains(rightEntities[0].OneSkipPayloadFull, e => e.Name == "Z7712");
             Assert.Contains(rightEntities[0].OneSkipPayloadFull, e => e.Name == "Z7713");
 
-            Assert.DoesNotContain(
-                leftEntities[1].ThreeSkipPayloadFull,
-                e => e.Name == "EntityThree 10"
+            Assert.DoesNotContain(leftEntities[1].ThreeSkipPayloadFull, e =>
+                e.Name == "EntityThree 10"
             );
-            Assert.DoesNotContain(
-                rightEntities[1].OneSkipPayloadFull,
-                e => e.Name == "EntityOne 7"
+            Assert.DoesNotContain(rightEntities[1].OneSkipPayloadFull, e =>
+                e.Name == "EntityOne 7"
             );
 
-            Assert.DoesNotContain(
-                leftEntities[2].ThreeSkipPayloadFull,
-                e => e.Name == "EntityThree 13"
+            Assert.DoesNotContain(leftEntities[2].ThreeSkipPayloadFull, e =>
+                e.Name == "EntityThree 13"
             );
             Assert.Contains(leftEntities[2].ThreeSkipPayloadFull, e => e.Name == "Z7724");
 
-            Assert.DoesNotContain(
-                rightEntities[2].OneSkipPayloadFull,
-                e => e.Name == "EntityOne 15"
+            Assert.DoesNotContain(rightEntities[2].OneSkipPayloadFull, e =>
+                e.Name == "EntityOne 15"
             );
             Assert.Contains(rightEntities[2].OneSkipPayloadFull, e => e.Name == "Z7714");
 
@@ -4737,15 +4674,13 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
 
                 ValidateJoinNavigations(context);
 
-                Assert.All(
-                    context.ChangeTracker.Entries<JoinOneToThreePayloadFull>(),
-                    e =>
-                        Assert.Equal(
-                            e.Entity.OneId == 1 || e.Entity.ThreeId == 1
-                                ? EntityState.Deleted
-                                : EntityState.Unchanged,
-                            e.State
-                        )
+                Assert.All(context.ChangeTracker.Entries<JoinOneToThreePayloadFull>(), e =>
+                    Assert.Equal(
+                        e.Entity.OneId == 1 || e.Entity.ThreeId == 1
+                            ? EntityState.Deleted
+                            : EntityState.Unchanged,
+                        e.State
+                    )
                 );
 
                 context.SaveChanges();
@@ -5104,9 +5039,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                 {
                     foreach (var leftEntity in leftEntities)
                     {
-                        context.ChangeTracker.TrackGraph(
-                            leftEntity,
-                            n => n.Entry.State = EntityState.Added
+                        context.ChangeTracker.TrackGraph(leftEntity, n =>
+                            n.Entry.State = EntityState.Added
                         );
                     }
                 }
@@ -5278,9 +5212,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                 {
                     foreach (var leftEntity in leftEntities)
                     {
-                        context.ChangeTracker.TrackGraph(
-                            leftEntity,
-                            n => n.Entry.State = EntityState.Added
+                        context.ChangeTracker.TrackGraph(leftEntity, n =>
+                            n.Entry.State = EntityState.Added
                         );
                     }
                 }
@@ -5547,45 +5480,37 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                 context.ChangeTracker.Entries().Count()
             );
 
-            Assert.Contains(
-                leftEntities[0].TwoSkip,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == twoIds[0]
+            Assert.Contains(leftEntities[0].TwoSkip, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == twoIds[0]
             );
-            Assert.Contains(
-                leftEntities[0].TwoSkip,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == twoIds[1]
+            Assert.Contains(leftEntities[0].TwoSkip, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == twoIds[1]
             );
-            Assert.Contains(
-                leftEntities[0].TwoSkip,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == twoIds[2]
+            Assert.Contains(leftEntities[0].TwoSkip, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == twoIds[2]
             );
 
-            Assert.Contains(
-                rightEntities[0].OneSkip,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == oneIds[0]
+            Assert.Contains(rightEntities[0].OneSkip, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == oneIds[0]
             );
-            Assert.Contains(
-                rightEntities[0].OneSkip,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == oneIds[1]
+            Assert.Contains(rightEntities[0].OneSkip, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == oneIds[1]
             );
-            Assert.Contains(
-                rightEntities[0].OneSkip,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == oneIds[2]
+            Assert.Contains(rightEntities[0].OneSkip, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == oneIds[2]
             );
 
             Assert.DoesNotContain(leftEntities[1].TwoSkip, e => e.Name == "EntityTwo 1");
             Assert.DoesNotContain(rightEntities[1].OneSkip, e => e.Name == "EntityOne 1");
 
             Assert.DoesNotContain(leftEntities[2].TwoSkip, e => e.Name == "EntityTwo 1");
-            Assert.Contains(
-                leftEntities[2].TwoSkip,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == twoIds[3]
+            Assert.Contains(leftEntities[2].TwoSkip, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == twoIds[3]
             );
 
             Assert.DoesNotContain(rightEntities[2].OneSkip, e => e.Name == "EntityOne 1");
-            Assert.Contains(
-                rightEntities[2].OneSkip,
-                e => context.Entry(e).Property(e => e.Id).CurrentValue == oneIds[3]
+            Assert.Contains(rightEntities[2].OneSkip, e =>
+                context.Entry(e).Property(e => e.Id).CurrentValue == oneIds[3]
             );
 
             var allLeft = context
@@ -5687,15 +5612,13 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ones.SelectMany(e => e.TwoSkip).Count(e => e == toRemoveTwo)
                 );
 
-                Assert.All(
-                    context.ChangeTracker.Entries<JoinOneToTwo>(),
-                    e =>
-                        Assert.Equal(
-                            e.Entity.OneId == oneId || e.Entity.TwoId == twoId
-                                ? EntityState.Deleted
-                                : EntityState.Unchanged,
-                            e.State
-                        )
+                Assert.All(context.ChangeTracker.Entries<JoinOneToTwo>(), e =>
+                    Assert.Equal(
+                        e.Entity.OneId == oneId || e.Entity.TwoId == twoId
+                            ? EntityState.Deleted
+                            : EntityState.Unchanged,
+                        e.State
+                    )
                 );
 
                 context.SaveChanges();
@@ -5711,9 +5634,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
 
                 ValidateNavigations(ones, twos);
 
-                Assert.DoesNotContain(
-                    context.ChangeTracker.Entries<JoinOneToTwo>(),
-                    e => e.Entity.OneId == oneId || e.Entity.TwoId == twoId
+                Assert.DoesNotContain(context.ChangeTracker.Entries<JoinOneToTwo>(), e =>
+                    e.Entity.OneId == oneId || e.Entity.TwoId == twoId
                 );
             },
             context =>
@@ -5730,9 +5652,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     .ToList();
 
                 ValidateNavigations(ones, twos);
-                Assert.DoesNotContain(
-                    context.ChangeTracker.Entries<JoinOneToTwo>(),
-                    e => e.Entity.OneId == oneId || e.Entity.TwoId == twoId
+                Assert.DoesNotContain(context.ChangeTracker.Entries<JoinOneToTwo>(), e =>
+                    e.Entity.OneId == oneId || e.Entity.TwoId == twoId
                 );
             }
         );
@@ -7911,9 +7832,8 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
 
                                     foreach (var related in snapshotCollection)
                                     {
-                                        Assert.Contains(
-                                            currentCollection,
-                                            c => ReferenceEquals(c, related)
+                                        Assert.Contains(currentCollection, c =>
+                                            ReferenceEquals(c, related)
                                         );
                                     }
                                 }

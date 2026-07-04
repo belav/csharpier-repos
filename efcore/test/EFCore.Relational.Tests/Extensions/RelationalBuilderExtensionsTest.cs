@@ -1107,13 +1107,10 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.HasSequence<int>(
-            "Snook",
-            b =>
-            {
-                b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222);
-            }
-        );
+        modelBuilder.HasSequence<int>("Snook", b =>
+        {
+            b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222);
+        });
 
         var sequence = modelBuilder.Model.FindSequence("Snook");
 
@@ -1125,14 +1122,10 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.HasSequence(
-            typeof(int),
-            "Snook",
-            b =>
-            {
-                b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222);
-            }
-        );
+        modelBuilder.HasSequence(typeof(int), "Snook", b =>
+        {
+            b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222);
+        });
 
         var sequence = modelBuilder.Model.FindSequence("Snook");
 
@@ -1189,10 +1182,8 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.HasSequence<int>(
-            "Snook",
-            "Tasty",
-            b => b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
+        modelBuilder.HasSequence<int>("Snook", "Tasty", b =>
+            b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
         );
 
         var sequence = modelBuilder.Model.FindSequence("Snook", "Tasty");
@@ -1205,11 +1196,8 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.HasSequence(
-            typeof(int),
-            "Snook",
-            "Tasty",
-            b => b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
+        modelBuilder.HasSequence(typeof(int), "Snook", "Tasty", b =>
+            b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
         );
 
         var sequence = modelBuilder.Model.FindSequence("Snook", "Tasty");

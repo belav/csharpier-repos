@@ -153,9 +153,8 @@ internal partial class ConvertInterpolatedStringToRawStringProvider
                 // the user may be invoking this on lots of strings that they have no interest in converting.
                 if (
                     priority == CodeActionPriority.Low
-                    && AllEscapesAre(
-                        characters,
-                        static c => c.Utf16SequenceLength == 1 && (char)c.Value is '"' or '{' or '}'
+                    && AllEscapesAre(characters, static c =>
+                        c.Utf16SequenceLength == 1 && (char)c.Value is '"' or '{' or '}'
                     )
                 )
                 {

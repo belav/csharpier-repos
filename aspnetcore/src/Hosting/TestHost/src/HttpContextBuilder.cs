@@ -55,9 +55,8 @@ internal sealed class HttpContextBuilder : IHttpBodyControlFeature, IHttpResetFe
             ResponseBodyReadComplete
         );
         _responsePipeWriter = new ResponseBodyPipeWriter(responsePipe, ReturnResponseMessageAsync);
-        _responseFeature.Body = new ResponseBodyWriterStream(
-            _responsePipeWriter,
-            () => AllowSynchronousIO
+        _responseFeature.Body = new ResponseBodyWriterStream(_responsePipeWriter, () =>
+            AllowSynchronousIO
         );
         _responseFeature.BodyWriter = _responsePipeWriter;
 

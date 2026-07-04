@@ -19960,13 +19960,10 @@ class Program
                 var l = (MyEmbeddedType t = null) => {};
                 """;
             var comp2 = CreateCompilation(source2, new[] { ref1 });
-            CompileAndVerify(
-                comp2,
-                symbolValidator: static module =>
-                {
-                    Assert.Contains("MyEmbeddedType", module.TypeNames);
-                }
-            );
+            CompileAndVerify(comp2, symbolValidator: static module =>
+            {
+                Assert.Contains("MyEmbeddedType", module.TypeNames);
+            });
         }
 
         [Fact]
@@ -19986,13 +19983,10 @@ class Program
                 var l = (object o = default(MyEmbeddedType)) => {};
                 """;
             var comp2 = CreateCompilation(source2, new[] { ref1 });
-            CompileAndVerify(
-                comp2,
-                symbolValidator: static module =>
-                {
-                    Assert.DoesNotContain("MyEmbeddedType", module.TypeNames);
-                }
-            );
+            CompileAndVerify(comp2, symbolValidator: static module =>
+            {
+                Assert.DoesNotContain("MyEmbeddedType", module.TypeNames);
+            });
         }
 
         [Fact]

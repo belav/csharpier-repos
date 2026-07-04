@@ -11,13 +11,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void CreateCompositionService_NullCatalog_ShouldThrowArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "composablePartCatalog",
-                () =>
-                {
-                    CatalogExtensions.CreateCompositionService(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("composablePartCatalog", () =>
+            {
+                CatalogExtensions.CreateCompositionService(null);
+            });
         }
 
         [Fact]

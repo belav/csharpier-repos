@@ -277,13 +277,11 @@ namespace System.Net.Tests
             using (HttpListenerResponse response = await _helper.GetResponse())
             using (Stream outputStream = response.OutputStream)
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "buffer",
-                    () => outputStream.Write(null, 0, 0)
+                AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+                    outputStream.Write(null, 0, 0)
                 );
-                await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                    "buffer",
-                    () => outputStream.WriteAsync(null, 0, 0)
+                await AssertExtensions.ThrowsAsync<ArgumentNullException>("buffer", () =>
+                    outputStream.WriteAsync(null, 0, 0)
                 );
             }
         }
@@ -603,9 +601,8 @@ namespace System.Net.Tests
             using (HttpListenerResponse response = await _helper.GetResponse())
             using (Stream outputStream = response.OutputStream)
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "asyncResult",
-                    () => outputStream.EndWrite(null)
+                AssertExtensions.Throws<ArgumentNullException>("asyncResult", () =>
+                    outputStream.EndWrite(null)
                 );
             }
         }
@@ -627,13 +624,11 @@ namespace System.Net.Tests
                     null
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "asyncResult",
-                    () => outputStream2.EndWrite(new CustomAsyncResult())
+                AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                    outputStream2.EndWrite(new CustomAsyncResult())
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "asyncResult",
-                    () => outputStream2.EndWrite(beginWriteResult)
+                AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                    outputStream2.EndWrite(beginWriteResult)
                 );
             }
         }

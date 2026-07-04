@@ -212,20 +212,17 @@ namespace System.IO.Ports.Tests
 
         private static void VerifyWriteException(Stream serialStream, Type expectedException)
         {
-            Assert.Throws(
-                expectedException,
-                () =>
-                {
-                    IAsyncResult writeAsyncResult = serialStream.BeginWrite(
-                        new byte[BYTE_SIZE_EXCEPTION],
-                        0,
-                        BYTE_SIZE_EXCEPTION,
-                        null,
-                        null
-                    );
-                    serialStream.EndWrite(writeAsyncResult);
-                }
-            );
+            Assert.Throws(expectedException, () =>
+            {
+                IAsyncResult writeAsyncResult = serialStream.BeginWrite(
+                    new byte[BYTE_SIZE_EXCEPTION],
+                    0,
+                    BYTE_SIZE_EXCEPTION,
+                    null,
+                    null
+                );
+                serialStream.EndWrite(writeAsyncResult);
+            });
         }
 
         private void VerifyTimeout(int writeTimeout)

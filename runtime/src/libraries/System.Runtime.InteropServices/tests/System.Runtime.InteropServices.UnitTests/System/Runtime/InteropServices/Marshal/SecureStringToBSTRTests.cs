@@ -39,9 +39,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SecureStringToBSTR_NullString_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => Marshal.SecureStringToBSTR(null)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                Marshal.SecureStringToBSTR(null)
             );
         }
 

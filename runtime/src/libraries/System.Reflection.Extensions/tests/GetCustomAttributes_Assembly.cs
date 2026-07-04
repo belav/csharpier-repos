@@ -148,13 +148,10 @@ namespace System.Reflection.Tests
             );
             Assert.Null(attribute);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    CustomAttributeExtensions.GetCustomAttributes(thisAsm, typeof(string));
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                CustomAttributeExtensions.GetCustomAttributes(thisAsm, typeof(string));
+            });
 
             attribute = CustomAttributeExtensions.GetCustomAttribute<MyAttribute_Single>(thisAsm);
             Assert.Equal("System.Reflection.Tests.MyAttribute_Single single", attribute.ToString());

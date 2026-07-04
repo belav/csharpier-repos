@@ -416,18 +416,16 @@ D9fVWpuVzYpEDfZm"
         [Fact]
         public static void CreateNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "privateKey",
-                () => Pkcs8PrivateKeyInfo.Create(null)
+            AssertExtensions.Throws<ArgumentNullException>("privateKey", () =>
+                Pkcs8PrivateKeyInfo.Create(null)
             );
         }
 
         [Fact]
         public static void NullAlgorithm()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "algorithmId",
-                () => new Pkcs8PrivateKeyInfo(null, null, ReadOnlyMemory<byte>.Empty)
+            AssertExtensions.Throws<ArgumentNullException>("algorithmId", () =>
+                new Pkcs8PrivateKeyInfo(null, null, ReadOnlyMemory<byte>.Empty)
             );
         }
 

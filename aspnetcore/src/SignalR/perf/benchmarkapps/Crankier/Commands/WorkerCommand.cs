@@ -14,42 +14,39 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
     {
         public static void Register(CommandLineApplication app)
         {
-            app.Command(
-                "worker",
-                cmd =>
+            app.Command("worker", cmd =>
+            {
+                var agentOption = cmd.Option(
+                    "--agent <PARENT_PID>",
+                    "The process ID of the agent controlling this worker",
+                    CommandOptionType.SingleValue
+                );
+                var waitForDebuggerOption = cmd.Option(
+                    "--wait-for-debugger",
+                    "Provide this flag to have the worker wait for the debugger.",
+                    CommandOptionType.NoValue
+                );
+
+                cmd.OnExecute(async () =>
                 {
-                    var agentOption = cmd.Option(
-                        "--agent <PARENT_PID>",
-                        "The process ID of the agent controlling this worker",
-                        CommandOptionType.SingleValue
-                    );
-                    var waitForDebuggerOption = cmd.Option(
-                        "--wait-for-debugger",
-                        "Provide this flag to have the worker wait for the debugger.",
-                        CommandOptionType.NoValue
-                    );
-
-                    cmd.OnExecute(async () =>
+                    if (!agentOption.HasValue())
                     {
-                        if (!agentOption.HasValue())
-                        {
-                            return MissingRequiredArg(agentOption);
-                        }
+                        return MissingRequiredArg(agentOption);
+                    }
 
-                        if (!int.TryParse(agentOption.Value(), out var agentPid))
-                        {
-                            return InvalidArg(agentOption);
-                        }
+                    if (!int.TryParse(agentOption.Value(), out var agentPid))
+                    {
+                        return InvalidArg(agentOption);
+                    }
 
-                        if (waitForDebuggerOption.HasValue())
-                        {
-                            SpinWait.SpinUntil(() => Debugger.IsAttached);
-                        }
+                    if (waitForDebuggerOption.HasValue())
+                    {
+                        SpinWait.SpinUntil(() => Debugger.IsAttached);
+                    }
 
-                        return await Execute(agentPid);
-                    });
-                }
-            );
+                    return await Execute(agentPid);
+                });
+            });
         }
 
         private static async Task<int> Execute(int agentPid)

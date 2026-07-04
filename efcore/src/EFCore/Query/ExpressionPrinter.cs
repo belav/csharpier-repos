@@ -1022,13 +1022,10 @@ public class ExpressionPrinter : ExpressionVisitor
     {
         Visit(indexExpression.Object);
         _stringBuilder.Append("[");
-        VisitArguments(
-            indexExpression.Arguments,
-            s =>
-            {
-                _stringBuilder.Append(s);
-            }
-        );
+        VisitArguments(indexExpression.Arguments, s =>
+        {
+            _stringBuilder.Append(s);
+        });
         _stringBuilder.Append("]");
 
         return indexExpression;

@@ -188,9 +188,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             Stream stream = MakeResponseStream();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "buffer",
-                () => stream.Read(new byte[1], int.MaxValue, int.MaxValue)
+            AssertExtensions.Throws<ArgumentException>("buffer", () =>
+                stream.Read(new byte[1], int.MaxValue, int.MaxValue)
             );
         }
 

@@ -3417,10 +3417,8 @@ namespace System.Transactions
 
         private static WaitCallback? s_signalMethod;
         private static WaitCallback SignalMethod =>
-            LazyInitializer.EnsureInitialized(
-                ref s_signalMethod,
-                ref s_classSyncObject,
-                () => new WaitCallback(SignalCallback!)
+            LazyInitializer.EnsureInitialized(ref s_signalMethod, ref s_classSyncObject, () =>
+                new WaitCallback(SignalCallback!)
             );
 
         private static void SignalCallback(object state)
@@ -4694,10 +4692,8 @@ namespace System.Transactions
 
         private static WaitCallback? s_signalMethod;
         private static WaitCallback SignalMethod =>
-            LazyInitializer.EnsureInitialized(
-                ref s_signalMethod,
-                ref s_classSyncObject,
-                () => new WaitCallback(SignalCallback!)
+            LazyInitializer.EnsureInitialized(ref s_signalMethod, ref s_classSyncObject, () =>
+                new WaitCallback(SignalCallback!)
             );
 
         private static void SignalCallback(object state)

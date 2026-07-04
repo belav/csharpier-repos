@@ -785,9 +785,8 @@ public class CosmosClientWrapper : ICosmosClientWrapper
         var container = Client.GetDatabase(_databaseId).GetContainer(containerId);
         var queryDefinition = new QueryDefinition(query.Query);
 
-        queryDefinition = query.Parameters.Aggregate(
-            queryDefinition,
-            (current, parameter) => current.WithParameter(parameter.Name, parameter.Value)
+        queryDefinition = query.Parameters.Aggregate(queryDefinition, (current, parameter) =>
+            current.WithParameter(parameter.Name, parameter.Value)
         );
 
         if (string.IsNullOrEmpty(partitionKey))

@@ -36,9 +36,8 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(TestEventHandler)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () => ev.SetCustomAttribute(null, new byte[256])
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                ev.SetCustomAttribute(null, new byte[256])
             );
         }
 
@@ -55,9 +54,8 @@ namespace System.Reflection.Emit.Tests
                 new Type[0]
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "binaryAttribute",
-                () => eventBuilder.SetCustomAttribute(attributeConstructor, null)
+            AssertExtensions.Throws<ArgumentNullException>("binaryAttribute", () =>
+                eventBuilder.SetCustomAttribute(attributeConstructor, null)
             );
         }
 
@@ -110,9 +108,8 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(TestEventHandler)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "customBuilder",
-                () => eventBuilder.SetCustomAttribute(null)
+            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () =>
+                eventBuilder.SetCustomAttribute(null)
             );
         }
 

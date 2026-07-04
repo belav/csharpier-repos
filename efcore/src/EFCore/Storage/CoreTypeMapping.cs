@@ -264,10 +264,8 @@ public abstract class CoreTypeMapping
     ///     and/or need a deep copy when taking a snapshot.
     /// </summary>
     public virtual ValueComparer Comparer =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _comparer,
-            this,
-            static c => ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: false)
+        NonCapturingLazyInitializer.EnsureInitialized(ref _comparer, this, static c =>
+            ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: false)
         );
 
     /// <summary>
@@ -275,26 +273,21 @@ public abstract class CoreTypeMapping
     ///     comparing key values to each other. For example, when comparing a PK to and FK.
     /// </summary>
     public virtual ValueComparer KeyComparer =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _keyComparer,
-            this,
-            static c => ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: true)
+        NonCapturingLazyInitializer.EnsureInitialized(ref _keyComparer, this, static c =>
+            ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: true)
         );
 
     /// <summary>
     ///     A <see cref="ValueComparer" /> for the provider CLR type values.
     /// </summary>
     public virtual ValueComparer ProviderValueComparer =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _providerValueComparer,
-            this,
-            static c =>
-                (c.Converter?.ProviderClrType ?? c.ClrType) == c.ClrType
-                    ? c.KeyComparer
-                    : ValueComparer.CreateDefault(
-                        c.Converter!.ProviderClrType,
-                        favorStructuralComparisons: true
-                    )
+        NonCapturingLazyInitializer.EnsureInitialized(ref _providerValueComparer, this, static c =>
+            (c.Converter?.ProviderClrType ?? c.ClrType) == c.ClrType
+                ? c.KeyComparer
+                : ValueComparer.CreateDefault(
+                    c.Converter!.ProviderClrType,
+                    favorStructuralComparisons: true
+                )
         );
 
     /// <summary>

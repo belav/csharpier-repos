@@ -456,9 +456,8 @@ MII
         [Fact]
         public static void CreateFromPemFile_Null_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "certPemFilePath",
-                () => X509Certificate2.CreateFromPemFile(null)
+            AssertExtensions.Throws<ArgumentNullException>("certPemFilePath", () =>
+                X509Certificate2.CreateFromPemFile(null)
             );
         }
 
@@ -544,9 +543,8 @@ MII
         [Fact]
         public static void CreateFromEncryptedPemFile_Null_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "certPemFilePath",
-                () => X509Certificate2.CreateFromEncryptedPemFile(null, default)
+            AssertExtensions.Throws<ArgumentNullException>("certPemFilePath", () =>
+                X509Certificate2.CreateFromEncryptedPemFile(null, default)
             );
         }
 

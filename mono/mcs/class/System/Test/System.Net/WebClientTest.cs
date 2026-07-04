@@ -1650,9 +1650,8 @@ namespace MonoTests.System.Net
         public void UploadValues1()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -2090,19 +2089,16 @@ namespace MonoTests.System.Net
 #endif
         public void UploadStringAsyncCancelEvent()
         {
-            UploadAsyncCancelEventTest(
-                9301,
-                (webClient, uri, cancelEvent) =>
+            UploadAsyncCancelEventTest(9301, (webClient, uri, cancelEvent) =>
+            {
+                webClient.UploadStringCompleted += (sender, args) =>
                 {
-                    webClient.UploadStringCompleted += (sender, args) =>
-                    {
-                        if (args.Cancelled)
-                            cancelEvent.Set();
-                    };
+                    if (args.Cancelled)
+                        cancelEvent.Set();
+                };
 
-                    webClient.UploadStringAsync(uri, "PUT", "text");
-                }
-            );
+                webClient.UploadStringAsync(uri, "PUT", "text");
+            });
         }
 
         [Test]
@@ -2112,19 +2108,16 @@ namespace MonoTests.System.Net
 #endif
         public void UploadDataAsyncCancelEvent()
         {
-            UploadAsyncCancelEventTest(
-                9302,
-                (webClient, uri, cancelEvent) =>
+            UploadAsyncCancelEventTest(9302, (webClient, uri, cancelEvent) =>
+            {
+                webClient.UploadDataCompleted += (sender, args) =>
                 {
-                    webClient.UploadDataCompleted += (sender, args) =>
-                    {
-                        if (args.Cancelled)
-                            cancelEvent.Set();
-                    };
+                    if (args.Cancelled)
+                        cancelEvent.Set();
+                };
 
-                    webClient.UploadDataAsync(uri, "PUT", new byte[] { });
-                }
-            );
+                webClient.UploadDataAsync(uri, "PUT", new byte[] { });
+            });
         }
 
         [Test]
@@ -2134,19 +2127,16 @@ namespace MonoTests.System.Net
 #endif
         public void UploadValuesAsyncCancelEvent()
         {
-            UploadAsyncCancelEventTest(
-                9303,
-                (webClient, uri, cancelEvent) =>
+            UploadAsyncCancelEventTest(9303, (webClient, uri, cancelEvent) =>
+            {
+                webClient.UploadValuesCompleted += (sender, args) =>
                 {
-                    webClient.UploadValuesCompleted += (sender, args) =>
-                    {
-                        if (args.Cancelled)
-                            cancelEvent.Set();
-                    };
+                    if (args.Cancelled)
+                        cancelEvent.Set();
+                };
 
-                    webClient.UploadValuesAsync(uri, "PUT", new NameValueCollection());
-                }
-            );
+                webClient.UploadValuesAsync(uri, "PUT", new NameValueCollection());
+            });
         }
 
         [Test]
@@ -2156,21 +2146,18 @@ namespace MonoTests.System.Net
 #endif
         public void UploadFileAsyncCancelEvent()
         {
-            UploadAsyncCancelEventTest(
-                9304,
-                (webClient, uri, cancelEvent) =>
+            UploadAsyncCancelEventTest(9304, (webClient, uri, cancelEvent) =>
+            {
+                string tempFile = Path.GetTempFileName();
+
+                webClient.UploadFileCompleted += (sender, args) =>
                 {
-                    string tempFile = Path.GetTempFileName();
+                    if (args.Cancelled)
+                        cancelEvent.Set();
+                };
 
-                    webClient.UploadFileCompleted += (sender, args) =>
-                    {
-                        if (args.Cancelled)
-                            cancelEvent.Set();
-                    };
-
-                    webClient.UploadFileAsync(uri, "PUT", tempFile);
-                }
-            );
+                webClient.UploadFileAsync(uri, "PUT", tempFile);
+            });
         }
 
         [Test]

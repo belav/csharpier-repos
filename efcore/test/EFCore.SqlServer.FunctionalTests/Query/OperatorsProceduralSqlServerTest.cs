@@ -52,17 +52,14 @@ public class OperatorsProceduralSqlServerTest : OperatorsProceduralQueryTestBase
         );
 
         Unaries.Add(
-            (
-                typeof(DateTimeOffset),
-                typeof(DateTimeOffset),
-                x =>
-                    Expression.Call(
-                        null,
-                        AtTimeZoneDateTimeOffsetMethodInfo,
-                        Expression.Constant(EF.Functions),
-                        x,
-                        Expression.Constant("UTC")
-                    )
+            (typeof(DateTimeOffset), typeof(DateTimeOffset), x =>
+                Expression.Call(
+                    null,
+                    AtTimeZoneDateTimeOffsetMethodInfo,
+                    Expression.Constant(EF.Functions),
+                    x,
+                    Expression.Constant("UTC")
+                )
             )
         );
 

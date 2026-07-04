@@ -375,9 +375,8 @@ namespace System.IO.Ports.Tests
 
         private static void VerifyWriteException(Stream serialStream, Type expectedException)
         {
-            Assert.Throws(
-                expectedException,
-                () => serialStream.Write(new byte[BYTE_SIZE_EXCEPTION], 0, BYTE_SIZE_EXCEPTION)
+            Assert.Throws(expectedException, () =>
+                serialStream.Write(new byte[BYTE_SIZE_EXCEPTION], 0, BYTE_SIZE_EXCEPTION)
             );
         }
 

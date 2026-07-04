@@ -30,13 +30,10 @@ namespace System.Xml.Linq.Tests
             Assert.Equal(xatt.Value, xattrPD.GetValue(xatt));
 
             bool valueChanged = false;
-            xattrPD.AddValueChanged(
-                xatt,
-                (o, e) =>
-                {
-                    valueChanged = true;
-                }
-            );
+            xattrPD.AddValueChanged(xatt, (o, e) =>
+            {
+                valueChanged = true;
+            });
             var newValue = "SomeNewValue";
             xattrPD.SetValue(xatt, newValue);
 
@@ -60,13 +57,10 @@ namespace System.Xml.Linq.Tests
             Assert.False(xelAttPD.ShouldSerializeValue(xel));
 
             bool valueChanged = false;
-            xelAttPD.AddValueChanged(
-                xel,
-                (o, e) =>
-                {
-                    valueChanged = true;
-                }
-            );
+            xelAttPD.AddValueChanged(xel, (o, e) =>
+            {
+                valueChanged = true;
+            });
 
             var attr1 = new XAttribute("attr1", "value");
             xel.Add(attr1);
@@ -147,13 +141,10 @@ namespace System.Xml.Linq.Tests
             var dess = (IEnumerable<XElement>)xelDesPD.GetValue(xel);
 
             bool valueChanged = false;
-            xelDesPD.AddValueChanged(
-                xel,
-                (o, e) =>
-                {
-                    valueChanged = true;
-                }
-            );
+            xelDesPD.AddValueChanged(xel, (o, e) =>
+            {
+                valueChanged = true;
+            });
 
             xel.Add(
                 new XElement("c1", new XElement("gc1", new XElement("ggc1"))),
@@ -183,13 +174,10 @@ namespace System.Xml.Linq.Tests
             Assert.False(xelElPD.ShouldSerializeValue(xel));
 
             bool valueChanged = false;
-            xelElPD.AddValueChanged(
-                xel,
-                (o, e) =>
-                {
-                    valueChanged = true;
-                }
-            );
+            xelElPD.AddValueChanged(xel, (o, e) =>
+            {
+                valueChanged = true;
+            });
 
             var el1 = new XElement("el1");
             xel.Add(el1);
@@ -270,13 +258,10 @@ namespace System.Xml.Linq.Tests
             var els = (IEnumerable<XElement>)xelElsPD.GetValue(xel);
 
             bool valueChanged = false;
-            xelElsPD.AddValueChanged(
-                xel,
-                (o, e) =>
-                {
-                    valueChanged = true;
-                }
-            );
+            xelElsPD.AddValueChanged(xel, (o, e) =>
+            {
+                valueChanged = true;
+            });
 
             xel.Add(new XElement("c1"), new XElement("c2"));
             Assert.True(valueChanged);
@@ -306,13 +291,10 @@ namespace System.Xml.Linq.Tests
             Assert.Equal(xel.Value, xelValPD.GetValue(xel));
 
             bool valueChanged = false;
-            xelValPD.AddValueChanged(
-                xel,
-                (o, e) =>
-                {
-                    valueChanged = true;
-                }
-            );
+            xelValPD.AddValueChanged(xel, (o, e) =>
+            {
+                valueChanged = true;
+            });
             var newValue = "SomeNewValue";
             xelValPD.SetValue(xel, newValue);
 
@@ -343,13 +325,10 @@ namespace System.Xml.Linq.Tests
             Assert.Equal(xel.ToString(), xelXmlPD.GetValue(xel));
 
             bool valueChanged = false;
-            xelXmlPD.AddValueChanged(
-                xel,
-                (o, e) =>
-                {
-                    valueChanged = true;
-                }
-            );
+            xelXmlPD.AddValueChanged(xel, (o, e) =>
+            {
+                valueChanged = true;
+            });
             xel.Value = "abc123";
             Assert.True(valueChanged);
             Assert.Equal(xel.ToString(), xelXmlPD.GetValue(xel));

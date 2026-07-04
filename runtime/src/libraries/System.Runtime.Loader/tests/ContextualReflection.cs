@@ -647,9 +647,8 @@ namespace System.Runtime.Loader.Tests
         [Fact]
         void EnterContextualReflectionWithMockAssemblyThrows()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "activating",
-                () => AssemblyLoadContext.EnterContextualReflection(new MockAssembly())
+            AssertExtensions.Throws<ArgumentException>("activating", () =>
+                AssemblyLoadContext.EnterContextualReflection(new MockAssembly())
             );
         }
         #endregion

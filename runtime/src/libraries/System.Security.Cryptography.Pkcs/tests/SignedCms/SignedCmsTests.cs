@@ -157,14 +157,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms();
             cms.Decode(SignedDocuments.RsaPssDocument);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "extraStore",
-                () => cms.CheckSignature(null, true)
+            AssertExtensions.Throws<ArgumentNullException>("extraStore", () =>
+                cms.CheckSignature(null, true)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "extraStore",
-                () => cms.CheckSignature(null, false)
+            AssertExtensions.Throws<ArgumentNullException>("extraStore", () =>
+                cms.CheckSignature(null, false)
             );
         }
 
@@ -323,9 +321,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms cms = new SignedCms();
             cms.Decode(SignedDocuments.RsaPkcs1OneSignerIssuerAndSerialNumber);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "signerInfo",
-                () => cms.RemoveSignature(null)
+            AssertExtensions.Throws<ArgumentNullException>("signerInfo", () =>
+                cms.RemoveSignature(null)
             );
 
             Assert.Single(cms.SignerInfos);
@@ -347,9 +344,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Single(cms.SignerInfos);
             Assert.Single(cms.Certificates);
 
-            ex = AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => cms.RemoveSignature(1)
+            ex = AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                cms.RemoveSignature(1)
             );
 
             Assert.Null(ex.ActualValue);

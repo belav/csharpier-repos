@@ -204,70 +204,57 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullTitle_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "title",
-                () => new ResourceCollectionInfo((string)null, new Uri("http://microsoft.com"))
+            AssertExtensions.Throws<ArgumentNullException>("title", () =>
+                new ResourceCollectionInfo((string)null, new Uri("http://microsoft.com"))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "title",
-                () =>
-                    new ResourceCollectionInfo(
-                        (TextSyndicationContent)null,
-                        new Uri("http://microsoft.com")
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("title", () =>
+                new ResourceCollectionInfo(
+                    (TextSyndicationContent)null,
+                    new Uri("http://microsoft.com")
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "title",
-                () =>
-                    new ResourceCollectionInfo(
-                        null,
-                        new Uri("http://microsoft.com"),
-                        new CategoriesDocument[0],
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("title", () =>
+                new ResourceCollectionInfo(
+                    null,
+                    new Uri("http://microsoft.com"),
+                    new CategoriesDocument[0],
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "title",
-                () =>
-                    new ResourceCollectionInfo(
-                        null,
-                        new Uri("http://microsoft.com"),
-                        new CategoriesDocument[0],
-                        new string[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("title", () =>
+                new ResourceCollectionInfo(
+                    null,
+                    new Uri("http://microsoft.com"),
+                    new CategoriesDocument[0],
+                    new string[0]
+                )
             );
         }
 
         [Fact]
         public void Ctor_NullLink_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "link",
-                () => new ResourceCollectionInfo("title", null)
+            AssertExtensions.Throws<ArgumentNullException>("link", () =>
+                new ResourceCollectionInfo("title", null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "link",
-                () => new ResourceCollectionInfo(new TextSyndicationContent("title"), null)
+            AssertExtensions.Throws<ArgumentNullException>("link", () =>
+                new ResourceCollectionInfo(new TextSyndicationContent("title"), null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "link",
-                () =>
-                    new ResourceCollectionInfo(
-                        new TextSyndicationContent("title"),
-                        null,
-                        new CategoriesDocument[0],
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("link", () =>
+                new ResourceCollectionInfo(
+                    new TextSyndicationContent("title"),
+                    null,
+                    new CategoriesDocument[0],
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "link",
-                () =>
-                    new ResourceCollectionInfo(
-                        new TextSyndicationContent("title"),
-                        null,
-                        new CategoriesDocument[0],
-                        new string[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("link", () =>
+                new ResourceCollectionInfo(
+                    new TextSyndicationContent("title"),
+                    null,
+                    new CategoriesDocument[0],
+                    new string[0]
+                )
             );
         }
 
@@ -275,25 +262,21 @@ namespace System.ServiceModel.Syndication.Tests
         public void Ctor_NullValueInCategories_ThrowsArgumentNullException()
         {
             var categories = new CategoriesDocument[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () =>
-                    new ResourceCollectionInfo(
-                        new TextSyndicationContent("title"),
-                        new Uri("http://microsoft.com"),
-                        categories,
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                new ResourceCollectionInfo(
+                    new TextSyndicationContent("title"),
+                    new Uri("http://microsoft.com"),
+                    categories,
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () =>
-                    new ResourceCollectionInfo(
-                        new TextSyndicationContent("title"),
-                        new Uri("http://microsoft.com"),
-                        categories,
-                        new string[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                new ResourceCollectionInfo(
+                    new TextSyndicationContent("title"),
+                    new Uri("http://microsoft.com"),
+                    categories,
+                    new string[0]
+                )
             );
         }
 
@@ -301,15 +284,13 @@ namespace System.ServiceModel.Syndication.Tests
         public void Ctor_NullValueInAccepts_ThrowsArgumentNullException()
         {
             var accepts = new string[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () =>
-                    new ResourceCollectionInfo(
-                        new TextSyndicationContent("title"),
-                        new Uri("http://microsoft.com"),
-                        new CategoriesDocument[0],
-                        accepts
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                new ResourceCollectionInfo(
+                    new TextSyndicationContent("title"),
+                    new Uri("http://microsoft.com"),
+                    new CategoriesDocument[0],
+                    accepts
+                )
             );
         }
 
@@ -451,9 +432,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Invoke_ReturnsExpected(string version)
         {
             var collectionInfo = new ResourceCollectionInfoSubclass();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => collectionInfo.WriteAttributeExtensionsEntryPoint(writer, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                collectionInfo.WriteAttributeExtensionsEntryPoint(writer, version)
             );
 
             collectionInfo.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
@@ -469,9 +449,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var collectionInfo = new ResourceCollectionInfoSubclass();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => collectionInfo.WriteAttributeExtensionsEntryPoint(null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                collectionInfo.WriteAttributeExtensionsEntryPoint(null, "version")
             );
         }
 
@@ -482,9 +461,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Invoke_ReturnsExpected(string version)
         {
             var collectionInfo = new ResourceCollectionInfoSubclass();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => collectionInfo.WriteElementExtensionsEntryPoint(writer, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                collectionInfo.WriteElementExtensionsEntryPoint(writer, version)
             );
 
             collectionInfo.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -504,9 +482,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var collectionInfo = new ResourceCollectionInfoSubclass();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => collectionInfo.WriteElementExtensionsEntryPoint(null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                collectionInfo.WriteElementExtensionsEntryPoint(null, "version")
             );
         }
 

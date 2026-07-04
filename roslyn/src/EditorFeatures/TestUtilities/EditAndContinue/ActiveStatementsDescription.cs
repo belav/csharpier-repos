@@ -134,52 +134,49 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var exceptionRegionMarkers = SourceMarkers.GetExceptionRegions(markedSource);
 
             return activeStatementMarkers
-                .Aggregate(
-                    new List<UnmappedActiveStatement>(),
-                    (list, marker) =>
-                    {
-                        var (unmappedSpan, ordinal) = marker;
-                        var mappedSpan = tree.GetMappedLineSpan(unmappedSpan);
-                        var documentActiveStatements = documentMap.GetOrAdd(
-                            mappedSpan.Path,
-                            path => new List<ActiveStatement>()
-                        );
+                .Aggregate(new List<UnmappedActiveStatement>(), (list, marker) =>
+                {
+                    var (unmappedSpan, ordinal) = marker;
+                    var mappedSpan = tree.GetMappedLineSpan(unmappedSpan);
+                    var documentActiveStatements = documentMap.GetOrAdd(
+                        mappedSpan.Path,
+                        path => new List<ActiveStatement>()
+                    );
 
-                        var statementFlags =
-                            (flags != null)
-                                ? flags[ordinal]
-                                : (
-                                    (ordinal == 0)
-                                        ? ActiveStatementFlags.LeafFrame
-                                        : ActiveStatementFlags.NonLeafFrame
-                                ) | ActiveStatementFlags.MethodUpToDate;
+                    var statementFlags =
+                        (flags != null)
+                            ? flags[ordinal]
+                            : (
+                                (ordinal == 0)
+                                    ? ActiveStatementFlags.LeafFrame
+                                    : ActiveStatementFlags.NonLeafFrame
+                            ) | ActiveStatementFlags.MethodUpToDate;
 
-                        var exceptionRegions =
-                            (ordinal < exceptionRegionMarkers.Length)
-                                ? exceptionRegionMarkers[ordinal]
-                                    .SelectAsArray(unmappedRegionSpan =>
-                                        (SourceFileSpan)tree.GetMappedLineSpan(unmappedRegionSpan)
-                                    )
-                                : ImmutableArray<SourceFileSpan>.Empty;
+                    var exceptionRegions =
+                        (ordinal < exceptionRegionMarkers.Length)
+                            ? exceptionRegionMarkers[ordinal]
+                                .SelectAsArray(unmappedRegionSpan =>
+                                    (SourceFileSpan)tree.GetMappedLineSpan(unmappedRegionSpan)
+                                )
+                            : ImmutableArray<SourceFileSpan>.Empty;
 
-                        var unmappedActiveStatement = new UnmappedActiveStatement(
-                            unmappedSpan,
-                            new ActiveStatement(
-                                ordinal,
-                                statementFlags,
-                                mappedSpan,
-                                instructionId: default
-                            ),
-                            new ActiveStatementExceptionRegions(
-                                exceptionRegions,
-                                isActiveStatementCovered: true
-                            )
-                        );
+                    var unmappedActiveStatement = new UnmappedActiveStatement(
+                        unmappedSpan,
+                        new ActiveStatement(
+                            ordinal,
+                            statementFlags,
+                            mappedSpan,
+                            instructionId: default
+                        ),
+                        new ActiveStatementExceptionRegions(
+                            exceptionRegions,
+                            isActiveStatementCovered: true
+                        )
+                    );
 
-                        documentActiveStatements.Add(unmappedActiveStatement.Statement);
-                        return SourceMarkers.SetListItem(list, ordinal, unmappedActiveStatement);
-                    }
-                )
+                    documentActiveStatements.Add(unmappedActiveStatement.Statement);
+                    return SourceMarkers.SetListItem(list, ordinal, unmappedActiveStatement);
+                })
                 .ToImmutableArray();
         }
 

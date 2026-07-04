@@ -931,85 +931,79 @@ public class A
     ~A() { }
 }
 ";
-            CompileAndVerify(
-                text,
-                assemblyValidator: (assembly) =>
-                {
-                    var peFileReader = assembly.GetMetadataReader();
+            CompileAndVerify(text, assemblyValidator: (assembly) =>
+            {
+                var peFileReader = assembly.GetMetadataReader();
 
-                    // Find the handle and row for A.
-                    var pairA = peFileReader
-                        .TypeDefinitions.AsEnumerable()
-                        .Select(handle => new
-                        {
-                            handle = handle,
-                            row = peFileReader.GetTypeDefinition(handle),
-                        })
-                        .Single(pair =>
-                            peFileReader.GetString(pair.row.Name) == "A"
-                            && string.IsNullOrEmpty(peFileReader.GetString(pair.row.Namespace))
-                        );
-                    TypeDefinitionHandle handleA = pairA.handle;
-                    TypeDefinition typeA = pairA.row;
+                // Find the handle and row for A.
+                var pairA = peFileReader
+                    .TypeDefinitions.AsEnumerable()
+                    .Select(handle => new
+                    {
+                        handle = handle,
+                        row = peFileReader.GetTypeDefinition(handle),
+                    })
+                    .Single(pair =>
+                        peFileReader.GetString(pair.row.Name) == "A"
+                        && string.IsNullOrEmpty(peFileReader.GetString(pair.row.Namespace))
+                    );
+                TypeDefinitionHandle handleA = pairA.handle;
+                TypeDefinition typeA = pairA.row;
 
-                    // Find the handle for A's destructor.
-                    MethodDefinitionHandle handleDestructorA = typeA
-                        .GetMethods()
-                        .AsEnumerable()
-                        .Single(handle =>
-                            peFileReader.GetString(peFileReader.GetMethodDefinition(handle).Name)
-                            == WellKnownMemberNames.DestructorName
-                        );
-
-                    // Find the handle for System.Object.
-                    TypeReferenceHandle handleObject = peFileReader
-                        .TypeReferences.AsEnumerable()
-                        .Select(handle => new
-                        {
-                            handle = handle,
-                            row = peFileReader.GetTypeReference(handle),
-                        })
-                        .Single(pair =>
-                            peFileReader.GetString(pair.row.Name) == "Object"
-                            && peFileReader.GetString(pair.row.Namespace) == "System"
-                        )
-                        .handle;
-
-                    // Find the handle for System.Object's destructor.
-                    MemberReferenceHandle handleDestructorObject = peFileReader
-                        .MemberReferences.AsEnumerable()
-                        .Select(handle => new
-                        {
-                            handle = handle,
-                            row = peFileReader.GetMemberReference(handle),
-                        })
-                        .Single(pair =>
-                            pair.row.Parent == (EntityHandle)handleObject
-                            && peFileReader.GetString(pair.row.Name)
-                                == WellKnownMemberNames.DestructorName
-                        )
-                        .handle;
-
-                    // Find the MethodImpl row for A.
-                    MethodImplementation methodImpl = typeA
-                        .GetMethodImplementations()
-                        .AsEnumerable()
-                        .Select(handle => peFileReader.GetMethodImplementation(handle))
-                        .Single();
-
-                    // The Class column should point to A.
-                    Assert.Equal(handleA, methodImpl.Type);
-
-                    // The MethodDeclaration column should point to System.Object.Finalize.
-                    Assert.Equal(
-                        (EntityHandle)handleDestructorObject,
-                        methodImpl.MethodDeclaration
+                // Find the handle for A's destructor.
+                MethodDefinitionHandle handleDestructorA = typeA
+                    .GetMethods()
+                    .AsEnumerable()
+                    .Single(handle =>
+                        peFileReader.GetString(peFileReader.GetMethodDefinition(handle).Name)
+                        == WellKnownMemberNames.DestructorName
                     );
 
-                    // The MethodDeclarationColumn should point to A's destructor.
-                    Assert.Equal((EntityHandle)handleDestructorA, methodImpl.MethodBody);
-                }
-            );
+                // Find the handle for System.Object.
+                TypeReferenceHandle handleObject = peFileReader
+                    .TypeReferences.AsEnumerable()
+                    .Select(handle => new
+                    {
+                        handle = handle,
+                        row = peFileReader.GetTypeReference(handle),
+                    })
+                    .Single(pair =>
+                        peFileReader.GetString(pair.row.Name) == "Object"
+                        && peFileReader.GetString(pair.row.Namespace) == "System"
+                    )
+                    .handle;
+
+                // Find the handle for System.Object's destructor.
+                MemberReferenceHandle handleDestructorObject = peFileReader
+                    .MemberReferences.AsEnumerable()
+                    .Select(handle => new
+                    {
+                        handle = handle,
+                        row = peFileReader.GetMemberReference(handle),
+                    })
+                    .Single(pair =>
+                        pair.row.Parent == (EntityHandle)handleObject
+                        && peFileReader.GetString(pair.row.Name)
+                            == WellKnownMemberNames.DestructorName
+                    )
+                    .handle;
+
+                // Find the MethodImpl row for A.
+                MethodImplementation methodImpl = typeA
+                    .GetMethodImplementations()
+                    .AsEnumerable()
+                    .Select(handle => peFileReader.GetMethodImplementation(handle))
+                    .Single();
+
+                // The Class column should point to A.
+                Assert.Equal(handleA, methodImpl.Type);
+
+                // The MethodDeclaration column should point to System.Object.Finalize.
+                Assert.Equal((EntityHandle)handleDestructorObject, methodImpl.MethodDeclaration);
+
+                // The MethodDeclarationColumn should point to A's destructor.
+                Assert.Equal((EntityHandle)handleDestructorA, methodImpl.MethodBody);
+            });
         }
 
         private static Action<ModuleSymbol> GetDestructorValidator(string typeName)

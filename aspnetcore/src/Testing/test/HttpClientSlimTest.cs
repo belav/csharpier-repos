@@ -38,10 +38,8 @@ public class HttpClientSlimTest
     public async Task PostAsyncHttp()
     {
         using (
-            var host = StartHost(
-                out var address,
-                handler: context =>
-                    context.Request.InputStream.CopyToAsync(context.Response.OutputStream)
+            var host = StartHost(out var address, handler: context =>
+                context.Request.InputStream.CopyToAsync(context.Response.OutputStream)
             )
         )
         {

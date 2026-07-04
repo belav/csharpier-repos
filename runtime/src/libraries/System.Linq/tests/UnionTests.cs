@@ -127,9 +127,8 @@ namespace System.Linq.Tests
             string[] first = null;
             string[] second = { "ttaM", "Charlie", "Bbo" };
 
-            var ane = AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => first.Union(second, new AnagramEqualityComparer())
+            var ane = AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                first.Union(second, new AnagramEqualityComparer())
             );
         }
 
@@ -139,9 +138,8 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Robert", "Tim", "Matt", "miT" };
             string[] second = null;
 
-            var ane = AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.Union(second, new AnagramEqualityComparer())
+            var ane = AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.Union(second, new AnagramEqualityComparer())
             );
         }
 
@@ -151,9 +149,8 @@ namespace System.Linq.Tests
             string[] first = null;
             string[] second = { "ttaM", "Charlie", "Bbo" };
 
-            var ane = AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => first.Union(second)
+            var ane = AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                first.Union(second)
             );
         }
 
@@ -163,9 +160,8 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Robert", "Tim", "Matt", "miT" };
             string[] second = null;
 
-            var ane = AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.Union(second)
+            var ane = AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.Union(second)
             );
         }
 
@@ -511,13 +507,11 @@ namespace System.Linq.Tests
             string[] first = null;
             string[] second = { "bBo", "shriC" };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => first.UnionBy(second, x => x)
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                first.UnionBy(second, x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => first.UnionBy(second, x => x, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                first.UnionBy(second, x => x, new AnagramEqualityComparer())
             );
         }
 
@@ -527,13 +521,11 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Tim", "Robert", "Chris" };
             string[] second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.UnionBy(second, x => x)
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.UnionBy(second, x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.UnionBy(second, x => x, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.UnionBy(second, x => x, new AnagramEqualityComparer())
             );
         }
 
@@ -544,13 +536,11 @@ namespace System.Linq.Tests
             string[] second = { "bBo", "shriC" };
             Func<string, string> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => first.UnionBy(second, keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                first.UnionBy(second, keySelector)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => first.UnionBy(second, keySelector, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                first.UnionBy(second, keySelector, new AnagramEqualityComparer())
             );
         }
 

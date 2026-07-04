@@ -59,13 +59,11 @@ namespace Microsoft.CodeAnalysis.MakeTypeAbstract
                     )
                 )
                 {
-                    editor.ReplaceNode(
-                        typeDeclaration,
-                        (currentTypeDeclaration, generator) =>
-                            generator.WithModifiers(
-                                currentTypeDeclaration,
-                                generator.GetModifiers(currentTypeDeclaration).WithIsAbstract(true)
-                            )
+                    editor.ReplaceNode(typeDeclaration, (currentTypeDeclaration, generator) =>
+                        generator.WithModifiers(
+                            currentTypeDeclaration,
+                            generator.GetModifiers(currentTypeDeclaration).WithIsAbstract(true)
+                        )
                     );
                 }
             }

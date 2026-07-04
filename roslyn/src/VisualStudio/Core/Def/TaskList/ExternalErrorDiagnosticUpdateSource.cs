@@ -1319,10 +1319,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 T key
             )
                 where T : notnull =>
-                map.GetOrAdd(
-                    key,
-                    _ => new Dictionary<DiagnosticData, int>(DiagnosticDataComparer.Instance)
-                );
+                map.GetOrAdd(key, _ => new Dictionary<DiagnosticData, int>(
+                    DiagnosticDataComparer.Instance
+                ));
         }
 
         private sealed class ArgumentKey : BuildToolId.Base<object>

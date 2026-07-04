@@ -22,9 +22,8 @@ namespace System.IO.Tests
         [InlineData(7, 8, 2)]
         public static void MemoryStream_Ctor_OutOfRangeIndices(int arraySize, int index, int count)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new MemoryStream(new byte[arraySize], index, count)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new MemoryStream(new byte[arraySize], index, count)
             );
         }
 

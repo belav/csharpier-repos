@@ -18,9 +18,8 @@ namespace System.Reflection.Tests
         public void GetTypeForObject_NullValue_ThrowsArgumentNullException()
         {
             var context = new SubReflectionContext();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => context.GetTypeForObject(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                context.GetTypeForObject(null)
             );
         }
 

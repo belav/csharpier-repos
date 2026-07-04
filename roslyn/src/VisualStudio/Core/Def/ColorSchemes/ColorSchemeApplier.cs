@@ -136,9 +136,8 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
         private async Task QueueColorSchemeUpdateAsync()
         {
             // Wait until things have settled down from the theme change, since we will potentially be changing theme colors.
-            await VsTaskLibraryHelper.StartOnIdle(
-                _threadingContext.JoinableTaskFactory,
-                () => UpdateColorSchemeAsync(_threadingContext.DisposalToken)
+            await VsTaskLibraryHelper.StartOnIdle(_threadingContext.JoinableTaskFactory, () =>
+                UpdateColorSchemeAsync(_threadingContext.DisposalToken)
             );
         }
 

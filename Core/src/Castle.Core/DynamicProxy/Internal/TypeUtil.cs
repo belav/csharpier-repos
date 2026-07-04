@@ -243,9 +243,8 @@ namespace Castle.DynamicProxy.Internal
         {
             var sortedMembers = new MemberInfo[members.Length];
             Array.Copy(members, sortedMembers, members.Length);
-            Array.Sort(
-                sortedMembers,
-                (l, r) => string.Compare(l.Name, r.Name, StringComparison.OrdinalIgnoreCase)
+            Array.Sort(sortedMembers, (l, r) =>
+                string.Compare(l.Name, r.Name, StringComparison.OrdinalIgnoreCase)
             );
             return sortedMembers;
         }

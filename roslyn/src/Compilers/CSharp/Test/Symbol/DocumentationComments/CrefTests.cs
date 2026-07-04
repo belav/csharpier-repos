@@ -1760,9 +1760,8 @@ class C<T, U, V>
             AssertEx.None(actualTypeParameters, p => p.IsFromCompilation(compilation));
             AssertEx.None(actualTypeParameters, p => p.IsImplicitlyDeclared);
             AssertEx.All(actualTypeParameters, p => p.Variance == VarianceKind.None);
-            AssertEx.All(
-                actualTypeParameters,
-                p => p.Locations.Single() == p.DeclaringSyntaxReferences.Single().GetLocation()
+            AssertEx.All(actualTypeParameters, p =>
+                p.Locations.Single() == p.DeclaringSyntaxReferences.Single().GetLocation()
             );
             AssertEx.None(actualTypeParameters, p => p.HasValueTypeConstraint);
             AssertEx.None(actualTypeParameters, p => p.HasReferenceTypeConstraint);
@@ -1905,14 +1904,12 @@ class A<T, U>
             Assert.False(actualWinner.IsDefinition);
 
             var actualParameterType = actualWinner.GetParameters().Single().Type;
-            AssertEx.All(
-                actualWinner.ContainingType.TypeArguments(),
-                typeParam =>
-                    TypeSymbol.Equals(
-                        typeParam,
-                        actualParameterType,
-                        TypeCompareKind.ConsiderEverything2
-                    )
+            AssertEx.All(actualWinner.ContainingType.TypeArguments(), typeParam =>
+                TypeSymbol.Equals(
+                    typeParam,
+                    actualParameterType,
+                    TypeCompareKind.ConsiderEverything2
+                )
             ); //CONSIDER: Would be different in Dev11.
             Assert.Equal(1, ((TypeParameterSymbol)actualParameterType).Ordinal);
 
@@ -6698,9 +6695,8 @@ class C
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source);
             var cref = GetCrefSyntaxes(compilation).Single();
 
-            AssertEx.None(
-                cref.DescendantTokens(descendIntoTrivia: true),
-                token => token.ValueText == null
+            AssertEx.None(cref.DescendantTokens(descendIntoTrivia: true), token =>
+                token.ValueText == null
             );
         }
 
@@ -6717,9 +6713,8 @@ class C
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(source);
             var cref = GetCrefSyntaxes(compilation).Single();
 
-            AssertEx.None(
-                cref.DescendantTokens(descendIntoTrivia: true),
-                token => token.ValueText == null
+            AssertEx.None(cref.DescendantTokens(descendIntoTrivia: true), token =>
+                token.ValueText == null
             );
 
             var tree = compilation.SyntaxTrees.Single();

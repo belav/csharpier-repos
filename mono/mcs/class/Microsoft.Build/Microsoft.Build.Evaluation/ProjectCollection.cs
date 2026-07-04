@@ -602,11 +602,8 @@ namespace Microsoft.Build.Evaluation
         {
             Func<string, Func<string>, ProjectPropertyInstance> create = (name, value) =>
                 new ProjectPropertyInstance(name, true, null, value);
-            return GetReservedProperties<ProjectPropertyInstance>(
-                toolset,
-                xml,
-                create,
-                () => project.FullPath
+            return GetReservedProperties<ProjectPropertyInstance>(toolset, xml, create, () =>
+                project.FullPath
             );
         }
 
@@ -623,57 +620,44 @@ namespace Microsoft.Build.Evaluation
             // FIXME: add MSBuildNodeCount
             // FIXME: add MSBuildProgramFiles32
             yield return create("MSBuildProjectDefaultTargets", () => project.DefaultTargets);
-            yield return create(
-                "MSBuildProjectDirectory",
-                () => project.DirectoryPath + Path.DirectorySeparatorChar
+            yield return create("MSBuildProjectDirectory", () =>
+                project.DirectoryPath + Path.DirectorySeparatorChar
             );
-            yield return create(
-                "MSBuildProjectDirectoryNoRoot",
-                () =>
-                    project.DirectoryPath.Substring(Path.GetPathRoot(project.DirectoryPath).Length)
+            yield return create("MSBuildProjectDirectoryNoRoot", () =>
+                project.DirectoryPath.Substring(Path.GetPathRoot(project.DirectoryPath).Length)
             );
-            yield return create(
-                "MSBuildProjectExtension",
-                () => Path.GetExtension(project.FullPath)
+            yield return create("MSBuildProjectExtension", () =>
+                Path.GetExtension(project.FullPath)
             );
             yield return create("MSBuildProjectFile", () => Path.GetFileName(project.FullPath));
             yield return create("MSBuildProjectFullPath", () => project.FullPath);
-            yield return create(
-                "MSBuildProjectName",
-                () => Path.GetFileNameWithoutExtension(project.FullPath)
+            yield return create("MSBuildProjectName", () =>
+                Path.GetFileNameWithoutExtension(project.FullPath)
             );
             yield return create("MSBuildStartupDirectory", () => BuildStartupDirectory);
-            yield return create(
-                "MSBuildThisFile",
-                () => Path.GetFileName(GetEvaluationTimeThisFile(projectFullPath))
+            yield return create("MSBuildThisFile", () =>
+                Path.GetFileName(GetEvaluationTimeThisFile(projectFullPath))
             );
-            yield return create(
-                "MSBuildThisFileFullPath",
-                () => GetEvaluationTimeThisFile(projectFullPath)
+            yield return create("MSBuildThisFileFullPath", () =>
+                GetEvaluationTimeThisFile(projectFullPath)
             );
-            yield return create(
-                "MSBuildThisFileName",
-                () => Path.GetFileNameWithoutExtension(GetEvaluationTimeThisFile(projectFullPath))
+            yield return create("MSBuildThisFileName", () =>
+                Path.GetFileNameWithoutExtension(GetEvaluationTimeThisFile(projectFullPath))
             );
-            yield return create(
-                "MSBuildThisFileExtension",
-                () => Path.GetExtension(GetEvaluationTimeThisFile(projectFullPath))
+            yield return create("MSBuildThisFileExtension", () =>
+                Path.GetExtension(GetEvaluationTimeThisFile(projectFullPath))
             );
 
-            yield return create(
-                "MSBuildThisFileDirectory",
-                () => Path.GetDirectoryName(GetEvaluationTimeThisFileDirectory(projectFullPath))
+            yield return create("MSBuildThisFileDirectory", () =>
+                Path.GetDirectoryName(GetEvaluationTimeThisFileDirectory(projectFullPath))
             );
-            yield return create(
-                "MSBuildThisFileDirectoryNoRoot",
-                () =>
-                {
-                    string dir =
-                        GetEvaluationTimeThisFileDirectory(projectFullPath)
-                        + Path.DirectorySeparatorChar;
-                    return dir.Substring(Path.GetPathRoot(dir).Length);
-                }
-            );
+            yield return create("MSBuildThisFileDirectoryNoRoot", () =>
+            {
+                string dir =
+                    GetEvaluationTimeThisFileDirectory(projectFullPath)
+                    + Path.DirectorySeparatorChar;
+                return dir.Substring(Path.GetPathRoot(dir).Length);
+            });
             yield return create("MSBuildToolsPath", () => toolset.ToolsPath);
             yield return create("MSBuildToolsVersion", () => toolset.ToolsVersion);
 

@@ -74,14 +74,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             {
                 Logger.Log(
                     FunctionId.Intellicode_UnknownIntent,
-                    KeyValueLogMessage.Create(
-                        LogType.UserAction,
-                        m =>
-                        {
-                            m["intent"] = intentRequestContext.IntentName;
-                            m["language"] = languageName;
-                        }
-                    )
+                    KeyValueLogMessage.Create(LogType.UserAction, m =>
+                    {
+                        m["intent"] = intentRequestContext.IntentName;
+                        m["language"] = languageName;
+                    })
                 );
 
                 return ImmutableArray<IntentSource>.Empty;

@@ -127,46 +127,37 @@ namespace System.Formats.Asn1.Tests.Reader
         {
             // The write starts beyond the portion of source that will be read,
             // but that hasn't yet been determined.
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () =>
-                    tryWriteMethod(
-                        input.AsSpan(encodedValueOffset),
-                        input.AsSpan(encodedValueOffset + encodedValueLength),
-                        AsnEncodingRules.BER,
-                        out _,
-                        out _
-                    )
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                tryWriteMethod(
+                    input.AsSpan(encodedValueOffset),
+                    input.AsSpan(encodedValueOffset + encodedValueLength),
+                    AsnEncodingRules.BER,
+                    out _,
+                    out _
+                )
             );
 
             // The CopyTo would actually end up with source == dest for this one
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () =>
-                    tryWriteMethod(
-                        input.AsSpan(encodedValueOffset),
-                        input.AsSpan(
-                            encodedValueOffset + encodedValueLength - copyLength,
-                            copyLength
-                        ),
-                        AsnEncodingRules.BER,
-                        out _,
-                        out _
-                    )
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                tryWriteMethod(
+                    input.AsSpan(encodedValueOffset),
+                    input.AsSpan(encodedValueOffset + encodedValueLength - copyLength, copyLength),
+                    AsnEncodingRules.BER,
+                    out _,
+                    out _
+                )
             );
 
             // destination[1] is source[0], but there isn't actually an overwrite because
             // the value length isn't long enough.
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () =>
-                    tryWriteMethod(
-                        input.AsSpan(encodedValueOffset),
-                        input.AsSpan(encodedValueOffset - copyLength, copyLength + 1),
-                        AsnEncodingRules.BER,
-                        out _,
-                        out _
-                    )
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                tryWriteMethod(
+                    input.AsSpan(encodedValueOffset),
+                    input.AsSpan(encodedValueOffset - copyLength, copyLength + 1),
+                    AsnEncodingRules.BER,
+                    out _,
+                    out _
+                )
             );
 
             Assert.True(

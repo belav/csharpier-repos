@@ -103,14 +103,11 @@ public abstract class SharedAuthenticationTests<TOptions>
                 o.AddScheme<TestHandler2>("auth1", "auth1");
                 o.AddScheme<TestHandler>("specific", "specific");
             });
-            RegisterAuth(
-                builder,
-                o =>
-                {
-                    o.ForwardDefault = "auth1";
-                    o.ForwardSignIn = "specific";
-                }
-            );
+            RegisterAuth(builder, o =>
+            {
+                o.ForwardDefault = "auth1";
+                o.ForwardSignIn = "specific";
+            });
 
             var specific = new TestHandler();
             services.AddSingleton(specific);
@@ -148,14 +145,11 @@ public abstract class SharedAuthenticationTests<TOptions>
                 o.AddScheme<TestHandler2>("auth1", "auth1");
                 o.AddScheme<TestHandler>("specific", "specific");
             });
-            RegisterAuth(
-                builder,
-                o =>
-                {
-                    o.ForwardDefault = "auth1";
-                    o.ForwardSignOut = "specific";
-                }
-            );
+            RegisterAuth(builder, o =>
+            {
+                o.ForwardDefault = "auth1";
+                o.ForwardSignOut = "specific";
+            });
 
             var specific = new TestHandler();
             services.AddSingleton(specific);
@@ -191,14 +185,11 @@ public abstract class SharedAuthenticationTests<TOptions>
             o.AddScheme<TestHandler2>("auth1", "auth1");
             o.AddScheme<TestHandler>("specific", "specific");
         });
-        RegisterAuth(
-            builder,
-            o =>
-            {
-                o.ForwardDefault = "auth1";
-                o.ForwardForbid = "specific";
-            }
-        );
+        RegisterAuth(builder, o =>
+        {
+            o.ForwardDefault = "auth1";
+            o.ForwardForbid = "specific";
+        });
 
         var specific = new TestHandler();
         services.AddSingleton(specific);
@@ -247,14 +238,11 @@ public abstract class SharedAuthenticationTests<TOptions>
                 o.AddScheme<TestHandler2>("auth1", "auth1");
                 o.AddScheme<TestHandler>("specific", "specific");
             });
-        RegisterAuth(
-            builder,
-            o =>
-            {
-                o.ForwardDefault = "auth1";
-                o.ForwardAuthenticate = "specific";
-            }
-        );
+        RegisterAuth(builder, o =>
+        {
+            o.ForwardDefault = "auth1";
+            o.ForwardAuthenticate = "specific";
+        });
 
         var specific = new TestHandler();
         services.AddSingleton(specific);
@@ -279,14 +267,11 @@ public abstract class SharedAuthenticationTests<TOptions>
             o.AddScheme<TestHandler2>("auth1", "auth1");
             o.AddScheme<TestHandler>("specific", "specific");
         });
-        RegisterAuth(
-            builder,
-            o =>
-            {
-                o.ForwardDefault = "auth1";
-                o.ForwardAuthenticate = "specific";
-            }
-        );
+        RegisterAuth(builder, o =>
+        {
+            o.ForwardDefault = "auth1";
+            o.ForwardAuthenticate = "specific";
+        });
 
         var specific = new TestHandler();
         services.AddSingleton(specific);
@@ -321,14 +306,11 @@ public abstract class SharedAuthenticationTests<TOptions>
             o.AddScheme<TestHandler2>("auth1", "auth1");
             o.AddScheme<TestHandler>("specific", "specific");
         });
-        RegisterAuth(
-            builder,
-            o =>
-            {
-                o.ForwardDefault = "auth1";
-                o.ForwardChallenge = "specific";
-            }
-        );
+        RegisterAuth(builder, o =>
+        {
+            o.ForwardDefault = "auth1";
+            o.ForwardChallenge = "specific";
+        });
 
         var specific = new TestHandler();
         services.AddSingleton(specific);
@@ -364,14 +346,11 @@ public abstract class SharedAuthenticationTests<TOptions>
             o.AddScheme<TestHandler3>("selector", "selector");
             o.AddScheme<TestHandler>("specific", "specific");
         });
-        RegisterAuth(
-            builder,
-            o =>
-            {
-                o.ForwardDefault = "auth1";
-                o.ForwardDefaultSelector = _ => "selector";
-            }
-        );
+        RegisterAuth(builder, o =>
+        {
+            o.ForwardDefault = "auth1";
+            o.ForwardDefaultSelector = _ => "selector";
+        });
 
         var specific = new TestHandler();
         services.AddSingleton(specific);
@@ -438,14 +417,11 @@ public abstract class SharedAuthenticationTests<TOptions>
             o.AddScheme<TestHandler3>("selector", "selector");
             o.AddScheme<TestHandler>("specific", "specific");
         });
-        RegisterAuth(
-            builder,
-            o =>
-            {
-                o.ForwardDefault = "auth1";
-                o.ForwardDefaultSelector = _ => null;
-            }
-        );
+        RegisterAuth(builder, o =>
+        {
+            o.ForwardDefault = "auth1";
+            o.ForwardDefaultSelector = _ => null;
+        });
 
         var specific = new TestHandler();
         services.AddSingleton(specific);
@@ -512,19 +488,16 @@ public abstract class SharedAuthenticationTests<TOptions>
             o.AddScheme<TestHandler3>("selector", "selector");
             o.AddScheme<TestHandler>("specific", "specific");
         });
-        RegisterAuth(
-            builder,
-            o =>
-            {
-                o.ForwardDefault = "auth1";
-                o.ForwardDefaultSelector = _ => "selector";
-                o.ForwardAuthenticate = "specific";
-                o.ForwardChallenge = "specific";
-                o.ForwardSignIn = "specific";
-                o.ForwardSignOut = "specific";
-                o.ForwardForbid = "specific";
-            }
-        );
+        RegisterAuth(builder, o =>
+        {
+            o.ForwardDefault = "auth1";
+            o.ForwardDefaultSelector = _ => "selector";
+            o.ForwardAuthenticate = "specific";
+            o.ForwardChallenge = "specific";
+            o.ForwardSignIn = "specific";
+            o.ForwardSignOut = "specific";
+            o.ForwardForbid = "specific";
+        });
 
         var specific = new TestHandler();
         services.AddSingleton(specific);

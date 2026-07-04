@@ -29,13 +29,10 @@ public class GroupTest
         );
         var group = builder.MapGroup("");
 
-        group.MapGet(
-            "/{id}",
-            (int id, HttpContext httpContext) =>
-            {
-                httpContext.Items["id"] = id;
-            }
-        );
+        group.MapGet("/{id}", (int id, HttpContext httpContext) =>
+        {
+            httpContext.Items["id"] = id;
+        });
 
         var dataSource = GetEndpointDataSource(builder);
         var endpoint = Assert.Single(dataSource.Endpoints);
@@ -65,14 +62,11 @@ public class GroupTest
         );
         var group = builder.MapGroup("/{org}");
 
-        group.MapGet(
-            "/{id}",
-            (string org, int id, HttpContext httpContext) =>
-            {
-                httpContext.Items["org"] = org;
-                httpContext.Items["id"] = id;
-            }
-        );
+        group.MapGet("/{id}", (string org, int id, HttpContext httpContext) =>
+        {
+            httpContext.Items["org"] = org;
+            httpContext.Items["id"] = id;
+        });
 
         var dataSource = GetEndpointDataSource(builder);
         var endpoint = Assert.Single(dataSource.Endpoints);
@@ -104,14 +98,11 @@ public class GroupTest
         );
         var group = builder.MapGroup("/{org}").MapGroup("/{id}");
 
-        group.MapGet(
-            "/",
-            (string org, int id, HttpContext httpContext) =>
-            {
-                httpContext.Items["org"] = org;
-                httpContext.Items["id"] = id;
-            }
-        );
+        group.MapGet("/", (string org, int id, HttpContext httpContext) =>
+        {
+            httpContext.Items["org"] = org;
+            httpContext.Items["id"] = id;
+        });
 
         var dataSource = GetEndpointDataSource(builder);
         var endpoint = Assert.Single(dataSource.Endpoints);
@@ -236,13 +227,10 @@ public class GroupTest
         var group = builder.MapGroup("/group");
         var mapGetCalled = false;
 
-        group.MapGet(
-            "/",
-            () =>
-            {
-                mapGetCalled = true;
-            }
-        );
+        group.MapGet("/", () =>
+        {
+            mapGetCalled = true;
+        });
 
         Endpoint? conventionBuiltEndpoint = null;
 
@@ -299,13 +287,10 @@ public class GroupTest
         var mapGetCallCount = 0;
         var replacementCalled = false;
 
-        group.MapGet(
-            "/",
-            () =>
-            {
-                mapGetCallCount++;
-            }
-        );
+        group.MapGet("/", () =>
+        {
+            mapGetCallCount++;
+        });
 
         ((IEndpointConventionBuilder)group).Add(builder =>
         {

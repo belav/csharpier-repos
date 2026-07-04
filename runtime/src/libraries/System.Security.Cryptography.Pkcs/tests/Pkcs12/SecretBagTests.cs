@@ -13,9 +13,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         {
             Pkcs12SafeContents contents = new Pkcs12SafeContents();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "secretType",
-                () => contents.AddSecret(null, ReadOnlyMemory<byte>.Empty)
+            AssertExtensions.Throws<ArgumentNullException>("secretType", () =>
+                contents.AddSecret(null, ReadOnlyMemory<byte>.Empty)
             );
         }
 

@@ -21,13 +21,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ICompoundAssignment_NullArgumentToGetConversionThrows()
         {
             ICompoundAssignmentOperation nullAssignment = null;
-            Assert.Throws<ArgumentNullException>(
-                "compoundAssignment",
-                () => nullAssignment.GetInConversion()
+            Assert.Throws<ArgumentNullException>("compoundAssignment", () =>
+                nullAssignment.GetInConversion()
             );
-            Assert.Throws<ArgumentNullException>(
-                "compoundAssignment",
-                () => nullAssignment.GetOutConversion()
+            Assert.Throws<ArgumentNullException>("compoundAssignment", () =>
+                nullAssignment.GetOutConversion()
             );
         }
 

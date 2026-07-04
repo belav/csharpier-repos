@@ -318,9 +318,8 @@ public class RouteTableFactoryTests
 
         // Assert
         Assert.NotNull(context.Handler);
-        Assert.Single(
-            context.Parameters,
-            p => p.Key == "parameter" && (string)p.Value == expectedValue
+        Assert.Single(context.Parameters, p =>
+            p.Key == "parameter" && (string)p.Value == expectedValue
         );
     }
 
@@ -338,9 +337,8 @@ public class RouteTableFactoryTests
 
         // Assert
         Assert.NotNull(context.Handler);
-        Assert.Single(
-            context.Parameters,
-            p => p.Key == "parameter" && (string)p.Value == expectedValue
+        Assert.Single(context.Parameters, p =>
+            p.Key == "parameter" && (string)p.Value == expectedValue
         );
     }
 

@@ -266,19 +266,16 @@ public class EndpointRoutingMiddlewareTest
 
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(
-                isHandled: true,
-                setEndpointCallback: c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            new EndpointMetadataCollection(metadata),
-                            "myapp"
-                        )
-                    );
-                }
-            )
+            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(
+                        c => Task.CompletedTask,
+                        new EndpointMetadataCollection(metadata),
+                        "myapp"
+                    )
+                );
+            })
         );
 
         // Act
@@ -315,19 +312,16 @@ public class EndpointRoutingMiddlewareTest
         var metadata = new List<object> { new RequestSizeLimitMetadata(100) };
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(
-                isHandled: true,
-                setEndpointCallback: c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            new EndpointMetadataCollection(metadata),
-                            "myapp"
-                        )
-                    );
-                }
-            )
+            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(
+                        c => Task.CompletedTask,
+                        new EndpointMetadataCollection(metadata),
+                        "myapp"
+                    )
+                );
+            })
         );
 
         // Act
@@ -359,19 +353,16 @@ public class EndpointRoutingMiddlewareTest
         var metadata = new List<object> { new RequestSizeLimitMetadata(100) };
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(
-                isHandled: true,
-                setEndpointCallback: c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            new EndpointMetadataCollection(metadata),
-                            "myapp"
-                        )
-                    );
-                }
-            )
+            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(
+                        c => Task.CompletedTask,
+                        new EndpointMetadataCollection(metadata),
+                        "myapp"
+                    )
+                );
+            })
         );
 
         // Act
@@ -405,19 +396,12 @@ public class EndpointRoutingMiddlewareTest
 
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(
-                isHandled: true,
-                setEndpointCallback: c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            new EndpointMetadataCollection(),
-                            "myapp"
-                        )
-                    );
-                }
-            )
+            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(), "myapp")
+                );
+            })
         );
 
         // Act
@@ -456,19 +440,16 @@ public class EndpointRoutingMiddlewareTest
 
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(
-                isHandled: true,
-                setEndpointCallback: c =>
-                {
-                    c.SetEndpoint(
-                        new Endpoint(
-                            c => Task.CompletedTask,
-                            new EndpointMetadataCollection(metadata),
-                            "myapp"
-                        )
-                    );
-                }
-            )
+            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
+            {
+                c.SetEndpoint(
+                    new Endpoint(
+                        c => Task.CompletedTask,
+                        new EndpointMetadataCollection(metadata),
+                        "myapp"
+                    )
+                );
+            })
         );
 
         // Act

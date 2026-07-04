@@ -12,26 +12,20 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_ValueNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                {
-                    new TransferCodingHeaderValue(null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+            {
+                new TransferCodingHeaderValue(null);
+            });
         }
 
         [Fact]
         public void Ctor_ValueEmpty_Throw()
         {
             // null and empty should be treated the same. So we also throw for empty strings.
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () =>
-                {
-                    new TransferCodingHeaderValue(string.Empty);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+            {
+                new TransferCodingHeaderValue(string.Empty);
+            });
         }
 
         [Fact]

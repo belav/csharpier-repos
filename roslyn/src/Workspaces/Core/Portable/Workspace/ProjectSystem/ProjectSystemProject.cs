@@ -384,36 +384,32 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
             Func<Solution, Solution> withNewValue
         )
         {
-            ChangeProjectProperty(
-                ref field,
-                newValue,
-                (solutionChanges, oldValue) =>
+            ChangeProjectProperty(ref field, newValue, (solutionChanges, oldValue) =>
+            {
+                // First, update the property itself that's exposed on the Project.
+                solutionChanges.UpdateSolutionForProjectAction(
+                    Id,
+                    withNewValue(solutionChanges.Solution)
+                );
+
+                if (oldValue != null)
                 {
-                    // First, update the property itself that's exposed on the Project.
-                    solutionChanges.UpdateSolutionForProjectAction(
+                    _projectSystemProjectFactory.RemoveProjectOutputPath_NoLock(
+                        solutionChanges,
                         Id,
-                        withNewValue(solutionChanges.Solution)
+                        oldValue
                     );
-
-                    if (oldValue != null)
-                    {
-                        _projectSystemProjectFactory.RemoveProjectOutputPath_NoLock(
-                            solutionChanges,
-                            Id,
-                            oldValue
-                        );
-                    }
-
-                    if (newValue != null)
-                    {
-                        _projectSystemProjectFactory.AddProjectOutputPath_NoLock(
-                            solutionChanges,
-                            Id,
-                            newValue
-                        );
-                    }
                 }
-            );
+
+                if (newValue != null)
+                {
+                    _projectSystemProjectFactory.AddProjectOutputPath_NoLock(
+                        solutionChanges,
+                        Id,
+                        newValue
+                    );
+                }
+            });
         }
 
         public string AssemblyName
@@ -465,14 +461,11 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         {
             get => _compilationOutputAssemblyFilePath;
             set =>
-                ChangeProjectOutputPath(
-                    ref _compilationOutputAssemblyFilePath,
-                    value,
-                    s =>
-                        s.WithProjectCompilationOutputInfo(
-                            Id,
-                            s.GetRequiredProject(Id).CompilationOutputInfo.WithAssemblyPath(value)
-                        )
+                ChangeProjectOutputPath(ref _compilationOutputAssemblyFilePath, value, s =>
+                    s.WithProjectCompilationOutputInfo(
+                        Id,
+                        s.GetRequiredProject(Id).CompilationOutputInfo.WithAssemblyPath(value)
+                    )
                 );
         }
 
@@ -480,10 +473,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         {
             get => _outputFilePath;
             set =>
-                ChangeProjectOutputPath(
-                    ref _outputFilePath,
-                    value,
-                    s => s.WithProjectOutputFilePath(Id, value)
+                ChangeProjectOutputPath(ref _outputFilePath, value, s =>
+                    s.WithProjectOutputFilePath(Id, value)
                 );
         }
 
@@ -491,10 +482,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         {
             get => _outputRefFilePath;
             set =>
-                ChangeProjectOutputPath(
-                    ref _outputRefFilePath,
-                    value,
-                    s => s.WithProjectOutputRefFilePath(Id, value)
+                ChangeProjectOutputPath(ref _outputRefFilePath, value, s =>
+                    s.WithProjectOutputRefFilePath(Id, value)
                 );
         }
 
@@ -516,10 +505,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         {
             get => _checksumAlgorithm;
             set =>
-                ChangeProjectProperty(
-                    ref _checksumAlgorithm,
-                    value,
-                    s => s.WithProjectChecksumAlgorithm(Id, value)
+                ChangeProjectProperty(ref _checksumAlgorithm, value, s =>
+                    s.WithProjectChecksumAlgorithm(Id, value)
                 );
         }
 
@@ -529,10 +516,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         {
             get => _hasAllInformation;
             set =>
-                ChangeProjectProperty(
-                    ref _hasAllInformation,
-                    value,
-                    s => s.WithHasAllInformation(Id, value)
+                ChangeProjectProperty(ref _hasAllInformation, value, s =>
+                    s.WithHasAllInformation(Id, value)
                 );
         }
 
@@ -561,10 +546,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
             // Property RunAnalyzers overrides RunAnalyzersDuringLiveAnalysis, and default when both properties are not set is 'true'.
             var runAnalyzers =
                 _runAnalyzersPropertyValue ?? _runAnalyzersDuringLiveAnalysisPropertyValue ?? true;
-            ChangeProjectProperty(
-                ref _runAnalyzers,
-                runAnalyzers,
-                s => s.WithRunAnalyzers(Id, runAnalyzers)
+            ChangeProjectProperty(ref _runAnalyzers, runAnalyzers, s =>
+                s.WithRunAnalyzers(Id, runAnalyzers)
             );
         }
 
@@ -583,10 +566,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         {
             get => _defaultNamespace;
             set =>
-                ChangeProjectProperty(
-                    ref _defaultNamespace,
-                    value,
-                    s => s.WithProjectDefaultNamespace(Id, value)
+                ChangeProjectProperty(ref _defaultNamespace, value, s =>
+                    s.WithProjectDefaultNamespace(Id, value)
                 );
         }
 
@@ -679,55 +660,102 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                     new List<(DocumentId documentId, SourceTextContainer textContainer)>();
 
                 await _projectSystemProjectFactory
-                    .ApplyBatchChangeToWorkspaceMaybeAsync(
-                        useAsync,
-                        solutionChanges =>
-                        {
-                            _sourceFiles.UpdateSolutionForBatch(
-                                solutionChanges,
-                                documentFileNamesAdded,
-                                documentsToOpen,
-                                (s, documents) => s.AddDocuments(documents),
-                                WorkspaceChangeKind.DocumentAdded,
-                                (s, ids) => s.RemoveDocuments(ids),
-                                WorkspaceChangeKind.DocumentRemoved
-                            );
+                    .ApplyBatchChangeToWorkspaceMaybeAsync(useAsync, solutionChanges =>
+                    {
+                        _sourceFiles.UpdateSolutionForBatch(
+                            solutionChanges,
+                            documentFileNamesAdded,
+                            documentsToOpen,
+                            (s, documents) => s.AddDocuments(documents),
+                            WorkspaceChangeKind.DocumentAdded,
+                            (s, ids) => s.RemoveDocuments(ids),
+                            WorkspaceChangeKind.DocumentRemoved
+                        );
 
-                            _additionalFiles.UpdateSolutionForBatch(
-                                solutionChanges,
-                                documentFileNamesAdded,
-                                additionalDocumentsToOpen,
-                                (s, documents) =>
+                        _additionalFiles.UpdateSolutionForBatch(
+                            solutionChanges,
+                            documentFileNamesAdded,
+                            additionalDocumentsToOpen,
+                            (s, documents) =>
+                            {
+                                foreach (var document in documents)
                                 {
-                                    foreach (var document in documents)
-                                    {
-                                        s = s.AddAdditionalDocument(document);
-                                    }
+                                    s = s.AddAdditionalDocument(document);
+                                }
 
-                                    return s;
-                                },
-                                WorkspaceChangeKind.AdditionalDocumentAdded,
-                                (s, ids) => s.RemoveAdditionalDocuments(ids),
-                                WorkspaceChangeKind.AdditionalDocumentRemoved
-                            );
+                                return s;
+                            },
+                            WorkspaceChangeKind.AdditionalDocumentAdded,
+                            (s, ids) => s.RemoveAdditionalDocuments(ids),
+                            WorkspaceChangeKind.AdditionalDocumentRemoved
+                        );
 
-                            _analyzerConfigFiles.UpdateSolutionForBatch(
-                                solutionChanges,
-                                documentFileNamesAdded,
-                                analyzerConfigDocumentsToOpen,
-                                (s, documents) => s.AddAnalyzerConfigDocuments(documents),
-                                WorkspaceChangeKind.AnalyzerConfigDocumentAdded,
-                                (s, ids) => s.RemoveAnalyzerConfigDocuments(ids),
-                                WorkspaceChangeKind.AnalyzerConfigDocumentRemoved
-                            );
+                        _analyzerConfigFiles.UpdateSolutionForBatch(
+                            solutionChanges,
+                            documentFileNamesAdded,
+                            analyzerConfigDocumentsToOpen,
+                            (s, documents) => s.AddAnalyzerConfigDocuments(documents),
+                            WorkspaceChangeKind.AnalyzerConfigDocumentAdded,
+                            (s, ids) => s.RemoveAnalyzerConfigDocuments(ids),
+                            WorkspaceChangeKind.AnalyzerConfigDocumentRemoved
+                        );
 
-                            // Metadata reference removing. Do this before adding in case this removes a project reference that
-                            // we are also going to add in the same batch. This could happen if case is changing, or we're targeting
-                            // a different output path (say bin vs. obj vs. ref).
-                            foreach (var (path, properties) in _metadataReferencesRemovedInBatch)
+                        // Metadata reference removing. Do this before adding in case this removes a project reference that
+                        // we are also going to add in the same batch. This could happen if case is changing, or we're targeting
+                        // a different output path (say bin vs. obj vs. ref).
+                        foreach (var (path, properties) in _metadataReferencesRemovedInBatch)
+                        {
+                            var projectReference =
+                                _projectSystemProjectFactory.TryRemoveConvertedProjectReference_NoLock(
+                                    Id,
+                                    path,
+                                    properties
+                                );
+
+                            if (projectReference != null)
+                            {
+                                solutionChanges.UpdateSolutionForProjectAction(
+                                    Id,
+                                    solutionChanges.Solution.RemoveProjectReference(
+                                        Id,
+                                        projectReference
+                                    )
+                                );
+                            }
+                            else
+                            {
+                                // TODO: find a cleaner way to fetch this
+                                var metadataReference = _projectSystemProjectFactory
+                                    .Workspace.CurrentSolution.GetRequiredProject(Id)
+                                    .MetadataReferences.Cast<PortableExecutableReference>()
+                                    .Single(m => m.FilePath == path && m.Properties == properties);
+
+                                _projectSystemProjectFactory.FileWatchedReferenceFactory.StopWatchingReference(
+                                    metadataReference
+                                );
+
+                                solutionChanges.UpdateSolutionForProjectAction(
+                                    Id,
+                                    newSolution: solutionChanges.Solution.RemoveMetadataReference(
+                                        Id,
+                                        metadataReference
+                                    )
+                                );
+                            }
+                        }
+
+                        ClearAndZeroCapacity(_metadataReferencesRemovedInBatch);
+
+                        // Metadata reference adding...
+                        if (_metadataReferencesAddedInBatch.Count > 0)
+                        {
+                            var projectReferencesCreated = new List<ProjectReference>();
+                            var metadataReferencesCreated = new List<MetadataReference>();
+
+                            foreach (var (path, properties) in _metadataReferencesAddedInBatch)
                             {
                                 var projectReference =
-                                    _projectSystemProjectFactory.TryRemoveConvertedProjectReference_NoLock(
+                                    _projectSystemProjectFactory.TryCreateConvertedProjectReference_NoLock(
                                         Id,
                                         path,
                                         properties
@@ -735,149 +763,94 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 
                                 if (projectReference != null)
                                 {
-                                    solutionChanges.UpdateSolutionForProjectAction(
-                                        Id,
-                                        solutionChanges.Solution.RemoveProjectReference(
-                                            Id,
-                                            projectReference
-                                        )
-                                    );
+                                    projectReferencesCreated.Add(projectReference);
                                 }
                                 else
                                 {
-                                    // TODO: find a cleaner way to fetch this
-                                    var metadataReference = _projectSystemProjectFactory
-                                        .Workspace.CurrentSolution.GetRequiredProject(Id)
-                                        .MetadataReferences.Cast<PortableExecutableReference>()
-                                        .Single(m =>
-                                            m.FilePath == path && m.Properties == properties
-                                        );
-
-                                    _projectSystemProjectFactory.FileWatchedReferenceFactory.StopWatchingReference(
-                                        metadataReference
-                                    );
-
-                                    solutionChanges.UpdateSolutionForProjectAction(
-                                        Id,
-                                        newSolution: solutionChanges.Solution.RemoveMetadataReference(
-                                            Id,
-                                            metadataReference
-                                        )
-                                    );
-                                }
-                            }
-
-                            ClearAndZeroCapacity(_metadataReferencesRemovedInBatch);
-
-                            // Metadata reference adding...
-                            if (_metadataReferencesAddedInBatch.Count > 0)
-                            {
-                                var projectReferencesCreated = new List<ProjectReference>();
-                                var metadataReferencesCreated = new List<MetadataReference>();
-
-                                foreach (var (path, properties) in _metadataReferencesAddedInBatch)
-                                {
-                                    var projectReference =
-                                        _projectSystemProjectFactory.TryCreateConvertedProjectReference_NoLock(
-                                            Id,
+                                    var metadataReference =
+                                        _projectSystemProjectFactory.FileWatchedReferenceFactory.CreateReferenceAndStartWatchingFile(
                                             path,
                                             properties
                                         );
-
-                                    if (projectReference != null)
-                                    {
-                                        projectReferencesCreated.Add(projectReference);
-                                    }
-                                    else
-                                    {
-                                        var metadataReference =
-                                            _projectSystemProjectFactory.FileWatchedReferenceFactory.CreateReferenceAndStartWatchingFile(
-                                                path,
-                                                properties
-                                            );
-                                        metadataReferencesCreated.Add(metadataReference);
-                                    }
+                                    metadataReferencesCreated.Add(metadataReference);
                                 }
-
-                                solutionChanges.UpdateSolutionForProjectAction(
-                                    Id,
-                                    solutionChanges
-                                        .Solution.AddProjectReferences(Id, projectReferencesCreated)
-                                        .AddMetadataReferences(Id, metadataReferencesCreated)
-                                );
-
-                                ClearAndZeroCapacity(_metadataReferencesAddedInBatch);
                             }
 
-                            // Project reference adding...
                             solutionChanges.UpdateSolutionForProjectAction(
                                 Id,
-                                newSolution: solutionChanges.Solution.AddProjectReferences(
-                                    Id,
-                                    _projectReferencesAddedInBatch
-                                )
+                                solutionChanges
+                                    .Solution.AddProjectReferences(Id, projectReferencesCreated)
+                                    .AddMetadataReferences(Id, metadataReferencesCreated)
                             );
-                            ClearAndZeroCapacity(_projectReferencesAddedInBatch);
 
-                            // Project reference removing...
-                            foreach (var projectReference in _projectReferencesRemovedInBatch)
-                            {
-                                solutionChanges.UpdateSolutionForProjectAction(
-                                    Id,
-                                    newSolution: solutionChanges.Solution.RemoveProjectReference(
-                                        Id,
-                                        projectReference
-                                    )
-                                );
-                            }
-
-                            ClearAndZeroCapacity(_projectReferencesRemovedInBatch);
-
-                            // Analyzer reference adding...
-                            solutionChanges.UpdateSolutionForProjectAction(
-                                Id,
-                                newSolution: solutionChanges.Solution.AddAnalyzerReferences(
-                                    Id,
-                                    _analyzersAddedInBatch.Select(a => a.GetReference())
-                                )
-                            );
-                            ClearAndZeroCapacity(_analyzersAddedInBatch);
-
-                            // Analyzer reference removing...
-                            foreach (var analyzerReference in _analyzersRemovedInBatch)
-                            {
-                                solutionChanges.UpdateSolutionForProjectAction(
-                                    Id,
-                                    newSolution: solutionChanges.Solution.RemoveAnalyzerReference(
-                                        Id,
-                                        analyzerReference.GetReference()
-                                    )
-                                );
-
-                                analyzerReference.Dispose();
-                            }
-
-                            ClearAndZeroCapacity(_analyzersRemovedInBatch);
-
-                            // Other property modifications...
-                            foreach (
-                                var propertyModification in _projectPropertyModificationsInBatch
-                            )
-                            {
-                                propertyModification(solutionChanges);
-                            }
-
-                            ClearAndZeroCapacity(_projectPropertyModificationsInBatch);
+                            ClearAndZeroCapacity(_metadataReferencesAddedInBatch);
                         }
-                    )
+
+                        // Project reference adding...
+                        solutionChanges.UpdateSolutionForProjectAction(
+                            Id,
+                            newSolution: solutionChanges.Solution.AddProjectReferences(
+                                Id,
+                                _projectReferencesAddedInBatch
+                            )
+                        );
+                        ClearAndZeroCapacity(_projectReferencesAddedInBatch);
+
+                        // Project reference removing...
+                        foreach (var projectReference in _projectReferencesRemovedInBatch)
+                        {
+                            solutionChanges.UpdateSolutionForProjectAction(
+                                Id,
+                                newSolution: solutionChanges.Solution.RemoveProjectReference(
+                                    Id,
+                                    projectReference
+                                )
+                            );
+                        }
+
+                        ClearAndZeroCapacity(_projectReferencesRemovedInBatch);
+
+                        // Analyzer reference adding...
+                        solutionChanges.UpdateSolutionForProjectAction(
+                            Id,
+                            newSolution: solutionChanges.Solution.AddAnalyzerReferences(
+                                Id,
+                                _analyzersAddedInBatch.Select(a => a.GetReference())
+                            )
+                        );
+                        ClearAndZeroCapacity(_analyzersAddedInBatch);
+
+                        // Analyzer reference removing...
+                        foreach (var analyzerReference in _analyzersRemovedInBatch)
+                        {
+                            solutionChanges.UpdateSolutionForProjectAction(
+                                Id,
+                                newSolution: solutionChanges.Solution.RemoveAnalyzerReference(
+                                    Id,
+                                    analyzerReference.GetReference()
+                                )
+                            );
+
+                            analyzerReference.Dispose();
+                        }
+
+                        ClearAndZeroCapacity(_analyzersRemovedInBatch);
+
+                        // Other property modifications...
+                        foreach (var propertyModification in _projectPropertyModificationsInBatch)
+                        {
+                            propertyModification(solutionChanges);
+                        }
+
+                        ClearAndZeroCapacity(_projectPropertyModificationsInBatch);
+                    })
                     .ConfigureAwait(false);
 
                 foreach (var (documentId, textContainer) in documentsToOpen)
                 {
                     await _projectSystemProjectFactory
-                        .ApplyChangeToWorkspaceMaybeAsync(
-                            useAsync,
-                            w => w.OnDocumentOpened(documentId, textContainer)
+                        .ApplyChangeToWorkspaceMaybeAsync(useAsync, w =>
+                            w.OnDocumentOpened(documentId, textContainer)
                         )
                         .ConfigureAwait(false);
                 }
@@ -885,9 +858,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 foreach (var (documentId, textContainer) in additionalDocumentsToOpen)
                 {
                     await _projectSystemProjectFactory
-                        .ApplyChangeToWorkspaceMaybeAsync(
-                            useAsync,
-                            w => w.OnAdditionalDocumentOpened(documentId, textContainer)
+                        .ApplyChangeToWorkspaceMaybeAsync(useAsync, w =>
+                            w.OnAdditionalDocumentOpened(documentId, textContainer)
                         )
                         .ConfigureAwait(false);
                 }
@@ -895,9 +867,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 foreach (var (documentId, textContainer) in analyzerConfigDocumentsToOpen)
                 {
                     await _projectSystemProjectFactory
-                        .ApplyChangeToWorkspaceMaybeAsync(
-                            useAsync,
-                            w => w.OnAnalyzerConfigDocumentOpened(documentId, textContainer)
+                        .ApplyChangeToWorkspaceMaybeAsync(useAsync, w =>
+                            w.OnAnalyzerConfigDocumentOpened(documentId, textContainer)
                         )
                         .ConfigureAwait(false);
                 }

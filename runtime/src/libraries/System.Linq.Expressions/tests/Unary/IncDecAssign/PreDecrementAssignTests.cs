@@ -221,9 +221,8 @@ namespace System.Linq.Expressions.Tests
         {
             Expression variable = Expression.Variable(typeof(string));
             MethodInfo method = typeof(object).GetTypeInfo().GetDeclaredMethod("ReferenceEquals");
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.PreDecrementAssign(variable, method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.PreDecrementAssign(variable, method)
             );
         }
 
@@ -234,9 +233,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(IncDecAssignTests)
                 .GetTypeInfo()
                 .GetDeclaredMethod("GetString");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.PreDecrementAssign(variable, method)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.PreDecrementAssign(variable, method)
             );
         }
 
@@ -315,18 +313,16 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullOperand()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => Expression.PreDecrementAssign(null)
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                Expression.PreDecrementAssign(null)
             );
         }
 
         [Fact]
         public void UnwritableOperand()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.PreDecrementAssign(Expression.Constant(1))
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.PreDecrementAssign(Expression.Constant(1))
             );
         }
 
@@ -334,9 +330,8 @@ namespace System.Linq.Expressions.Tests
         public void UnreadableOperand()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.PreDecrementAssign(value)
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.PreDecrementAssign(value)
             );
         }
 

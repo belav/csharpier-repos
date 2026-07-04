@@ -679,9 +679,8 @@ namespace Microsoft.Extensions.Hosting.Tests
             builder.Services.AddTransient<ServiceD>();
             builder.Services.AddScoped<ServiceC>();
 
-            builder.ConfigureContainer(
-                new FakeServiceProviderFactory(),
-                container => container.State = "Hi!"
+            builder.ConfigureContainer(new FakeServiceProviderFactory(), container =>
+                container.State = "Hi!"
             );
 
             using IHost host = builder.Build();

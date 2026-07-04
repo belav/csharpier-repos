@@ -34,9 +34,8 @@ namespace System.Linq.Tests
             IEnumerable<int> first = null;
             IEnumerable<int> second = new int[] { 2, 5, 9 };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => first.Zip<int, int, int>(second, (x, y) => x + y)
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                first.Zip<int, int, int>(second, (x, y) => x + y)
             );
         }
 
@@ -46,9 +45,8 @@ namespace System.Linq.Tests
             IEnumerable<int> first = new int[] { 1, 2, 3 };
             IEnumerable<int> second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.Zip<int, int, int>(second, (x, y) => x + y)
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.Zip<int, int, int>(second, (x, y) => x + y)
             );
         }
 
@@ -59,9 +57,8 @@ namespace System.Linq.Tests
             IEnumerable<int> second = new int[] { 2, 4, 6 };
             Func<int, int, int> func = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () => first.Zip(second, func)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                first.Zip(second, func)
             );
         }
 
@@ -424,9 +421,8 @@ namespace System.Linq.Tests
             IEnumerable<int> first = null;
             IEnumerable<int> second = new int[] { 2, 5, 9 };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => first.Zip<int, int>(second)
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                first.Zip<int, int>(second)
             );
         }
 
@@ -436,9 +432,8 @@ namespace System.Linq.Tests
             IEnumerable<int> first = new int[] { 1, 2, 3 };
             IEnumerable<int> second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.Zip<int, int>(second)
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.Zip<int, int>(second)
             );
         }
 
@@ -645,9 +640,8 @@ namespace System.Linq.Tests
             IEnumerable<int> second = null;
             IEnumerable<int> third = new[] { 4, 5, 6 };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => first.Zip(second, third)
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                first.Zip(second, third)
             );
         }
 

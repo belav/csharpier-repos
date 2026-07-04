@@ -19291,44 +19291,38 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void OpenGenericnType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Convert(Expression.Constant(null), typeof(List<>))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Convert(Expression.Constant(null), typeof(List<>))
             );
         }
 
         [Fact]
         public static void TypeContainingGenericParameters()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Convert(Expression.Constant(null), typeof(List<>.Enumerator))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Convert(Expression.Constant(null), typeof(List<>.Enumerator))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.Convert(
-                        Expression.Constant(null),
-                        typeof(List<>).MakeGenericType(typeof(List<>))
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Convert(
+                    Expression.Constant(null),
+                    typeof(List<>).MakeGenericType(typeof(List<>))
+                )
             );
         }
 
         [Fact]
         public static void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Convert(Expression.Constant(null), typeof(object).MakeByRefType())
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Convert(Expression.Constant(null), typeof(object).MakeByRefType())
             );
         }
 
         [Fact]
         public static void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Convert(Expression.Constant(null), typeof(int*))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Convert(Expression.Constant(null), typeof(int*))
             );
         }
 
@@ -19496,9 +19490,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(CustomConversions).GetMethod(
                 nameof(CustomConversions.DoNothing)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.Convert(operand, typeof(int), method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.Convert(operand, typeof(int), method)
             );
         }
 
@@ -19509,9 +19502,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(CustomConversions).GetMethod(
                 nameof(CustomConversions.Create)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.Convert(operand, typeof(int), method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.Convert(operand, typeof(int), method)
             );
         }
 
@@ -19522,9 +19514,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(CustomConversions).GetMethod(
                 nameof(CustomConversions.FromAddition)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.Convert(operand, typeof(int), method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.Convert(operand, typeof(int), method)
             );
         }
 

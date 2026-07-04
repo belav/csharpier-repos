@@ -576,9 +576,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 3, 2, 1, 0x7E };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.TryReadPrimitiveBitString(out _, out _, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.TryReadPrimitiveBitString(out _, out _, Asn1Tag.Null)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -618,17 +617,14 @@ namespace System.Formats.Asn1.Tests.Reader
             Asn1Tag wrongTag2 = new Asn1Tag(TagClass.ContextSpecific, 1);
             Asn1Tag correctTag = new Asn1Tag(TagClass.ContextSpecific, 7);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.TryReadPrimitiveBitString(out _, out _, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.TryReadPrimitiveBitString(out _, out _, Asn1Tag.Null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.TryReadBitString(output, out _, out _, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.TryReadBitString(output, out _, out _, Asn1Tag.Null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadBitString(out _, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadBitString(out _, Asn1Tag.Null)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");

@@ -543,13 +543,11 @@ namespace System.Reflection.Tests
 
         private static void AssertMainModuleTypesFound(Type[] types, Assembly a)
         {
-            Assert.Contains(
-                types,
-                (t) => t.Module == a.ManifestModule && t.FullName == "MainType1"
+            Assert.Contains(types, (t) =>
+                t.Module == a.ManifestModule && t.FullName == "MainType1"
             );
-            Assert.Contains(
-                types,
-                (t) => t.Module == a.ManifestModule && t.FullName == "MainType2"
+            Assert.Contains(types, (t) =>
+                t.Module == a.ManifestModule && t.FullName == "MainType2"
             );
         }
 

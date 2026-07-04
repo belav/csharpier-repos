@@ -286,13 +286,10 @@ namespace System.Data.Tests
             });
 
             //zero length collection
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    fkc = new ForeignKeyConstraint(new DataColumn[] { }, new DataColumn[] { });
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                fkc = new ForeignKeyConstraint(new DataColumn[] { }, new DataColumn[] { });
+            });
 
             //different datasets
             Assert.Throws<InvalidOperationException>(() =>
@@ -324,13 +321,10 @@ namespace System.Data.Tests
             ForeignKeyConstraint fkc;
 
             //Columns must belong to a Table
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    fkc = new ForeignKeyConstraint(col, _ds.Tables[0].Columns[0]);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                fkc = new ForeignKeyConstraint(col, _ds.Tables[0].Columns[0]);
+            });
 
             //Columns must belong to the same table
             //InvalidConstraintException
@@ -356,16 +350,13 @@ namespace System.Data.Tests
                 _ds.Tables[0].Columns[1],
             };
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    fkc = new ForeignKeyConstraint(
-                        twoCol,
-                        new DataColumn[] { _ds.Tables[0].Columns[0] }
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                fkc = new ForeignKeyConstraint(
+                    twoCol,
+                    new DataColumn[] { _ds.Tables[0].Columns[0] }
+                );
+            });
 
             //InvalidOperation: Parent and child are the same column.
             Assert.Throws<InvalidOperationException>(() =>
@@ -404,29 +395,26 @@ namespace System.Data.Tests
         [Fact]
         public void ViolationTest()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable parent = _ds.Tables[0];
+                DataTable child = _ds.Tables[1];
+
+                parent.Rows.Add(new object[] { 1, 1, 1 });
+                child.Rows.Add(new object[] { 2, 2, 2 });
+
+                try
                 {
-                    DataTable parent = _ds.Tables[0];
-                    DataTable child = _ds.Tables[1];
-
-                    parent.Rows.Add(new object[] { 1, 1, 1 });
-                    child.Rows.Add(new object[] { 2, 2, 2 });
-
-                    try
-                    {
-                        child.Constraints.Add(
-                            new ForeignKeyConstraint(parent.Columns[0], child.Columns[0])
-                        );
-                    }
-                    finally
-                    {
-                        // clear the rows for further testing
-                        _ds.Clear();
-                    }
+                    child.Constraints.Add(
+                        new ForeignKeyConstraint(parent.Columns[0], child.Columns[0])
+                    );
                 }
-            );
+                finally
+                {
+                    // clear the rows for further testing
+                    _ds.Clear();
+                }
+            });
         }
 
         [Fact]

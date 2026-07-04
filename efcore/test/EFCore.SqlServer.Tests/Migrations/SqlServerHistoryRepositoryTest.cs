@@ -179,9 +179,8 @@ END;
         new TestDbContext(
             new DbContextOptionsBuilder()
                 .UseInternalServiceProvider(SqlServerTestHelpers.Instance.CreateServiceProvider())
-                .UseSqlServer(
-                    new SqlConnection("Database=DummyDatabase"),
-                    b => b.MigrationsHistoryTable(HistoryRepository.DefaultTableName, schema)
+                .UseSqlServer(new SqlConnection("Database=DummyDatabase"), b =>
+                    b.MigrationsHistoryTable(HistoryRepository.DefaultTableName, schema)
                 )
                 .Options
         ).GetService<IHistoryRepository>();

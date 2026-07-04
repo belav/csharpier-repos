@@ -32,9 +32,8 @@ public class InjectStringFunctionExpressionMutator : ExpressionMutator
             .ToList();
         var methodInfo = methodInfos[random.Next(methodInfos.Count)];
 
-        var injector = new ExpressionInjector(
-            _expressionFinder.FoundExpressions[i],
-            e => Expression.Call(e, methodInfo)
+        var injector = new ExpressionInjector(_expressionFinder.FoundExpressions[i], e =>
+            Expression.Call(e, methodInfo)
         );
 
         return injector.Visit(expression);

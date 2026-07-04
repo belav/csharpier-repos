@@ -102,13 +102,10 @@ namespace System.IO.Pipes.Tests
             // This is a valid mask that should not throw
             new PipeAccessRule(si, PipeAccessRights.Synchronize, AccessControlType.Allow);
 
-            Assert.Throws<ArgumentException>(
-                "accessMask",
-                () =>
-                {
-                    new PipeAccessRule(si, PipeAccessRights.Synchronize, AccessControlType.Deny);
-                }
-            );
+            Assert.Throws<ArgumentException>("accessMask", () =>
+            {
+                new PipeAccessRule(si, PipeAccessRights.Synchronize, AccessControlType.Deny);
+            });
         }
 
         protected static string GetUniquePipeName() =>

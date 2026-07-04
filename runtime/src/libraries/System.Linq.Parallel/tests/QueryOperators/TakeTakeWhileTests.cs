@@ -152,9 +152,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Take_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).Take(0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).Take(0)
             );
         }
 
@@ -244,9 +243,8 @@ namespace System.Linq.Parallel.Tests
             // For unordered collections, which elements (if any) are taken isn't actually guaranteed, but an effect of the implementation.
             // If this test starts failing it should be updated, and possibly mentioned in release notes.
             IntegerRangeSet seen = new IntegerRangeSet(0, Math.Min(count, Math.Max(0, take)));
-            Assert.All(
-                UnorderedSources.Default(count).TakeWhile(x => x < take).ToList(),
-                x => seen.Add(x)
+            Assert.All(UnorderedSources.Default(count).TakeWhile(x => x < take).ToList(), x =>
+                seen.Add(x)
             );
             seen.AssertComplete();
         }
@@ -393,9 +391,8 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(
-                query.TakeWhile((x, index) => index < take).ToList(),
-                x => Assert.Equal(seen++, x)
+            Assert.All(query.TakeWhile((x, index) => index < take).ToList(), x =>
+                Assert.Equal(seen++, x)
             );
             Assert.Equal(Math.Min(count, Math.Max(0, take)), seen);
         }
@@ -537,17 +534,14 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void TakeWhile_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).TakeWhile(x => true)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).TakeWhile(x => true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ParallelEnumerable.Empty<bool>().TakeWhile((Func<bool, bool>)null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ParallelEnumerable.Empty<bool>().TakeWhile((Func<bool, bool>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ParallelEnumerable.Empty<bool>().TakeWhile((Func<bool, int, bool>)null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ParallelEnumerable.Empty<bool>().TakeWhile((Func<bool, int, bool>)null)
             );
         }
     }

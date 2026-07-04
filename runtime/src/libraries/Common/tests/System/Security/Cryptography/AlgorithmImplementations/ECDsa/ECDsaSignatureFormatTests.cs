@@ -189,54 +189,44 @@ namespace System.Security.Cryptography.EcDsa.Tests
 
             foreach (DSASignatureFormat format in Enum.GetValues(typeof(DSASignatureFormat)))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => key.SignData(buffer, -1, buffer.Length, hash, format)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    key.SignData(buffer, -1, buffer.Length, hash, format)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => key.SignData(buffer, buffer.Length + 1, 0, hash, format)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    key.SignData(buffer, buffer.Length + 1, 0, hash, format)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => key.VerifyData(buffer, -1, buffer.Length, buffer, hash, format)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    key.VerifyData(buffer, -1, buffer.Length, buffer, hash, format)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => key.VerifyData(buffer, buffer.Length + 1, 0, buffer, hash, format)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    key.VerifyData(buffer, buffer.Length + 1, 0, buffer, hash, format)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => key.SignData(buffer, 1, buffer.Length, hash, format)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    key.SignData(buffer, 1, buffer.Length, hash, format)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => key.SignData(buffer, 0, buffer.Length + 1, hash, format)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    key.SignData(buffer, 0, buffer.Length + 1, hash, format)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => key.SignData(buffer, buffer.Length, 1, hash, format)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    key.SignData(buffer, buffer.Length, 1, hash, format)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => key.VerifyData(buffer, 1, buffer.Length, buffer, hash, format)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    key.VerifyData(buffer, 1, buffer.Length, buffer, hash, format)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => key.VerifyData(buffer, 0, buffer.Length + 1, buffer, hash, format)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    key.VerifyData(buffer, 0, buffer.Length + 1, buffer, hash, format)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => key.VerifyData(buffer, buffer.Length, 1, buffer, hash, format)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    key.VerifyData(buffer, buffer.Length, 1, buffer, hash, format)
                 );
             }
         }

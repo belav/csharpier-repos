@@ -317,9 +317,8 @@ internal partial class XmlSnippetParser
                                     {
                                         // If we have an editable field we need to know its order in the snippet so we can place the appropriate tab stop indices.
                                         int? fieldIndex = field.IsEditable
-                                            ? fieldNameToSnippetIndex.GetOrAdd(
-                                                field.ID,
-                                                (key) => currentTabStopIndex++
+                                            ? fieldNameToSnippetIndex.GetOrAdd(field.ID, (key) =>
+                                                currentTabStopIndex++
                                             )
                                             : null;
                                         var fieldPart = string.IsNullOrEmpty(field.FunctionName)

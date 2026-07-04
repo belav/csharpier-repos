@@ -155,9 +155,8 @@ public sealed partial class QuicListener : IAsyncDisposable
 
         // Start the listener, from now on MsQuic events will come.
         using MsQuicBuffers alpnBuffers = new MsQuicBuffers();
-        alpnBuffers.Initialize(
-            options.ApplicationProtocols,
-            applicationProtocol => applicationProtocol.Protocol
+        alpnBuffers.Initialize(options.ApplicationProtocols, applicationProtocol =>
+            applicationProtocol.Protocol
         );
         QuicAddr address = options.ListenEndPoint.ToQuicAddr();
         if (options.ListenEndPoint.Address.Equals(IPAddress.IPv6Any))

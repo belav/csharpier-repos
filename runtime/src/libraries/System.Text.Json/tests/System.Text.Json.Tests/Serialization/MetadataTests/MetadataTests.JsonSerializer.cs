@@ -58,13 +58,11 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonTypeInfo nullMetadata = null!;
             WeatherForecastWithPOCOs expected = CreateWeatherForecastWithPOCOs();
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                "jsonTypeInfo",
-                () => Serializer.SerializeWrapper(expected, nullMetadata)
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>("jsonTypeInfo", () =>
+                Serializer.SerializeWrapper(expected, nullMetadata)
             );
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                "jsonTypeInfo",
-                () => Serializer.DeserializeWrapper("{}", nullMetadata)
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>("jsonTypeInfo", () =>
+                Serializer.DeserializeWrapper("{}", nullMetadata)
             );
         }
 

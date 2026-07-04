@@ -91,23 +91,20 @@ public class MinimalFormTests
                         app.UseRouting();
                         app.UseAntiforgery();
                         app.UseEndpoints(b =>
-                            b.MapPost(
-                                    "/todo",
-                                    async context =>
+                            b.MapPost("/todo", async context =>
+                                {
+                                    var form = await context.Request.ReadFormAsync();
+                                    var todo = new Todo
                                     {
-                                        var form = await context.Request.ReadFormAsync();
-                                        var todo = new Todo
-                                        {
-                                            Name = form["name"],
-                                            IsCompleted = bool.Parse(form["isComplete"]),
-                                            DueDate = DateTime.Parse(
-                                                form["dueDate"],
-                                                CultureInfo.InvariantCulture
-                                            ),
-                                        };
-                                        await context.Response.WriteAsJsonAsync(todo);
-                                    }
-                                )
+                                        Name = form["name"],
+                                        IsCompleted = bool.Parse(form["isComplete"]),
+                                        DueDate = DateTime.Parse(
+                                            form["dueDate"],
+                                            CultureInfo.InvariantCulture
+                                        ),
+                                    };
+                                    await context.Response.WriteAsJsonAsync(todo);
+                                })
                                 .WithMetadata(AntiforgeryMetadata.ValidationRequired)
                         );
                     })
@@ -382,66 +379,45 @@ public class MinimalFormTests
         {
             yield return new object[]
             {
-                (IEndpointRouteBuilder builder) =>
-                    builder.MapPost(
-                        "/todo",
-                        async context =>
+                (IEndpointRouteBuilder builder) => builder.MapPost("/todo", async context =>
+                    {
+                        var form = await context.Request.ReadFormAsync();
+                        var todo = new Todo
                         {
-                            var form = await context.Request.ReadFormAsync();
-                            var todo = new Todo
-                            {
-                                Name = form["name"],
-                                IsCompleted = bool.Parse(form["isComplete"]),
-                                DueDate = DateTime.Parse(
-                                    form["dueDate"],
-                                    CultureInfo.InvariantCulture
-                                ),
-                            };
-                            await context.Response.WriteAsJsonAsync(todo);
-                        }
-                    ),
+                            Name = form["name"],
+                            IsCompleted = bool.Parse(form["isComplete"]),
+                            DueDate = DateTime.Parse(form["dueDate"], CultureInfo.InvariantCulture),
+                        };
+                        await context.Response.WriteAsJsonAsync(todo);
+                    }),
             };
             yield return new object[]
             {
-                (IEndpointRouteBuilder builder) =>
-                    builder.MapPost(
-                        "/todo",
-                        async context =>
+                (IEndpointRouteBuilder builder) => builder.MapPost("/todo", async context =>
+                    {
+                        var form = context.Request.Form;
+                        var todo = new Todo
                         {
-                            var form = context.Request.Form;
-                            var todo = new Todo
-                            {
-                                Name = form["name"],
-                                IsCompleted = bool.Parse(form["isComplete"]),
-                                DueDate = DateTime.Parse(
-                                    form["dueDate"],
-                                    CultureInfo.InvariantCulture
-                                ),
-                            };
-                            await context.Response.WriteAsJsonAsync(todo);
-                        }
-                    ),
+                            Name = form["name"],
+                            IsCompleted = bool.Parse(form["isComplete"]),
+                            DueDate = DateTime.Parse(form["dueDate"], CultureInfo.InvariantCulture),
+                        };
+                        await context.Response.WriteAsJsonAsync(todo);
+                    }),
             };
             yield return new object[]
             {
-                (IEndpointRouteBuilder builder) =>
-                    builder.MapPost(
-                        "/todo",
-                        async context =>
+                (IEndpointRouteBuilder builder) => builder.MapPost("/todo", async context =>
+                    {
+                        var form = context.Features.Get<IFormFeature>()?.ReadForm();
+                        var todo = new Todo
                         {
-                            var form = context.Features.Get<IFormFeature>()?.ReadForm();
-                            var todo = new Todo
-                            {
-                                Name = form["name"],
-                                IsCompleted = bool.Parse(form["isComplete"]),
-                                DueDate = DateTime.Parse(
-                                    form["dueDate"],
-                                    CultureInfo.InvariantCulture
-                                ),
-                            };
-                            await context.Response.WriteAsJsonAsync(todo);
-                        }
-                    ),
+                            Name = form["name"],
+                            IsCompleted = bool.Parse(form["isComplete"]),
+                            DueDate = DateTime.Parse(form["dueDate"], CultureInfo.InvariantCulture),
+                        };
+                        await context.Response.WriteAsJsonAsync(todo);
+                    }),
             };
         }
     }

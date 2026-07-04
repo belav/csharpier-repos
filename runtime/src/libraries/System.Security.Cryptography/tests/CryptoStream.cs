@@ -56,31 +56,26 @@ namespace System.Security.Cryptography.Tests
         public static void Ctor()
         {
             var transform = new IdentityTransform(1, 1, true);
-            AssertExtensions.Throws<ArgumentException>(
-                "mode",
-                () => new CryptoStream(new MemoryStream(), transform, (CryptoStreamMode)12345)
+            AssertExtensions.Throws<ArgumentException>("mode", () =>
+                new CryptoStream(new MemoryStream(), transform, (CryptoStreamMode)12345)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "stream",
-                () =>
+            AssertExtensions.Throws<ArgumentException>("stream", () =>
+                new CryptoStream(
+                    new MemoryStream(new byte[0], writable: false),
+                    transform,
+                    CryptoStreamMode.Write
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>("stream", () =>
+                new CryptoStream(
                     new CryptoStream(
-                        new MemoryStream(new byte[0], writable: false),
+                        new MemoryStream(new byte[0]),
                         transform,
                         CryptoStreamMode.Write
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "stream",
-                () =>
-                    new CryptoStream(
-                        new CryptoStream(
-                            new MemoryStream(new byte[0]),
-                            transform,
-                            CryptoStreamMode.Write
-                        ),
-                        transform,
-                        CryptoStreamMode.Read
-                    )
+                    ),
+                    transform,
+                    CryptoStreamMode.Read
+                )
             );
         }
 

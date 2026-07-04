@@ -448,9 +448,8 @@ namespace System.IO.Ports.Tests
                 );
                 com.Open();
 
-                Assert.Throws(
-                    expectedException,
-                    () => com.BaseStream.BeginWrite(buffer, offset, count, null, null)
+                Assert.Throws(expectedException, () =>
+                    com.BaseStream.BeginWrite(buffer, offset, count, null, null)
                 );
             }
         }

@@ -255,22 +255,19 @@ namespace System.Net.Http.Functional.Tests
                         )
                         {
                             var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                            await listener.RunWithCallbackAsync(
-                                events.Enqueue,
-                                async () =>
-                                {
-                                    // Exercise various code paths to get coverage of tracing
-                                    await GetFactoryForVersion(useVersion)
-                                        .CreateClientAndServerAsync(
-                                            async uri => await GetAsync(useVersion, testAsync, uri),
-                                            async server => await server.HandleRequestAsync(),
-                                            options: new GenericLoopbackOptions
-                                            {
-                                                UseSsl = bool.Parse(useSsl),
-                                            }
-                                        );
-                                }
-                            );
+                            await listener.RunWithCallbackAsync(events.Enqueue, async () =>
+                            {
+                                // Exercise various code paths to get coverage of tracing
+                                await GetFactoryForVersion(useVersion)
+                                    .CreateClientAndServerAsync(
+                                        async uri => await GetAsync(useVersion, testAsync, uri),
+                                        async server => await server.HandleRequestAsync(),
+                                        options: new GenericLoopbackOptions
+                                        {
+                                            UseSsl = bool.Parse(useSsl),
+                                        }
+                                    );
+                            });
 
                             // We don't validate receiving specific events, but rather that we do at least
                             // receive some events, and that enabling tracing doesn't cause other failures

@@ -34,20 +34,14 @@ namespace System.Net.Security.Tests
         [Fact]
         public void Constructor_Overloads_Validation()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "clientOptions",
-                () =>
-                {
-                    new NegotiateAuthentication((NegotiateAuthenticationClientOptions)null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serverOptions",
-                () =>
-                {
-                    new NegotiateAuthentication((NegotiateAuthenticationServerOptions)null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("clientOptions", () =>
+            {
+                new NegotiateAuthentication((NegotiateAuthenticationClientOptions)null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("serverOptions", () =>
+            {
+                new NegotiateAuthentication((NegotiateAuthenticationServerOptions)null);
+            });
         }
 
         [Fact]

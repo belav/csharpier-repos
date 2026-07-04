@@ -818,9 +818,8 @@ namespace System.Reflection.PortableExecutable
 
             // First try .pdb file specified in CodeView data (we prefer .pdb file on disk over embedded PDB
             // since embedded PDB needs decompression which is less efficient than memory-mapping the file).
-            var codeViewEntry = ImmutableArrayExtensions.FirstOrDefault(
-                entries,
-                e => e.IsPortableCodeView
+            var codeViewEntry = ImmutableArrayExtensions.FirstOrDefault(entries, e =>
+                e.IsPortableCodeView
             );
             if (
                 codeViewEntry.DataSize != 0
@@ -838,9 +837,8 @@ namespace System.Reflection.PortableExecutable
             }
 
             // if it failed try Embedded Portable PDB (if available):
-            var embeddedPdbEntry = ImmutableArrayExtensions.FirstOrDefault(
-                entries,
-                e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb
+            var embeddedPdbEntry = ImmutableArrayExtensions.FirstOrDefault(entries, e =>
+                e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb
             );
             if (embeddedPdbEntry.DataSize != 0)
             {

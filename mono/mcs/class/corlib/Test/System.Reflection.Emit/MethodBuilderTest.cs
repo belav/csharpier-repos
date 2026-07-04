@@ -1408,9 +1408,8 @@ namespace MonoTests.System.Reflection.Emit
                 CallingConventions.HasThis
             );
 
-            var testParameters = Array.ConvertAll(
-                testMethod.DefineGenericParameters("T"),
-                b => (Type)b
+            var testParameters = Array.ConvertAll(testMethod.DefineGenericParameters("T"), b =>
+                (Type)b
             );
 
             var returnType = testParameters[0].MakeArrayType();

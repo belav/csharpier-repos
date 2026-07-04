@@ -129,9 +129,8 @@ public sealed class TpcTablesExpression : TableExpressionBase
         expressionPrinter.AppendLine("(");
         using (expressionPrinter.Indent())
         {
-            expressionPrinter.VisitCollection(
-                SelectExpressions,
-                e => e.AppendLine().AppendLine("UNION ALL")
+            expressionPrinter.VisitCollection(SelectExpressions, e =>
+                e.AppendLine().AppendLine("UNION ALL")
             );
         }
 

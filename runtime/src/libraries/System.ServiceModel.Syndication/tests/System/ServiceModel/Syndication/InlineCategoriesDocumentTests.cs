@@ -84,13 +84,11 @@ namespace System.ServiceModel.Syndication.Tests
         public void Ctor_NullValueInCategories_ThrowsArgumentNullException()
         {
             var categories = new Collection<SyndicationCategory> { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () => new InlineCategoriesDocument(categories)
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                new InlineCategoriesDocument(categories)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () => new InlineCategoriesDocument(categories, true, "scheme")
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                new InlineCategoriesDocument(categories, true, "scheme")
             );
         }
 
@@ -182,9 +180,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Invoke_ReturnsExpected(string version)
         {
             var document = new InlineCategoriesDocumentSubclass();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => document.WriteAttributeExtensionsEntryPoint(writer, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                document.WriteAttributeExtensionsEntryPoint(writer, version)
             );
 
             document.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
@@ -200,9 +197,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var document = new InlineCategoriesDocumentSubclass();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => document.WriteAttributeExtensionsEntryPoint(null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                document.WriteAttributeExtensionsEntryPoint(null, "version")
             );
         }
 
@@ -213,9 +209,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Invoke_ReturnsExpected(string version)
         {
             var document = new InlineCategoriesDocumentSubclass();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => document.WriteElementExtensionsEntryPoint(writer, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                document.WriteElementExtensionsEntryPoint(writer, version)
             );
 
             document.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -235,9 +230,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var document = new InlineCategoriesDocumentSubclass();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => document.WriteElementExtensionsEntryPoint(null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                document.WriteElementExtensionsEntryPoint(null, "version")
             );
         }
 

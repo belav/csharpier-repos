@@ -29,117 +29,95 @@ public class SemanticEditTests : TestBase
         var method = type!.Constructors.Single();
         Assert.NotNull(method);
 
-        Assert.Throws<ArgumentOutOfRangeException>(
-            "kind",
-            () => new SemanticEdit(SemanticEditKind.None, oldSymbol: null, newSymbol: null)
+        Assert.Throws<ArgumentOutOfRangeException>("kind", () =>
+            new SemanticEdit(SemanticEditKind.None, oldSymbol: null, newSymbol: null)
         );
 
-        Assert.Throws<ArgumentNullException>(
-            "oldSymbol",
-            () => new SemanticEdit(SemanticEditKind.Update, oldSymbol: null, newSymbol: type)
+        Assert.Throws<ArgumentNullException>("oldSymbol", () =>
+            new SemanticEdit(SemanticEditKind.Update, oldSymbol: null, newSymbol: type)
         );
-        Assert.Throws<ArgumentNullException>(
-            "oldSymbol",
-            () => new SemanticEdit(SemanticEditKind.Delete, oldSymbol: null, newSymbol: type)
+        Assert.Throws<ArgumentNullException>("oldSymbol", () =>
+            new SemanticEdit(SemanticEditKind.Delete, oldSymbol: null, newSymbol: type)
         );
 
-        Assert.Throws<ArgumentNullException>(
-            "newSymbol",
-            () => new SemanticEdit(SemanticEditKind.Update, oldSymbol: type, newSymbol: null)
+        Assert.Throws<ArgumentNullException>("newSymbol", () =>
+            new SemanticEdit(SemanticEditKind.Update, oldSymbol: type, newSymbol: null)
         );
-        Assert.Throws<ArgumentNullException>(
-            "newSymbol",
-            () => new SemanticEdit(SemanticEditKind.Insert, oldSymbol: type, newSymbol: null)
+        Assert.Throws<ArgumentNullException>("newSymbol", () =>
+            new SemanticEdit(SemanticEditKind.Insert, oldSymbol: type, newSymbol: null)
         );
-        Assert.Throws<ArgumentNullException>(
-            "newSymbol",
-            () => new SemanticEdit(SemanticEditKind.Replace, oldSymbol: type, newSymbol: null)
+        Assert.Throws<ArgumentNullException>("newSymbol", () =>
+            new SemanticEdit(SemanticEditKind.Replace, oldSymbol: type, newSymbol: null)
         );
 
         var instrumentation = new MethodInstrumentation()
         {
             Kinds = ImmutableArray.Create(InstrumentationKind.TestCoverage),
         };
-        Assert.Throws<ArgumentOutOfRangeException>(
-            "kind",
-            () =>
-                new SemanticEdit(
-                    SemanticEditKind.Replace,
-                    oldSymbol: method,
-                    newSymbol: method,
-                    instrumentation: instrumentation
-                )
+        Assert.Throws<ArgumentOutOfRangeException>("kind", () =>
+            new SemanticEdit(
+                SemanticEditKind.Replace,
+                oldSymbol: method,
+                newSymbol: method,
+                instrumentation: instrumentation
+            )
         );
-        Assert.Throws<ArgumentOutOfRangeException>(
-            "kind",
-            () =>
-                new SemanticEdit(
-                    SemanticEditKind.Insert,
-                    oldSymbol: method,
-                    newSymbol: method,
-                    instrumentation: instrumentation
-                )
+        Assert.Throws<ArgumentOutOfRangeException>("kind", () =>
+            new SemanticEdit(
+                SemanticEditKind.Insert,
+                oldSymbol: method,
+                newSymbol: method,
+                instrumentation: instrumentation
+            )
         );
-        Assert.Throws<ArgumentOutOfRangeException>(
-            "kind",
-            () =>
-                new SemanticEdit(
-                    SemanticEditKind.Delete,
-                    oldSymbol: method,
-                    newSymbol: method,
-                    instrumentation: instrumentation
-                )
+        Assert.Throws<ArgumentOutOfRangeException>("kind", () =>
+            new SemanticEdit(
+                SemanticEditKind.Delete,
+                oldSymbol: method,
+                newSymbol: method,
+                instrumentation: instrumentation
+            )
         );
 
-        Assert.Throws<ArgumentException>(
-            "oldSymbol",
-            () =>
-                new SemanticEdit(
-                    SemanticEditKind.Update,
-                    oldSymbol: type,
-                    newSymbol: method,
-                    instrumentation: instrumentation
-                )
+        Assert.Throws<ArgumentException>("oldSymbol", () =>
+            new SemanticEdit(
+                SemanticEditKind.Update,
+                oldSymbol: type,
+                newSymbol: method,
+                instrumentation: instrumentation
+            )
         );
-        Assert.Throws<ArgumentException>(
-            "newSymbol",
-            () =>
-                new SemanticEdit(
-                    SemanticEditKind.Update,
-                    oldSymbol: method,
-                    newSymbol: type,
-                    instrumentation: instrumentation
-                )
+        Assert.Throws<ArgumentException>("newSymbol", () =>
+            new SemanticEdit(
+                SemanticEditKind.Update,
+                oldSymbol: method,
+                newSymbol: type,
+                instrumentation: instrumentation
+            )
         );
 
-        Assert.Throws<ArgumentOutOfRangeException>(
-            "Kinds",
-            () =>
-                new SemanticEdit(
-                    SemanticEditKind.Update,
-                    oldSymbol: method,
-                    newSymbol: method,
-                    instrumentation: new MethodInstrumentation()
-                    {
-                        Kinds = ImmutableArray.Create(
-                            InstrumentationKindExtensions.LocalStateTracing
-                        ),
-                    }
-                )
+        Assert.Throws<ArgumentOutOfRangeException>("Kinds", () =>
+            new SemanticEdit(
+                SemanticEditKind.Update,
+                oldSymbol: method,
+                newSymbol: method,
+                instrumentation: new MethodInstrumentation()
+                {
+                    Kinds = ImmutableArray.Create(InstrumentationKindExtensions.LocalStateTracing),
+                }
+            )
         );
 
-        Assert.Throws<ArgumentOutOfRangeException>(
-            "Kinds",
-            () =>
-                new SemanticEdit(
-                    SemanticEditKind.Update,
-                    oldSymbol: method,
-                    newSymbol: method,
-                    instrumentation: new MethodInstrumentation()
-                    {
-                        Kinds = ImmutableArray.Create((InstrumentationKind)123),
-                    }
-                )
+        Assert.Throws<ArgumentOutOfRangeException>("Kinds", () =>
+            new SemanticEdit(
+                SemanticEditKind.Update,
+                oldSymbol: method,
+                newSymbol: method,
+                instrumentation: new MethodInstrumentation()
+                {
+                    Kinds = ImmutableArray.Create((InstrumentationKind)123),
+                }
+            )
         );
     }
 }

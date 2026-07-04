@@ -512,9 +512,8 @@ public abstract class MaterializationInterceptionTestBase<TContext>
 
         var results = context.Set<Book>().ToList();
         Assert.All(results, e => Assert.Equal("4", e.MaterializedBy));
-        Assert.All(
-            interceptors.OfType<TestBindingInterceptor>(),
-            i => Assert.Equal(1, i.CalledCount)
+        Assert.All(interceptors.OfType<TestBindingInterceptor>(), i =>
+            Assert.Equal(1, i.CalledCount)
         );
 
         Assert.All(results, e => Assert.Equal("ABC", e.CreatedBy));

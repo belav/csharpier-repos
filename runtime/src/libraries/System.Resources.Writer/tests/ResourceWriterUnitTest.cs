@@ -310,17 +310,14 @@ namespace System.Resources.ResourceWriterTests
         [Fact]
         public static void ExceptionforResWriter02()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                byte[] buffer = new byte[_RefBuffer.Length];
+                using (var ms2 = new MemoryStream(buffer, false))
                 {
-                    byte[] buffer = new byte[_RefBuffer.Length];
-                    using (var ms2 = new MemoryStream(buffer, false))
-                    {
-                        var rw = new ResourceWriter(ms2);
-                    }
+                    var rw = new ResourceWriter(ms2);
                 }
-            );
+            });
         }
 
         [Fact]
@@ -337,21 +334,18 @@ namespace System.Resources.ResourceWriterTests
         [Fact]
         public static void ExceptionforResWriter04()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                byte[] buffer = new byte[_RefBuffer.Length];
+                using (var ms2 = new MemoryStream(buffer, true))
                 {
-                    byte[] buffer = new byte[_RefBuffer.Length];
-                    using (var ms2 = new MemoryStream(buffer, true))
+                    using (var rw1 = new ResourceWriter(ms2))
                     {
-                        using (var rw1 = new ResourceWriter(ms2))
-                        {
-                            rw1.AddResource("key1", "args");
-                            rw1.AddResource("key1", "args");
-                        }
+                        rw1.AddResource("key1", "args");
+                        rw1.AddResource("key1", "args");
                     }
                 }
-            );
+            });
         }
 
         [Fact]

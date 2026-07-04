@@ -114,9 +114,8 @@ namespace System.Text.RegularExpressions.Tests
         public void MatchTimeout_GetSet_Throws(TimeSpan matchTimeout)
         {
             RegexCompilationInfo regexCompilationInfo = Instance;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "matchTimeout",
-                () => regexCompilationInfo.MatchTimeout = matchTimeout
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () =>
+                regexCompilationInfo.MatchTimeout = matchTimeout
             );
         }
 
@@ -133,15 +132,11 @@ namespace System.Text.RegularExpressions.Tests
         public void Name_GetSet()
         {
             RegexCompilationInfo regexCompilationInfo = Instance;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "Name",
-                "value",
-                () => regexCompilationInfo.Name = null
+            AssertExtensions.Throws<ArgumentNullException>("Name", "value", () =>
+                regexCompilationInfo.Name = null
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "Name",
-                "value",
-                () => regexCompilationInfo.Name = string.Empty
+            AssertExtensions.Throws<ArgumentException>("Name", "value", () =>
+                regexCompilationInfo.Name = string.Empty
             );
             regexCompilationInfo.Name = "Name";
             Assert.Equal("Name", regexCompilationInfo.Name);
@@ -151,10 +146,8 @@ namespace System.Text.RegularExpressions.Tests
         public void Namespace_GetSet()
         {
             RegexCompilationInfo regexCompilationInfo = Instance;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "Namespace",
-                "value",
-                () => regexCompilationInfo.Namespace = null
+            AssertExtensions.Throws<ArgumentNullException>("Namespace", "value", () =>
+                regexCompilationInfo.Namespace = null
             );
             regexCompilationInfo.Namespace = string.Empty;
             Assert.Equal(string.Empty, regexCompilationInfo.Namespace);
@@ -179,10 +172,8 @@ namespace System.Text.RegularExpressions.Tests
         public void Pattern_GetSet()
         {
             RegexCompilationInfo regexCompilationInfo = Instance;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "Pattern",
-                "value",
-                () => regexCompilationInfo.Pattern = null
+            AssertExtensions.Throws<ArgumentNullException>("Pattern", "value", () =>
+                regexCompilationInfo.Pattern = null
             );
             regexCompilationInfo.Pattern = string.Empty;
             Assert.Equal(string.Empty, regexCompilationInfo.Pattern);

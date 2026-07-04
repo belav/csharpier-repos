@@ -142,9 +142,8 @@ namespace System.CommandLine.Rendering.Tests
                 .RenderOperations()
                 .Select(l => l.Text)
                 .Should()
-                .BeEquivalentTo(
-                    new[] { $"     ", $"*    " },
-                    options => options.WithStrictOrdering()
+                .BeEquivalentTo(new[] { $"     ", $"*    " }, options =>
+                    options.WithStrictOrdering()
                 );
         }
 

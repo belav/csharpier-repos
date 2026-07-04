@@ -36,38 +36,34 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
             Compilation sourceCompilation
         )
         {
-            return tracker.GetResultIdForSymbol(
-                symbol,
-                "moniker",
-                idFactory =>
+            return tracker.GetResultIdForSymbol(symbol, "moniker", idFactory =>
+            {
+                var moniker = SymbolMoniker.Create(symbol);
+
+                string? kind;
+
+                if (symbol.Kind == SymbolKind.Namespace)
                 {
-                    var moniker = SymbolMoniker.Create(symbol);
-
-                    string? kind;
-
-                    if (symbol.Kind == SymbolKind.Namespace)
-                    {
-                        kind = null;
-                    }
-                    else if (symbol.ContainingAssembly.Equals(sourceCompilation.Assembly))
-                    {
-                        kind = "export";
-                    }
-                    else
-                    {
-                        kind = "import";
-                    }
-
-                    // Since we fully qualify everything, all monitors are unique within the scheme
-                    return new Moniker(
-                        moniker.Scheme,
-                        moniker.Identifier,
-                        kind,
-                        unique: "scheme",
-                        idFactory
-                    );
+                    kind = null;
                 }
-            );
+                else if (symbol.ContainingAssembly.Equals(sourceCompilation.Assembly))
+                {
+                    kind = "export";
+                }
+                else
+                {
+                    kind = "import";
+                }
+
+                // Since we fully qualify everything, all monitors are unique within the scheme
+                return new Moniker(
+                    moniker.Scheme,
+                    moniker.Identifier,
+                    kind,
+                    unique: "scheme",
+                    idFactory
+                );
+            });
         }
     }
 }

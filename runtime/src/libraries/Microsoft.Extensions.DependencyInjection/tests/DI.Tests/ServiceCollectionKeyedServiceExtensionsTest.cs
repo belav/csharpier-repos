@@ -180,10 +180,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     {
                         collection =>
-                            collection.AddKeyedTransient(
-                                serviceType,
-                                "some-key-1",
-                                (s, k) => new FakeService()
+                            collection.AddKeyedTransient(serviceType, "some-key-1", (s, k) =>
+                                new FakeService()
                             ),
                         serviceType,
                         "some-key-1",
@@ -192,9 +190,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     },
                     {
                         collection =>
-                            collection.AddKeyedTransient<IFakeService>(
-                                "some-key-2",
-                                (s, k) => new FakeService()
+                            collection.AddKeyedTransient<IFakeService>("some-key-2", (s, k) =>
+                                new FakeService()
                             ),
                         serviceType,
                         "some-key-2",
@@ -214,10 +211,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     },
                     {
                         collection =>
-                            collection.AddKeyedScoped(
-                                serviceType,
-                                "some-key-4",
-                                (s, k) => new FakeService()
+                            collection.AddKeyedScoped(serviceType, "some-key-4", (s, k) =>
+                                new FakeService()
                             ),
                         serviceType,
                         "some-key-4",
@@ -226,9 +221,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     },
                     {
                         collection =>
-                            collection.AddKeyedScoped<IFakeService>(
-                                "some-key-5",
-                                (s, k) => new FakeService()
+                            collection.AddKeyedScoped<IFakeService>("some-key-5", (s, k) =>
+                                new FakeService()
                             ),
                         serviceType,
                         "some-key-5",
@@ -248,10 +242,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     },
                     {
                         collection =>
-                            collection.AddKeyedSingleton(
-                                serviceType,
-                                "some-key-7",
-                                (s, k) => new FakeService()
+                            collection.AddKeyedSingleton(serviceType, "some-key-7", (s, k) =>
+                                new FakeService()
                             ),
                         serviceType,
                         "some-key-7",
@@ -260,9 +252,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     },
                     {
                         collection =>
-                            collection.AddKeyedSingleton<IFakeService>(
-                                "some-key-8",
-                                (s, k) => new FakeService()
+                            collection.AddKeyedSingleton<IFakeService>("some-key-8", (s, k) =>
+                                new FakeService()
                             ),
                         serviceType,
                         "some-key-8",
@@ -687,52 +678,43 @@ namespace Microsoft.Extensions.DependencyInjection
                 return new TheoryData<ServiceDescriptor, Type, Type>
                 {
                     {
-                        ServiceDescriptor.KeyedTransient<IFakeService>(
-                            key,
-                            (s, k) => new FakeService()
+                        ServiceDescriptor.KeyedTransient<IFakeService>(key, (s, k) =>
+                            new FakeService()
                         ),
                         serviceType,
                         serviceType
                     },
                     {
-                        ServiceDescriptor.KeyedTransient(
-                            serviceType,
-                            key,
-                            (s, k) => new FakeService()
+                        ServiceDescriptor.KeyedTransient(serviceType, key, (s, k) =>
+                            new FakeService()
                         ),
                         serviceType,
                         objectType
                     },
                     {
-                        ServiceDescriptor.KeyedScoped<IFakeService>(
-                            key,
-                            (s, k) => new FakeService()
+                        ServiceDescriptor.KeyedScoped<IFakeService>(key, (s, k) =>
+                            new FakeService()
                         ),
                         serviceType,
                         serviceType
                     },
                     {
-                        ServiceDescriptor.KeyedScoped(
-                            serviceType,
-                            key,
-                            (s, k) => new FakeService()
+                        ServiceDescriptor.KeyedScoped(serviceType, key, (s, k) =>
+                            new FakeService()
                         ),
                         serviceType,
                         objectType
                     },
                     {
-                        ServiceDescriptor.KeyedSingleton<IFakeService>(
-                            key,
-                            (s, k) => new FakeService()
+                        ServiceDescriptor.KeyedSingleton<IFakeService>(key, (s, k) =>
+                            new FakeService()
                         ),
                         serviceType,
                         serviceType
                     },
                     {
-                        ServiceDescriptor.KeyedSingleton(
-                            serviceType,
-                            key,
-                            (s, k) => new FakeService()
+                        ServiceDescriptor.KeyedSingleton(serviceType, key, (s, k) =>
+                            new FakeService()
                         ),
                         serviceType,
                         objectType
@@ -894,16 +876,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     { ServiceDescriptor.KeyedTransient<IFakeService, FakeService>(key) },
                     {
-                        ServiceDescriptor.KeyedTransient<IFakeService>(
-                            key,
-                            (sp, key) => new FakeService()
+                        ServiceDescriptor.KeyedTransient<IFakeService>(key, (sp, key) =>
+                            new FakeService()
                         )
                     },
                     { ServiceDescriptor.KeyedScoped<IFakeService, FakeService>(key) },
                     {
-                        ServiceDescriptor.KeyedScoped<IFakeService>(
-                            key,
-                            (sp, key) => new FakeService()
+                        ServiceDescriptor.KeyedScoped<IFakeService>(key, (sp, key) =>
+                            new FakeService()
                         )
                     },
                     { ServiceDescriptor.KeyedSingleton<IFakeService, FakeService>(key) },
@@ -941,16 +921,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     { ServiceDescriptor.KeyedTransient<IFakeService, FakeService>(key) },
                     {
-                        ServiceDescriptor.KeyedTransient<IFakeService>(
-                            key,
-                            (sp, key) => new FakeService()
+                        ServiceDescriptor.KeyedTransient<IFakeService>(key, (sp, key) =>
+                            new FakeService()
                         )
                     },
                     { ServiceDescriptor.KeyedScoped<IFakeService, FakeService>(key) },
                     {
-                        ServiceDescriptor.KeyedScoped<IFakeService>(
-                            key,
-                            (sp, key) => new FakeService()
+                        ServiceDescriptor.KeyedScoped<IFakeService>(key, (sp, key) =>
+                            new FakeService()
                         )
                     },
                     { ServiceDescriptor.KeyedSingleton<IFakeService, FakeService>(key) },

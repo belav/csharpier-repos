@@ -185,20 +185,17 @@ namespace System.Security.Cryptography.X509Certificates
             Debug.Assert(password != null);
 
             ICertificatePal? result = null;
-            TryDecodePem(
-                rawData,
-                (derData, contentType) =>
-                {
-                    result = FromDerBlob(
-                        derData,
-                        contentType,
-                        password,
-                        readingFromFile,
-                        keyStorageFlags
-                    );
-                    return false;
-                }
-            );
+            TryDecodePem(rawData, (derData, contentType) =>
+            {
+                result = FromDerBlob(
+                    derData,
+                    contentType,
+                    password,
+                    readingFromFile,
+                    keyStorageFlags
+                );
+                return false;
+            });
 
             return result
                 ?? FromDerBlob(

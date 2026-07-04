@@ -419,13 +419,11 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetNativeVariantForObject_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pDstNativeVariant",
-                () => Marshal.GetNativeVariantForObject(new object(), IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentNullException>("pDstNativeVariant", () =>
+                Marshal.GetNativeVariantForObject(new object(), IntPtr.Zero)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pDstNativeVariant",
-                () => Marshal.GetNativeVariantForObject<int>(1, IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentNullException>("pDstNativeVariant", () =>
+                Marshal.GetNativeVariantForObject<int>(1, IntPtr.Zero)
             );
         }
 
@@ -442,13 +440,11 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(GetNativeVariantForObject_GenericObject_TestData))]
         public void GetNativeVariantForObject_GenericObject_ThrowsArgumentException(object obj)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "obj",
-                () => Marshal.GetNativeVariantForObject(obj, (IntPtr)1)
+            AssertExtensions.Throws<ArgumentException>("obj", () =>
+                Marshal.GetNativeVariantForObject(obj, (IntPtr)1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "obj",
-                () => Marshal.GetNativeVariantForObject<object>(obj, (IntPtr)1)
+            AssertExtensions.Throws<ArgumentException>("obj", () =>
+                Marshal.GetNativeVariantForObject<object>(obj, (IntPtr)1)
             );
         }
 
@@ -489,13 +485,11 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr pNative = Marshal.AllocHGlobal(Marshal.SizeOf(v));
             try
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => Marshal.GetNativeVariantForObject(obj, pNative)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    Marshal.GetNativeVariantForObject(obj, pNative)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => Marshal.GetNativeVariantForObject<object>(obj, pNative)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    Marshal.GetNativeVariantForObject<object>(obj, pNative)
                 );
             }
             finally
@@ -524,13 +518,11 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr pNative = Marshal.AllocHGlobal(Marshal.SizeOf(v));
             try
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => Marshal.GetNativeVariantForObject(obj, pNative)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    Marshal.GetNativeVariantForObject(obj, pNative)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => Marshal.GetNativeVariantForObject<object>(obj, pNative)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    Marshal.GetNativeVariantForObject<object>(obj, pNative)
                 );
             }
             finally

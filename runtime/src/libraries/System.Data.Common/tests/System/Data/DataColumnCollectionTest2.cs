@@ -460,14 +460,11 @@ namespace System.Data.Tests
             //------Check Remove column exception---------
             dt = dtSource.Clone();
             dt.ImportRow(dtSource.Rows[0]);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataColumn dc = new DataColumn();
-                    dt.Columns.Remove(dc);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataColumn dc = new DataColumn();
+                dt.Columns.Remove(dc);
+            });
         }
 
         [Fact]
@@ -584,13 +581,10 @@ namespace System.Data.Tests
         public void Clear2()
         {
             DataSet ds = DataProvider.CreateForeignConstraint();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    ds.Tables[0].Columns.Clear();
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                ds.Tables[0].Columns.Clear();
+            });
         }
 
         [Fact]
@@ -758,23 +752,17 @@ namespace System.Data.Tests
             dt = dtSource.Clone();
             dt.ImportRow(dtSource.Rows[0]);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    dt.Columns.Remove("NotExist");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                dt.Columns.Remove("NotExist");
+            });
 
             dt.Columns.Clear();
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    dt.Columns.Remove("Col_0");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                dt.Columns.Remove("Col_0");
+            });
         }
 
         private bool _eventOccurred = false;

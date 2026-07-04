@@ -22,9 +22,8 @@ namespace System.Security.Cryptography.Tests
         {
             using (TAlg key = CreateKey())
             {
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => key.ImportFromPem("")
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    key.ImportFromPem("")
                 );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }
@@ -238,9 +237,8 @@ Isuk92Ner/JmgKjYoSumHVmSNfZ9nLTVjxeD08pD548KWrqmJAeZNsDDqQ==
 MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEgQHs5HRkpurXDPaabivT2IaRoyYt
 Isuk92Ner/JmgKjYoSumHVmSNfZ9nLTVjxeD08pD548KWrqmJAeZNsDDqQ==
 -----END PUBLIC KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => key.ImportFromPem(pem)
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    key.ImportFromPem(pem)
                 );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
@@ -264,9 +262,8 @@ Qh0fqdrNovgFLubbJFMQN/MwwIAfIuf0Mn0WFYYeQiBJ3kg=
 MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEgQHs5HRkpurXDPaabivT2IaRoyYt
 Isuk92Ner/JmgKjYoSumHVmSNfZ9nLTVjxeD08pD548KWrqmJAeZNsDDqQ==
 -----END PUBLIC KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => key.ImportFromPem(pem)
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    key.ImportFromPem(pem)
                 );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
@@ -290,9 +287,8 @@ Evt9yfvEjiP/6yITq59drw1Kcgp6buOCVCY7LZ06aD6WpogiqGDYMuzfvqg5hNFp
 opSAJ/pvHONL5kyAJLeNyG9c/mR2qyrP2L9gL0Z5fB9NyPejKTLi0PXMGQWdDTH8
 Qh0fqdrNovgFLubbJFMQN/MwwIAfIuf0Mn0WFYYeQiBJ3kg=
 -----END ENCRYPTED PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => key.ImportFromPem(pem)
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    key.ImportFromPem(pem)
                 );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
@@ -312,9 +308,8 @@ Evt9yfvEjiP/6yITq59drw1Kcgp6buOCVCY7LZ06aD6WpogiqGDYMuzfvqg5hNFp
 opSAJ/pvHONL5kyAJLeNyG9c/mR2qyrP2L9gL0Z5fB9NyPejKTLi0PXMGQWdDTH8
 Qh0fqdrNovgFLubbJFMQN/MwwIAfIuf0Mn0WFYYeQiBJ3kg=
 -----END ENCRYPTED PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => key.ImportFromPem(pem)
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    key.ImportFromPem(pem)
                 );
                 Assert.Contains(EncryptedExceptionMarker, ae.Message);
             }
@@ -341,9 +336,8 @@ Evt9yfvEjiP/6yITq59drw1Kcgp6buOCVCY7LZ06aD6WpogiqGDYMuzfvqg5hNFp
 opSAJ/pvHONL5kyAJLeNyG9c/mR2qyrP2L9gL0Z5fB9NyPejKTLi0PXMGQWdDTH8
 Qh0fqdrNovgFLubbJFMQN/MwwIAfIuf0Mn0WFYYeQiBJ3kg=
 -----END ENCRYPTED PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => key.ImportFromPem(pem)
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    key.ImportFromPem(pem)
                 );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
@@ -413,9 +407,8 @@ opSAJ/pvHONL5kyAJLeNyG9c/mR2qyrP2L9gL0Z5fB9NyPejKTLi0PXMGQWdDTH8
 Qh0fqdrNovgFLubbJFMQN/MwwIAfIuf0Mn0WFYYeQiBJ3kg=
 -----END ENCRYPTED PRIVATE KEY-----";
 
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => key.ImportFromEncryptedPem(pem, "test"u8)
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    key.ImportFromEncryptedPem(pem, "test"u8)
                 );
 
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
@@ -443,9 +436,8 @@ Evt9yfvEjiP/6yITq59drw1Kcgp6buOCVCY7LZ06aD6WpogiqGDYMuzfvqg5hNFp
 opSAJ/pvHONL5kyAJLeNyG9c/mR2qyrP2L9gL0Z5fB9NyPejKTLi0PXMGQWdDTH8
 Qh0fqdrNovgFLubbJFMQN/MwwIAfIuf0Mn0WFYYeQiBJ3kg=
 -----END ENCRYPTED PRIVATE KEY-----";
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => key.ImportFromEncryptedPem(pem, (ReadOnlySpan<char>)"")
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    key.ImportFromEncryptedPem(pem, (ReadOnlySpan<char>)"")
                 );
                 Assert.Contains(AmbiguousExceptionMarker, ae.Message);
             }
@@ -464,9 +456,8 @@ whpHKz8E19aFG/Y0ny19WzRSs4qhRANCAASBAezkdGSm6tcM9ppuK9PYhpGjJi0i
 y6T3Y16v8maAqNihK6YdWZI19n2ctNWPF4PTykPnjwpauqYkB5k2wMOp
 -----END PRIVATE KEY-----";
                 byte[] passwordBytes = Array.Empty<byte>();
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => key.ImportFromEncryptedPem(pem, passwordBytes)
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    key.ImportFromEncryptedPem(pem, passwordBytes)
                 );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }
@@ -477,9 +468,8 @@ y6T3Y16v8maAqNihK6YdWZI19n2ctNWPF4PTykPnjwpauqYkB5k2wMOp
         {
             using (TAlg key = CreateKey())
             {
-                ArgumentException ae = AssertExtensions.Throws<ArgumentException>(
-                    "input",
-                    () => key.ImportFromEncryptedPem("", (ReadOnlySpan<char>)"")
+                ArgumentException ae = AssertExtensions.Throws<ArgumentException>("input", () =>
+                    key.ImportFromEncryptedPem("", (ReadOnlySpan<char>)"")
                 );
                 Assert.Contains(NoPemExceptionMarker, ae.Message);
             }

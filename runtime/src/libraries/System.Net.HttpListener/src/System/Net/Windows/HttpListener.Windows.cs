@@ -90,9 +90,8 @@ namespace System.Net
         }
 
         private Dictionary<ulong, DisconnectAsyncResult> DisconnectResults =>
-            LazyInitializer.EnsureInitialized(
-                ref _disconnectResults,
-                () => new Dictionary<ulong, DisconnectAsyncResult>()
+            LazyInitializer.EnsureInitialized(ref _disconnectResults, () =>
+                new Dictionary<ulong, DisconnectAsyncResult>()
             );
 
         private unsafe void SetUrlGroupProperty(

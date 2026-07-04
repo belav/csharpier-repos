@@ -126,19 +126,15 @@ public sealed class EntityFrameworkEventSource : EventSource
             // overhead by at all times even when counters aren't enabled.
             // On disable, PollingCounters will stop polling for values so it should be fine to leave them around.
 
-            _activeDbContextsCounter ??= new PollingCounter(
-                "active-db-contexts",
-                this,
-                () => Interlocked.Read(ref _activeDbContexts)
+            _activeDbContextsCounter ??= new PollingCounter("active-db-contexts", this, () =>
+                Interlocked.Read(ref _activeDbContexts)
             )
             {
                 DisplayName = "Active DbContexts",
             };
 
-            _totalQueriesCounter ??= new PollingCounter(
-                "total-queries",
-                this,
-                () => Interlocked.Read(ref _totalQueries)
+            _totalQueriesCounter ??= new PollingCounter("total-queries", this, () =>
+                Interlocked.Read(ref _totalQueries)
             )
             {
                 DisplayName = "Queries (Total)",
@@ -154,10 +150,8 @@ public sealed class EntityFrameworkEventSource : EventSource
                 DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
-            _totalSaveChangesCounter ??= new PollingCounter(
-                "total-save-changes",
-                this,
-                () => Interlocked.Read(ref _totalSaveChanges)
+            _totalSaveChangesCounter ??= new PollingCounter("total-save-changes", this, () =>
+                Interlocked.Read(ref _totalSaveChanges)
             )
             {
                 DisplayName = "SaveChanges (Total)",

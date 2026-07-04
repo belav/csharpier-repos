@@ -84,56 +84,36 @@ namespace System.SpanTests
             {
                 string argName = low is null ? "lowInclusive" : "highInclusive";
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    argName,
-                    () => MemoryExtensions.IndexOfAnyInRange(Span<RefType>.Empty, low, high)
+                AssertExtensions.Throws<ArgumentNullException>(argName, () =>
+                    MemoryExtensions.IndexOfAnyInRange(Span<RefType>.Empty, low, high)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    argName,
-                    () => MemoryExtensions.IndexOfAnyInRange(ReadOnlySpan<RefType>.Empty, low, high)
+                AssertExtensions.Throws<ArgumentNullException>(argName, () =>
+                    MemoryExtensions.IndexOfAnyInRange(ReadOnlySpan<RefType>.Empty, low, high)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    argName,
-                    () => MemoryExtensions.LastIndexOfAnyInRange(Span<RefType>.Empty, low, high)
+                AssertExtensions.Throws<ArgumentNullException>(argName, () =>
+                    MemoryExtensions.LastIndexOfAnyInRange(Span<RefType>.Empty, low, high)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    argName,
-                    () =>
-                        MemoryExtensions.LastIndexOfAnyInRange(
-                            ReadOnlySpan<RefType>.Empty,
-                            low,
-                            high
-                        )
+                AssertExtensions.Throws<ArgumentNullException>(argName, () =>
+                    MemoryExtensions.LastIndexOfAnyInRange(ReadOnlySpan<RefType>.Empty, low, high)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    argName,
-                    () => MemoryExtensions.IndexOfAnyExceptInRange(Span<RefType>.Empty, low, high)
+                AssertExtensions.Throws<ArgumentNullException>(argName, () =>
+                    MemoryExtensions.IndexOfAnyExceptInRange(Span<RefType>.Empty, low, high)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    argName,
-                    () =>
-                        MemoryExtensions.IndexOfAnyExceptInRange(
-                            ReadOnlySpan<RefType>.Empty,
-                            low,
-                            high
-                        )
+                AssertExtensions.Throws<ArgumentNullException>(argName, () =>
+                    MemoryExtensions.IndexOfAnyExceptInRange(ReadOnlySpan<RefType>.Empty, low, high)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    argName,
-                    () =>
-                        MemoryExtensions.LastIndexOfAnyExceptInRange(Span<RefType>.Empty, low, high)
+                AssertExtensions.Throws<ArgumentNullException>(argName, () =>
+                    MemoryExtensions.LastIndexOfAnyExceptInRange(Span<RefType>.Empty, low, high)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    argName,
-                    () =>
-                        MemoryExtensions.LastIndexOfAnyExceptInRange(
-                            ReadOnlySpan<RefType>.Empty,
-                            low,
-                            high
-                        )
+                AssertExtensions.Throws<ArgumentNullException>(argName, () =>
+                    MemoryExtensions.LastIndexOfAnyExceptInRange(
+                        ReadOnlySpan<RefType>.Empty,
+                        low,
+                        high
+                    )
                 );
             }
         }

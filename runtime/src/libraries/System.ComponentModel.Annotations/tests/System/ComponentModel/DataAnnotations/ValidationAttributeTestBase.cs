@@ -20,18 +20,16 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void Validate_Valid()
         {
-            Assert.All(
-                ValidValues(),
-                test => Validate(test.Attribute, test.Value, test.ValidationContext, isValid: true)
+            Assert.All(ValidValues(), test =>
+                Validate(test.Attribute, test.Value, test.ValidationContext, isValid: true)
             );
         }
 
         [Fact]
         public void Validate_Invalid()
         {
-            Assert.All(
-                InvalidValues(),
-                test => Validate(test.Attribute, test.Value, test.ValidationContext, isValid: false)
+            Assert.All(InvalidValues(), test =>
+                Validate(test.Attribute, test.Value, test.ValidationContext, isValid: false)
             );
         }
 
@@ -119,9 +117,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         private void ErrorMessageNotSet(TestCase test)
         {
             test.Attribute.ErrorMessage = null;
-            Assert.Throws(
-                InvalidErrorMessage_Type,
-                () => test.Attribute.Validate(test.Value, test.ValidationContext)
+            Assert.Throws(InvalidErrorMessage_Type, () =>
+                test.Attribute.Validate(test.Value, test.ValidationContext)
             );
         }
 
@@ -129,9 +126,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             test.Attribute.ErrorMessage = "Some";
             test.Attribute.ErrorMessageResourceName = "Some";
-            Assert.Throws(
-                InvalidErrorMessage_Type,
-                () => test.Attribute.Validate(test.Value, test.ValidationContext)
+            Assert.Throws(InvalidErrorMessage_Type, () =>
+                test.Attribute.Validate(test.Value, test.ValidationContext)
             );
         }
 
@@ -139,9 +135,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             test.Attribute.ErrorMessageResourceName = "Some";
             test.Attribute.ErrorMessageResourceType = null;
-            Assert.Throws(
-                InvalidErrorMessage_Type,
-                () => test.Attribute.Validate(test.Value, test.ValidationContext)
+            Assert.Throws(InvalidErrorMessage_Type, () =>
+                test.Attribute.Validate(test.Value, test.ValidationContext)
             );
         }
 
@@ -149,9 +144,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             test.Attribute.ErrorMessageResourceName = null;
             test.Attribute.ErrorMessageResourceType = typeof(ErrorMessageResources);
-            Assert.Throws(
-                InvalidErrorMessage_Type,
-                () => test.Attribute.Validate(test.Value, test.ValidationContext)
+            Assert.Throws(InvalidErrorMessage_Type, () =>
+                test.Attribute.Validate(test.Value, test.ValidationContext)
             );
         }
 
@@ -161,9 +155,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             test.Attribute.ErrorMessageResourceName = "NoSuchProperty";
             test.Attribute.ErrorMessageResourceType = typeof(ErrorMessageResources);
-            Assert.Throws(
-                InvalidErrorMessage_Type,
-                () => test.Attribute.Validate(test.Value, test.ValidationContext)
+            Assert.Throws(InvalidErrorMessage_Type, () =>
+                test.Attribute.Validate(test.Value, test.ValidationContext)
             );
         }
 
@@ -175,9 +168,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 ErrorMessageResources.InstanceProperty
             );
             test.Attribute.ErrorMessageResourceType = typeof(ErrorMessageResources);
-            Assert.Throws(
-                InvalidErrorMessage_Type,
-                () => test.Attribute.Validate(test.Value, test.ValidationContext)
+            Assert.Throws(InvalidErrorMessage_Type, () =>
+                test.Attribute.Validate(test.Value, test.ValidationContext)
             );
         }
 
@@ -187,9 +179,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             test.Attribute.ErrorMessageResourceName = "PrivateProperty";
             test.Attribute.ErrorMessageResourceType = typeof(ErrorMessageResources);
-            Assert.Throws(
-                InvalidErrorMessage_Type,
-                () => test.Attribute.Validate(test.Value, test.ValidationContext)
+            Assert.Throws(InvalidErrorMessage_Type, () =>
+                test.Attribute.Validate(test.Value, test.ValidationContext)
             );
         }
 
@@ -199,9 +190,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             test.Attribute.ErrorMessageResourceName = nameof(ErrorMessageResources.BoolProperty);
             test.Attribute.ErrorMessageResourceType = typeof(ErrorMessageResources);
-            Assert.Throws(
-                InvalidErrorMessage_Type,
-                () => test.Attribute.Validate(test.Value, test.ValidationContext)
+            Assert.Throws(InvalidErrorMessage_Type, () =>
+                test.Attribute.Validate(test.Value, test.ValidationContext)
             );
         }
 

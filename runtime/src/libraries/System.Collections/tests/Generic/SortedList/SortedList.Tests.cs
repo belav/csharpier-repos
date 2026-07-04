@@ -49,9 +49,8 @@ namespace System.Collections.Tests
             if (!IsReadOnly)
             {
                 IDictionary dictionary = new SortedList<string, string>();
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "key",
-                    () => dictionary[23] = CreateTValue(12345)
+                AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                    dictionary[23] = CreateTValue(12345)
                 );
                 Assert.Empty(dictionary);
             }
@@ -64,9 +63,8 @@ namespace System.Collections.Tests
             {
                 IDictionary dictionary = new SortedList<string, string>();
                 object missingKey = GetNewKey(dictionary);
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => dictionary[missingKey] = 324
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    dictionary[missingKey] = 324
                 );
                 Assert.Empty(dictionary);
             }
@@ -79,9 +77,8 @@ namespace System.Collections.Tests
             {
                 IDictionary dictionary = new SortedList<string, string>();
                 object missingKey = 23;
-                AssertExtensions.Throws<ArgumentException>(
-                    "key",
-                    () => dictionary.Add(missingKey, CreateTValue(12345))
+                AssertExtensions.Throws<ArgumentException>("key", () =>
+                    dictionary.Add(missingKey, CreateTValue(12345))
                 );
                 Assert.Empty(dictionary);
             }
@@ -94,9 +91,8 @@ namespace System.Collections.Tests
             {
                 IDictionary dictionary = new SortedList<string, string>();
                 object missingKey = GetNewKey(dictionary);
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => dictionary.Add(missingKey, 324)
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    dictionary.Add(missingKey, 324)
                 );
                 Assert.Empty(dictionary);
             }
@@ -128,9 +124,8 @@ namespace System.Collections.Tests
         public void CantAcceptDuplicateKeysFromSourceDictionary()
         {
             Dictionary<string, int> source = new Dictionary<string, int> { { "a", 1 }, { "A", 1 } };
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new SortedList<string, int>(source, StringComparer.OrdinalIgnoreCase)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new SortedList<string, int>(source, StringComparer.OrdinalIgnoreCase)
             );
         }
 
@@ -144,10 +139,8 @@ namespace System.Collections.Tests
         {
             ICollection collection = NonGenericICollectionFactory(count);
             KeyValuePair<string, int>[] array = new KeyValuePair<string, int>[count * 3 / 2];
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                null,
-                () => collection.CopyTo(array, 0)
+            AssertExtensions.Throws<ArgumentException>("array", null, () =>
+                collection.CopyTo(array, 0)
             );
         }
 

@@ -4775,9 +4775,8 @@ namespace System.Diagnostics.Tracing
         protected EventListener()
         {
             // This will cause the OnEventSourceCreated callback to fire.
-            CallBackForExistingEventSources(
-                true,
-                (obj, args) => args.EventSource!.AddListener((EventListener)obj!)
+            CallBackForExistingEventSources(true, (obj, args) =>
+                args.EventSource!.AddListener((EventListener)obj!)
             );
         }
 

@@ -225,14 +225,12 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             if (statementIndex + 1 < state.OutermostBlockStatements.Count)
             {
                 var originalNextStatement = state.OutermostBlockStatements[statementIndex + 1];
-                editor.ReplaceNode(
-                    originalNextStatement,
-                    (current, generator) =>
-                        current
-                            .WithAdditionalAnnotations(Formatter.Annotation)
-                            .WithPrependedLeadingTrivia(
-                                bannerService.GetLeadingBlankLines(state.DeclarationStatement)
-                            )
+                editor.ReplaceNode(originalNextStatement, (current, generator) =>
+                    current
+                        .WithAdditionalAnnotations(Formatter.Annotation)
+                        .WithPrependedLeadingTrivia(
+                            bannerService.GetLeadingBlankLines(state.DeclarationStatement)
+                        )
                 );
             }
         }

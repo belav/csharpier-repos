@@ -475,9 +475,8 @@ namespace System.Data.Common.CommandTrees
 
             // Note that it is only safe to call DbConstantExpression.GetValue because the call to
             // DbExpressionBuilder.Constant must clone immutable values (byte[]).
-            return VisitTerminal(
-                expression,
-                newType => CqtBuilder.Constant(newType, expression.GetValue())
+            return VisitTerminal(expression, newType =>
+                CqtBuilder.Constant(newType, expression.GetValue())
             );
         }
 
@@ -506,9 +505,8 @@ namespace System.Data.Common.CommandTrees
         {
             EntityUtil.CheckArgumentNull(expression, "expression");
 
-            return VisitTerminal(
-                expression,
-                newType => CqtBuilder.Parameter(newType, expression.ParameterName)
+            return VisitTerminal(expression, newType =>
+                CqtBuilder.Parameter(newType, expression.ParameterName)
             );
         }
 
@@ -640,21 +638,18 @@ namespace System.Data.Common.CommandTrees
         {
             EntityUtil.CheckArgumentNull(expression, "expression");
 
-            return VisitUnary(
-                expression,
-                exp =>
+            return VisitUnary(expression, exp =>
+            {
+                if (TypeSemantics.IsRowType(exp.ResultType))
                 {
-                    if (TypeSemantics.IsRowType(exp.ResultType))
-                    {
-                        //
-                        return CqtBuilder.CreateIsNullExpressionAllowingRowTypeArgument(exp);
-                    }
-                    else
-                    {
-                        return CqtBuilder.IsNull(exp);
-                    }
+                    //
+                    return CqtBuilder.CreateIsNullExpressionAllowingRowTypeArgument(exp);
                 }
-            );
+                else
+                {
+                    return CqtBuilder.IsNull(exp);
+                }
+            });
         }
 
         public override DbExpression Visit(DbArithmeticExpression expression)

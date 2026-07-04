@@ -322,14 +322,11 @@ namespace System.Threading.Tests
         {
             bool shouldThrow = true;
             int participants = 4;
-            Barrier barrier = new Barrier(
-                participants,
-                (b) =>
-                {
-                    if (shouldThrow)
-                        throw new InvalidOperationException();
-                }
-            );
+            Barrier barrier = new Barrier(participants, (b) =>
+            {
+                if (shouldThrow)
+                    throw new InvalidOperationException();
+            });
             int succeededCount = 0;
 
             // Run threads that will expect BarrierPostPhaseException when they call SignalAndWait, and increment the count in the catch block

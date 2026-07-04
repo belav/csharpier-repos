@@ -287,13 +287,11 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void Ctor_NullException_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "e",
-                () => new StackTrace((Exception)null)
+            AssertExtensions.Throws<ArgumentNullException>("e", () =>
+                new StackTrace((Exception)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "e",
-                () => new StackTrace((Exception)null, false)
+            AssertExtensions.Throws<ArgumentNullException>("e", () =>
+                new StackTrace((Exception)null, false)
             );
             AssertExtensions.Throws<ArgumentNullException>("e", () => new StackTrace(null, 1));
         }
@@ -301,9 +299,8 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void Ctor_NullMultiFrame_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "frames",
-                () => new StackTrace((IEnumerable<StackFrame>)null)
+            AssertExtensions.Throws<ArgumentNullException>("frames", () =>
+                new StackTrace((IEnumerable<StackFrame>)null)
             );
         }
 

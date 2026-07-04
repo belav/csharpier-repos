@@ -99,13 +99,11 @@ namespace Microsoft.CodeAnalysis.Telemetry
             s_eventMap.GetOrAdd(id, id => EventPrefix + GetTelemetryName(id, separator: '/'));
 
         internal static string GetPropertyName(FunctionId id, string name) =>
-            s_propertyMap.GetOrAdd(
-                (id, name),
-                key =>
-                    PropertyPrefix
-                    + GetTelemetryName(id, separator: '.')
-                    + "."
-                    + key.name.ToLowerInvariant()
+            s_propertyMap.GetOrAdd((id, name), key =>
+                PropertyPrefix
+                + GetTelemetryName(id, separator: '.')
+                + "."
+                + key.name.ToLowerInvariant()
             );
 
         private static string GetTelemetryName(FunctionId id, char separator) =>

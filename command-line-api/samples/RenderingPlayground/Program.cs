@@ -110,9 +110,8 @@ namespace RenderingPlayground
                         table.AddColumn(process => $"{process.ProcessName} ", "Name");
                         table.AddColumn(
                             process =>
-                                ContentView.FromObservable(
-                                    process.TrackCpuUsage(),
-                                    x => $"{x.UsageTotal:P}"
+                                ContentView.FromObservable(process.TrackCpuUsage(), x =>
+                                    $"{x.UsageTotal:P}"
                                 ),
                             "CPU",
                             ColumnDefinition.Star(1)

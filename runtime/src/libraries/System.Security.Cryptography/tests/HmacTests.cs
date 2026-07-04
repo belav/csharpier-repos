@@ -455,13 +455,11 @@ namespace System.Security.Cryptography.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "buffer",
-                    () => hash.ComputeHash((byte[])null)
+                AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+                    hash.ComputeHash((byte[])null)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "buffer",
-                    () => hash.ComputeHash(null, 0, 0)
+                AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+                    hash.ComputeHash(null, 0, 0)
                 );
                 Assert.Throws<NullReferenceException>(() => hash.ComputeHash((Stream)null));
             }
@@ -472,9 +470,8 @@ namespace System.Security.Cryptography.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => hash.ComputeHash(Array.Empty<byte>(), -1, 0)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    hash.ComputeHash(Array.Empty<byte>(), -1, 0)
                 );
             }
         }
@@ -484,9 +481,8 @@ namespace System.Security.Cryptography.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => hash.ComputeHash(Array.Empty<byte>(), 0, -1)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    hash.ComputeHash(Array.Empty<byte>(), 0, -1)
                 );
             }
         }
@@ -496,9 +492,8 @@ namespace System.Security.Cryptography.Tests
         {
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => hash.ComputeHash(Array.Empty<byte>(), 1, 0)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    hash.ComputeHash(Array.Empty<byte>(), 1, 0)
                 );
             }
         }
@@ -510,21 +505,17 @@ namespace System.Security.Cryptography.Tests
 
             using (HMAC hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => hash.ComputeHash(nonEmpty, 0, nonEmpty.Length + 1)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    hash.ComputeHash(nonEmpty, 0, nonEmpty.Length + 1)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => hash.ComputeHash(nonEmpty, 1, nonEmpty.Length)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    hash.ComputeHash(nonEmpty, 1, nonEmpty.Length)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => hash.ComputeHash(nonEmpty, 2, nonEmpty.Length - 1)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    hash.ComputeHash(nonEmpty, 2, nonEmpty.Length - 1)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => hash.ComputeHash(Array.Empty<byte>(), 0, 1)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    hash.ComputeHash(Array.Empty<byte>(), 0, 1)
                 );
             }
         }
@@ -584,38 +575,32 @@ namespace System.Security.Cryptography.Tests
         [ConditionalFact(nameof(IsSupported))]
         public void OneShot_NullKey_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => HashDataOneShot(key: (byte[])null, source: Array.Empty<byte>())
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                HashDataOneShot(key: (byte[])null, source: Array.Empty<byte>())
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () =>
-                    CryptographicOperations.HmacData(
-                        HashAlgorithm,
-                        key: (byte[])null,
-                        source: Array.Empty<byte>()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                CryptographicOperations.HmacData(
+                    HashAlgorithm,
+                    key: (byte[])null,
+                    source: Array.Empty<byte>()
+                )
             );
         }
 
         [ConditionalFact(nameof(IsSupported))]
         public void OneShot_NullSource_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => HashDataOneShot(key: Array.Empty<byte>(), source: (byte[])null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                HashDataOneShot(key: Array.Empty<byte>(), source: (byte[])null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    CryptographicOperations.HmacData(
-                        HashAlgorithm,
-                        key: Array.Empty<byte>(),
-                        source: (byte[])null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                CryptographicOperations.HmacData(
+                    HashAlgorithm,
+                    key: Array.Empty<byte>(),
+                    source: (byte[])null
+                )
             );
         }
 
@@ -626,16 +611,14 @@ namespace System.Security.Cryptography.Tests
             byte[] key = _testKeys[1];
             byte[] data = _testData[1];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => HashDataOneShot(key, data, buffer)
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                HashDataOneShot(key, data, buffer)
             );
 
             AssertExtensions.FilledWith<byte>(0, buffer);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => CryptographicOperations.HmacData(HashAlgorithm, key, data, buffer)
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                CryptographicOperations.HmacData(HashAlgorithm, key, data, buffer)
             );
 
             AssertExtensions.FilledWith<byte>(0, buffer);
@@ -886,83 +869,66 @@ namespace System.Security.Cryptography.Tests
         [ConditionalFact(nameof(IsSupported))]
         public void HashData_Stream_Source_Null()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => HashDataOneShot(ReadOnlySpan<byte>.Empty, (Stream)null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                HashDataOneShot(ReadOnlySpan<byte>.Empty, (Stream)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => HashDataOneShot(Array.Empty<byte>(), (Stream)null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                HashDataOneShot(Array.Empty<byte>(), (Stream)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    CryptographicOperations.HmacData(
-                        HashAlgorithm,
-                        Array.Empty<byte>(),
-                        (Stream)null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                CryptographicOperations.HmacData(HashAlgorithm, Array.Empty<byte>(), (Stream)null)
             );
         }
 
         [ConditionalFact(nameof(IsSupported))]
         public void HashData_Stream_Source_Null_Async()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => HashDataOneShotAsync(ReadOnlyMemory<byte>.Empty, (Stream)null, default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                HashDataOneShotAsync(ReadOnlyMemory<byte>.Empty, (Stream)null, default)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => HashDataOneShotAsync(Array.Empty<byte>(), (Stream)null, default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                HashDataOneShotAsync(Array.Empty<byte>(), (Stream)null, default)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    CryptographicOperations.HmacDataAsync(
-                        HashAlgorithm,
-                        Array.Empty<byte>(),
-                        (Stream)null,
-                        default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                CryptographicOperations.HmacDataAsync(
+                    HashAlgorithm,
+                    Array.Empty<byte>(),
+                    (Stream)null,
+                    default
+                )
             );
         }
 
         [ConditionalFact(nameof(IsSupported))]
         public void HashData_Stream_ByteKey_Null()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => HashDataOneShot((byte[])null, Stream.Null)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                HashDataOneShot((byte[])null, Stream.Null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => CryptographicOperations.HmacData(HashAlgorithm, (byte[])null, Stream.Null)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                CryptographicOperations.HmacData(HashAlgorithm, (byte[])null, Stream.Null)
             );
         }
 
         [ConditionalFact(nameof(IsSupported))]
         public void HashData_Stream_ByteKey_Null_Async()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => HashDataOneShotAsync((byte[])null, Stream.Null, default)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                HashDataOneShotAsync((byte[])null, Stream.Null, default)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () =>
-                    CryptographicOperations.HmacDataAsync(
-                        HashAlgorithm,
-                        (byte[])null,
-                        Stream.Null,
-                        default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                CryptographicOperations.HmacDataAsync(
+                    HashAlgorithm,
+                    (byte[])null,
+                    Stream.Null,
+                    default
+                )
             );
         }
 
@@ -971,27 +937,23 @@ namespace System.Security.Cryptography.Tests
         {
             byte[] destination = new byte[MacSize - 1];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => HashDataOneShot(Array.Empty<byte>(), Stream.Null, destination)
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                HashDataOneShot(Array.Empty<byte>(), Stream.Null, destination)
             );
             AssertExtensions.FilledWith<byte>(0, destination);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => HashDataOneShot(ReadOnlySpan<byte>.Empty, Stream.Null, destination)
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                HashDataOneShot(ReadOnlySpan<byte>.Empty, Stream.Null, destination)
             );
             AssertExtensions.FilledWith<byte>(0, destination);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () =>
-                    CryptographicOperations.HmacData(
-                        HashAlgorithm,
-                        ReadOnlySpan<byte>.Empty,
-                        Stream.Null,
-                        destination
-                    )
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                CryptographicOperations.HmacData(
+                    HashAlgorithm,
+                    ReadOnlySpan<byte>.Empty,
+                    Stream.Null,
+                    destination
+                )
             );
             AssertExtensions.FilledWith<byte>(0, destination);
         }
@@ -1001,34 +963,24 @@ namespace System.Security.Cryptography.Tests
         {
             byte[] destination = new byte[MacSize - 1];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => HashDataOneShotAsync(Array.Empty<byte>(), Stream.Null, destination, default)
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                HashDataOneShotAsync(Array.Empty<byte>(), Stream.Null, destination, default)
             );
             AssertExtensions.FilledWith<byte>(0, destination);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () =>
-                    HashDataOneShotAsync(
-                        ReadOnlyMemory<byte>.Empty,
-                        Stream.Null,
-                        destination,
-                        default
-                    )
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                HashDataOneShotAsync(ReadOnlyMemory<byte>.Empty, Stream.Null, destination, default)
             );
             AssertExtensions.FilledWith<byte>(0, destination);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () =>
-                    CryptographicOperations.HmacDataAsync(
-                        HashAlgorithm,
-                        ReadOnlyMemory<byte>.Empty,
-                        Stream.Null,
-                        destination,
-                        default
-                    )
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                CryptographicOperations.HmacDataAsync(
+                    HashAlgorithm,
+                    ReadOnlyMemory<byte>.Empty,
+                    Stream.Null,
+                    destination,
+                    default
+                )
             );
             AssertExtensions.FilledWith<byte>(0, destination);
         }
@@ -1036,24 +988,20 @@ namespace System.Security.Cryptography.Tests
         [ConditionalFact(nameof(IsSupported))]
         public void HashData_Stream_NotReadable()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "source",
-                () => HashDataOneShot(Array.Empty<byte>(), UntouchableStream.Instance)
+            AssertExtensions.Throws<ArgumentException>("source", () =>
+                HashDataOneShot(Array.Empty<byte>(), UntouchableStream.Instance)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "source",
-                () => HashDataOneShot(ReadOnlySpan<byte>.Empty, UntouchableStream.Instance)
+            AssertExtensions.Throws<ArgumentException>("source", () =>
+                HashDataOneShot(ReadOnlySpan<byte>.Empty, UntouchableStream.Instance)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "source",
-                () =>
-                    CryptographicOperations.HmacData(
-                        HashAlgorithm,
-                        ReadOnlySpan<byte>.Empty,
-                        UntouchableStream.Instance
-                    )
+            AssertExtensions.Throws<ArgumentException>("source", () =>
+                CryptographicOperations.HmacData(
+                    HashAlgorithm,
+                    ReadOnlySpan<byte>.Empty,
+                    UntouchableStream.Instance
+                )
             );
         }
 

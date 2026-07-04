@@ -851,21 +851,17 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.Int64,
             };
 
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddAggregate(PrimitiveTypeKind.Double, "StDev", type)
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddAggregate(PrimitiveTypeKind.Double, "StDev", type)
             );
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddAggregate(PrimitiveTypeKind.Double, "StDevP", type)
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddAggregate(PrimitiveTypeKind.Double, "StDevP", type)
             );
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddAggregate(PrimitiveTypeKind.Double, "Var", type)
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddAggregate(PrimitiveTypeKind.Double, "Var", type)
             );
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddAggregate(PrimitiveTypeKind.Double, "VarP", type)
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddAggregate(PrimitiveTypeKind.Double, "VarP", type)
             );
 
             // Count and Big Count must be supported for all edm types, except the strong spatial types.
@@ -923,43 +919,37 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.SByte,
             };
 
-            functions.ForTypes(
-                parameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.String,
-                        "Substring",
-                        PrimitiveTypeKind.String,
-                        "stringArgument",
-                        type,
-                        "start",
-                        type,
-                        "length"
-                    )
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.String,
+                    "Substring",
+                    PrimitiveTypeKind.String,
+                    "stringArgument",
+                    type,
+                    "start",
+                    type,
+                    "length"
+                )
             );
-            functions.ForTypes(
-                parameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.String,
-                        "Left",
-                        PrimitiveTypeKind.String,
-                        "stringArgument",
-                        type,
-                        "length"
-                    )
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.String,
+                    "Left",
+                    PrimitiveTypeKind.String,
+                    "stringArgument",
+                    type,
+                    "length"
+                )
             );
-            functions.ForTypes(
-                parameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.String,
-                        "Right",
-                        PrimitiveTypeKind.String,
-                        "stringArgument",
-                        type,
-                        "length"
-                    )
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.String,
+                    "Right",
+                    PrimitiveTypeKind.String,
+                    "stringArgument",
+                    type,
+                    "length"
+                )
             );
 
             functions.AddFunction(
@@ -1032,22 +1022,17 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.DateTimeOffset,
                 PrimitiveTypeKind.DateTime,
             };
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type => functions.AddFunction(PrimitiveTypeKind.Int32, "Year", type, "dateValue")
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(PrimitiveTypeKind.Int32, "Year", type, "dateValue")
             );
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type => functions.AddFunction(PrimitiveTypeKind.Int32, "Month", type, "dateValue")
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(PrimitiveTypeKind.Int32, "Month", type, "dateValue")
             );
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type => functions.AddFunction(PrimitiveTypeKind.Int32, "Day", type, "dateValue")
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(PrimitiveTypeKind.Int32, "Day", type, "dateValue")
             );
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type =>
-                    functions.AddFunction(PrimitiveTypeKind.Int32, "DayOfYear", type, "dateValue")
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(PrimitiveTypeKind.Int32, "DayOfYear", type, "dateValue")
             );
 
             PrimitiveTypeKind[] timeParameterTypes =
@@ -1056,22 +1041,17 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.DateTime,
                 PrimitiveTypeKind.Time,
             };
-            functions.ForTypes(
-                timeParameterTypes,
-                type => functions.AddFunction(PrimitiveTypeKind.Int32, "Hour", type, "timeValue")
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(PrimitiveTypeKind.Int32, "Hour", type, "timeValue")
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type => functions.AddFunction(PrimitiveTypeKind.Int32, "Minute", type, "timeValue")
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(PrimitiveTypeKind.Int32, "Minute", type, "timeValue")
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type => functions.AddFunction(PrimitiveTypeKind.Int32, "Second", type, "timeValue")
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(PrimitiveTypeKind.Int32, "Second", type, "timeValue")
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(PrimitiveTypeKind.Int32, "Millisecond", type, "timeValue")
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(PrimitiveTypeKind.Int32, "Millisecond", type, "timeValue")
             );
 
             functions.AddFunction(PrimitiveTypeKind.DateTime, "CurrentDateTime");
@@ -1085,9 +1065,8 @@ namespace System.Data.Metadata.Edm
             functions.AddFunction(PrimitiveTypeKind.DateTime, "CurrentUtcDateTime");
 
             //TruncateTime
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type => functions.AddFunction(type, "TruncateTime", type, "dateValue")
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(type, "TruncateTime", type, "dateValue")
             );
 
             //DateTime constructor
@@ -1141,225 +1120,189 @@ namespace System.Data.Metadata.Edm
             );
 
             //Date and time addition functions
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "AddYears",
-                        type,
-                        "dateValue",
-                        PrimitiveTypeKind.Int32,
-                        "addValue"
-                    )
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "AddYears",
+                    type,
+                    "dateValue",
+                    PrimitiveTypeKind.Int32,
+                    "addValue"
+                )
             );
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "AddMonths",
-                        type,
-                        "dateValue",
-                        PrimitiveTypeKind.Int32,
-                        "addValue"
-                    )
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "AddMonths",
+                    type,
+                    "dateValue",
+                    PrimitiveTypeKind.Int32,
+                    "addValue"
+                )
             );
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "AddDays",
-                        type,
-                        "dateValue",
-                        PrimitiveTypeKind.Int32,
-                        "addValue"
-                    )
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "AddDays",
+                    type,
+                    "dateValue",
+                    PrimitiveTypeKind.Int32,
+                    "addValue"
+                )
             );
 
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "AddHours",
-                        type,
-                        "timeValue",
-                        PrimitiveTypeKind.Int32,
-                        "addValue"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "AddHours",
+                    type,
+                    "timeValue",
+                    PrimitiveTypeKind.Int32,
+                    "addValue"
+                )
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "AddMinutes",
-                        type,
-                        "timeValue",
-                        PrimitiveTypeKind.Int32,
-                        "addValue"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "AddMinutes",
+                    type,
+                    "timeValue",
+                    PrimitiveTypeKind.Int32,
+                    "addValue"
+                )
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "AddSeconds",
-                        type,
-                        "timeValue",
-                        PrimitiveTypeKind.Int32,
-                        "addValue"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "AddSeconds",
+                    type,
+                    "timeValue",
+                    PrimitiveTypeKind.Int32,
+                    "addValue"
+                )
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "AddMilliseconds",
-                        type,
-                        "timeValue",
-                        PrimitiveTypeKind.Int32,
-                        "addValue"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "AddMilliseconds",
+                    type,
+                    "timeValue",
+                    PrimitiveTypeKind.Int32,
+                    "addValue"
+                )
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "AddMicroseconds",
-                        type,
-                        "timeValue",
-                        PrimitiveTypeKind.Int32,
-                        "addValue"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "AddMicroseconds",
+                    type,
+                    "timeValue",
+                    PrimitiveTypeKind.Int32,
+                    "addValue"
+                )
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "AddNanoseconds",
-                        type,
-                        "timeValue",
-                        PrimitiveTypeKind.Int32,
-                        "addValue"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "AddNanoseconds",
+                    type,
+                    "timeValue",
+                    PrimitiveTypeKind.Int32,
+                    "addValue"
+                )
             );
 
             // Date and time diff functions
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.Int32,
-                        "DiffYears",
-                        type,
-                        "dateValue1",
-                        type,
-                        "dateValue2"
-                    )
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.Int32,
+                    "DiffYears",
+                    type,
+                    "dateValue1",
+                    type,
+                    "dateValue2"
+                )
             );
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.Int32,
-                        "DiffMonths",
-                        type,
-                        "dateValue1",
-                        type,
-                        "dateValue2"
-                    )
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.Int32,
+                    "DiffMonths",
+                    type,
+                    "dateValue1",
+                    type,
+                    "dateValue2"
+                )
             );
-            functions.ForTypes(
-                dateTimeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.Int32,
-                        "DiffDays",
-                        type,
-                        "dateValue1",
-                        type,
-                        "dateValue2"
-                    )
+            functions.ForTypes(dateTimeParameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.Int32,
+                    "DiffDays",
+                    type,
+                    "dateValue1",
+                    type,
+                    "dateValue2"
+                )
             );
 
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.Int32,
-                        "DiffHours",
-                        type,
-                        "timeValue1",
-                        type,
-                        "timeValue2"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.Int32,
+                    "DiffHours",
+                    type,
+                    "timeValue1",
+                    type,
+                    "timeValue2"
+                )
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.Int32,
-                        "DiffMinutes",
-                        type,
-                        "timeValue1",
-                        type,
-                        "timeValue2"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.Int32,
+                    "DiffMinutes",
+                    type,
+                    "timeValue1",
+                    type,
+                    "timeValue2"
+                )
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.Int32,
-                        "DiffSeconds",
-                        type,
-                        "timeValue1",
-                        type,
-                        "timeValue2"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.Int32,
+                    "DiffSeconds",
+                    type,
+                    "timeValue1",
+                    type,
+                    "timeValue2"
+                )
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.Int32,
-                        "DiffMilliseconds",
-                        type,
-                        "timeValue1",
-                        type,
-                        "timeValue2"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.Int32,
+                    "DiffMilliseconds",
+                    type,
+                    "timeValue1",
+                    type,
+                    "timeValue2"
+                )
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.Int32,
-                        "DiffMicroseconds",
-                        type,
-                        "timeValue1",
-                        type,
-                        "timeValue2"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.Int32,
+                    "DiffMicroseconds",
+                    type,
+                    "timeValue1",
+                    type,
+                    "timeValue2"
+                )
             );
-            functions.ForTypes(
-                timeParameterTypes,
-                type =>
-                    functions.AddFunction(
-                        PrimitiveTypeKind.Int32,
-                        "DiffNanoseconds",
-                        type,
-                        "timeValue1",
-                        type,
-                        "timeValue2"
-                    )
+            functions.ForTypes(timeParameterTypes, type =>
+                functions.AddFunction(
+                    PrimitiveTypeKind.Int32,
+                    "DiffNanoseconds",
+                    type,
+                    "timeValue1",
+                    type,
+                    "timeValue2"
+                )
             );
 
             #endregion // DateTime Functions
@@ -1373,44 +1316,37 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.Double,
                 PrimitiveTypeKind.Decimal,
             };
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddFunction(type, "Round", type, "value")
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(type, "Round", type, "value")
             );
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddFunction(type, "Floor", type, "value")
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(type, "Floor", type, "value")
             );
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddFunction(type, "Ceiling", type, "value")
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(type, "Ceiling", type, "value")
             );
 
             // Overloads for ROUND, TRUNCATE
             parameterTypes = new[] { PrimitiveTypeKind.Double, PrimitiveTypeKind.Decimal };
-            functions.ForTypes(
-                parameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "Round",
-                        type,
-                        "value",
-                        PrimitiveTypeKind.Int32,
-                        "digits"
-                    )
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "Round",
+                    type,
+                    "value",
+                    PrimitiveTypeKind.Int32,
+                    "digits"
+                )
             );
-            functions.ForTypes(
-                parameterTypes,
-                type =>
-                    functions.AddFunction(
-                        type,
-                        "Truncate",
-                        type,
-                        "value",
-                        PrimitiveTypeKind.Int32,
-                        "digits"
-                    )
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(
+                    type,
+                    "Truncate",
+                    type,
+                    "value",
+                    PrimitiveTypeKind.Int32,
+                    "digits"
+                )
             );
 
             // Overloads for ABS functions
@@ -1424,9 +1360,8 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.Byte,
                 PrimitiveTypeKind.Single,
             };
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddFunction(type, "Abs", type, "value")
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(type, "Abs", type, "value")
             );
 
             // Overloads for POWER functions
@@ -1466,21 +1401,17 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.Byte,
             };
 
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddFunction(type, "BitwiseAnd", type, "value1", type, "value2")
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(type, "BitwiseAnd", type, "value1", type, "value2")
             );
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddFunction(type, "BitwiseOr", type, "value1", type, "value2")
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(type, "BitwiseOr", type, "value1", type, "value2")
             );
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddFunction(type, "BitwiseXor", type, "value1", type, "value2")
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(type, "BitwiseXor", type, "value1", type, "value2")
             );
-            functions.ForTypes(
-                parameterTypes,
-                type => functions.AddFunction(type, "BitwiseNot", type, "value")
+            functions.ForTypes(parameterTypes, type =>
+                functions.AddFunction(type, "BitwiseNot", type, "value")
             );
 
             #endregion

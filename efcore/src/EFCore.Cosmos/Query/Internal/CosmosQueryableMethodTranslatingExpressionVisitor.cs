@@ -152,9 +152,8 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
                             )
                             {
                                 var propertyParameterList = queryProperties
-                                    .Zip(
-                                        parameterNames,
-                                        (property, parameter) => (property, parameter)
+                                    .Zip(parameterNames, (property, parameter) =>
+                                        (property, parameter)
                                     )
                                     .ToDictionary(
                                         tuple => tuple.property,

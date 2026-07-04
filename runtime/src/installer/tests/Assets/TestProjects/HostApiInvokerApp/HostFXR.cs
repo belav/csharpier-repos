@@ -175,9 +175,8 @@ namespace HostApiInvokerApp
             }
 
             string[] sdks = null;
-            int rc = hostfxr.hostfxr_get_available_sdks(
-                exe_dir: args[1],
-                (sdk_count, sdk_dirs) => sdks = sdk_dirs
+            int rc = hostfxr.hostfxr_get_available_sdks(exe_dir: args[1], (sdk_count, sdk_dirs) =>
+                sdks = sdk_dirs
             );
 
             if (rc == 0)

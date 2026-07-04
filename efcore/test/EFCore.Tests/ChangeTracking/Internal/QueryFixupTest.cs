@@ -17,15 +17,12 @@ public class QueryFixupTest
         var dependent = context.Set<Product>().Include(e => e.Category).Single();
         var principal = dependent.Category;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.CategoryId);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.CategoryId);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+        });
     }
 
     [ConditionalFact]
@@ -37,15 +34,12 @@ public class QueryFixupTest
         var principal = context.Set<Category>().Include(e => e.Products).Single();
         var dependent = principal.Products.Single();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.CategoryId);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.CategoryId);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+        });
     }
 
     [ConditionalFact]
@@ -57,14 +51,11 @@ public class QueryFixupTest
         var dependent = context.Set<ProductDN>().Include(e => e.Category).Single();
         var principal = dependent.Category;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.CategoryId);
-                Assert.Same(principal, dependent.Category);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.CategoryId);
+            Assert.Same(principal, dependent.Category);
+        });
     }
 
     [ConditionalFact]
@@ -76,14 +67,11 @@ public class QueryFixupTest
         var principal = context.Set<CategoryPN>().Include(e => e.Products).Single();
         var dependent = principal.Products.Single();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.CategoryId);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.CategoryId);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+        });
     }
 
     [ConditionalFact]
@@ -95,15 +83,12 @@ public class QueryFixupTest
         var dependent = context.Set<Child>().Include(e => e.Parent).Single();
         var principal = dependent.Parent;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentId);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentId);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+        });
     }
 
     [ConditionalFact]
@@ -115,15 +100,12 @@ public class QueryFixupTest
         var principal = context.Set<Parent>().Include(e => e.Child).Single();
         var dependent = principal.Child;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentId);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentId);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+        });
     }
 
     [ConditionalFact]
@@ -135,14 +117,11 @@ public class QueryFixupTest
         var dependent = context.Set<ChildDN>().Include(e => e.Parent).Single();
         var principal = dependent.Parent;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentId);
-                Assert.Same(principal, dependent.Parent);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentId);
+            Assert.Same(principal, dependent.Parent);
+        });
     }
 
     [ConditionalFact]
@@ -154,14 +133,11 @@ public class QueryFixupTest
         var principal = context.Set<ParentPN>().Include(e => e.Child).Single();
         var dependent = principal.Child;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentId);
-                Assert.Same(dependent, principal.Child);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentId);
+            Assert.Same(dependent, principal.Child);
+        });
     }
 
     [ConditionalFact]
@@ -174,15 +150,12 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Same(principal, dependent.ParentWidget);
-                Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Same(principal, dependent.ParentWidget);
+            Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
+        });
     }
 
     [ConditionalFact]
@@ -195,15 +168,12 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Same(principal, dependent.ParentWidget);
-                Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Same(principal, dependent.ParentWidget);
+            Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
+        });
     }
 
     [ConditionalFact]
@@ -216,15 +186,12 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Same(principal, dependent.ParentWidget);
-                Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Same(principal, dependent.ParentWidget);
+            Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
+        });
     }
 
     [ConditionalFact]
@@ -237,14 +204,11 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
+        });
     }
 
     [ConditionalFact]
@@ -257,14 +221,11 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Same(principal, dependent.ParentWidget);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Same(principal, dependent.ParentWidget);
+        });
     }
 
     [ConditionalFact]
@@ -277,14 +238,11 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Same(principal, dependent.ParentWidget);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Same(principal, dependent.ParentWidget);
+        });
     }
 
     [ConditionalFact]
@@ -297,14 +255,11 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Equal(new[] { dependent }.ToList(), principal.ChildWidgets);
+        });
     }
 
     [ConditionalFact]
@@ -317,15 +272,12 @@ public class QueryFixupTest
         var dependent = smidgets.Single(e => e.Id == 78);
         var principal = smidgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentSmidgetId);
-                Assert.Same(principal, dependent.ParentSmidget);
-                Assert.Same(dependent, principal.ChildSmidget);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentSmidgetId);
+            Assert.Same(principal, dependent.ParentSmidget);
+            Assert.Same(dependent, principal.ChildSmidget);
+        });
     }
 
     [ConditionalFact]
@@ -338,15 +290,12 @@ public class QueryFixupTest
         var dependent = smidgets.Single(e => e.Id == 78);
         var principal = smidgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentSmidgetId);
-                Assert.Same(principal, dependent.ParentSmidget);
-                Assert.Same(dependent, principal.ChildSmidget);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentSmidgetId);
+            Assert.Same(principal, dependent.ParentSmidget);
+            Assert.Same(dependent, principal.ChildSmidget);
+        });
     }
 
     [ConditionalFact]
@@ -359,15 +308,12 @@ public class QueryFixupTest
         var dependent = smidgets.Single(e => e.Id == 78);
         var principal = smidgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentSmidgetId);
-                Assert.Same(principal, dependent.ParentSmidget);
-                Assert.Same(dependent, principal.ChildSmidget);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentSmidgetId);
+            Assert.Same(principal, dependent.ParentSmidget);
+            Assert.Same(dependent, principal.ChildSmidget);
+        });
     }
 
     [ConditionalFact]
@@ -380,14 +326,11 @@ public class QueryFixupTest
         var dependent = smidgets.Single(e => e.Id == 78);
         var principal = smidgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentSmidgetId);
-                Assert.Same(dependent, principal.ChildSmidget);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentSmidgetId);
+            Assert.Same(dependent, principal.ChildSmidget);
+        });
     }
 
     [ConditionalFact]
@@ -400,14 +343,11 @@ public class QueryFixupTest
         var dependent = smidgets.Single(e => e.Id == 78);
         var principal = smidgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentSmidgetId);
-                Assert.Same(principal, dependent.ParentSmidget);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentSmidgetId);
+            Assert.Same(principal, dependent.ParentSmidget);
+        });
     }
 
     [ConditionalFact]
@@ -420,14 +360,11 @@ public class QueryFixupTest
         var dependent = smidgets.Single(e => e.Id == 78);
         var principal = smidgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentSmidgetId);
-                Assert.Same(principal, dependent.ParentSmidget);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentSmidgetId);
+            Assert.Same(principal, dependent.ParentSmidget);
+        });
     }
 
     [ConditionalFact]
@@ -440,14 +377,11 @@ public class QueryFixupTest
         var dependent = smidgets.Single(e => e.Id == 78);
         var principal = smidgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentSmidgetId);
-                Assert.Same(dependent, principal.ChildSmidget);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentSmidgetId);
+            Assert.Same(dependent, principal.ChildSmidget);
+        });
     }
 
     [ConditionalFact]
@@ -459,18 +393,15 @@ public class QueryFixupTest
         var dependent = context.Set<Post>().Include(e => e.Blog).Single();
         var principal = dependent.Blog;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.BlogId);
-                Assert.Same(principal, dependent.Blog);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Posts);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.BlogId);
+            Assert.Same(principal, dependent.Blog);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Posts);
 
-                Assert.Equal(dependent.Id, principal.TopPostId);
-                Assert.Same(dependent, principal.TopPost);
-            }
-        );
+            Assert.Equal(dependent.Id, principal.TopPostId);
+            Assert.Same(dependent, principal.TopPost);
+        });
     }
 
     [ConditionalFact]
@@ -482,18 +413,15 @@ public class QueryFixupTest
         var principal = context.Set<Blog>().Include(e => e.Posts).Single();
         var dependent = principal.Posts.Single();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.BlogId);
-                Assert.Same(principal, dependent.Blog);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Posts);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.BlogId);
+            Assert.Same(principal, dependent.Blog);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Posts);
 
-                Assert.Equal(dependent.Id, principal.TopPostId);
-                Assert.Same(dependent, principal.TopPost);
-            }
-        );
+            Assert.Equal(dependent.Id, principal.TopPostId);
+            Assert.Same(dependent, principal.TopPost);
+        });
     }
 
     [ConditionalTheory]
@@ -511,19 +439,16 @@ public class QueryFixupTest
         var dependent = context.Set<Product>().Include(e => e.Category).Single();
         var principal = dependent.Category;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.CategoryId);
-                Assert.Same(principal, dependent.Category);
-                Assert.Contains(dependent, principal.Products);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.CategoryId);
+            Assert.Same(principal, dependent.Category);
+            Assert.Contains(dependent, principal.Products);
 
-                Assert.Equal(principal.Id, newDependent.CategoryId);
-                Assert.Same(principal, newDependent.Category);
-                Assert.Contains(newDependent, principal.Products);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.CategoryId);
+            Assert.Same(principal, newDependent.Category);
+            Assert.Contains(newDependent, principal.Products);
+        });
     }
 
     [ConditionalTheory]
@@ -541,19 +466,16 @@ public class QueryFixupTest
         var principal = context.Set<Category>().Include(e => e.Products).Single();
         var dependent = principal.Products.Single(e => e.Id != newDependent.Id);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.CategoryId);
-                Assert.Same(principal, dependent.Category);
-                Assert.Contains(dependent, principal.Products);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.CategoryId);
+            Assert.Same(principal, dependent.Category);
+            Assert.Contains(dependent, principal.Products);
 
-                Assert.Equal(principal.Id, newDependent.CategoryId);
-                Assert.Same(principal, newDependent.Category);
-                Assert.Contains(newDependent, principal.Products);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.CategoryId);
+            Assert.Same(principal, newDependent.Category);
+            Assert.Contains(newDependent, principal.Products);
+        });
     }
 
     [ConditionalTheory]
@@ -573,17 +495,14 @@ public class QueryFixupTest
         var dependent = context.Set<ProductDN>().Include(e => e.Category).Single();
         var principal = dependent.Category;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.CategoryId);
-                Assert.Same(principal, dependent.Category);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.CategoryId);
+            Assert.Same(principal, dependent.Category);
 
-                Assert.Equal(principal.Id, newDependent.CategoryId);
-                Assert.Same(principal, newDependent.Category);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.CategoryId);
+            Assert.Same(principal, newDependent.Category);
+        });
     }
 
     [ConditionalTheory]
@@ -603,17 +522,14 @@ public class QueryFixupTest
         var principal = context.Set<CategoryPN>().Include(e => e.Products).Single();
         var dependent = principal.Products.Single(e => e.Id != newDependent.Id);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.CategoryId);
-                Assert.Contains(dependent, principal.Products);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.CategoryId);
+            Assert.Contains(dependent, principal.Products);
 
-                Assert.Equal(principal.Id, newDependent.CategoryId);
-                Assert.Contains(newDependent, principal.Products);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.CategoryId);
+            Assert.Contains(newDependent, principal.Products);
+        });
     }
 
     [ConditionalTheory]
@@ -632,19 +548,16 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Same(principal, dependent.ParentWidget);
-                Assert.Contains(dependent, principal.ChildWidgets);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Same(principal, dependent.ParentWidget);
+            Assert.Contains(dependent, principal.ChildWidgets);
 
-                Assert.Equal(principal.Id, newDependent.ParentWidgetId);
-                Assert.Same(principal, newDependent.ParentWidget);
-                Assert.Contains(newDependent, principal.ChildWidgets);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.ParentWidgetId);
+            Assert.Same(principal, newDependent.ParentWidget);
+            Assert.Contains(newDependent, principal.ChildWidgets);
+        });
     }
 
     [ConditionalTheory]
@@ -663,19 +576,16 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Same(principal, dependent.ParentWidget);
-                Assert.Contains(dependent, principal.ChildWidgets);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Same(principal, dependent.ParentWidget);
+            Assert.Contains(dependent, principal.ChildWidgets);
 
-                Assert.Equal(principal.Id, newDependent.ParentWidgetId);
-                Assert.Same(principal, newDependent.ParentWidget);
-                Assert.Contains(newDependent, principal.ChildWidgets);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.ParentWidgetId);
+            Assert.Same(principal, newDependent.ParentWidget);
+            Assert.Contains(newDependent, principal.ChildWidgets);
+        });
     }
 
     [ConditionalTheory]
@@ -694,19 +604,16 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Same(principal, dependent.ParentWidget);
-                Assert.Contains(dependent, principal.ChildWidgets);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Same(principal, dependent.ParentWidget);
+            Assert.Contains(dependent, principal.ChildWidgets);
 
-                Assert.Equal(principal.Id, newDependent.ParentWidgetId);
-                Assert.Same(principal, newDependent.ParentWidget);
-                Assert.Contains(newDependent, principal.ChildWidgets);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.ParentWidgetId);
+            Assert.Same(principal, newDependent.ParentWidget);
+            Assert.Contains(newDependent, principal.ChildWidgets);
+        });
     }
 
     [ConditionalTheory]
@@ -725,17 +632,14 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Contains(dependent, principal.ChildWidgets);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Contains(dependent, principal.ChildWidgets);
 
-                Assert.Equal(principal.Id, newDependent.ParentWidgetId);
-                Assert.Contains(newDependent, principal.ChildWidgets);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.ParentWidgetId);
+            Assert.Contains(newDependent, principal.ChildWidgets);
+        });
     }
 
     [ConditionalTheory]
@@ -754,17 +658,14 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Same(principal, dependent.ParentWidget);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Same(principal, dependent.ParentWidget);
 
-                Assert.Equal(principal.Id, newDependent.ParentWidgetId);
-                Assert.Same(principal, newDependent.ParentWidget);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.ParentWidgetId);
+            Assert.Same(principal, newDependent.ParentWidget);
+        });
     }
 
     [ConditionalTheory]
@@ -785,17 +686,14 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Same(principal, dependent.ParentWidget);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Same(principal, dependent.ParentWidget);
 
-                Assert.Equal(principal.Id, newDependent.ParentWidgetId);
-                Assert.Same(principal, newDependent.ParentWidget);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.ParentWidgetId);
+            Assert.Same(principal, newDependent.ParentWidget);
+        });
     }
 
     [ConditionalTheory]
@@ -816,17 +714,14 @@ public class QueryFixupTest
         var dependent = widgets.Single(e => e.Id == 78);
         var principal = widgets.Single(e => e.Id == 77);
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependent.ParentWidgetId);
-                Assert.Contains(dependent, principal.ChildWidgets);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependent.ParentWidgetId);
+            Assert.Contains(dependent, principal.ChildWidgets);
 
-                Assert.Equal(principal.Id, newDependent.ParentWidgetId);
-                Assert.Contains(newDependent, principal.ChildWidgets);
-            }
-        );
+            Assert.Equal(principal.Id, newDependent.ParentWidgetId);
+            Assert.Contains(newDependent, principal.ChildWidgets);
+        });
     }
 
     [ConditionalFact]
@@ -837,68 +732,55 @@ public class QueryFixupTest
         using var context = new QueryFixupContext();
         var principal = context.Set<Order>().Single();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                var dependent = principal.OrderDetails;
-                Assert.Same(principal, dependent.Order);
+        AssertFixup(context, () =>
+        {
+            var dependent = principal.OrderDetails;
+            Assert.Same(principal, dependent.Order);
 
-                var subDependent1 = dependent.BillingAddress;
-                var subDependent2 = dependent.ShippingAddress;
-                Assert.Same(dependent, subDependent1.OrderDetails);
-                Assert.Same(dependent, subDependent2.OrderDetails);
-                Assert.Equal("BillMe", subDependent1.Street);
-                Assert.Equal("ShipMe", subDependent2.Street);
+            var subDependent1 = dependent.BillingAddress;
+            var subDependent2 = dependent.ShippingAddress;
+            Assert.Same(dependent, subDependent1.OrderDetails);
+            Assert.Same(dependent, subDependent2.OrderDetails);
+            Assert.Equal("BillMe", subDependent1.Street);
+            Assert.Equal("ShipMe", subDependent2.Street);
 
-                Assert.Equal(4, context.ChangeTracker.Entries().Count());
+            Assert.Equal(4, context.ChangeTracker.Entries().Count());
 
-                var principalEntry = context.Entry(principal);
-                Assert.Equal(EntityState.Unchanged, principalEntry.State);
+            var principalEntry = context.Entry(principal);
+            Assert.Equal(EntityState.Unchanged, principalEntry.State);
 
-                var dependentEntry = principalEntry.Reference(p => p.OrderDetails).TargetEntry;
-                Assert.Equal(principal.Id, dependentEntry.Property("OrderId").CurrentValue);
-                Assert.Equal(EntityState.Unchanged, dependentEntry.State);
-                Assert.Equal(
-                    nameof(OrderDetails),
-                    dependentEntry.Metadata.FindOwnership().PrincipalToDependent.Name
-                );
+            var dependentEntry = principalEntry.Reference(p => p.OrderDetails).TargetEntry;
+            Assert.Equal(principal.Id, dependentEntry.Property("OrderId").CurrentValue);
+            Assert.Equal(EntityState.Unchanged, dependentEntry.State);
+            Assert.Equal(
+                nameof(OrderDetails),
+                dependentEntry.Metadata.FindOwnership().PrincipalToDependent.Name
+            );
 
-                var subDependent1Entry = dependentEntry
-                    .Reference(p => p.BillingAddress)
-                    .TargetEntry;
-                Assert.Equal(
-                    principal.Id,
-                    subDependent1Entry.Property("OrderDetailsId").CurrentValue
-                );
-                Assert.Equal(EntityState.Unchanged, subDependent1Entry.State);
-                Assert.Equal(
-                    typeof(OrderDetails).DisplayName()
-                        + "."
-                        + nameof(OrderDetails.BillingAddress)
-                        + "#"
-                        + typeof(Address).ShortDisplayName(),
-                    subDependent1Entry.Metadata.Name
-                );
+            var subDependent1Entry = dependentEntry.Reference(p => p.BillingAddress).TargetEntry;
+            Assert.Equal(principal.Id, subDependent1Entry.Property("OrderDetailsId").CurrentValue);
+            Assert.Equal(EntityState.Unchanged, subDependent1Entry.State);
+            Assert.Equal(
+                typeof(OrderDetails).DisplayName()
+                    + "."
+                    + nameof(OrderDetails.BillingAddress)
+                    + "#"
+                    + typeof(Address).ShortDisplayName(),
+                subDependent1Entry.Metadata.Name
+            );
 
-                var subDependent2Entry = dependentEntry
-                    .Reference(p => p.ShippingAddress)
-                    .TargetEntry;
-                Assert.Equal(
-                    principal.Id,
-                    subDependent2Entry.Property("OrderDetailsId").CurrentValue
-                );
-                Assert.Equal(EntityState.Unchanged, subDependent2Entry.State);
-                Assert.Equal(
-                    typeof(OrderDetails).DisplayName()
-                        + "."
-                        + nameof(OrderDetails.ShippingAddress)
-                        + "#"
-                        + typeof(Address).ShortDisplayName(),
-                    subDependent2Entry.Metadata.Name
-                );
-            }
-        );
+            var subDependent2Entry = dependentEntry.Reference(p => p.ShippingAddress).TargetEntry;
+            Assert.Equal(principal.Id, subDependent2Entry.Property("OrderDetailsId").CurrentValue);
+            Assert.Equal(EntityState.Unchanged, subDependent2Entry.State);
+            Assert.Equal(
+                typeof(OrderDetails).DisplayName()
+                    + "."
+                    + nameof(OrderDetails.ShippingAddress)
+                    + "#"
+                    + typeof(Address).ShortDisplayName(),
+                subDependent2Entry.Metadata.Name
+            );
+        });
     }
 
     [ConditionalFact]
@@ -940,18 +822,15 @@ public class QueryFixupTest
         var owned = context.Set<Order>().Single().OrderDetails;
         var principal = context.Set<Order>().AsNoTracking().Single();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                var dependentEntry = context.Entry(owned);
-                Assert.Equal(principal.Id, dependentEntry.Property("OrderId").CurrentValue);
-                Assert.Equal(
-                    nameof(Order.OrderDetails),
-                    dependentEntry.Metadata.FindOwnership().PrincipalToDependent.Name
-                );
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            var dependentEntry = context.Entry(owned);
+            Assert.Equal(principal.Id, dependentEntry.Property("OrderId").CurrentValue);
+            Assert.Equal(
+                nameof(Order.OrderDetails),
+                dependentEntry.Metadata.FindOwnership().PrincipalToDependent.Name
+            );
+        });
     }
 
     [ConditionalFact]

@@ -316,9 +316,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
 
                 EcmaModule[] moduleArray = _modulesWhichMustBeIndexable.ToArray();
-                Array.Sort(
-                    moduleArray,
-                    (EcmaModule moduleA, EcmaModule moduleB) => moduleA.CompareTo(moduleB)
+                Array.Sort(moduleArray, (EcmaModule moduleA, EcmaModule moduleB) =>
+                    moduleA.CompareTo(moduleB)
                 );
                 foreach (var module in moduleArray)
                 {

@@ -141,13 +141,10 @@ public class WebAssemblyLoggingTest : ServerTestBase<ToggleExecutionModeServerFi
         var log = Browser.Manage().Logs.GetLog(LogType.Browser);
         foreach (var message in messages)
         {
-            Assert.Contains(
-                log,
-                entry =>
-                {
-                    return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
-                }
-            );
+            Assert.Contains(log, entry =>
+            {
+                return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
+            });
         }
     }
 }

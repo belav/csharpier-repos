@@ -28,13 +28,11 @@ namespace System.Reflection.Context.Tests
             // that is loaded in the reflection-only context.
             IList<CustomAttributeData> customAttributesData =
                 _customProperty.GetCustomAttributesData();
-            Assert.All(
-                customAttributesData,
-                cad =>
-                    Assert.Equal(
-                        ProjectionConstants.ProjectingCustomAttributeData,
-                        cad.GetType().FullName
-                    )
+            Assert.All(customAttributesData, cad =>
+                Assert.Equal(
+                    ProjectionConstants.ProjectingCustomAttributeData,
+                    cad.GetType().FullName
+                )
             );
         }
     }

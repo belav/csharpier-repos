@@ -68,9 +68,8 @@ internal sealed partial class CSharpUseCollectionExpressionForEmptyCodeFixProvid
             var expression = diagnostic
                 .AdditionalLocations[0]
                 .FindNode(getInnermostNodeForTie: true, cancellationToken);
-            editor.ReplaceNode(
-                expression,
-                (current, _) => s_emptyCollection.WithTriviaFrom(current)
+            editor.ReplaceNode(expression, (current, _) =>
+                s_emptyCollection.WithTriviaFrom(current)
             );
         }
 

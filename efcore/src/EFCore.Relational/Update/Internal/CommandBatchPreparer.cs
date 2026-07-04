@@ -370,19 +370,17 @@ public class CommandBatchPreparer : ICommandBatchPreparer
                     sharedTablesCommandsMap.Add(tableKey, sharedCommandsMap);
                 }
 
-                command = sharedCommandsMap.GetOrAddValue(
-                    entry,
-                    (t, comparer) =>
-                        Dependencies.ModificationCommandFactory.CreateModificationCommand(
-                            new ModificationCommandParameters(
-                                t,
-                                _sensitiveLoggingEnabled,
-                                _detailedErrorsEnabled,
-                                comparer,
-                                generateParameterName,
-                                Dependencies.UpdateLogger
-                            )
+                command = sharedCommandsMap.GetOrAddValue(entry, (t, comparer) =>
+                    Dependencies.ModificationCommandFactory.CreateModificationCommand(
+                        new ModificationCommandParameters(
+                            t,
+                            _sensitiveLoggingEnabled,
+                            _detailedErrorsEnabled,
+                            comparer,
+                            generateParameterName,
+                            Dependencies.UpdateLogger
                         )
+                    )
                 );
                 isMainEntry = sharedCommandsMap.IsMainEntry(entry);
             }

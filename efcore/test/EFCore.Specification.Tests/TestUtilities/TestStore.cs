@@ -40,9 +40,8 @@ public abstract class TestStore : IDisposable
         else
         {
             GetTestStoreIndex(serviceProvider)
-                .CreateNonShared(
-                    GetType().Name + Name,
-                    () => Initialize(createContext, seed, clean)
+                .CreateNonShared(GetType().Name + Name, () =>
+                    Initialize(createContext, seed, clean)
                 );
         }
 

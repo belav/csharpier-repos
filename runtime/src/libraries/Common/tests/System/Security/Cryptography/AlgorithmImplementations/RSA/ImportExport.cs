@@ -247,9 +247,8 @@ namespace System.Security.Cryptography.Rsa.Tests
             using (RSA rsa = RSAFactory.Create())
             {
                 if (rsa is RSACng && PlatformDetection.IsNetFramework)
-                    AssertExtensions.Throws<ArgumentException>(
-                        null,
-                        () => rsa.ImportParameters(imported)
+                    AssertExtensions.Throws<ArgumentException>(null, () =>
+                        rsa.ImportParameters(imported)
                     );
                 else
                     Assert.ThrowsAny<CryptographicException>(() => rsa.ImportParameters(imported));
@@ -267,9 +266,8 @@ namespace System.Security.Cryptography.Rsa.Tests
             using (RSA rsa = RSAFactory.Create())
             {
                 if (rsa is RSACng && PlatformDetection.IsNetFramework)
-                    AssertExtensions.Throws<ArgumentException>(
-                        null,
-                        () => rsa.ImportParameters(imported)
+                    AssertExtensions.Throws<ArgumentException>(null, () =>
+                        rsa.ImportParameters(imported)
                     );
                 else
                     Assert.ThrowsAny<CryptographicException>(() => rsa.ImportParameters(imported));

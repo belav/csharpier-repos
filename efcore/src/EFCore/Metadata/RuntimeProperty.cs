@@ -427,19 +427,15 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
     /// <inheritdoc />
     [DebuggerStepThrough]
     ValueComparer? IReadOnlyProperty.GetValueComparer() =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _valueComparer,
-            this,
-            static property => property.GetValueComparer()
+        NonCapturingLazyInitializer.EnsureInitialized(ref _valueComparer, this, static property =>
+            property.GetValueComparer()
         );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     ValueComparer IProperty.GetValueComparer() =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _valueComparer,
-            this,
-            static property => property.GetValueComparer()
+        NonCapturingLazyInitializer.EnsureInitialized(ref _valueComparer, this, static property =>
+            property.GetValueComparer()
         );
 
     /// <inheritdoc />

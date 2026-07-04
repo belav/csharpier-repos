@@ -375,9 +375,8 @@ namespace System.IO.Ports.Tests
 
         private void VerifyReadException(SerialPort com, Type expectedException)
         {
-            Assert.Throws(
-                expectedException,
-                () => com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize)
+            Assert.Throws(expectedException, () =>
+                com.Read(new char[defaultCharArraySize], 0, defaultCharArraySize)
             );
         }
 

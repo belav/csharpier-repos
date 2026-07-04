@@ -174,9 +174,8 @@ The source for this generator should be in Mono repository
                         : UcdDecompositionType.None,
                 DecompositionMapping =
                     decomp != null
-                        ? Array.ConvertAll<string, int>(
-                            decomp,
-                            dv => int.Parse(dv, NumberStyles.HexNumber)
+                        ? Array.ConvertAll<string, int>(decomp, dv =>
+                            int.Parse(dv, NumberStyles.HexNumber)
                         )
                         : null,
                 DecimalDigitValue = tokens[6],

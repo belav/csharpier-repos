@@ -43,37 +43,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             IList<InlineRenameReplacementKind> replacementKinds
         )
         {
-            return KeyValueLogMessage.Create(
-                LogType.UserAction,
-                m =>
-                {
-                    m[RenameInComments] = options.RenameInComments;
-                    m[RenameInStrings] = options.RenameInStrings;
-                    m[RenameOverloads] = options.RenameOverloads;
-                    m[RenameFile] = options.RenameFile;
+            return KeyValueLogMessage.Create(LogType.UserAction, m =>
+            {
+                m[RenameInComments] = options.RenameInComments;
+                m[RenameInStrings] = options.RenameInStrings;
+                m[RenameOverloads] = options.RenameOverloads;
+                m[RenameFile] = options.RenameFile;
 
-                    m[Committed] =
-                        (outcome & UserActionOutcome.Committed) == UserActionOutcome.Committed;
-                    m[Canceled] =
-                        (outcome & UserActionOutcome.Canceled) == UserActionOutcome.Canceled;
+                m[Committed] =
+                    (outcome & UserActionOutcome.Committed) == UserActionOutcome.Committed;
+                m[Canceled] = (outcome & UserActionOutcome.Canceled) == UserActionOutcome.Canceled;
 
-                    m[ConflictResolutionFinishedComputing] = conflictResolutionFinishedComputing;
-                    m[PreviewChanges] = previewChanges;
+                m[ConflictResolutionFinishedComputing] = conflictResolutionFinishedComputing;
+                m[PreviewChanges] = previewChanges;
 
-                    m[RenamedIdentifiersWithoutConflicts] = replacementKinds.Count(r =>
-                        r == InlineRenameReplacementKind.NoConflict
-                    );
-                    m[ResolvableReferenceConflicts] = replacementKinds.Count(r =>
-                        r == InlineRenameReplacementKind.ResolvedReferenceConflict
-                    );
-                    m[ResolvableNonReferenceConflicts] = replacementKinds.Count(r =>
-                        r == InlineRenameReplacementKind.ResolvedNonReferenceConflict
-                    );
-                    m[UnresolvableConflicts] = replacementKinds.Count(r =>
-                        r == InlineRenameReplacementKind.UnresolvedConflict
-                    );
-                }
-            );
+                m[RenamedIdentifiersWithoutConflicts] = replacementKinds.Count(r =>
+                    r == InlineRenameReplacementKind.NoConflict
+                );
+                m[ResolvableReferenceConflicts] = replacementKinds.Count(r =>
+                    r == InlineRenameReplacementKind.ResolvedReferenceConflict
+                );
+                m[ResolvableNonReferenceConflicts] = replacementKinds.Count(r =>
+                    r == InlineRenameReplacementKind.ResolvedNonReferenceConflict
+                );
+                m[UnresolvableConflicts] = replacementKinds.Count(r =>
+                    r == InlineRenameReplacementKind.UnresolvedConflict
+                );
+            });
         }
 
         [Flags]

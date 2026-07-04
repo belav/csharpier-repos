@@ -71,9 +71,8 @@ namespace System.Reflection.Emit.Tests
                 null
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "customBuilder",
-                () => property.SetCustomAttribute(null)
+            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () =>
+                property.SetCustomAttribute(null)
             );
         }
 
@@ -167,9 +166,8 @@ namespace System.Reflection.Emit.Tests
                 null
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () => property.SetCustomAttribute(null, new byte[6])
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                property.SetCustomAttribute(null, new byte[6])
             );
         }
 

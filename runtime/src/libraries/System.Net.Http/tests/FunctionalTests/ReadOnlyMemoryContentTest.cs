@@ -189,13 +189,11 @@ namespace System.Net.Http.Functional.Tests
                 Assert.Throws<ArgumentOutOfRangeException>("value", () => s.Position = -1);
                 Assert.Throws<IOException>(() => s.Seek(-1, SeekOrigin.Begin));
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => s.Position = (long)int.MaxValue + 1
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    s.Position = (long)int.MaxValue + 1
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => s.Seek((long)int.MaxValue + 1, SeekOrigin.Begin)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    s.Seek((long)int.MaxValue + 1, SeekOrigin.Begin)
                 );
 
                 Assert.ThrowsAny<ArgumentException>(() => s.Seek(0, (SeekOrigin)42));
@@ -251,34 +249,26 @@ namespace System.Net.Http.Functional.Tests
             using (memoryOwner)
             using (Stream stream = await content.ReadAsStreamAsync(readStreamAsync))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "buffer",
-                    () => stream.Read(null, 0, 0)
+                AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+                    stream.Read(null, 0, 0)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "buffer",
-                    () =>
-                    {
-                        stream.ReadAsync(null, 0, 0);
-                    }
+                AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+                {
+                    stream.ReadAsync(null, 0, 0);
+                });
+
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    stream.Read(new byte[1], -1, 1)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    stream.Read(new byte[1], -1, 1)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => stream.Read(new byte[1], -1, 1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    stream.Read(new byte[1], 0, -1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => stream.Read(new byte[1], -1, 1)
-                );
-
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => stream.Read(new byte[1], 0, -1)
-                );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => stream.Read(new byte[1], 0, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    stream.Read(new byte[1], 0, -1)
                 );
 
                 Assert.ThrowsAny<ArgumentException>(() =>
@@ -539,29 +529,21 @@ namespace System.Net.Http.Functional.Tests
             {
                 using (Stream s = await content.ReadAsStreamAsync(readStreamAsync))
                 {
-                    AssertExtensions.Throws<ArgumentNullException>(
-                        "destination",
-                        () => s.CopyTo(null)
+                    AssertExtensions.Throws<ArgumentNullException>("destination", () =>
+                        s.CopyTo(null)
                     );
-                    AssertExtensions.Throws<ArgumentNullException>(
-                        "destination",
-                        () =>
-                        {
-                            s.CopyToAsync(null);
-                        }
-                    );
+                    AssertExtensions.Throws<ArgumentNullException>("destination", () =>
+                    {
+                        s.CopyToAsync(null);
+                    });
 
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "bufferSize",
-                        () => s.CopyTo(new MemoryStream(), 0)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () =>
+                        s.CopyTo(new MemoryStream(), 0)
                     );
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "bufferSize",
-                        () =>
-                        {
-                            s.CopyToAsync(new MemoryStream(), 0);
-                        }
-                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () =>
+                    {
+                        s.CopyToAsync(new MemoryStream(), 0);
+                    });
 
                     Assert.Throws<NotSupportedException>(() =>
                         s.CopyTo(new MemoryStream(new byte[1], writable: false))

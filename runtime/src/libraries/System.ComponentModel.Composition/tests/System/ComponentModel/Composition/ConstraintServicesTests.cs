@@ -181,9 +181,8 @@ namespace System.ComponentModel.Composition
         public void PartCreatorConstraint_ShouldMatchPartCreatorExportDefinition()
         {
             var partCreatorImportDef = ReflectionModelServices.CreateImportDefinition(
-                new LazyMemberInfo(
-                    MemberTypes.Field,
-                    () => new MemberInfo[] { typeof(ConstraintServicesTests) }
+                new LazyMemberInfo(MemberTypes.Field, () =>
+                    new MemberInfo[] { typeof(ConstraintServicesTests) }
                 ),
                 "Foo",
                 "Foo",

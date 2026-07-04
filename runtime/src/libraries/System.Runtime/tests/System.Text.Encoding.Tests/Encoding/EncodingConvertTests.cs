@@ -62,57 +62,46 @@ namespace System.Text.Tests
         public void Convert_Invalid()
         {
             // Bytes is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "bytes",
-                () => Encoding.Convert(Encoding.ASCII, Encoding.ASCII, null)
+            AssertExtensions.Throws<ArgumentNullException>("bytes", () =>
+                Encoding.Convert(Encoding.ASCII, Encoding.ASCII, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "bytes",
-                () => Encoding.Convert(Encoding.ASCII, Encoding.ASCII, null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("bytes", () =>
+                Encoding.Convert(Encoding.ASCII, Encoding.ASCII, null, 0, 0)
             );
 
             // SrcEncoding is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "srcEncoding",
-                () => Encoding.Convert(null, Encoding.ASCII, new byte[0])
+            AssertExtensions.Throws<ArgumentNullException>("srcEncoding", () =>
+                Encoding.Convert(null, Encoding.ASCII, new byte[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "srcEncoding",
-                () => Encoding.Convert(null, Encoding.ASCII, new byte[0], 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("srcEncoding", () =>
+                Encoding.Convert(null, Encoding.ASCII, new byte[0], 0, 0)
             );
 
             // DstEncoding is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dstEncoding",
-                () => Encoding.Convert(Encoding.ASCII, null, new byte[0])
+            AssertExtensions.Throws<ArgumentNullException>("dstEncoding", () =>
+                Encoding.Convert(Encoding.ASCII, null, new byte[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dstEncoding",
-                () => Encoding.Convert(Encoding.ASCII, null, new byte[0], 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("dstEncoding", () =>
+                Encoding.Convert(Encoding.ASCII, null, new byte[0], 0, 0)
             );
 
             // Invalid index
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => Encoding.Convert(Encoding.ASCII, Encoding.ASCII, new byte[10], -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                Encoding.Convert(Encoding.ASCII, Encoding.ASCII, new byte[10], -1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bytes",
-                () => Encoding.Convert(Encoding.ASCII, Encoding.ASCII, new byte[10], 11, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bytes", () =>
+                Encoding.Convert(Encoding.ASCII, Encoding.ASCII, new byte[10], 11, 0)
             );
 
             // Invalid count
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Encoding.Convert(Encoding.ASCII, Encoding.ASCII, new byte[10], 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Encoding.Convert(Encoding.ASCII, Encoding.ASCII, new byte[10], 0, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bytes",
-                () => Encoding.Convert(Encoding.ASCII, Encoding.ASCII, new byte[10], 0, 11)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bytes", () =>
+                Encoding.Convert(Encoding.ASCII, Encoding.ASCII, new byte[10], 0, 11)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bytes",
-                () => Encoding.Convert(Encoding.ASCII, Encoding.ASCII, new byte[10], 1, 10)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bytes", () =>
+                Encoding.Convert(Encoding.ASCII, Encoding.ASCII, new byte[10], 1, 10)
             );
         }
     }

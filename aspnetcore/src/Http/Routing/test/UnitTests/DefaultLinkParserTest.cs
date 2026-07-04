@@ -42,9 +42,8 @@ public class DefaultLinkParserTest : LinkParserTestBase
         // Assert
         Assert.Null(values);
 
-        Assert.Collection(
-            sink.Writes,
-            w => Assert.Equal("No endpoints found for address 0", w.Message)
+        Assert.Collection(sink.Writes, w =>
+            Assert.Equal("No endpoints found for address 0", w.Message)
         );
     }
 

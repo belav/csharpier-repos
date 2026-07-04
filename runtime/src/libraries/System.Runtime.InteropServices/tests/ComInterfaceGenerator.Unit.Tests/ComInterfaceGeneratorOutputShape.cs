@@ -364,11 +364,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                             implementationType.Interfaces,
                             SymbolEqualityComparer.Default
                         );
-                        Assert.Contains(
-                            implementationType.GetAttributes(),
-                            attr =>
-                                attr.AttributeClass?.ToDisplayString()
-                                == typeof(DynamicInterfaceCastableImplementationAttribute).FullName
+                        Assert.Contains(implementationType.GetAttributes(), attr =>
+                            attr.AttributeClass?.ToDisplayString()
+                            == typeof(DynamicInterfaceCastableImplementationAttribute).FullName
                         );
                         Assert.All(
                             userDefinedInterface

@@ -24,14 +24,11 @@ namespace System.Transactions.Tests
         [Fact]
         public void TransactionScopeWithInvalidTimeSpanThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "transactionToUse",
-                () => new TransactionScope(null, TimeSpan.FromSeconds(-1))
+            AssertExtensions.Throws<ArgumentNullException>("transactionToUse", () =>
+                new TransactionScope(null, TimeSpan.FromSeconds(-1))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "scopeTimeout",
-                () =>
-                    new TransactionScope(TransactionScopeOption.Required, TimeSpan.FromSeconds(-1))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("scopeTimeout", () =>
+                new TransactionScope(TransactionScopeOption.Required, TimeSpan.FromSeconds(-1))
             );
         }
 
@@ -1078,18 +1075,15 @@ namespace System.Transactions.Tests
         [Fact]
         public void ExplicitTransaction12()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () =>
-                {
-                    CommittableTransaction ct = new CommittableTransaction();
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+            {
+                CommittableTransaction ct = new CommittableTransaction();
 
-                    IntResourceManager irm = new IntResourceManager(1);
-                    irm.FailPrepare = true;
-                    ct.BeginCommit(null, null);
-                    ct.EndCommit(null);
-                }
-            );
+                IntResourceManager irm = new IntResourceManager(1);
+                irm.FailPrepare = true;
+                ct.BeginCommit(null, null);
+                ct.EndCommit(null);
+            });
         }
 
         [Fact]

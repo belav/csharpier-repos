@@ -71,9 +71,8 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesCcm = new AesCcm(key))
             {
-                Assert.Throws<ArgumentException>(
-                    "nonce",
-                    () => aesCcm.Encrypt(nonce, plaintext, ciphertext, tag)
+                Assert.Throws<ArgumentException>("nonce", () =>
+                    aesCcm.Encrypt(nonce, plaintext, ciphertext, tag)
                 );
             }
         }
@@ -120,9 +119,8 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesCcm = new AesCcm(key))
             {
-                Assert.Throws<ArgumentException>(
-                    "tag",
-                    () => aesCcm.Encrypt(nonce, plaintext, ciphertext, tag)
+                Assert.Throws<ArgumentException>("tag", () =>
+                    aesCcm.Encrypt(nonce, plaintext, ciphertext, tag)
                 );
             }
         }
@@ -240,13 +238,11 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesCcm = new AesCcm(key))
             {
-                Assert.Throws<ArgumentNullException>(
-                    "nonce",
-                    () => aesCcm.Encrypt((byte[])null, plaintext, ciphertext, tag)
+                Assert.Throws<ArgumentNullException>("nonce", () =>
+                    aesCcm.Encrypt((byte[])null, plaintext, ciphertext, tag)
                 );
-                Assert.Throws<ArgumentNullException>(
-                    "nonce",
-                    () => aesCcm.Decrypt((byte[])null, ciphertext, tag, plaintext)
+                Assert.Throws<ArgumentNullException>("nonce", () =>
+                    aesCcm.Decrypt((byte[])null, ciphertext, tag, plaintext)
                 );
             }
         }
@@ -261,13 +257,11 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesCcm = new AesCcm(key))
             {
-                Assert.Throws<ArgumentNullException>(
-                    "plaintext",
-                    () => aesCcm.Encrypt(nonce, (byte[])null, ciphertext, tag)
+                Assert.Throws<ArgumentNullException>("plaintext", () =>
+                    aesCcm.Encrypt(nonce, (byte[])null, ciphertext, tag)
                 );
-                Assert.Throws<ArgumentNullException>(
-                    "plaintext",
-                    () => aesCcm.Decrypt(nonce, ciphertext, tag, (byte[])null)
+                Assert.Throws<ArgumentNullException>("plaintext", () =>
+                    aesCcm.Decrypt(nonce, ciphertext, tag, (byte[])null)
                 );
             }
         }
@@ -282,13 +276,11 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesCcm = new AesCcm(key))
             {
-                Assert.Throws<ArgumentNullException>(
-                    "ciphertext",
-                    () => aesCcm.Encrypt(nonce, plaintext, (byte[])null, tag)
+                Assert.Throws<ArgumentNullException>("ciphertext", () =>
+                    aesCcm.Encrypt(nonce, plaintext, (byte[])null, tag)
                 );
-                Assert.Throws<ArgumentNullException>(
-                    "ciphertext",
-                    () => aesCcm.Decrypt(nonce, (byte[])null, tag, plaintext)
+                Assert.Throws<ArgumentNullException>("ciphertext", () =>
+                    aesCcm.Decrypt(nonce, (byte[])null, tag, plaintext)
                 );
             }
         }
@@ -303,13 +295,11 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesCcm = new AesCcm(key))
             {
-                Assert.Throws<ArgumentNullException>(
-                    "tag",
-                    () => aesCcm.Encrypt(nonce, plaintext, ciphertext, (byte[])null)
+                Assert.Throws<ArgumentNullException>("tag", () =>
+                    aesCcm.Encrypt(nonce, plaintext, ciphertext, (byte[])null)
                 );
-                Assert.Throws<ArgumentNullException>(
-                    "tag",
-                    () => aesCcm.Decrypt(nonce, ciphertext, (byte[])null, plaintext)
+                Assert.Throws<ArgumentNullException>("tag", () =>
+                    aesCcm.Decrypt(nonce, ciphertext, (byte[])null, plaintext)
                 );
             }
         }

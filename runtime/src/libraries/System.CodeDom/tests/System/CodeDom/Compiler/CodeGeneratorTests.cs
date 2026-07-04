@@ -144,9 +144,8 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateBinaryOperatorExpression_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateBinaryOperatorExpression(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateBinaryOperatorExpression(null)
             );
         }
 
@@ -165,9 +164,8 @@ namespace System.CodeDom.Compiler.Tests
                 generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
                 generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
                     baseMethod(actualE);
-                Assert.Throws<ArgumentNullException>(
-                    "e",
-                    () => generator.GenerateBinaryOperatorExpression(null)
+                Assert.Throws<ArgumentNullException>("e", () =>
+                    generator.GenerateBinaryOperatorExpression(null)
                 );
             });
         }
@@ -187,9 +185,8 @@ namespace System.CodeDom.Compiler.Tests
                 generator.OutputOperatorAction = (actualOp, baseMethod) => baseMethod(actualOp);
                 generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
                     baseMethod(actualE);
-                Assert.Throws<ArgumentNullException>(
-                    "e",
-                    () => generator.GenerateBinaryOperatorExpression(null)
+                Assert.Throws<ArgumentNullException>("e", () =>
+                    generator.GenerateBinaryOperatorExpression(null)
                 );
             });
         }
@@ -488,14 +485,12 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCodeFromMember_NullMember_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>(
-                "member",
-                () =>
-                    generator.GenerateCodeFromMember(
-                        null,
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+            Assert.Throws<ArgumentNullException>("member", () =>
+                generator.GenerateCodeFromMember(
+                    null,
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                )
             );
         }
 
@@ -504,14 +499,12 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCodeFromMember_NullWriter_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    generator.GenerateCodeFromMember(
-                        new CodeTypeMember(),
-                        null,
-                        new CodeGeneratorOptions()
-                    )
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                generator.GenerateCodeFromMember(
+                    new CodeTypeMember(),
+                    null,
+                    new CodeGeneratorOptions()
+                )
             );
         }
 
@@ -538,9 +531,8 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateCommentStatement_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateCommentStatement(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateCommentStatement(null)
             );
         }
 
@@ -594,9 +586,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             generator.GenerateCommentStatementsAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateCommentStatements(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateCommentStatements(null)
             );
         }
 
@@ -821,9 +812,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             generator.GenerateCompileUnitStartAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateCompileUnitStart(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateCompileUnitStart(null)
             );
         }
 
@@ -926,9 +916,8 @@ namespace System.CodeDom.Compiler.Tests
                 baseMethod(actualE);
             generator.OutputDirectionAction = (actualDirection, baseMethod) =>
                 baseMethod(actualDirection);
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateDirectionExpression(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateDirectionExpression(null)
             );
         }
 
@@ -943,9 +932,8 @@ namespace System.CodeDom.Compiler.Tests
                 baseMethod(actualDirection);
             generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateDirectionExpression(e)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateDirectionExpression(e)
             );
         }
 
@@ -1650,9 +1638,8 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateNamespaceImports_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateNamespaceImports(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateNamespaceImports(null)
             );
         }
 
@@ -1826,9 +1813,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             generator.GenerateParameterDeclarationExpressionAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateParameterDeclarationExpression(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateParameterDeclarationExpression(null)
             );
         }
 
@@ -1961,9 +1947,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GeneratePrimitiveExpression(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GeneratePrimitiveExpression(null)
             );
         }
 
@@ -2127,9 +2112,8 @@ namespace System.CodeDom.Compiler.Tests
         public void GenerateSnippetCompileUnit_NullE_ThrowsArgumentNullException()
         {
             CodeGeneratorTests generator = this;
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateSnippetCompileUnit(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateSnippetCompileUnit(null)
             );
         }
 
@@ -2164,9 +2148,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             generator.GenerateSnippetStatementAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateSnippetStatement(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateSnippetStatement(null)
             );
         }
 
@@ -2570,9 +2553,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeGeneratorTests generator = this;
             generator.GenerateTypeOfExpressionAction = (actualE, baseMethod) => baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateTypeOfExpression(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateTypeOfExpression(null)
             );
         }
 
@@ -2614,9 +2596,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             generator.GenerateTypeReferenceExpressionAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>(
-                "e",
-                () => generator.GenerateTypeReferenceExpression(null)
+            Assert.Throws<ArgumentNullException>("e", () =>
+                generator.GenerateTypeReferenceExpression(null)
             );
         }
 
@@ -3063,9 +3044,8 @@ namespace System.CodeDom.Compiler.Tests
                 baseMethod(actualArg);
             generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
                 baseMethod(actualE);
-            Assert.Throws<ArgumentNullException>(
-                "arg",
-                () => generator.OutputAttributeArgument(null)
+            Assert.Throws<ArgumentNullException>("arg", () =>
+                generator.OutputAttributeArgument(null)
             );
         }
 
@@ -3082,9 +3062,8 @@ namespace System.CodeDom.Compiler.Tests
                     baseMethod(actualArg);
                 generator.GeneratePrimitiveExpressionAction = (actualE, baseMethod) =>
                     baseMethod(actualE);
-                Assert.Throws<ArgumentNullException>(
-                    "e",
-                    () => generator.OutputAttributeArgument(arg)
+                Assert.Throws<ArgumentNullException>("e", () =>
+                    generator.OutputAttributeArgument(arg)
                 );
             });
         }
@@ -3193,9 +3172,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
                 baseMethod(actualAttributes);
-            Assert.Throws<ArgumentNullException>(
-                "attributes",
-                () => generator.OutputAttributeDeclarations(null)
+            Assert.Throws<ArgumentNullException>("attributes", () =>
+                generator.OutputAttributeDeclarations(null)
             );
         }
 
@@ -3238,9 +3216,8 @@ namespace System.CodeDom.Compiler.Tests
                 generator.OutputAttributeArgumentAction = (actualArg, baseMethod) =>
                     baseMethod(actualArg);
                 generator.GenerateAttributeDeclarationsEndAction = (actualAttributes) => { };
-                Assert.Throws<ArgumentNullException>(
-                    "e",
-                    () => generator.OutputAttributeDeclarations(attributes)
+                Assert.Throws<ArgumentNullException>("e", () =>
+                    generator.OutputAttributeDeclarations(attributes)
                 );
             });
         }
@@ -4142,9 +4119,8 @@ namespace System.CodeDom.Compiler.Tests
             CodeGeneratorTests generator = this;
             generator.OutputParametersAction = (actualParameters, baseMethod) =>
                 baseMethod(actualParameters);
-            Assert.Throws<ArgumentNullException>(
-                "parameters",
-                () => generator.OutputParameters(null)
+            Assert.Throws<ArgumentNullException>("parameters", () =>
+                generator.OutputParameters(null)
             );
         }
 
@@ -4554,9 +4530,8 @@ namespace System.CodeDom.Compiler.Tests
                 return false;
             };
             ICodeGenerator iCodeGenerator = generator;
-            Assert.Throws<ArgumentException>(
-                "value",
-                () => iCodeGenerator.ValidateIdentifier(value)
+            Assert.Throws<ArgumentException>("value", () =>
+                iCodeGenerator.ValidateIdentifier(value)
             );
             Assert.Equal(1, isValidIdentifierCallCount);
         }

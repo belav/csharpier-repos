@@ -1474,9 +1474,8 @@ public class ModelStateDictionaryTest
                 Assert.Equal(ModelValidationState.Invalid, entry.Value.ValidationState);
                 Assert.Null(entry.Value.RawValue);
                 Assert.Null(entry.Value.AttemptedValue);
-                Assert.Collection(
-                    entry.Value.Errors,
-                    error => Assert.Equal("Property2[Property3] invalid.", error.ErrorMessage)
+                Assert.Collection(entry.Value.Errors, error =>
+                    Assert.Equal("Property2[Property3] invalid.", error.ErrorMessage)
                 );
             }
         );
@@ -1605,9 +1604,8 @@ public class ModelStateDictionaryTest
                 Assert.Equal(ModelValidationState.Invalid, value.ValidationState);
                 Assert.Null(value.RawValue);
                 Assert.Null(value.AttemptedValue);
-                Assert.Collection(
-                    value.Errors,
-                    error => Assert.Equal("Property2[Property3] invalid.", error.ErrorMessage)
+                Assert.Collection(value.Errors, error =>
+                    Assert.Equal("Property2[Property3] invalid.", error.ErrorMessage)
                 );
             }
         );

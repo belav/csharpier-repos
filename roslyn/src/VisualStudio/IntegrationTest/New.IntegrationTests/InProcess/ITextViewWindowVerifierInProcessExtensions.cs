@@ -116,10 +116,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             {
                 var codeActionLogger = new CodeActionLogger();
                 using var loggerRestorer = WithLogger(
-                    AggregateLogger.AddOrReplace(
-                        codeActionLogger,
-                        Logger.GetLogger(),
-                        logger => logger is CodeActionLogger
+                    AggregateLogger.AddOrReplace(codeActionLogger, Logger.GetLogger(), logger =>
+                        logger is CodeActionLogger
                     )
                 );
 

@@ -84,40 +84,37 @@ internal sealed class CSharpMakeStructMemberReadOnlyCodeFixProvider()
                 else if (accessorList.Accessors.Count == 2)
                 {
                     // `int X { readonly get { } readonly set { } }` is not legal.  Has to add the modifier to the property.
-                    editor.ReplaceNode(
-                        property,
-                        (current, generator) =>
+                    editor.ReplaceNode(property, (current, generator) =>
+                    {
+                        var currentProperty = (BasePropertyDeclarationSyntax)current;
+                        var currentAccessorList = currentProperty.AccessorList;
+                        Contract.ThrowIfNull(currentAccessorList);
+
+                        var currentAccessor = currentAccessorList.Accessors.First(a =>
+                            a.Kind() == accessor.Kind()
+                        );
+                        var otherAccessor = currentAccessorList.Accessors.Single(a =>
+                            a != currentAccessor
+                        );
+
+                        if (otherAccessor.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))
                         {
-                            var currentProperty = (BasePropertyDeclarationSyntax)current;
-                            var currentAccessorList = currentProperty.AccessorList;
-                            Contract.ThrowIfNull(currentAccessorList);
-
-                            var currentAccessor = currentAccessorList.Accessors.First(a =>
-                                a.Kind() == accessor.Kind()
+                            // both accessors would have 'readonly' on them.  Remove from the accessors and place on the property.
+                            currentProperty = currentProperty.ReplaceNode(
+                                otherAccessor,
+                                UpdateReadOnlyModifier(otherAccessor, add: false)
                             );
-                            var otherAccessor = currentAccessorList.Accessors.Single(a =>
-                                a != currentAccessor
-                            );
-
-                            if (otherAccessor.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))
-                            {
-                                // both accessors would have 'readonly' on them.  Remove from the accessors and place on the property.
-                                currentProperty = currentProperty.ReplaceNode(
-                                    otherAccessor,
-                                    UpdateReadOnlyModifier(otherAccessor, add: false)
-                                );
-                                return UpdateReadOnlyModifier(currentProperty, add: true);
-                            }
-                            else
-                            {
-                                // Otherwise, just add to this accessor alone.
-                                return currentProperty.ReplaceNode(
-                                    currentAccessor,
-                                    UpdateReadOnlyModifier(currentAccessor, add: true)
-                                );
-                            }
+                            return UpdateReadOnlyModifier(currentProperty, add: true);
                         }
-                    );
+                        else
+                        {
+                            // Otherwise, just add to this accessor alone.
+                            return currentProperty.ReplaceNode(
+                                currentAccessor,
+                                UpdateReadOnlyModifier(currentAccessor, add: true)
+                            );
+                        }
+                    });
                 }
             }
         }

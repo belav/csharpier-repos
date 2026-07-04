@@ -209,9 +209,8 @@ namespace System.Globalization.Tests
             Assert.Throws<InvalidOperationException>(() =>
                 CultureInfo.InvariantCulture.TextInfo.ListSeparator = ""
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CultureInfo("en-US").TextInfo.ListSeparator = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CultureInfo("en-US").TextInfo.ListSeparator = null
             );
         }
 
@@ -463,9 +462,8 @@ namespace System.Globalization.Tests
         [InlineData("fr")]
         public void ToLower_Null_ThrowsArgumentNullException(string cultureName)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "str",
-                () => new CultureInfo(cultureName).TextInfo.ToLower(null)
+            AssertExtensions.Throws<ArgumentNullException>("str", () =>
+                new CultureInfo(cultureName).TextInfo.ToLower(null)
             );
         }
 
@@ -648,9 +646,8 @@ namespace System.Globalization.Tests
         [InlineData("fr")]
         public void ToUpper_Null_ThrowsArgumentNullException(string cultureName)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "str",
-                () => new CultureInfo(cultureName).TextInfo.ToUpper(null)
+            AssertExtensions.Throws<ArgumentNullException>("str", () =>
+                new CultureInfo(cultureName).TextInfo.ToUpper(null)
             );
         }
 

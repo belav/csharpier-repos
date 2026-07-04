@@ -99,13 +99,11 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NullServerName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serverName",
-                () => new VerifyNameControl(null)
+            AssertExtensions.Throws<ArgumentNullException>("serverName", () =>
+                new VerifyNameControl(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "serverName",
-                () => new VerifyNameControl(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("serverName", () =>
+                new VerifyNameControl(null, 0)
             );
         }
 
@@ -120,9 +118,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void ServerName_SetNull_ThrowsArgumentNullException()
         {
             var control = new VerifyNameControl();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => control.ServerName = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                control.ServerName = null
             );
         }
 

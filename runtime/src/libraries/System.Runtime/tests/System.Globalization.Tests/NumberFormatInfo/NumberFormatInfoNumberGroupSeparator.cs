@@ -28,10 +28,8 @@ namespace System.Globalization.Tests
         public void NumberGroupSeparator_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "NumberGroupSeparator",
-                () => format.NumberGroupSeparator = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "NumberGroupSeparator", () =>
+                format.NumberGroupSeparator = null
             );
         }
 

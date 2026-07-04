@@ -990,10 +990,8 @@ namespace Mono.Tools.LocaleBuilder
                             break;
                         default:
                             List<int?> all_fdow = new List<int?>();
-                            GetAllChildrenValues(
-                                ci,
-                                all_fdow,
-                                l => l.DateTimeFormatEntry.FirstDayOfWeek
+                            GetAllChildrenValues(ci, all_fdow, l =>
+                                l.DateTimeFormatEntry.FirstDayOfWeek
                             );
                             var children = all_fdow.Where(l => l != null).Distinct().ToList();
 
@@ -1037,10 +1035,8 @@ namespace Mono.Tools.LocaleBuilder
                             break;
                         default:
                             List<int?> all_cwr = new List<int?>();
-                            GetAllChildrenValues(
-                                ci,
-                                all_cwr,
-                                l => l.DateTimeFormatEntry.CalendarWeekRule
+                            GetAllChildrenValues(ci, all_cwr, l =>
+                                l.DateTimeFormatEntry.CalendarWeekRule
                             );
                             var children = all_cwr.Where(l => l != null).Distinct().ToList();
 
@@ -1142,10 +1138,8 @@ namespace Mono.Tools.LocaleBuilder
                             break;
                         default:
                             var all_currencies = new List<string>();
-                            GetAllChildrenValues(
-                                ci,
-                                all_currencies,
-                                l => l.NumberFormatEntry.CurrencySymbol
+                            GetAllChildrenValues(ci, all_currencies, l =>
+                                l.NumberFormatEntry.CurrencySymbol
                             );
                             var children = all_currencies.Where(l => l != null).Distinct().ToList();
 

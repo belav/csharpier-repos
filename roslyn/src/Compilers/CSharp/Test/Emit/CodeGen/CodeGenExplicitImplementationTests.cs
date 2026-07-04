@@ -1146,22 +1146,17 @@ class C : Q::I
             var classCMembers = classC.GetMembers();
 
             // The alias is preserved, in case a similar interface is implemented from another aliased assembly.
-            AssertEx.All(
-                classCMembers.Select(m => m.Name),
-                name =>
-                    name == WellKnownMemberNames.InstanceConstructorName
-                    || name.StartsWith("Q::I.", StringComparison.Ordinal)
+            AssertEx.All(classCMembers.Select(m => m.Name), name =>
+                name == WellKnownMemberNames.InstanceConstructorName
+                || name.StartsWith("Q::I.", StringComparison.Ordinal)
             );
-            AssertEx.All(
-                classCMembers.Select(m => m.MetadataName),
-                metadataName =>
-                    metadataName == WellKnownMemberNames.InstanceConstructorName
-                    || metadataName.StartsWith("Q::I.", StringComparison.Ordinal)
+            AssertEx.All(classCMembers.Select(m => m.MetadataName), metadataName =>
+                metadataName == WellKnownMemberNames.InstanceConstructorName
+                || metadataName.StartsWith("Q::I.", StringComparison.Ordinal)
             );
             AssertEx.None(classCMembers.Select(m => m.ToString()), id => id.Contains("Q"));
-            AssertEx.None(
-                classCMembers.Select(m => m.GetDocumentationCommentId()),
-                id => id.Contains("Q")
+            AssertEx.None(classCMembers.Select(m => m.GetDocumentationCommentId()), id =>
+                id.Contains("Q")
             );
         }
 

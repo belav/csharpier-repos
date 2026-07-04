@@ -36,15 +36,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         [ConditionalFact]
         public virtual void Global_namespace() =>
             Test<GlobalNamespaceContext>(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "1",
-                        e =>
-                        {
-                            e.Property<int>("Id");
-                            e.HasKey("Id");
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("1", e =>
+                    {
+                        e.Property<int>("Id");
+                        e.HasKey("Id");
+                    }),
                 model =>
                 {
                     Assert.NotNull(model.FindEntityType("1"));
@@ -88,26 +84,15 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
 
         [ConditionalFact]
         public virtual void Throws_for_constructor_binding() =>
-            Test(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "Lazy",
-                        e =>
-                        {
-                            e.Property<int>("Id");
-                            e.HasKey("Id");
-                            ((EntityType)e.Metadata).ConstructorBinding = new ConstructorBinding(
-                                typeof(object).GetConstructor(Type.EmptyTypes)!,
-                                Array.Empty<ParameterBinding>()
-                            );
-                        }
-                    ),
-                expectedExceptionMessage: DesignStrings.CompiledModelConstructorBinding(
-                    "Lazy",
-                    "Customize()",
-                    "LazyEntityType"
-                )
-            );
+            Test(modelBuilder => modelBuilder.Entity("Lazy", e =>
+                    {
+                        e.Property<int>("Id");
+                        e.HasKey("Id");
+                        ((EntityType)e.Metadata).ConstructorBinding = new ConstructorBinding(
+                            typeof(object).GetConstructor(Type.EmptyTypes)!,
+                            Array.Empty<ParameterBinding>()
+                        );
+                    }), expectedExceptionMessage: DesignStrings.CompiledModelConstructorBinding("Lazy", "Customize()", "LazyEntityType"));
 
         [ConditionalFact]
         public virtual void Manual_lazy_loading() =>
@@ -151,13 +136,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
                         typeof(LazyPropertyDelegateEntity)
                     );
                     Assert.Equal(2, lazyPropertyDelegateEntity!.GetServiceProperties().Count());
-                    Assert.Contains(
-                        lazyPropertyDelegateEntity!.GetServiceProperties(),
-                        p => p.ClrType == typeof(ILazyLoader)
+                    Assert.Contains(lazyPropertyDelegateEntity!.GetServiceProperties(), p =>
+                        p.ClrType == typeof(ILazyLoader)
                     );
-                    Assert.Contains(
-                        lazyPropertyDelegateEntity!.GetServiceProperties(),
-                        p => p.ClrType == typeof(Action<object, string>)
+                    Assert.Contains(lazyPropertyDelegateEntity!.GetServiceProperties(), p =>
+                        p.ClrType == typeof(Action<object, string>)
                     );
                 }
             );
@@ -242,21 +225,14 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
 
         [ConditionalFact]
         public virtual void Throws_for_query_filter() =>
-            Test(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "QueryFilter",
-                        e =>
-                        {
-                            e.Property<int>("Id");
-                            e.HasKey("Id");
-                            e.HasQueryFilter(
-                                (Expression<Func<Dictionary<string, object>, bool>>)(e => e != null)
-                            );
-                        }
-                    ),
-                expectedExceptionMessage: DesignStrings.CompiledModelQueryFilter("QueryFilter")
-            );
+            Test(modelBuilder => modelBuilder.Entity("QueryFilter", e =>
+                    {
+                        e.Property<int>("Id");
+                        e.HasKey("Id");
+                        e.HasQueryFilter(
+                            (Expression<Func<Dictionary<string, object>, bool>>)(e => e != null)
+                        );
+                    }), expectedExceptionMessage: DesignStrings.CompiledModelQueryFilter("QueryFilter"));
 
         [ConditionalFact]
         public virtual void Throws_for_defining_query() =>
@@ -284,35 +260,20 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
 
         [ConditionalFact]
         public virtual void Throws_for_value_generator() =>
-            Test(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "MyEntity",
-                        e =>
-                        {
-                            e.Property<int>("Id").HasValueGenerator((p, e) => null!);
-                            e.HasKey("Id");
-                        }
-                    ),
-                expectedExceptionMessage: DesignStrings.CompiledModelValueGenerator(
-                    "MyEntity",
-                    "Id",
-                    nameof(PropertyBuilder.HasValueGeneratorFactory)
-                )
-            );
+            Test(modelBuilder => modelBuilder.Entity("MyEntity", e =>
+                    {
+                        e.Property<int>("Id").HasValueGenerator((p, e) => null!);
+                        e.HasKey("Id");
+                    }), expectedExceptionMessage: DesignStrings.CompiledModelValueGenerator("MyEntity", "Id", nameof(PropertyBuilder.HasValueGeneratorFactory)));
 
         [ConditionalFact]
         public virtual void Custom_value_converter() =>
             Test(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "MyEntity",
-                        e =>
-                        {
-                            e.Property<int>("Id").HasConversion(i => i, i => i);
-                            e.HasKey("Id");
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("MyEntity", e =>
+                    {
+                        e.Property<int>("Id").HasConversion(i => i, i => i);
+                        e.HasKey("Id");
+                    }),
                 model =>
                 {
                     var entityType = model.GetEntityTypes().Single();
@@ -325,16 +286,11 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         [ConditionalFact]
         public virtual void Custom_value_comparer() =>
             Test(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "MyEntity",
-                        e =>
-                        {
-                            e.Property<int>("Id")
-                                .HasConversion(typeof(int), new FakeValueComparer());
-                            e.HasKey("Id");
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("MyEntity", e =>
+                    {
+                        e.Property<int>("Id").HasConversion(typeof(int), new FakeValueComparer());
+                        e.HasKey("Id");
+                    }),
                 model =>
                 {
                     var entityType = model.GetEntityTypes().Single();
@@ -368,16 +324,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         [ConditionalFact]
         public virtual void Custom_provider_value_comparer() =>
             Test(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "MyEntity",
-                        e =>
-                        {
-                            e.Property<int>("Id")
-                                .HasConversion(typeof(int), null, new FakeValueComparer());
-                            e.HasKey("Id");
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("MyEntity", e =>
+                    {
+                        e.Property<int>("Id")
+                            .HasConversion(typeof(int), null, new FakeValueComparer());
+                        e.HasKey("Id");
+                    }),
                 model =>
                 {
                     var entityType = model.GetEntityTypes().Single();
@@ -394,21 +346,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
         [ConditionalFact]
         public virtual void Custom_type_mapping() =>
             Test(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "MyEntity",
-                        e =>
-                        {
-                            e.Property<int>("Id")
-                                .Metadata.SetTypeMapping(
-                                    new InMemoryTypeMapping(
-                                        typeof(int),
-                                        jsonValueReaderWriter: JsonInt32ReaderWriter.Instance
-                                    )
-                                );
-                            e.HasKey("Id");
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("MyEntity", e =>
+                    {
+                        e.Property<int>("Id")
+                            .Metadata.SetTypeMapping(
+                                new InMemoryTypeMapping(
+                                    typeof(int),
+                                    jsonValueReaderWriter: JsonInt32ReaderWriter.Instance
+                                )
+                            );
+                        e.HasKey("Id");
+                    }),
                 model =>
                 {
                     var entityType = model.GetEntityTypes().Single();

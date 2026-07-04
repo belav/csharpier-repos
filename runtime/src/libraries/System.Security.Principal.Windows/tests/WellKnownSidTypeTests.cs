@@ -144,9 +144,8 @@ public class WellKnownSidTypeTests
     {
         using WindowsIdentity currentIdentity = WindowsIdentity.GetCurrent();
         var currentDomainSid = currentIdentity.Owner.AccountDomainSid;
-        AssertExtensions.Throws<ArgumentException>(
-            "sidType",
-            () => new SecurityIdentifier(sidType, currentDomainSid)
+        AssertExtensions.Throws<ArgumentException>("sidType", () =>
+            new SecurityIdentifier(sidType, currentDomainSid)
         );
     }
 

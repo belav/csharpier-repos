@@ -24,30 +24,27 @@ namespace Microsoft.Interop.Analyzers
 
         private static Task AddGeneratedComClassAsync(DocumentEditor editor, SyntaxNode node)
         {
-            editor.ReplaceNode(
-                node,
-                (node, gen) =>
-                {
-                    var attribute = gen.Attribute(
-                        gen.TypeExpression(
-                                editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
-                                    TypeNames.GeneratedComClassAttribute
-                                )
+            editor.ReplaceNode(node, (node, gen) =>
+            {
+                var attribute = gen.Attribute(
+                    gen.TypeExpression(
+                            editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
+                                TypeNames.GeneratedComClassAttribute
                             )
-                            .WithAdditionalAnnotations(Simplifier.AddImportsAnnotation)
+                        )
+                        .WithAdditionalAnnotations(Simplifier.AddImportsAnnotation)
+                );
+                var updatedNode = gen.AddAttributes(node, attribute);
+                var declarationModifiers = gen.GetModifiers(updatedNode);
+                if (!declarationModifiers.IsPartial)
+                {
+                    updatedNode = gen.WithModifiers(
+                        updatedNode,
+                        declarationModifiers.WithPartial(true)
                     );
-                    var updatedNode = gen.AddAttributes(node, attribute);
-                    var declarationModifiers = gen.GetModifiers(updatedNode);
-                    if (!declarationModifiers.IsPartial)
-                    {
-                        updatedNode = gen.WithModifiers(
-                            updatedNode,
-                            declarationModifiers.WithPartial(true)
-                        );
-                    }
-                    return updatedNode;
                 }
-            );
+                return updatedNode;
+            });
 
             MakeNodeParentsPartial(editor, node);
 

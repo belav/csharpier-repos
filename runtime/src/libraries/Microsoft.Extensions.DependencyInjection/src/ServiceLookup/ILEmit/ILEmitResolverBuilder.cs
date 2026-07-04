@@ -105,9 +105,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             if (callSite.Cache.Location == CallSiteResultCacheLocation.Scope)
             {
 #if NETFRAMEWORK || NETSTANDARD2_0
-                return _scopeResolverCache.GetOrAdd(
-                    callSite.Cache.Key,
-                    key => _buildTypeDelegate(key, callSite)
+                return _scopeResolverCache.GetOrAdd(callSite.Cache.Key, key =>
+                    _buildTypeDelegate(key, callSite)
                 );
 #else
                 return _scopeResolverCache.GetOrAdd(

@@ -101,9 +101,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void AsEnumerable_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).AsEnumerable()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).AsEnumerable()
             );
         }
     }

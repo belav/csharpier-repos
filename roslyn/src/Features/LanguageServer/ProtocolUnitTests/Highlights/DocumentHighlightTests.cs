@@ -131,15 +131,12 @@ class A
                 CreateTextDocumentPositionParams(caret),
                 CancellationToken.None
             );
-            Array.Sort(
-                results,
-                (h1, h2) =>
-                {
-                    var compareKind = h1.Kind.CompareTo(h2.Kind);
-                    var compareRange = CompareRange(h1.Range, h2.Range);
-                    return compareKind != 0 ? compareKind : compareRange;
-                }
-            );
+            Array.Sort(results, (h1, h2) =>
+            {
+                var compareKind = h1.Kind.CompareTo(h2.Kind);
+                var compareRange = CompareRange(h1.Range, h2.Range);
+                return compareKind != 0 ? compareKind : compareRange;
+            });
 
             return results;
         }

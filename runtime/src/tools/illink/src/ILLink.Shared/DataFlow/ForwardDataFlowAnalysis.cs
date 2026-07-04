@@ -471,19 +471,13 @@ namespace ILLink.Shared.DataFlow
 
                     state.Current = currentState;
                     state.Exception = exceptionState;
-                    TransferOut(
-                        transfer,
-                        cfg,
-                        block,
-                        state,
-                        updateState: (branch, newValue) =>
-                        {
-                            TState state = cfgState.Get(branch);
-                            if (!changed && !newValue.Equals(state.Current))
-                                changed = true;
-                            state.Current = newValue;
-                        }
-                    );
+                    TransferOut(transfer, cfg, block, state, updateState: (branch, newValue) =>
+                    {
+                        TState state = cfgState.Get(branch);
+                        if (!changed && !newValue.Equals(state.Current))
+                            changed = true;
+                        state.Current = newValue;
+                    });
 
                     if (isFinallyBlock)
                     {

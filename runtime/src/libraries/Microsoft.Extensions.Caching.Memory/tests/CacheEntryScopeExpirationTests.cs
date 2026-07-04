@@ -119,14 +119,11 @@ namespace Microsoft.Extensions.Caching.Memory
             string key1 = "myKey1";
             var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = true };
 
-            cache.GetOrCreate(
-                key1,
-                e =>
-                {
-                    e.AddExpirationToken(expirationToken);
-                    return obj;
-                }
-            );
+            cache.GetOrCreate(key1, e =>
+            {
+                e.AddExpirationToken(expirationToken);
+                return obj;
+            });
 
             using (var entry = cache.CreateEntry(key))
             {
@@ -184,22 +181,16 @@ namespace Microsoft.Extensions.Caching.Memory
             string key1 = "myKey1";
             var expirationToken = new TestExpirationToken() { ActiveChangeCallbacks = true };
 
-            cache.GetOrCreate(
-                key,
-                entry =>
+            cache.GetOrCreate(key, entry =>
+            {
+                cache.GetOrCreate(key1, entry1 =>
                 {
-                    cache.GetOrCreate(
-                        key1,
-                        entry1 =>
-                        {
-                            entry1.AddExpirationToken(expirationToken);
-                            return obj;
-                        }
-                    );
-
+                    entry1.AddExpirationToken(expirationToken);
                     return obj;
-                }
-            );
+                });
+
+                return obj;
+            });
 
             Assert.Same(obj, cache.Get(key));
             Assert.Same(obj, cache.Get(key1));
@@ -487,32 +478,26 @@ namespace Microsoft.Extensions.Caching.Memory
                 t3 = new TestExpirationToken() { ActiveChangeCallbacks = true };
                 t4 = new TestExpirationToken() { ActiveChangeCallbacks = true };
 
-                value1 = await cache.GetOrCreateAsync(
-                    key1,
-                    async e1 =>
+                value1 = await cache.GetOrCreateAsync(key1, async e1 =>
+                {
+                    value2 = await cache.GetOrCreateAsync(key2, async e2 =>
                     {
-                        value2 = await cache.GetOrCreateAsync(
-                            key2,
-                            async e2 =>
+                        await Task.WhenAll(
+                            Task.Run(() =>
                             {
-                                await Task.WhenAll(
-                                    Task.Run(() =>
-                                    {
-                                        value3 = cache.Set(key3, Guid.NewGuid(), t3);
-                                    }),
-                                    Task.Run(() =>
-                                    {
-                                        value4 = cache.Set(key4, Guid.NewGuid(), t4);
-                                    })
-                                );
-
-                                return Guid.NewGuid();
-                            }
+                                value3 = cache.Set(key3, Guid.NewGuid(), t3);
+                            }),
+                            Task.Run(() =>
+                            {
+                                value4 = cache.Set(key4, Guid.NewGuid(), t4);
+                            })
                         );
 
                         return Guid.NewGuid();
-                    }
-                );
+                    });
+
+                    return Guid.NewGuid();
+                });
             };
 
             await func();

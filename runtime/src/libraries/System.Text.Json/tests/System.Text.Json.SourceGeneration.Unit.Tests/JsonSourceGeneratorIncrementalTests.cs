@@ -226,24 +226,18 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             IncrementalGeneratorRunStep[] runSteps = GetSourceGenRunStep(runResult);
             if (runSteps != null)
             {
-                Assert.Collection(
-                    runSteps,
-                    step =>
-                    {
-                        Assert.Collection(
-                            step.Inputs,
-                            source =>
-                                Assert.Equal(
-                                    IncrementalStepRunReason.New,
-                                    source.Source.Outputs[source.OutputIndex].Reason
-                                )
-                        );
-                        Assert.Collection(
-                            step.Outputs,
-                            output => Assert.Equal(IncrementalStepRunReason.New, output.Reason)
-                        );
-                    }
-                );
+                Assert.Collection(runSteps, step =>
+                {
+                    Assert.Collection(step.Inputs, source =>
+                        Assert.Equal(
+                            IncrementalStepRunReason.New,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        )
+                    );
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.New, output.Reason)
+                    );
+                });
             }
 
             // run the same compilation through again, and confirm the output wasn't called
@@ -253,24 +247,18 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             if (runSteps != null)
             {
-                Assert.Collection(
-                    runSteps2,
-                    step =>
-                    {
-                        Assert.Collection(
-                            step.Inputs,
-                            source =>
-                                Assert.Equal(
-                                    IncrementalStepRunReason.Cached,
-                                    source.Source.Outputs[source.OutputIndex].Reason
-                                )
-                        );
-                        Assert.Collection(
-                            step.Outputs,
-                            output => Assert.Equal(IncrementalStepRunReason.Cached, output.Reason)
-                        );
-                    }
-                );
+                Assert.Collection(runSteps2, step =>
+                {
+                    Assert.Collection(step.Inputs, source =>
+                        Assert.Equal(
+                            IncrementalStepRunReason.Cached,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        )
+                    );
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason)
+                    );
+                });
             }
             else
             {
@@ -343,17 +331,14 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            )
+                    Assert.Collection(step.Inputs, source =>
+                        Assert.Equal(
+                            IncrementalStepRunReason.New,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        )
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.New, output.Reason)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.New, output.Reason)
                     );
                 }
             );
@@ -369,17 +354,14 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                            Assert.Equal(
-                                IncrementalStepRunReason.Modified,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            )
+                    Assert.Collection(step.Inputs, source =>
+                        Assert.Equal(
+                            IncrementalStepRunReason.Modified,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        )
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
                     );
                 }
             );
@@ -429,17 +411,14 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            )
+                    Assert.Collection(step.Inputs, source =>
+                        Assert.Equal(
+                            IncrementalStepRunReason.New,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        )
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.New, output.Reason)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.New, output.Reason)
                     );
                 }
             );
@@ -455,17 +434,14 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 runResult.TrackedSteps[JsonSourceGenerator.SourceGenerationSpecTrackingName],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                            Assert.Equal(
-                                IncrementalStepRunReason.Modified,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            )
+                    Assert.Collection(step.Inputs, source =>
+                        Assert.Equal(
+                            IncrementalStepRunReason.Modified,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        )
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
                     );
                 }
             );

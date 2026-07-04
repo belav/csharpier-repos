@@ -131,9 +131,8 @@ public abstract class SpatialQueryFixtureBase
         }.ToDictionary(e => e.Key, e => (object)e.Value);
 
     public virtual GeometryFactory GeometryFactory =>
-        LazyInitializer.EnsureInitialized(
-            ref _geometryFactory,
-            () => NtsGeometryServices.Instance.CreateGeometryFactory(srid: 0)
+        LazyInitializer.EnsureInitialized(ref _geometryFactory, () =>
+            NtsGeometryServices.Instance.CreateGeometryFactory(srid: 0)
         );
 
     protected override string StoreName => "SpatialQueryTest";

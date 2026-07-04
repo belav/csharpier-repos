@@ -28,9 +28,8 @@ namespace MonoTests.System.Net
         public void CharacterSet_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -66,9 +65,8 @@ namespace MonoTests.System.Net
         public void Close_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -92,9 +90,8 @@ namespace MonoTests.System.Net
         public void ContentEncoding_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -130,9 +127,8 @@ namespace MonoTests.System.Net
         public void ContentLength_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -157,9 +153,8 @@ namespace MonoTests.System.Net
         public void ContentType_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -195,9 +190,8 @@ namespace MonoTests.System.Net
         public void Cookies_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -246,9 +240,8 @@ namespace MonoTests.System.Net
         public void GetResponseHeader_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -284,9 +277,8 @@ namespace MonoTests.System.Net
         public void GetResponseStream_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -322,9 +314,8 @@ namespace MonoTests.System.Net
         public void Headers_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -356,9 +347,8 @@ namespace MonoTests.System.Net
         public void LastModified_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -394,9 +384,8 @@ namespace MonoTests.System.Net
         public void Method_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -432,9 +421,8 @@ namespace MonoTests.System.Net
         public void ProtocolVersion_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -470,9 +458,8 @@ namespace MonoTests.System.Net
         public void ResponseUri_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -508,9 +495,8 @@ namespace MonoTests.System.Net
         public void Server_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -546,9 +532,8 @@ namespace MonoTests.System.Net
         public void StatusCode_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -573,9 +558,8 @@ namespace MonoTests.System.Net
         public void StatusDescription_Disposed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    FullResponseHandler(s)
                 )
             )
             {
@@ -693,9 +677,8 @@ namespace MonoTests.System.Net
         public void BeginRead_Buffer_Null()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -759,9 +742,8 @@ namespace MonoTests.System.Net
         public void BeginWrite()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -802,9 +784,8 @@ namespace MonoTests.System.Net
         public void CanRead()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -840,9 +821,8 @@ namespace MonoTests.System.Net
         public void CanSeek()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -878,9 +858,8 @@ namespace MonoTests.System.Net
         public void CanTimeout()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -916,9 +895,8 @@ namespace MonoTests.System.Net
         public void CanWrite()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -954,9 +932,8 @@ namespace MonoTests.System.Net
         public void Read()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -1002,9 +979,8 @@ namespace MonoTests.System.Net
         public void Read_Buffer_Null()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -1068,9 +1044,8 @@ namespace MonoTests.System.Net
         public void Read_Count_Negative()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -1143,9 +1118,8 @@ namespace MonoTests.System.Net
         public void Read_Count_Overflow()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -1218,9 +1192,8 @@ namespace MonoTests.System.Net
         public void Read_Offset_Negative()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -1293,9 +1266,8 @@ namespace MonoTests.System.Net
         public void Read_Offset_Overflow()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -1366,9 +1338,8 @@ namespace MonoTests.System.Net
         public void Read_Stream_Closed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -1448,9 +1419,8 @@ namespace MonoTests.System.Net
         public void ReadTimeout()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -1486,9 +1456,8 @@ namespace MonoTests.System.Net
         public void Write()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -1531,9 +1500,8 @@ namespace MonoTests.System.Net
         public void WriteTimeout()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.FullResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.FullResponseHandler(s)
                 )
             )
             {
@@ -1571,9 +1539,8 @@ namespace MonoTests.System.Net
         public void AutomaticDecompression()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebResponseTest.GzipResponseHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebResponseTest.GzipResponseHandler(s)
                 )
             )
             {

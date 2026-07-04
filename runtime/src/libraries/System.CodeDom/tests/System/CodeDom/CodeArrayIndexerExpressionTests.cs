@@ -39,22 +39,16 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullIndices_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeArrayIndexerExpression(new CodeExpression(), null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeArrayIndexerExpression(new CodeExpression(), null)
             );
         }
 
         [Fact]
         public void Ctor_NullObjectInIndices_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    new CodeArrayIndexerExpression(
-                        new CodeExpression(),
-                        new CodeExpression[] { null }
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeArrayIndexerExpression(new CodeExpression(), new CodeExpression[] { null })
             );
         }
 

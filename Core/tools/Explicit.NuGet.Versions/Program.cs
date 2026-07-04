@@ -81,27 +81,24 @@ namespace Explicit.NuGet.Versions
             string nugetIdFilter
         )
         {
-            WalkDocumentNodes(
-                nuspecXmlDocument.ChildNodes,
-                node =>
+            WalkDocumentNodes(nuspecXmlDocument.ChildNodes, node =>
+            {
+                if (
+                    node.Name.ToLowerInvariant() == "dependency"
+                    && !string.IsNullOrEmpty(node.Attributes["id"].Value)
+                    && node.Attributes["id"].Value.ToLowerInvariant().StartsWith(nugetIdFilter)
+                )
                 {
+                    var currentVersion = node.Attributes["version"].Value;
                     if (
-                        node.Name.ToLowerInvariant() == "dependency"
-                        && !string.IsNullOrEmpty(node.Attributes["id"].Value)
-                        && node.Attributes["id"].Value.ToLowerInvariant().StartsWith(nugetIdFilter)
+                        !node.Attributes["version"].Value.StartsWith("[")
+                        && !node.Attributes["version"].Value.EndsWith("]")
                     )
                     {
-                        var currentVersion = node.Attributes["version"].Value;
-                        if (
-                            !node.Attributes["version"].Value.StartsWith("[")
-                            && !node.Attributes["version"].Value.EndsWith("]")
-                        )
-                        {
-                            node.Attributes["version"].Value = $"[{currentVersion}]";
-                        }
+                        node.Attributes["version"].Value = $"[{currentVersion}]";
                     }
                 }
-            );
+            });
         }
 
         internal class NuspecContentEntry

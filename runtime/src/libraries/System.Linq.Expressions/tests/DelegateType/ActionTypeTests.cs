@@ -10,18 +10,16 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullTypeList()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "typeArgs",
-                () => Expression.GetActionType(default(Type[]))
+            AssertExtensions.Throws<ArgumentNullException>("typeArgs", () =>
+                Expression.GetActionType(default(Type[]))
             );
         }
 
         [Fact]
         public void NullInTypeList()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "typeArgs",
-                () => Expression.GetActionType(typeof(int), null)
+            AssertExtensions.Throws<ArgumentNullException>("typeArgs", () =>
+                Expression.GetActionType(typeof(int), null)
             );
         }
 
@@ -93,9 +91,8 @@ namespace System.Linq.Expressions.Tests
                 typeArgs.Any(t => t == typeof(void)) || typeArgs.Count(t => t.IsPointer) == 1
                     ? null
                     : "typeArgs";
-            AssertExtensions.Throws<ArgumentException>(
-                paramName,
-                () => Expression.GetActionType(typeArgs)
+            AssertExtensions.Throws<ArgumentException>(paramName, () =>
+                Expression.GetActionType(typeArgs)
             );
         }
 

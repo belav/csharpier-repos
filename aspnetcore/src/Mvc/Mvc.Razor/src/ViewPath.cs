@@ -21,24 +21,20 @@ internal static class ViewPath
             length++;
         }
 
-        return string.Create(
-            length,
-            (path, addLeadingSlash),
-            (span, tuple) =>
+        return string.Create(length, (path, addLeadingSlash), (span, tuple) =>
+        {
+            var (pathValue, addLeadingSlashValue) = tuple;
+            var spanIndex = 0;
+
+            if (addLeadingSlashValue)
             {
-                var (pathValue, addLeadingSlashValue) = tuple;
-                var spanIndex = 0;
-
-                if (addLeadingSlashValue)
-                {
-                    span[spanIndex++] = '/';
-                }
-
-                foreach (var ch in pathValue)
-                {
-                    span[spanIndex++] = ch == '\\' ? '/' : ch;
-                }
+                span[spanIndex++] = '/';
             }
-        );
+
+            foreach (var ch in pathValue)
+            {
+                span[spanIndex++] = ch == '\\' ? '/' : ch;
+            }
+        });
     }
 }

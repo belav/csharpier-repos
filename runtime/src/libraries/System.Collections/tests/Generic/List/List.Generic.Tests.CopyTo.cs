@@ -14,13 +14,11 @@ namespace System.Collections.Tests
         [Fact]
         public void CopyTo_InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "list",
-                () => CollectionExtensions.CopyTo(null, Span<int>.Empty)
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                CollectionExtensions.CopyTo(null, Span<int>.Empty)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "list",
-                () => CollectionExtensions.CopyTo(null, new Span<int>(new int[1]))
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                CollectionExtensions.CopyTo(null, new Span<int>(new int[1]))
             );
 
             var list = new List<int>() { 1, 2, 3 };

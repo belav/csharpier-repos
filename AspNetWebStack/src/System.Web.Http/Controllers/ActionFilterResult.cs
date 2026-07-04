@@ -101,11 +101,8 @@ namespace System.Web.Http.Controllers
             T state
         )
         {
-            return InvokeActionWithActionFilters(
-                actionContext,
-                cancellationToken,
-                filters,
-                () => innerAction(state)
+            return InvokeActionWithActionFilters(actionContext, cancellationToken, filters, () =>
+                innerAction(state)
             );
         }
 

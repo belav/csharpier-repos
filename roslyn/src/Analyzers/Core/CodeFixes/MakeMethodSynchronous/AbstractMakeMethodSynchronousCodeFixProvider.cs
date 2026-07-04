@@ -336,12 +336,10 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             {
                 // Handle the case where we're directly awaited.
                 var awaitExpression = invocationExpression.GetRequiredParent();
-                editor.ReplaceNode(
-                    awaitExpression,
-                    (currentAwaitExpression, generator) =>
-                        syntaxFacts
-                            .GetExpressionOfAwaitExpression(currentAwaitExpression)
-                            .WithTriviaFrom(currentAwaitExpression)
+                editor.ReplaceNode(awaitExpression, (currentAwaitExpression, generator) =>
+                    syntaxFacts
+                        .GetExpressionOfAwaitExpression(currentAwaitExpression)
+                        .WithTriviaFrom(currentAwaitExpression)
                 );
             }
             else if (syntaxFacts.IsExpressionOfMemberAccessExpression(invocationExpression))
@@ -360,29 +358,24 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                     if (syntaxFacts.IsExpressionOfAwaitExpression(parentExpression))
                     {
                         var awaitExpression = parentExpression.GetRequiredParent();
-                        editor.ReplaceNode(
-                            awaitExpression,
-                            (currentAwaitExpression, generator) =>
-                            {
-                                var currentConfigureAwaitInvocation =
-                                    syntaxFacts.GetExpressionOfAwaitExpression(
-                                        currentAwaitExpression
-                                    );
-                                var currentMemberAccess =
-                                    syntaxFacts.GetExpressionOfInvocationExpression(
-                                        currentConfigureAwaitInvocation
-                                    );
-                                var currentInvocationExpression =
-                                    syntaxFacts.GetExpressionOfMemberAccessExpression(
-                                        currentMemberAccess
-                                    );
-                                Contract.ThrowIfNull(currentInvocationExpression);
-
-                                return currentInvocationExpression.WithTriviaFrom(
-                                    currentAwaitExpression
+                        editor.ReplaceNode(awaitExpression, (currentAwaitExpression, generator) =>
+                        {
+                            var currentConfigureAwaitInvocation =
+                                syntaxFacts.GetExpressionOfAwaitExpression(currentAwaitExpression);
+                            var currentMemberAccess =
+                                syntaxFacts.GetExpressionOfInvocationExpression(
+                                    currentConfigureAwaitInvocation
                                 );
-                            }
-                        );
+                            var currentInvocationExpression =
+                                syntaxFacts.GetExpressionOfMemberAccessExpression(
+                                    currentMemberAccess
+                                );
+                            Contract.ThrowIfNull(currentInvocationExpression);
+
+                            return currentInvocationExpression.WithTriviaFrom(
+                                currentAwaitExpression
+                            );
+                        });
                     }
                 }
             }

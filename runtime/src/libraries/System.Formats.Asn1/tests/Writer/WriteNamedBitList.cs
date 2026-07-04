@@ -134,24 +134,20 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => writer.WriteNamedBitList((Enum)null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                writer.WriteNamedBitList((Enum)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => writer.WriteNamedBitList((Enum)null, new Asn1Tag(TagClass.ContextSpecific, 1))
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                writer.WriteNamedBitList((Enum)null, new Asn1Tag(TagClass.ContextSpecific, 1))
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => writer.WriteNamedBitList((BitArray)null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                writer.WriteNamedBitList((BitArray)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => writer.WriteNamedBitList((BitArray)null, new Asn1Tag(TagClass.Private, 2))
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                writer.WriteNamedBitList((BitArray)null, new Asn1Tag(TagClass.Private, 2))
             );
         }
 
@@ -163,32 +159,26 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tEnum",
-                () => writer.WriteNamedBitList(AsnEncodingRules.BER)
+            AssertExtensions.Throws<ArgumentException>("tEnum", () =>
+                writer.WriteNamedBitList(AsnEncodingRules.BER)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tEnum",
-                () =>
-                    writer.WriteNamedBitList(
-                        AsnEncodingRules.BER,
-                        new Asn1Tag(TagClass.ContextSpecific, 1)
-                    )
+            AssertExtensions.Throws<ArgumentException>("tEnum", () =>
+                writer.WriteNamedBitList(
+                    AsnEncodingRules.BER,
+                    new Asn1Tag(TagClass.ContextSpecific, 1)
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tEnum",
-                () => writer.WriteNamedBitList((Enum)AsnEncodingRules.BER)
+            AssertExtensions.Throws<ArgumentException>("tEnum", () =>
+                writer.WriteNamedBitList((Enum)AsnEncodingRules.BER)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tEnum",
-                () =>
-                    writer.WriteNamedBitList(
-                        (Enum)AsnEncodingRules.BER,
-                        new Asn1Tag(TagClass.ContextSpecific, 1)
-                    )
+            AssertExtensions.Throws<ArgumentException>("tEnum", () =>
+                writer.WriteNamedBitList(
+                    (Enum)AsnEncodingRules.BER,
+                    new Asn1Tag(TagClass.ContextSpecific, 1)
+                )
             );
         }
 
@@ -200,18 +190,12 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteNamedBitList(StringSplitOptions.RemoveEmptyEntries, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteNamedBitList(StringSplitOptions.RemoveEmptyEntries, Asn1Tag.Null)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () =>
-                    writer.WriteNamedBitList(
-                        (Enum)StringSplitOptions.RemoveEmptyEntries,
-                        Asn1Tag.Null
-                    )
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteNamedBitList((Enum)StringSplitOptions.RemoveEmptyEntries, Asn1Tag.Null)
             );
         }
 

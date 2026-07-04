@@ -315,9 +315,8 @@ namespace System.Text.RegularExpressions.Tests
         [Fact]
         public void GroupNumberFromName_NullName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new Regex("foo").GroupNumberFromName(null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new Regex("foo").GroupNumberFromName(null)
             );
         }
     }

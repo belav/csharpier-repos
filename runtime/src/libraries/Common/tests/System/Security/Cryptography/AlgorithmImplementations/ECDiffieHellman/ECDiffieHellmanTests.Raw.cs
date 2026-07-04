@@ -20,9 +20,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         {
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "otherPartyPublicKey",
-                    () => ecdh.DeriveRawSecretAgreement(null)
+                AssertExtensions.Throws<ArgumentNullException>("otherPartyPublicKey", () =>
+                    ecdh.DeriveRawSecretAgreement(null)
                 );
             }
         }
@@ -38,9 +37,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman bob = ECDiffieHellmanFactory.Create(bobSize))
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "otherPartyPublicKey",
-                    () => alice.DeriveRawSecretAgreement(bobPublic)
+                AssertExtensions.Throws<ArgumentException>("otherPartyPublicKey", () =>
+                    alice.DeriveRawSecretAgreement(bobPublic)
                 );
             }
         }

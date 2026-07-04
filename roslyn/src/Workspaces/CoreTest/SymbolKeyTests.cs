@@ -1308,9 +1308,8 @@ class C
             );
 
             var symbol = (IPropertySymbol)
-                GetAllSymbols(
-                        compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                        n => n is CSharp.Syntax.PropertyDeclarationSyntax
+                GetAllSymbols(compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()), n =>
+                        n is CSharp.Syntax.PropertyDeclarationSyntax
                     )
                     .Single();
 
@@ -1357,9 +1356,8 @@ end class";
             );
 
             var symbol = (IPropertySymbol)
-                GetAllSymbols(
-                        compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()),
-                        n => n is VisualBasic.Syntax.PropertyStatementSyntax
+                GetAllSymbols(compilation1.GetSemanticModel(compilation1.SyntaxTrees.Single()), n =>
+                        n is VisualBasic.Syntax.PropertyStatementSyntax
                     )
                     .Single();
 
@@ -1413,9 +1411,8 @@ class X
             );
 
             var symbol = (IPropertySymbol)
-                GetAllSymbols(
-                        compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
-                        n => n is CSharp.Syntax.MemberAccessExpressionSyntax
+                GetAllSymbols(compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()), n =>
+                        n is CSharp.Syntax.MemberAccessExpressionSyntax
                     )
                     .Single();
 
@@ -1469,9 +1466,8 @@ end class";
             );
 
             var symbol = (IPropertySymbol)
-                GetAllSymbols(
-                        compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()),
-                        n => n is VisualBasic.Syntax.MemberAccessExpressionSyntax
+                GetAllSymbols(compilation2.GetSemanticModel(compilation2.SyntaxTrees.Single()), n =>
+                        n is VisualBasic.Syntax.MemberAccessExpressionSyntax
                     )
                     .Single();
 

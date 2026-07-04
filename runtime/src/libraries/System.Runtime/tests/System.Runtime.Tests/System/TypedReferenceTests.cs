@@ -70,38 +70,28 @@ namespace System.Tests
             {
                 TypedReference.MakeTypedReference(data, null);
             });
-            AssertExtensions.Throws<ArgumentException>(
-                "flds",
-                null,
-                () =>
-                {
-                    TypedReference.MakeTypedReference(data, Array.Empty<FieldInfo>());
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    TypedReference.MakeTypedReference(
-                        data,
-                        new FieldInfo[] { dataType.GetField("oneStruct"), null }
-                    );
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    TypedReference.MakeTypedReference(
-                        data,
-                        new FieldInfo[]
-                        {
-                            dataType.GetField("oneStruct"),
-                            typeof(OneStruct).GetField("b"),
-                        }
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("flds", null, () =>
+            {
+                TypedReference.MakeTypedReference(data, Array.Empty<FieldInfo>());
+            });
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                TypedReference.MakeTypedReference(
+                    data,
+                    new FieldInfo[] { dataType.GetField("oneStruct"), null }
+                );
+            });
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                TypedReference.MakeTypedReference(
+                    data,
+                    new FieldInfo[]
+                    {
+                        dataType.GetField("oneStruct"),
+                        typeof(OneStruct).GetField("b"),
+                    }
+                );
+            });
         }
 
         [Fact]

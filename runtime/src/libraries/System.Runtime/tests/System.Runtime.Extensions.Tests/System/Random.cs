@@ -1023,37 +1023,33 @@ namespace System.Tests
         public void Shared_ParallelUsage()
         {
             using var barrier = new Barrier(2);
-            Parallel.For(
-                0,
-                2,
-                _ =>
+            Parallel.For(0, 2, _ =>
+            {
+                byte[] buffer = new byte[1000];
+
+                barrier.SignalAndWait();
+                for (int i = 0; i < 1_000; i++)
                 {
-                    byte[] buffer = new byte[1000];
+                    Assert.InRange(Random.Shared.Next(), 0, int.MaxValue - 1);
+                    Assert.InRange(Random.Shared.Next(5), 0, 4);
+                    Assert.InRange(Random.Shared.Next(42, 50), 42, 49);
 
-                    barrier.SignalAndWait();
-                    for (int i = 0; i < 1_000; i++)
-                    {
-                        Assert.InRange(Random.Shared.Next(), 0, int.MaxValue - 1);
-                        Assert.InRange(Random.Shared.Next(5), 0, 4);
-                        Assert.InRange(Random.Shared.Next(42, 50), 42, 49);
+                    Assert.InRange(Random.Shared.NextInt64(), 0, long.MaxValue - 1);
+                    Assert.InRange(Random.Shared.NextInt64(5), 0L, 5L);
+                    Assert.InRange(Random.Shared.NextInt64(42L, 50L), 42L, 49L);
 
-                        Assert.InRange(Random.Shared.NextInt64(), 0, long.MaxValue - 1);
-                        Assert.InRange(Random.Shared.NextInt64(5), 0L, 5L);
-                        Assert.InRange(Random.Shared.NextInt64(42L, 50L), 42L, 49L);
+                    Assert.InRange(Random.Shared.NextSingle(), 0.0f, 1.0f);
+                    Assert.InRange(Random.Shared.NextDouble(), 0.0, 1.0);
 
-                        Assert.InRange(Random.Shared.NextSingle(), 0.0f, 1.0f);
-                        Assert.InRange(Random.Shared.NextDouble(), 0.0, 1.0);
+                    Array.Clear(buffer);
+                    Random.Shared.NextBytes(buffer);
+                    Assert.Contains(buffer, b => b != 0);
 
-                        Array.Clear(buffer);
-                        Random.Shared.NextBytes(buffer);
-                        Assert.Contains(buffer, b => b != 0);
-
-                        Array.Clear(buffer);
-                        Random.Shared.NextBytes((Span<byte>)buffer);
-                        Assert.Contains(buffer, b => b != 0);
-                    }
+                    Array.Clear(buffer);
+                    Random.Shared.NextBytes((Span<byte>)buffer);
+                    Assert.Contains(buffer, b => b != 0);
                 }
-            );
+            });
         }
 
         [ConditionalFact(typeof(BitConverter), nameof(BitConverter.IsLittleEndian))] // test makes little-endian assumptions
@@ -1623,9 +1619,8 @@ namespace System.Tests
         public static void Shuffle_Array_ArgValidation()
         {
             Random random = new Random(0x70636A61);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => random.Shuffle((int[])null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                random.Shuffle((int[])null)
             );
         }
 
@@ -1655,13 +1650,11 @@ namespace System.Tests
         public static void GetItems_Span_ArgValidation()
         {
             Random random = new Random(0x70636A61);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => random.GetItems<int>(stackalloc int[1], length: -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                random.GetItems<int>(stackalloc int[1], length: -1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "choices",
-                () => random.GetItems<int>(ReadOnlySpan<int>.Empty, length: 1)
+            AssertExtensions.Throws<ArgumentException>("choices", () =>
+                random.GetItems<int>(ReadOnlySpan<int>.Empty, length: 1)
             );
         }
 
@@ -1669,17 +1662,14 @@ namespace System.Tests
         public static void GetItems_Array_Allocating_ArgValidation()
         {
             Random random = new Random(0x70636A61);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => random.GetItems(new int[1], length: -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                random.GetItems(new int[1], length: -1)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "choices",
-                () => random.GetItems((int[])null, length: 1)
+            AssertExtensions.Throws<ArgumentNullException>("choices", () =>
+                random.GetItems((int[])null, length: 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "choices",
-                () => random.GetItems<int>(Array.Empty<int>(), length: 1)
+            AssertExtensions.Throws<ArgumentException>("choices", () =>
+                random.GetItems<int>(Array.Empty<int>(), length: 1)
             );
         }
 
@@ -1688,9 +1678,8 @@ namespace System.Tests
         {
             Random random = new Random(0x70636A61);
             int[] destination = new int[1];
-            AssertExtensions.Throws<ArgumentException>(
-                "choices",
-                () => random.GetItems<int>(ReadOnlySpan<int>.Empty, destination)
+            AssertExtensions.Throws<ArgumentException>("choices", () =>
+                random.GetItems<int>(ReadOnlySpan<int>.Empty, destination)
             );
         }
 

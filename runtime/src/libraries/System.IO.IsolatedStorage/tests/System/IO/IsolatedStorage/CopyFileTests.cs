@@ -12,21 +12,17 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "sourceFileName",
-                    () => isf.CopyFile(null, "bar")
+                AssertExtensions.Throws<ArgumentNullException>("sourceFileName", () =>
+                    isf.CopyFile(null, "bar")
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "sourceFileName",
-                    () => isf.CopyFile(null, "bar", true)
+                AssertExtensions.Throws<ArgumentNullException>("sourceFileName", () =>
+                    isf.CopyFile(null, "bar", true)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "destinationFileName",
-                    () => isf.CopyFile("foo", null)
+                AssertExtensions.Throws<ArgumentNullException>("destinationFileName", () =>
+                    isf.CopyFile("foo", null)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "destinationFileName",
-                    () => isf.CopyFile("foo", null, true)
+                AssertExtensions.Throws<ArgumentNullException>("destinationFileName", () =>
+                    isf.CopyFile("foo", null, true)
                 );
             }
         }
@@ -36,21 +32,17 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "sourceFileName",
-                    () => isf.CopyFile(string.Empty, "bar")
+                AssertExtensions.Throws<ArgumentException>("sourceFileName", () =>
+                    isf.CopyFile(string.Empty, "bar")
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "sourceFileName",
-                    () => isf.CopyFile(string.Empty, "bar", true)
+                AssertExtensions.Throws<ArgumentException>("sourceFileName", () =>
+                    isf.CopyFile(string.Empty, "bar", true)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "destinationFileName",
-                    () => isf.CopyFile("foo", string.Empty)
+                AssertExtensions.Throws<ArgumentException>("destinationFileName", () =>
+                    isf.CopyFile("foo", string.Empty)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "destinationFileName",
-                    () => isf.CopyFile("foo", string.Empty, true)
+                AssertExtensions.Throws<ArgumentException>("destinationFileName", () =>
+                    isf.CopyFile("foo", string.Empty, true)
                 );
             }
         }

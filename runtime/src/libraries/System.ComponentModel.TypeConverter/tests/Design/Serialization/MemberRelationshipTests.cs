@@ -33,18 +33,16 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void Ctor_NullOwner_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "owner",
-                () => new MemberRelationship(null, new MockPropertyDescriptor())
+            AssertExtensions.Throws<ArgumentNullException>("owner", () =>
+                new MemberRelationship(null, new MockPropertyDescriptor())
             );
         }
 
         [Fact]
         public void Ctor_NullMember_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "member",
-                () => new MemberRelationship(1, null)
+            AssertExtensions.Throws<ArgumentNullException>("member", () =>
+                new MemberRelationship(1, null)
             );
         }
 

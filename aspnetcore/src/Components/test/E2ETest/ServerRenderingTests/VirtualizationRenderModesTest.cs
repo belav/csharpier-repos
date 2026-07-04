@@ -26,13 +26,11 @@ public class VirtualizationRenderModesTest
     {
         Navigate($"{ServerPathBase}/interactivity/virtualization");
 
-        Browser.Equal(
-            "interactive",
-            () => Browser.FindElement(By.Id("virtualize-server")).GetAttribute("class")
+        Browser.Equal("interactive", () =>
+            Browser.FindElement(By.Id("virtualize-server")).GetAttribute("class")
         );
-        Browser.Equal(
-            "interactive",
-            () => Browser.FindElement(By.Id("virtualize-webassembly")).GetAttribute("class")
+        Browser.Equal("interactive", () =>
+            Browser.FindElement(By.Id("virtualize-webassembly")).GetAttribute("class")
         );
 
         Browser.True(() =>

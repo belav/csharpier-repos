@@ -17,20 +17,14 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyedItem<string, int>("foo", 0),
                 new KeyedItem<string, int>("bar", 1),
             };
-            AssertExtensions.Throws<ArgumentException>(
-                "key",
-                null,
-                () => collection.Add(new KeyedItem<string, int>("Foo", 0))
+            AssertExtensions.Throws<ArgumentException>("key", null, () =>
+                collection.Add(new KeyedItem<string, int>("Foo", 0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "key",
-                null,
-                () => collection.Add(new KeyedItem<string, int>("fOo", 0))
+            AssertExtensions.Throws<ArgumentException>("key", null, () =>
+                collection.Add(new KeyedItem<string, int>("fOo", 0))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "key",
-                null,
-                () => collection.Add(new KeyedItem<string, int>("baR", 0))
+            AssertExtensions.Throws<ArgumentException>("key", null, () =>
+                collection.Add(new KeyedItem<string, int>("baR", 0))
             );
         }
 

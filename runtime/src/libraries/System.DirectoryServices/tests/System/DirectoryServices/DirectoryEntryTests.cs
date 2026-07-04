@@ -245,9 +245,8 @@ namespace System.DirectoryServices.Tests
         public void ObjectSecurity_SetNull_ThrowsArgumentnullExceptioN()
         {
             var entry = new DirectoryEntry();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => entry.ObjectSecurity = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                entry.ObjectSecurity = null
             );
         }
     }

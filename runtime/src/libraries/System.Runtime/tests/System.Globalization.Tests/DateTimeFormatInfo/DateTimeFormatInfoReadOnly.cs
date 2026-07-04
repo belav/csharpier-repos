@@ -44,9 +44,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void ReadOnly_NullDtfi_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dtfi",
-                () => DateTimeFormatInfo.ReadOnly(null)
+            AssertExtensions.Throws<ArgumentNullException>("dtfi", () =>
+                DateTimeFormatInfo.ReadOnly(null)
             ); // Dtfi is null
         }
     }

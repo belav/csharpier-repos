@@ -22,14 +22,11 @@ public class OrdersSqliteContext : OrdersContextBase
     }
 
     protected override void ConfigureProvider(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.UseSqlite(
-            _connectionString,
-            b =>
+        optionsBuilder.UseSqlite(_connectionString, b =>
+        {
+            if (_disableBatching)
             {
-                if (_disableBatching)
-                {
-                    b.MaxBatchSize(1);
-                }
+                b.MaxBatchSize(1);
             }
-        );
+        });
 }

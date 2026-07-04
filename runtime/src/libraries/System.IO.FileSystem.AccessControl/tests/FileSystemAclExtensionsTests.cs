@@ -104,9 +104,8 @@ namespace System.IO
         [Fact]
         public void GetAccessControl_Filestream_InvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                "fileStream",
-                () => FileSystemAclExtensions.GetAccessControl((FileStream)null)
+            Assert.Throws<ArgumentNullException>("fileStream", () =>
+                FileSystemAclExtensions.GetAccessControl((FileStream)null)
             );
         }
 
@@ -135,9 +134,8 @@ namespace System.IO
         {
             using var directory = new TempAclDirectory();
             var directoryInfo = new DirectoryInfo(directory.Path);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "directorySecurity",
-                () => directoryInfo.SetAccessControl(directorySecurity: null)
+            AssertExtensions.Throws<ArgumentNullException>("directorySecurity", () =>
+                directoryInfo.SetAccessControl(directorySecurity: null)
             );
         }
 
@@ -156,9 +154,8 @@ namespace System.IO
             using var directory = new TempAclDirectory();
             using var file = new TempFile(Path.Combine(directory.Path, "file.txt"));
             var fileInfo = new FileInfo(file.Path);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileSecurity",
-                () => fileInfo.SetAccessControl(fileSecurity: null)
+            AssertExtensions.Throws<ArgumentNullException>("fileSecurity", () =>
+                fileInfo.SetAccessControl(fileSecurity: null)
             );
         }
 
@@ -198,9 +195,8 @@ namespace System.IO
         [Fact]
         public void SetAccessControl_FileStream_FileSecurity_InvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                "fileStream",
-                () => FileSystemAclExtensions.SetAccessControl((FileStream)null, fileSecurity: null)
+            Assert.Throws<ArgumentNullException>("fileStream", () =>
+                FileSystemAclExtensions.SetAccessControl((FileStream)null, fileSecurity: null)
             );
         }
 
@@ -215,9 +211,8 @@ namespace System.IO
                 FileAccess.Write,
                 FileShare.None
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileSecurity",
-                () => FileSystemAclExtensions.SetAccessControl(fileStream, fileSecurity: null)
+            AssertExtensions.Throws<ArgumentNullException>("fileSecurity", () =>
+                FileSystemAclExtensions.SetAccessControl(fileStream, fileSecurity: null)
             );
         }
 
@@ -245,9 +240,8 @@ namespace System.IO
         {
             DirectoryInfo info = null;
             var security = new DirectorySecurity();
-            Assert.Throws<ArgumentNullException>(
-                "directoryInfo",
-                () => CreateDirectoryWithSecurity(info, security)
+            Assert.Throws<ArgumentNullException>("directoryInfo", () =>
+                CreateDirectoryWithSecurity(info, security)
             );
         }
 
@@ -255,9 +249,8 @@ namespace System.IO
         public void DirectoryInfo_Create_NullDirectorySecurity()
         {
             var info = new DirectoryInfo("path");
-            Assert.Throws<ArgumentNullException>(
-                "directorySecurity",
-                () => CreateDirectoryWithSecurity(info, null)
+            Assert.Throws<ArgumentNullException>("directorySecurity", () =>
+                CreateDirectoryWithSecurity(info, null)
             );
         }
 
@@ -372,17 +365,15 @@ namespace System.IO
         {
             FileInfo info = null;
             var security = new FileSecurity();
-            Assert.Throws<ArgumentNullException>(
-                "fileInfo",
-                () =>
-                    info.Create(
-                        FileMode.CreateNew,
-                        FileSystemRights.FullControl,
-                        FileShare.None,
-                        DefaultBufferSize,
-                        FileOptions.None,
-                        security
-                    )
+            Assert.Throws<ArgumentNullException>("fileInfo", () =>
+                info.Create(
+                    FileMode.CreateNew,
+                    FileSystemRights.FullControl,
+                    FileShare.None,
+                    DefaultBufferSize,
+                    FileOptions.None,
+                    security
+                )
             );
         }
 
@@ -728,13 +719,11 @@ namespace System.IO
             DirectorySecurity security = null;
             string path = "whatever";
 
-            Assert.Throws<ArgumentNullException>(
-                "directorySecurity",
-                () => security.CreateDirectory(path)
+            Assert.Throws<ArgumentNullException>("directorySecurity", () =>
+                security.CreateDirectory(path)
             );
-            Assert.Throws<ArgumentNullException>(
-                "directorySecurity",
-                () => FileSystemAclExtensions.CreateDirectory(security, path)
+            Assert.Throws<ArgumentNullException>("directorySecurity", () =>
+                FileSystemAclExtensions.CreateDirectory(security, path)
             );
         }
 
@@ -864,17 +853,15 @@ namespace System.IO
         {
             var security = new FileSecurity();
             var info = new FileInfo(PathGenerator.GenerateTestFileName());
-            Assert.Throws<ArgumentOutOfRangeException>(
-                paramName,
-                () =>
-                    info.Create(
-                        mode,
-                        FileSystemRights.FullControl,
-                        share,
-                        bufferSize,
-                        FileOptions.None,
-                        security
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>(paramName, () =>
+                info.Create(
+                    mode,
+                    FileSystemRights.FullControl,
+                    share,
+                    bufferSize,
+                    FileOptions.None,
+                    security
+                )
             );
         }
 
@@ -1024,16 +1011,13 @@ namespace System.IO
             Assert.Equal(expectedAccessRules.Count, actualAccessRules.Count);
             if (expectedAccessRules.Count > 0)
             {
-                Assert.All(
-                    expectedAccessRules,
-                    actualAccessRule =>
-                    {
-                        int count = expectedAccessRules.Count(expectedAccessRule =>
-                            AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
-                        );
-                        Assert.True(count > 0);
-                    }
-                );
+                Assert.All(expectedAccessRules, actualAccessRule =>
+                {
+                    int count = expectedAccessRules.Count(expectedAccessRule =>
+                        AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
+                    );
+                    Assert.True(count > 0);
+                });
             }
         }
 

@@ -188,40 +188,29 @@ namespace Microsoft.DotNet.CoreSetup.Test
             // Native libraries are excluded - matches DropFromSingleFile setting in RuntimeList.xml.
             // All assets are configured to not be on disk as this app is just for bundling purposes.
             // We can grab the runtime assets from their original location and avoid copying everything
-            builder.WithProject(
-                AppName,
-                "1.0.0",
-                p =>
-                    p.WithAssemblyGroup(
-                        string.Empty,
-                        g => g.WithAsset(Path.GetFileName(builtApp.AppDll), f => f.NotOnDisk())
-                    )
+            builder.WithProject(AppName, "1.0.0", p =>
+                p.WithAssemblyGroup(string.Empty, g =>
+                    g.WithAsset(Path.GetFileName(builtApp.AppDll), f => f.NotOnDisk())
+                )
             );
             if (selfContained)
             {
                 builder.WithRuntimePack(
                     $"{Constants.MicrosoftNETCoreApp}.Runtime.{TestContext.TargetRID}",
                     TestContext.MicrosoftNETCoreAppVersion,
-                    l =>
-                        l.WithAssemblyGroup(
-                            string.Empty,
-                            g =>
+                    l => l.WithAssemblyGroup(string.Empty, g =>
+                        {
+                            foreach (var file in Binaries.GetRuntimeFiles().Assemblies)
                             {
-                                foreach (var file in Binaries.GetRuntimeFiles().Assemblies)
-                                {
-                                    var fileVersion = FileVersionInfo
-                                        .GetVersionInfo(file)
-                                        .FileVersion;
-                                    var asmVersion = AssemblyName
-                                        .GetAssemblyName(file)
-                                        .Version!.ToString();
-                                    g.WithAsset(
-                                        Path.GetFileName(file),
-                                        f => f.WithVersion(asmVersion, fileVersion!).NotOnDisk()
-                                    );
-                                }
+                                var fileVersion = FileVersionInfo.GetVersionInfo(file).FileVersion;
+                                var asmVersion = AssemblyName
+                                    .GetAssemblyName(file)
+                                    .Version!.ToString();
+                                g.WithAsset(Path.GetFileName(file), f =>
+                                    f.WithVersion(asmVersion, fileVersion!).NotOnDisk()
+                                );
                             }
-                        )
+                        })
                 );
             }
 

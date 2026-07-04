@@ -90,16 +90,13 @@ public partial class TestDbContext : DbContext
         TestAsync(
             modelBuilder =>
             {
-                modelBuilder.Entity(
-                    "Vista",
-                    b =>
-                    {
-                        b.ToTable("Vistas"); // Default name is "Vista" in the absence of pluralizer
-                        b.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Vista");
-                        b.Property<int>("Id");
-                        b.HasKey("Id");
-                    }
-                );
+                modelBuilder.Entity("Vista", b =>
+                {
+                    b.ToTable("Vistas"); // Default name is "Vista" in the absence of pluralizer
+                    b.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Vista");
+                    b.Property<int>("Id");
+                    b.HasKey("Id");
+                });
             },
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -138,15 +135,12 @@ public partial class Vista
             modelBuilder =>
             {
                 modelBuilder.HasDefaultSchema("dbo");
-                modelBuilder.Entity(
-                    "Vista",
-                    b =>
-                    {
-                        b.ToTable("Vista", "dbo"); // Default name is "Vista" in the absence of pluralizer
-                        b.Property<int>("Id");
-                        b.HasKey("Id");
-                    }
-                );
+                modelBuilder.Entity("Vista", b =>
+                {
+                    b.ToTable("Vista", "dbo"); // Default name is "Vista" in the absence of pluralizer
+                    b.Property<int>("Id");
+                    b.HasKey("Id");
+                });
             },
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -184,15 +178,12 @@ public partial class Vista
             modelBuilder =>
             {
                 modelBuilder.HasDefaultSchema("dbo");
-                modelBuilder.Entity(
-                    "Vista",
-                    b =>
-                    {
-                        b.ToTable("Vista", "custom");
-                        b.Property<int>("Id");
-                        b.HasKey("Id");
-                    }
-                );
+                modelBuilder.Entity("Vista", b =>
+                {
+                    b.ToTable("Vista", "custom");
+                    b.Property<int>("Id");
+                    b.HasKey("Id");
+                });
             },
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -263,23 +254,19 @@ public partial class Vista
     [ConditionalFact]
     public Task IndexAttribute_is_generated_for_multiple_indexes_with_name_unique_descending() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "EntityWithIndexes",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<int>("A");
-                        x.Property<int>("B");
-                        x.Property<int>("C");
-                        x.HasKey("Id");
-                        x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
-                            .IsUnique()
-                            .IsDescending(true, false);
-                        x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC");
-                        x.HasIndex("C");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("EntityWithIndexes", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<int>("A");
+                    x.Property<int>("B");
+                    x.Property<int>("C");
+                    x.HasKey("Id");
+                    x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
+                        .IsUnique()
+                        .IsDescending(true, false);
+                    x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC");
+                    x.HasIndex("C");
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -327,21 +314,16 @@ public partial class EntityWithIndexes
     [ConditionalFact]
     public Task IndexAttribute_is_generated_with_ascending_descending() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "EntityWithAscendingDescendingIndexes",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<int>("A");
-                        x.Property<int>("B");
-                        x.HasKey("Id");
-                        x.HasIndex(new[] { "A", "B" }, "AllAscending");
-                        x.HasIndex(new[] { "A", "B" }, "PartiallyDescending")
-                            .IsDescending(true, false);
-                        x.HasIndex(new[] { "A", "B" }, "AllDescending").IsDescending();
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("EntityWithAscendingDescendingIndexes", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<int>("A");
+                    x.Property<int>("B");
+                    x.HasKey("Id");
+                    x.HasIndex(new[] { "A", "B" }, "AllAscending");
+                    x.HasIndex(new[] { "A", "B" }, "PartiallyDescending").IsDescending(true, false);
+                    x.HasIndex(new[] { "A", "B" }, "AllDescending").IsDescending();
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -403,20 +385,16 @@ public partial class EntityWithAscendingDescendingIndexes
     [ConditionalFact]
     public Task Entity_with_indexes_generates_IndexAttribute_only_for_indexes_without_annotations() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "EntityWithIndexes",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<int>("A");
-                        x.Property<int>("B");
-                        x.Property<int>("C");
-                        x.HasKey("Id");
-                        x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB").IsUnique();
-                        x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC").HasFilter("Filter SQL");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("EntityWithIndexes", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<int>("A");
+                    x.Property<int>("B");
+                    x.Property<int>("C");
+                    x.HasKey("Id");
+                    x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB").IsUnique();
+                    x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC").HasFilter("Filter SQL");
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -497,15 +475,11 @@ public partial class TestDbContext : DbContext
     [ConditionalFact]
     public Task KeyAttribute_is_generated_for_single_property_and_no_fluent_api() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("PrimaryKey");
-                        x.HasKey("PrimaryKey");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    x.Property<int>("PrimaryKey");
+                    x.HasKey("PrimaryKey");
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -574,16 +548,12 @@ public partial class TestDbContext : DbContext
     [ConditionalFact]
     public Task KeyAttribute_is_generated_on_multiple_properties_but_and_uses_PrimaryKeyAttribute_for_composite_key() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Post",
-                    x =>
-                    {
-                        x.Property<int>("Key");
-                        x.Property<int>("Serial");
-                        x.HasKey("Key", "Serial");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Post", x =>
+                {
+                    x.Property<int>("Key");
+                    x.Property<int>("Serial");
+                    x.HasKey("Key", "Serial");
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -659,18 +629,14 @@ public partial class TestDbContext : DbContext
     [ConditionalFact]
     public Task Required_and_not_required_properties_without_nrt() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("RequiredString").IsRequired();
-                        x.Property<string>("NonRequiredString");
-                        x.Property<int>("RequiredInt");
-                        x.Property<int?>("NonRequiredInt");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("RequiredString").IsRequired();
+                    x.Property<string>("NonRequiredString");
+                    x.Property<int>("RequiredInt");
+                    x.Property<int?>("NonRequiredInt");
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -715,18 +681,14 @@ public partial class Entity
     [ConditionalFact]
     public Task Required_and_not_required_properties_with_nrt() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("RequiredString").IsRequired();
-                        x.Property<string>("NonRequiredString");
-                        x.Property<int>("RequiredInt");
-                        x.Property<int?>("NonRequiredInt");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("RequiredString").IsRequired();
+                    x.Property<string>("NonRequiredString");
+                    x.Property<int>("RequiredInt");
+                    x.Property<int?>("NonRequiredInt");
+                }),
             new ModelCodeGenerationOptions
             {
                 UseDataAnnotations = true,
@@ -776,23 +738,19 @@ public partial class Entity
         TestAsync(
             modelBuilder =>
                 modelBuilder
-                    .Entity(
-                        "Entity",
-                        x =>
-                        {
-                            x.Property<int>("Id");
+                    .Entity("Entity", x =>
+                    {
+                        x.Property<int>("Id");
 
-                            x.HasOne("Dependent1", "RequiredReferenceNavigation")
-                                .WithMany("Entity")
-                                .IsRequired();
-                            x.HasOne("Dependent2", "OptionalReferenceNavigation")
-                                .WithMany("Entity");
-                            x.HasOne("Dependent3", "RequiredValueNavigation")
-                                .WithMany("Entity")
-                                .IsRequired();
-                            x.HasOne("Dependent4", "OptionalValueNavigation").WithMany("Entity");
-                        }
-                    )
+                        x.HasOne("Dependent1", "RequiredReferenceNavigation")
+                            .WithMany("Entity")
+                            .IsRequired();
+                        x.HasOne("Dependent2", "OptionalReferenceNavigation").WithMany("Entity");
+                        x.HasOne("Dependent3", "RequiredValueNavigation")
+                            .WithMany("Entity")
+                            .IsRequired();
+                        x.HasOne("Dependent4", "OptionalValueNavigation").WithMany("Entity");
+                    })
                     .Entity("Dependent1", x => x.Property<string>("Id"))
                     .Entity("Dependent2", x => x.Property<string>("Id"))
                     .Entity("Dependent3", x => x.Property<int>("Id"))
@@ -873,43 +831,34 @@ public partial class Entity
         TestAsync(
             modelBuilder =>
                 modelBuilder
-                    .Entity(
-                        "Entity",
-                        x =>
-                        {
-                            x.Property<int>("Id");
+                    .Entity("Entity", x =>
+                    {
+                        x.Property<int>("Id");
 
-                            x.HasOne("Dependent1", "RequiredNavigationWithReferenceForeignKey")
-                                .WithOne("Entity")
-                                .HasForeignKey(
-                                    "Dependent1",
-                                    "RequiredNavigationWithReferenceForeignKey"
-                                )
-                                .IsRequired();
+                        x.HasOne("Dependent1", "RequiredNavigationWithReferenceForeignKey")
+                            .WithOne("Entity")
+                            .HasForeignKey(
+                                "Dependent1",
+                                "RequiredNavigationWithReferenceForeignKey"
+                            )
+                            .IsRequired();
 
-                            x.HasOne("Dependent2", "OptionalNavigationWithReferenceForeignKey")
-                                .WithOne("Entity")
-                                .HasForeignKey(
-                                    "Dependent2",
-                                    "OptionalNavigationWithReferenceForeignKey"
-                                );
+                        x.HasOne("Dependent2", "OptionalNavigationWithReferenceForeignKey")
+                            .WithOne("Entity")
+                            .HasForeignKey(
+                                "Dependent2",
+                                "OptionalNavigationWithReferenceForeignKey"
+                            );
 
-                            x.HasOne("Dependent3", "RequiredNavigationWithValueForeignKey")
-                                .WithOne("Entity")
-                                .HasForeignKey(
-                                    "Dependent3",
-                                    "RequiredNavigationWithValueForeignKey"
-                                )
-                                .IsRequired();
+                        x.HasOne("Dependent3", "RequiredNavigationWithValueForeignKey")
+                            .WithOne("Entity")
+                            .HasForeignKey("Dependent3", "RequiredNavigationWithValueForeignKey")
+                            .IsRequired();
 
-                            x.HasOne("Dependent4", "OptionalNavigationWithValueForeignKey")
-                                .WithOne("Entity")
-                                .HasForeignKey(
-                                    "Dependent4",
-                                    "OptionalNavigationWithValueForeignKey"
-                                );
-                        }
-                    )
+                        x.HasOne("Dependent4", "OptionalNavigationWithValueForeignKey")
+                            .WithOne("Entity")
+                            .HasForeignKey("Dependent4", "OptionalNavigationWithValueForeignKey");
+                    })
                     .Entity("Dependent1", x => x.Property<string>("Id"))
                     .Entity("Dependent2", x => x.Property<string>("Id"))
                     .Entity("Dependent3", x => x.Property<int>("Id"))
@@ -984,24 +933,21 @@ public partial class Entity
         TestAsync(
             modelBuilder =>
                 modelBuilder
-                    .Entity(
-                        "Entity",
-                        x =>
-                        {
-                            x.Property<int>("Id");
+                    .Entity("Entity", x =>
+                    {
+                        x.Property<int>("Id");
 
-                            x.HasOne("Dependent1", "RequiredNavigationWithReferenceForeignKey")
-                                .WithMany("Entity")
-                                .IsRequired();
-                            x.HasOne("Dependent2", "OptionalNavigationWithReferenceForeignKey")
-                                .WithMany("Entity");
-                            x.HasOne("Dependent3", "RequiredNavigationWithValueForeignKey")
-                                .WithMany("Entity")
-                                .IsRequired();
-                            x.HasOne("Dependent4", "OptionalNavigationWithValueForeignKey")
-                                .WithMany("Entity");
-                        }
-                    )
+                        x.HasOne("Dependent1", "RequiredNavigationWithReferenceForeignKey")
+                            .WithMany("Entity")
+                            .IsRequired();
+                        x.HasOne("Dependent2", "OptionalNavigationWithReferenceForeignKey")
+                            .WithMany("Entity");
+                        x.HasOne("Dependent3", "RequiredNavigationWithValueForeignKey")
+                            .WithMany("Entity")
+                            .IsRequired();
+                        x.HasOne("Dependent4", "OptionalNavigationWithValueForeignKey")
+                            .WithMany("Entity");
+                    })
                     .Entity("Dependent1", x => x.Property<string>("Id"))
                     .Entity("Dependent2", x => x.Property<string>("Id"))
                     .Entity("Dependent3", x => x.Property<int>("Id"))
@@ -1107,15 +1053,11 @@ public partial class Entity
     [ConditionalFact]
     public Task RequiredAttribute_is_not_generated_for_key_property() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<string>("RequiredString");
-                        x.HasKey("RequiredString");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    x.Property<string>("RequiredString");
+                    x.HasKey("RequiredString");
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1150,21 +1092,15 @@ public partial class Entity
     [ConditionalFact]
     public Task ColumnAttribute_is_generated_for_property() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("A").HasColumnName("propertyA");
-                        x.Property<string>("B").HasColumnType("nchar(10)");
-                        x.Property<string>("C")
-                            .HasColumnName("random")
-                            .HasColumnType("varchar(200)");
-                        x.Property<decimal>("D").HasColumnType("numeric(18, 2)");
-                        x.Property<string>("E").HasMaxLength(100);
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("A").HasColumnName("propertyA");
+                    x.Property<string>("B").HasColumnType("nchar(10)");
+                    x.Property<string>("C").HasColumnName("random").HasColumnType("varchar(200)");
+                    x.Property<decimal>("D").HasColumnType("numeric(18, 2)");
+                    x.Property<string>("E").HasMaxLength(100);
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1251,16 +1187,12 @@ public partial class TestDbContext : DbContext
     [ConditionalFact]
     public Task MaxLengthAttribute_is_generated_for_property() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("A").HasMaxLength(34);
-                        x.Property<byte[]>("B").HasMaxLength(10);
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("A").HasMaxLength(34);
+                    x.Property<byte[]>("B").HasMaxLength(10);
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1300,17 +1232,13 @@ public partial class Entity
     [ConditionalFact]
     public Task UnicodeAttribute_is_generated_for_property() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("A").HasMaxLength(34).IsUnicode();
-                        x.Property<string>("B").HasMaxLength(34).IsUnicode(false);
-                        x.Property<string>("C").HasMaxLength(34);
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<string>("A").HasMaxLength(34).IsUnicode();
+                    x.Property<string>("B").HasMaxLength(34).IsUnicode(false);
+                    x.Property<string>("C").HasMaxLength(34);
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1356,18 +1284,14 @@ public partial class Entity
     [ConditionalFact]
     public Task PrecisionAttribute_is_generated_for_property() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<decimal>("A").HasPrecision(10);
-                        x.Property<decimal>("B").HasPrecision(14, 3);
-                        x.Property<DateTime>("C").HasPrecision(5);
-                        x.Property<DateTimeOffset>("D").HasPrecision(3);
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    x.Property<int>("Id");
+                    x.Property<decimal>("A").HasPrecision(10);
+                    x.Property<decimal>("B").HasPrecision(14, 3);
+                    x.Property<DateTime>("C").HasPrecision(5);
+                    x.Property<DateTimeOffset>("D").HasPrecision(3);
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1416,15 +1340,11 @@ public partial class Entity
     [ConditionalFact]
     public Task Comments_are_generated() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.ToTable(tb => tb.HasComment("Entity Comment"));
-                        x.Property<int>("Id").HasComment("Property Comment");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    x.ToTable(tb => tb.HasComment("Entity Comment"));
+                    x.Property<int>("Id").HasComment("Property Comment");
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1459,30 +1379,26 @@ public partial class Entity
     [ConditionalFact]
     public Task Comments_complex_are_generated() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.ToTable(tb =>
-                            tb.HasComment(
-                                """
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    x.ToTable(tb =>
+                        tb.HasComment(
+                            """
 Entity Comment
 On multiple lines
 With XML content <br/>
 """
-                            )
-                        );
-                        x.Property<int>("Id")
-                            .HasComment(
-                                """
+                        )
+                    );
+                    x.Property<int>("Id")
+                        .HasComment(
+                            """
 Property Comment
 On multiple lines
 With XML content <br/>
 """
-                            );
-                    }
-                ),
+                        );
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1521,17 +1437,13 @@ public partial class Entity
     [ConditionalFact]
     public Task Properties_are_sorted_in_order_of_definition_in_table() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "Entity",
-                    x =>
-                    {
-                        // Order would be PK first and then rest alphabetically since they are all shadow
-                        x.Property<int>("Id");
-                        x.Property<string>("LastProperty");
-                        x.Property<string>("FirstProperty");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("Entity", x =>
+                {
+                    // Order would be PK first and then rest alphabetically since they are all shadow
+                    x.Property<int>("Id");
+                    x.Property<string>("LastProperty");
+                    x.Property<string>("FirstProperty");
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1568,16 +1480,13 @@ public partial class Entity
                 modelBuilder
                     .Entity("Person", x => x.Property<int>("Id"))
                     .Entity("Contribution", x => x.Property<int>("Id"))
-                    .Entity(
-                        "Post",
-                        x =>
-                        {
-                            x.Property<int>("Id");
+                    .Entity("Post", x =>
+                    {
+                        x.Property<int>("Id");
 
-                            x.HasOne("Person", "Author").WithMany("Posts");
-                            x.HasMany("Contribution", "Contributions").WithOne("Post");
-                        }
-                    ),
+                        x.HasOne("Person", "Author").WithMany("Posts");
+                        x.HasMany("Contribution", "Contributions").WithOne("Post");
+                    }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1655,26 +1564,20 @@ public partial class Person
         TestAsync(
             modelBuilder =>
                 modelBuilder
-                    .Entity(
-                        "Blog",
-                        x =>
-                        {
-                            x.Property<int>("Id1");
-                            x.Property<int>("Id2");
-                            x.HasKey("Id1", "Id2");
-                        }
-                    )
-                    .Entity(
-                        "Post",
-                        x =>
-                        {
-                            x.Property<int>("Id");
+                    .Entity("Blog", x =>
+                    {
+                        x.Property<int>("Id1");
+                        x.Property<int>("Id2");
+                        x.HasKey("Id1", "Id2");
+                    })
+                    .Entity("Post", x =>
+                    {
+                        x.Property<int>("Id");
 
-                            x.HasOne("Blog", "BlogNavigation")
-                                .WithMany("Posts")
-                                .HasForeignKey("BlogId1", "BlogId2");
-                        }
-                    ),
+                        x.HasOne("Blog", "BlogNavigation")
+                            .WithMany("Posts")
+                            .HasForeignKey("BlogId1", "BlogId2");
+                    }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1763,27 +1666,21 @@ public partial class TestDbContext : DbContext
         TestAsync(
             modelBuilder =>
                 modelBuilder
-                    .Entity(
-                        "Blog",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.Property<int>("Id1");
-                            x.Property<int>("Id2");
-                        }
-                    )
-                    .Entity(
-                        "Post",
-                        x =>
-                        {
-                            x.Property<int>("Id");
+                    .Entity("Blog", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<int>("Id1");
+                        x.Property<int>("Id2");
+                    })
+                    .Entity("Post", x =>
+                    {
+                        x.Property<int>("Id");
 
-                            x.HasOne("Blog", "BlogNavigation")
-                                .WithMany("Posts")
-                                .HasPrincipalKey("Id1", "Id2")
-                                .HasForeignKey("BlogId1", "BlogId2");
-                        }
-                    ),
+                        x.HasOne("Blog", "BlogNavigation")
+                            .WithMany("Posts")
+                            .HasPrincipalKey("Id1", "Id2")
+                            .HasForeignKey("BlogId1", "BlogId2");
+                    }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1883,26 +1780,20 @@ public partial class TestDbContext : DbContext
         TestAsync(
             modelBuilder =>
                 modelBuilder
-                    .Entity(
-                        "Color",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.Property<string>("ColorCode");
-                        }
-                    )
-                    .Entity(
-                        "Car",
-                        x =>
-                        {
-                            x.Property<int>("Id");
+                    .Entity("Color", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<string>("ColorCode");
+                    })
+                    .Entity("Car", x =>
+                    {
+                        x.Property<int>("Id");
 
-                            x.HasOne("Color", "Color")
-                                .WithMany("Cars")
-                                .HasPrincipalKey("ColorCode")
-                                .HasForeignKey("ColorCode");
-                        }
-                    ),
+                        x.HasOne("Color", "Color")
+                            .WithMany("Cars")
+                            .HasPrincipalKey("ColorCode")
+                            .HasForeignKey("ColorCode");
+                    }),
             new ModelCodeGenerationOptions
             {
                 UseDataAnnotations = true,
@@ -2127,14 +2018,11 @@ public partial class Post
             modelBuilder =>
                 modelBuilder
                     .Entity("Blog", x => x.Property<int>("Id"))
-                    .Entity(
-                        "Post",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.HasOne("Blog", "Blog").WithMany("Posts");
-                        }
-                    ),
+                    .Entity("Post", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.HasOne("Blog", "Blog").WithMany("Posts");
+                    }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2183,16 +2071,11 @@ public partial class Post
             modelBuilder =>
                 modelBuilder
                     .Entity("Blog", x => x.Property<int>("Id"))
-                    .Entity(
-                        "Post",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.HasOne("Blog", "BlogNavigation")
-                                .WithMany("Posts")
-                                .HasForeignKey("Blog");
-                        }
-                    ),
+                    .Entity("Post", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.HasOne("Blog", "BlogNavigation").WithMany("Posts").HasForeignKey("Blog");
+                    }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2241,17 +2124,14 @@ public partial class Post
             modelBuilder =>
                 modelBuilder
                     .Entity("Blog", x => x.Property<int>("Id"))
-                    .Entity(
-                        "Post",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.HasOne("Blog", "Blog").WithMany("Posts");
-                            x.HasOne("Blog", "OriginalBlog")
-                                .WithMany("OriginalPosts")
-                                .HasForeignKey("OriginalBlogId");
-                        }
-                    ),
+                    .Entity("Post", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.HasOne("Blog", "Blog").WithMany("Posts");
+                        x.HasOne("Blog", "OriginalBlog")
+                            .WithMany("OriginalPosts")
+                            .HasForeignKey("OriginalBlogId");
+                    }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2321,14 +2201,11 @@ public partial class Post
             modelBuilder =>
                 modelBuilder
                     .Entity("Blog", x => x.Property<int>("Id"))
-                    .Entity(
-                        "Post",
-                        x =>
-                        {
-                            x.HasNoKey();
-                            x.HasOne("Blog", "Blog").WithMany();
-                        }
-                    ),
+                    .Entity("Post", x =>
+                    {
+                        x.HasNoKey();
+                        x.HasOne("Blog", "Blog").WithMany();
+                    }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2369,16 +2246,12 @@ public partial class Post
     [ConditionalFact]
     public Task Entity_with_custom_annotation() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "EntityWithAnnotation",
-                    x =>
-                    {
-                        x.HasAnnotation("Custom:EntityAnnotation", "first argument");
-                        x.Property<int>("Id");
-                        x.HasKey("Id");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("EntityWithAnnotation", x =>
+                {
+                    x.HasAnnotation("Custom:EntityAnnotation", "first argument");
+                    x.Property<int>("Id");
+                    x.HasKey("Id");
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2445,16 +2318,12 @@ public partial class TestDbContext : DbContext
     [ConditionalFact]
     public Task Entity_property_with_custom_annotation() =>
         TestAsync(
-            modelBuilder =>
-                modelBuilder.Entity(
-                    "EntityWithPropertyAnnotation",
-                    x =>
-                    {
-                        x.Property<int>("Id")
-                            .HasAnnotation("Custom:PropertyAnnotation", "first argument");
-                        x.HasKey("Id");
-                    }
-                ),
+            modelBuilder => modelBuilder.Entity("EntityWithPropertyAnnotation", x =>
+                {
+                    x.Property<int>("Id")
+                        .HasAnnotation("Custom:PropertyAnnotation", "first argument");
+                    x.HasKey("Id");
+                }),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2913,14 +2782,11 @@ public partial class Post
         TestAsync(
             modelBuilder =>
                 modelBuilder
-                    .Entity(
-                        "Blog",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.Property<int>("Key");
-                        }
-                    )
+                    .Entity("Blog", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<int>("Key");
+                    })
                     .Entity("Post", x => x.Property<int>("Id"))
                     .Entity("Blog")
                     .HasMany("Post", "Posts")
@@ -3072,53 +2938,47 @@ public partial class Post
         TestAsync(
             modelBuilder =>
                 modelBuilder
-                    .Entity(
-                        "Blog",
-                        x =>
-                        {
-                            x.ToTable("Blogs");
-                            x.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Blogs");
+                    .Entity("Blog", x =>
+                    {
+                        x.ToTable("Blogs");
+                        x.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Blogs");
 
-                            x.Property<int>("Id");
-                        }
-                    )
-                    .Entity(
-                        "Post",
-                        x =>
-                        {
-                            x.ToTable("Posts");
-                            x.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Posts");
+                        x.Property<int>("Id");
+                    })
+                    .Entity("Post", x =>
+                    {
+                        x.ToTable("Posts");
+                        x.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Posts");
 
-                            x.Property<int>("Id");
+                        x.Property<int>("Id");
 
-                            x.HasMany("Blog", "Blogs")
-                                .WithMany("Posts")
-                                .UsingEntity(
-                                    "PostBlog",
-                                    r =>
-                                        r.HasOne("Blog", null)
-                                            .WithMany()
-                                            .HasForeignKey("BlogId")
-                                            .HasConstraintName("Post_Blogs_Target"),
-                                    l =>
-                                        l.HasOne("Post", null)
-                                            .WithMany()
-                                            .HasForeignKey("PostId")
-                                            .HasConstraintName("Post_Blogs_Source"),
-                                    j =>
-                                    {
-                                        j.ToTable("PostBlogs");
-                                        j.HasAnnotation(
-                                            ScaffoldingAnnotationNames.DbSetName,
-                                            "PostBlogs"
-                                        );
+                        x.HasMany("Blog", "Blogs")
+                            .WithMany("Posts")
+                            .UsingEntity(
+                                "PostBlog",
+                                r =>
+                                    r.HasOne("Blog", null)
+                                        .WithMany()
+                                        .HasForeignKey("BlogId")
+                                        .HasConstraintName("Post_Blogs_Target"),
+                                l =>
+                                    l.HasOne("Post", null)
+                                        .WithMany()
+                                        .HasForeignKey("PostId")
+                                        .HasConstraintName("Post_Blogs_Source"),
+                                j =>
+                                {
+                                    j.ToTable("PostBlogs");
+                                    j.HasAnnotation(
+                                        ScaffoldingAnnotationNames.DbSetName,
+                                        "PostBlogs"
+                                    );
 
-                                        j.Property<int>("BlogId").HasColumnName("Blog_Id");
-                                        j.Property<int>("PostId").HasColumnName("Post_Id");
-                                    }
-                                );
-                        }
-                    ),
+                                    j.Property<int>("BlogId").HasColumnName("Blog_Id");
+                                    j.Property<int>("PostId").HasColumnName("Post_Id");
+                                }
+                            );
+                    }),
             new ModelCodeGenerationOptions(),
             code =>
             {

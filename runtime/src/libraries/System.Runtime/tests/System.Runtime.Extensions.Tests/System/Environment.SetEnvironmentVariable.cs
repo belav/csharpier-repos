@@ -36,18 +36,14 @@ namespace System.Tests
         [Fact]
         public void IncorrectVariableThrowsArgument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "variable",
-                () => Environment.SetEnvironmentVariable(string.Empty, "test")
+            AssertExtensions.Throws<ArgumentException>("variable", () =>
+                Environment.SetEnvironmentVariable(string.Empty, "test")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "variable",
-                () => Environment.SetEnvironmentVariable(NullString, "test")
+            AssertExtensions.Throws<ArgumentException>("variable", () =>
+                Environment.SetEnvironmentVariable(NullString, "test")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "variable",
-                null,
-                () => Environment.SetEnvironmentVariable("Variable=Something", "test")
+            AssertExtensions.Throws<ArgumentException>("variable", null, () =>
+                Environment.SetEnvironmentVariable("Variable=Something", "test")
             );
         }
 
@@ -306,24 +302,21 @@ namespace System.Tests
             string varName = $"Test_DeleteEnvironmentVariable ({target})";
             const string value = "false";
 
-            ExecuteAgainstTarget(
-                target,
-                () =>
-                {
-                    // First set the value to something and then ensure that it can be deleted.
-                    Environment.SetEnvironmentVariable(varName, value);
-                    Environment.SetEnvironmentVariable(varName, string.Empty);
-                    Assert.Null(Environment.GetEnvironmentVariable(varName));
+            ExecuteAgainstTarget(target, () =>
+            {
+                // First set the value to something and then ensure that it can be deleted.
+                Environment.SetEnvironmentVariable(varName, value);
+                Environment.SetEnvironmentVariable(varName, string.Empty);
+                Assert.Null(Environment.GetEnvironmentVariable(varName));
 
-                    Environment.SetEnvironmentVariable(varName, value);
-                    Environment.SetEnvironmentVariable(varName, null);
-                    Assert.Null(Environment.GetEnvironmentVariable(varName));
+                Environment.SetEnvironmentVariable(varName, value);
+                Environment.SetEnvironmentVariable(varName, null);
+                Assert.Null(Environment.GetEnvironmentVariable(varName));
 
-                    Environment.SetEnvironmentVariable(varName, value);
-                    Environment.SetEnvironmentVariable(varName, NullString);
-                    Assert.Null(Environment.GetEnvironmentVariable(varName));
-                }
-            );
+                Environment.SetEnvironmentVariable(varName, value);
+                Environment.SetEnvironmentVariable(varName, NullString);
+                Assert.Null(Environment.GetEnvironmentVariable(varName));
+            });
         }
 
         [Fact]

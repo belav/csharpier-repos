@@ -92,17 +92,14 @@
 
                 if (fingerprint != null)
                 {
-                    var del = _fingerprintedCache.GetOrAdd(
-                        fingerprint,
-                        _ =>
-                        {
-                            // Fingerprinting succeeded, but there was a cache miss. Rewrite the expression
-                            // and add the rewritten expression to the cache.
+                    var del = _fingerprintedCache.GetOrAdd(fingerprint, _ =>
+                    {
+                        // Fingerprinting succeeded, but there was a cache miss. Rewrite the expression
+                        // and add the rewritten expression to the cache.
 
-                            var hoistedExpr = HoistingExpressionVisitor<TIn, TOut>.Hoist(expr);
-                            return hoistedExpr.Compile();
-                        }
-                    );
+                        var hoistedExpr = HoistingExpressionVisitor<TIn, TOut>.Hoist(expr);
+                        return hoistedExpr.Compile();
+                    });
                     return model => del(model, capturedConstants);
                 }
 
@@ -127,9 +124,8 @@
                     )
                     {
                         // model => model.Member or model => StaticMember
-                        return _simpleMemberAccessDict.GetOrAdd(
-                            memberExpr.Member,
-                            _ => expr.Compile()
+                        return _simpleMemberAccessDict.GetOrAdd(memberExpr.Member, _ =>
+                            expr.Compile()
                         );
                     }
 
@@ -137,27 +133,24 @@
                     if (constExpr != null)
                     {
                         // model => {const}.Member (captured local variable)
-                        var del = _constMemberAccessDict.GetOrAdd(
-                            memberExpr.Member,
-                            _ =>
-                            {
-                                // rewrite as capturedLocal => ((TDeclaringType)capturedLocal).Member
-                                var constParamExpr = Expression.Parameter(
-                                    typeof(object),
-                                    "capturedLocal"
-                                );
-                                var constCastExpr = Expression.Convert(
-                                    constParamExpr,
-                                    memberExpr.Member.DeclaringType
-                                );
-                                var newMemberAccessExpr = memberExpr.Update(constCastExpr);
-                                var newLambdaExpr = Expression.Lambda<Func<object, TOut>>(
-                                    newMemberAccessExpr,
-                                    constParamExpr
-                                );
-                                return newLambdaExpr.Compile();
-                            }
-                        );
+                        var del = _constMemberAccessDict.GetOrAdd(memberExpr.Member, _ =>
+                        {
+                            // rewrite as capturedLocal => ((TDeclaringType)capturedLocal).Member
+                            var constParamExpr = Expression.Parameter(
+                                typeof(object),
+                                "capturedLocal"
+                            );
+                            var constCastExpr = Expression.Convert(
+                                constParamExpr,
+                                memberExpr.Member.DeclaringType
+                            );
+                            var newMemberAccessExpr = memberExpr.Update(constCastExpr);
+                            var newLambdaExpr = Expression.Lambda<Func<object, TOut>>(
+                                newMemberAccessExpr,
+                                constParamExpr
+                            );
+                            return newLambdaExpr.Compile();
+                        });
 
                         object capturedLocal = constExpr.Value;
                         return _ => del(capturedLocal);

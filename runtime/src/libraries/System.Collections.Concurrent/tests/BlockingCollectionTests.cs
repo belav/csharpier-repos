@@ -1038,17 +1038,14 @@ namespace System.Collections.Concurrent.Tests
                 );
             });
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    ConcurrentStackCollection<int> concurrentStack =
-                        new ConcurrentStackCollection<int>();
-                    concurrentStack.TryAdd(1);
-                    concurrentStack.TryAdd(2);
-                    blockingCollection = new BlockingCollection<int>(concurrentStack, 1);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                ConcurrentStackCollection<int> concurrentStack =
+                    new ConcurrentStackCollection<int>();
+                concurrentStack.TryAdd(1);
+                concurrentStack.TryAdd(2);
+                blockingCollection = new BlockingCollection<int>(concurrentStack, 1);
+            });
         }
 
         /// <summary>Verifies that the correct exceptions are thrown for invalid inputs.</summary>
@@ -1149,27 +1146,21 @@ namespace System.Collections.Concurrent.Tests
                 BlockingCollection<int>.TryAddToAny(blockingCollections, 0, -2)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "collections",
-                () =>
-                    BlockingCollection<int>.TryAddToAny(
-                        new BlockingCollection<int>[NUM_OF_COLLECTIONS],
-                        0
-                    )
+            AssertExtensions.Throws<ArgumentException>("collections", () =>
+                BlockingCollection<int>.TryAddToAny(
+                    new BlockingCollection<int>[NUM_OF_COLLECTIONS],
+                    0
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "collections",
-                () => BlockingCollection<int>.TryAddToAny(new BlockingCollection<int>[0], 0)
+            AssertExtensions.Throws<ArgumentException>("collections", () =>
+                BlockingCollection<int>.TryAddToAny(new BlockingCollection<int>[0], 0)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "collections",
-                () =>
-                {
-                    blockingCollections[NUM_OF_COLLECTIONS - 1].CompleteAdding();
-                    BlockingCollection<int>.TryAddToAny(blockingCollections, 0);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("collections", () =>
+            {
+                blockingCollections[NUM_OF_COLLECTIONS - 1].CompleteAdding();
+                BlockingCollection<int>.TryAddToAny(blockingCollections, 0);
+            });
 
             Assert.Throws<ArgumentNullException>(() =>
                 BlockingCollection<int>.TryAddToAny(null, 0)
@@ -1210,18 +1201,14 @@ namespace System.Collections.Concurrent.Tests
                 BlockingCollection<int>.TryTakeFromAny(blockingCollections, out item, -2)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "collections",
-                () =>
-                    BlockingCollection<int>.TryTakeFromAny(
-                        new BlockingCollection<int>[NUM_OF_COLLECTIONS],
-                        out item
-                    )
+            AssertExtensions.Throws<ArgumentException>("collections", () =>
+                BlockingCollection<int>.TryTakeFromAny(
+                    new BlockingCollection<int>[NUM_OF_COLLECTIONS],
+                    out item
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "collections",
-                () =>
-                    BlockingCollection<int>.TryTakeFromAny(new BlockingCollection<int>[0], out item)
+            AssertExtensions.Throws<ArgumentException>("collections", () =>
+                BlockingCollection<int>.TryTakeFromAny(new BlockingCollection<int>[0], out item)
             );
             Assert.Throws<ArgumentNullException>(() =>
                 BlockingCollection<int>.TryTakeFromAny(null, out item)
@@ -1233,9 +1220,8 @@ namespace System.Collections.Concurrent.Tests
             {
                 blockingCollections[i].CompleteAdding();
             }
-            AssertExtensions.Throws<ArgumentException>(
-                "collections",
-                () => BlockingCollection<int>.TakeFromAny(blockingCollections, out item)
+            AssertExtensions.Throws<ArgumentException>("collections", () =>
+                BlockingCollection<int>.TakeFromAny(blockingCollections, out item)
             );
         }
 
@@ -1251,27 +1237,20 @@ namespace System.Collections.Concurrent.Tests
 
             Assert.Throws<ArgumentNullException>(() => blockingCollection.CopyTo(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => blockingCollection.CopyTo(arr, -1));
-            AssertExtensions.Throws<ArgumentException>(
-                "index",
-                () => blockingCollection.CopyTo(arr, 2)
+            AssertExtensions.Throws<ArgumentException>("index", () =>
+                blockingCollection.CopyTo(arr, 2)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                () =>
-                {
-                    int[,] twoDArray = new int[2, 2];
-                    ((ICollection)blockingCollection).CopyTo(twoDArray, 0);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("array", () =>
+            {
+                int[,] twoDArray = new int[2, 2];
+                ((ICollection)blockingCollection).CopyTo(twoDArray, 0);
+            });
 
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                () =>
-                {
-                    float[,] twoDArray = new float[2, 2];
-                    ((ICollection)blockingCollection).CopyTo(twoDArray, 0);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("array", () =>
+            {
+                float[,] twoDArray = new float[2, 2];
+                ((ICollection)blockingCollection).CopyTo(twoDArray, 0);
+            });
         }
 
         [Fact]

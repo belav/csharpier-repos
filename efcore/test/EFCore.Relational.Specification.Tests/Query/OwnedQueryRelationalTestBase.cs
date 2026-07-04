@@ -84,22 +84,19 @@ public abstract class OwnedQueryRelationalTestBase<TFixture> : OwnedQueryTestBas
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Unmapped_property_projection_loads_owned_navigations_split(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .Where(e => e.Id == 1)
-                    .AsTracking()
-                    .Select(e => new { e.ReadOnlyProperty })
-                    .AsSplitQuery()
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>()
+                .Where(e => e.Id == 1)
+                .AsTracking()
+                .Select(e => new { e.ReadOnlyProperty })
+                .AsSplitQuery()
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_query_on_indexer_properties_split(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().Where(c => (string)c["Name"] == "Mona Cy").AsSplitQuery()
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().Where(c => (string)c["Name"] == "Mona Cy").AsSplitQuery()
         );
 
     [ConditionalTheory]

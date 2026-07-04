@@ -4462,14 +4462,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static bool AreLambdaAndNewDelegateSimilar(LambdaSymbol l, NamedTypeSymbol n)
         {
             var invokeMethod = n.DelegateInvokeMethod;
-            return invokeMethod!.Parameters.SequenceEqual(
-                    l.Parameters,
-                    (p1, p2) =>
-                        p1.Type.Equals(
-                            p2.Type,
-                            TypeCompareKind.AllNullableIgnoreOptions
-                                | TypeCompareKind.IgnoreTupleNames
-                        )
+            return invokeMethod!.Parameters.SequenceEqual(l.Parameters, (p1, p2) =>
+                    p1.Type.Equals(
+                        p2.Type,
+                        TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
+                    )
                 )
                 && invokeMethod.ReturnType.Equals(
                     l.ReturnType,

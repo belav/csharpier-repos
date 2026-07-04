@@ -1607,12 +1607,10 @@ public class Http2StreamTests : Http2TestBase
             withStreamId: 1
         );
 
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Exception?.Message.Contains(
-                    "Response Content-Length mismatch: too many bytes written (12 of 11)."
-                ) ?? false
+        Assert.Contains(LogMessages, m =>
+            m.Exception?.Message.Contains(
+                "Response Content-Length mismatch: too many bytes written (12 of 11)."
+            ) ?? false
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -1698,9 +1696,8 @@ public class Http2StreamTests : Http2TestBase
             withStreamId: 1
         );
 
-        Assert.Contains(
-            LogMessages,
-            m => m.Exception?.Message.Contains(CoreStrings.FormatTooFewBytesWritten(0, 11)) ?? false
+        Assert.Contains(LogMessages, m =>
+            m.Exception?.Message.Contains(CoreStrings.FormatTooFewBytesWritten(0, 11)) ?? false
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -2262,12 +2259,8 @@ public class Http2StreamTests : Http2TestBase
 
         await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.NO_ERROR, null);
         // Logged without an exception.
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("the application completed without reading the entire request body.")
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -2363,12 +2356,8 @@ public class Http2StreamTests : Http2TestBase
 
         await WaitForStreamErrorAsync(1, Http2ErrorCode.NO_ERROR, null);
         // Logged without an exception.
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("the application completed without reading the entire request body.")
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -2435,12 +2424,8 @@ public class Http2StreamTests : Http2TestBase
 
         await WaitForStreamErrorAsync(1, Http2ErrorCode.NO_ERROR, null);
         // Logged without an exception.
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("the application completed without reading the entire request body.")
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -3285,11 +3270,8 @@ public class Http2StreamTests : Http2TestBase
             withStreamId: 1
         );
 
-        Assert.Contains(
-            LogMessages,
-            m =>
-                (m.Exception?.Message.Contains("App Faulted") ?? false)
-                && m.LogLevel == LogLevel.Error
+        Assert.Contains(LogMessages, m =>
+            (m.Exception?.Message.Contains("App Faulted") ?? false) && m.LogLevel == LogLevel.Error
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -4840,13 +4822,11 @@ public class Http2StreamTests : Http2TestBase
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("500", _decodedHeaders[InternalHeaderNames.Status]);
 
-        Assert.Contains(
-            TestSink.Writes,
-            w =>
-                w.EventId.Id == 13
-                && w.LogLevel == LogLevel.Error
-                && w.Exception is ConnectionAbortedException
-                && w.Exception.InnerException == expectedException
+        Assert.Contains(TestSink.Writes, w =>
+            w.EventId.Id == 13
+            && w.LogLevel == LogLevel.Error
+            && w.Exception is ConnectionAbortedException
+            && w.Exception.InnerException == expectedException
         );
     }
 
@@ -6322,12 +6302,10 @@ public class Http2StreamTests : Http2TestBase
 
         Assert.True(_helloWorldBytes.AsSpan().SequenceEqual(dataFrame1.PayloadSequence.ToArray()));
 
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Equals(
-                    "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Equals(
+                "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
+            )
         );
     }
 

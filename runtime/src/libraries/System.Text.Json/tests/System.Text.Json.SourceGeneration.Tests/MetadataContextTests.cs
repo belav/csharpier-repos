@@ -156,9 +156,8 @@ namespace System.Text.Json.SourceGeneration.Tests
     public sealed class MetadataWithPerTypeAttributeContextTests : RealWorldContextTests
     {
         public MetadataWithPerTypeAttributeContextTests()
-            : base(
-                MetadataWithPerTypeAttributeContext.Default,
-                (options) => new MetadataWithPerTypeAttributeContext(options)
+            : base(MetadataWithPerTypeAttributeContext.Default, (options) =>
+                new MetadataWithPerTypeAttributeContext(options)
             ) { }
 
         [Fact]

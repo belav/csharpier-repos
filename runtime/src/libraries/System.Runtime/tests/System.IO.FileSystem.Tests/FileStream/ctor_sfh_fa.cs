@@ -18,9 +18,8 @@ namespace System.IO.Tests
         {
             using (var handle = new SafeFileHandle(new IntPtr(-1), ownsHandle: false))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "handle",
-                    () => CreateFileStream(handle, FileAccess.Read)
+                AssertExtensions.Throws<ArgumentException>("handle", () =>
+                    CreateFileStream(handle, FileAccess.Read)
                 );
             }
         }
@@ -32,9 +31,8 @@ namespace System.IO.Tests
                 var handle = File.OpenHandle(GetTestFilePath(), FileMode.Create, FileAccess.Write)
             )
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "access",
-                    () => CreateFileStream(handle, ~FileAccess.Read)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("access", () =>
+                    CreateFileStream(handle, ~FileAccess.Read)
                 );
             }
         }

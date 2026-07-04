@@ -943,22 +943,16 @@ namespace System.Threading.Tasks.Tests
         [InlineData((long)uint.MaxValue)]
         public static void TaskDelay_OutOfBounds_ThrowsException(long delay)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "delay",
-                () =>
-                {
-                    Task.Delay(TimeSpan.FromMilliseconds(delay));
-                }
-            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("delay", () =>
+            {
+                Task.Delay(TimeSpan.FromMilliseconds(delay));
+            });
             if (delay >= int.MinValue && delay <= int.MaxValue)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "millisecondsDelay",
-                    () =>
-                    {
-                        Task.Delay((int)delay);
-                    }
-                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecondsDelay", () =>
+                {
+                    Task.Delay((int)delay);
+                });
             }
         }
 

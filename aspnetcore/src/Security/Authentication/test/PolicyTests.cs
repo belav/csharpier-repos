@@ -27,22 +27,14 @@ public class PolicyTests
                     o.AddScheme<TestHandler>("auth2", "auth2");
                     o.AddScheme<TestHandler>("auth3", "auth3");
                 })
-                .AddPolicyScheme(
-                    "policy1",
-                    "policy1",
-                    p =>
-                    {
-                        p.ForwardDefault = "auth1";
-                    }
-                )
-                .AddPolicyScheme(
-                    "policy2",
-                    "policy2",
-                    p =>
-                    {
-                        p.ForwardAuthenticate = "auth2";
-                    }
-                );
+                .AddPolicyScheme("policy1", "policy1", p =>
+                {
+                    p.ForwardDefault = "auth1";
+                })
+                .AddPolicyScheme("policy2", "policy2", p =>
+                {
+                    p.ForwardAuthenticate = "auth2";
+                });
         });
 
         var transaction = await server.SendAsync("http://example.com/auth/policy1");
@@ -71,15 +63,11 @@ public class PolicyTests
                 o.AddScheme<TestHandler>("auth1", "auth1");
                 o.AddScheme<TestHandler2>("auth2", "auth2");
             })
-            .AddPolicyScheme(
-                "forward",
-                "forward",
-                p =>
-                {
-                    p.ForwardDefault = "auth2";
-                    p.ForwardDefaultSelector = ctx => "auth1";
-                }
-            );
+            .AddPolicyScheme("forward", "forward", p =>
+            {
+                p.ForwardDefault = "auth2";
+                p.ForwardDefaultSelector = ctx => "auth1";
+            });
 
         var handler1 = new TestHandler();
         services.AddSingleton(handler1);
@@ -132,15 +120,11 @@ public class PolicyTests
                 o.AddScheme<TestHandler>("auth1", "auth1");
                 o.AddScheme<TestHandler2>("auth2", "auth2");
             })
-            .AddPolicyScheme(
-                "forward",
-                "forward",
-                p =>
-                {
-                    p.ForwardDefault = "auth1";
-                    p.ForwardDefaultSelector = ctx => null;
-                }
-            );
+            .AddPolicyScheme("forward", "forward", p =>
+            {
+                p.ForwardDefault = "auth1";
+                p.ForwardDefaultSelector = ctx => null;
+            });
 
         var handler1 = new TestHandler();
         services.AddSingleton(handler1);
@@ -193,20 +177,16 @@ public class PolicyTests
                 o.AddScheme<TestHandler>("auth1", "auth1");
                 o.AddScheme<TestHandler2>("auth2", "auth2");
             })
-            .AddPolicyScheme(
-                "forward",
-                "forward",
-                p =>
-                {
-                    p.ForwardDefault = "auth2";
-                    p.ForwardDefaultSelector = ctx => "auth2";
-                    p.ForwardAuthenticate = "auth1";
-                    p.ForwardSignIn = "auth1";
-                    p.ForwardSignOut = "auth1";
-                    p.ForwardForbid = "auth1";
-                    p.ForwardChallenge = "auth1";
-                }
-            );
+            .AddPolicyScheme("forward", "forward", p =>
+            {
+                p.ForwardDefault = "auth2";
+                p.ForwardDefaultSelector = ctx => "auth2";
+                p.ForwardAuthenticate = "auth1";
+                p.ForwardSignIn = "auth1";
+                p.ForwardSignOut = "auth1";
+                p.ForwardForbid = "auth1";
+                p.ForwardChallenge = "auth1";
+            });
 
         var handler1 = new TestHandler();
         services.AddSingleton(handler1);
@@ -312,16 +292,12 @@ public class PolicyTests
                 o.AddScheme<TestHandler>("auth1", "auth1");
                 o.AddScheme<TestHandler2>("auth2", "auth2");
             })
-            .AddPolicyScheme(
-                "forward",
-                "forward",
-                p =>
-                {
-                    p.ForwardDefault = "auth1";
-                    p.ForwardChallenge = "auth2";
-                    p.ForwardSignIn = "auth2";
-                }
-            );
+            .AddPolicyScheme("forward", "forward", p =>
+            {
+                p.ForwardDefault = "auth1";
+                p.ForwardChallenge = "auth2";
+                p.ForwardSignIn = "auth2";
+            });
 
         var handler1 = new TestHandler();
         services.AddSingleton(handler1);
@@ -376,14 +352,10 @@ public class PolicyTests
                     o.AddScheme<TestHandler>("auth2", "auth2");
                     o.AddScheme<TestHandler>("auth3", "auth3");
                 })
-                .AddPolicyScheme(
-                    "dynamic",
-                    "dynamic",
-                    p =>
-                    {
-                        p.ForwardDefaultSelector = c => c.Request.QueryString.Value.Substring(1);
-                    }
-                );
+                .AddPolicyScheme("dynamic", "dynamic", p =>
+                {
+                    p.ForwardDefaultSelector = c => c.Request.QueryString.Value.Substring(1);
+                });
         });
 
         var transaction = await server.SendAsync("http://example.com/auth/dynamic?auth1");

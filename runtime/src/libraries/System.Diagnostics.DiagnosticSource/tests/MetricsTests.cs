@@ -655,33 +655,24 @@ namespace System.Diagnostics.Metrics.Tests
                     Meter meter = new Meter("InstrumentMeasurementTest");
 
                     Counter<byte> counter = meter.CreateCounter<byte>("byteCounter");
-                    InstrumentMeasurementAggregationValidation(
-                        counter,
-                        (value, tags) =>
-                        {
-                            counter.Add(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(counter, (value, tags) =>
+                    {
+                        counter.Add(value, tags);
+                    });
 
                     UpDownCounter<byte> upDownCounter = meter.CreateUpDownCounter<byte>(
                         "byteUpDownCounter"
                     );
-                    InstrumentMeasurementAggregationValidation(
-                        upDownCounter,
-                        (value, tags) =>
-                        {
-                            upDownCounter.Add(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(upDownCounter, (value, tags) =>
+                    {
+                        upDownCounter.Add(value, tags);
+                    });
 
                     Counter<short> counter1 = meter.CreateCounter<short>("shortCounter");
-                    InstrumentMeasurementAggregationValidation(
-                        counter1,
-                        (value, tags) =>
-                        {
-                            counter1.Add(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(counter1, (value, tags) =>
+                    {
+                        counter1.Add(value, tags);
+                    });
 
                     UpDownCounter<short> upDownCounter1 = meter.CreateUpDownCounter<short>(
                         "shortUpDownCounter"
@@ -696,13 +687,10 @@ namespace System.Diagnostics.Metrics.Tests
                     );
 
                     Counter<int> counter2 = meter.CreateCounter<int>("intCounter");
-                    InstrumentMeasurementAggregationValidation(
-                        counter2,
-                        (value, tags) =>
-                        {
-                            counter2.Add(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(counter2, (value, tags) =>
+                    {
+                        counter2.Add(value, tags);
+                    });
 
                     UpDownCounter<int> upDownCounter2 = meter.CreateUpDownCounter<int>(
                         "intUpDownCounter"
@@ -717,13 +705,10 @@ namespace System.Diagnostics.Metrics.Tests
                     );
 
                     Counter<long> counter3 = meter.CreateCounter<long>("longCounter");
-                    InstrumentMeasurementAggregationValidation(
-                        counter3,
-                        (value, tags) =>
-                        {
-                            counter3.Add(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(counter3, (value, tags) =>
+                    {
+                        counter3.Add(value, tags);
+                    });
 
                     UpDownCounter<long> upDownCounter3 = meter.CreateUpDownCounter<long>(
                         "longUpDownCounter"
@@ -738,13 +723,10 @@ namespace System.Diagnostics.Metrics.Tests
                     );
 
                     Counter<float> counter4 = meter.CreateCounter<float>("floatCounter");
-                    InstrumentMeasurementAggregationValidation(
-                        counter4,
-                        (value, tags) =>
-                        {
-                            counter4.Add(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(counter4, (value, tags) =>
+                    {
+                        counter4.Add(value, tags);
+                    });
 
                     UpDownCounter<float> upDownCounter4 = meter.CreateUpDownCounter<float>(
                         "floatUpDownCounter"
@@ -759,13 +741,10 @@ namespace System.Diagnostics.Metrics.Tests
                     );
 
                     Counter<double> counter5 = meter.CreateCounter<double>("doubleCounter");
-                    InstrumentMeasurementAggregationValidation(
-                        counter5,
-                        (value, tags) =>
-                        {
-                            counter5.Add(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(counter5, (value, tags) =>
+                    {
+                        counter5.Add(value, tags);
+                    });
 
                     UpDownCounter<double> upDownCounter5 = meter.CreateUpDownCounter<double>(
                         "doubleUpDownCounter"
@@ -780,13 +759,10 @@ namespace System.Diagnostics.Metrics.Tests
                     );
 
                     Counter<decimal> counter6 = meter.CreateCounter<decimal>("decimalCounter");
-                    InstrumentMeasurementAggregationValidation(
-                        counter6,
-                        (value, tags) =>
-                        {
-                            counter6.Add(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(counter6, (value, tags) =>
+                    {
+                        counter6.Add(value, tags);
+                    });
 
                     UpDownCounter<decimal> upDownCounter6 = meter.CreateUpDownCounter<decimal>(
                         "decimalUpDownCounter"
@@ -801,69 +777,48 @@ namespace System.Diagnostics.Metrics.Tests
                     );
 
                     Histogram<byte> histogram = meter.CreateHistogram<byte>("byteHistogram");
-                    InstrumentMeasurementAggregationValidation(
-                        histogram,
-                        (value, tags) =>
-                        {
-                            histogram.Record(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(histogram, (value, tags) =>
+                    {
+                        histogram.Record(value, tags);
+                    });
 
                     Histogram<short> histogram1 = meter.CreateHistogram<short>("shortHistogram");
-                    InstrumentMeasurementAggregationValidation(
-                        histogram1,
-                        (value, tags) =>
-                        {
-                            histogram1.Record(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(histogram1, (value, tags) =>
+                    {
+                        histogram1.Record(value, tags);
+                    });
 
                     Histogram<int> histogram2 = meter.CreateHistogram<int>("intHistogram");
-                    InstrumentMeasurementAggregationValidation(
-                        histogram2,
-                        (value, tags) =>
-                        {
-                            histogram2.Record(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(histogram2, (value, tags) =>
+                    {
+                        histogram2.Record(value, tags);
+                    });
 
                     Histogram<long> histogram3 = meter.CreateHistogram<long>("longHistogram");
-                    InstrumentMeasurementAggregationValidation(
-                        histogram3,
-                        (value, tags) =>
-                        {
-                            histogram3.Record(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(histogram3, (value, tags) =>
+                    {
+                        histogram3.Record(value, tags);
+                    });
 
                     Histogram<float> histogram4 = meter.CreateHistogram<float>("floatHistogram");
-                    InstrumentMeasurementAggregationValidation(
-                        histogram4,
-                        (value, tags) =>
-                        {
-                            histogram4.Record(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(histogram4, (value, tags) =>
+                    {
+                        histogram4.Record(value, tags);
+                    });
 
                     Histogram<double> histogram5 = meter.CreateHistogram<double>("doubleHistogram");
-                    InstrumentMeasurementAggregationValidation(
-                        histogram5,
-                        (value, tags) =>
-                        {
-                            histogram5.Record(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(histogram5, (value, tags) =>
+                    {
+                        histogram5.Record(value, tags);
+                    });
 
                     Histogram<decimal> histogram6 = meter.CreateHistogram<decimal>(
                         "decimalHistogram"
                     );
-                    InstrumentMeasurementAggregationValidation(
-                        histogram6,
-                        (value, tags) =>
-                        {
-                            histogram6.Record(value, tags);
-                        }
-                    );
+                    InstrumentMeasurementAggregationValidation(histogram6, (value, tags) =>
+                    {
+                        histogram6.Record(value, tags);
+                    });
                 })
                 .Dispose();
         }
@@ -888,9 +843,8 @@ namespace System.Diagnostics.Metrics.Tests
                         new Measurement<byte>[] { new Measurement<byte>(50) }
                     );
                     ObservableCounter<short> observableCounter1 =
-                        meter.CreateObservableCounter<short>(
-                            "ShortObservableCounter",
-                            () => 30_000
+                        meter.CreateObservableCounter<short>("ShortObservableCounter", () =>
+                            30_000
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter1,
@@ -905,9 +859,8 @@ namespace System.Diagnostics.Metrics.Tests
                         new Measurement<int>[] { new Measurement<int>(1_000_000) }
                     );
                     ObservableCounter<long> observableCounter3 =
-                        meter.CreateObservableCounter<long>(
-                            "longObservableCounter",
-                            () => 1_000_000_000
+                        meter.CreateObservableCounter<long>("longObservableCounter", () =>
+                            1_000_000_000
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter3,
@@ -926,9 +879,8 @@ namespace System.Diagnostics.Metrics.Tests
                         new Measurement<double>[] { new Measurement<double>(1e6) }
                     );
                     ObservableCounter<decimal> observableCounter6 =
-                        meter.CreateObservableCounter<decimal>(
-                            "decimalObservableCounter",
-                            () => 1.5E6m
+                        meter.CreateObservableCounter<decimal>("decimalObservableCounter", () =>
+                            1.5E6m
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter6,
@@ -957,9 +909,8 @@ namespace System.Diagnostics.Metrics.Tests
                         new Measurement<short>[] { new Measurement<short>(-10) }
                     );
                     ObservableUpDownCounter<int> observableUpDownCounter2 =
-                        meter.CreateObservableUpDownCounter<int>(
-                            "intObservableUpDownCounter",
-                            () => -12
+                        meter.CreateObservableUpDownCounter<int>("intObservableUpDownCounter", () =>
+                            -12
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableUpDownCounter2,
@@ -1054,9 +1005,8 @@ namespace System.Diagnostics.Metrics.Tests
                         new Measurement<double>[] { new Measurement<double>(1e5) }
                     );
                     ObservableGauge<decimal> observableGauge6 =
-                        meter.CreateObservableGauge<decimal>(
-                            "decimalObservableGauge",
-                            () => 2.5E7m
+                        meter.CreateObservableGauge<decimal>("decimalObservableGauge", () =>
+                            2.5E7m
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableGauge6,
@@ -1075,9 +1025,8 @@ namespace System.Diagnostics.Metrics.Tests
                         }
                     );
                     ObservableCounter<byte> observableCounter7 =
-                        meter.CreateObservableCounter<byte>(
-                            "ByteObservableCounter",
-                            () => byteMeasurement
+                        meter.CreateObservableCounter<byte>("ByteObservableCounter", () =>
+                            byteMeasurement
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter7,
@@ -1093,9 +1042,8 @@ namespace System.Diagnostics.Metrics.Tests
                         }
                     );
                     ObservableCounter<short> observableCounter8 =
-                        meter.CreateObservableCounter<short>(
-                            "ShortObservableCounter",
-                            () => shortMeasurement
+                        meter.CreateObservableCounter<short>("ShortObservableCounter", () =>
+                            shortMeasurement
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter8,
@@ -1128,9 +1076,8 @@ namespace System.Diagnostics.Metrics.Tests
                         }
                     );
                     ObservableCounter<long> observableCounter10 =
-                        meter.CreateObservableCounter<long>(
-                            "longObservableCounter",
-                            () => longMeasurement
+                        meter.CreateObservableCounter<long>("longObservableCounter", () =>
+                            longMeasurement
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter10,
@@ -1161,9 +1108,8 @@ namespace System.Diagnostics.Metrics.Tests
                         }
                     );
                     ObservableCounter<double> observableCounter12 =
-                        meter.CreateObservableCounter<double>(
-                            "doubleObservableCounter",
-                            () => doubleMeasurement
+                        meter.CreateObservableCounter<double>("doubleObservableCounter", () =>
+                            doubleMeasurement
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter12,
@@ -1179,9 +1125,8 @@ namespace System.Diagnostics.Metrics.Tests
                         }
                     );
                     ObservableCounter<decimal> observableCounter13 =
-                        meter.CreateObservableCounter<decimal>(
-                            "decimalObservableCounter",
-                            () => decimalMeasurement
+                        meter.CreateObservableCounter<decimal>("decimalObservableCounter", () =>
+                            decimalMeasurement
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter13,
@@ -1236,9 +1181,8 @@ namespace System.Diagnostics.Metrics.Tests
                         }
                     );
                     ObservableUpDownCounter<int> observableUpDownCounter9 =
-                        meter.CreateObservableUpDownCounter<int>(
-                            "IntObservableUpDownCounter",
-                            () => intMeasurement1
+                        meter.CreateObservableUpDownCounter<int>("IntObservableUpDownCounter", () =>
+                            intMeasurement1
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableUpDownCounter9,
@@ -1431,9 +1375,8 @@ namespace System.Diagnostics.Metrics.Tests
                         }
                     );
                     ObservableGauge<decimal> observableGauge13 =
-                        meter.CreateObservableGauge<decimal>(
-                            "decimalObservableGauge",
-                            () => decimalGaugeMeasurement
+                        meter.CreateObservableGauge<decimal>("decimalObservableGauge", () =>
+                            decimalGaugeMeasurement
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableGauge13,
@@ -1463,9 +1406,8 @@ namespace System.Diagnostics.Metrics.Tests
                         ),
                     };
                     ObservableCounter<byte> observableCounter14 =
-                        meter.CreateObservableCounter<byte>(
-                            "ByteObservableCounter",
-                            () => byteGaugeMeasurementList
+                        meter.CreateObservableCounter<byte>("ByteObservableCounter", () =>
+                            byteGaugeMeasurementList
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter14,
@@ -1492,9 +1434,8 @@ namespace System.Diagnostics.Metrics.Tests
                         ),
                     };
                     ObservableCounter<short> observableCounter15 =
-                        meter.CreateObservableCounter<short>(
-                            "ShortObservableCounter",
-                            () => shortGaugeMeasurementList
+                        meter.CreateObservableCounter<short>("ShortObservableCounter", () =>
+                            shortGaugeMeasurementList
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter15,
@@ -1549,9 +1490,8 @@ namespace System.Diagnostics.Metrics.Tests
                         ),
                     };
                     ObservableCounter<long> observableCounter17 =
-                        meter.CreateObservableCounter<long>(
-                            "longObservableCounter",
-                            () => longGaugeMeasurementList
+                        meter.CreateObservableCounter<long>("longObservableCounter", () =>
+                            longGaugeMeasurementList
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter17,
@@ -1578,9 +1518,8 @@ namespace System.Diagnostics.Metrics.Tests
                         ),
                     };
                     ObservableCounter<float> observableCounter18 =
-                        meter.CreateObservableCounter<float>(
-                            "floatObservableCounter",
-                            () => floatGaugeMeasurementList
+                        meter.CreateObservableCounter<float>("floatObservableCounter", () =>
+                            floatGaugeMeasurementList
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter18,
@@ -1607,9 +1546,8 @@ namespace System.Diagnostics.Metrics.Tests
                         ),
                     };
                     ObservableCounter<double> observableCounter19 =
-                        meter.CreateObservableCounter<double>(
-                            "doubleObservableCounter",
-                            () => doubleGaugeMeasurementList
+                        meter.CreateObservableCounter<double>("doubleObservableCounter", () =>
+                            doubleGaugeMeasurementList
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter19,
@@ -1636,9 +1574,8 @@ namespace System.Diagnostics.Metrics.Tests
                         ),
                     };
                     ObservableCounter<decimal> observableCounter20 =
-                        meter.CreateObservableCounter<decimal>(
-                            "decimalObservableCounter",
-                            () => decimalGaugeMeasurementList
+                        meter.CreateObservableCounter<decimal>("decimalObservableCounter", () =>
+                            decimalGaugeMeasurementList
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableCounter20,
@@ -1727,9 +1664,8 @@ namespace System.Diagnostics.Metrics.Tests
                         ),
                     };
                     ObservableUpDownCounter<int> observableUpDownCounter16 =
-                        meter.CreateObservableUpDownCounter<int>(
-                            "IntObservableUpDownCounter",
-                            () => intUpDownCounterMeasurementList
+                        meter.CreateObservableUpDownCounter<int>("IntObservableUpDownCounter", () =>
+                            intUpDownCounterMeasurementList
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableUpDownCounter16,
@@ -1913,9 +1849,8 @@ namespace System.Diagnostics.Metrics.Tests
                     );
 
                     ObservableGauge<decimal> observableGauge20 =
-                        meter.CreateObservableGauge<decimal>(
-                            "decimalObservableGauge",
-                            () => decimalGaugeMeasurementList
+                        meter.CreateObservableGauge<decimal>("decimalObservableGauge", () =>
+                            decimalGaugeMeasurementList
                         );
                     ObservableInstrumentMeasurementAggregationValidation(
                         observableGauge20,
@@ -2167,43 +2102,37 @@ namespace System.Diagnostics.Metrics.Tests
                     Counter<int> counter = meter1.CreateCounter<int>("Counter");
                     Histogram<double> histogram = meter2.CreateHistogram<double>("Histogram");
                     ObservableCounter<long> observableCounter =
-                        meter3.CreateObservableCounter<long>(
-                            "ObservableCounter",
-                            () =>
-                                new Measurement<long>(
-                                    10,
-                                    new KeyValuePair<string, object?>[]
-                                    {
-                                        new KeyValuePair<string, object?>("Key", "value"),
-                                    }
-                                )
+                        meter3.CreateObservableCounter<long>("ObservableCounter", () =>
+                            new Measurement<long>(
+                                10,
+                                new KeyValuePair<string, object?>[]
+                                {
+                                    new KeyValuePair<string, object?>("Key", "value"),
+                                }
+                            )
                         );
                     ObservableGauge<decimal> observableGauge =
-                        meter4.CreateObservableGauge<decimal>(
-                            "ObservableGauge",
-                            () =>
-                                new Measurement<decimal>(
-                                    5.7m,
-                                    new KeyValuePair<string, object?>[]
-                                    {
-                                        new KeyValuePair<string, object?>("Key", "value"),
-                                    }
-                                )
+                        meter4.CreateObservableGauge<decimal>("ObservableGauge", () =>
+                            new Measurement<decimal>(
+                                5.7m,
+                                new KeyValuePair<string, object?>[]
+                                {
+                                    new KeyValuePair<string, object?>("Key", "value"),
+                                }
+                            )
                         );
                     UpDownCounter<short> upDownCounter = meter5.CreateUpDownCounter<short>(
                         "UpDownCounter"
                     );
                     ObservableUpDownCounter<int> observableUpDownCounter =
-                        meter6.CreateObservableUpDownCounter<int>(
-                            "ObservableUpDownCounter",
-                            () =>
-                                new Measurement<int>(
-                                    -5,
-                                    new KeyValuePair<string, object?>[]
-                                    {
-                                        new KeyValuePair<string, object?>("Key", "value"),
-                                    }
-                                )
+                        meter6.CreateObservableUpDownCounter<int>("ObservableUpDownCounter", () =>
+                            new Measurement<int>(
+                                -5,
+                                new KeyValuePair<string, object?>[]
+                                {
+                                    new KeyValuePair<string, object?>("Key", "value"),
+                                }
+                            )
                         );
 
                     using MeterListener listener = new MeterListener();
@@ -2310,16 +2239,14 @@ namespace System.Diagnostics.Metrics.Tests
                             )
                     );
                     ObservableUpDownCounter<float> observableUpDownCounter =
-                        meter.CreateObservableUpDownCounter<float>(
-                            "ObservableUpDownCounter",
-                            () =>
-                                new Measurement<float>(
-                                    -5.7f,
-                                    new KeyValuePair<string, object?>[]
-                                    {
-                                        new KeyValuePair<string, object?>("Key", "value"),
-                                    }
-                                )
+                        meter.CreateObservableUpDownCounter<float>("ObservableUpDownCounter", () =>
+                            new Measurement<float>(
+                                -5.7f,
+                                new KeyValuePair<string, object?>[]
+                                {
+                                    new KeyValuePair<string, object?>("Key", "value"),
+                                }
+                            )
                         );
 
                     int completedMeasurements = 0;
@@ -2534,9 +2461,8 @@ namespace System.Diagnostics.Metrics.Tests
                         () => 1
                     );
                     ObservableUpDownCounter<int> observableUpDownCounter =
-                        meter.CreateObservableUpDownCounter<int>(
-                            "ObservableUpDownCounter",
-                            () => 1
+                        meter.CreateObservableUpDownCounter<int>("ObservableUpDownCounter", () =>
+                            1
                         );
                     ObservableGauge<int> observableGauge = meter.CreateObservableGauge<int>(
                         "ObservableGauge",

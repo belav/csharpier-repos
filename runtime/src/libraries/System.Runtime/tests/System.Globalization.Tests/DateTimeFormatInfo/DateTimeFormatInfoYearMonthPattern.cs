@@ -127,9 +127,8 @@ namespace System.Globalization.Tests
         public void YearMonthPattern_SetNull_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.YearMonthPattern = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.YearMonthPattern = null
             );
         }
 

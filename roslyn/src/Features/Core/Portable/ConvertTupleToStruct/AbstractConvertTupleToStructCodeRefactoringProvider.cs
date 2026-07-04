@@ -436,9 +436,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
 
             // Generate a unique name for the struct we're creating.  We'll also add a rename
             // annotation so the user can pick the right name for the type afterwards.
-            var structName = NameGenerator.GenerateUniqueName(
-                "NewStruct",
-                n => semanticModel.LookupSymbols(position, name: n).IsEmpty
+            var structName = NameGenerator.GenerateUniqueName("NewStruct", n =>
+                semanticModel.LookupSymbols(position, name: n).IsEmpty
             );
 
             var capturedTypeParameters = tupleType
@@ -906,15 +905,13 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 .ConfigureAwait(false);
 
             // Then, actually insert the new class in the appropriate container.
-            editor.ReplaceNode(
-                container,
-                (currentContainer, _) =>
-                    info.Service.AddNamedType(
-                        currentContainer,
-                        namedTypeSymbol,
-                        info,
-                        cancellationToken
-                    )
+            editor.ReplaceNode(container, (currentContainer, _) =>
+                info.Service.AddNamedType(
+                    currentContainer,
+                    namedTypeSymbol,
+                    info,
+                    cancellationToken
+                )
             );
         }
 
@@ -1103,41 +1100,33 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
         {
             // Use the callback form as tuples types may be nested, and we want to
             // properly replace them even in that case.
-            editor.ReplaceNode(
-                childCreation,
-                (currentNode, g) =>
-                {
-                    var currentTupleExpr = (TTupleExpressionSyntax)currentNode;
+            editor.ReplaceNode(childCreation, (currentNode, g) =>
+            {
+                var currentTupleExpr = (TTupleExpressionSyntax)currentNode;
 
-                    // If we hit the node the user started on, then add the rename annotation here.
-                    var typeNameNode =
-                        startingCreationNode == childCreation
-                            ? CreateStructNameNode(
-                                g,
-                                typeName,
-                                typeParameters,
-                                addRenameAnnotation: true
-                            )
-                            : qualifiedTypeName;
-
-                    var syntaxFacts = g.SyntaxFacts;
-                    syntaxFacts.GetPartsOfTupleExpression<TArgumentSyntax>(
-                        currentTupleExpr,
-                        out var openParen,
-                        out var arguments,
-                        out var closeParen
-                    );
-                    arguments = ConvertArguments(g, parameterNamingRule, isRecord, arguments);
-
-                    return g.ObjectCreationExpression(
-                            typeNameNode,
-                            openParen,
-                            arguments,
-                            closeParen
+                // If we hit the node the user started on, then add the rename annotation here.
+                var typeNameNode =
+                    startingCreationNode == childCreation
+                        ? CreateStructNameNode(
+                            g,
+                            typeName,
+                            typeParameters,
+                            addRenameAnnotation: true
                         )
-                        .WithAdditionalAnnotations(Formatter.Annotation);
-                }
-            );
+                        : qualifiedTypeName;
+
+                var syntaxFacts = g.SyntaxFacts;
+                syntaxFacts.GetPartsOfTupleExpression<TArgumentSyntax>(
+                    currentTupleExpr,
+                    out var openParen,
+                    out var arguments,
+                    out var closeParen
+                );
+                arguments = ConvertArguments(g, parameterNamingRule, isRecord, arguments);
+
+                return g.ObjectCreationExpression(typeNameNode, openParen, arguments, closeParen)
+                    .WithAdditionalAnnotations(Formatter.Annotation);
+            });
         }
 
         private SeparatedSyntaxList<TArgumentSyntax> ConvertArguments(
@@ -1272,24 +1261,21 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
         {
             // Use the callback form as tuple types may be nested, and we want to
             // properly replace them even in that case.
-            editor.ReplaceNode(
-                childTupleType,
-                (currentNode, g) =>
-                {
-                    // If we hit the node the user started on, then add the rename annotation here.
-                    var typeNameNode =
-                        startingNode == childTupleType
-                            ? CreateStructNameNode(
-                                g,
-                                typeName,
-                                typeParameters,
-                                addRenameAnnotation: true
-                            )
-                            : qualifiedTypeName;
+            editor.ReplaceNode(childTupleType, (currentNode, g) =>
+            {
+                // If we hit the node the user started on, then add the rename annotation here.
+                var typeNameNode =
+                    startingNode == childTupleType
+                        ? CreateStructNameNode(
+                            g,
+                            typeName,
+                            typeParameters,
+                            addRenameAnnotation: true
+                        )
+                        : qualifiedTypeName;
 
-                    return typeNameNode.WithTriviaFrom(currentNode);
-                }
-            );
+                return typeNameNode.WithTriviaFrom(currentNode);
+            });
         }
 
         private static async Task<INamedTypeSymbol> GenerateFinalNamedTypeAsync(

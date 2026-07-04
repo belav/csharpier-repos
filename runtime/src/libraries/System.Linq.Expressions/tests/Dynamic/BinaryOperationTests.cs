@@ -659,9 +659,8 @@ namespace System.Dynamic.Tests
         [Theory, MemberData(nameof(NonBinaryExpressionTypes))]
         public void NonBinaryOperations(ExpressionType type)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "operation",
-                () => new MinimumOverrideBinaryOperationBinder(type)
+            AssertExtensions.Throws<ArgumentException>("operation", () =>
+                new MinimumOverrideBinaryOperationBinder(type)
             );
         }
 
@@ -685,9 +684,8 @@ namespace System.Dynamic.Tests
                 Expression.Parameter(typeof(object), null),
                 BindingRestrictions.Empty
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "target",
-                () => binder.Bind(null, new[] { arg })
+            AssertExtensions.Throws<ArgumentNullException>("target", () =>
+                binder.Bind(null, new[] { arg })
             );
         }
 
@@ -710,9 +708,8 @@ namespace System.Dynamic.Tests
                 BindingRestrictions.Empty
             );
             var binder = new MinimumOverrideBinaryOperationBinder(ExpressionType.Add);
-            AssertExtensions.Throws<ArgumentException>(
-                "args",
-                () => binder.Bind(target, Array.Empty<DynamicMetaObject>())
+            AssertExtensions.Throws<ArgumentException>("args", () =>
+                binder.Bind(target, Array.Empty<DynamicMetaObject>())
             );
         }
 
@@ -732,9 +729,8 @@ namespace System.Dynamic.Tests
                 Expression.Parameter(typeof(object), null),
                 BindingRestrictions.Empty
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "args",
-                () => binder.Bind(target, new[] { arg0, arg1 })
+            AssertExtensions.Throws<ArgumentException>("args", () =>
+                binder.Bind(target, new[] { arg0, arg1 })
             );
         }
 
@@ -746,9 +742,8 @@ namespace System.Dynamic.Tests
                 BindingRestrictions.Empty
             );
             var binder = new MinimumOverrideBinaryOperationBinder(ExpressionType.Add);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "args",
-                () => binder.Bind(target, new DynamicMetaObject[1])
+            AssertExtensions.Throws<ArgumentNullException>("args", () =>
+                binder.Bind(target, new DynamicMetaObject[1])
             );
         }
 

@@ -377,13 +377,10 @@ namespace Microsoft.NET.HostModel
 
                     void PatchRVA(int offset)
                     {
-                        ModifyI32(
-                            accessor,
-                            offset,
-                            pointer =>
-                                pointer >= trailingSectionVirtualStart
-                                    ? pointer + virtualDelta
-                                    : pointer
+                        ModifyI32(accessor, offset, pointer =>
+                            pointer >= trailingSectionVirtualStart
+                                ? pointer + virtualDelta
+                                : pointer
                         );
                     }
 
@@ -398,10 +395,8 @@ namespace Microsoft.NET.HostModel
                         peSignatureOffset + PEOffsets.PEHeader.InitializedDataSize,
                         size => size + delta
                     );
-                    ModifyI32(
-                        accessor,
-                        peSignatureOffset + PEOffsets.PEHeader.SizeOfImage,
-                        size => size + virtualDelta
+                    ModifyI32(accessor, peSignatureOffset + PEOffsets.PEHeader.SizeOfImage, size =>
+                        size + virtualDelta
                     );
 
                     if (needsMoveTrailingSections)

@@ -63,54 +63,42 @@ namespace System.Security.Cryptography.Tests
             byte[] data_3bytes = "aaa"u8.ToArray();
             ICryptoTransform transform = new ToBase64Transform();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inputBuffer",
-                () => transform.TransformBlock(null, 0, 0, null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("inputBuffer", () =>
+                transform.TransformBlock(null, 0, 0, null, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inputOffset",
-                () => transform.TransformBlock(Array.Empty<byte>(), -1, 0, null, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inputOffset", () =>
+                transform.TransformBlock(Array.Empty<byte>(), -1, 0, null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outputBuffer",
-                () => transform.TransformBlock(data_3bytes, 0, 3, null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("outputBuffer", () =>
+                transform.TransformBlock(data_3bytes, 0, 3, null, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inputCount",
-                () => transform.TransformBlock(Array.Empty<byte>(), 0, 1, null, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inputCount", () =>
+                transform.TransformBlock(Array.Empty<byte>(), 0, 1, null, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inputCount",
-                () => transform.TransformBlock(data_3bytes, 0, 1, new byte[10], 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inputCount", () =>
+                transform.TransformBlock(data_3bytes, 0, 1, new byte[10], 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inputCount",
-                () => transform.TransformBlock(new byte[4], 0, 4, new byte[10], 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inputCount", () =>
+                transform.TransformBlock(new byte[4], 0, 4, new byte[10], 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "outputBuffer",
-                () => transform.TransformBlock(data_3bytes, 0, 3, new byte[1], 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("outputBuffer", () =>
+                transform.TransformBlock(data_3bytes, 0, 3, new byte[1], 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => transform.TransformBlock(Array.Empty<byte>(), 1, 0, null, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                transform.TransformBlock(Array.Empty<byte>(), 1, 0, null, 0)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inputBuffer",
-                () => transform.TransformFinalBlock(null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("inputBuffer", () =>
+                transform.TransformFinalBlock(null, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inputOffset",
-                () => transform.TransformFinalBlock(Array.Empty<byte>(), -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inputOffset", () =>
+                transform.TransformFinalBlock(Array.Empty<byte>(), -1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inputOffset",
-                () => transform.TransformFinalBlock(Array.Empty<byte>(), -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inputOffset", () =>
+                transform.TransformFinalBlock(Array.Empty<byte>(), -1, 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => transform.TransformFinalBlock(Array.Empty<byte>(), 1, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                transform.TransformFinalBlock(Array.Empty<byte>(), 1, 0)
             );
         }
 
@@ -120,42 +108,33 @@ namespace System.Security.Cryptography.Tests
             byte[] data_4bytes = "aaaa"u8.ToArray();
             ICryptoTransform transform = new FromBase64Transform();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inputBuffer",
-                () => transform.TransformBlock(null, 0, 0, null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("inputBuffer", () =>
+                transform.TransformBlock(null, 0, 0, null, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inputOffset",
-                () => transform.TransformBlock(Array.Empty<byte>(), -1, 0, null, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inputOffset", () =>
+                transform.TransformBlock(Array.Empty<byte>(), -1, 0, null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outputBuffer",
-                () => transform.TransformBlock(data_4bytes, 0, 4, null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("outputBuffer", () =>
+                transform.TransformBlock(data_4bytes, 0, 4, null, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inputCount",
-                () => transform.TransformBlock(Array.Empty<byte>(), 0, 1, null, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inputCount", () =>
+                transform.TransformBlock(Array.Empty<byte>(), 0, 1, null, 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => transform.TransformBlock(Array.Empty<byte>(), 1, 0, null, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                transform.TransformBlock(Array.Empty<byte>(), 1, 0, null, 0)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inputBuffer",
-                () => transform.TransformFinalBlock(null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("inputBuffer", () =>
+                transform.TransformFinalBlock(null, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inputOffset",
-                () => transform.TransformFinalBlock(Array.Empty<byte>(), -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inputOffset", () =>
+                transform.TransformFinalBlock(Array.Empty<byte>(), -1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inputOffset",
-                () => transform.TransformFinalBlock(Array.Empty<byte>(), -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inputOffset", () =>
+                transform.TransformFinalBlock(Array.Empty<byte>(), -1, 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => transform.TransformFinalBlock(Array.Empty<byte>(), 1, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                transform.TransformFinalBlock(Array.Empty<byte>(), 1, 0)
             );
 
             // These exceptions only thrown in FromBase

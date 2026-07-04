@@ -145,12 +145,10 @@
                     typeof(ActionMethodSelectorAttribute),
                     true /* inherit */
                 );
-            ActionSelector[] selectors = Array.ConvertAll(
-                attrs,
-                attr =>
-                    (ActionSelector)(
-                        controllerContext => attr.IsValidForRequest(controllerContext, MethodInfo)
-                    )
+            ActionSelector[] selectors = Array.ConvertAll(attrs, attr =>
+                (ActionSelector)(
+                    controllerContext => attr.IsValidForRequest(controllerContext, MethodInfo)
+                )
             );
             return selectors;
         }

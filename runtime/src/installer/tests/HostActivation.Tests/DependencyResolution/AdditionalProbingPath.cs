@@ -157,20 +157,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     MicrosoftNETCoreApp,
                     TestContext.MicrosoftNETCoreAppVersion,
                     b =>
-                        b.WithProject(
-                            DependencyName,
-                            DependencyVersion,
-                            p =>
-                                p.WithAssemblyGroup(
-                                        null,
-                                        g =>
-                                            g.WithAsset($"{DependencyName}.dll", f => f.NotOnDisk())
-                                    )
-                                    .WithNativeLibraryGroup(
-                                        TestContext.TargetRID,
-                                        g =>
-                                            g.WithAsset(nativeDependencyRelPath, f => f.NotOnDisk())
-                                    )
+                        b.WithProject(DependencyName, DependencyVersion, p =>
+                            p.WithAssemblyGroup(null, g =>
+                                    g.WithAsset($"{DependencyName}.dll", f => f.NotOnDisk())
+                                )
+                                .WithNativeLibraryGroup(TestContext.TargetRID, g =>
+                                    g.WithAsset(nativeDependencyRelPath, f => f.NotOnDisk())
+                                )
                         )
                 );
                 RuntimeConfig

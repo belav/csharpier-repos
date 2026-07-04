@@ -127,14 +127,11 @@ public class DefaultHealthCheckServiceTest
                 Assert.Equal(HealthyMessage, actual.Value.Description);
                 Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
                 Assert.Null(actual.Value.Exception);
-                Assert.Collection(
-                    actual.Value.Data,
-                    item =>
-                    {
-                        Assert.Equal(DataKey, item.Key);
-                        Assert.Equal(DataValue, item.Value);
-                    }
-                );
+                Assert.Collection(actual.Value.Data, item =>
+                {
+                    Assert.Equal(DataKey, item.Key);
+                    Assert.Equal(DataValue, item.Value);
+                });
                 Assert.Equal(actual.Value.Tags, healthyCheckTags);
             },
             actual =>
@@ -214,17 +211,14 @@ public class DefaultHealthCheckServiceTest
 
         var service = CreateHealthChecksService(b =>
         {
-            b.AddAsyncCheck(
-                "HealthyCheck",
-                _ => Task.FromResult(HealthCheckResult.Healthy(HealthyMessage, data))
+            b.AddAsyncCheck("HealthyCheck", _ =>
+                Task.FromResult(HealthCheckResult.Healthy(HealthyMessage, data))
             );
-            b.AddAsyncCheck(
-                "DegradedCheck",
-                _ => Task.FromResult(HealthCheckResult.Degraded(DegradedMessage))
+            b.AddAsyncCheck("DegradedCheck", _ =>
+                Task.FromResult(HealthCheckResult.Degraded(DegradedMessage))
             );
-            b.AddAsyncCheck(
-                "UnhealthyCheck",
-                _ => Task.FromResult(HealthCheckResult.Unhealthy(UnhealthyMessage, exception))
+            b.AddAsyncCheck("UnhealthyCheck", _ =>
+                Task.FromResult(HealthCheckResult.Unhealthy(UnhealthyMessage, exception))
             );
         });
 
@@ -232,24 +226,18 @@ public class DefaultHealthCheckServiceTest
         var results = await service.CheckHealthAsync(c => c.Name == "HealthyCheck");
 
         // Assert
-        Assert.Collection(
-            results.Entries,
-            actual =>
+        Assert.Collection(results.Entries, actual =>
+        {
+            Assert.Equal("HealthyCheck", actual.Key);
+            Assert.Equal(HealthyMessage, actual.Value.Description);
+            Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
+            Assert.Null(actual.Value.Exception);
+            Assert.Collection(actual.Value.Data, item =>
             {
-                Assert.Equal("HealthyCheck", actual.Key);
-                Assert.Equal(HealthyMessage, actual.Value.Description);
-                Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
-                Assert.Null(actual.Value.Exception);
-                Assert.Collection(
-                    actual.Value.Data,
-                    item =>
-                    {
-                        Assert.Equal(DataKey, item.Key);
-                        Assert.Equal(DataValue, item.Value);
-                    }
-                );
-            }
-        );
+                Assert.Equal(DataKey, item.Key);
+                Assert.Equal(DataValue, item.Value);
+            });
+        });
     }
 
     [Fact]
@@ -275,25 +263,22 @@ public class DefaultHealthCheckServiceTest
             actual =>
             {
                 Assert.Equal("A", actual.Key);
-                Assert.Collection(
-                    actual.Value.Data,
-                    kvp => Assert.Equal(kvp, new KeyValuePair<string, object>("name", "A"))
+                Assert.Collection(actual.Value.Data, kvp =>
+                    Assert.Equal(kvp, new KeyValuePair<string, object>("name", "A"))
                 );
             },
             actual =>
             {
                 Assert.Equal("B", actual.Key);
-                Assert.Collection(
-                    actual.Value.Data,
-                    kvp => Assert.Equal(kvp, new KeyValuePair<string, object>("name", "B"))
+                Assert.Collection(actual.Value.Data, kvp =>
+                    Assert.Equal(kvp, new KeyValuePair<string, object>("name", "B"))
                 );
             },
             actual =>
             {
                 Assert.Equal("C", actual.Key);
-                Assert.Collection(
-                    actual.Value.Data,
-                    kvp => Assert.Equal(kvp, new KeyValuePair<string, object>("name", "C"))
+                Assert.Collection(actual.Value.Data, kvp =>
+                    Assert.Equal(kvp, new KeyValuePair<string, object>("name", "C"))
                 );
             }
         );
@@ -307,16 +292,13 @@ public class DefaultHealthCheckServiceTest
 
         var service = CreateHealthChecksService(b =>
         {
-            b.AddAsyncCheck(
-                "cancels",
-                async ct =>
-                {
-                    insideCheck.SetResult(null);
+            b.AddAsyncCheck("cancels", async ct =>
+            {
+                insideCheck.SetResult(null);
 
-                    await Task.Delay(10000, ct);
-                    return HealthCheckResult.Unhealthy();
-                }
-            );
+                await Task.Delay(10000, ct);
+                return HealthCheckResult.Unhealthy();
+            });
         });
 
         var cancel = new CancellationTokenSource();
@@ -341,9 +323,8 @@ public class DefaultHealthCheckServiceTest
         var service = CreateHealthChecksService(b =>
         {
             b.AddAsyncCheck("Throws", ct => throw thrownException);
-            b.AddAsyncCheck(
-                "Faults",
-                ct => Task.FromException<HealthCheckResult>(faultedException)
+            b.AddAsyncCheck("Faults", ct =>
+                Task.FromException<HealthCheckResult>(faultedException)
             );
             b.AddAsyncCheck("Succeeds", ct => Task.FromResult(HealthCheckResult.Healthy()));
         });
@@ -385,21 +366,15 @@ public class DefaultHealthCheckServiceTest
         var sink = new TestSink();
         var check = new DelegateHealthCheck(cancellationToken =>
         {
-            Assert.Collection(
-                sink.Scopes,
-                actual =>
+            Assert.Collection(sink.Scopes, actual =>
+            {
+                Assert.Equal(actual.LoggerName, typeof(DefaultHealthCheckService).FullName);
+                Assert.Collection((IEnumerable<KeyValuePair<string, object>>)actual.Scope, item =>
                 {
-                    Assert.Equal(actual.LoggerName, typeof(DefaultHealthCheckService).FullName);
-                    Assert.Collection(
-                        (IEnumerable<KeyValuePair<string, object>>)actual.Scope,
-                        item =>
-                        {
-                            Assert.Equal("HealthCheckName", item.Key);
-                            Assert.Equal("TestScope", item.Value);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal("HealthCheckName", item.Key);
+                    Assert.Equal("TestScope", item.Value);
+                });
+            });
             return Task.FromResult(HealthCheckResult.Healthy());
         });
 
@@ -416,14 +391,11 @@ public class DefaultHealthCheckServiceTest
         var results = await service.CheckHealthAsync();
 
         // Assert
-        Assert.Collection(
-            results.Entries,
-            actual =>
-            {
-                Assert.Equal("TestScope", actual.Key);
-                Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
-            }
-        );
+        Assert.Collection(results.Entries, actual =>
+        {
+            Assert.Equal("TestScope", actual.Key);
+            Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
+        });
     }
 
     [Fact]
@@ -441,14 +413,11 @@ public class DefaultHealthCheckServiceTest
         var results = await service.CheckHealthAsync();
 
         // Assert
-        Assert.Collection(
-            results.Entries,
-            actual =>
-            {
-                Assert.Equal("Test", actual.Key);
-                Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
-            }
-        );
+        Assert.Collection(results.Entries, actual =>
+        {
+            Assert.Equal("Test", actual.Key);
+            Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
+        });
     }
 
     [Fact]
@@ -466,14 +435,11 @@ public class DefaultHealthCheckServiceTest
         var results = await service.CheckHealthAsync();
 
         // Assert
-        Assert.Collection(
-            results.Entries,
-            actual =>
-            {
-                Assert.Equal("Test", actual.Key);
-                Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
-            }
-        );
+        Assert.Collection(results.Entries, actual =>
+        {
+            Assert.Equal("Test", actual.Key);
+            Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
+        });
     }
 
     [Fact]
@@ -549,14 +515,11 @@ public class DefaultHealthCheckServiceTest
         var results = await service.CheckHealthAsync();
 
         // Assert
-        Assert.Collection(
-            results.Entries,
-            actual =>
-            {
-                Assert.Equal("Test", actual.Key);
-                Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
-            }
-        );
+        Assert.Collection(results.Entries, actual =>
+        {
+            Assert.Equal("Test", actual.Key);
+            Assert.Equal(HealthStatus.Healthy, actual.Value.Status);
+        });
     }
 
     [Fact]
@@ -578,24 +541,18 @@ public class DefaultHealthCheckServiceTest
 
         var service = CreateHealthChecksService(b =>
         {
-            b.AddAsyncCheck(
-                "test1",
-                async () =>
-                {
-                    output1.SetResult(null);
-                    await input1.Task;
-                    return HealthCheckResult.Healthy();
-                }
-            );
-            b.AddAsyncCheck(
-                "test2",
-                async () =>
-                {
-                    output2.SetResult(null);
-                    await input2.Task;
-                    return HealthCheckResult.Healthy();
-                }
-            );
+            b.AddAsyncCheck("test1", async () =>
+            {
+                output1.SetResult(null);
+                await input1.Task;
+                return HealthCheckResult.Healthy();
+            });
+            b.AddAsyncCheck("test2", async () =>
+            {
+                output2.SetResult(null);
+                await input2.Task;
+                return HealthCheckResult.Healthy();
+            });
         });
 
         // Act
@@ -642,14 +599,11 @@ public class DefaultHealthCheckServiceTest
         var results = await service.CheckHealthAsync();
 
         // Assert
-        Assert.Collection(
-            results.Entries,
-            actual =>
-            {
-                Assert.Equal("timeout", actual.Key);
-                Assert.Equal(HealthStatus.Unhealthy, actual.Value.Status);
-            }
-        );
+        Assert.Collection(results.Entries, actual =>
+        {
+            Assert.Equal("timeout", actual.Key);
+            Assert.Equal(HealthStatus.Unhealthy, actual.Value.Status);
+        });
     }
 
     [Fact]
@@ -658,14 +612,11 @@ public class DefaultHealthCheckServiceTest
         // Arrange
         var service = CreateHealthChecksService(b =>
         {
-            b.AddAsyncCheck(
-                "test",
-                async () =>
-                {
-                    await Task.Delay(1).ConfigureAwait(false);
-                    return HealthCheckResult.Healthy();
-                }
-            );
+            b.AddAsyncCheck("test", async () =>
+            {
+                await Task.Delay(1).ConfigureAwait(false);
+                return HealthCheckResult.Healthy();
+            });
         });
 
         var hangs = true;

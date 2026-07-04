@@ -182,17 +182,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(2, stringIntDictionary["2"]);
             Assert.Equal(2, intDictionary.Count);
 
-            Assert.Throws<ArgumentNullException>(
-                "keySelector",
-                () => list.ToImmutableSegmentedDictionary<int, int>(null!)
+            Assert.Throws<ArgumentNullException>("keySelector", () =>
+                list.ToImmutableSegmentedDictionary<int, int>(null!)
             );
-            Assert.Throws<ArgumentNullException>(
-                "keySelector",
-                () => list.ToImmutableSegmentedDictionary<int, int, int>(null!, v => v)
+            Assert.Throws<ArgumentNullException>("keySelector", () =>
+                list.ToImmutableSegmentedDictionary<int, int, int>(null!, v => v)
             );
-            Assert.Throws<ArgumentNullException>(
-                "elementSelector",
-                () => list.ToImmutableSegmentedDictionary<int, int, int>(k => k, null!)
+            Assert.Throws<ArgumentNullException>("elementSelector", () =>
+                list.ToImmutableSegmentedDictionary<int, int, int>(k => k, null!)
             );
 
             list.ToDictionary(k => k, v => v, null); // verifies BCL behavior is to not throw.
@@ -250,9 +247,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 .Add("a", "1")
                 .Add("A", "2")
                 .Add("b", "3");
-            Assert.Throws<ArgumentException>(
-                null,
-                () => map.WithComparer(StringComparer.OrdinalIgnoreCase)
+            Assert.Throws<ArgumentException>(null, () =>
+                map.WithComparer(StringComparer.OrdinalIgnoreCase)
             );
         }
 

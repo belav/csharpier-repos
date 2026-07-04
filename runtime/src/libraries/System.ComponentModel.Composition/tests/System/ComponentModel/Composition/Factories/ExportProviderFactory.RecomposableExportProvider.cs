@@ -93,9 +93,8 @@ namespace System.ComponentModel.Composition.Factories
 
             private Export CreateExport(string contractName, object value)
             {
-                return new Export(
-                    new ExportDefinition(contractName, EmptyMetadataDictionary),
-                    () => value
+                return new Export(new ExportDefinition(contractName, EmptyMetadataDictionary), () =>
+                    value
                 );
             }
 

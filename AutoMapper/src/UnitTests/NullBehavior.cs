@@ -741,28 +741,22 @@ public class When_overriding_null_behavior_in_sub_profile : AutoMapperSpecBase
         {
             cfg.AllowNullDestinationValues = false;
 
-            cfg.CreateProfile(
-                "Foo",
-                p =>
-                {
-                    p.AllowNullDestinationValues = true;
-                    p.CreateMap<ModelSubObject, ModelSubDto>();
-                    p.CreateMap<ModelObject, ModelDto>()
-                        .ForMember(
-                            d => d.SubExpressionName,
-                            opt =>
-                                opt.MapFrom(src =>
-                                    src.Subs.FirstOrDefault(spt =>
-                                        spt.Sub.Something == src.Id
-                                    ).Something
-                                )
-                        )
-                        .ForMember(
-                            d => d.NullableMapFrom,
-                            opt => opt.MapFrom(s => s.Sub.Something)
-                        );
-                }
-            );
+            cfg.CreateProfile("Foo", p =>
+            {
+                p.AllowNullDestinationValues = true;
+                p.CreateMap<ModelSubObject, ModelSubDto>();
+                p.CreateMap<ModelObject, ModelDto>()
+                    .ForMember(
+                        d => d.SubExpressionName,
+                        opt =>
+                            opt.MapFrom(src =>
+                                src.Subs.FirstOrDefault(spt =>
+                                    spt.Sub.Something == src.Id
+                                ).Something
+                            )
+                    )
+                    .ForMember(d => d.NullableMapFrom, opt => opt.MapFrom(s => s.Sub.Something));
+            });
         });
 
     protected override void Because_of()
@@ -833,14 +827,11 @@ public class When_overriding_null_behavior_in_a_profile : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
         {
-            cfg.CreateProfile(
-                "MapsNulls",
-                p =>
-                {
-                    p.AllowNullDestinationValues = false;
-                    p.CreateMap<NullSource, NullDestination>();
-                }
-            );
+            cfg.CreateProfile("MapsNulls", p =>
+            {
+                p.AllowNullDestinationValues = false;
+                p.CreateMap<NullSource, NullDestination>();
+            });
             cfg.CreateMap<DefaultSource, DefaultDestination>();
         });
 
@@ -1109,14 +1100,11 @@ public class When_overriding_collection_null_behavior_in_profile_with_MapAtRunti
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
         {
-            cfg.CreateProfile(
-                "MyProfile",
-                p =>
-                {
-                    p.CreateMap<Source, Dest>().ForAllMembers(o => o.MapAtRuntime());
-                    p.AllowNullCollections = true;
-                }
-            );
+            cfg.CreateProfile("MyProfile", p =>
+            {
+                p.CreateMap<Source, Dest>().ForAllMembers(o => o.MapAtRuntime());
+                p.AllowNullCollections = true;
+            });
         });
 
     protected override void Because_of()
@@ -1196,14 +1184,11 @@ public class When_overriding_collection_null_behavior_in_profile : AutoMapperSpe
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
         {
-            cfg.CreateProfile(
-                "MyProfile",
-                p =>
-                {
-                    p.CreateMap<Source, Dest>();
-                    p.AllowNullCollections = true;
-                }
-            );
+            cfg.CreateProfile("MyProfile", p =>
+            {
+                p.CreateMap<Source, Dest>();
+                p.AllowNullCollections = true;
+            });
         });
 
     protected override void Because_of()

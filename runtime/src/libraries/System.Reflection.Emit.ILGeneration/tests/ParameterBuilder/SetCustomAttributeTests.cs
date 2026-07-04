@@ -102,23 +102,19 @@ namespace System.Reflection.Emit.Tests
                 "testParam"
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () => parameter.SetCustomAttribute(null, new byte[0])
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                parameter.SetCustomAttribute(null, new byte[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "binaryAttribute",
-                () =>
-                    parameter.SetCustomAttribute(
-                        typeof(ParameterBuilderCustomAttribute).GetConstructor(
-                            new Type[] { typeof(bool) }
-                        ),
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("binaryAttribute", () =>
+                parameter.SetCustomAttribute(
+                    typeof(ParameterBuilderCustomAttribute).GetConstructor(
+                        new Type[] { typeof(bool) }
+                    ),
+                    null
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "customBuilder",
-                () => parameter.SetCustomAttribute(null)
+            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () =>
+                parameter.SetCustomAttribute(null)
             );
         }
     }

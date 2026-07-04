@@ -15,14 +15,12 @@ public class UserClaimsPrincipalFactoryTest
         var userManager = MockHelpers.MockUserManager<PocoUser>().Object;
         var roleManager = MockHelpers.MockRoleManager<PocoRole>().Object;
         var options = new Mock<IOptions<IdentityOptions>>();
-        Assert.Throws<ArgumentException>(
-            "optionsAccessor",
-            () =>
-                new UserClaimsPrincipalFactory<PocoUser, PocoRole>(
-                    userManager,
-                    roleManager,
-                    options.Object
-                )
+        Assert.Throws<ArgumentException>("optionsAccessor", () =>
+            new UserClaimsPrincipalFactory<PocoUser, PocoRole>(
+                userManager,
+                roleManager,
+                options.Object
+            )
         );
         var identityOptions = new IdentityOptions();
         options.Setup(a => a.Value).Returns(identityOptions);
@@ -31,9 +29,8 @@ public class UserClaimsPrincipalFactoryTest
             roleManager,
             options.Object
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await factory.CreateAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await factory.CreateAsync(null)
         );
     }
 
@@ -123,15 +120,11 @@ public class UserClaimsPrincipalFactoryTest
         Assert.Equal(IdentityConstants.ApplicationScheme, identity.AuthenticationType);
         var claims = identity.Claims.ToList();
         Assert.NotNull(claims);
-        Assert.Contains(
-            claims,
-            c =>
-                c.Type == manager.Options.ClaimsIdentity.UserNameClaimType
-                && c.Value == user.UserName
+        Assert.Contains(claims, c =>
+            c.Type == manager.Options.ClaimsIdentity.UserNameClaimType && c.Value == user.UserName
         );
-        Assert.Contains(
-            claims,
-            c => c.Type == manager.Options.ClaimsIdentity.UserIdClaimType && c.Value == user.Id
+        Assert.Contains(claims, c =>
+            c.Type == manager.Options.ClaimsIdentity.UserIdClaimType && c.Value == user.Id
         );
         Assert.Equal(
             supportsUserEmail,

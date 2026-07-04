@@ -60,44 +60,39 @@ namespace Mono.Debugger.Soft
                 fetching = true;
                 fetchingEvent.Reset();
             }
-            vm.conn.Thread_GetFrameInfo(
-                id,
-                0,
-                -1,
-                (frame_info) =>
+            vm.conn.Thread_GetFrameInfo(id, 0, -1, (frame_info) =>
+            {
+                var framesList = new List<StackFrame>();
+                for (int i = 0; i < frame_info.Length; ++i)
                 {
-                    var framesList = new List<StackFrame>();
-                    for (int i = 0; i < frame_info.Length; ++i)
-                    {
-                        var frameInfo = (FrameInfo)frame_info[i];
-                        var method = vm.GetMethod(frameInfo.method);
-                        var f = new StackFrame(
-                            vm,
-                            frameInfo.id,
-                            this,
-                            method,
-                            frameInfo.il_offset,
-                            frameInfo.flags
-                        );
-                        if (!(f.IsNativeTransition && !NativeTransitions))
-                            framesList.Add(f);
-                    }
-                    lock (fetchingLocker)
-                    {
-                        vm.AddThreadToInvalidateList(this);
-                        fetching = false;
-                        //In case it was invalidated during waiting for response from
-                        //runtime and mustFetch was set refetch
-                        if (cacheInvalid && mustFetch)
-                        {
-                            FetchFrames(mustFetch);
-                            return;
-                        }
-                        frames = framesList.ToArray();
-                        fetchingEvent.Set();
-                    }
+                    var frameInfo = (FrameInfo)frame_info[i];
+                    var method = vm.GetMethod(frameInfo.method);
+                    var f = new StackFrame(
+                        vm,
+                        frameInfo.id,
+                        this,
+                        method,
+                        frameInfo.il_offset,
+                        frameInfo.flags
+                    );
+                    if (!(f.IsNativeTransition && !NativeTransitions))
+                        framesList.Add(f);
                 }
-            );
+                lock (fetchingLocker)
+                {
+                    vm.AddThreadToInvalidateList(this);
+                    fetching = false;
+                    //In case it was invalidated during waiting for response from
+                    //runtime and mustFetch was set refetch
+                    if (cacheInvalid && mustFetch)
+                    {
+                        FetchFrames(mustFetch);
+                        return;
+                    }
+                    frames = framesList.ToArray();
+                    fetchingEvent.Set();
+                }
+            });
         }
 
         public static void FetchFrames(IList<ThreadMirror> threads)

@@ -658,9 +658,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnReader reader = new AsnReader(inputData, ruleSet);
             const UniversalTagNumber EncodingType = UniversalTagNumber.UTF8String;
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.TryReadPrimitiveCharacterStringBytes(Asn1Tag.Null, out _)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.TryReadPrimitiveCharacterStringBytes(Asn1Tag.Null, out _)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -695,9 +694,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             const UniversalTagNumber EncodingType = UniversalTagNumber.UTF8String;
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.TryReadPrimitiveCharacterStringBytes(Asn1Tag.Null, out _)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.TryReadPrimitiveCharacterStringBytes(Asn1Tag.Null, out _)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");

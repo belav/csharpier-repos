@@ -189,13 +189,10 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             {
                 OSPlatform nullObj = OSPlatform.Create(null);
             });
-            AssertExtensions.Throws<ArgumentException>(
-                "osPlatform",
-                () =>
-                {
-                    OSPlatform emptyObj = OSPlatform.Create("");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("osPlatform", () =>
+            {
+                OSPlatform emptyObj = OSPlatform.Create("");
+            });
 
             Assert.True(winObj == winProp);
             Assert.True(winObj != randomObj);

@@ -800,14 +800,11 @@ namespace Microsoft.Extensions.Hosting.Internal
                 .ConfigureServices(services =>
                 {
                     services.AddHostedService(_ => new AsyncThrowingService(throwingTcs.Task));
-                    services.AddHostedService(_ => new TestBackgroundService(
-                        otherTcs.Task,
-                        () =>
-                        {
-                            wasOtherServiceStarted = true;
-                            throwingTcs.SetResult(true);
-                        }
-                    ));
+                    services.AddHostedService(_ => new TestBackgroundService(otherTcs.Task, () =>
+                    {
+                        wasOtherServiceStarted = true;
+                        throwingTcs.SetResult(true);
+                    }));
                     services.Configure<HostOptions>(options =>
                         options.BackgroundServiceExceptionBehavior =
                             BackgroundServiceExceptionBehavior.StopHost

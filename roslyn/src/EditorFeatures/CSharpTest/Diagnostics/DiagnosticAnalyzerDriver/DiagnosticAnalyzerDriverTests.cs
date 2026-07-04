@@ -532,9 +532,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
             );
 
             var diagnostics = compilerEngineCompilation.GetAnalyzerDiagnostics(new[] { analyzer });
-            AssertEx.Any(
-                diagnostics,
-                d => d.Id == DocumentAnalysisExecutor.AnalyzerExceptionDiagnosticId
+            AssertEx.Any(diagnostics, d =>
+                d.Id == DocumentAnalysisExecutor.AnalyzerExceptionDiagnosticId
             );
         }
 

@@ -1012,89 +1012,69 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Sum_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat(0, 1).Sum((Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat(0, 1).Sum((Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int?>)null).Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int?>)null).Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((int?)0, 1).Sum((Func<int?, int?>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((int?)0, 1).Sum((Func<int?, int?>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<long>)null).Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<long>)null).Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((long)0, 1).Sum((Func<long, long>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((long)0, 1).Sum((Func<long, long>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<long?>)null).Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<long?>)null).Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((long?)0, 1).Sum((Func<long?, long?>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((long?)0, 1).Sum((Func<long?, long?>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<float>)null).Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<float>)null).Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((float)0, 1).Sum((Func<float, float>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((float)0, 1).Sum((Func<float, float>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<float?>)null).Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<float?>)null).Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((float?)0, 1).Sum((Func<float?, float>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((float?)0, 1).Sum((Func<float?, float>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<double>)null).Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<double>)null).Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((double)0, 1).Sum((Func<double, double>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((double)0, 1).Sum((Func<double, double>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<double?>)null).Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<double?>)null).Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((double?)0, 1).Sum((Func<double?, double>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((double?)0, 1).Sum((Func<double?, double>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<decimal>)null).Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<decimal>)null).Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((decimal)0, 1).Sum((Func<decimal, decimal>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((decimal)0, 1).Sum((Func<decimal, decimal>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<decimal?>)null).Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<decimal?>)null).Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((decimal?)0, 1).Sum((Func<decimal?, decimal>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((decimal?)0, 1).Sum((Func<decimal?, decimal>)null)
             );
         }
     }

@@ -230,13 +230,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_Int_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).Max(i => i)
             );
         }
 
@@ -324,13 +322,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_Long_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<long>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<long>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<long>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<long>)null).Max(i => i)
             );
         }
 
@@ -405,13 +401,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_Float_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<float>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<float>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<float>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<float>)null).Max(i => i)
             );
         }
 
@@ -512,13 +506,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_Double_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<double>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<double>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<double>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<double>)null).Max(i => i)
             );
         }
 
@@ -590,13 +582,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_Decimal_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<decimal>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<decimal>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<decimal>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<decimal>)null).Max(i => i)
             );
         }
 
@@ -654,13 +644,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_NullableInt_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int?>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int?>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int?>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int?>)null).Max(i => i)
             );
         }
 
@@ -710,13 +698,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_NullableLong_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<long?>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<long?>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<long?>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<long?>)null).Max(i => i)
             );
         }
 
@@ -795,13 +781,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_NullableFloat_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<float?>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<float?>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<float?>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<float?>)null).Max(i => i)
             );
         }
 
@@ -888,13 +872,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_NullableDouble_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<double?>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<double?>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<double?>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<double?>)null).Max(i => i)
             );
         }
 
@@ -958,13 +940,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_NullableDecimal_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<decimal?>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<decimal?>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<decimal?>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<decimal?>)null).Max(i => i)
             );
         }
 
@@ -1012,13 +992,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_DateTime_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<DateTime>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<DateTime>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<DateTime>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<DateTime>)null).Max(i => i)
             );
         }
 
@@ -1096,13 +1074,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Max_String_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<string>)null).Max()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<string>)null).Max()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<string>)null).Max(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<string>)null).Max(i => i)
             );
         }
 
@@ -1110,9 +1086,8 @@ namespace System.Linq.Tests
         public void Max_Int_NullSelector_ThrowsArgumentNullException()
         {
             Func<int, int> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<int>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<int>().Max(selector)
             );
         }
 
@@ -1133,9 +1108,8 @@ namespace System.Linq.Tests
         public void Max_Long_NullSelector_ThrowsArgumentNullException()
         {
             Func<long, long> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<long>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<long>().Max(selector)
             );
         }
 
@@ -1168,9 +1142,8 @@ namespace System.Linq.Tests
         public void Max_Float_NullSelector_ThrowsArgumentNullException()
         {
             Func<float, float> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<float>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<float>().Max(selector)
             );
         }
 
@@ -1178,9 +1151,8 @@ namespace System.Linq.Tests
         public void Max_Double_NullSelector_ThrowsArgumentNullException()
         {
             Func<double, double> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<double>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<double>().Max(selector)
             );
         }
 
@@ -1200,9 +1172,8 @@ namespace System.Linq.Tests
         public void Max_Decimal_NullSelector_ThrowsArgumentNullException()
         {
             Func<decimal, decimal> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<decimal>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<decimal>().Max(selector)
             );
         }
 
@@ -1222,9 +1193,8 @@ namespace System.Linq.Tests
         public void Max_NullableInt_NullSelector_ThrowsArgumentNullException()
         {
             Func<int?, int?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<int?>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<int?>().Max(selector)
             );
         }
 
@@ -1245,9 +1215,8 @@ namespace System.Linq.Tests
         public void Max_NullableLong_NullSelector_ThrowsArgumentNullException()
         {
             Func<long?, long?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<long?>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<long?>().Max(selector)
             );
         }
 
@@ -1267,9 +1236,8 @@ namespace System.Linq.Tests
         public void Max_NullableFloat_NullSelector_ThrowsArgumentNullException()
         {
             Func<float?, float?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<float?>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<float?>().Max(selector)
             );
         }
 
@@ -1289,9 +1257,8 @@ namespace System.Linq.Tests
         public void Max_NullableDouble_NullSelector_ThrowsArgumentNullException()
         {
             Func<double?, double?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<double?>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<double?>().Max(selector)
             );
         }
 
@@ -1311,9 +1278,8 @@ namespace System.Linq.Tests
         public void Max_NullableDecimal_NullSelector_ThrowsArgumentNullException()
         {
             Func<decimal?, decimal?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<decimal?>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<decimal?>().Max(selector)
             );
         }
 
@@ -1339,9 +1305,8 @@ namespace System.Linq.Tests
         public void Max_NullableDateTime_NullSelector_ThrowsArgumentNullException()
         {
             Func<DateTime?, DateTime?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<DateTime?>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<DateTime?>().Max(selector)
             );
         }
 
@@ -1349,9 +1314,8 @@ namespace System.Linq.Tests
         public void Max_String_NullSelector_ThrowsArgumentNullException()
         {
             Func<string, string> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => Enumerable.Empty<string>().Max(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                Enumerable.Empty<string>().Max(selector)
             );
         }
 
@@ -1379,13 +1343,11 @@ namespace System.Linq.Tests
             IEnumerable<int> source = null;
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.Max());
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.Max(comparer: null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.Max(comparer: null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.Max(Comparer<int>.Create((_, _) => 0))
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.Max(Comparer<int>.Create((_, _) => 0))
             );
         }
 
@@ -1472,13 +1434,11 @@ namespace System.Linq.Tests
             IEnumerable<int> source = null;
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.MaxBy(x => x));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.MaxBy(x => x, comparer: null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.MaxBy(x => x, comparer: null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.MaxBy(x => x, Comparer<int>.Create((_, _) => 0))
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.MaxBy(x => x, Comparer<int>.Create((_, _) => 0))
             );
         }
 
@@ -1488,17 +1448,14 @@ namespace System.Linq.Tests
             IEnumerable<int> source = Enumerable.Empty<int>();
             Func<int, int> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.MaxBy(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.MaxBy(keySelector)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.MaxBy(keySelector, comparer: null)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.MaxBy(keySelector, comparer: null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.MaxBy(keySelector, Comparer<int>.Create((_, _) => 0))
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.MaxBy(keySelector, Comparer<int>.Create((_, _) => 0))
             );
         }
 

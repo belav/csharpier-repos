@@ -60,16 +60,13 @@ public static class WebAssemblyRazorComponentsBuilderExtensions
             applicationBuilder.UseBlazorFrameworkFiles(pathPrefix ?? default);
             var app = applicationBuilder.Build();
 
-            endpointRouteBuilder.Map(
-                $"{pathPrefix}/_framework/{{*path}}",
-                context =>
-                {
-                    // Set endpoint to null so the static files middleware will handle the request.
-                    context.SetEndpoint(null);
+            endpointRouteBuilder.Map($"{pathPrefix}/_framework/{{*path}}", context =>
+            {
+                // Set endpoint to null so the static files middleware will handle the request.
+                context.SetEndpoint(null);
 
-                    return app(context);
-                }
-            );
+                return app(context);
+            });
 
             return endpointRouteBuilder.GetEndpoints();
         }

@@ -56,17 +56,14 @@ namespace System.Reflection.Emit.Tests
             ModuleBuilder module = Helpers.DynamicModule();
             SignatureHelper helper = SignatureHelper.GetFieldSigHelper(module);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "argument",
-                () => helper.AddArgument(null)
+            AssertExtensions.Throws<ArgumentNullException>("argument", () =>
+                helper.AddArgument(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "argument",
-                () => helper.AddArgument(null, true)
+            AssertExtensions.Throws<ArgumentNullException>("argument", () =>
+                helper.AddArgument(null, true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "argument",
-                () => helper.AddArgument(null, null, null)
+            AssertExtensions.Throws<ArgumentNullException>("argument", () =>
+                helper.AddArgument(null, null, null)
             );
         }
 
@@ -78,13 +75,11 @@ namespace System.Reflection.Emit.Tests
             SignatureHelper helper = SignatureHelper.GetFieldSigHelper(module);
             helper.GetSignature();
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => helper.AddArgument(typeof(string))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                helper.AddArgument(typeof(string))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => helper.AddArgument(typeof(string), null, null)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                helper.AddArgument(typeof(string), null, null)
             );
         }
 
@@ -96,13 +91,11 @@ namespace System.Reflection.Emit.Tests
             SignatureHelper helper = SignatureHelper.GetFieldSigHelper(module);
             helper.GetSignature();
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => helper.AddArgument(typeof(string), new Type[] { typeof(int) }, null)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                helper.AddArgument(typeof(string), new Type[] { typeof(int) }, null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => helper.AddArgument(typeof(string), null, new Type[] { typeof(int) })
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                helper.AddArgument(typeof(string), null, new Type[] { typeof(int) })
             );
         }
     }

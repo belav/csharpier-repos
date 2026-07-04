@@ -63,14 +63,11 @@ namespace System.Security.Cryptography.X509Certificates
 
                 X509ContentType result = X509ContentType.Unknown;
 
-                AppleCertificatePal.TryDecodePem(
-                    rawData,
-                    (derData, contentType) =>
-                    {
-                        result = contentType;
-                        return false;
-                    }
-                );
+                AppleCertificatePal.TryDecodePem(rawData, (derData, contentType) =>
+                {
+                    result = contentType;
+                    return false;
+                });
 
                 if (result == X509ContentType.Unknown)
                 {

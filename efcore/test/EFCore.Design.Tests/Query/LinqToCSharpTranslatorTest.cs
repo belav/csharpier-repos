@@ -362,9 +362,8 @@ new LinqToCSharpTranslatorTest.Blog("foo")
         var (translator, _) = CreateTranslator();
         var namespaces = new HashSet<string>();
         _ = translator.TranslateExpression(Call(FooMethod), namespaces);
-        Assert.Collection(
-            namespaces,
-            ns => Assert.Equal(typeof(LinqToCSharpTranslatorTest).Namespace, ns)
+        Assert.Collection(namespaces, ns =>
+            Assert.Equal(typeof(LinqToCSharpTranslatorTest).Namespace, ns)
         );
     }
 

@@ -482,40 +482,37 @@ namespace System
 
             try
             {
-                EnumerateFilesRecursively(
-                    timeZoneDirectory,
-                    (string filePath) =>
-                    {
-                        // skip the localtime and posixrules file, since they won't give us the correct id
-                        if (
-                            !string.Equals(
-                                filePath,
-                                localtimeFilePath,
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                            && !string.Equals(
-                                filePath,
-                                posixrulesFilePath,
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                EnumerateFilesRecursively(timeZoneDirectory, (string filePath) =>
+                {
+                    // skip the localtime and posixrules file, since they won't give us the correct id
+                    if (
+                        !string.Equals(
+                            filePath,
+                            localtimeFilePath,
+                            StringComparison.OrdinalIgnoreCase
                         )
+                        && !string.Equals(
+                            filePath,
+                            posixrulesFilePath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    {
+                        if (CompareTimeZoneFile(filePath, buffer, rawData))
                         {
-                            if (CompareTimeZoneFile(filePath, buffer, rawData))
-                            {
-                                // if all bytes are the same, this must be the right tz file
-                                id = filePath;
+                            // if all bytes are the same, this must be the right tz file
+                            id = filePath;
 
-                                // strip off the root time zone directory
-                                if (id.StartsWith(timeZoneDirectory, StringComparison.Ordinal))
-                                {
-                                    id = id.Substring(timeZoneDirectory.Length);
-                                }
-                                return true;
+                            // strip off the root time zone directory
+                            if (id.StartsWith(timeZoneDirectory, StringComparison.Ordinal))
+                            {
+                                id = id.Substring(timeZoneDirectory.Length);
                             }
+                            return true;
                         }
-                        return false;
                     }
-                );
+                    return false;
+                });
             }
             catch (IOException) { }
             catch (SecurityException) { }

@@ -94,9 +94,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                             .Combine(
                                 pathElements
                                     .Skip(2)
-                                    .Aggregate(
-                                        new NPath(string.Empty),
-                                        (path, s) => path.Combine(s)
+                                    .Aggregate(new NPath(string.Empty), (path, s) =>
+                                        path.Combine(s)
                                     )
                             );
                     }

@@ -31,10 +31,8 @@ public class AuthenticationStartupBase
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
         services.AddAuthorization(options =>
         {
-            options.AddPolicy(
-                "NameMustStartWithB",
-                policy =>
-                    policy.RequireAssertion(ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false)
+            options.AddPolicy("NameMustStartWithB", policy =>
+                policy.RequireAssertion(ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false)
             );
         });
     }
@@ -54,23 +52,20 @@ public class AuthenticationStartupBase
         app.UseAuthentication();
 
         // Mount the server-side Blazor app on /subdir
-        app.Map(
-            "/subdir",
-            app =>
-            {
-                app.UseBlazorFrameworkFiles();
-                app.UseStaticFiles();
+        app.Map("/subdir", app =>
+        {
+            app.UseBlazorFrameworkFiles();
+            app.UseStaticFiles();
 
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                    endpoints.MapRazorPages();
-                    endpoints.MapBlazorHub();
-                    _configureMode(endpoints);
-                });
-            }
-        );
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
+                _configureMode(endpoints);
+            });
+        });
     }
 }
 

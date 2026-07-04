@@ -58,9 +58,7 @@ public class DateTimeOffsetToBinaryConverter : ValueConverter<DateTimeOffset, lo
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
     public static ValueConverterInfo DefaultInfo { get; } =
-        new(
-            typeof(DateTimeOffset),
-            typeof(long),
-            i => new DateTimeOffsetToBinaryConverter(i.MappingHints)
-        );
+        new(typeof(DateTimeOffset), typeof(long), i => new DateTimeOffsetToBinaryConverter(
+            i.MappingHints
+        ));
 }

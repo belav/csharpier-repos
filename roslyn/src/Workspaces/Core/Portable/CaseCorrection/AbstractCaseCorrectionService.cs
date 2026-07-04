@@ -87,9 +87,8 @@ namespace Microsoft.CodeAnalysis.CaseCorrection
 
                 using (Logger.LogBlock(FunctionId.CaseCorrection_ReplaceTokens, cancellationToken))
                 {
-                    return root.ReplaceTokens(
-                        replacements.Keys,
-                        (oldToken, _) => replacements[oldToken]
+                    return root.ReplaceTokens(replacements.Keys, (oldToken, _) =>
+                        replacements[oldToken]
                     );
                 }
             }

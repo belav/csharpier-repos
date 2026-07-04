@@ -191,9 +191,8 @@ namespace System.Collections.Tests
                 ICollection collection = NonGenericICollectionFactory(count);
                 Array arr = new object[count, count];
                 Assert.Equal(2, arr.Rank);
-                Assert.Throws(
-                    ICollection_NonGeneric_CopyTo_TwoDimensionArray_ThrowType,
-                    () => collection.CopyTo(arr, 0)
+                Assert.Throws(ICollection_NonGeneric_CopyTo_TwoDimensionArray_ThrowType, () =>
+                    collection.CopyTo(arr, 0)
                 );
             }
         }
@@ -214,9 +213,8 @@ namespace System.Collections.Tests
             );
             Assert.Equal(1, arr.Rank);
             Assert.Equal(2, arr.GetLowerBound(0));
-            Assert.Throws(
-                ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType,
-                () => collection.CopyTo(arr, 0)
+            Assert.Throws(ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType, () =>
+                collection.CopyTo(arr, 0)
             );
         }
 #pragma warning restore xUnit1013
@@ -260,9 +258,8 @@ namespace System.Collections.Tests
             if (count > 0 && count < enumArr.Length)
             {
                 ICollection collection = NonGenericICollectionFactory(count);
-                Assert.Throws(
-                    ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType,
-                    () => collection.CopyTo(enumArr, 0)
+                Assert.Throws(ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType, () =>
+                    collection.CopyTo(enumArr, 0)
                 );
             }
         }
@@ -304,9 +301,8 @@ namespace System.Collections.Tests
             ICollection collection = NonGenericICollectionFactory(count);
 
             object[] array = new object[count];
-            Assert.Throws(
-                ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType,
-                () => collection.CopyTo(array, count + 1)
+            Assert.Throws(ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType, () =>
+                collection.CopyTo(array, count + 1)
             );
         }
 

@@ -352,9 +352,8 @@ namespace System.Data.Tests
         [Fact]
         public void GetHashCode_NullRow_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "row",
-                () => DataRowComparer<DataRow>.Default.GetHashCode(null)
+            AssertExtensions.Throws<ArgumentNullException>("row", () =>
+                DataRowComparer<DataRow>.Default.GetHashCode(null)
             );
         }
 

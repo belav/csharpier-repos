@@ -26,9 +26,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullDocumentToWrite_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "documentToWrite",
-                () => new Formatter(null)
+            AssertExtensions.Throws<ArgumentNullException>("documentToWrite", () =>
+                new Formatter(null)
             );
         }
 

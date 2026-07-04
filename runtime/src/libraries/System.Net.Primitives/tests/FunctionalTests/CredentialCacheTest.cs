@@ -230,13 +230,11 @@ namespace System.Net.Primitives.Functional.Tests
             Assert.Null(cc.GetCredential(new Uri("http://invalid.uri"), authenticationType1)); //No such uriPrefix
             Assert.Null(cc.GetCredential(uriPrefix1, "invalid-authentication-type")); //No such authenticationType
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "uriPrefix",
-                () => cc.Add(null, "some", new NetworkCredential())
+            AssertExtensions.Throws<ArgumentNullException>("uriPrefix", () =>
+                cc.Add(null, "some", new NetworkCredential())
             ); //Null uriPrefix
-            AssertExtensions.Throws<ArgumentNullException>(
-                "authType",
-                () => cc.Add(new Uri("http://microsoft:80"), null, new NetworkCredential())
+            AssertExtensions.Throws<ArgumentNullException>("authType", () =>
+                cc.Add(new Uri("http://microsoft:80"), null, new NetworkCredential())
             ); //Null authenticationType
         }
 
@@ -246,9 +244,8 @@ namespace System.Net.Primitives.Functional.Tests
             CredentialCache cc = new CredentialCache();
             cc.Add(uriPrefix1, authenticationType1, credential1);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => cc.Add(uriPrefix1, authenticationType1, credential1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                cc.Add(uriPrefix1, authenticationType1, credential1)
             );
         }
 
@@ -277,13 +274,11 @@ namespace System.Net.Primitives.Functional.Tests
             Assert.Null(cc.GetCredential(host1, 900, authenticationType1)); //No such port
             Assert.Null(cc.GetCredential(host1, port1, "invalid-authentication-type")); //No such authenticationType
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "host",
-                () => cc.Add(null, 500, "authenticationType", new NetworkCredential())
+            AssertExtensions.Throws<ArgumentNullException>("host", () =>
+                cc.Add(null, 500, "authenticationType", new NetworkCredential())
             ); //Null host
-            AssertExtensions.Throws<ArgumentNullException>(
-                "authenticationType",
-                () => cc.Add("host", 500, null, new NetworkCredential())
+            AssertExtensions.Throws<ArgumentNullException>("authenticationType", () =>
+                cc.Add("host", 500, null, new NetworkCredential())
             ); //Null authenticationType
 
             var exception = Record.Exception(() =>
@@ -295,9 +290,8 @@ namespace System.Net.Primitives.Functional.Tests
             ArgumentException ae = exception as ArgumentException;
             Assert.True(ae.ParamName == "host" || ae.ParamName == null);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "port",
-                () => cc.Add("host", -1, "authenticationType", new NetworkCredential())
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () =>
+                cc.Add("host", -1, "authenticationType", new NetworkCredential())
             ); //Port < 0
         }
 
@@ -307,9 +301,8 @@ namespace System.Net.Primitives.Functional.Tests
             CredentialCache cc = new CredentialCache();
             cc.Add(host1, port1, authenticationType1, credential1);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => cc.Add(host1, port1, authenticationType1, credential1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                cc.Add(host1, port1, authenticationType1, credential1)
             );
         }
 
@@ -373,13 +366,11 @@ namespace System.Net.Primitives.Functional.Tests
         {
             CredentialCache cc = new CredentialCache();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "uriPrefix",
-                () => cc.GetCredential(null, "authenticationType")
+            AssertExtensions.Throws<ArgumentNullException>("uriPrefix", () =>
+                cc.GetCredential(null, "authenticationType")
             ); //Null uriPrefix
-            AssertExtensions.Throws<ArgumentNullException>(
-                "authType",
-                () => cc.GetCredential(new Uri("http://microsoft:80"), null)
+            AssertExtensions.Throws<ArgumentNullException>("authType", () =>
+                cc.GetCredential(new Uri("http://microsoft:80"), null)
             ); //Null authenticationType
         }
 
@@ -388,13 +379,11 @@ namespace System.Net.Primitives.Functional.Tests
         {
             CredentialCache cc = new CredentialCache();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "host",
-                () => cc.GetCredential(null, 500, "authenticationType")
+            AssertExtensions.Throws<ArgumentNullException>("host", () =>
+                cc.GetCredential(null, 500, "authenticationType")
             ); //Null host
-            AssertExtensions.Throws<ArgumentNullException>(
-                "authenticationType",
-                () => cc.GetCredential("host", 500, null)
+            AssertExtensions.Throws<ArgumentNullException>("authenticationType", () =>
+                cc.GetCredential("host", 500, null)
             ); //Null authenticationType
 
             var exception = Record.Exception(() => cc.GetCredential("", 500, "authenticationType")); //Empty host
@@ -404,9 +393,8 @@ namespace System.Net.Primitives.Functional.Tests
             ArgumentException ae = exception as ArgumentException;
             Assert.True(ae.ParamName == "host" || ae.ParamName == null);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "port",
-                () => cc.GetCredential("host", -1, "authenticationType")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () =>
+                cc.GetCredential("host", -1, "authenticationType")
             ); //Port < 0
         }
 
@@ -585,9 +573,8 @@ namespace System.Net.Primitives.Functional.Tests
                 {
                     // In .NET Core, WDigestAvailable will always be false (we don't support it).
                     // It will always throw ArgumentException.
-                    AssertExtensions.Throws<ArgumentException>(
-                        "authType",
-                        () => cc.Add(uriPrefix1, authType, nc)
+                    AssertExtensions.Throws<ArgumentException>("authType", () =>
+                        cc.Add(uriPrefix1, authType, nc)
                     );
                     return;
                 }
@@ -605,9 +592,8 @@ namespace System.Net.Primitives.Functional.Tests
         )
         {
             CredentialCache cc = new CredentialCache();
-            AssertExtensions.Throws<ArgumentException>(
-                "authType",
-                () => cc.Add(uriPrefix1, authType, nc)
+            AssertExtensions.Throws<ArgumentException>("authType", () =>
+                cc.Add(uriPrefix1, authType, nc)
             );
         }
 
@@ -650,9 +636,8 @@ namespace System.Net.Primitives.Functional.Tests
                 {
                     // In .NET Core, WDigestAvailable will always be false (we don't support it).
                     // It will always throw ArgumentException.
-                    AssertExtensions.Throws<ArgumentException>(
-                        "authenticationType",
-                        () => cc.Add(host1, port1, authType, nc)
+                    AssertExtensions.Throws<ArgumentException>("authenticationType", () =>
+                        cc.Add(host1, port1, authType, nc)
                     );
                     return;
                 }
@@ -670,9 +655,8 @@ namespace System.Net.Primitives.Functional.Tests
         )
         {
             CredentialCache cc = new CredentialCache();
-            AssertExtensions.Throws<ArgumentException>(
-                "authenticationType",
-                () => cc.Add(host1, port1, authType, nc)
+            AssertExtensions.Throws<ArgumentException>("authenticationType", () =>
+                cc.Add(host1, port1, authType, nc)
             );
         }
 

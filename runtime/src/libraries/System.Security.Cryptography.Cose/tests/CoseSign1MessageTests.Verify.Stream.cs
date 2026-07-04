@@ -60,9 +60,8 @@ namespace System.Security.Cryptography.Cose.Tests
 
             CoseSign1Message msg = CoseMessage.DecodeSign1(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unseekable);
-            await Assert.ThrowsAsync<ArgumentException>(
-                "detachedContent",
-                () => msg.VerifyDetachedAsync(DefaultKey, unseekableStream)
+            await Assert.ThrowsAsync<ArgumentException>("detachedContent", () =>
+                msg.VerifyDetachedAsync(DefaultKey, unseekableStream)
             );
         }
 
@@ -77,9 +76,8 @@ namespace System.Security.Cryptography.Cose.Tests
 
             CoseSign1Message msg = CoseMessage.DecodeSign1(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unreadable);
-            await Assert.ThrowsAsync<ArgumentException>(
-                "detachedContent",
-                () => msg.VerifyDetachedAsync(DefaultKey, unseekableStream)
+            await Assert.ThrowsAsync<ArgumentException>("detachedContent", () =>
+                msg.VerifyDetachedAsync(DefaultKey, unseekableStream)
             );
         }
     }
@@ -125,9 +123,8 @@ namespace System.Security.Cryptography.Cose.Tests
 
             CoseSign1Message msg = CoseMessage.DecodeSign1(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unseekable);
-            Assert.Throws<ArgumentException>(
-                "detachedContent",
-                () => msg.VerifyDetached(DefaultKey, unseekableStream)
+            Assert.Throws<ArgumentException>("detachedContent", () =>
+                msg.VerifyDetached(DefaultKey, unseekableStream)
             );
         }
 
@@ -142,9 +139,8 @@ namespace System.Security.Cryptography.Cose.Tests
 
             CoseSign1Message msg = CoseMessage.DecodeSign1(encodedMsg);
             using Stream unseekableStream = GetTestStream(s_sampleContent, StreamKind.Unreadable);
-            Assert.Throws<ArgumentException>(
-                "detachedContent",
-                () => msg.VerifyDetached(DefaultKey, unseekableStream)
+            Assert.Throws<ArgumentException>("detachedContent", () =>
+                msg.VerifyDetached(DefaultKey, unseekableStream)
             );
         }
     }

@@ -267,14 +267,12 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void EmptyScopeExplicitWrongType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Block(
-                        typeof(int),
-                        new[] { Expression.Parameter(typeof(int), "x") },
-                        new Expression[0]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Block(
+                    typeof(int),
+                    new[] { Expression.Parameter(typeof(int), "x") },
+                    new Expression[0]
+                )
             );
         }
 

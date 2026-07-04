@@ -96,9 +96,8 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetTypeFromProgID_ReturnsExpected()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "progID",
-                () => Type.GetTypeFromProgID(null)
+            AssertExtensions.Throws<ArgumentNullException>("progID", () =>
+                Type.GetTypeFromProgID(null)
             );
         }
     }

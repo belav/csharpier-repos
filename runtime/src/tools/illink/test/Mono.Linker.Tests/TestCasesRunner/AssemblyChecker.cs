@@ -1640,13 +1640,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 )
                 .ToArray();
 
-            return removals.Aggregate(
-                    sourceValue,
-                    (accum, item) => accum & ~(uint)item.ConstructorArguments[0].Value
+            return removals.Aggregate(sourceValue, (accum, item) =>
+                    accum & ~(uint)item.ConstructorArguments[0].Value
                 )
-                | adds.Aggregate(
-                    (uint)0,
-                    (acum, item) => acum | (uint)item.ConstructorArguments[0].Value
+                | adds.Aggregate((uint)0, (acum, item) =>
+                    acum | (uint)item.ConstructorArguments[0].Value
                 );
         }
 

@@ -32,9 +32,8 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Ctor_NullValue_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new DesignerVerbCollection(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new DesignerVerbCollection(null)
             );
         }
 
@@ -138,13 +137,11 @@ namespace System.ComponentModel.Design.Tests
         public void AddRange_NullValue_ThrowsArgumentNullException()
         {
             var collection = new DesignerVerbCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => collection.AddRange((DesignerVerb[])null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                collection.AddRange((DesignerVerb[])null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => collection.AddRange((DesignerVerbCollection)null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                collection.AddRange((DesignerVerbCollection)null)
             );
         }
 

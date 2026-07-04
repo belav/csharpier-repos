@@ -581,98 +581,68 @@ namespace A.B {
             var comp = CSharpCompilation.Create("Compilation", options: TestOptions.ReleaseDll);
 
             Assert.Throws<ArgumentNullException>("peStream", () => comp.Emit(peStream: null));
-            Assert.Throws<ArgumentException>(
-                "peStream",
-                () =>
-                    comp.Emit(
-                        peStream: new TestStream(canRead: true, canWrite: false, canSeek: true)
-                    )
+            Assert.Throws<ArgumentException>("peStream", () =>
+                comp.Emit(peStream: new TestStream(canRead: true, canWrite: false, canSeek: true))
             );
-            Assert.Throws<ArgumentException>(
-                "pdbStream",
-                () =>
-                    comp.Emit(
-                        peStream: new MemoryStream(),
-                        pdbStream: new TestStream(canRead: true, canWrite: false, canSeek: true)
-                    )
+            Assert.Throws<ArgumentException>("pdbStream", () =>
+                comp.Emit(
+                    peStream: new MemoryStream(),
+                    pdbStream: new TestStream(canRead: true, canWrite: false, canSeek: true)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                "pdbStream",
-                () =>
-                    comp.Emit(
-                        peStream: new MemoryStream(),
-                        pdbStream: new MemoryStream(),
-                        options: EmitOptions.Default.WithDebugInformationFormat(
-                            DebugInformationFormat.Embedded
-                        )
+            Assert.Throws<ArgumentException>("pdbStream", () =>
+                comp.Emit(
+                    peStream: new MemoryStream(),
+                    pdbStream: new MemoryStream(),
+                    options: EmitOptions.Default.WithDebugInformationFormat(
+                        DebugInformationFormat.Embedded
                     )
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "sourceLinkStream",
-                () =>
-                    comp.Emit(
-                        peStream: new MemoryStream(),
-                        pdbStream: new MemoryStream(),
-                        options: EmitOptions.Default.WithDebugInformationFormat(
-                            DebugInformationFormat.PortablePdb
-                        ),
-                        sourceLinkStream: new TestStream(
-                            canRead: false,
-                            canWrite: true,
-                            canSeek: true
-                        )
-                    )
+            Assert.Throws<ArgumentException>("sourceLinkStream", () =>
+                comp.Emit(
+                    peStream: new MemoryStream(),
+                    pdbStream: new MemoryStream(),
+                    options: EmitOptions.Default.WithDebugInformationFormat(
+                        DebugInformationFormat.PortablePdb
+                    ),
+                    sourceLinkStream: new TestStream(canRead: false, canWrite: true, canSeek: true)
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "embeddedTexts",
-                () =>
-                    comp.Emit(
-                        peStream: new MemoryStream(),
-                        pdbStream: null,
-                        options: null,
-                        embeddedTexts: new[] { EmbeddedText.FromStream("_", new MemoryStream()) }
-                    )
+            Assert.Throws<ArgumentException>("embeddedTexts", () =>
+                comp.Emit(
+                    peStream: new MemoryStream(),
+                    pdbStream: null,
+                    options: null,
+                    embeddedTexts: new[] { EmbeddedText.FromStream("_", new MemoryStream()) }
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "embeddedTexts",
-                () =>
-                    comp.Emit(
-                        peStream: new MemoryStream(),
-                        pdbStream: null,
-                        options: EmitOptions.Default.WithDebugInformationFormat(
-                            DebugInformationFormat.PortablePdb
-                        ),
-                        embeddedTexts: new[] { EmbeddedText.FromStream("_", new MemoryStream()) }
-                    )
+            Assert.Throws<ArgumentException>("embeddedTexts", () =>
+                comp.Emit(
+                    peStream: new MemoryStream(),
+                    pdbStream: null,
+                    options: EmitOptions.Default.WithDebugInformationFormat(
+                        DebugInformationFormat.PortablePdb
+                    ),
+                    embeddedTexts: new[] { EmbeddedText.FromStream("_", new MemoryStream()) }
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "win32Resources",
-                () =>
-                    comp.Emit(
-                        peStream: new MemoryStream(),
-                        win32Resources: new TestStream(
-                            canRead: true,
-                            canWrite: false,
-                            canSeek: false
-                        )
-                    )
+            Assert.Throws<ArgumentException>("win32Resources", () =>
+                comp.Emit(
+                    peStream: new MemoryStream(),
+                    win32Resources: new TestStream(canRead: true, canWrite: false, canSeek: false)
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "win32Resources",
-                () =>
-                    comp.Emit(
-                        peStream: new MemoryStream(),
-                        win32Resources: new TestStream(
-                            canRead: false,
-                            canWrite: false,
-                            canSeek: true
-                        )
-                    )
+            Assert.Throws<ArgumentException>("win32Resources", () =>
+                comp.Emit(
+                    peStream: new MemoryStream(),
+                    win32Resources: new TestStream(canRead: false, canWrite: false, canSeek: true)
+                )
             );
 
             // we don't report an error when we can't write to the XML doc stream:
@@ -3807,63 +3777,53 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 .Construct(intType);
 
             // vb binary operator name
-            Assert.Throws<ArgumentException>(
-                "name",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.LikeOperatorName,
-                        intType,
-                        intType,
-                        intType
-                    )
+            Assert.Throws<ArgumentException>("name", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.LikeOperatorName,
+                    intType,
+                    intType,
+                    intType
+                )
             );
 
             // unary operator name
-            Assert.Throws<ArgumentException>(
-                "name",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.UnaryPlusOperatorName,
-                        intType,
-                        intType,
-                        intType
-                    )
+            Assert.Throws<ArgumentException>("name", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.UnaryPlusOperatorName,
+                    intType,
+                    intType,
+                    intType
+                )
             );
 
             // nullable type 1
-            Assert.Throws<ArgumentException>(
-                null,
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.CheckedAdditionOperatorName,
-                        nullableIntType,
-                        intType,
-                        intType
-                    )
+            Assert.Throws<ArgumentException>(null, () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.CheckedAdditionOperatorName,
+                    nullableIntType,
+                    intType,
+                    intType
+                )
             );
 
             // nullable type 2
-            Assert.Throws<ArgumentException>(
-                null,
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.CheckedAdditionOperatorName,
-                        intType,
-                        nullableIntType,
-                        intType
-                    )
+            Assert.Throws<ArgumentException>(null, () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.CheckedAdditionOperatorName,
+                    intType,
+                    nullableIntType,
+                    intType
+                )
             );
 
             // nullable type 3
-            Assert.Throws<ArgumentException>(
-                null,
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.CheckedAdditionOperatorName,
-                        intType,
-                        intType,
-                        nullableIntType
-                    )
+            Assert.Throws<ArgumentException>(null, () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.CheckedAdditionOperatorName,
+                    intType,
+                    intType,
+                    nullableIntType
+                )
             );
         }
 
@@ -3872,35 +3832,29 @@ public class C { public static FrameworkName Goo() { return null; }}";
         {
             var compilation = CreateCompilation("");
             var intType = compilation.GetSpecialType(SpecialType.System_Int32).GetPublicSymbol();
-            Assert.Throws<ArgumentNullException>(
-                "returnType",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.AdditionOperatorName,
-                        null,
-                        intType,
-                        intType
-                    )
+            Assert.Throws<ArgumentNullException>("returnType", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.AdditionOperatorName,
+                    null,
+                    intType,
+                    intType
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "leftType",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.AdditionOperatorName,
-                        intType,
-                        null,
-                        intType
-                    )
+            Assert.Throws<ArgumentNullException>("leftType", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.AdditionOperatorName,
+                    intType,
+                    null,
+                    intType
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "rightType",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.AdditionOperatorName,
-                        intType,
-                        intType,
-                        null
-                    )
+            Assert.Throws<ArgumentNullException>("rightType", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.AdditionOperatorName,
+                    intType,
+                    intType,
+                    null
+                )
             );
         }
 
@@ -4123,14 +4077,12 @@ class C
                 "Int32",
                 arity: 0
             );
-            Assert.Throws<ArgumentException>(
-                null,
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.UnaryPlusOperatorName,
-                        fakeIntType,
-                        fakeIntType
-                    )
+            Assert.Throws<ArgumentException>(null, () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.UnaryPlusOperatorName,
+                    fakeIntType,
+                    fakeIntType
+                )
             );
         }
 
@@ -4163,80 +4115,66 @@ class C
                 .Construct(intType);
 
             // Binary operator name
-            Assert.Throws<ArgumentException>(
-                "name",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.AdditionOperatorName,
-                        intType,
-                        intType
-                    )
+            Assert.Throws<ArgumentException>("name", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.AdditionOperatorName,
+                    intType,
+                    intType
+                )
             );
 
             // Nullable type 1
-            Assert.Throws<ArgumentException>(
-                null,
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.CheckedUnaryNegationOperatorName,
-                        nullableIntType,
-                        intType
-                    )
+            Assert.Throws<ArgumentException>(null, () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.CheckedUnaryNegationOperatorName,
+                    nullableIntType,
+                    intType
+                )
             );
 
             // Nullable type 2
-            Assert.Throws<ArgumentException>(
-                null,
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.CheckedUnaryNegationOperatorName,
-                        intType,
-                        nullableIntType
-                    )
+            Assert.Throws<ArgumentException>(null, () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.CheckedUnaryNegationOperatorName,
+                    intType,
+                    nullableIntType
+                )
             );
 
             // op_Implicit
-            Assert.Throws<ArgumentException>(
-                "name",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.ImplicitConversionName,
-                        intType,
-                        intType
-                    )
+            Assert.Throws<ArgumentException>("name", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.ImplicitConversionName,
+                    intType,
+                    intType
+                )
             );
 
             // op_Explicit
-            Assert.Throws<ArgumentException>(
-                "name",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.ExplicitConversionName,
-                        intType,
-                        intType
-                    )
+            Assert.Throws<ArgumentException>("name", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.ExplicitConversionName,
+                    intType,
+                    intType
+                )
             );
 
             // op_True
-            Assert.Throws<ArgumentException>(
-                "name",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.TrueOperatorName,
-                        intType,
-                        intType
-                    )
+            Assert.Throws<ArgumentException>("name", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.TrueOperatorName,
+                    intType,
+                    intType
+                )
             );
 
             // op_False
-            Assert.Throws<ArgumentException>(
-                "name",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.FalseOperatorName,
-                        intType,
-                        intType
-                    )
+            Assert.Throws<ArgumentException>("name", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.FalseOperatorName,
+                    intType,
+                    intType
+                )
             );
         }
 
@@ -4245,23 +4183,19 @@ class C
         {
             var compilation = CreateCompilation("");
             var intType = compilation.GetSpecialType(SpecialType.System_Int32).GetPublicSymbol();
-            Assert.Throws<ArgumentNullException>(
-                "returnType",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.UnaryPlusOperatorName,
-                        null,
-                        intType
-                    )
+            Assert.Throws<ArgumentNullException>("returnType", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.UnaryPlusOperatorName,
+                    null,
+                    intType
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "operandType",
-                () =>
-                    compilation.CreateBuiltinOperator(
-                        WellKnownMemberNames.UnaryPlusOperatorName,
-                        intType,
-                        null
-                    )
+            Assert.Throws<ArgumentNullException>("operandType", () =>
+                compilation.CreateBuiltinOperator(
+                    WellKnownMemberNames.UnaryPlusOperatorName,
+                    intType,
+                    null
+                )
             );
         }
 

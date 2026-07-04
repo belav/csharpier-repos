@@ -39,9 +39,8 @@ namespace Microsoft.Extensions.Logging.Generators
                 classDeclarations.Collect()
             );
 
-            context.RegisterSourceOutput(
-                compilationAndClasses,
-                static (spc, source) => Execute(source.Item1, source.Item2, spc)
+            context.RegisterSourceOutput(compilationAndClasses, static (spc, source) =>
+                Execute(source.Item1, source.Item2, spc)
             );
         }
 

@@ -43,18 +43,16 @@ namespace System.Text.Encodings.Web
         [Fact]
         public void HtmlEncode_CreateNullRanges()
         {
-            Assert.Throws<ArgumentNullException>(
-                "allowedRanges",
-                () => HtmlEncoder.Create(default(UnicodeRange[]))
+            Assert.Throws<ArgumentNullException>("allowedRanges", () =>
+                HtmlEncoder.Create(default(UnicodeRange[]))
             );
         }
 
         [Fact]
         public void HtmlEncode_CreateNullSettings()
         {
-            Assert.Throws<ArgumentNullException>(
-                "settings",
-                () => HtmlEncoder.Create(default(TextEncoderSettings))
+            Assert.Throws<ArgumentNullException>("settings", () =>
+                HtmlEncoder.Create(default(TextEncoderSettings))
             );
         }
 

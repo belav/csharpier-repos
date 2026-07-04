@@ -132,24 +132,19 @@ namespace System.Diagnostics.TraceSourceTests
         public void NullSourceName()
         {
             AssertExtensions.Throws<ArgumentNullException>("name", () => new TraceSource(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new TraceSource(null, SourceLevels.All)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new TraceSource(null, SourceLevels.All)
             );
         }
 
         [Fact]
         public void EmptySourceName()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => new TraceSource(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                new TraceSource(string.Empty)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => new TraceSource(string.Empty, SourceLevels.All)
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                new TraceSource(string.Empty, SourceLevels.All)
             );
         }
     }

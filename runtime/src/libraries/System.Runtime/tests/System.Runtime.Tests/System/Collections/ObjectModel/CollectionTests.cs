@@ -81,16 +81,14 @@ namespace System.Collections.ObjectModel.Tests
             var collection = new ModifiableCollection<int>(s_intArray);
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection[-1]);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => collection[s_intArray.Length]
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                collection[s_intArray.Length]
             );
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => s_empty[0]);
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection[-1] = 0);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => collection[s_intArray.Length] = 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                collection[s_intArray.Length] = 0
             );
         }
 
@@ -98,9 +96,8 @@ namespace System.Collections.ObjectModel.Tests
         public static void Item_Set_InvalidType_ThrowsArgumentException()
         {
             var collection = new Collection<int>(new Collection<int>(s_intArray));
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => ((IList)collection)[1] = "Two"
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                ((IList)collection)[1] = "Two"
             );
         }
 
@@ -183,13 +180,11 @@ namespace System.Collections.ObjectModel.Tests
         public static void Insert_InvalidIndex_ThrowsArgumentOutOfRangeException()
         {
             var collection = new ModifiableCollection<int>(s_intArray);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => collection.Insert(-1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                collection.Insert(-1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => collection.Insert(s_intArray.Length + 1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                collection.Insert(s_intArray.Length + 1, 0)
             );
         }
 
@@ -224,19 +219,12 @@ namespace System.Collections.ObjectModel.Tests
             int[] intArray = new int[s_intArray.Length + targetIndex];
 
             Assert.Throws<ArgumentNullException>(() => collection.CopyTo(null, 0));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    ((ICollection)collection).CopyTo(
-                        new int[s_intArray.Length, s_intArray.Length],
-                        0
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                ((ICollection)collection).CopyTo(new int[s_intArray.Length, s_intArray.Length], 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(intArray, -1));
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                "",
-                () => collection.CopyTo(intArray, s_intArray.Length - 1)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                collection.CopyTo(intArray, s_intArray.Length - 1)
             );
 
             collection.CopyTo(intArray, targetIndex);
@@ -298,13 +286,11 @@ namespace System.Collections.ObjectModel.Tests
         public static void RemoveAt_InvalidIndex_ThrowsArgumentOutOfRangeException()
         {
             var collection = new ModifiableCollection<int>(s_intSequence);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => collection.RemoveAt(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                collection.RemoveAt(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => collection.RemoveAt(s_intArray.Length)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                collection.RemoveAt(s_intArray.Length)
             );
         }
 

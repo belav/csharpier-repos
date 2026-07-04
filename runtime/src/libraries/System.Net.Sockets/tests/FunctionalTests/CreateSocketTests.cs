@@ -329,9 +329,8 @@ namespace System.Net.Sockets.Tests
         public void Ctor_SafeHandle_Invalid_ThrowsException()
         {
             AssertExtensions.Throws<ArgumentNullException>("handle", () => new Socket(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "handle",
-                () => new Socket(new SafeSocketHandle((IntPtr)(-1), false))
+            AssertExtensions.Throws<ArgumentException>("handle", () =>
+                new Socket(new SafeSocketHandle((IntPtr)(-1), false))
             );
         }
 

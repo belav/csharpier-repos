@@ -424,9 +424,8 @@ public abstract class MusicStoreTestBase<TFixture> : IClassFixture<TFixture>
                     );
 
                     var cart = ShoppingCart.GetCart(context, cartId);
-                    Assert.DoesNotContain(
-                        (await cart.GetCartItems()),
-                        c => c.CartItemId == cartItemId
+                    Assert.DoesNotContain((await cart.GetCartItems()), c =>
+                        c.CartItemId == cartItemId
                     );
                 }
             });

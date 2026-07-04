@@ -44,13 +44,11 @@ namespace System.Threading.Tests
         {
             SpinWait spinner = new SpinWait();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sleep1Threshold",
-                () => spinner.SpinOnce(-2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sleep1Threshold", () =>
+                spinner.SpinOnce(-2)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sleep1Threshold",
-                () => spinner.SpinOnce(int.MinValue)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sleep1Threshold", () =>
+                spinner.SpinOnce(int.MinValue)
             );
             Assert.Equal(0, spinner.Count);
 

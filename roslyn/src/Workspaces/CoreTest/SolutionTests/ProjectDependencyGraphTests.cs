@@ -138,12 +138,10 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         {
             var solution = CreateSolutionFromReferenceMap("");
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () =>
-                    solution
-                        .GetProjectDependencyGraph()
-                        .GetProjectsThatThisProjectDirectlyDependsOn(null!)
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution
+                    .GetProjectDependencyGraph()
+                    .GetProjectsThatThisProjectDirectlyDependsOn(null!)
             );
         }
 
@@ -405,12 +403,10 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         {
             var solution = CreateSolutionFromReferenceMap("");
 
-            Assert.Throws<ArgumentNullException>(
-                "projectId",
-                () =>
-                    solution
-                        .GetProjectDependencyGraph()
-                        .GetProjectsThatTransitivelyDependOnThisProject(null!)
+            Assert.Throws<ArgumentNullException>("projectId", () =>
+                solution
+                    .GetProjectDependencyGraph()
+                    .GetProjectsThatTransitivelyDependOnThisProject(null!)
             );
         }
 

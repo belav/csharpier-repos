@@ -65,19 +65,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                 // of other replace calls.  i.e. we may have statements nested in statements,
                 // we need to make sure that any inner edits are seen when we make the outer
                 // replacement.
-                editor.ReplaceNode(
-                    statement,
-                    (currentStatement, g) =>
-                    {
-                        var embeddedStatement = currentStatement.GetEmbeddedStatement();
-                        return embeddedStatement is null
-                            ? currentStatement
-                            : currentStatement.ReplaceNode(
-                                embeddedStatement,
-                                SyntaxFactory.Block(embeddedStatement)
-                            );
-                    }
-                );
+                editor.ReplaceNode(statement, (currentStatement, g) =>
+                {
+                    var embeddedStatement = currentStatement.GetEmbeddedStatement();
+                    return embeddedStatement is null
+                        ? currentStatement
+                        : currentStatement.ReplaceNode(
+                            embeddedStatement,
+                            SyntaxFactory.Block(embeddedStatement)
+                        );
+                });
             }
 
             return Task.CompletedTask;

@@ -316,9 +316,8 @@ namespace System.Globalization.Tests
         public void ShortestDayNames_SetNulValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.ShortestDayNames = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.ShortestDayNames = null
             );
         }
 
@@ -326,9 +325,8 @@ namespace System.Globalization.Tests
         public void ShortestDayNames_SetNulValueInValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.ShortestDayNames = new string[] { "1", "2", "3", null, "5", "6", "7" }
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.ShortestDayNames = new string[] { "1", "2", "3", null, "5", "6", "7" }
             );
         }
 

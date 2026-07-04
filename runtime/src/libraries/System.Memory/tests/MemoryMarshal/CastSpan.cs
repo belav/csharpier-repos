@@ -91,10 +91,8 @@ namespace System.SpanTests
         public static void CastSpanToTypeContainsReferences()
         {
             Span<uint> span = new Span<uint>(Array.Empty<uint>());
-            TestHelpers.AssertThrows<ArgumentException, uint>(
-                span,
-                (_span) =>
-                    MemoryMarshal.Cast<uint, TestHelpers.StructWithReferences>(_span).DontBox()
+            TestHelpers.AssertThrows<ArgumentException, uint>(span, (_span) =>
+                MemoryMarshal.Cast<uint, TestHelpers.StructWithReferences>(_span).DontBox()
             );
         }
 

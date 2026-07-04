@@ -248,9 +248,8 @@ namespace System.Runtime.InteropServices.Tests
         public void VariantWrapper_Throws(object obj)
         {
             VariantWrapper wrapper = new VariantWrapper(obj);
-            Assert.Throws<ArgumentException>(
-                "managed",
-                () => ComVariantMarshaller.ConvertToUnmanaged(wrapper)
+            Assert.Throws<ArgumentException>("managed", () =>
+                ComVariantMarshaller.ConvertToUnmanaged(wrapper)
             );
         }
 
